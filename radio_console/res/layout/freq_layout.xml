@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg" >
+
+    <ImageView
+        android:id="@+id/pre_button"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="72dp"
+        android:background="@drawable/ripple_bg"
+        android:scaleType="center"
+        android:src="@drawable/ic_previous" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="bottom" >
+
+        <TextView
+            android:id="@+id/freq_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="103.5"
+            android:textColor="#263238"
+            android:textSize="72sp" />
+
+        <TextView
+            android:id="@+id/unit_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="MHZ"
+            android:textColor="#263238"
+            android:textSize="36sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/next_button"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="72dp"
+        android:background="@drawable/ripple_bg"
+        android:scaleType="center"
+        android:src="@drawable/ic_next" />
+
+</RelativeLayout>
