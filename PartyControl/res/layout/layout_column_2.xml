@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icVolAdd"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_volume_add" />
+
+        <Button
+            android:id="@+id/mMainVolumeAddBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icVolAdd"
+            android:text="@string/default_value" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/spaceVertical"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icVolSub"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_volume_sub" />
+
+        <Button
+            android:id="@+id/mMainVolumeSubBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icVolSub"
+            android:text="@string/default_value" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/spaceVertical"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icPhoneUp"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_call" />
+
+        <Button
+            android:id="@+id/mMainPhoneAnswerBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icPhoneUp"
+            android:text="@string/default_value" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/spaceVertical"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icPhoneDown"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_call_end" />
+
+        <Button
+            android:id="@+id/mMainPhoneDropedBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icPhoneDown"
+            android:text="@string/default_value" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/spaceVertical"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icPlay"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_play_pause" />
+
+        <Button
+            android:id="@+id/mMainPauseBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icPlay"
+            android:text="@string/default_value" />
+    </RelativeLayout>
+</LinearLayout>

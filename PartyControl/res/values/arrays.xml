@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="settingModel">
+        <item>USER</item>
+        <item>BYD</item>
+        <item>VIOS</item>
+        <item>FORD</item>
+        <item>CAMRY</item>
+        <item>ELANTR</item>
+        <item>CRV</item>
+    </string-array>
+    
+</resources>

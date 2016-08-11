@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<string name="reset">重置</string>
+	<string name="save"> 保存</string>
+	<string name="ok">确定</string>
+	<string name="desc">按住原车方控按键,再点击屏幕相应按钮,数值改变后学习完成,松开原车按键</string>
+	<string name="desc2">ZYST_DaZhong9_byHT_T0207-MST2531</string>
+</resources>

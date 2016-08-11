@@ -1,0 +1,31 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    	<!-- main title -->
+	<dimen name="mainTitleHeight">64dp</dimen>
+	<dimen name="mainTitleBtnWd">52dp</dimen>
+	<dimen name="mainTitleBtnHg">52dp</dimen>
+	<dimen name="mainTitleHomeMarginLeft">30dp</dimen>
+	<dimen name="mainTitleHomeMarginRight">30dp</dimen>
+	<dimen name="mainTitleDescTextSize">32dp</dimen>
+	<dimen name="mainTitleDateTextSize">22dp</dimen>
+	<dimen name="mainTitleTimeTextSize">22dp</dimen>
+	<dimen name="mainTitleWeekTextSize">22dp</dimen>
+	<dimen name="mainDividerWd">20dp</dimen>
+	<dimen name="mainDividerHg">20dp</dimen>
+	<dimen name="mainImgBtnWd">108dp</dimen>
+	<dimen name="mainImgBtnHg">68dp</dimen>
+	<dimen name="mainMargin10Dp">10dp</dimen>
+	<dimen name="mainMargin30Dp">30dp</dimen>
+	<dimen name="mainMargin60Dp">60dp</dimen>
+	<dimen name="mainTextLayoutHg">180dp</dimen>
+	<dimen name="mainPswTextSize">35dp</dimen>
+	<dimen name="mainTvWd">152dp</dimen>
+	<dimen name="mainTvHg">38dp</dimen>
+	<dimen name="mainDirecWd">32dp</dimen>
+	<dimen name="mainDirecHg">40dp</dimen>
+	<dimen name="mainIconWd">52dp</dimen>
+	<dimen name="mainIconHg">38dp</dimen>
+</resources>

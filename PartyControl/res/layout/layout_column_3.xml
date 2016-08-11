@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+    
+    <View
+        android:layout_height="48dp"
+        android:layout_width="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/mMainLeftBtn"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_left"
+            android:tint="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/mMainSettingModelBtn"
+            style="@style/keyValueStyle"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="@string/default_value" />
+
+        <ImageView
+            android:id="@+id/mMainRightBtn"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_right"
+            android:tint="@color/colorAccent" />
+    </LinearLayout>
+
+    <View style="@style/spaceVertical" />
+
+    <Button
+        android:id="@+id/mMainSaveBtn"
+        style="@style/norBtnStyle"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/save" />
+
+    <View style="@style/spaceVertical" />
+
+    <Button
+        android:id="@+id/mMainResetBtn"
+        style="@style/norBtnStyle"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/reset" />
+
+</LinearLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icPower"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_power" />
+
+        <Button
+            android:id="@+id/mMainPowerBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icPower"
+            android:text="@string/default_value" />
+    </RelativeLayout>
+
+    <View style="@style/spaceVertical" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/icMode"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="@string/ic_menu"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/mMainModeBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icMode"
+            android:text="@string/default_value" />
+    </RelativeLayout>
+
+    <View style="@style/spaceVertical" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icMute"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_mute" />
+
+        <Button
+            android:id="@+id/mMainVolumeBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icMute"
+            android:text="@string/default_value" />
+    </RelativeLayout>
+
+    <View style="@style/spaceVertical" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icFtbw"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_skip_previous" />
+
+        <Button
+            android:id="@+id/mMainNextBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icFtbw"
+            android:text="@string/default_value" />
+    </RelativeLayout>
+
+    <View style="@style/spaceVertical" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icSkipNext"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_skip_next" />
+
+        <Button
+            android:id="@+id/mMainPreBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@+id/icSkipNext"
+            android:text="@string/default_value" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/mainTitleHeight" 
+    android:background="@drawable/bg"
+    >
+
+    <ImageButton
+        android:id="@+id/mMainTitleHomeBtn"
+        style="@style/mainTitleBtnStyle"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/mainTitleHomeMarginLeft"
+        android:contentDescription="@string/app_name" 
+        android:src="@drawable/home"
+        />
+
+    <cn.lzl.partycontrol.view.FontTextView
+        android:id="@+id/mMainTitleTimeTv"
+        style="@style/mainTitleText"
+        android:layout_toRightOf="@id/mMainTitleHomeBtn"
+        android:layout_marginLeft="@dimen/mainTitleHomeMarginLeft"
+        android:layout_centerVertical="true" 
+         android:textSize="@dimen/mainTitleTimeTextSize"
+        />
+
+    <cn.lzl.partycontrol.view.FontTextView
+        android:id="@+id/mMainTitleWeekTv"
+        style="@style/mainTitleText"
+        android:layout_toRightOf="@id/mMainTitleTimeTv"
+        android:layout_centerVertical="true" 
+        android:textSize="@dimen/mainTitleWeekTextSize"
+        />
+
+    <cn.lzl.partycontrol.view.FontTextView
+        android:id="@+id/mMainTitleDescTv"
+        style="@style/mainTitleText"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" 
+        android:text="@string/app_name"
+        android:textSize="@dimen/mainTitleDescTextSize"
+        />
+
+    
+    <ImageButton
+        android:id="@+id/mMainTitleVoiceBtn"
+        style="@style/mainTitleBtnStyle"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/app_name" 
+        android:src="@drawable/ic_launcher"
+        android:visibility="gone"
+        />
+
+    <ImageButton
+        android:id="@+id/mMainTitleGpsBtn"
+        style="@style/mainTitleBtnStyle"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/mMainTitleVoiceBtn"
+        android:contentDescription="@string/app_name" 
+        android:src="@drawable/ic_launcher"
+        android:visibility="gone"
+        />
+    
+    <ImageButton
+        android:id="@+id/mMainTitleCloseScreenBtn"
+        style="@style/mainTitleBtnStyle"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/mMainTitleGpsBtn"
+        android:contentDescription="@string/app_name" 
+        android:src="@drawable/ic_launcher"
+        android:visibility="gone"
+        />
+    
+     <cn.lzl.partycontrol.view.FontTextView
+        android:id="@+id/mMainTitleDateTv"
+        style="@style/mainTitleText"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/mainTitleHomeMarginRight"
+        android:layout_centerVertical="true" 
+        android:textSize="@dimen/mainTitleDateTextSize"
+        />
+</RelativeLayout>
