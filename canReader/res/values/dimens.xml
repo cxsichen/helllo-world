@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+      <!--Fan Dimens-->
+    <dimen name="fan_assets_margin">40dp</dimen>
+    <dimen name="fan_assets_height">72dp</dimen>
+    <dimen name="fan_assets_width">48dp</dimen>
+
+</resources>

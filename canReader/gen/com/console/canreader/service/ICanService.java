@@ -1,0 +1,143 @@
+/*
+ * This file is auto-generated.  DO NOT MODIFY.
+ * Original file: F:\\workapace\\canReader\\src\\com\\console\\canreader\\service\\ICanService.aidl
+ */
+package com.console.canreader.service;
+public interface ICanService extends android.os.IInterface
+{
+/** Local-side IPC implementation stub class. */
+public static abstract class Stub extends android.os.Binder implements com.console.canreader.service.ICanService
+{
+private static final java.lang.String DESCRIPTOR = "com.console.canreader.service.ICanService";
+/** Construct the stub at attach it to the interface. */
+public Stub()
+{
+this.attachInterface(this, DESCRIPTOR);
+}
+/**
+ * Cast an IBinder object into an com.console.canreader.service.ICanService interface,
+ * generating a proxy if needed.
+ */
+public static com.console.canreader.service.ICanService asInterface(android.os.IBinder obj)
+{
+if ((obj==null)) {
+return null;
+}
+android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR);
+if (((iin!=null)&&(iin instanceof com.console.canreader.service.ICanService))) {
+return ((com.console.canreader.service.ICanService)iin);
+}
+return new com.console.canreader.service.ICanService.Stub.Proxy(obj);
+}
+@Override public android.os.IBinder asBinder()
+{
+return this;
+}
+@Override public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException
+{
+switch (code)
+{
+case INTERFACE_TRANSACTION:
+{
+reply.writeString(DESCRIPTOR);
+return true;
+}
+case TRANSACTION_addClient:
+{
+data.enforceInterface(DESCRIPTOR);
+com.console.canreader.service.ICanCallback _arg0;
+_arg0 = com.console.canreader.service.ICanCallback.Stub.asInterface(data.readStrongBinder());
+this.addClient(_arg0);
+reply.writeNoException();
+return true;
+}
+case TRANSACTION_removeCliend:
+{
+data.enforceInterface(DESCRIPTOR);
+com.console.canreader.service.ICanCallback _arg0;
+_arg0 = com.console.canreader.service.ICanCallback.Stub.asInterface(data.readStrongBinder());
+this.removeCliend(_arg0);
+reply.writeNoException();
+return true;
+}
+case TRANSACTION_sendDataToSp:
+{
+data.enforceInterface(DESCRIPTOR);
+java.lang.String _arg0;
+_arg0 = data.readString();
+this.sendDataToSp(_arg0);
+reply.writeNoException();
+return true;
+}
+}
+return super.onTransact(code, data, reply, flags);
+}
+private static class Proxy implements com.console.canreader.service.ICanService
+{
+private android.os.IBinder mRemote;
+Proxy(android.os.IBinder remote)
+{
+mRemote = remote;
+}
+@Override public android.os.IBinder asBinder()
+{
+return mRemote;
+}
+public java.lang.String getInterfaceDescriptor()
+{
+return DESCRIPTOR;
+}
+@Override public void addClient(com.console.canreader.service.ICanCallback client) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeStrongBinder((((client!=null))?(client.asBinder()):(null)));
+mRemote.transact(Stub.TRANSACTION_addClient, _data, _reply, 0);
+_reply.readException();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+}
+@Override public void removeCliend(com.console.canreader.service.ICanCallback client) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeStrongBinder((((client!=null))?(client.asBinder()):(null)));
+mRemote.transact(Stub.TRANSACTION_removeCliend, _data, _reply, 0);
+_reply.readException();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+}
+@Override public void sendDataToSp(java.lang.String hexString) throws android.os.RemoteException
+{
+android.os.Parcel _data = android.os.Parcel.obtain();
+android.os.Parcel _reply = android.os.Parcel.obtain();
+try {
+_data.writeInterfaceToken(DESCRIPTOR);
+_data.writeString(hexString);
+mRemote.transact(Stub.TRANSACTION_sendDataToSp, _data, _reply, 0);
+_reply.readException();
+}
+finally {
+_reply.recycle();
+_data.recycle();
+}
+}
+}
+static final int TRANSACTION_addClient = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
+static final int TRANSACTION_removeCliend = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+static final int TRANSACTION_sendDataToSp = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
+}
+public void addClient(com.console.canreader.service.ICanCallback client) throws android.os.RemoteException;
+public void removeCliend(com.console.canreader.service.ICanCallback client) throws android.os.RemoteException;
+public void sendDataToSp(java.lang.String hexString) throws android.os.RemoteException;
+}

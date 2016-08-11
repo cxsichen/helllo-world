@@ -1,0 +1,158 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <style name="Theme.AppCompat.Light.NoActionBar" parent="android:Widget"></style>
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--
+        Customize your theme here.>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item
+        -->
+    </style>
+
+    <!-- Status Group Text -->
+    <style name="StatusText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="MyDialog" parent="@android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/bg_empty</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/push_up_in</item>
+        <item name="android:windowExitAnimation">@anim/push_down_out</item>
+    </style>
+
+    <style name="DialogAnimation1">
+        <item name="android:windowEnterAnimation">@anim/large</item>
+        <item name="android:windowExitAnimation">@anim/small</item>
+    </style>
+
+    <style name="TextViewSy">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- Temperature -->
+    <style name="TextTemp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">60sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <!-- Divider -->
+    <style name="Divider">
+        <item name="android:layout_width">152dp</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:background">#57FFFFFF</item>
+    </style>
+
+    <!-- Fan Assets Styles -->
+    <!-- Fan icon -->
+    <style name="IconFan">
+        <item name="android:layout_height">@dimen/fan_assets_height</item>
+        <item name="android:layout_width">@dimen/fan_assets_width</item>
+        <item name="android:layout_marginLeft">@dimen/fan_assets_margin</item>
+        <item name="android:src">@drawable/ic_ac_fan</item>
+    </style>
+    <!-- Fan Text -->
+    <style name="TextFan">
+        <item name="android:layout_height">@dimen/fan_assets_height</item>
+        <item name="android:layout_width">@dimen/fan_assets_width</item>
+        <item name="android:layout_marginRight">@dimen/fan_assets_margin</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <!-- AC Status Group Text -->
+    <style name="AcStatusText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- Dashboard -->
+    <!-- Dashboard Status RelativeLayout -->
+    <style name="DashboardStatusRelativeLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+    <!-- Dashboard Status Icon -->
+    <style name="DashboardStatusIcon">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+    <!-- Dashboard Status Text -->
+    <style name="DashboardStatusText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <!-- Dashboard Speedmeter Text -->
+    <style name="SpeedmeterText">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#8AFFFFFF</item>
+        <item name="android:background">@drawable/bg_speedmeter_collapse</item>
+    </style>
+    <!-- Fuel and RPM Icons -->
+    <style name="FuelAndRpmIcons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">80dp</item>
+    </style>
+    <!-- Fuel and RPM Text -->
+    <style name="FuelAndRpmText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginLeft">16sp</item>
+    </style>
+
+</resources>

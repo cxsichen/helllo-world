@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            
+            style="@style/TextViewSy"
+            android:text="剩余油量：1L" />
+        <TextView
+         
+            style="@style/TextViewSy"
+            android:text="车外温度： 0度" />
+        <TextView
+
+            style="@style/TextViewSy"
+            android:text="电池电压：0.00V" />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+         android:orientation="vertical"
+        android:layout_weight="1" >
+        
+          <TextView
+            style="@style/TextViewSy"
+            android:text="安全带：正常" />
+          
+            <TextView
+            style="@style/TextViewSy"
+            android:text="手刹制动：正常" />
+            
+              <TextView
+          
+            style="@style/TextViewSy"
+            android:text="清洗液：正常" />
+              
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+              
+          <TextView
+       
+            style="@style/TextViewSy"
+            android:text="发动机转速：0RPM" />
+          
+            <TextView
+            
+            style="@style/TextViewSy"
+            android:text="瞬时速度：0km/h" />
+            
+              <TextView
+           
+            style="@style/TextViewSy"
+            android:text="行驶里程：0km" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp" 
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+              
+           <TextView
+            android:id="@+id/fuel_warn"
+            style="@style/TextViewSy"
+            android:text="油量警告：正常" />
+            
+              <TextView
+            android:id="@+id/battery_warn"
+            style="@style/TextViewSy"
+            android:text="电池电压：正常" />
+    </LinearLayout>
+
+</LinearLayout>
