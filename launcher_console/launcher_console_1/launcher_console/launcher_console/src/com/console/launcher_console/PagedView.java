@@ -1129,13 +1129,10 @@ public class PagedView extends ViewGroup {
                 // If the view has 0 alpha, we set it to be invisible so as to  
                 // prevent  
                 // it from accepting touches
-                Log.i("cxs","=======alpha========="+alpha);
                 if (alpha < 0.3) {  
                     v.setVisibility(GONE);  
-                    Log.i("cxs1","======v=GONE======="+v.getId());
                 } else if (v.getVisibility() != VISIBLE) {  
                     v.setVisibility(VISIBLE);  
-                    Log.i("cxs1","======v=====VISIBLE=="+v.getId());
                 }  
                 Log.d("Nevin","VERSION:"+getVersion());  
             }  

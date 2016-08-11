@@ -15,6 +15,7 @@ import com.console.launcher_console.control.FmCardControl;
 import com.console.launcher_console.control.MusicCardControl;
 import com.console.launcher_console.control.NaviCardControl;
 import com.console.launcher_console.control.OtherControl;
+import com.console.launcher_console.control.RecCardControl;
 import com.console.launcher_console.control.SerialPortControl;
 import com.console.launcher_console.control.SettingCardControl;
 import com.console.launcher_console.control.TpmsContol;
@@ -98,6 +99,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private OtherControl mOtherControl;
 	private TpmsContol mTpmsContol;
 	private SerialPortControl mSerialPortControl;
+	// 记录仪卡片
+	private RecCardControl mRecCardControl;
 
 	private int verticalMinDistance = 100;
 	private int horizontalMaxDistance = 250;
@@ -107,6 +110,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 	float deg;
 	private float predeg = 0;
+	int currentIndex = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -190,6 +194,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		mOtherControl = new OtherControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.other_card_layout),
 				mSerialPortControl);
+		mRecCardControl = new RecCardControl(getApplicationContext(),
+				(LinearLayout) findViewById(R.id.rec_layout));
 
 	}
 
@@ -278,11 +284,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		case R.id.ev_rec_app:
+	/*	case R.id.ev_rec_app:
 			Intent recIntent = getPackageManager().getLaunchIntentForPackage(
 					"com.srtc.pingwang");
 			startActivitySafely(v, recIntent, null);
-			break;
+			break;*/
 		case R.id.navi_car_layout:
 			startNavi(v);
 			break;
@@ -332,6 +338,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		}
 		if (mSerialPortControl != null)
 			mSerialPortControl.bindSpService();
+		if (mRecCardControl != null)
+			mRecCardControl.resumeVideoPreview(); // rec开始预览
 		// setWallPaper()
 		super.onResume();
 		isResume = true;
@@ -343,6 +351,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		// TODO Auto-generated method stub
 		super.onPause();
 		isResume = false;
+		if (mRecCardControl != null)
+			mRecCardControl.pauseVideoPreview(); // rec暂停预览
 	}
 
 	@Override
@@ -366,7 +376,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		if (mTpmsContol != null) {
 			mTpmsContol.unregisterContentObserver();
 		}
-
+		if (mRecCardControl != null)
+			mRecCardControl.stopVideoPreview(); // 停止预览
 		unregisterHomeKeyReceiver(this);
 		super.onDestroy();
 

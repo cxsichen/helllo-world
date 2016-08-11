@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\workspace\\launcher_console\\launcher_console_1\\launcher_console\\launcher_console\\src\\cn\\colink\\serialport\\service\\ISerialPortCallback.aidl
+ * Original file: C:\\Users\\okg\\Documents\\helllo-world\\launcher_console\\launcher_console_1\\launcher_console\\launcher_console\\src\\cn\\colink\\serialport\\service\\ISerialPortCallback.aidl
  */
 package cn.colink.serialport.service;
 public interface ISerialPortCallback extends android.os.IInterface

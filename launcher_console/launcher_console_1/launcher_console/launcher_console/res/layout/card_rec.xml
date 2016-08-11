@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rec_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_rec"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1" >
 
-    </FrameLayout>
+        <RelativeLayout
+            android:id="@+id/video_layout"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/bg_rec_preview"
+            android:paddingBottom="18dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="18dp" >
+
+            <RelativeLayout
+                android:id="@+id/video_parentview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/video_offline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:src="@drawable/offline_mode" />
+        </RelativeLayout>
+    </RelativeLayout>
 
     <TextView
         style="@style/CardLabel"
@@ -19,7 +47,7 @@
 
     <View style="@style/HorizontalDivider" />
 
-    <RelativeLayout style="@style/ShortCutGroup">
+    <RelativeLayout style="@style/ShortCutGroup" >
 
         <ImageView
             android:layout_width="wrap_content"
@@ -28,12 +56,12 @@
             android:src="@drawable/ic_rec_lock" />
 
         <ImageView
-	    android:id="@+id/ev_rec_app"
+            android:id="@+id/ev_rec_app"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_rec_stop" />
+            android:src="@drawable/ic_rec_start" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -41,8 +69,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_rec_capture" />
-
     </RelativeLayout>
-
 
 </LinearLayout>

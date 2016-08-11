@@ -504,6 +504,7 @@ public class SerialPortControlService extends Service {
 		// TODO Auto-generated method stub
 		RADIOWAKE = false;
 		AUXWAKE = false;
+		EQUWAKE = false;
 		Message msg = new Message();
 		msg.what = Contacts.MSG_APP_CHANGE;
 		msg.arg1 = state;
@@ -610,6 +611,7 @@ public class SerialPortControlService extends Service {
 
 	Boolean RADIOWAKE = false;
 	Boolean AUXWAKE = false;
+	Boolean EQUWAKE = false;
 
 	private void handleTTS(int state) {
 		// TODO Auto-generated method stub
@@ -635,6 +637,17 @@ public class SerialPortControlService extends Service {
 			AUXWAKE = false;
 			PreferenceUtil.setMode(this, 4);
 			sendMsg(Contacts.AUX_MODE);
+		}
+		
+		if (state == 1 && mode == 5) { // state=1 语言被唤醒 mode=5 音效界面
+			EQUWAKE = true;
+			PreferenceUtil.setMode(this, 1);
+			sendMsg(Contacts.MUSIC_MODE);
+		}
+		if (state == 0 && EQUWAKE) {
+			EQUWAKE = false;
+			PreferenceUtil.setMode(this, 5);
+			sendMsg(Contacts.EQUALIZER_MODE);
 		}
 	}
 
