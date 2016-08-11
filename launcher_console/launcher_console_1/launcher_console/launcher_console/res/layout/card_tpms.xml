@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/tpms_layout"
+    android:background="@drawable/bg_other">
+
+    <LinearLayout
+        android:id="@+id/tpms_data_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <!--左前轮-->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <!--气压-->
+                <TextView
+                    android:id="@+id/pressure_fl"
+                    style="@style/TpmsData"
+                    android:text="0Kpa" />
+
+                <!--温度-->
+                <TextView
+                    android:id="@+id/temperature_fl"
+                    style="@style/TpmsData"
+                    android:layout_below="@+id/pressure_fl"
+                    android:text="0℃" />
+
+                <!--电量过低-->
+                <ImageView
+                    android:id="@+id/battery_fl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_alignBottom="@+id/temperature_fl"
+                    android:layout_toRightOf="@+id/temperature_fl"
+                    android:src="@drawable/ic_tpms_battery_alert"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+            <!--右前轮-->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/pressure_fr"
+                    style="@style/TpmsData"
+                    android:layout_alignParentRight="true"
+                    android:text="0Kpa" />
+
+                <TextView
+                    android:id="@+id/temperature_fr"
+                    style="@style/TpmsData"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/pressure_fr"
+                    android:text="0℃" />
+
+                <ImageView
+                    android:id="@+id/battery_fr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_alignBottom="@+id/temperature_fr"
+                    android:layout_toLeftOf="@+id/temperature_fr"
+                    android:src="@drawable/ic_tpms_battery_alert"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_tpms_tyre" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <!--左后轮-->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/pressure_bl"
+                    style="@style/TpmsData"
+                    android:layout_below="@+id/temperature_bl"
+                    android:text="0Kpa" />
+
+                <TextView
+                    android:id="@+id/temperature_bl"
+                    style="@style/TpmsData"
+                    android:text="0℃" />
+
+                <ImageView
+                    android:id="@+id/battery_bl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_alignBottom="@+id/temperature_bl"
+                    android:layout_toRightOf="@+id/temperature_bl"
+                    android:src="@drawable/ic_tpms_battery_alert"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+            <!--右后轮-->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/pressure_br"
+                    style="@style/TpmsData"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/temperature_br"
+                    android:text="0Kpa" />
+
+                <TextView
+                    android:id="@+id/temperature_br"
+                    style="@style/TpmsData"
+                    android:layout_alignParentRight="true"
+                    android:text="0℃" />
+
+                <ImageView
+                    android:id="@+id/battery_br"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_alignBottom="@+id/temperature_br"
+                    android:layout_toLeftOf="@+id/temperature_br"
+                    android:src="@drawable/ic_tpms_battery_alert"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/ripple_bg"
+        android:src="@drawable/ic_tpms_car" />
+
+</FrameLayout>

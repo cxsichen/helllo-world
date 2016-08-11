@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">Launcher Fullmirror</string>
+
+    <!--Labels-->
+    <string name="label_card_rec">Recorder</string>
+    <string name="label_card_nav">Navigation</string>
+    <string name="label_card_music">Music</string>
+    <string name="label_card_radio">Radio</string>
+    <string name="label_card_bt">Bluetooth</string>
+    <string name="label_app_playback">Playback</string>
+    <string name="label_app_edog">Edog</string>
+    <string name="label_setting_wlan">WLAN</string>
+    <string name="label_setting_fm">Effects</string>
+    <string name="label_setting_wifi_tethering">WiFi hotspot</string>
+    <string name="label_setting_device_bind">Device Bind</string>
+
+    <!--Blue card-->
+    <string name="device_name">Disconnected</string>
+    <string name="activity_not_found">Activity not found</string>
+    
+    <string name="next_road_unit">M</string>
+     <string name="next_road_km_unit">KM</string>
+    <string name="remind_distance_unit">KM</string>
+    <string name="remind_day_unit">hours arrive</string>
+    <string name="remind_time_unit">arrive</string>
+    
+    <string name="weather_haze">霾</string>
+    <string name="weather_blizzard_big">暴雪</string>
+    <string name="weather_heavy_snow_big">大雪</string>
+    <string name="weather_moderate_snow_big">中雪</string>
+    <string name="weather_light_snow_big">小雪</string>
+    <string name="weather_snow_shower_big">阵雪</string>
+    <string name="weather_super_rainstorm_big">特大暴雨</string>
+    <string name="weather_big_rainstorm_big">大暴雨</string>
+    <string name="weather_rainstorm_big">暴雨</string>
+    <string name="weather_heavy_rain_big">大雨</string>
+    <string name="weather_moderate_rain_big">中雨</string>
+    <string name="weather_light_rain_big">小雨</string>
+    <string name="weather_sleety_big">雨夹雪</string>
+    <string name="weather_hail_big">雷阵雨伴有冰雹</string>
+    <string name="weather_thunder_rain_big">雷阵雨</string>
+    <string name="weather_shower_big">阵雨</string>
+    <string name="weather_icerain_big">冻雨</string>
+    <string name="weather_strong_sandstorm_big">强沙尘暴</string>
+    <string name="weather_sandstorm_big">沙尘暴</string>
+    <string name="weather_dust_big">浮尘</string>
+    <string name="weather_dustblow_big">扬沙</string>
+    <string name="weather_foggy_big">雾</string>
+    <string name="weather_overcast_big">阴</string>
+    <string name="weather_cloudy_big">多云</string>
+    <string name="weather_sunny_big">晴</string>
+    
+     <string name="to">到</string>
+    <string name="turn">转</string>
+    
+    <string name="temperature_degree">℃</string>
+</resources>

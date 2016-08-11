@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/next_distance"
+        style="@style/CardLabel"
+        android:text="200米后"
+        android:textSize="30sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/maneuver_name"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:src="@drawable/turn_front_3branch_left" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/next_road_name"
+        style="@style/CardLabel"
+        android:text="宝安大道"
+        android:textSize="30sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/remain_message"
+        style="@style/CardLabel"
+        android:ellipsize="marquee" 
+        android:focusable="true" 
+        android:singleLine="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever" 
+        android:scrollHorizontally="true"
+        android:text="1500公里 14：01到达" />
+
+</LinearLayout>

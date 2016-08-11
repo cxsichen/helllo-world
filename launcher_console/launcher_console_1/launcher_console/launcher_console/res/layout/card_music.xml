@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app1="http://schemas.android.com/apk/res/com.console.launcher_console"
+    android:id="@+id/music_card_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_music"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <!-- 专辑封面要被下面这个image盖住 -->
+
+        <com.console.launcher_console.view.CircleImageView
+            android:id="@+id/ev_music_cover"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/bbb"
+        />
+        <!--
+          app1:border_width="20dp"
+            app1:border_color="@color/circleImageView"
+        -->
+
+        <ImageView
+            android:id="@+id/ev_music_app"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/ripple_bg"
+            android:src="@drawable/oval_music" />
+    </FrameLayout>
+
+    <!-- 播放音乐时，该TextView显示歌曲名称 -->
+
+    <TextView
+        style="@style/CardLabel"
+        android:text="@string/label_card_music" />
+
+    <View style="@style/HorizontalDivider" />
+
+    <RelativeLayout style="@style/ShortCutGroup" >
+
+        <com.console.launcher_console.view.SelectImageView
+            android:id="@+id/ev_music_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_music_previous" />
+
+        <com.console.launcher_console.view.SelectImageView
+            android:id="@+id/ev_music_play"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_music_play" />
+
+        <com.console.launcher_console.view.SelectImageView
+            android:id="@+id/ev_music_next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_music_next" />
+    </RelativeLayout>
+
+</LinearLayout>

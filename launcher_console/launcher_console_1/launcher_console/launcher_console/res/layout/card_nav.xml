@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_nav"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/navi_car_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/ripple_bg"
+        android:layout_weight="1" >
+
+        <include
+            android:id="@+id/navi_layout"
+            layout="@layout/navi"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/compass_layout"
+            layout="@layout/compass"
+            android:visibility="visible" />
+    </FrameLayout>
+
+    <View style="@style/HorizontalDivider" />
+
+    <RelativeLayout style="@style/ShortCutGroup" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/onenav_dots_left" />
+
+        <ImageView
+            android:id="@+id/navigation_one_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_nav_onenav" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/onenav_dots_right" />
+    </RelativeLayout>
+
+</LinearLayout>
