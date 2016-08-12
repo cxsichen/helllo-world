@@ -148,5 +148,6 @@ public class WeatherProvider extends ContentProvider {
 		return count;
 
 	}
+	
 
 }

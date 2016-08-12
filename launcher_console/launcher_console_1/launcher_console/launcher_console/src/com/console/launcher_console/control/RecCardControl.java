@@ -39,7 +39,7 @@ import android.widget.TextView;
 public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 		View.OnClickListener {
 
-	private static final String TAG = "cxs_TestClient";
+	private static final String TAG = "cxs";
 
 	private UNVideoViewHelper mUNVideoViewHelper;
 
@@ -51,10 +51,6 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 	// private boolean isStopingVideoStream = false;// 表示是否正在停止视频
 
 	private boolean mResume = false;
-	
-
-	private WorkHandler mWorkHandler = null;
-	private Looper mWorkLooper = null;
 
 	private static final int MSG_START_STREAM = 1;
 	private static final int MSG_STOP_STREAM = 2;
@@ -63,11 +59,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 	private Context context;
 	private ImageView devicePre;
 
-	private final class WorkHandler extends Handler {
-		public WorkHandler(Looper looper) {
-			super(looper);
-		}
-
+	private Handler mWorkHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			// UNLog.debug_print(UNLog.LV_DEBUG, TAG,
@@ -76,14 +68,23 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			Log.i("cxs", "===WorkHandler===handleMessage=========" + msg.what);
 			switch (msg.what) {
 			case MSG_START_STREAM:
-				startVideoStream();
+				new Thread() {
+					public void run() {
+						startVideoStream();
+					};
+				}.start();
+
 				break;
 			case MSG_STOP_STREAM:
-				stopVideoStream();
+				new Thread() {
+					public void run() {
+						stopVideoStream();
+					};
+				}.start();
 				break;
 			}
 		}
-	}
+	};
 
 	public RecCardControl(Context context, LinearLayout layout) {
 		recCardLayout = layout;
@@ -102,17 +103,9 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 				Context.BIND_AUTO_CREATE);
 		Log.e(TAG, "---------------------------bindservice ret = " + ret);
 
-		thread = new HandlerThread("WorkHandler[" + TAG + "]");
-		thread.start();
-		mWorkLooper = thread.getLooper();
-		mWorkHandler = new WorkHandler(mWorkLooper);
-
 	}
 
 	public void resumeVideoPreview() {
-		Log.i("cxs", "======resumeVideoPreview=========");
-		if (!thread.isAlive())
-			thread.start();
 		mResume = true;
 		mWorkHandler.removeMessages(MSG_START_STREAM);
 		mWorkHandler.removeMessages(MSG_STOP_STREAM);
@@ -132,7 +125,6 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 		mWorkHandler.removeMessages(MSG_START_STREAM);
 		mWorkHandler.removeMessages(MSG_STOP_STREAM);
 		mWorkHandler.sendEmptyMessageDelayed(MSG_STOP_STREAM, 500);
-		mWorkLooper.quit();
 		context.unbindService(mServiceConnection);
 	}
 
@@ -289,7 +281,6 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 		}
 	};
 
-	private HandlerThread thread;
 
 	@Override
 	public void videoViewShow() {
