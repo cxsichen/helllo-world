@@ -12,8 +12,9 @@ public class BeanFactory {
 
 	public static AnalyzeUtils getCanInfo(Context context, byte[] mPacket,
 			int canType, int carType) {
-	//	Log.i("cxs","========canType=========="+canType);
-	//	Log.i("cxs","========carType=========="+carType);
+		Log.i("cxs","========canType=========="+canType);
+	    Log.i("cxs","========carType=========="+carType);
+	    
 		switch (canType) {
 		case 0: // 睿志诚
 			switch (carType) {
@@ -25,6 +26,9 @@ public class BeanFactory {
 				break;
 			case 2:                           //本田
 				getRZCHonda(mPacket);
+				break;
+			case 8:                           //日产
+				getRZCNISSAN(mPacket);
 				break;
 			default:
 				break;
@@ -93,6 +97,7 @@ public class BeanFactory {
 		}
 	}
 	
+	
 	private static void getSSDFFG(byte[] mPacket) {
 		if (mAnalyzeUtils == null) {
 			mAnalyzeUtils = new SSDFFG(mPacket,3);
@@ -104,6 +109,14 @@ public class BeanFactory {
 	private static void getRZCHonda(byte[] mPacket) {
 		if (mAnalyzeUtils == null) {
 			mAnalyzeUtils = new RZCHonda(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	
+	private static void getRZCNISSAN(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCNISSAN(mPacket,1);
 		} else {
 			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
 		}

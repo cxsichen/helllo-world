@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
 	ImageView icObdHandBrake;
 	ImageView icFuel;
 	Boolean FirstShow = true;    //第一次显示的时候所有数据都处理
-	public static final int FLAG_HOMEKEY_DISPATCHED = 0x80000000; // 需要自己定义标志
+
 	/*
 	 * TextView fuel_warn; TextView battery_warn;
 	 */

@@ -3,6 +3,8 @@ package com.console.canreader.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -18,6 +20,7 @@ import com.console.canreader.utils.PreferenceUtil;
 import com.console.canreader.utils.Trace;
 import com.console.canreader.view.AirConDialog;
 import com.console.canreader.view.UnlockWaringDialog;
+
 
 import android.app.Dialog;
 import android.app.Service;
@@ -73,7 +76,7 @@ public class CanService extends Service {
 				byte[] mPacket = (byte[]) msg.obj;
 				// Broadcast to all clients the new value.
 				Trace.i("packet : " + BytesUtil.bytesToHexString(mPacket));
-
+                Log.i("cxs","==========handleMessage===========");
 				info = BeanFactory.getCanInfo(CanService.this, mPacket,
 						canType, carType);
 				if (info != null)
@@ -285,6 +288,23 @@ public class CanService extends Service {
 		mInputStream = null;
 		mOutputStream = null;
 		super.onDestroy();
+		new Timer().schedule(new TimerTask() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				try {
+					Intent localIntent = new Intent();
+					localIntent.setClass(CanService.this,
+							CanService.class); // 销毁时重新启动Service
+					startService(localIntent);
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+
+			}
+		}, 1000 * 10);
 	}
 
 	private class SendDataToSpThread extends Thread {

@@ -329,7 +329,7 @@ public class KeyDealer {
 		mAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
 				currVolume, 0);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_RING,
-				currVolume, 0);
+				currVolume*2> 15?15:currVolume*2, 0);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
 				currVolume > 15 ? 15 : currVolume, 1);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,
