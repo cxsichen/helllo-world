@@ -5,4 +5,5 @@ package com.srtc.pingwang;
 
 interface IVideoListener {
     void onConnectStatusChange(int status);
+    void onStatusChange(int index, int state);
 }

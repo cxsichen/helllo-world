@@ -45,6 +45,14 @@ public class SerialPortControlService extends Service {
 	private ISerialPortService mISpService;
 	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
 	int volumeValue;
+	/**
+	 * 音效设置默认值
+	 */
+	private static int treValue = 7;
+	private static int midValue = 7;
+	private static int basValue = 7;
+	private static int rowValue = 7;
+	private static int colValue = 7;
 
 	private final String[] Applist = { "com.console.radio",
 			"cn.kuwo.kwmusiccar", "com.mxtech.videoplayer.pro",
@@ -92,7 +100,10 @@ public class SerialPortControlService extends Service {
 						&& (float) msg.obj != 0)
 					sendMsg(getMsgString((int) ((float) msg.obj * 100), 1));
 				break;
-			case Contacts.MSG_ACCON_MSG:
+			case Contacts.MSG_ACCON_MSG:				
+				/*
+				 * acc on 后自动返回之前开启的模式对应的app
+				 */
 				int parkingState = android.provider.Settings.System.getInt(getContentResolver(), Constact.BACK_CAR, 0); 
 				Log.i("cxs","======MSG_ACCON_MSG=========parkingState======="+parkingState);				
 				if (parkingState != 1) {
@@ -102,6 +113,16 @@ public class SerialPortControlService extends Service {
 					Log.i("cxs","======MSG_ACCON_MSG=========mode======="+mode);
 					startModeActivty(mode);
 				}
+				/*
+				 * 启动can协议服务
+				 */				
+				Intent canIntent = new Intent("com.console.canreader.service.CanService");
+				canIntent.setPackage("com.console.canreader");
+				startService(canIntent);
+				/*
+				 * 发送音效的高低音值
+				 */
+				sendEquValue();
 				break;
 			case Contacts.MSG_SEND_FIRST_MSG:
 				int launchMode = PreferenceUtil
@@ -111,9 +132,9 @@ public class SerialPortControlService extends Service {
 			case Contacts.MSG_CHECK_MODE:
 				if (PreferenceUtil.getMode(SerialPortControlService.this) != PreferenceUtil
 						.getCheckMode(SerialPortControlService.this)) {
-					Toast.makeText(SerialPortControlService.this,
+					/*Toast.makeText(SerialPortControlService.this,
 							"     模式错误  现在自动修正。\n 如果还不对应，请重新打开应用",
-							Toast.LENGTH_LONG).show();
+							Toast.LENGTH_LONG).show();*/
 					sendMsg("F5020000"
 							+ BytesUtil.intToHexString(PreferenceUtil
 									.getMode(SerialPortControlService.this)));
@@ -131,6 +152,17 @@ public class SerialPortControlService extends Service {
 				startActivity(intent);
 				break;
 			case Contacts.MSG_APP_CHANGE:
+				/*
+				 * 处理app切换模式命令
+				 * 0 收音机
+				 * 1 音乐
+				 * 2 视频
+				 * 3 蓝牙
+				 * 4 aux
+				 * 5 音效
+				 * 6 导航
+				 * 7 行车记录仪 
+				 */
 				mHandler.removeMessages(Contacts.MSG_CHECK_MODE);
 				switch (Applist[msg.arg1]) {
 				case "com.console.radio":
@@ -235,17 +267,19 @@ public class SerialPortControlService extends Service {
 			}
 		}
 	};
-
-	private ComponentName getTop() {
-		ComponentName className = null;
-		ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-		@SuppressWarnings("deprecation")
-		List<RunningTaskInfo> tasksInfo = activityManager.getRunningTasks(1);
-		// 应用程序位于堆栈的顶层
-		if (tasksInfo != null) {
-			className = tasksInfo.get(0).topActivity;
-		}
-		return className;
+	/**
+	 * 发送音效的高低音值
+	 */
+	private void sendEquValue(){
+		int[] values=PreferenceUtil.getEquValue(this, basValue, midValue, treValue, rowValue,
+				colValue);
+		basValue=values[0];
+		midValue=values[1];
+		treValue=values[2];
+		rowValue=values[3];
+		colValue=values[4];
+		sendMsg(BytesUtil.makeEfMsg(basValue, midValue,treValue, rowValue,
+				colValue));
 	}
 
 	public String getMsgString(final int freq, int type) {
@@ -314,12 +348,15 @@ public class SerialPortControlService extends Service {
 			if (packet[1] == Contacts.ZERO && packet[2] == Contacts.ZERO
 					&& packet[3] == Contacts.ZERO) {
 				if (packet[4] == Contacts.BACK_CAR) {
+					//MCU发过来的倒车信号
 					mHandler.sendEmptyMessage(Contacts.MSG_BACK_CAR);
 				} else if (packet[4] == Contacts.BACK_CAR_OFF) {
+					//MCU发过来的倒车结束信号
 					Intent intent = new Intent();
 					intent.setAction(SEND_BACK_CAR_OFF);
 					sendBroadcast(intent);
 				} else {
+					//MCU发过来的模式校验
 					for (int i = 0; i < Modes.length; i++) {
 						if (packet[4] == Modes[i]) {
 							// PreferenceUtil.setMode(context, i);

@@ -50,13 +50,14 @@
     <RelativeLayout style="@style/ShortCutGroup" >
 
         <ImageView
+            android:id="@+id/LockButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_rec_lock" />
 
         <ImageView
-            android:id="@+id/ev_rec_app"
+            android:id="@+id/RecordButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -64,6 +65,7 @@
             android:src="@drawable/ic_rec_start" />
 
         <ImageView
+            android:id="@+id/CaptureButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

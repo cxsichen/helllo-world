@@ -85,15 +85,16 @@ public class BytesUtil {
 		return str + tmp;
 	}
 
-	public static String makeEfMsg(int tre, int bas, int ver, int hon) {
+	public static String makeEfMsg(int bas, int mid,int tre, int ver, int hon) {
 		StringBuilder stringBuilder = new StringBuilder("F8");
-		String hv = Integer.toHexString(tre & 0xFF);
+		String hv = Integer.toHexString(bas & 0xFF);
 		if (hv.length() < 2) {
 			stringBuilder.append(0);
 		}
 		stringBuilder.append(hv);
+       
 
-		hv = Integer.toHexString(bas & 0xFF);
+		hv = Integer.toHexString(mid & 0xFF)+Integer.toHexString(tre & 0xFF);	
 		if (hv.length() < 2) {
 			stringBuilder.append(0);
 		}
@@ -110,7 +111,6 @@ public class BytesUtil {
 			stringBuilder.append(0);
 		}
 		stringBuilder.append(hv);
-
 		return stringBuilder.toString();
 	}
 

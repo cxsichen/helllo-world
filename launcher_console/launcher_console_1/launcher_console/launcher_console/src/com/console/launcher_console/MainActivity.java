@@ -262,9 +262,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 	private void init_event() {
 		// rec_card
-		ev_rec_app = (ImageView) findViewById(R.id.ev_rec_app);
-		ev_rec_app.setOnClickListener(this);
-
 		naviCardLayout = (FrameLayout) findViewById(R.id.navi_car_layout);
 		naviCardLayout.setOnClickListener(this);
 
@@ -284,11 +281,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-	/*	case R.id.ev_rec_app:
-			Intent recIntent = getPackageManager().getLaunchIntentForPackage(
-					"com.srtc.pingwang");
-			startActivitySafely(v, recIntent, null);
-			break;*/
 		case R.id.navi_car_layout:
 			startNavi(v);
 			break;

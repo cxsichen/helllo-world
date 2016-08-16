@@ -17,4 +17,9 @@ interface ISrtcService {
     int stopVideo();
 
     int getConnectStatus();
+    
+    int setStatus(int index, int state);
+
+    int getStatus(int index);
+    
 }
