@@ -14,6 +14,7 @@ import com.console.launcher_console.util.Trace;
 
 import cn.colink.serialport.service.ISerialPortCallback;
 import cn.colink.serialport.service.ISerialPortService;
+import cn.kuwo.autosdk.api.KWAPI;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -35,6 +36,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -43,6 +45,7 @@ import android.widget.Toast;
 public class SerialPortControlService extends Service {
 
 	private ISerialPortService mISpService;
+	private KWAPI mKwapi;
 	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
 	int volumeValue;
 	/**
@@ -58,11 +61,10 @@ public class SerialPortControlService extends Service {
 			"cn.kuwo.kwmusiccar", "com.mxtech.videoplayer.pro",
 			"com.mtk.bluetooth", "com.console.equalizer", "com.baidu.navi",
 			"com.autonavi.amapauto", "com.srtc.pingwang", "com.console.auxapp" }; // 与系统发过来的值对应
-	private final String[] modeApplist = {
-			"com.console.radio", // Acc on后打开的应用的列表
+	private final String[] modeApplist = { "com.console.radio",
 			"cn.kuwo.kwmusiccar", "com.mxtech.videoplayer.pro",
 			"com.mtk.bluetooth", "com.console.auxapp", "com.console.equalizer",
-			"com.autonavi.amapauto", "com.srtc.pingwang" };
+			"com.autonavi.amapauto", "com.srtc.pingwang" }; // Acc on后打开的应用的列表
 
 	Boolean Change2FM = false;
 
@@ -81,6 +83,7 @@ public class SerialPortControlService extends Service {
 				if (mDataCallback != null) {
 					mDataCallback.OnChange(packet);
 				}
+				// 处理串口发送过来的一部分命令
 				dealWithPacket(packet);
 				break;
 			case Contacts.MSG_RADIO_VALUME_CHANGE:
@@ -100,23 +103,27 @@ public class SerialPortControlService extends Service {
 						&& (float) msg.obj != 0)
 					sendMsg(getMsgString((int) ((float) msg.obj * 100), 1));
 				break;
-			case Contacts.MSG_ACCON_MSG:				
+			case Contacts.MSG_ACCON_MSG:
 				/*
 				 * acc on 后自动返回之前开启的模式对应的app
 				 */
-				int parkingState = android.provider.Settings.System.getInt(getContentResolver(), Constact.BACK_CAR, 0); 
-				Log.i("cxs","======MSG_ACCON_MSG=========parkingState======="+parkingState);				
+				int parkingState = android.provider.Settings.System.getInt(
+						getContentResolver(), Constact.BACK_CAR, 0);
+				Log.i("cxs", "======MSG_ACCON_MSG=========parkingState======="
+						+ parkingState);
 				if (parkingState != 1) {
 					int mode = PreferenceUtil
 							.getMode(SerialPortControlService.this);
 					sendMsg("F5020000" + BytesUtil.intToHexString(mode));
-					Log.i("cxs","======MSG_ACCON_MSG=========mode======="+mode);
+					Log.i("cxs", "======MSG_ACCON_MSG=========mode======="
+							+ mode);
 					startModeActivty(mode);
 				}
 				/*
 				 * 启动can协议服务
-				 */				
-				Intent canIntent = new Intent("com.console.canreader.service.CanService");
+				 */
+				Intent canIntent = new Intent(
+						"com.console.canreader.service.CanService");
 				canIntent.setPackage("com.console.canreader");
 				startService(canIntent);
 				/*
@@ -132,9 +139,11 @@ public class SerialPortControlService extends Service {
 			case Contacts.MSG_CHECK_MODE:
 				if (PreferenceUtil.getMode(SerialPortControlService.this) != PreferenceUtil
 						.getCheckMode(SerialPortControlService.this)) {
-					/*Toast.makeText(SerialPortControlService.this,
-							"     模式错误  现在自动修正。\n 如果还不对应，请重新打开应用",
-							Toast.LENGTH_LONG).show();*/
+					/*
+					 * Toast.makeText(SerialPortControlService.this,
+					 * "     模式错误  现在自动修正。\n 如果还不对应，请重新打开应用",
+					 * Toast.LENGTH_LONG).show();
+					 */
 					sendMsg("F5020000"
 							+ BytesUtil.intToHexString(PreferenceUtil
 									.getMode(SerialPortControlService.this)));
@@ -153,15 +162,7 @@ public class SerialPortControlService extends Service {
 				break;
 			case Contacts.MSG_APP_CHANGE:
 				/*
-				 * 处理app切换模式命令
-				 * 0 收音机
-				 * 1 音乐
-				 * 2 视频
-				 * 3 蓝牙
-				 * 4 aux
-				 * 5 音效
-				 * 6 导航
-				 * 7 行车记录仪 
+				 * 处理app切换模式命令 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪
 				 */
 				mHandler.removeMessages(Contacts.MSG_CHECK_MODE);
 				switch (Applist[msg.arg1]) {
@@ -267,18 +268,19 @@ public class SerialPortControlService extends Service {
 			}
 		}
 	};
+
 	/**
 	 * 发送音效的高低音值
 	 */
-	private void sendEquValue(){
-		int[] values=PreferenceUtil.getEquValue(this, basValue, midValue, treValue, rowValue,
-				colValue);
-		basValue=values[0];
-		midValue=values[1];
-		treValue=values[2];
-		rowValue=values[3];
-		colValue=values[4];
-		sendMsg(BytesUtil.makeEfMsg(basValue, midValue,treValue, rowValue,
+	private void sendEquValue() {
+		int[] values = PreferenceUtil.getEquValue(this, basValue, midValue,
+				treValue, rowValue, colValue);
+		basValue = values[0];
+		midValue = values[1];
+		treValue = values[2];
+		rowValue = values[3];
+		colValue = values[4];
+		sendMsg(BytesUtil.makeEfMsg(basValue, midValue, treValue, rowValue,
 				colValue));
 	}
 
@@ -297,6 +299,9 @@ public class SerialPortControlService extends Service {
 	private void startModeActivty(int mode) {
 		// TODO Auto-generated method stub
 		switch (mode) {
+		case 1: // 酷我
+			mKwapi.startAPP(SerialPortControlService.this, true);
+			break;
 		case 6:
 			startNavi();
 			break;
@@ -348,15 +353,15 @@ public class SerialPortControlService extends Service {
 			if (packet[1] == Contacts.ZERO && packet[2] == Contacts.ZERO
 					&& packet[3] == Contacts.ZERO) {
 				if (packet[4] == Contacts.BACK_CAR) {
-					//MCU发过来的倒车信号
+					// MCU发过来的倒车信号
 					mHandler.sendEmptyMessage(Contacts.MSG_BACK_CAR);
 				} else if (packet[4] == Contacts.BACK_CAR_OFF) {
-					//MCU发过来的倒车结束信号
+					// MCU发过来的倒车结束信号
 					Intent intent = new Intent();
 					intent.setAction(SEND_BACK_CAR_OFF);
 					sendBroadcast(intent);
 				} else {
-					//MCU发过来的模式校验
+					// MCU发过来的模式校验
 					for (int i = 0; i < Modes.length; i++) {
 						if (packet[4] == Modes[i]) {
 							// PreferenceUtil.setMode(context, i);
@@ -364,6 +369,17 @@ public class SerialPortControlService extends Service {
 						}
 					}
 				}
+			}
+			break;
+		case Contacts.BACKLIGHT:// 背光信息
+			if (packet[1] == Contacts.ONE && packet[2] == Contacts.ZERO // 大灯开启降低背光
+					&& packet[3] == Contacts.ZERO && packet[4] == Contacts.ZERO) {
+				changeBackLight(true);
+
+			} else if (packet[1] == Contacts.ZERO && packet[2] == Contacts.ZERO // 大灯关闭恢复背光
+					&& packet[3] == Contacts.ZERO && packet[4] == Contacts.ZERO) {
+				changeBackLight(false);
+
 			}
 			break;
 		case Contacts.VERSION_0: // 获取mcu版本号
@@ -412,6 +428,49 @@ public class SerialPortControlService extends Service {
 
 	}
 
+	/**
+	 * @param down
+	 *            down 为true 大灯开启降低背光 down 为false 大灯关闭恢复背光
+	 */
+	private void changeBackLight(Boolean down) {
+		// TODO Auto-generated method stub
+		if (down) {
+			try {
+				int value = Settings.System.getInt(getContentResolver(),
+						Settings.System.SCREEN_BRIGHTNESS, 0);
+				Log.i("cxs", "=========SCREEN_BRIGHTNESS=====value=========="
+						+ value);
+				if (value > Constact.DEFAULT_BRIGHTNESS) {
+					Settings.System.putInt(getContentResolver(),
+							Constact.USER_SAVE_BRIGHTNESS, value);
+					Settings.System.putInt(getContentResolver(),
+							Settings.System.SCREEN_BRIGHTNESS,
+							Constact.DEFAULT_BRIGHTNESS);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			try {
+				int value = Settings.System.getInt(getContentResolver(),
+						Constact.USER_SAVE_BRIGHTNESS, 0);
+				Log.i("cxs",
+						"=========USER_SAVE_BRIGHTNESS=====value=========="
+								+ value);
+				if (value > Constact.DEFAULT_BRIGHTNESS) {
+					Settings.System.putInt(getContentResolver(),
+							Settings.System.SCREEN_BRIGHTNESS, value);
+					Settings.System.putInt(getContentResolver(),
+							Constact.USER_SAVE_BRIGHTNESS, 0);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+
 	public class MyBinder extends Binder {
 		public SerialPortControlService getService() {
 			return SerialPortControlService.this;
@@ -427,6 +486,7 @@ public class SerialPortControlService extends Service {
 		bindSpService();
 		doRegisterReceiver();
 		doRegisterContentObserver();
+		mKwapi = KWAPI.createKWAPI(this, "auto");
 
 	}
 
@@ -675,7 +735,7 @@ public class SerialPortControlService extends Service {
 			PreferenceUtil.setMode(this, 4);
 			sendMsg(Contacts.AUX_MODE);
 		}
-		
+
 		if (state == 1 && mode == 5) { // state=1 语言被唤醒 mode=5 音效界面
 			EQUWAKE = true;
 			PreferenceUtil.setMode(this, 1);
@@ -707,7 +767,7 @@ public class SerialPortControlService extends Service {
 	private void handleAccState(int state) {
 		// TODO Auto-generated method stub
 		if (state == 1) {
-			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG,1000);
+			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 1000);
 		}
 	}
 

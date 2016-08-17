@@ -148,6 +148,7 @@ public class Contacts {
 	public static final int SYSTEM_TIME = 0x7C;// 系统时间
 	public static final int SYSTEM_INFO = 0x7D;// 系统信息
 	public static final int ZERO = 0x00;// 系统信息
+	public static final int ONE = 0x01;// 系统信息
 	public static final int FACTORY_SETUP = 0x6F;
 	public static final int MODE_AUDIO_5_1 = 0x8C;// GPS音量
 	public static final int TOUCH_SEND = 0x72;// touch
@@ -157,6 +158,7 @@ public class Contacts {
 	public static final int BLINK = -1;
 	public static final int BACK_CAR = 0x0F;
 	public static final int BACK_CAR_OFF = 0x10;
+	public static final int BACKLIGHT= 0x78;
 	
 	public static final int VERSION_0= 0x60;
 	public static final int VERSION_1= 0x61;

@@ -27,5 +27,7 @@ public interface Constact {
     public static final String KEY_VOLUME_VALUE = "volume_value";
     public static final String MCU_VERSION = "mcu_version";
     public final static String FMSTATUS = "fmstatus";
+    public final static String USER_SAVE_BRIGHTNESS= "user_brightness";
+    public final static int DEFAULT_BRIGHTNESS = 110;
 
 }
