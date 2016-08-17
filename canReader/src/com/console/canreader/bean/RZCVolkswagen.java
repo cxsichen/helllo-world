@@ -49,7 +49,7 @@ public class RZCVolkswagen extends AnalyzeUtils {
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
-	
+
 	@Override
 	public void analyzeEach(byte[] msg, int i) {
 		// TODO Auto-generated method stub
@@ -176,25 +176,25 @@ public class RZCVolkswagen extends AnalyzeUtils {
 	void analyzeFrontRaderData(byte[] msg) {
 		// TODO Auto-generated method stub
 		mCanInfo.FRONT_LEFT_DISTANCE = (((int) (msg[3] & 0xff)) > 10 ? 10
-				: ((int) (msg[3] & 0xff))+2)/3;
+				: ((int) (msg[3] & 0xff)) + 2) / 3;
 		mCanInfo.FRONT_MIDDLE_LEFT_DISTANCE = (((int) (msg[4] & 0xff)) > 10 ? 10
-				: ((int) (msg[4] & 0xff))+2)/3;
+				: ((int) (msg[4] & 0xff)) + 2) / 3;
 		mCanInfo.FRONT_MIDDLE_RIGHT_DISTANCE = (((int) (msg[5] & 0xff)) > 10 ? 10
-				: ((int) (msg[5] & 0xff))+2)/3;
+				: ((int) (msg[5] & 0xff)) + 2) / 3;
 		mCanInfo.FRONT_RIGHT_DISTANCE = (((int) (msg[6] & 0xff)) > 10 ? 10
-				: ((int) (msg[6] & 0xff))+2)/3;
+				: ((int) (msg[6] & 0xff)) + 2) / 3;
 	}
 
 	void analyzeBackRaderData(byte[] msg) {
 		// TODO Auto-generated method stub
 		mCanInfo.BACK_LEFT_DISTANCE = (((int) (msg[3] & 0xff)) > 10 ? 10
-				: ((int) (msg[3] & 0xff))+2)/3;
+				: ((int) (msg[3] & 0xff)) + 2) / 3;
 		mCanInfo.BACK_MIDDLE_LEFT_DISTANCE = (((int) (msg[4] & 0xff)) > 10 ? 10
-				: ((int) (msg[4] & 0xff))+2)/3;
+				: ((int) (msg[4] & 0xff)) + 2) / 3;
 		mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE = (((int) (msg[5] & 0xff)) > 10 ? 10
-				: ((int) (msg[5] & 0xff))+2)/3;
+				: ((int) (msg[5] & 0xff)) + 2) / 3;
 		mCanInfo.BACK_RIGHT_DISTANCE = (((int) (msg[6] & 0xff)) > 10 ? 10
-				: ((int) (msg[6] & 0xff))+2)/3;
+				: ((int) (msg[6] & 0xff)) + 2) / 3;
 	}
 
 	void analyzeAirConditionData(byte[] msg) {
@@ -243,6 +243,5 @@ public class RZCVolkswagen extends AnalyzeUtils {
 		// TODO Auto-generated method stub
 		mCanInfo.BACK_LIGHT_DATA = (int) (msg[3] & 0xFF);
 	}
-
 
 }

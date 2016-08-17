@@ -1,26 +1,43 @@
 package com.console.canreader.utils;
 
 public class Contacts {
+	/*
+	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
+	 * PHONE 6：mute 7：SRC 8：SPEECH/MIC 9:answer phone 10:hangup phone
+	 */
+	public final static class KEYEVENT {
+		public static final int VOLUP = 1;
+		public static final int VOLDOW = 2;
+		public static final int MENUUP = 3;
+		public static final int MENUDOWN = 4;
+		public static final int PHONE = 5;
+		public static final int MUTE = 6;
+		public static final int SRC = 7;
+		public static final int SPEECH = 8;
+		public static final int ANSWER = 9;
+		public static final int HANGUP = 10;
+	}
+
 	public final static String CARTYPE = "carType";
 	public final static String CANTYPE = "canType";
-	public static final String MODE = "Console_mode";        //声音模式
+	public static final String MODE = "Console_mode"; // 声音模式
 	public static final String KEY_VOLUME_VALUE = "volume_value";
 	public static final String BACK_CAR = "back_car_state";
 	public static final String ACC_STATE = "acc_state";
 
-    public static final int VOL_UP = 1;
-    public static final int VOL_DOWN = 2;
-    public static final int MENU_UP = 3;
-    public static final int MENU_DOWN = 4;
-    public static final int TEL = 5;
-    public static final int MUTE = 6;
-    public static final int SRC = 7;
-    public static final int MIC = 8;
-    public static final int TEL_ANSWER = 9;
-    public static final int TEL_HANDUP = 10;
-    public static final int MENU_LONG_UP = 11;
-    public static final int MENU_LONG_DOWN = 12;
-    
+	public static final int VOL_UP = 1;
+	public static final int VOL_DOWN = 2;
+	public static final int MENU_UP = 3;
+	public static final int MENU_DOWN = 4;
+	public static final int TEL = 5;
+	public static final int MUTE = 6;
+	public static final int SRC = 7;
+	public static final int MIC = 8;
+	public static final int TEL_ANSWER = 9;
+	public static final int TEL_HANDUP = 10;
+	public static final int MENU_LONG_UP = 11;
+	public static final int MENU_LONG_DOWN = 12;
+
 	public static final int MSG_RADIO_DATA = 0x01;
 	public static final int MSG_UPDATA_UI = 0x02;
 	public static final int MSG_DATA = 0x03;

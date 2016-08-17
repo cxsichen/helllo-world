@@ -21,16 +21,27 @@ public class BeanFactory {
 			case 0:                           //大众
 				getRZCVolkswagen(mPacket);
 				break;
-			case 1:                           //大众高尔夫
+			case 1:                           //大众高尔夫          未完成
 				getRZCVolkswagenGolf(mPacket);
 				break;
-			case 2:                           //本田
+			case 2:                           //本田                         未完成
 				getRZCHonda(mPacket);
+				break;
+			case 3:                          //丰田 丰田锐志
+			case 4:  
+				getRZCToyota(mPacket);
 				break;
 			case 8:                           //日产
 				getRZCNISSAN(mPacket);
 				break;
+			case 9:                           //广汽传祺
+				getRZCTrumpche(mPacket);
+				break;
+			case 10:                           //福克斯
+				getRZCFOCUS(mPacket);
+				break;				
 			default:
+						
 				break;
 			}
 			break;
@@ -106,9 +117,33 @@ public class BeanFactory {
 		}
 	}
 	
+	private static void getRZCToyota(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCToyota(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	
 	private static void getRZCHonda(byte[] mPacket) {
 		if (mAnalyzeUtils == null) {
 			mAnalyzeUtils = new RZCHonda(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	
+	private static void getRZCFOCUS(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCFOCUS(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	
+	private static void getRZCTrumpche(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCTrumpche(mPacket,1);
 		} else {
 			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
 		}

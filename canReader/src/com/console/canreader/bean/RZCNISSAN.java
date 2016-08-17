@@ -6,7 +6,7 @@ import com.console.canreader.service.CanInfo;
 import android.util.Log;
 
 public class RZCNISSAN extends AnalyzeUtils {
-
+    
 	// Head Code
 	public static final int HEAD_CODE = 0x2e;
 	// DataType
@@ -209,6 +209,7 @@ public class RZCNISSAN extends AnalyzeUtils {
 			mCanInfo.STEERING_BUTTON_MODE = 10;
 			break;
 		default:
+			mCanInfo.STEERING_BUTTON_MODE = 0;
 			break;
 		}
 		mCanInfo.STEERING_BUTTON_STATUS = (int) (msg[4] & 0xFF);

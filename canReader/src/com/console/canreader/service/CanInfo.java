@@ -6,6 +6,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class CanInfo implements Parcelable {
+	
+    /**
+	 * mCanInfo.CHANGE_STATUS表示更改的状态
+	 * 
+	 * STEERING_BUTTON_DATA--------------mCanInfo.CHANGE_STATUS = 2         按键状态
+	 * AIR_CONDITIONER_DATA--------------mCanInfo.CHANGE_STATUS = 3         空调状态
+	 * BACK_RADER_DATA-------------------mCanInfo.CHANGE_STATUS = 4         后雷达状态
+	 * FRONT_RADER_DATA------------------mCanInfo.CHANGE_STATUS = 5         前雷达状态
+	 * RADAR_DATA------------------------mCanInfo.CHANGE_STATUS = 11        雷达状态（前后都有）
+	 * STEERING_TURN_DATA----------------mCanInfo.CHANGE_STATUS = 8         方向盘状态
+	 * CAR_INFO_DATA---------------------mCanInfo.CHANGE_STATUS = 10        报警状态（车门报警，车身信息报警）
+	 *                                                                      车身信息
+	 */
 
 	public int CHANGE_STATUS = 8888;
 	
@@ -45,7 +58,7 @@ public class CanInfo implements Parcelable {
 	public int DOWNWARD_AIR_INDICATOR = 0;     //吹脚
 	public int AIRCON_SHOW_REQUEST = 0;           
 	public int AIR_RATE = 0;	             //风速        -1是自动 其他的都是数值
-	public float DRIVING_POSITON_TEMP = 0;   // 驾驶位置处温度	  0xFE=low对应0  0xFF=high对应1 
+	public float DRIVING_POSITON_TEMP = 0;   // 驾驶位置处温度	  low对应0  high对应255 
 	public float DEPUTY_DRIVING_POSITON_TEMP = 0; // 副驾驶位置处温度
 	// 座椅加热信息
 
@@ -89,7 +102,7 @@ public class CanInfo implements Parcelable {
 	/*
 	 * 方向盘转角
 	 */
-	public int STERRING_WHELL_STATUS = 0;                    //方向盘转角
+	public int STERRING_WHELL_STATUS = 0;                    //方向盘转角           -540 到 540
 	                                                        //ESP>0  左转        ESP<0 右转             
 	/*
 	 * 功放状态POWER_AMPLIFIER_DATA

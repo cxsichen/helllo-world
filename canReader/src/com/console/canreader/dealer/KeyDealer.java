@@ -47,11 +47,13 @@ public class KeyDealer {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Contacts.VOL_UP:
-				Log.i("cxs", "-------msg.VOL_UP-------");
+				Log.i("cxs1", "-----1111--msg.VOL_UP-------");
+				cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM);
 				handleVolume(context, cur_music + SETP_VOLUME);
 				break;
 			case Contacts.VOL_DOWN:
 				Log.i("cxs", "-------msg.VOL_DOWN-------");
+				cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM);
 				handleVolume(context, cur_music - SETP_VOLUME);
 				break;
 			case Contacts.MENU_UP:
@@ -253,6 +255,8 @@ public class KeyDealer {
 
 	protected void dealWith(Context context, CanInfo canInfo) {
 		// TODO Auto-generated method stub
+		Log.i("cxs","======dealWith===STEERING_BUTTON_STATUS===="+canInfo.STEERING_BUTTON_STATUS);
+		Log.i("cxs","======dealWith==STEERING_BUTTON_MODE====="+canInfo.STEERING_BUTTON_MODE);
 		if (canInfo.STEERING_BUTTON_STATUS == 0) {			
 			mHandler.removeMessages(Contacts.MENU_LONG_UP);
 			mHandler.removeMessages(Contacts.MENU_LONG_DOWN);
@@ -300,6 +304,7 @@ public class KeyDealer {
 				mHandler.sendEmptyMessageDelayed(Contacts.MIC, 200);
 				break;
 			case Contacts.TEL_ANSWER:
+				Log.i("cxs","======dealWith==TEL_ANSWER=====");
 				mHandler.removeMessages(Contacts.TEL_ANSWER);
 				mHandler.sendEmptyMessageDelayed(Contacts.TEL_ANSWER, 200);
 				break;
@@ -325,7 +330,6 @@ public class KeyDealer {
 		if (currVolume > MAX_ALARM_VOICE) {
 			currVolume = MAX_ALARM_VOICE;
 		}
-		cur_music = currVolume;
 		mAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
 				currVolume, 0);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_RING,
