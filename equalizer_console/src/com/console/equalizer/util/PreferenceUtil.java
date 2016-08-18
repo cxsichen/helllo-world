@@ -38,6 +38,18 @@ public class PreferenceUtil {
 		SharedPreferences.Editor editor = getPreferencesEditor(context);
 		editor.putInt(KEY_ST_OR_MD, value).apply();
 	}
+	
+	 /**
+     * 获取音效值
+     * @param context
+     * @param basValue     低音值
+     * @param midValue     中音值
+     * @param treValue     高音值
+     * @param rowValue     声音偏移排值
+     * @param colValue     声音偏移列值
+     * @param mode
+     * @return
+     */
 
 	public static int[] getMode(Context context, int basValue, int midValue,
 			int treValue, int rowValue, int colValue, int mode) {
