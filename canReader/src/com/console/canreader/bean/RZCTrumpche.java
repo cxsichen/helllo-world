@@ -69,6 +69,7 @@ public class RZCTrumpche extends AnalyzeUtils {
 				analyzeSteeringTurnData(msg);
 				break;
 			default:
+				mCanInfo.CHANGE_STATUS = 8888;
 				break;
 			}
 		} catch (Exception e) {

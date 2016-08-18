@@ -127,6 +127,9 @@ public class CanService extends Service {
 								if (canType == 0 && carType == 0)
 									writeCanPort(BytesUtil
 											.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO));
+								if (canType == 0 && carType == 1)
+									writeCanPort(BytesUtil
+											.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_0_1));
 							}
 						});
 				break;

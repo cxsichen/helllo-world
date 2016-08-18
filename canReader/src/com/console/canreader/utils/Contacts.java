@@ -123,6 +123,7 @@ public class Contacts {
 	public static final String HEX_SOUND_CAR_RIGHT = "F50500000B";
 	public static final String HEX_SOUND_CAR_RESET = "F50500000E";
 	public static final String HEX_GET_CAR_INFO = "2e90024102";
+	public static final String HEX_GET_CAR_INFO_0_1 = "2e90022700";
 	public static final String HEX_GET_CAR_INFO_1 = "2e90024101";
 	public static final String HEX_GET_CAR_INFO_3 = "2e90024103";
 	/** volumn popup */

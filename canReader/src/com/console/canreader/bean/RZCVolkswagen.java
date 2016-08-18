@@ -89,6 +89,8 @@ public class RZCVolkswagen extends AnalyzeUtils {
 			} else if ((int) (msg[i] & 0xFF) == CAR_INFO_DATA) {
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData(msg);
+			}else{
+				mCanInfo.CHANGE_STATUS = 8888;
 			}
 
 		} catch (Exception e) {

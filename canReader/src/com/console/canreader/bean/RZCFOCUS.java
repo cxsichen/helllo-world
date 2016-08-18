@@ -61,6 +61,7 @@ public class RZCFOCUS extends AnalyzeUtils {
 				analyzeCarInfoData(msg);
 				break;
 			default:
+				mCanInfo.CHANGE_STATUS = 8888;
 				break;
 			}
 		} catch (Exception e) {
@@ -79,11 +80,10 @@ public class RZCFOCUS extends AnalyzeUtils {
 		mCanInfo.LEFT_BACKDOOR_STATUS = (int) ((msg[3] >> 4) & 0x01);
 		mCanInfo.TRUNK_STATUS = (int) ((msg[3] >> 3) & 0x01);
 
-
 		mCanInfo.HANDBRAKE_STATUS = (int) ((msg[4] >> 3) & 0x01);
 		mCanInfo.SAFETY_BELT_STATUS = (int) ((msg[4] >> 7) & 0x01);
-		mCanInfo.BATTERY_VOLTAGE=-1;
-		mCanInfo.REMAIN_FUEL=-1;
+		mCanInfo.BATTERY_VOLTAGE = -1;
+		mCanInfo.REMAIN_FUEL = -1;
 	}
 
 	void analyzeSteeringTurnData(byte[] msg) {
@@ -93,7 +93,7 @@ public class RZCFOCUS extends AnalyzeUtils {
 
 	void analyzeFrontRaderData(byte[] msg) {
 		// TODO Auto-generated method stub
-		
+
 		mCanInfo.FRONT_LEFT_DISTANCE = (((int) (msg[3] & 0xff)) == 0 ? 0
 				: (((((float) (msg[3] & 0xff)) / (0x1f / 4f)) + 1) > 4 ? 4
 						: (int) ((((float) (msg[3] & 0xff)) / (0x1f / 4f)) + 1)));
@@ -106,7 +106,7 @@ public class RZCFOCUS extends AnalyzeUtils {
 		mCanInfo.FRONT_RIGHT_DISTANCE = (((int) (msg[6] & 0xff)) == 0 ? 0
 				: (((((float) (msg[6] & 0xff)) / (0x1f / 4f)) + 1) > 4 ? 4
 						: (int) ((((float) (msg[6] & 0xff)) / (0x1f / 4f)) + 1)));
-		
+
 	}
 
 	void analyzeBackRaderData(byte[] msg) {

@@ -164,6 +164,7 @@ public class DialogCreater {
 	public static void showAirConDialog(Context context, CanInfo canInfo,
 			CallBack mCallBack) {
 		// TODO Auto-generated method stub
+		
 		if (canInfo.AIR_CONDITIONER_STATUS != airConStatus[0]
 				|| canInfo.AC_INDICATOR_STATUS != airConStatus[1]
 				|| canInfo.CYCLE_INDICATOR != airConStatus[2]
@@ -175,11 +176,12 @@ public class DialogCreater {
 				|| canInfo.PARALLEL_AIR_INDICATOR != airConStatus[8]
 				|| canInfo.DOWNWARD_AIR_INDICATOR != airConStatus[9]
 				|| canInfo.AIR_RATE != airConStatus[10]
-				|| canInfo.DRIVING_POSITON_TEMP != airConStatus[11]
-				|| canInfo.DEPUTY_DRIVING_POSITON_TEMP != airConStatus[12]
+				|| (int) canInfo.DRIVING_POSITON_TEMP != airConStatus[11]
+				|| (int) canInfo.DEPUTY_DRIVING_POSITON_TEMP != airConStatus[12]
 				|| canInfo.LEFT_SEAT_TEMP != airConStatus[13]
 				|| canInfo.RIGTHT_SEAT_TEMP != airConStatus[14]
 				) {
+		
 			airConStatus[0] = canInfo.AIR_CONDITIONER_STATUS;
 			airConStatus[1] = canInfo.AC_INDICATOR_STATUS;
 			airConStatus[2] = canInfo.CYCLE_INDICATOR;
@@ -198,7 +200,7 @@ public class DialogCreater {
 			airConStatus[12] = (int) canInfo.DEPUTY_DRIVING_POSITON_TEMP;
 			airConStatus[13] = canInfo.LEFT_SEAT_TEMP;
 			airConStatus[14] = canInfo.RIGTHT_SEAT_TEMP;
-	
+			
 
 			if (airCondialog == null) {
 				airCondialog = new AirConDialog(context, R.style.MyDialog);

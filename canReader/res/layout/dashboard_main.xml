@@ -59,7 +59,7 @@
                 android:id="@+id/enginee"
                 style="@style/FuelAndRpmText"
                 android:layout_toRightOf="@+id/icRpm"
-                android:text="0 RPM" />
+                />
 
             <ImageView
                 android:layout_width="wrap_content"

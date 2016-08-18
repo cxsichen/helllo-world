@@ -47,7 +47,7 @@ public class KeyDealer {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Contacts.VOL_UP:
-				Log.i("cxs1", "-----1111--msg.VOL_UP-------");
+				Log.i("cxs", "-----1111--msg.VOL_UP-------");
 				cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM);
 				handleVolume(context, cur_music + SETP_VOLUME);
 				break;
@@ -128,6 +128,7 @@ public class KeyDealer {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			Log.i("cxs1","----------myReceiver----------"+intent.getAction());
 			switch (intent.getAction()) {
 			case KEYCODE_VOLUME_UP:
 				mHandler.sendEmptyMessageDelayed(Contacts.VOL_UP, 0);
@@ -255,8 +256,7 @@ public class KeyDealer {
 
 	protected void dealWith(Context context, CanInfo canInfo) {
 		// TODO Auto-generated method stub
-		Log.i("cxs","======dealWith===STEERING_BUTTON_STATUS===="+canInfo.STEERING_BUTTON_STATUS);
-		Log.i("cxs","======dealWith==STEERING_BUTTON_MODE====="+canInfo.STEERING_BUTTON_MODE);
+
 		if (canInfo.STEERING_BUTTON_STATUS == 0) {			
 			mHandler.removeMessages(Contacts.MENU_LONG_UP);
 			mHandler.removeMessages(Contacts.MENU_LONG_DOWN);

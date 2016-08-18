@@ -10,6 +10,7 @@ import com.console.canreader.service.ICanCallback;
 import com.console.canreader.service.ICanService;
 import com.console.canreader.utils.BytesUtil;
 import com.console.canreader.utils.Contacts;
+import com.console.canreader.utils.PreferenceUtil;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -56,8 +57,9 @@ public class MainActivity extends Activity {
 	ImageView icObdBattery;
 	ImageView icObdHandBrake;
 	ImageView icFuel;
-	Boolean FirstShow = true;    //第一次显示的时候所有数据都处理
-
+	Boolean FirstShow = true; // 第一次显示的时候所有数据都处理
+	private int canType = -1; // 盒子厂家 0：睿志诚 1：尚摄
+	private int carType = -1; // 车型 0:大众
 	/*
 	 * TextView fuel_warn; TextView battery_warn;
 	 */
@@ -79,12 +81,19 @@ public class MainActivity extends Activity {
 				// sendMsg(Contacts.HEX_GET_CAR_INFO);
 				break;
 			case Contacts.MSG_GET_MSG:
-				sendMsg(BytesUtil.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO));
+				// 大众主动获取数据
+				if (canType == 0 && carType == 0) {
+					sendMsg(BytesUtil.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO));
+				}
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 2000);
 				break;
 			case Contacts.MSG_ONCE_GET_MSG:
-				sendMsg(BytesUtil.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_1));
-				sendMsg(BytesUtil.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_3));
+				if (canType == 0 && carType == 0) {
+					sendMsg(BytesUtil
+							.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_1));
+					sendMsg(BytesUtil
+							.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_3));
+				}
 				break;
 			default:
 				break;
@@ -131,6 +140,8 @@ public class MainActivity extends Activity {
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 2000);
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ONCE_GET_MSG, 5000);
 		}
+		canType = PreferenceUtil.getCANTYPE(this);
+		carType = PreferenceUtil.getCARTYPE(this);
 	}
 
 	protected void show(CanInfo caninfo) {
@@ -184,8 +195,8 @@ public class MainActivity extends Activity {
 				clean.setText("清洁液\n");
 				icObdWasherFluid.setColorFilter(null);
 			}
-
-			enginee.setText((int) caninfo.ENGINE_SPEED + " RPM");
+			if (caninfo.ENGINE_SPEED != -1)
+				enginee.setText((int) caninfo.ENGINE_SPEED + " RPM");
 			driving_speed.setText((int) caninfo.DRIVING_SPEED + "KM/H");
 			distance.setText("行驶里程\n " + caninfo.DRIVING_DISTANCE + "km");
 			speedHand.setRotation(1.125f * caninfo.DRIVING_SPEED);

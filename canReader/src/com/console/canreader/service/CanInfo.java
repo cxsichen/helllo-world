@@ -130,7 +130,7 @@ public class CanInfo implements Parcelable {
 	public int LEFT_FORONTDOOR_STATUS = 0;                   //左前门未关
 
 
-	public int ENGINE_SPEED = 0;                           //发动机转速
+	public int ENGINE_SPEED = -1;                           //发动机转速 -1表示无此功能
 	public float DRIVING_SPEED = 0;                        //瞬时车速
 	public float BATTERY_VOLTAGE = 0;        //电池电量       -1表示无此功能 
 	public float OUTSIDE_TEMPERATURE = 0;   //窗外温度
