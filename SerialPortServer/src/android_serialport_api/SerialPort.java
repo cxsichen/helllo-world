@@ -38,7 +38,7 @@ public class SerialPort {
     private static SerialPort mInstance;
     
     private final static String DEV_FILE = "/dev/ttyMT3";
-    private final static int SERIAL_PORT_BT = 38400;
+    private final static int SERIAL_PORT_BT = 9600;
     
     private SerialPort(String device, int baudrate, int flags)
             throws SecurityException, IOException {

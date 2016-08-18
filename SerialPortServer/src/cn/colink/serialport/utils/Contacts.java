@@ -128,5 +128,6 @@ public class Contacts {
 	public static final int VERSION_2= 0x62;
 	public static final int VERSION_3= 0x63;
 	public static final int VERSION_4= 0x64;
+	public static final int BACKLIGHT= 0x78;
 
 }
