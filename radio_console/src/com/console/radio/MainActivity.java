@@ -688,6 +688,7 @@ public class MainActivity extends Activity implements OnClickListener,
 				allFqs.set(mRadioData.curBand * 6 + i, mRadioData.FF[i]);
 			}
 		}
+		
 		updatePageItem(allFqs, band, item);
 	}
 
@@ -780,7 +781,13 @@ public class MainActivity extends Activity implements OnClickListener,
 		updateAmFm(isFM);
 		updatePageView(allFqs, band, item);
 	}
-
+	
+	/**
+     * 更新所有band的页面
+     * @param allFqs
+     * @param band
+     * @param item
+     */
 	private void updatePageView(List<Integer> allFqs, int band, int item) {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < 3; i++) {
@@ -817,7 +824,12 @@ public class MainActivity extends Activity implements OnClickListener,
 		mHandler.sendMessage(msg);
 
 	}
-
+     /**
+      * 更新当前band的页面
+      * @param allFqs
+      * @param band
+      * @param item
+      */
 	private void updatePageItem(List<Integer> allFqs, int band, int item) {
 		// TODO Auto-generated method stub
 		if (band < 3) {
