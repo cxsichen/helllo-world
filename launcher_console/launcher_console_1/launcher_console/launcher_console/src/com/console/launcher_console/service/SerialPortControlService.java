@@ -165,7 +165,11 @@ public class SerialPortControlService extends Service {
 				 * 处理app切换模式命令 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪
 				 */
 				mHandler.removeMessages(Contacts.MSG_CHECK_MODE);
-				switch (Applist[msg.arg1]) {
+				switch ((String)msg.obj) {
+				case "com.console.parking":                           //主界面 倒车和obd报警不处理模式切换
+				case "com.console.canreader": 
+				case "com.console.launcher_console":  
+					break;
 				case "com.console.radio":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 0) {
 						PreferenceUtil
@@ -248,7 +252,7 @@ public class SerialPortControlService extends Service {
 					}
 					break;
 				default:
-					if (PreferenceUtil.getMode(SerialPortControlService.this) != 1) {
+					if (PreferenceUtil.getMode(SerialPortControlService.this) != 1) {        //第三方应用默认音乐模式
 						PreferenceUtil
 								.setMode(SerialPortControlService.this, 1);
 						sendMsg("F5020000" + BytesUtil.intToHexString(1));
@@ -257,6 +261,7 @@ public class SerialPortControlService extends Service {
 				}
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_CHECK_MODE,
 						2 * 1000);
+				//收音模式
 				if (!Change2FM) {
 					Settings.System.putInt(getContentResolver(),
 							Constact.FMSTATUS, 1);
@@ -591,20 +596,21 @@ public class SerialPortControlService extends Service {
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
 
-			int state = android.provider.Settings.System.getInt(
-					getContentResolver(), Constact.APPLIST, 0);
-			handleAPPChange(state);
+			String appName = android.provider.Settings.System.getString(
+					getContentResolver(), Constact.APPLIST);
+			handleAPPChange(appName);
+			Log.i("cxs","==========mAPPObserver================"+appName);		
 		}
 	}
 
-	private void handleAPPChange(int state) {
+	private void handleAPPChange(String appName) {
 		// TODO Auto-generated method stub
 		RADIOWAKE = false;
 		AUXWAKE = false;
 		EQUWAKE = false;
 		Message msg = new Message();
 		msg.what = Contacts.MSG_APP_CHANGE;
-		msg.arg1 = state;
+		msg.obj = appName;
 		mHandler.sendMessage(msg);
 	}
 
