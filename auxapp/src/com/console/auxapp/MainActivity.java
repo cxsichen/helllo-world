@@ -2,9 +2,6 @@ package com.console.auxapp;
 
 import java.io.IOException;
 
-
-
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -29,7 +26,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements SurfaceTextureListener{
+public class MainActivity extends Activity implements SurfaceTextureListener {
 
 	private Camera camera;// ÉùÃ÷Ïà»ú
 	private TextureView surface;
@@ -40,7 +37,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-		initView();	
+		initView();
 	}
 
 	@Override
@@ -49,18 +46,21 @@ public class MainActivity extends Activity implements SurfaceTextureListener{
 		super.onWindowFocusChanged(hasFocus);
 		// changeSurfaceView();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-	//	com.example.cjc7150.MainActivity.setmode((byte) 1);
-		super.onResume();	
+		if (com.example.cjc7150.MainActivity.getmode() != 0)
+			com.example.cjc7150.MainActivity.setmode((byte) 0);
+		super.onResume();
+		openCamera();
 	}
-	
+
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		closeCamera();
 	}
 
 	@Override
@@ -68,6 +68,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener{
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		closeCamera();
+		surface = null;
 	}
 
 	private void openCamera() {
@@ -89,14 +90,13 @@ public class MainActivity extends Activity implements SurfaceTextureListener{
 			camera.stopPreview();
 			camera.release();
 			camera = null;
-			surface = null;
 		}
 
 	}
 
 	private void initView() {
 		// TODO Auto-generated method stub
-		auxHint=(TextView) findViewById(R.id.aux_hint);
+		auxHint = (TextView) findViewById(R.id.aux_hint);
 		surface = (TextureView) findViewById(R.id.camera_surface);
 		surface.setSurfaceTextureListener(this);
 		Matrix transform = new Matrix();
@@ -130,8 +130,6 @@ public class MainActivity extends Activity implements SurfaceTextureListener{
 		// TODO Auto-generated method stub
 
 	}
-	
-	
 
 	@Override
 	public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
