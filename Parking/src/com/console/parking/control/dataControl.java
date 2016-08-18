@@ -127,8 +127,9 @@ public class dataControl {
 				r4Rd.setImageResource(r4Draws[canInfo.BACK_RIGHT_DISTANCE]);
 				break;
 			case 8:
-				int index = (((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080) > 38 ? 38
+				int index = (((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080) > 38 ? 38:(((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080) < 0 ? 0
 						: (((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080);
+				
 				if (SterringSave != index) {
 					SterringSave = index;
 					railLine.setBackgroundResource((R.drawable.g39 - index));

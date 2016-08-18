@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SurfaceHolder;
@@ -61,7 +62,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 				if(android.provider.Settings.System.getInt(
 						getContentResolver(), BACKCARSTATE, 1)==0){
 					mHandler.sendEmptyMessageDelayed(FINISHMSG, 0);
-				}				
+				}	
 				break;
 			case FINISHMSG:
 				if(android.provider.Settings.System.getInt(
@@ -167,6 +168,8 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
+		Log.i("cxs","=====parking====onResume======");
+		openCamera();
 		getSetting();
 		com.example.cjc7150.MainActivity.setmode((byte) 1);
 		super.onResume();
@@ -201,13 +204,17 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
+		Log.i("cxs","=====parking====onPause======");
 		com.example.cjc7150.MainActivity.setmode((byte) 0);
+		closeCamera();
 		super.onPause();
 	}
 
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
+		Log.i("cxs","=====parking====onDestroy======");
+		com.example.cjc7150.MainActivity.setmode((byte) 0);
 		super.onDestroy();
 		closeCamera();
 		if (mRadarControl != null) {
@@ -215,11 +222,13 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		}
 		getContentResolver().unregisterContentObserver(mBackCarObserver);
 		unregisterReceiver(myReceiver);
+		surface = null;
 	}
 
 	private void openCamera() {
 		// TODO Auto-generated method stub
 		if (camera == null) {
+			Log.i("cxs","=====parking====openCamera======");
 			try {
 				camera = Camera.open();
 				camera.setDisplayOrientation(0);
@@ -233,10 +242,10 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private void closeCamera() {
 		// TODO Auto-generated method stub
 		if (camera != null) {
+			Log.i("cxs","=====parking====closeCamera======");
 			camera.stopPreview();
 			camera.release();
-			camera = null;
-			surface = null;
+			camera = null;		
 		}
 
 	}
@@ -251,6 +260,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	public void onSurfaceTextureAvailable(SurfaceTexture surface, int width,
 			int height) {
 		// TODO Auto-generated method stub
+		Log.i("cxs","=====parking====onSurfaceTextureAvailable======");
 		openCamera();
 		if (camera != null) {
 			Camera.Parameters mParams = camera.getParameters();
@@ -286,5 +296,13 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		return;
+	}
+	
+	
 
 }
