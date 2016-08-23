@@ -202,9 +202,11 @@ public class RZCToyota extends AnalyzeUtils {
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOLDOW;
 			break;
 		case 0x03:
+		case 0x14:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUDOWN;
 			break;
 		case 0x04:
+		case 0x13:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUUP;
 			break;
 		case 0x07:
