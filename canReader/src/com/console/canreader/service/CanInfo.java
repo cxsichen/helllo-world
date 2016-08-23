@@ -118,24 +118,24 @@ public class CanInfo implements Parcelable {
 	/*
 	 * 车身信息CAR_INFO_DATA
 	 */
-	public int SAFETY_BELT_STATUS = 0;                          //安全带状态     -1表示无此功能         0正常 1报警
-	public int DISINFECTON_STATUS = 0;                          //清洁液状态     -1表示无此功能
-	public int HANDBRAKE_STATUS = 0;                           //手刹状态          0正常 1报警
+	public int SAFETY_BELT_STATUS = -1;                          //安全带状态     -1表示无此功能         0正常 1报警
+	public int DISINFECTON_STATUS = -1;                          //清洁液状态     -1表示无此功能
+	public int HANDBRAKE_STATUS = -1;                           //手刹状态          0正常 1报警
 	
-	public int HOOD_STATUS = 0;                                   //引擎盖未关
+	public int HOOD_STATUS = 0;                                   //引擎盖    0关 1开
 	public int TRUNK_STATUS = 0;                                 //后盖报警
-	public int RIGHT_BACKDOOR_STATUS = 0;                       //右后门未关
-	public int LEFT_BACKDOOR_STATUS = 0;                       //左后门未关
-	public int RIGHT_FORONTDOOR_STATUS = 0;                   //右前门未关
-	public int LEFT_FORONTDOOR_STATUS = 0;                   //左前门未关
+	public int RIGHT_BACKDOOR_STATUS = 0;                       //右后门
+	public int LEFT_BACKDOOR_STATUS = 0;                       //左后门
+	public int RIGHT_FORONTDOOR_STATUS = 0;                   //右前门
+	public int LEFT_FORONTDOOR_STATUS = 0;                   //左前门
 
 
 	public int ENGINE_SPEED = -1;                           //发动机转速 -1表示无此功能
 	public float DRIVING_SPEED = 0;                        //瞬时车速
-	public float BATTERY_VOLTAGE = 0;        //电池电量       -1表示无此功能 
+	public float BATTERY_VOLTAGE = -1;        //电池电量       -1表示无此功能 
 	public float OUTSIDE_TEMPERATURE = 0;   //窗外温度
 	public int DRIVING_DISTANCE = 0;             //行车里程
-	public int REMAIN_FUEL = 0;                  //剩余油量     -1表示无此功能 
+	public int REMAIN_FUEL = -1;                  //剩余油量     -1表示无此功能 
 
 	public int FUEL_WARING_SIGN = 0;           //没油报警
 	public int BATTERY_WARING_SIGN = 0;        //没电报警

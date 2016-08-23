@@ -180,9 +180,12 @@ public class MainActivity extends Activity {
 			if (caninfo.HANDBRAKE_STATUS == 0) {
 				handbrake.setText("驻车制动\n正 常");
 				icObdHandBrake.setColorFilter(null);
-			} else {
+			} else if (caninfo.HANDBRAKE_STATUS == 1){
 				handbrake.setText("驻车制动\n未 放");
 				icObdHandBrake.setColorFilter(Color.RED);
+			} else{
+				handbrake.setText("驻车制动\n");
+				icObdHandBrake.setColorFilter(null);
 			}
 
 			if (caninfo.DISINFECTON_STATUS == 0) {
@@ -195,6 +198,7 @@ public class MainActivity extends Activity {
 				clean.setText("清洁液\n");
 				icObdWasherFluid.setColorFilter(null);
 			}
+			
 			if (caninfo.ENGINE_SPEED != -1)
 				enginee.setText((int) caninfo.ENGINE_SPEED + " RPM");
 			driving_speed.setText((int) caninfo.DRIVING_SPEED + "KM/H");

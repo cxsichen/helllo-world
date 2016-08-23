@@ -27,8 +27,12 @@ public class KeyDealer {
 	public static final String ACTION_TEL_HANDUP = "com.console.TEL_HANDUP";
 	public static final String ACTION_MENU_LONG_UP = "com.console.MENU_LONG_UP";
 	public static final String ACTION_MENU_LONG_DOWN = "com.console.MENU_LONG_DOWN";
+	
+	//音量加减和mute由这里处理，其他发到外面处理
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
+	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
+	//音量加减和mute由这里处理，其他发到外面处理
 	public static final String ACTION_RAIDO_VOL_DOWN = "com.console.RAIDO_VOL_DOWN";
 	public static final String ACTION_RAIDO_VOL_UP = "com.console.RAIDO_VOL_UP";
 
@@ -48,12 +52,18 @@ public class KeyDealer {
 			switch (msg.what) {
 			case Contacts.VOL_UP:
 				Log.i("cxs", "-----1111--msg.VOL_UP-------");
-				cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM);
+				if (mAudioManager == null)
+		    	mAudioManager = (AudioManager) context
+					.getSystemService(Context.AUDIO_SERVICE);
+				cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 				handleVolume(context, cur_music + SETP_VOLUME);
 				break;
 			case Contacts.VOL_DOWN:
 				Log.i("cxs", "-------msg.VOL_DOWN-------");
-				cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM);
+				if (mAudioManager == null)
+	    		mAudioManager = (AudioManager) context
+					.getSystemService(Context.AUDIO_SERVICE);
+				cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 				handleVolume(context, cur_music - SETP_VOLUME);
 				break;
 			case Contacts.MENU_UP:
@@ -115,12 +125,13 @@ public class KeyDealer {
 		doRegisterReceiver();
 	}
 
-	// 监听音量加减变化
+	// 监听物理加减音量键
 	private void doRegisterReceiver() {
 		// TODO Auto-generated method stub
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(KEYCODE_VOLUME_UP);
 		filter.addAction(KEYCODE_VOLUME_DOWN);
+		filter.addAction(KEYCODE_VOLUME_MUTE);
 		context.registerReceiver(myReceiver, filter);
 	}
 
@@ -135,6 +146,9 @@ public class KeyDealer {
 				break;
 			case KEYCODE_VOLUME_DOWN:
 				mHandler.sendEmptyMessageDelayed(Contacts.VOL_DOWN, 0);
+				break;
+			case KEYCODE_VOLUME_MUTE:
+				mHandler.sendEmptyMessageDelayed(Contacts.MUTE, 0);
 				break;
 			default:
 				break;
@@ -226,7 +240,7 @@ public class KeyDealer {
 		if (mAudioManager == null)
 			mAudioManager = (AudioManager) context
 					.getSystemService(Context.AUDIO_SERVICE);
-		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM);
+		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 		if (cur_music > 0) {
 			save_music = cur_music;
 			handleVolume(context, 0);
@@ -246,7 +260,7 @@ public class KeyDealer {
 		if (mAudioManager == null)
 			mAudioManager = (AudioManager) context
 					.getSystemService(Context.AUDIO_SERVICE);
-		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM);
+		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 		dealWith(context, mCanInfo);
 	}
 

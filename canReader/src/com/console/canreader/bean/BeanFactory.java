@@ -39,7 +39,13 @@ public class BeanFactory {
 				break;
 			case 10:                           //福克斯
 				getRZCFOCUS(mPacket);
-				break;				
+				break;
+			case 11:                           //本田CRV
+				getRZCHondaCRV(mPacket);
+				break;
+			case 12:                           //本田DA
+				getRZCHondaDA(mPacket);
+				break;
 			default:
 						
 				break;
@@ -136,6 +142,23 @@ public class BeanFactory {
 	private static void getRZCFOCUS(byte[] mPacket) {
 		if (mAnalyzeUtils == null) {
 			mAnalyzeUtils = new RZCFOCUS(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	
+	private static void getRZCHondaCRV(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCHondaCRV(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	
+	
+	private static void getRZCHondaDA(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCHondaDA(mPacket,1);
 		} else {
 			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
 		}
