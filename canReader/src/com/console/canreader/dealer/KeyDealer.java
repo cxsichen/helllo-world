@@ -155,7 +155,7 @@ public class KeyDealer {
 			}
 		}
 	};
-
+	
 	private class ValumeObserver extends BroadcastReceiver {
 
 		@Override
@@ -168,7 +168,12 @@ public class KeyDealer {
 							.getSystemService(Context.AUDIO_SERVICE);
 				cur_music = mAudioManager
 						.getStreamVolume(AudioManager.STREAM_MUSIC);
-				
+				Log.i("cxs","============STREAM_MUSIC==========="+ mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+				Log.i("cxs","============STREAM_NOTIFICATION==========="+ mAudioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
+				Log.i("cxs","============STREAM_RING==========="+ mAudioManager.getStreamVolume(AudioManager.STREAM_RING));
+				Log.i("cxs","============STREAM_VOICE_CALL==========="+ mAudioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL));
+				Log.i("cxs","============STREAM_ALARM==========="+ mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM));
+				Log.i("cxs","============STREAM_BLUETOOTH==========="+ mAudioManager.getStreamVolume(6));
 				//muteÏà¹Ø
 				if (cur_music > 0) {
 					save_music = 0;
@@ -347,7 +352,7 @@ public class KeyDealer {
 		mAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
 				currVolume, 0);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_RING,
-				currVolume*2> 15?15:currVolume*2, 0);
+				currVolume> 15?15:currVolume, 0);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
 				currVolume > 15 ? 15 : currVolume, 1);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,

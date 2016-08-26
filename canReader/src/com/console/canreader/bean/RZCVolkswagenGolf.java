@@ -23,6 +23,7 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 	public final static int CAR_INFO_DATA_1 = 0x16;
 	public final static int CAR_INFO_DATA_2 = 0x27;
 	public final static int CAR_INFO_DATA_3 = 0x50;
+	public final static int CAR_INFO_DATA_4 = 0x63;
 	// ·½ÏòÅÌ×ª½Ç
 	public final static int STEERING_TURN_DATA = 0x29;
 
@@ -74,6 +75,10 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_3(msg);
 				break;
+			case CAR_INFO_DATA_4:
+				mCanInfo.CHANGE_STATUS = 10;
+				analyzeCarInfoData_4(msg);
+				break;
 			case STEERING_TURN_DATA:
 				mCanInfo.CHANGE_STATUS = 8;
 				analyzeSteeringTurnData(msg);
@@ -93,12 +98,119 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 	void analyzeCarInfoData_2(byte[] msg) {
 		mCanInfo.OUTSIDE_TEMPERATURE = ((int) (msg[5] << 8 | ((int) msg[4] & 0xFF))) / 10;
 	}
-	
+
 	void analyzeCarInfoData_3(byte[] msg) {
-		if(((int) msg[3] & 0xFF)==0x20){
-			mCanInfo.DRIVING_DISTANCE = (((int) (msg[5] & 0xFF))+(((int) (msg[6] & 0xFF))<<8)+(((int) (msg[7] & 0xFF))<<16)+
-					(((int) (msg[8] & 0xFF))<<24))/10;
-		}		
+
+		switch (((int) msg[3] & 0xFF)) {
+		case 0x10:
+			mCanInfo.RANGE_UNIT = ((int) msg[4] & 0x01);
+			mCanInfo.RANGE = ((int) msg[6] & 0xFF) << 8 | ((int) msg[5] & 0xFF);
+			break;
+		case 0x20:
+			mCanInfo.DISTANCE_UNIT = ((int) msg[4] & 0x01);
+			mCanInfo.DISTANCE_SINCE_START = (((int) (msg[5] & 0xFF))
+					+ (((int) (msg[6] & 0xFF)) << 8)
+					+ (((int) (msg[7] & 0xFF)) << 16) + (((int) (msg[8] & 0xFF)) << 24)) / 10;
+			break;
+		case 0x21:
+			mCanInfo.DISTANCE_UNIT = ((int) msg[4] & 0x01);
+			mCanInfo.DISTANCE_SINCE_REFUELING = (((int) (msg[5] & 0xFF))
+					+ (((int) (msg[6] & 0xFF)) << 8)
+					+ (((int) (msg[7] & 0xFF)) << 16) + (((int) (msg[8] & 0xFF)) << 24)) / 10;
+			break;
+		case 0x22:
+			mCanInfo.DISTANCE_UNIT = ((int) msg[4] & 0x01);
+			mCanInfo.DISTANCE_LONG_TERM = (((int) (msg[5] & 0xFF))
+					+ (((int) (msg[6] & 0xFF)) << 8)
+					+ (((int) (msg[7] & 0xFF)) << 16) + (((int) (msg[8] & 0xFF)) << 24)) / 10;
+			break;
+		case 0x30:
+			mCanInfo.CONSUMPTION_UNIT = ((int) msg[4] & 0x03);
+			mCanInfo.CONSUMPTION_SINCE_START = (((int) (msg[5] & 0xFF)) + (((int) (msg[6] & 0xFF)) << 8)) / 10;
+			break;
+		case 0x31:
+			mCanInfo.CONSUMPTION_UNIT = ((int) msg[4] & 0x03);
+			mCanInfo.CONSUMPTION_SINCE_REFUELING = (((int) (msg[5] & 0xFF)) + (((int) (msg[6] & 0xFF)) << 8)) / 10;
+			break;
+		case 0x32:
+			mCanInfo.CONSUMPTION_UNIT = ((int) msg[4] & 0x03);
+			mCanInfo.CONSUMPTION_LONG_TERM = (((int) (msg[5] & 0xFF)) + (((int) (msg[6] & 0xFF)) << 8)) / 10;
+			break;
+		case 0x40:
+			mCanInfo.SPEED_UNIT = ((int) msg[4] & 0x01);
+			mCanInfo.SPEED_SINCE_START = (((int) (msg[5] & 0xFF)) + (((int) (msg[6] & 0xFF)) << 8)) / 10;
+			break;
+		case 0x41:
+			mCanInfo.SPEED_UNIT = ((int) msg[4] & 0x01);
+			mCanInfo.SPEED_SINCE_REFUELINGT = (((int) (msg[5] & 0xFF)) + (((int) (msg[6] & 0xFF)) << 8)) / 10;
+			break;
+		case 0x42:
+			mCanInfo.SPEED_UNIT = ((int) msg[4] & 0x01);
+			mCanInfo.SPEED_LONG_TERM = (((int) (msg[5] & 0xFF)) + (((int) (msg[6] & 0xFF)) << 8)) / 10;
+			break;
+		case 0x50:
+			mCanInfo.TRAVELLINGTIME_SINCE_START = (((int) (msg[5] & 0xFF))
+					+ (((int) (msg[6] & 0xFF)) << 8)
+					+ (((int) (msg[7] & 0xFF)) << 16) + (((int) (msg[8] & 0xFF)) << 24));
+			break;
+		case 0x51:
+			mCanInfo.TRAVELLINGTIME_SINCE_REFUELINGT = (((int) (msg[5] & 0xFF))
+					+ (((int) (msg[6] & 0xFF)) << 8)
+					+ (((int) (msg[7] & 0xFF)) << 16) + (((int) (msg[8] & 0xFF)) << 24));
+			break;
+		case 0x52:
+			mCanInfo.TRAVELLINGTIME_LONG_TERM = (((int) (msg[5] & 0xFF))
+					+ (((int) (msg[6] & 0xFF)) << 8)
+					+ (((int) (msg[7] & 0xFF)) << 16) + (((int) (msg[8] & 0xFF)) << 24));
+			break;
+		default:
+			break;
+		}
+	}
+
+	void analyzeCarInfoData_4(byte[] msg) {
+		switch (((int) msg[3] & 0xFF)) {
+		case 0x00:
+			int len=((int) msg[2] & 0xFF);
+			byte[] acscii=new byte[len];
+			for(int i=0;i<len;i++){
+				acscii[i]=msg[i+4];
+			}
+			mCanInfo.VEHICLE_NO = ascii2String(acscii);
+			break;
+		case 0x10:
+			mCanInfo.INSPECTON_DAYS_STATUS = ((int) (msg[4]>>0) & 0x0F);  
+			mCanInfo.INSPECTON_DAYS =  ((int)msg[5]& 0xFF+((int)msg[6]& 0xFF)<<8);  
+			break;
+		case 0x11:
+			mCanInfo.INSPECTON_DISTANCE_UNIT = ((int) (msg[4]>>4) & 0x0F); 
+			mCanInfo.INSPECTON_DISTANCE_STATUS = ((int) (msg[4]>>0) & 0x0F);  
+			mCanInfo.INSPECTON_DISTANCE =  ((int)msg[5]& 0xFF+((int)msg[6]& 0xFF)<<8)*100;  
+			break;
+		case 0x20:
+			mCanInfo.OILCHANGE_SERVICE_DAYS_UNIT = ((int) (msg[4]>>0) & 0x0F);  
+			mCanInfo.OILCHANGE_SERVICE_DAYS =  ((int)msg[5]& 0xFF+((int)msg[6]& 0xFF)<<8);  
+			break;
+		case 0x21:
+			mCanInfo.OILCHANGE_SERVICE_DISTANCE_UNIT = ((int) (msg[4]>>4) & 0x0F);  
+			mCanInfo.OILCHANGE_SERVICE_DISTANCE_STATUS = ((int) (msg[4]>>0) & 0x0F); 
+			mCanInfo.OILCHANGE_SERVICE_DISTANCE =  ((int)msg[5]& 0xFF+((int)msg[6]& 0xFF)<<8)*100;  
+			break;
+		default:
+			break;
+		}
+	}
+
+	public char ascii2Char(int ASCII) {
+		return (char) ASCII;
+	}
+
+	public String ascii2String(byte[] ASCIIs) {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < ASCIIs.length; i++) {
+			sb.append((char) ascii2Char((int)(ASCIIs[i]& 0xFF)));
+		}
+		return sb.toString();
 	}
 
 	void analyzeCarInfoData_1(byte[] msg) {

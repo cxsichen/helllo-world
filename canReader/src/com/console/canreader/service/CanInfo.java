@@ -140,6 +140,47 @@ public class CanInfo implements Parcelable {
 	public int FUEL_WARING_SIGN = 0;           //没油报警
 	public int BATTERY_WARING_SIGN = 0;        //没电报警
 	
+	
+	
+	public int RANGE=0;                         //续航里程
+	public int RANGE_UNIT=0;                         //续航里程单位
+	 
+	public int DISTANCE_UNIT=0;                 //行驶里程单位
+	public int CONSUMPTION_UNIT=0;                 //平均油耗单位
+	public int SPEED_UNIT=0;                 //平均车速单位
+	
+	public float DISTANCE_SINCE_START = 0;        //自启动行驶里程
+	public float CONSUMPTION_SINCE_START = 0;     //自启动平均油耗
+	public float SPEED_SINCE_START = 0;           //自启动平均车速
+	public int TRAVELLINGTIME_SINCE_START = 0;  //自启动行驶时间
+	
+	public float DISTANCE_SINCE_REFUELING = 0;     //自加油行驶里程
+	public float CONSUMPTION_SINCE_REFUELING = 0;   //自加油平均油耗
+	public float SPEED_SINCE_REFUELINGT = 0;           //自加油平均车速
+	public int TRAVELLINGTIME_SINCE_REFUELINGT = 0;  //自加油行驶时间
+	
+	public float DISTANCE_LONG_TERM = 0;           //长时间行驶里程
+	public float CONSUMPTION_LONG_TERM = 0;        //长时间平均油耗
+	public float SPEED_LONG_TERM = 0;           //长时间平均车速
+	public int TRAVELLINGTIME_LONG_TERM = 0;  //长时间行驶时间
+	
+	public String VEHICLE_NO = "";  //汽车编号
+	
+	public int INSPECTON_DAYS_STATUS = 0;  //车况检查状态
+	public int INSPECTON_DAYS = 0;  //车况检查天数
+	
+	public int INSPECTON_DISTANCE_UNIT = 0;  //车况检查里程单位
+	public int INSPECTON_DISTANCE_STATUS = 0;  //车况检查里程状况
+	public int INSPECTON_DISTANCE = 0;  //车况检查里程
+	
+	public int OILCHANGE_SERVICE_DAYS_UNIT = 0;  //更换机油保养天数状况
+	public int OILCHANGE_SERVICE_DAYS = 0;  //更换机油保养天数
+	
+	public int OILCHANGE_SERVICE_DISTANCE_UNIT = 0;  //更换机油保养里程单位
+	public int OILCHANGE_SERVICE_DISTANCE_STATUS = 0;  //更换机油保养里程状况
+	public int OILCHANGE_SERVICE_DISTANCE = 0;  //更换机油保养里程
+	
+	
 	public CanInfo(){
 		
 	}

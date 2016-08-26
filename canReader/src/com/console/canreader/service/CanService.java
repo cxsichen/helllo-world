@@ -130,6 +130,7 @@ public class CanService extends Service {
 								if (canType == 0 && carType == 1)
 									writeCanPort(BytesUtil
 											.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_0_1));
+								
 							}
 						});
 				break;
@@ -536,9 +537,25 @@ public class CanService extends Service {
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
+		String ex=intent.getStringExtra("normal");
+		if(ex!=null){
+			if(ex.equals(other))
+		}else{
+			
+		}
 		return mBinder;
 	}
+	
+	//normal server binder
+	private CanServiceBinder myBinder = new CanServiceBinder();
 
+	public class CanServiceBinder extends Binder {
+
+		public CanService getService() {
+			return CanService.this;
+		}
+	}
+    //aidl server binder
 	private final RemoteCallbackList<ICanCallback> mCallbacks = new RemoteCallbackList<ICanCallback>();
 
 	private final ICanService.Stub mBinder = new ICanService.Stub() {
