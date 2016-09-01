@@ -1,7 +1,10 @@
 package com.console.canreader.bean;
 
+import java.io.UnsupportedEncodingException;
+
 import com.console.canreader.bean.AnalyzeUtils.AnalyzeUtilsCallback;
 import com.console.canreader.service.CanInfo;
+import com.console.canreader.utils.BytesUtil;
 import com.console.canreader.utils.Contacts;
 
 import android.util.Log;
@@ -149,19 +152,19 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 			mCanInfo.SPEED_LONG_TERM = (((int) (msg[5] & 0xFF)) + (((int) (msg[6] & 0xFF)) << 8)) / 10;
 			break;
 		case 0x50:
-			mCanInfo.TRAVELLINGTIME_SINCE_START = (((int) (msg[5] & 0xFF))
-					+ (((int) (msg[6] & 0xFF)) << 8)
-					+ (((int) (msg[7] & 0xFF)) << 16) + (((int) (msg[8] & 0xFF)) << 24));
+			mCanInfo.TRAVELLINGTIME_SINCE_START = (((int) (msg[4] & 0xFF))
+					+ (((int) (msg[5] & 0xFF)) << 8)
+					+ (((int) (msg[6] & 0xFF)) << 16));
 			break;
 		case 0x51:
-			mCanInfo.TRAVELLINGTIME_SINCE_REFUELINGT = (((int) (msg[5] & 0xFF))
-					+ (((int) (msg[6] & 0xFF)) << 8)
-					+ (((int) (msg[7] & 0xFF)) << 16) + (((int) (msg[8] & 0xFF)) << 24));
+			mCanInfo.TRAVELLINGTIME_SINCE_REFUELINGT =  (((int) (msg[4] & 0xFF))
+					+ (((int) (msg[5] & 0xFF)) << 8)
+					+ (((int) (msg[6] & 0xFF)) << 16));
 			break;
 		case 0x52:
-			mCanInfo.TRAVELLINGTIME_LONG_TERM = (((int) (msg[5] & 0xFF))
-					+ (((int) (msg[6] & 0xFF)) << 8)
-					+ (((int) (msg[7] & 0xFF)) << 16) + (((int) (msg[8] & 0xFF)) << 24));
+			mCanInfo.TRAVELLINGTIME_LONG_TERM =  (((int) (msg[4] & 0xFF))
+					+ (((int) (msg[5] & 0xFF)) << 8)
+					+ (((int) (msg[6] & 0xFF)) << 16));
 			break;
 		default:
 			break;
@@ -173,44 +176,38 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 		case 0x00:
 			int len=((int) msg[2] & 0xFF);
 			byte[] acscii=new byte[len];
-			for(int i=0;i<len;i++){
+			for(int i=0;i<len-1;i++){
 				acscii[i]=msg[i+4];
 			}
-			mCanInfo.VEHICLE_NO = ascii2String(acscii);
+			try {
+				mCanInfo.VEHICLE_NO =new String(acscii,"GBK");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case 0x10:
+			
 			mCanInfo.INSPECTON_DAYS_STATUS = ((int) (msg[4]>>0) & 0x0F);  
-			mCanInfo.INSPECTON_DAYS =  ((int)msg[5]& 0xFF+((int)msg[6]& 0xFF)<<8);  
+			mCanInfo.INSPECTON_DAYS =  ((int)msg[5]& 0xFF)+(((int)msg[6]& 0xFF)<<8); 
 			break;
-		case 0x11:
+		case 0x11:		
 			mCanInfo.INSPECTON_DISTANCE_UNIT = ((int) (msg[4]>>4) & 0x0F); 
 			mCanInfo.INSPECTON_DISTANCE_STATUS = ((int) (msg[4]>>0) & 0x0F);  
-			mCanInfo.INSPECTON_DISTANCE =  ((int)msg[5]& 0xFF+((int)msg[6]& 0xFF)<<8)*100;  
+			mCanInfo.INSPECTON_DISTANCE =  (((int)msg[5]& 0xFF)+(((int)msg[6]& 0xFF)<<8)); 
 			break;
-		case 0x20:
-			mCanInfo.OILCHANGE_SERVICE_DAYS_UNIT = ((int) (msg[4]>>0) & 0x0F);  
-			mCanInfo.OILCHANGE_SERVICE_DAYS =  ((int)msg[5]& 0xFF+((int)msg[6]& 0xFF)<<8);  
+		case 0x20:			
+			mCanInfo.OILCHANGE_SERVICE_DAYS_STATUS = ((int) (msg[4]>>0) & 0x0F);  
+			mCanInfo.OILCHANGE_SERVICE_DAYS =  ((int)msg[5]& 0xFF)+(((int)msg[6]& 0xFF)<<8); 
 			break;
 		case 0x21:
 			mCanInfo.OILCHANGE_SERVICE_DISTANCE_UNIT = ((int) (msg[4]>>4) & 0x0F);  
 			mCanInfo.OILCHANGE_SERVICE_DISTANCE_STATUS = ((int) (msg[4]>>0) & 0x0F); 
-			mCanInfo.OILCHANGE_SERVICE_DISTANCE =  ((int)msg[5]& 0xFF+((int)msg[6]& 0xFF)<<8)*100;  
+			mCanInfo.OILCHANGE_SERVICE_DISTANCE = (((int)msg[5]& 0xFF)+(((int)msg[6]& 0xFF)<<8));  
 			break;
 		default:
 			break;
 		}
-	}
-
-	public char ascii2Char(int ASCII) {
-		return (char) ASCII;
-	}
-
-	public String ascii2String(byte[] ASCIIs) {
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < ASCIIs.length; i++) {
-			sb.append((char) ascii2Char((int)(ASCIIs[i]& 0xFF)));
-		}
-		return sb.toString();
 	}
 
 	void analyzeCarInfoData_1(byte[] msg) {

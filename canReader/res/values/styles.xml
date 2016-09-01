@@ -2,23 +2,25 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
- <style name="Theme.AppCompat.Light.NoActionBar" parent="android:Widget">  
-  </style>  
+
+    <style name="Theme.AppCompat.Light.NoActionBar" parent="android:Widget"></style>
     <!-- Application theme. -->
-   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here.>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--
+        Customize your theme here.>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item-->
+        <item name="colorAccent">@color/colorAccent</item
+        -->
     </style>
 
     <!-- Status Group Text -->
@@ -151,6 +153,56 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">24sp</item>
         <item name="android:layout_marginLeft">16sp</item>
+    </style>
+
+    <!-- obd pageView textView -->
+    <style name="PageViewTextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- obd layout layout -->
+    <style name="PageViewLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- ver divide -->
+    <style name="verDivide">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@android:color/holo_blue_bright</item>
+    </style>
+
+    <!-- hon divide -->
+    <style name="honDivide">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@android:color/holo_blue_bright</item>
+    </style>
+    
+    <!-- oil change -->
+    <style name="oilChangeTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <!-- pageView title -->
+    <style name="pageViewTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:textSize">26sp</item>
     </style>
 
 </resources>

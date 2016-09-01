@@ -18,7 +18,7 @@
         android:layout_height="56dp"
         android:layout_gravity="center|bottom"
         android:layout_marginBottom="72dp"
-        android:text="0\n公里" />
+        android:text="0\nKM" />
 
     <TextView
         android:id="@+id/driving_speed"

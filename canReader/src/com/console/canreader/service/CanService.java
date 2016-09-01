@@ -21,7 +21,6 @@ import com.console.canreader.utils.Trace;
 import com.console.canreader.view.AirConDialog;
 import com.console.canreader.view.UnlockWaringDialog;
 
-
 import android.app.Dialog;
 import android.app.Service;
 import android.content.ComponentName;
@@ -76,7 +75,7 @@ public class CanService extends Service {
 				byte[] mPacket = (byte[]) msg.obj;
 				// Broadcast to all clients the new value.
 				Trace.i("packet : " + BytesUtil.bytesToHexString(mPacket));
-                Log.i("cxs","==========handleMessage===========");
+				Log.i("cxs", "==========handleMessage===========");
 				info = BeanFactory.getCanInfo(CanService.this, mPacket,
 						canType, carType);
 				if (info != null)
@@ -105,11 +104,18 @@ public class CanService extends Service {
 		}
 		mCallbacks.finishBroadcast();
 
+		// 发送can信息到客户端2
+		if (mReaderCallback != null) {
+			mReaderCallback.Callback(info.getCanInfo());
+		}
+
 		// 根据can信息处理事件
 		int parkingState = android.provider.Settings.System.getInt(
 				getContentResolver(), Contacts.BACK_CAR, 0); // 倒车的时候不处理任何弹框事件
 		if (parkingState != 1) {
-			DialogCreater.showUnlockWaringDialog(CanService.this, // 车门报警事件处理 比较重要 故都处理一下
+			DialogCreater.showUnlockWaringDialog(CanService.this, // 车门报警事件处理
+																	// 比较重要
+																	// 故都处理一下
 					info.getCanInfo());
 			switch (info.getCanInfo().CHANGE_STATUS) {
 			case 2:
@@ -130,7 +136,7 @@ public class CanService extends Service {
 								if (canType == 0 && carType == 1)
 									writeCanPort(BytesUtil
 											.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_0_1));
-								
+
 							}
 						});
 				break;
@@ -161,7 +167,7 @@ public class CanService extends Service {
 		}
 		init();
 	}
-	
+
 	private AccStateObserver mAccStateObserver = new AccStateObserver();
 
 	public class AccStateObserver extends ContentObserver {
@@ -182,7 +188,7 @@ public class CanService extends Service {
 		// TODO Auto-generated method stub
 		if (state == 1) {
 			// acc on清空原先的数据
-		    BeanFactory.setInfoEmpty();
+			BeanFactory.setInfoEmpty();
 		}
 	}
 
@@ -214,11 +220,12 @@ public class CanService extends Service {
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Contacts.CARTYPE),
 				true, mCarTypeObserver);
-		
+
 		connectCanDevice();
 		mKeyDealer = KeyDealer.getInstance(CanService.this); // 初始化按键事件处理
 																// 里面有音量加减的监听
-		getContentResolver().registerContentObserver(           //监听倒车状态，取消报警对话框
+		getContentResolver().registerContentObserver(
+				// 监听倒车状态，取消报警对话框
 				android.provider.Settings.System.getUriFor(Contacts.BACK_CAR),
 				true, mBackCarObserver);
 		getContentResolver().registerContentObserver(
@@ -258,16 +265,13 @@ public class CanService extends Service {
 		}
 	}
 
-	public static final String CONNECTMSG = "2e810101";
-
 	private void connectCanDevice() {
 		// TODO Auto-generated method stub
 		switch (canType) {
 		case 0: // 睿志诚
-			writeCanPort(CONNECTMSG);
+			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			break;
 		case 1: // 尚摄
-
 			break;
 		default:
 			break;
@@ -299,8 +303,7 @@ public class CanService extends Service {
 				// TODO Auto-generated method stub
 				try {
 					Intent localIntent = new Intent();
-					localIntent.setClass(CanService.this,
-							CanService.class); // 销毁时重新启动Service
+					localIntent.setClass(CanService.this, CanService.class); // 销毁时重新启动Service
 					startService(localIntent);
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -537,16 +540,27 @@ public class CanService extends Service {
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
-		String ex=intent.getStringExtra("normal");
-		if(ex!=null){
-			if(ex.equals(other))
-		}else{
-			
+		String ex = intent.getStringExtra("normal");
+		Log.i("cxs", "=======ex==============" + ex);
+		if (ex != null) {
+			if (ex.equals("normal")) {
+				return myBinder;
+			}
+		} else {
+			return mBinder;
 		}
 		return mBinder;
+
 	}
-	
-	//normal server binder
+
+	// normal server binder
+
+	ReaderCallback mReaderCallback;
+
+	public void setCallback(ReaderCallback mReaderCallback) {
+		this.mReaderCallback = mReaderCallback;
+	}
+
 	private CanServiceBinder myBinder = new CanServiceBinder();
 
 	public class CanServiceBinder extends Binder {
@@ -555,7 +569,23 @@ public class CanService extends Service {
 			return CanService.this;
 		}
 	}
-    //aidl server binder
+
+	public void sendDataToSp(final String hexString) throws RemoteException {
+		try {
+			mBlockingQueue.put(getTask(hexString));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public CanInfo getCanInfo() {
+		if (info != null)
+			return info.getCanInfo();
+		else
+			return null;
+	}
+
+	// aidl server binder
 	private final RemoteCallbackList<ICanCallback> mCallbacks = new RemoteCallbackList<ICanCallback>();
 
 	private final ICanService.Stub mBinder = new ICanService.Stub() {

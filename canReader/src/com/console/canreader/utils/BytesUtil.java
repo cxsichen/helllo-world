@@ -74,16 +74,18 @@ public class BytesUtil {
     //睿志诚数据添加数据位
 	public static String addRZCCheckBit(String str) {
 		byte[] b = hexStringToBytes(str);
-		int sum = 0;
+		byte sum = 0;
 
 		for (int i = 1; i < b.length; i++) {
-			sum = sum + b[i];
+			sum += b[i];
 		}
-		sum = (byte) (sum ^ ((byte) 0xff));
+		sum = (byte) ((sum)^0xff);
 		// String tmp = Integer.toHexString(255 - sum).toUpperCase();
-		String tmp = Integer.toHexString(sum).toUpperCase();
+		String tmp = Integer.toHexString(sum);
 		if (tmp.length() > 2) {
-			tmp = tmp.substring(1);
+			tmp = tmp.substring(tmp.length()-2,tmp.length());
+		}else if(tmp.length()==1){
+			tmp="0"+tmp;
 		}
 		return str + tmp;
 	}

@@ -27,7 +27,7 @@
                 android:id="@+id/clean"
                 style="@style/DashboardStatusText"
                 android:layout_toRightOf="@+id/icObdWasherFluid"
-                android:text="清洁液\n" />
+                android:text="@string/washer_info" />
 
         </RelativeLayout>
 
@@ -42,7 +42,7 @@
                 android:id="@+id/safety_salt"
                 style="@style/DashboardStatusText"
                 android:layout_toRightOf="@+id/icObdSeatBelt"
-                android:text="安全带\n" />
+                android:text="@string/safety_salt_info" />
 
         </RelativeLayout>
 
@@ -65,7 +65,7 @@
                 android:id="@+id/battery"
                 style="@style/DashboardStatusText"
                 android:layout_toRightOf="@+id/icObdBattery"
-                android:text="剩余电量\n" />
+                android:text="@string/battery_info" />
 
         </RelativeLayout>
 
@@ -80,7 +80,7 @@
                 android:id="@+id/handbrake"
                 style="@style/DashboardStatusText"
                 android:layout_toRightOf="@+id/icObdHandBrake"
-                android:text="驻车制动\n" />
+                android:text="@string/handbrake_info" />
 
         </RelativeLayout>
 

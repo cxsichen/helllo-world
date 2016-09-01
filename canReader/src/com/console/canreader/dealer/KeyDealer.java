@@ -168,12 +168,6 @@ public class KeyDealer {
 							.getSystemService(Context.AUDIO_SERVICE);
 				cur_music = mAudioManager
 						.getStreamVolume(AudioManager.STREAM_MUSIC);
-				Log.i("cxs","============STREAM_MUSIC==========="+ mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
-				Log.i("cxs","============STREAM_NOTIFICATION==========="+ mAudioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION));
-				Log.i("cxs","============STREAM_RING==========="+ mAudioManager.getStreamVolume(AudioManager.STREAM_RING));
-				Log.i("cxs","============STREAM_VOICE_CALL==========="+ mAudioManager.getStreamVolume(AudioManager.STREAM_VOICE_CALL));
-				Log.i("cxs","============STREAM_ALARM==========="+ mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM));
-				Log.i("cxs","============STREAM_BLUETOOTH==========="+ mAudioManager.getStreamVolume(6));
 				//muteœ‡πÿ
 				if (cur_music > 0) {
 					save_music = 0;
@@ -358,7 +352,6 @@ public class KeyDealer {
 		mAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,
 				currVolume, 0);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_ALARM, currVolume, 0);
-		mAudioManager.setStreamVolume(6,currVolume,0);         //¿∂—¿…˘“Ù
 
 		Settings.System.putInt(context.getContentResolver(),
 				Contacts.KEY_VOLUME_VALUE, currVolume * 3);

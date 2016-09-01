@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">车辆信息</string>
+    <string name="app_name">Vehicle information</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="temp_unit">°</string>
     <string name="aaaaa">aaaaa</string>
-    <string name="allOpen">后备箱,车门未关</string>
-    <string name="doorOpen">车门未关</string>
-    <string name="trunkOpen">后备箱未关</string>
+    <string name="allOpen">trunk or door is open</string>
+    <string name="doorOpen">door is open</string>
+    <string name="trunkOpen">trunk is open</string>
+    <string name="driving_data_since_start">Driving Data Since Car Start</string>
+    <string name="average_oil_consumption">Average Oil Consumption</string>
+    <string name="travelling_time">Travelling Time</string>
+    <string name="time_17">17hour 31minutes</string>
+    <string name="range">Range</string>
+    <string name="average_speed">Average Speed</string>
+    <string name="driving_distance">Driving Distance</string>
+    <string name="driving_data_since_oilchange">Driving Data Since Car Refueling</string>
+    <string name="driving_datas_long_term">Driving Data Since Long  Term</string>
+    <string name="Maintenance_information">Maintenance Information</string>
+    <string name="vehicle_no">Vehicle No</string>
+    <string name="inspection_days">Inspection Days</string>
+    <string name="inspection_distance">Inspection Distance</string>
+    <string name="inspection_need_distance">Distance to Inspection</string>
+    <string name="oil_change_service_days">Days to Change Oil</string>
+    <string name="oil_change_service_distance">Distance to Change Oil</string>
+    <string name="handbrake_info">Handbrake Status\n</string>
+    <string name="battery_info">Battery Status\n</string>
+    <string name="safety_salt_info">Safety belt Status\n</string>
+    <string name="washer_info">Washer Status\n</string>
+    <string name="hour">hour</string>
+    <string name="minute">minute</string>
+    <string name="inspection_need_days">Days to Inspect</string>
+    <string name="inspection_overdue_days">Days Overdue for Inspection</string>
+    <string name="inspection_overdue_distance">Distance Overdue for Inspection</string>
+    <string name="oil_change_service_need_days">Days to Change Oil</string>
+    <string name="oil_change_service_overdue_days">Days Overdue for Change Oil</string>
+    <string name="oil_change_service_need_distance">Distance to Change Oil</string>
+    <string name="oil_change_overdue_distance">Distance Overdue for Change Oil</string>
+    <string name="normal">normal</string>
+    <string name="untie">untie</string>
+    <string name="not_put">not put</string>
+    <string name="too_low">too low</string>
+    <string name="day">天</string>
 </resources>

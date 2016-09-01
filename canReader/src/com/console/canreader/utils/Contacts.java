@@ -126,6 +126,8 @@ public class Contacts {
 	public static final String HEX_GET_CAR_INFO_0_1 = "2e90022700";
 	public static final String HEX_GET_CAR_INFO_1 = "2e90024101";
 	public static final String HEX_GET_CAR_INFO_3 = "2e90024103";
+	public static final String CONNECTMSG = "2e810101";
+	public static final String DISCONNECTMSG = "2e810100";
 	/** volumn popup */
 	public static final String HEX_VOLUMN_POPUP = "F00000001F";
 	/** volumn silent, */

@@ -1,16 +1,26 @@
 package com.console.canreader;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.service.CanService;
+import com.console.canreader.service.CanService.CanServiceBinder;
 import com.console.canreader.service.CanService.ReaderCallback;
 import com.console.canreader.service.ICanCallback;
 import com.console.canreader.service.ICanService;
 import com.console.canreader.utils.BytesUtil;
 import com.console.canreader.utils.Contacts;
+import com.console.canreader.utils.DensityUtils;
 import com.console.canreader.utils.PreferenceUtil;
+import com.console.canreader.utils.ViewPagerAdapter;
+import com.console.canreader.view.ObdView;
+import com.console.canreader.view.ViewPageFactory;
+import com.console.canreader.view.VolkswagenGolfView.GolfView1;
+import com.console.canreader.view.VolkswagenGolfView.GolfView2;
+import com.console.canreader.view.VolkswagenGolfView.GolfView3;
+import com.console.canreader.view.VolkswagenGolfView.GolfView4;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -28,8 +38,11 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.provider.SyncStateContract.Constants;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,61 +51,78 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.FrameLayout.LayoutParams;
 
 public class MainActivity extends Activity {
-	private ICanService mISpService;
 	public static final String TEST = "2e810101";
-	CanInfo mCanInfo;
-	TextView oil;
-	TextView battery;
-	TextView safety_salt;
-	TextView handbrake;
-	TextView clean;
-	TextView enginee;
-	TextView driving_speed;
-	TextView distance;
-	ImageView icObdWasherFluid;
-	ImageView icObdSeatBelt;
-	ImageView icObdBattery;
-	ImageView icObdHandBrake;
-	ImageView icFuel;
-	Boolean FirstShow = true; // 第一次显示的时候所有数据都处理
+
 	private int canType = -1; // 盒子厂家 0：睿志诚 1：尚摄
 	private int carType = -1; // 车型 0:大众
+
+	private ViewPager vp;
+	private ViewPagerAdapter vpAdapter;
+	private List<ViewPageFactory> viewsFactory;
+	private LinearLayout indicatorLayout;
 	/*
 	 * TextView fuel_warn; TextView battery_warn;
 	 */
 	private static final String WARNSTART = "warn_start";
 	private static final int KEYCODE_HOME = 271;
 	CanInfo mCaninfo;
-	ImageView speedHand;
 	int cout = 0;
-	DecimalFormat fnum = new DecimalFormat("##0.00");
 
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Contacts.MSG_UPDATA_UI:
-				// dealwithPacket(Volkswagen)msg.obj);
 				mCaninfo = (CanInfo) msg.obj;
-				checkStartMode(mCaninfo);
-				show(mCaninfo);
-				// sendMsg(Contacts.HEX_GET_CAR_INFO);
+				if (mCaninfo != null) {
+					checkStartMode(mCaninfo);
+					show(mCaninfo);
+				}
 				break;
 			case Contacts.MSG_GET_MSG:
 				// 大众主动获取数据
+
 				if (canType == 0 && carType == 0) {
-					sendMsg(BytesUtil.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO));
+					sendMsg(Contacts.HEX_GET_CAR_INFO);
+					mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 2000);
 				}
-				mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 2000);
+
+				if (canType == 0 && carType == 1) {
+					sendMsg("2e90026300");
+					sendMsg("2e90026310");
+					sendMsg("2e90026311");
+					sendMsg("2e90026320");
+					sendMsg("2e90026321");
+					sendMsg("2e90025010");
+					sendMsg("2e90025020");
+					sendMsg("2e90025021");
+					sendMsg("2e90025022");
+					sendMsg("2e90025030");
+					sendMsg("2e90025031");
+					sendMsg("2e90025032");
+					sendMsg("2e90025040");
+					sendMsg("2e90025041");
+					sendMsg("2e90025042");
+					sendMsg("2e90025050");
+					sendMsg("2e90025051");
+					sendMsg("2e90025052");
+					mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG,
+							40000);
+				}
+
 				break;
+
 			case Contacts.MSG_ONCE_GET_MSG:
+				if (canType == 0) {
+					sendMsg(Contacts.CONNECTMSG);
+				}
 				if (canType == 0 && carType == 0) {
-					sendMsg(BytesUtil
-							.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_1));
-					sendMsg(BytesUtil
-							.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_3));
+					sendMsg(Contacts.HEX_GET_CAR_INFO_1);
+					sendMsg(Contacts.HEX_GET_CAR_INFO_3);
 				}
 				break;
 			default:
@@ -104,6 +134,10 @@ public class MainActivity extends Activity {
 	private void checkStartMode(CanInfo mCanInfo) {
 		// TODO Auto-generated method stub
 		int mode = Settings.System.getInt(getContentResolver(), WARNSTART, 0);
+		if (mode == 1) {
+			if (vp != null)
+				vp.setCurrentItem(0);
+		}
 		if (mode == 1 && mCanInfo.FUEL_WARING_SIGN != 1
 				&& mCanInfo.BATTERY_WARING_SIGN != 1
 				&& mCanInfo.SAFETY_BELT_STATUS != 1
@@ -117,7 +151,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.dashboard_main);
+		setContentView(R.layout.main);
 		bindService();
 		initView();
 	}
@@ -135,75 +169,36 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		FirstShow = true;
-		if (mISpService != null) {
+		if (mCanservice != null) {
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 2000);
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ONCE_GET_MSG, 5000);
 		}
-		canType = PreferenceUtil.getCANTYPE(this);
-		carType = PreferenceUtil.getCARTYPE(this);
+
+		initView();
+
+		firstShow();
+
+	}
+
+	private void firstShow() {
+		// TODO Auto-generated method stub
+		if (mCanservice != null) {
+			Message msg = new Message();
+			msg.what = Contacts.MSG_UPDATA_UI;
+			CanInfo tempInfo= mCanservice.getCanInfo();
+			//this page only deal with the type 10
+			tempInfo.CHANGE_STATUS=10;                     
+			msg.obj = tempInfo;
+			mHandler.sendMessage(msg);
+		}
 	}
 
 	protected void show(CanInfo caninfo) {
 		// TODO Auto-generated method stub
-		if (mCaninfo.CHANGE_STATUS == 10 || FirstShow) {
-			FirstShow = false;
-			if (caninfo.REMAIN_FUEL != -1)
-				oil.setText(caninfo.REMAIN_FUEL + " L");
-			if (caninfo.BATTERY_VOLTAGE != -1)
-				battery.setText("剩余电量\n" + fnum.format(caninfo.BATTERY_VOLTAGE)
-						+ " V");
-
-			if (caninfo.FUEL_WARING_SIGN == 1) {
-				icFuel.setColorFilter(Color.RED);
-			} else {
-				icFuel.setColorFilter(null);
+		if (mCaninfo.CHANGE_STATUS == 10) {
+			for (ViewPageFactory mViewPageFactory : viewsFactory) {
+				mViewPageFactory.showView(caninfo);
 			}
-
-			if (caninfo.BATTERY_WARING_SIGN == 1) {
-				icObdBattery.setColorFilter(Color.RED);
-			} else {
-				icObdBattery.setColorFilter(null);
-			}
-
-			if (caninfo.SAFETY_BELT_STATUS == 0) {
-				safety_salt.setText("安全带\n正 常");
-				icObdSeatBelt.setColorFilter(null);
-			} else if (caninfo.SAFETY_BELT_STATUS == 1) {
-				safety_salt.setText("安全带\n未 系");
-				icObdSeatBelt.setColorFilter(Color.RED);
-			} else {
-				safety_salt.setText("安全带\n");
-				icObdSeatBelt.setColorFilter(null);
-			}
-
-			if (caninfo.HANDBRAKE_STATUS == 0) {
-				handbrake.setText("驻车制动\n正 常");
-				icObdHandBrake.setColorFilter(null);
-			} else if (caninfo.HANDBRAKE_STATUS == 1) {
-				handbrake.setText("驻车制动\n未 放");
-				icObdHandBrake.setColorFilter(Color.RED);
-			} else {
-				handbrake.setText("驻车制动\n");
-				icObdHandBrake.setColorFilter(null);
-			}
-
-			if (caninfo.DISINFECTON_STATUS == 0) {
-				clean.setText("清洁液\n正 常");
-				icObdWasherFluid.setColorFilter(null);
-			} else if (caninfo.DISINFECTON_STATUS == 1) {
-				clean.setText("清洁液\n过 低");
-				icObdWasherFluid.setColorFilter(Color.RED);
-			} else {
-				clean.setText("清洁液\n");
-				icObdWasherFluid.setColorFilter(null);
-			}
-
-			if (caninfo.ENGINE_SPEED != -1)
-				enginee.setText((int) caninfo.ENGINE_SPEED + " RPM");
-			driving_speed.setText((int) caninfo.DRIVING_SPEED + "KM/H");
-			distance.setText("行驶里程\n " + caninfo.DRIVING_DISTANCE + "km");
-			speedHand.setRotation(1.125f * caninfo.DRIVING_SPEED);
 		}
 	}
 
@@ -222,21 +217,113 @@ public class MainActivity extends Activity {
 
 	private void initView() {
 		// TODO Auto-generated method stub
-		oil = (TextView) findViewById(R.id.oil);
-		battery = (TextView) findViewById(R.id.battery);
-		safety_salt = (TextView) findViewById(R.id.safety_salt);
-		handbrake = (TextView) findViewById(R.id.handbrake);
-		clean = (TextView) findViewById(R.id.clean);
-		enginee = (TextView) findViewById(R.id.enginee);
-		driving_speed = (TextView) findViewById(R.id.driving_speed);
-		distance = (TextView) findViewById(R.id.distance);
-		speedHand = (ImageView) findViewById(R.id.speed_hand);
-		icObdWasherFluid = (ImageView) findViewById(R.id.icObdWasherFluid);
-		icObdSeatBelt = (ImageView) findViewById(R.id.icObdSeatBelt);
-		icObdBattery = (ImageView) findViewById(R.id.icObdBattery);
-		icObdHandBrake = (ImageView) findViewById(R.id.icObdHandBrake);
-		icFuel = (ImageView) findViewById(R.id.icFuel);
+		if (viewsFactory == null)
+			viewsFactory = new ArrayList<ViewPageFactory>();
+		if (vp == null)
+			vp = (ViewPager) findViewById(R.id.vp);
+		vp.setOffscreenPageLimit(2);
+		if (vpAdapter == null)
+			vpAdapter = new ViewPagerAdapter(viewsFactory);
+		if (PreferenceUtil.getCARTYPE(this) == 1 && carType != 1) { // 大众高尔夫
+
+			carType = PreferenceUtil.getCARTYPE(this);
+
+			vp.removeAllViews();
+			viewsFactory.clear();
+
+			ViewPageFactory pageView = new ObdView(this,
+					R.layout.dashboard_main);
+			viewsFactory.add(pageView);
+
+			ViewPageFactory GolfView1 = new GolfView1(this,
+					R.layout.carinfo_layout_1);
+			viewsFactory.add(GolfView1);
+
+			ViewPageFactory GolfView2 = new GolfView2(this,
+					R.layout.carinfo_layout_2);
+			viewsFactory.add(GolfView2);
+
+			ViewPageFactory GolfView3 = new GolfView3(this,
+					R.layout.carinfo_layout_3);
+			viewsFactory.add(GolfView3);
+
+			ViewPageFactory GolfView4 = new GolfView4(this,
+					R.layout.carinfo_layout_4);
+			viewsFactory.add(GolfView4);
+
+			vpAdapter.notifyDataSetChanged();
+		} else if (PreferenceUtil.getCARTYPE(this) != 1) {
+			vp.removeAllViews();
+			viewsFactory.clear();
+			ViewPageFactory pageView = new ObdView(this,
+					R.layout.dashboard_main);
+			viewsFactory.add(pageView);
+			vpAdapter.notifyDataSetChanged();
+		}
+		vp.setAdapter(vpAdapter);
+
+		initIndicator();
+
+		canType = PreferenceUtil.getCANTYPE(this);
+		carType = PreferenceUtil.getCARTYPE(this);
 	}
+
+	/**
+	 * init Indicator
+	 */
+	protected void initIndicator() {
+		if (indicatorLayout == null)
+			indicatorLayout = (LinearLayout) findViewById(R.id.indicator);
+
+		indicatorLayout.removeAllViews();
+
+		if (viewsFactory.size() < 2) {
+			return;
+		}
+
+		for (int i = 0; i < viewsFactory.size(); i++) {
+			ImageView imageView = new ImageView(this);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			lp.setMargins(DensityUtils.dip2px(this, 4), 0,
+					DensityUtils.dip2px(this, 4), 0);
+			imageView.setLayoutParams(lp);
+			if (i == 0) {
+				imageView.setImageResource(R.drawable.white_oval);
+			} else {
+				imageView.setImageResource(R.drawable.gray_oval);
+			}
+			indicatorLayout.addView(imageView);
+		}
+		vp.setOnPageChangeListener(mOnPageChangeListener);
+	}
+
+	OnPageChangeListener mOnPageChangeListener = new OnPageChangeListener() {
+
+		@Override
+		public void onPageSelected(int arg0) {
+			// TODO Auto-generated method stub
+			for (int i = 0; i < viewsFactory.size(); i++) {
+				((ImageView) indicatorLayout.getChildAt(i))
+						.setImageResource(R.drawable.gray_oval);
+			}
+			((ImageView) indicatorLayout.getChildAt(arg0))
+					.setImageResource(R.drawable.white_oval);
+
+		}
+
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
+			// TODO Auto-generated method stub
+			indicatorLayout.setVisibility(View.VISIBLE);
+		}
+
+		@Override
+		public void onPageScrollStateChanged(int arg0) {
+			// TODO Auto-generated method stub
+			// indicatorLayout.setVisibility(View.INVISIBLE);
+		}
+	};
 
 	@Override
 	protected void onDestroy() {
@@ -249,54 +336,59 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent();
 		intent.setClassName("com.console.canreader",
 				"com.console.canreader.service.CanService");
-		bindService(intent, mServiceConnection, BIND_AUTO_CREATE);
+		intent.putExtra("normal", "normal");
+		bindService(intent, conn, BIND_AUTO_CREATE);
 	}
 
 	private void unBindService() {
-		try {
-			if (mISpService != null)
-				mISpService.removeCliend(mICallback);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		unbindService(mServiceConnection);
+		if (mCanservice != null)
+			unbindService(conn);
 	}
 
-	private ICanCallback mICallback = new ICanCallback.Stub() {
+	/**
+	 * bind service
+	 */
+	CanService mCanservice;
+	private ServiceConnection conn = new ServiceConnection() {
 
 		@Override
-		public void readDataFromServer(CanInfo canInfo) throws RemoteException {
-			Message msg = new Message();
-			msg.what = Contacts.MSG_UPDATA_UI;
-			msg.obj = canInfo;
-			mHandler.sendMessage(msg);
+		public void onServiceDisconnected(ComponentName name) {
+			// TODO Auto-generated method stub
+			Log.i("cxs", "onServiceDisconnected()");
 		}
-	};
 
-	private ServiceConnection mServiceConnection = new ServiceConnection() {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-			mISpService = ICanService.Stub.asInterface(service);
-			try {
-				mISpService.addClient(mICallback);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
+			// TODO Auto-generated method stub
+			CanServiceBinder binder = (CanServiceBinder) service;
+			mCanservice = binder.getService();
+			mCanservice.setCallback(new ReaderCallback() {
+				@Override
+				public void Callback(CanInfo mCanInfo) {
+					// TODO Auto-generated method stub
+					Log.i("cxs",
+							"====Callback===CanInfo========="
+									+ mCanInfo.toString());
+					Message msg = new Message();
+					msg.what = Contacts.MSG_UPDATA_UI;
+					msg.obj = mCanInfo;
+					mHandler.sendMessage(msg);
+				}
+			});
 			Message msg = new Message();
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 1000);
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ONCE_GET_MSG, 5000);
 		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			mISpService = null;
-		}
 	};
+
+	/**
+	 * bind service
+	 */
 
 	public void sendMsg(String msg) {
 		try {
-			if (mISpService != null) {
-				mISpService.sendDataToSp(BytesUtil.addRZCCheckBit(msg));
+			if (mCanservice != null) {
+				mCanservice.sendDataToSp(BytesUtil.addRZCCheckBit(msg));
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();

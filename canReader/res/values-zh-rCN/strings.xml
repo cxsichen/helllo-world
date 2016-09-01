@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">车辆信息</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="temp_unit">°</string>
+    <string name="aaaaa">aaaaa</string>
+    <string name="allOpen">后备箱,车门未关</string>
+    <string name="doorOpen">车门未关</string>
+    <string name="trunkOpen">后备箱未关</string>
+    <string name="driving_data_since_start">自启动起数据</string>
+    <string name="average_oil_consumption">平均油耗</string>
+    <string name="travelling_time">行驶时间</string>
+    <string name="time_17">17小时31分钟</string>
+    <string name="range">续航里程</string>
+    <string name="average_speed">平均车速</string>
+    <string name="driving_distance">行驶里程</string>
+    <string name="driving_data_since_oilchange">自加油起数据</string>
+    <string name="driving_datas_long_term">长时间数据</string>
+    <string name="Maintenance_information">保养信息</string>
+    <string name="vehicle_no">汽车编号</string>
+    <string name="inspection_days">车况检查天数</string>
+    <string name="inspection_distance">车况检查里程</string>
+    <string name="inspection_need_distance">离车况检查需要里程</string>
+    <string name="oil_change_service_days">更换机油保养天数</string>
+    <string name="oil_change_service_distance">更换机油保养里程</string>
+    <string name="handbrake_info">驻车制动\n</string>
+    <string name="battery_info">剩余电量\n</string>
+    <string name="safety_salt_info">安全带\n</string>
+    <string name="washer_info">清洁液\n</string>
+    <string name="hour">小时</string>
+    <string name="minute">分钟</string>
+    <string name="inspection_need_days">离车况检查需要天数</string>
+    <string name="inspection_overdue_days">车况检查过期天数</string>
+    <string name="inspection_overdue_distance">车况检查过期里程</string>
+    <string name="oil_change_service_need_days">离更换机油保养需要天数</string>
+    <string name="oil_change_service_overdue_days">更换机油保养过期天数</string>
+    <string name="oil_change_service_need_distance">离更换机油保养需要里程</string>
+    <string name="oil_change_overdue_distance">更换机油保养过期里程</string>
+    <string name="normal">正 常</string>
+    <string name="untie">未 系</string>
+    <string name="not_put">未 放</string>
+    <string name="too_low">过 低</string>
+</resources>

@@ -106,7 +106,7 @@ public class RZCVolkswagen extends AnalyzeUtils {
 		case 1:
 			mCanInfo.SAFETY_BELT_STATUS = (int) ((msg[4] >> 7) & 0x01);
 			mCanInfo.DISINFECTON_STATUS = (int) ((msg[4] >> 6) & 0x01);
-			mCanInfo.HANDBRAKE_STATUS = (int) ((msg[4] >> 5) & 0x01);
+			mCanInfo.HANDBRAKE_STATUS = (int) ((msg[4] >> 5) & 0x01)==0?1:0;
 			mCanInfo.TRUNK_STATUS = (int) ((msg[4] >> 4) & 0x01);
 			mCanInfo.RIGHT_BACKDOOR_STATUS = (int) ((msg[4] >> 3) & 0x01);
 			mCanInfo.LEFT_BACKDOOR_STATUS = (int) ((msg[4] >> 2) & 0x01);
