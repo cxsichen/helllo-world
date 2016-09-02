@@ -72,6 +72,7 @@ public class MainActivity extends Activity {
 	private static final int KEYCODE_HOME = 271;
 	CanInfo mCaninfo;
 	int cout = 0;
+	public static Boolean isResume = false;
 
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -151,6 +152,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		Log.i("cxs", "====canReader=====onCreate===");
 		setContentView(R.layout.main);
 		bindService();
 		initView();
@@ -162,6 +164,7 @@ public class MainActivity extends Activity {
 		Settings.System.putInt(getContentResolver(), WARNSTART, 0);
 		super.onPause();
 		mHandler.removeMessages(Contacts.MSG_GET_MSG);
+		isResume = false;
 
 	}
 
@@ -169,27 +172,30 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (mCanservice != null) {
+		if (mISpService != null) {
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 2000);
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ONCE_GET_MSG, 5000);
 		}
-
 		initView();
-
 		firstShow();
+		isResume = true;
 
 	}
 
 	private void firstShow() {
 		// TODO Auto-generated method stub
-		if (mCanservice != null) {
-			Message msg = new Message();
-			msg.what = Contacts.MSG_UPDATA_UI;
-			CanInfo tempInfo= mCanservice.getCanInfo();
-			//this page only deal with the type 10
-			tempInfo.CHANGE_STATUS=10;                     
-			msg.obj = tempInfo;
-			mHandler.sendMessage(msg);
+		try {
+			if (mISpService != null) {
+				Message msg = new Message();
+				msg.what = Contacts.MSG_UPDATA_UI;
+				CanInfo tempInfo = mISpService.getCanInfo();
+				// this page only deal with the type 10
+				tempInfo.CHANGE_STATUS = 10;
+				msg.obj = tempInfo;
+				mHandler.sendMessage(msg);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 
@@ -336,48 +342,51 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent();
 		intent.setClassName("com.console.canreader",
 				"com.console.canreader.service.CanService");
-		intent.putExtra("normal", "normal");
-		bindService(intent, conn, BIND_AUTO_CREATE);
+		bindService(intent, mServiceConnection, BIND_AUTO_CREATE);
 	}
 
 	private void unBindService() {
-		if (mCanservice != null)
-			unbindService(conn);
+		try {
+			if (mISpService != null)
+				mISpService.removeCliend(mICallback);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		unbindService(mServiceConnection);
 	}
 
 	/**
 	 * bind service
 	 */
-	CanService mCanservice;
-	private ServiceConnection conn = new ServiceConnection() {
+	private ICanService mISpService;
+	private ICanCallback mICallback = new ICanCallback.Stub() {
 
 		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			// TODO Auto-generated method stub
-			Log.i("cxs", "onServiceDisconnected()");
+		public void readDataFromServer(CanInfo canInfo) throws RemoteException {
+			Message msg = new Message();
+			msg.what = Contacts.MSG_UPDATA_UI;
+			msg.obj = canInfo;
+			mHandler.sendMessage(msg);
 		}
+	};
 
+	private ServiceConnection mServiceConnection = new ServiceConnection() {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-			// TODO Auto-generated method stub
-			CanServiceBinder binder = (CanServiceBinder) service;
-			mCanservice = binder.getService();
-			mCanservice.setCallback(new ReaderCallback() {
-				@Override
-				public void Callback(CanInfo mCanInfo) {
-					// TODO Auto-generated method stub
-					Log.i("cxs",
-							"====Callback===CanInfo========="
-									+ mCanInfo.toString());
-					Message msg = new Message();
-					msg.what = Contacts.MSG_UPDATA_UI;
-					msg.obj = mCanInfo;
-					mHandler.sendMessage(msg);
-				}
-			});
+			mISpService = ICanService.Stub.asInterface(service);
+			try {
+				mISpService.addClient(mICallback);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 			Message msg = new Message();
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 1000);
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ONCE_GET_MSG, 5000);
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			mISpService = null;
 		}
 	};
 
@@ -387,8 +396,8 @@ public class MainActivity extends Activity {
 
 	public void sendMsg(String msg) {
 		try {
-			if (mCanservice != null) {
-				mCanservice.sendDataToSp(BytesUtil.addRZCCheckBit(msg));
+			if (mISpService != null) {
+				mISpService.sendDataToSp(BytesUtil.addRZCCheckBit(msg));
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();

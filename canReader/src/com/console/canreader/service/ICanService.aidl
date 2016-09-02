@@ -7,4 +7,5 @@ interface ICanService {
 	void addClient(ICanCallback client);
 	void removeCliend(ICanCallback client);
 	void sendDataToSp(String hexString);
+	CanInfo getCanInfo();
 }

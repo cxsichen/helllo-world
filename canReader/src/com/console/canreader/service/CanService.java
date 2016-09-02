@@ -540,17 +540,7 @@ public class CanService extends Service {
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
-		String ex = intent.getStringExtra("normal");
-		Log.i("cxs", "=======ex==============" + ex);
-		if (ex != null) {
-			if (ex.equals("normal")) {
-				return myBinder;
-			}
-		} else {
-			return mBinder;
-		}
 		return mBinder;
-
 	}
 
 	// normal server binder
@@ -578,12 +568,6 @@ public class CanService extends Service {
 		}
 	}
 
-	public CanInfo getCanInfo() {
-		if (info != null)
-			return info.getCanInfo();
-		else
-			return null;
-	}
 
 	// aidl server binder
 	private final RemoteCallbackList<ICanCallback> mCallbacks = new RemoteCallbackList<ICanCallback>();
@@ -611,6 +595,15 @@ public class CanService extends Service {
 			if (client != null) {
 				mCallbacks.unregister(client);
 			}
+		}
+
+		@Override
+		public CanInfo getCanInfo() throws RemoteException {
+			// TODO Auto-generated method stub
+			if (info != null)
+				return info.getCanInfo();
+			else
+				return null;
 		}
 
 	};
