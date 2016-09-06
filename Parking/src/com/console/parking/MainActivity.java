@@ -58,7 +58,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case BACKCARSTATEMSG:
-				mHandler.sendEmptyMessageDelayed(BACKCARSTATEMSG, 2000);
+				mHandler.sendEmptyMessageDelayed(BACKCARSTATEMSG, 1000);
 				if(android.provider.Settings.System.getInt(
 						getContentResolver(), BACKCARSTATE, 1)==0){
 					mHandler.sendEmptyMessageDelayed(FINISHMSG, 0);
