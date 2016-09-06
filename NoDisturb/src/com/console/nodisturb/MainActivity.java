@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
 	TextView timeTv;
 	TextView dateTv;
 	static long saveTime = 0;
+	static  int i=0;
 
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -40,7 +41,9 @@ public class MainActivity extends Activity {
 				dateTv.setText(dateSdf.format(curDate));
 				mHandler.sendEmptyMessageDelayed(1, 1000);
 				break;
-
+			case 2:
+				finish();
+				break;
 			default:
 				break;
 			}
@@ -70,6 +73,17 @@ public class MainActivity extends Activity {
 		timeTv.setText(timeSdf.format(curDate));
 		dateTv.setText(dateSdf.format(curDate));
 		mHandler.sendEmptyMessageDelayed(1, 1000);
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		i++;
+		if(i>2){
+			mHandler.removeMessages(2);
+			mHandler.sendEmptyMessageDelayed(2, 500);
+		}
 	}
 
 	private void initView() {
@@ -105,6 +119,7 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		mHandler.removeMessages(1);
 		unregisterReceiver(mBroadcastReceiver);
+		i=0;
 		super.onDestroy();
 	}
 
