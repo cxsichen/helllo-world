@@ -72,7 +72,7 @@
         <ImageView
             android:id="@+id/icPhoneDown"
             style="@style/keyIconStyle"
-            android:src="@drawable/ic_call_end" />
+            android:src="@drawable/ic_sysbar_voice" />
 
         <Button
             android:id="@+id/mMainPhoneDropedBtn"
