@@ -2,7 +2,7 @@ package cn.colink.serialport.utils;
 
 public class Contacts {
 
-	public static final int K_POWER = 0x5c;
+	public static final int K_POWER = 0x5D;
 	public static final int K_MAINMENU = 0x6E;
 
 	public static final int K_AVMUTE = 0x58;
@@ -24,7 +24,7 @@ public class Contacts {
 	public static final int MENU_DOWN = 4;
 	public static final int TEL = 5;
 	public static final int MUTE = 6;
-	public static final int SRC = 7;
+	public static final int SRC = 0x07;
 	public static final int MIC = 8;
 	public static final int TEL_ANSWER = 9;
 	public static final int TEL_HANDUP = 10;

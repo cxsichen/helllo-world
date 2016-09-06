@@ -26,17 +26,11 @@ public class KeyDealer {
 	
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
+	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
 
-
-	private final static int SETP_VOLUME = 1;
-	private static final int MAX_ALARM_VOICE = 15;
-	private final int MAX_CALL_VOICE = 15;
-	private static AudioManager mAudioManager;
-	int cur_alarm;
-	static int save_alarm = 0;
 	static Context context;
 	static KeyDealer mKeyDealer;
-	ValumeObserver mValumeObserver = new ValumeObserver();
+
 
 	public Handler mHandler = new Handler() {
 
@@ -105,24 +99,9 @@ public class KeyDealer {
 	public KeyDealer(Context context) {
 		// TODO Auto-generated constructor stub
 		this.context = context;
-		context.registerReceiver(mValumeObserver, new IntentFilter(
-				ACTION_VOLUMN_CHANGE));
 	}
 
-	private class ValumeObserver extends BroadcastReceiver {
 
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			final String action = intent.getAction();
-			if (action.equals(ACTION_VOLUMN_CHANGE)) {
-				cur_alarm = mAudioManager
-						.getStreamVolume(AudioManager.STREAM_ALARM);
-				if (cur_alarm > 0) {
-					save_alarm = 0;
-				}
-			}
-		}
-	}
 	
 	protected void handlePlayPause() {
 		Intent intent = new Intent();
@@ -153,6 +132,12 @@ public class KeyDealer {
 			// TODO: handle exception
 			e.printStackTrace();
 		}	
+	}
+	
+	protected void handleMute() {
+		Intent intent = new Intent();
+		intent.setAction(KEYCODE_VOLUME_MUTE);
+		context.sendBroadcast(intent);
 	}
 	
 	protected void handleVolumeUp() {
@@ -199,19 +184,6 @@ public class KeyDealer {
 		context.sendBroadcast(intent);
 	}
 
-	protected void handleMute() {
-		// TODO Auto-generated method stub
-		if (mAudioManager == null)
-			mAudioManager = (AudioManager) context
-					.getSystemService(Context.AUDIO_SERVICE);
-		cur_alarm = mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM);
-		if (cur_alarm > 0) {
-			save_alarm = cur_alarm;
-			handleVolume(context, 0);
-		} else if (cur_alarm == 0 && save_alarm != 0) {
-			handleVolume(context, save_alarm);
-		}
-	}
 
 	public static KeyDealer getInstance(Context context) {
 		if (mKeyDealer == null) {
@@ -221,10 +193,6 @@ public class KeyDealer {
 	}
 
 	public void dealCanKeyEvent(Context context, byte[] mPacket) {
-		if (mAudioManager == null)
-			mAudioManager = (AudioManager) context
-					.getSystemService(Context.AUDIO_SERVICE);
-		cur_alarm = mAudioManager.getStreamVolume(AudioManager.STREAM_ALARM);
 		dealWith(context, mPacket);
 	}
 
@@ -261,6 +229,7 @@ public class KeyDealer {
 				mHandler.sendEmptyMessageDelayed(Contacts.K_NEXT, 200);
 				break;
 			case Contacts.TEL:
+			case (byte) Contacts.K_PHONE_UP:            //改为接听和挂断一起
 				mHandler.removeMessages(Contacts.TEL);
 				mHandler.sendEmptyMessageDelayed(Contacts.TEL, 200);
 				break;
@@ -269,10 +238,10 @@ public class KeyDealer {
 				mHandler.removeMessages(Contacts.MIC);
 				mHandler.sendEmptyMessageDelayed(Contacts.MIC, 200);
 				break;
-			case (byte) Contacts.K_PHONE_UP:
+/*			case (byte) Contacts.K_PHONE_UP:
 				mHandler.removeMessages(Contacts.K_PHONE_UP);
 				mHandler.sendEmptyMessageDelayed(Contacts.K_PHONE_UP, 200);
-				break;
+				break;*/
 			case (byte) Contacts.K_PHONE_DN:
 				mHandler.removeMessages(Contacts.K_PHONE_DN);
 				mHandler.sendEmptyMessageDelayed(Contacts.K_PHONE_DN, 200);
@@ -295,26 +264,5 @@ public class KeyDealer {
 		}
 	}
 
-	private void handleVolume(Context context, int value) {
-		int currVolume = value;
-		if (mAudioManager == null)
-			mAudioManager = (AudioManager) context
-					.getSystemService(Context.AUDIO_SERVICE);
-		if (currVolume <= 0) {
-			currVolume = 0;
-		}
-
-		if (currVolume > MAX_ALARM_VOICE) {
-			currVolume = MAX_ALARM_VOICE;
-		}
-		cur_alarm = currVolume;
-		mAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
-				currVolume, 0);
-		mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-				currVolume > 15 ? 15 : currVolume, 1);
-		mAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,
-				currVolume, 0);
-		mAudioManager.setStreamVolume(AudioManager.STREAM_ALARM, currVolume, 0);
-	}
 
 }
