@@ -123,30 +123,38 @@ public class NaviContentProvider extends ContentProvider {
 	@Override
 	public int update(Uri uri, ContentValues values, String selection,
 			String[] selectionArgs) {
-		int count;
-		long rowId = 0;
-		int match = sURLMatcher.match(uri);
-		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-		switch (match) {
-		
-			case ALARMS_ID: {
-				String segment = uri.getPathSegments().get(1);
-				rowId = Long.parseLong(segment);
-				count = db.update(DBConstant.NaviTable.TABLE_NAME, values, "_id=" + rowId, null);
-				break;
-			}
+		try {
 			
-			case ALARMS:
-				count = db.update(DBConstant.NaviTable.TABLE_NAME, values, null, null);
-				break;
+			int count;
+			long rowId = 0;
+			int match = sURLMatcher.match(uri);
+			SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+			switch (match) {
+			
+				case ALARMS_ID: {
+					String segment = uri.getPathSegments().get(1);
+					rowId = Long.parseLong(segment);
+					count = db.update(DBConstant.NaviTable.TABLE_NAME, values, "_id=" + rowId, null);
+					break;
+				}
 				
-			default: {
-				Log.e("navi", "Cannot update URL: " + uri);
-				throw new UnsupportedOperationException("Cannot update URL: " + uri);
+				case ALARMS:
+					count = db.update(DBConstant.NaviTable.TABLE_NAME, values, null, null);
+					break;
+					
+				default: {
+					Log.e("navi", "Cannot update URL: " + uri);
+					throw new UnsupportedOperationException("Cannot update URL: " + uri);
+				}
 			}
+			getContext().getContentResolver().notifyChange(uri, null);
+			return count;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return -1;
 		}
-		getContext().getContentResolver().notifyChange(uri, null);
-		return count;
+		
 
 	}
 

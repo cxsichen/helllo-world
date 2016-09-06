@@ -8,8 +8,8 @@ public interface Constact {
 	public final static String STARTNAVI="com.inet.broadcast.startnavi";
 	public static final String ACC_STATE = "acc_state";
 	public static final String TTS_SHOW = "tts_show";
-	public static final String BACK_CAR = "back_car_state";
-
+	public static final String BACK_CAR = "back_car_state";        //1 是倒车  0是倒完车
+	public static final String NAVING_STATUS = "naving_status";        
 	
 	public static final String NAVI_AUTHORITY = "com.zzj.softwareservice.NaviProvider";
     public static final Uri NAVI_CONTENT_URI = Uri.parse("content://" + NAVI_AUTHORITY + "/navi");
@@ -28,6 +28,7 @@ public interface Constact {
     public static final String MCU_VERSION = "mcu_version";
     public final static String FMSTATUS = "fmstatus";
     public final static String USER_SAVE_BRIGHTNESS= "user_brightness";
+    public final static String FACTORY_SOUND="factory_sound";
     public final static int DEFAULT_BRIGHTNESS = 110;
 
 }

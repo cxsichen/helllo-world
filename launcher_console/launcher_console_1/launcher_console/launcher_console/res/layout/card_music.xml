@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/bbb"
+            android:src="@drawable/cc"
         />
         <!--
           app1:border_width="20dp"

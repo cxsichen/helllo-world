@@ -47,6 +47,7 @@ public class SerialPortControlService extends Service {
 	private ISerialPortService mISpService;
 	private KWAPI mKwapi;
 	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
+
 	int volumeValue;
 	/**
 	 * 音效设置默认值
@@ -56,6 +57,7 @@ public class SerialPortControlService extends Service {
 	private static int basValue = 7;
 	private static int rowValue = 7;
 	private static int colValue = 7;
+	private static boolean  isNaving=false;
 
 	private final String[] Applist = { "com.console.radio",
 			"cn.kuwo.kwmusiccar", "com.mxtech.videoplayer.pro",
@@ -86,6 +88,13 @@ public class SerialPortControlService extends Service {
 				// 处理串口发送过来的一部分命令
 				dealWithPacket(packet);
 				break;
+			case Contacts.MSG_FACTORY_SOUND:
+				int factorySoundValue = android.provider.Settings.System
+						.getInt(getContentResolver(), Constact.FACTORY_SOUND,
+								30);
+				sendMsg("F755" + BytesUtil.intToHexString(factorySoundValue)
+						+ "0000");
+				break;
 			case Contacts.MSG_RADIO_VALUME_CHANGE:
 			/*
 			 * if ((PreferenceUtil.getMode(SerialPortControlService.this) == 0)
@@ -109,15 +118,29 @@ public class SerialPortControlService extends Service {
 				 */
 				int parkingState = android.provider.Settings.System.getInt(
 						getContentResolver(), Constact.BACK_CAR, 0);
-				Log.i("cxs", "======MSG_ACCON_MSG=========parkingState======="
+				Log.i("cxs", "--------MSG_ACCON_MSG------parkingState-------"
 						+ parkingState);
 				if (parkingState != 1) {
 					int mode = PreferenceUtil
 							.getMode(SerialPortControlService.this);
-					sendMsg("F5020000" + BytesUtil.intToHexString(mode));
-					Log.i("cxs", "======MSG_ACCON_MSG=========mode======="
+					Log.i("cxs", "--------MSG_ACCON_MSG------mode---0----"
 							+ mode);
+					sendMsg("F5020000" + BytesUtil.intToHexString(mode));
 					startModeActivty(mode);
+				} else { // 当处在倒车状态是 先进模式app后进入倒车
+					int mode = PreferenceUtil
+							.getMode(SerialPortControlService.this);
+					Log.i("cxs", "--------MSG_ACCON_MSG------mode----1---"
+							+ mode);
+					sendMsg("F5020000" + BytesUtil.intToHexString(mode));
+					startModeActivty(mode);
+
+					Intent intent = new Intent();
+					intent.setClassName("com.console.parking",
+							"com.console.parking.MainActivity");
+					intent.addCategory(Intent.CATEGORY_DEFAULT);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
 				}
 				/*
 				 * 启动can协议服务
@@ -130,11 +153,27 @@ public class SerialPortControlService extends Service {
 				 * 发送音效的高低音值
 				 */
 				sendEquValue();
+
+				/*
+				 * 发送媒体音量
+				 */
+				Message msg1 = new Message();
+				msg1.what = Contacts.MSG_FACTORY_SOUND;
+				mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
+				mHandler.sendMessageDelayed(msg1, 100);
 				break;
 			case Contacts.MSG_SEND_FIRST_MSG:
 				int launchMode = PreferenceUtil
 						.getMode(SerialPortControlService.this);
 				sendMsg("F00000" + BytesUtil.intToHexString(launchMode) + "01");
+
+				/*
+				 * 发送媒体音量
+				 */
+				Message msg2 = new Message();
+				msg2.what = Contacts.MSG_FACTORY_SOUND;
+				mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
+				mHandler.sendMessageDelayed(msg2, 100);
 				break;
 			case Contacts.MSG_CHECK_MODE:
 				if (PreferenceUtil.getMode(SerialPortControlService.this) != PreferenceUtil
@@ -153,22 +192,30 @@ public class SerialPortControlService extends Service {
 
 				break;
 			case Contacts.MSG_BACK_CAR: // 处理倒车事件
-				Intent intent = new Intent();
-				intent.setClassName("com.console.parking",
-						"com.console.parking.MainActivity");
-				intent.addCategory(Intent.CATEGORY_DEFAULT);
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(intent);
+				Log.i("cxs","=====start parking ========getTopActivity=====");
+				if (!getTopActivity(SerialPortControlService.this).equals(
+						"com.console.parking")) {
+				Log.i("cxs","=====start parking ====now =========");
+					Intent intent = new Intent();
+					intent.setClassName("com.console.parking",
+							"com.console.parking.MainActivity");
+					intent.addCategory(Intent.CATEGORY_DEFAULT);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
+				}
 				break;
 			case Contacts.MSG_APP_CHANGE:
 				/*
 				 * 处理app切换模式命令 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪
 				 */
 				mHandler.removeMessages(Contacts.MSG_CHECK_MODE);
-				switch ((String)msg.obj) {
-				case "com.console.parking":                           //主界面 倒车和obd报警不处理模式切换
-				case "com.console.canreader": 
-				case "com.console.launcher_console":  
+				switch ((String) msg.obj) {
+				case "com.console.parking": // 主界面 倒车和obd报警不处理模式切换
+				case "com.console.canreader":
+				case "com.console.launcher_console":
+				case "cn.coogo.hardware.service":
+				case "com.android.stk":
+				case "com.android.settings":
 					break;
 				case "com.console.radio":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 0) {
@@ -208,7 +255,7 @@ public class SerialPortControlService extends Service {
 				case "com.mtk.bluetooth":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 3) {
 						// 暂停音乐
-						stopKWMusic();
+						// stopKWMusic();
 						PreferenceUtil
 								.setMode(SerialPortControlService.this, 3);
 						sendMsg("F5020000" + BytesUtil.intToHexString(3));
@@ -235,6 +282,7 @@ public class SerialPortControlService extends Service {
 								.setMode(SerialPortControlService.this, 5);
 						sendMsg("F5020000" + BytesUtil.intToHexString(5));
 					}
+
 					break;
 				case "com.baidu.navi":
 				case "com.autonavi.amapauto":
@@ -243,6 +291,7 @@ public class SerialPortControlService extends Service {
 								.setMode(SerialPortControlService.this, 6);
 						sendMsg("F5020000" + BytesUtil.intToHexString(6));
 					}
+
 					break;
 				case "com.srtc.pingwang":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 7) {
@@ -252,7 +301,7 @@ public class SerialPortControlService extends Service {
 					}
 					break;
 				default:
-					if (PreferenceUtil.getMode(SerialPortControlService.this) != 1) {        //第三方应用默认音乐模式
+					if (PreferenceUtil.getMode(SerialPortControlService.this) != 1) { // 第三方应用默认音乐模式
 						PreferenceUtil
 								.setMode(SerialPortControlService.this, 1);
 						sendMsg("F5020000" + BytesUtil.intToHexString(1));
@@ -261,7 +310,7 @@ public class SerialPortControlService extends Service {
 				}
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_CHECK_MODE,
 						2 * 1000);
-				//收音模式
+				// 收音模式
 				if (!Change2FM) {
 					Settings.System.putInt(getContentResolver(),
 							Constact.FMSTATUS, 1);
@@ -303,14 +352,22 @@ public class SerialPortControlService extends Service {
 
 	private void startModeActivty(int mode) {
 		// TODO Auto-generated method stub
+		// if when acc off ,the naving is process 
+		if(isNaving){
+			mode=6;
+		}
 		switch (mode) {
 		case 1: // 酷我
+			Log.i("cxs", "--------MSG_ACCON_MSG------mKwapi-------");
 			mKwapi.startAPP(SerialPortControlService.this, true);
 			break;
 		case 6:
+			Log.i("cxs", "--------MSG_ACCON_MSG------startNavi-------");
 			startNavi();
 			break;
 		default:
+			Log.i("cxs", "--------MSG_ACCON_MSG------default-------"
+					+ modeApplist[mode]);
 			openApplication(SerialPortControlService.this, modeApplist[mode]);
 			break;
 		}
@@ -344,6 +401,7 @@ public class SerialPortControlService extends Service {
 		if (intent == null) {
 			return false;
 		}
+		Log.i("cxs", "=======openApplication==========" + pkgName);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
 		return true;
@@ -359,12 +417,33 @@ public class SerialPortControlService extends Service {
 					&& packet[3] == Contacts.ZERO) {
 				if (packet[4] == Contacts.BACK_CAR) {
 					// MCU发过来的倒车信号
-					mHandler.sendEmptyMessage(Contacts.MSG_BACK_CAR);
+					Log.i("cxs",
+							"==========Contacts.BACK_CAR==========="
+									+ android.provider.Settings.System.getInt(
+											getContentResolver(),
+											Constact.BACK_CAR, 1));
+					if (android.provider.Settings.System.getInt(
+							getContentResolver(), Constact.BACK_CAR, 1) != 1) {
+						android.provider.Settings.System.putInt(
+								getContentResolver(), Constact.BACK_CAR, 1);
+					}
+
 				} else if (packet[4] == Contacts.BACK_CAR_OFF) {
 					// MCU发过来的倒车结束信号
-					Intent intent = new Intent();
-					intent.setAction(SEND_BACK_CAR_OFF);
-					sendBroadcast(intent);
+					Log.i("cxs",
+							"==========Contacts.BACK_CAR_OFF==========="
+									+ android.provider.Settings.System.getInt(
+											getContentResolver(),
+											Constact.BACK_CAR, 1));
+					if (android.provider.Settings.System.getInt(
+							getContentResolver(), Constact.BACK_CAR, 0) != 0) {
+						android.provider.Settings.System.putInt(
+								getContentResolver(), Constact.BACK_CAR, 0);
+
+						Intent intent = new Intent();
+						intent.setAction(SEND_BACK_CAR_OFF);
+						sendBroadcast(intent);
+					}
 				} else {
 					// MCU发过来的模式校验
 					for (int i = 0; i < Modes.length; i++) {
@@ -515,6 +594,7 @@ public class SerialPortControlService extends Service {
 		getContentResolver().unregisterContentObserver(mBackCarObserver);
 		getContentResolver().unregisterContentObserver(mAPPObserver);
 		getContentResolver().unregisterContentObserver(mValumeObserver);
+		getContentResolver().unregisterContentObserver(mFactorySoundObserver);
 
 		super.onDestroy();
 
@@ -539,6 +619,7 @@ public class SerialPortControlService extends Service {
 
 	private void doRegisterContentObserver() {
 		// TODO Auto-generated method stub
+		// 监控acc状态
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Constact.ACC_STATE),
 				true, mAccStateObserver);
@@ -560,6 +641,32 @@ public class SerialPortControlService extends Service {
 						android.provider.Settings.System
 								.getUriFor(Constact.KEY_VOLUME_VALUE),
 						true, mValumeObserver);
+		getContentResolver()
+				.registerContentObserver(
+						android.provider.Settings.System
+								.getUriFor(Constact.FACTORY_SOUND),
+						true, mFactorySoundObserver);
+	}
+
+	/**
+	 * 媒体音量
+	 */
+	private FactorySoundObserver mFactorySoundObserver = new FactorySoundObserver();
+
+	public class FactorySoundObserver extends ContentObserver {
+		public FactorySoundObserver() {
+			super(null);
+		}
+
+		@Override
+		public void onChange(boolean selfChange) {
+			super.onChange(selfChange);
+			Message msg = new Message();
+			msg.what = Contacts.MSG_FACTORY_SOUND;
+			mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
+			mHandler.sendMessageDelayed(msg, 100);
+
+		}
 	}
 
 	private ValumeObserver mValumeObserver = new ValumeObserver();
@@ -599,7 +706,7 @@ public class SerialPortControlService extends Service {
 			String appName = android.provider.Settings.System.getString(
 					getContentResolver(), Constact.APPLIST);
 			handleAPPChange(appName);
-			Log.i("cxs","==========mAPPObserver================"+appName);		
+			Log.i("cxs", "==========mAPPObserver================" + appName);
 		}
 	}
 
@@ -754,6 +861,7 @@ public class SerialPortControlService extends Service {
 		}
 	}
 
+	// 监控acc状态
 	private AccStateObserver mAccStateObserver = new AccStateObserver();
 
 	public class AccStateObserver extends ContentObserver {
@@ -773,7 +881,11 @@ public class SerialPortControlService extends Service {
 	private void handleAccState(int state) {
 		// TODO Auto-generated method stub
 		if (state == 1) {
-			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 1000);
+			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 100);
+		}else{
+			isNaving=(android.provider.Settings.System.getInt(
+					getContentResolver(), Constact.NAVING_STATUS, 0)==1);
+			Log.i("cxs","=====acc off   insNaving ============="+isNaving);
 		}
 	}
 
@@ -802,10 +914,11 @@ public class SerialPortControlService extends Service {
 				break;
 			case RADIO_FREQ_ACTION:
 				float freq = intent.getFloatExtra("fm_fq", 0);
+				Log.i("cxs", "-==--------RADIO_FREQ_ACTION----freq----" + freq);
 				Message freqmsg = new Message();
 				freqmsg.what = Contacts.MSG_RADIO_FREQ_MEG;
 				freqmsg.obj = freq;
-				mHandler.sendMessageDelayed(freqmsg, 0);
+				mHandler.sendMessageDelayed(freqmsg, 1000);
 				break;
 			default:
 				break;
@@ -816,7 +929,6 @@ public class SerialPortControlService extends Service {
 	public void sendMsg(String msg) {
 		try {
 			if (mISpService != null) {
-				Trace.i("Sound MainActivity sendMsg");
 				mISpService.sendDataToSp(BytesUtil.addCheckBit(msg));
 			}
 		} catch (RemoteException e) {

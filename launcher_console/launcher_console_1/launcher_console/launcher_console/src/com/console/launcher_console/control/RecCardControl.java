@@ -42,7 +42,7 @@ import android.widget.Toast;
 public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 		View.OnClickListener {
 
-	private static final String TAG = "cxs";
+	private static final String TAG = "RecCardControl";
 
 	private UNVideoViewHelper mUNVideoViewHelper;
 
@@ -57,6 +57,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 
 	private static final int MSG_START_STREAM = 1;
 	private static final int MSG_STOP_STREAM = 2;
+	private static final int MSG_UPDATE_BUTTON = 3;
 
 	private LinearLayout recCardLayout;
 	private Context context;
@@ -64,15 +65,18 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 	private ImageView mRecordButton = null;
 	private ImageView mLockButton = null;
 	private ImageView mCaptureButton = null;
-
+	Object obj = new Object();
 	private Handler mWorkHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			// UNLog.debug_print(UNLog.LV_DEBUG, TAG,
 			// "cxs =================handleMessage msg what = "
 			// + msg.what);
-			Log.i("cxs", "===WorkHandler===handleMessage=========" + msg.what);
+			Log.i(TAG,"========handleMessage==============="+msg.what);
 			switch (msg.what) {
+			case MSG_UPDATE_BUTTON:
+				syncButtonStatus();
+				break;
 			case MSG_START_STREAM:
 				new Thread() {
 					public void run() {
@@ -100,7 +104,8 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 				.findViewById(R.id.video_parentview);
 		recCardLayout.findViewById(R.id.video_layout).setOnClickListener(this);
 		devicePre = (ImageView) recCardLayout.findViewById(R.id.video_offline);
-		mRecordButton = (ImageView) recCardLayout.findViewById(R.id.RecordButton);
+		mRecordButton = (ImageView) recCardLayout
+				.findViewById(R.id.RecordButton);
 		mRecordButton.setOnClickListener(this);
 		mLockButton = (ImageView) recCardLayout.findViewById(R.id.LockButton);
 		mLockButton.setOnClickListener(this);
@@ -116,10 +121,18 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 				Context.BIND_AUTO_CREATE);
 		Log.e(TAG, "---------------------------bindservice ret = " + ret);
 
-		
 	}
 
 	public void resumeVideoPreview() {
+		if (mService == null) {
+			Log.i(TAG,"========resumeVideoPreview===bind agin===mService========");
+			Intent intent = new Intent(
+					"com.softwinner.un.tool.service.SrtcService");
+			intent.setPackage("com.srtc.pingwang");
+			boolean ret = context.bindService(intent, mServiceConnection,
+					Context.BIND_AUTO_CREATE);
+		}
+		Log.i(TAG,"========resumeVideoPreview===============");
 		mResume = true;
 		mWorkHandler.removeMessages(MSG_START_STREAM);
 		mWorkHandler.removeMessages(MSG_STOP_STREAM);
@@ -172,7 +185,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 		}
 		// if (!isStartVideoStream && !isStartingVideoStream &&
 		// !isStopingVideoStream) {
-		
+
 		try {
 			if (mService.getConnectStatus() == 0) {
 				Log.e(TAG,
@@ -225,6 +238,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			// isStartingVideoStream = true;
 			UNJni.jni_startDisplay(mUNVideoViewHelper);
 		}
+		mWorkHandler.sendEmptyMessageDelayed(MSG_UPDATE_BUTTON, 500);
 		// }
 	}
 
@@ -289,7 +303,8 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			Log.e(TAG, "+++++++++++++++++++onConnectStatusChange connected = "
 					+ connected);
 			if (1 == connected && mResume) {
-				mWorkHandler.sendEmptyMessage(MSG_START_STREAM);
+				//mWorkHandler.sendEmptyMessage(MSG_START_STREAM);
+				resumeVideoPreview();
 			} else {
 				resetFlags();
 			}
@@ -299,31 +314,33 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 		public void onStatusChange(int index, int state) throws RemoteException {
 			// TODO Auto-generated method stub
 			// TODO：状态改变时，会回调这个接口，index对应UtilsStatus里面的index
+
 			switch (index) {
 			case UtilsStatus.INDEX_RECORDING:
 				if (state > 0) {
-					Log.i(TAG,"-----record success---------------------");
+					Log.i(TAG, "-----record success---------------------");
 				} else {
-					Log.i(TAG,"-----record fail------------------------");
+					Log.i(TAG, "-----record fail------------------------");
 				}
 				break;
 			case UtilsStatus.INDEX_CAPTURE:
 				if (state > 0) {
-					Log.i(TAG,"-----capture success---------------------");
+					Log.i(TAG, "-----capture success---------------------");
 				} else {
-					Log.i(TAG,"-----capture fail---------------------");
+					Log.i(TAG, "-----capture fail---------------------");
 				}
 				break;
 			case UtilsStatus.INDEX_FILE_LOCK:
 				if (state > 0) {
-					Log.i(TAG,"-----lock success---------------------");
+					Log.i(TAG, "-----lock success---------------------");
 				} else {
-					Log.i(TAG,"-----lock fail---------------------");
+					Log.i(TAG, "-----lock fail---------------------");
 				}
 				break;
 			default:
 				break;
 			}
+			mWorkHandler.sendEmptyMessageDelayed(MSG_UPDATE_BUTTON, 500);
 
 		}
 	};
@@ -360,37 +377,33 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			}
 			break;
 		case R.id.RecordButton:
-			Log.i("cxs","===== R.id.RecordButton==========="+mService);
 			if (null != mService) {
 				try {
 					int record_status = mService
 							.getStatus(UtilsStatus.INDEX_RECORDING);
-					Log.i("cxs","===== record_status==========="+record_status);
 					if (record_status != -1) { // ret == -1 意味者设备未连接
 						int ret = mService.setStatus(
 								UtilsStatus.INDEX_RECORDING,
 								record_status == 0 ? 1 : 0);
 						// TODO: 判断返回ret，给出对应的回应
-						Log.i("cxs","record msg send ret = " + ret);
+						Log.i(TAG, "record msg send ret = " + ret);
 					}
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}
 			}
-			break;			
+			break;
 		case R.id.LockButton:
-			Log.i("cxs","===== R.id.LockButton==========="+mService);
 			if (null != mService) {
 				try {
 					int lock_status = mService
 							.getStatus(UtilsStatus.INDEX_FILE_LOCK);
-					Log.i("cxs","===== lock_status==========="+lock_status);
 					if (lock_status != -1) { // ret == -1 意味者设备未连接
 						int ret = mService.setStatus(
 								UtilsStatus.INDEX_FILE_LOCK,
 								lock_status == 0 ? 1 : 0);
 						// TODO: 判断返回ret，给出对应的回应
-						Log.i("cxs","lock msg send ret = " + ret);
+						Log.i(TAG, "lock msg send ret = " + ret);
 					}
 				} catch (RemoteException e) {
 					e.printStackTrace();
@@ -398,17 +411,15 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			}
 			break;
 		case R.id.CaptureButton:
-			Log.i("cxs","===== R.id.CaptureButton==========="+mService);
 			if (null != mService) {
 				try {
 					int capture_status = mService
 							.getStatus(UtilsStatus.INDEX_CAPTURE);
-					Log.i("cxs","===== capture_status==========="+capture_status);
 					if (capture_status != -1) { // ret == -1 意味者设备未连接
 						int ret = mService.setStatus(UtilsStatus.INDEX_CAPTURE,
 								capture_status == 0 ? 1 : 0);
 						// TODO: 判断返回ret，给出对应的回应
-						Log.i("cxs","capture msg send ret = " + ret);
+						Log.i(TAG, "capture msg send ret = " + ret);
 					}
 				} catch (RemoteException e) {
 					e.printStackTrace();
@@ -418,6 +429,35 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 
 		default:
 			break;
+		}
+	}
+
+	private void syncButtonStatus() {
+		try {
+			if (mService != null) {
+				// lock button status
+				int lock_status = mService
+						.getStatus(UtilsStatus.INDEX_FILE_LOCK);
+				if (lock_status == 0) {
+					mLockButton.setImageResource(R.drawable.ic_rec_lock);
+				} else {
+					mLockButton.setImageResource(R.drawable.ic_rec_unlock);
+				}
+				Log.i(TAG, "=============lock_status=========" + lock_status);
+				// record button status
+				int record_status = mService
+						.getStatus(UtilsStatus.INDEX_RECORDING);
+				if (record_status == 0) {
+					mRecordButton.setImageResource(R.drawable.ic_rec_start);
+				} else {
+					mRecordButton.setImageResource(R.drawable.ic_rec_stop);
+				}
+				Log.i(TAG, "=============record_status========="
+						+ record_status);
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

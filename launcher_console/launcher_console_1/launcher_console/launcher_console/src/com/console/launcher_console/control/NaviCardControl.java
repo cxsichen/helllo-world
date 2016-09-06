@@ -76,6 +76,9 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 				.findViewById(R.id.next_road_name);
 		remainMessage = (TextView) naviCardLayout
 				.findViewById(R.id.remain_message);
+		
+		showLayout(compassLayout);
+		hideLayout(naviLayout);
 	}
 
 	private void registerReceiver() {
@@ -215,6 +218,11 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 				R.anim.fade_in);
 		vg.startAnimation(animation);
 		vg.setVisibility(View.VISIBLE);
+		if(vg==naviLayout){
+			 Log.i("cxs","=========navi start============");
+			 android.provider.Settings.System.putInt(
+					context.getContentResolver(), Constact.NAVING_STATUS, 1);
+		}
 	}
 
 	private void hideLayout(ViewGroup vg) {
@@ -223,5 +231,10 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 				R.anim.fade_out);
 		vg.startAnimation(animation);
 		vg.setVisibility(View.GONE);
+		if(vg==naviLayout){
+			 Log.i("cxs","=========navi stop============");
+			 android.provider.Settings.System.putInt(
+					context.getContentResolver(), Constact.NAVING_STATUS, 0);
+		}
 	}
 }

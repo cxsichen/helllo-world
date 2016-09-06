@@ -61,6 +61,7 @@ public class SerialPortControl {
 						@Override
 						public void OnChange(byte[] value) {
 							// TODO Auto-generated method stub
+							if(mDataCallback!=null)
 							mDataCallback.OnChange(value);
 						}
 					});

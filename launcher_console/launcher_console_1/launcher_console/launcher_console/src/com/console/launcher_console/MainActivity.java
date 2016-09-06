@@ -189,8 +189,10 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 				(FrameLayout) findViewById(R.id.tpms_layout));
 		mFmCardControl = new FmCardControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.fm_layout), mSerialPortControl);
-		mWeatherController = new WeatherController(getApplicationContext(),
-				(LinearLayout) findViewById(R.id.weather_card_layout));
+
+		if (checkLocale("CN"))
+			mWeatherController = new WeatherController(getApplicationContext(),
+					(LinearLayout) findViewById(R.id.weather_card_layout));
 		mOtherControl = new OtherControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.other_card_layout),
 				mSerialPortControl);
@@ -200,12 +202,23 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	}
 
 	private void init(PagedView view) {
-		view.addView(getNewPage(R.layout.activity_page_1));
-		view.addView(getNewPage(R.layout.activity_page_2));
-		view.addView(getNewPage(R.layout.activity_page_3));
+		if (checkLocale("CN")) {
+			view.addView(getNewPage(R.layout.activity_page_1));
+			view.addView(getNewPage(R.layout.activity_page_2));
+			view.addView(getNewPage(R.layout.activity_page_3));
+		} else {
+			view.addView(getNewPage(R.layout.activity_page_4));
+			view.addView(getNewPage(R.layout.activity_page_5));
+			view.addView(getNewPage(R.layout.activity_page_6));
+		}
+
 		view.invalidate();
 		initIndicator(view);
 
+	}
+	
+	Boolean checkLocale(String str){		
+		return getResources().getConfiguration().locale.getCountry().equals(str);
 	}
 
 	private View getNewPage(int resid) {

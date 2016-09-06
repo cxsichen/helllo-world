@@ -28,14 +28,15 @@
             <RelativeLayout
                 android:id="@+id/video_parentview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                />
 
             <ImageView
                 android:id="@+id/video_offline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:visibility="gone"
+                android:layout_centerInParent="true"    
+                android:visibility="gone"             
                 android:src="@drawable/offline_mode" />
         </RelativeLayout>
     </RelativeLayout>
@@ -49,14 +50,14 @@
 
     <RelativeLayout style="@style/ShortCutGroup" >
 
-        <ImageView
+        <com.console.launcher_console.view.SelectImageView
             android:id="@+id/LockButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_rec_lock" />
 
-        <ImageView
+        <com.console.launcher_console.view.SelectImageView
             android:id="@+id/RecordButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,7 +65,7 @@
             android:layout_centerVertical="true"
             android:src="@drawable/ic_rec_start" />
 
-        <ImageView
+        <com.console.launcher_console.view.SelectImageView
             android:id="@+id/CaptureButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

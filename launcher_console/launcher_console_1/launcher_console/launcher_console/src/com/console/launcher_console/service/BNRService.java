@@ -298,57 +298,9 @@ public class BNRService extends Service implements Constact {
 		BNRemoteVistor.getInstance()
 				.connectToBNService(getApplicationContext());
 
-		//cxs监控前台程序的线程 先放弃
-		//mThread = new MonitorThread();
-		//mThread.start();
+
 	}
 
-	class MonitorThread extends Thread {
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-
-			while (true) {
-
-				/*Log.i("cxs", "=======getForegroundApp()==========="
-						+ getForegroundApp());*/
-				try {
-					sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		}
-	}
-
-	private String getForegroundApp() {
-		String topPackageName = "888";
-		Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-		startActivity(intent);
-
-		UsageStatsManager mUsageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
-		long time = System.currentTimeMillis();
-
-		List<UsageStats> stats = mUsageStatsManager.queryUsageStats(
-				UsageStatsManager.INTERVAL_DAILY, time - 1000 * 10, time);
-
-		if (stats != null) {
-			SortedMap<Long, UsageStats> mySortedMap = new TreeMap<Long, UsageStats>();
-			for (UsageStats usageStats : stats) {
-				mySortedMap.put(usageStats.getLastTimeUsed(), usageStats);
-			}
-			if (mySortedMap != null && !mySortedMap.isEmpty()) {
-				topPackageName = mySortedMap.get(mySortedMap.lastKey())
-						.getPackageName();
-				Log.e("TopPackage Name", topPackageName);
-			}
-		}
-		return topPackageName;
-	}
 
 	@Override
 	public void onDestroy() {

@@ -18,6 +18,7 @@ import com.console.launcher_console.util.ViewPagerAdapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Application;
 import android.app.Notification.Action;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -72,7 +73,7 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 	private LinearLayout indicatorLayout;
 
 	private ISerialPortService mISpService;
-
+	
 	private String[] applist = { "com.mediatek.datatransfer",
 			"com.android.email", "com.inet.mtk.cardplay",
 			"com.android.soundrecorder", "com.android.calendar",
@@ -84,7 +85,7 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 			"com.console.nodisturb", "com.colink.zzj.txzassistant","com.autonavi.amapauto"
 			,"com.baidu.navi","cn.lzl.partycontrol","com.mtk.bluetooth","com.srtc.pingwang",
 			"com.android.settings","com.android.deskclock","com.console.radio",
-			"com.share.android","com.android.gallery3d","com.console.equalizer","com.xbkpnotification",
+			"com.share.android","com.console.equalizer","com.xbkpnotification",
 			"com.console.auxapp","com.inetwp.cardservice","com.mediatek.mco",
 			"com.mxtech.videoplayer.pro","com.console.parking","com.android.stk","com.example.mtk10263.whatsTemp"};    //屏蔽显示列表
 
@@ -99,7 +100,6 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 		mlistAppInfo = new ArrayList<AppInfo>();
 		views = new ArrayList<View>();
 		queryAppInfo();
-
 	}
 
 	@Override
@@ -211,6 +211,7 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 
 					});
 					appLayout.addView(view);
+					Application mApplication = (Application) getApplication();
 				}
 
 			}
@@ -291,6 +292,12 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 				}
 				String pkgName = reInfo.activityInfo.packageName; // 获得应用程序的包�?
 
+				if (checkLocale("CN")) {
+					if(pkgName.equals("com.android.gallery3d")){
+						temp = 1;
+						continue;
+					}
+				}
 				for (int i = 0; i < applist.length; i++) {
 					if (pkgName.equals(applist[i])) {
 						temp = 1;
@@ -423,12 +430,15 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 	public void sendMsg(String msg) {
 		try {
 			if (mISpService != null) {
-				Trace.i("Sound MainActivity sendMsg");
 				mISpService.sendDataToSp(BytesUtil.addCheckBit(msg));
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	Boolean checkLocale(String str){		
+		return getResources().getConfiguration().locale.getCountry().equals(str);
 	}
 
 }

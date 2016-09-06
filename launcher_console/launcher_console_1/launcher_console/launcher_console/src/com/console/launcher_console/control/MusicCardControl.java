@@ -118,6 +118,7 @@ public class MusicCardControl extends BroadcastReceiver implements
 						controlPlayButton();
 					}
 				});
+		
 
 	}
 

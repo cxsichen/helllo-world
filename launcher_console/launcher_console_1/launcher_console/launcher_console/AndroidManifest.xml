@@ -94,6 +94,12 @@
                 <action android:name="com.autonavi.minimap.carmode.send" />
             </intent-filter>
         </receiver>
+        
+        <receiver android:name="com.console.launcher_console.receiver.BootBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <provider
             android:name="com.zzj.softwareservice.database.NaviContentProvider"
