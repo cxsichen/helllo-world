@@ -381,7 +381,7 @@ public class CanService extends Service {
 					default:
 						break;
 					}
-				} catch (IOException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
