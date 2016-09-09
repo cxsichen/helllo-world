@@ -111,7 +111,8 @@
         <ImageView
             android:id="@+id/rail_line"
             android:layout_width="547dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/g18"/>
 
         <!--
              <com.console.parking.view.RailLineView
