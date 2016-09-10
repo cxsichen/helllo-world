@@ -127,8 +127,8 @@ public class MusicCardControl extends BroadcastReceiver implements
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.ev_music_play:
-		//	if (PreferenceUtil.getMode(context) == 1)			
-			controlPlay();			
+		//	if (PreferenceUtil.getMode(context) == 1)
+				controlPlay();			
 			break;
 		case R.id.ev_music_app:
 			startKWApp();

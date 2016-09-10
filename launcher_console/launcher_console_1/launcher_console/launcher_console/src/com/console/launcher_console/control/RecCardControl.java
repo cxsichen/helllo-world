@@ -69,6 +69,10 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 	private Handler mWorkHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
+			// UNLog.debug_print(UNLog.LV_DEBUG, TAG,
+			// "cxs =================handleMessage msg what = "
+			// + msg.what);
+			Log.i(TAG,"========handleMessage==============="+msg.what);
 			switch (msg.what) {
 			case MSG_UPDATE_BUTTON:
 				syncButtonStatus();
@@ -98,6 +102,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 
 		mRelativeLayout = (RelativeLayout) recCardLayout
 				.findViewById(R.id.video_parentview);
+		recCardLayout.findViewById(R.id.video_layout).setOnClickListener(this);
 		devicePre = (ImageView) recCardLayout.findViewById(R.id.video_offline);
 		mRecordButton = (ImageView) recCardLayout
 				.findViewById(R.id.RecordButton);
@@ -120,12 +125,14 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 
 	public void resumeVideoPreview() {
 		if (mService == null) {
+			Log.i(TAG,"========resumeVideoPreview===bind agin===mService========");
 			Intent intent = new Intent(
 					"com.softwinner.un.tool.service.SrtcService");
 			intent.setPackage("com.srtc.pingwang");
 			boolean ret = context.bindService(intent, mServiceConnection,
 					Context.BIND_AUTO_CREATE);
 		}
+		Log.i(TAG,"========resumeVideoPreview===============");
 		mResume = true;
 		mWorkHandler.removeMessages(MSG_START_STREAM);
 		mWorkHandler.removeMessages(MSG_STOP_STREAM);
@@ -133,6 +140,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 	}
 
 	public void pauseVideoPreview() {
+		Log.i("cxs", "======pauseVideoPreview=========");
 		mResume = false;
 		mWorkHandler.removeMessages(MSG_START_STREAM);
 		mWorkHandler.removeMessages(MSG_STOP_STREAM);
@@ -140,6 +148,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 	}
 
 	public void stopVideoPreview() {
+		Log.i("cxs", "======stopVideoPreviews=========");
 		mWorkHandler.removeMessages(MSG_START_STREAM);
 		mWorkHandler.removeMessages(MSG_STOP_STREAM);
 		mWorkHandler.sendEmptyMessageDelayed(MSG_STOP_STREAM, 0);
@@ -174,6 +183,9 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			Log.e(TAG, "startVideoStream 2 client not connect!!!");
 			return;
 		}
+		// if (!isStartVideoStream && !isStartingVideoStream &&
+		// !isStopingVideoStream) {
+
 		try {
 			if (mService.getConnectStatus() == 0) {
 				Log.e(TAG,
@@ -227,13 +239,25 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			UNJni.jni_startDisplay(mUNVideoViewHelper);
 		}
 		mWorkHandler.sendEmptyMessageDelayed(MSG_UPDATE_BUTTON, 500);
+		// }
 	}
 
 	public void stopVideoStream() {
 
 		UNJni.jni_deInitNetServer();
 
-		Log.e(TAG, "stopVideoStream in");
+		Log.e(TAG, "stopVideoStream in");// isStartVideoStream =
+											// "+isStartVideoStream );
+		// if (isStartVideoStream) {
+		// try {
+		// if (mService.getConnectStatus() == 0) {
+		// return;
+		// }
+		// } catch (RemoteException e) {
+		// e.printStackTrace();
+		// }
+		// isStartVideoStream = false;
+		// isStopingVideoStream = true;
 
 		mRelativeLayout.post(new Runnable() {
 			@Override
@@ -253,10 +277,23 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			Log.e(TAG, "stopVideoStream client not connect!!!");
 		}
 		UNJni.jni_stopDisplay();
+		// } else if (isStartingVideoStream) {
+		//
+		// mRelativeLayout.postDelayed(new Runnable() {
+		// @Override
+		// public void run() {
+		// stopVideoStream();
+		// }
+		// }, 1000);
+		// }
 	}
 
 	private void resetFlags() {
 		mWorkHandler.sendEmptyMessage(MSG_STOP_STREAM);
+
+		// isStartVideoStream = false;
+		// isStartingVideoStream = false;
+		// isStopingVideoStream = false;
 	}
 
 	private IVideoListener.Stub mVideoListener = new IVideoListener.Stub() {
@@ -266,6 +303,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			Log.e(TAG, "+++++++++++++++++++onConnectStatusChange connected = "
 					+ connected);
 			if (1 == connected && mResume) {
+				//mWorkHandler.sendEmptyMessage(MSG_START_STREAM);
 				resumeVideoPreview();
 			} else {
 				resetFlags();
@@ -309,6 +347,8 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 
 	@Override
 	public void videoViewShow() {
+		// isStartVideoStream = true;
+		// isStartingVideoStream = false;
 	}
 
 	@Override
@@ -318,12 +358,24 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 
 	@Override
 	public void videoViewEnd() {
+		// isStartVideoStream = false;
+		// isStopingVideoStream = false;
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
+		case R.id.video_layout:
+			try {
+				Intent recIntent = context.getPackageManager()
+						.getLaunchIntentForPackage("com.srtc.pingwang");
+				recIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				context.startActivity(recIntent);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			break;
 		case R.id.RecordButton:
 			if (null != mService) {
 				try {
@@ -391,6 +443,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 				} else {
 					mLockButton.setImageResource(R.drawable.ic_rec_unlock);
 				}
+				Log.i(TAG, "=============lock_status=========" + lock_status);
 				// record button status
 				int record_status = mService
 						.getStatus(UtilsStatus.INDEX_RECORDING);
@@ -399,6 +452,8 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 				} else {
 					mRecordButton.setImageResource(R.drawable.ic_rec_stop);
 				}
+				Log.i(TAG, "=============record_status========="
+						+ record_status);
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

@@ -124,6 +124,45 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 		}
 	}
 
+	private void sendModeCommad(AppInfo appInfo) {
+		// TODO Auto-generated method stub
+		switch (appInfo.getPkgName()) {
+		case "com.console.radio":
+			PreferenceUtil.setMode(this, 0);
+			sendMsg("F5020000" + BytesUtil.intToHexString(0));
+			break;
+		case "cn.kuwo.kwmusiccar":
+			PreferenceUtil.setMode(this, 1);
+			sendMsg("F5020000" + BytesUtil.intToHexString(1));
+			break;
+		case "com.mxtech.videoplayer.pro":
+			PreferenceUtil.setMode(this, 2);
+			sendMsg("F5020000" + BytesUtil.intToHexString(2));
+			break;
+		case "com.mtk.bluetooth":
+			PreferenceUtil.setMode(this, 3);
+			sendMsg("F5020000" + BytesUtil.intToHexString(3));
+			break;
+		case "com.console.equalizer":
+			PreferenceUtil.setMode(this, 5);
+			sendMsg("F5020000" + BytesUtil.intToHexString(5));
+			break;
+		case "com.baidu.navi":
+		case "com.autonavi.amapauto":
+			PreferenceUtil.setMode(this, 6);
+			sendMsg("F5020000" + BytesUtil.intToHexString(6));
+			break;
+		case "com.srtc.pingwang":
+			PreferenceUtil.setMode(this, 7);
+			sendMsg("F5020000" + BytesUtil.intToHexString(7));
+			break;
+		default:
+			PreferenceUtil.setMode(this, 1);
+			sendMsg("F5020000" + BytesUtil.intToHexString(1));
+			break;
+		}
+	}
+
 	private void initLayout() {
 		// TODO Auto-generated method stub
 
@@ -172,6 +211,7 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 
 					});
 					appLayout.addView(view);
+					Application mApplication = (Application) getApplication();
 				}
 
 			}

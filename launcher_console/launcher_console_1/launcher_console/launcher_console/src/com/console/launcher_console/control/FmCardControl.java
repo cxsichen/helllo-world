@@ -161,8 +161,10 @@ public class FmCardControl implements OnClickListener {
 		fmCardLayout.findViewById(R.id.fm_next).setOnClickListener(this);
 		fmCardLayout.findViewById(R.id.fm_play).setOnClickListener(this);
 		fmCardLayout.findViewById(R.id.fm_pre).setOnClickListener(this);
+		fmCardLayout.findViewById(R.id.radio_layout).setOnClickListener(this);
 		mFMView = (FMView) fmCardLayout.findViewById(R.id.fMView);
 		channelTv = (TextView) fmCardLayout.findViewById(R.id.channel_tx);
+
 		mFMView.setOnValueChangedListener(onValueChangedListener);
 		mFMView.setValue(fmValue);
 	}
@@ -222,6 +224,13 @@ public class FmCardControl implements OnClickListener {
 			break;
 		case R.id.fm_play:
 			mSerialPortControl.sendMsg(Contacts.FM_PLAY);
+			break;
+		case R.id.radio_layout:
+			Intent intent = new Intent();
+			intent.setClassName("com.console.radio",
+					"com.console.radio.MainActivity");
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(intent);
 			break;
 		default:
 			break;

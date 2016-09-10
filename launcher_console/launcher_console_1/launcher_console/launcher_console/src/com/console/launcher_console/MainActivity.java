@@ -14,6 +14,7 @@ import com.console.launcher_console.control.CompassControl;
 import com.console.launcher_console.control.FmCardControl;
 import com.console.launcher_console.control.MusicCardControl;
 import com.console.launcher_console.control.NaviCardControl;
+import com.console.launcher_console.control.OtherControl;
 import com.console.launcher_console.control.RecCardControl;
 import com.console.launcher_console.control.SerialPortControl;
 import com.console.launcher_console.control.SettingCardControl;
@@ -65,9 +66,29 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		OnTouchListener, OnGestureListener {
 
 	PagedView content;
+	private ImageView ev_music_play;
+	private ImageView ev_nav_app;
+	private ImageView ev_radio_app;
+	private ImageView ev_bt_app;
+	private ImageView ev_music_app;
+	private ImageView ev_nav_compss;
+	private ImageView ev_rec_app;
+	private FrameLayout naviCardLayout;
 	private LinearLayout indicatorLayout;
 	private static final int default_page = 1;
 	private static final int fm_page = 0;
+	private LocationClient mLocationClient;
+	private LocationMode lmode = LocationMode.Hight_Accuracy;
+	private String tempcoor = "bd09ll";
+
+	MyLatLng A = new MyLatLng(113.249648, 23.401553);
+	MyLatLng B = new MyLatLng(113.246033, 23.403362);
+
+	public static ImageView ev_point;
+	public static Drawable drawable;
+	public static Drawable drawable1;
+	public static Drawable drawable2;
+
 	private NaviCardControl mNaviCarControl;
 	private MusicCardControl mMusicCardControl;
 	private CompassControl mCompassControl;
@@ -75,6 +96,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private BTCardControl mBTCardControl;
 	private FmCardControl mFmCardControl;
 	private WeatherController mWeatherController;
+	private OtherControl mOtherControl;
 	private TpmsContol mTpmsContol;
 	private SerialPortControl mSerialPortControl;
 	// 记录仪卡片
@@ -137,6 +159,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		Intent serialIntent = new Intent(MainActivity.this,
 				SerialPortControlService.class);
 		startService(serialIntent);
+		Log.i("cxs", "======doStartService=======");
 	}
 
 	private void setWallPaper() {
@@ -153,6 +176,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 		mNaviCarControl = new NaviCardControl(getApplicationContext(),
 				(FrameLayout) findViewById(R.id.navi_car_layout));
+		mMusicCardControl = new MusicCardControl(getApplicationContext(),
+				(LinearLayout) findViewById(R.id.music_card_layout));
 		// mCompassControl = new CompassControl(getApplicationContext(),
 		// (FrameLayout) findViewById(R.id.navi_car_layout));
 		mSettingCardControl = new SettingCardControl(this,
@@ -164,16 +189,16 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 				(FrameLayout) findViewById(R.id.tpms_layout));
 		mFmCardControl = new FmCardControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.fm_layout), mSerialPortControl);
+
+		if (checkLocale("CN"))
+			mWeatherController = new WeatherController(getApplicationContext(),
+					(LinearLayout) findViewById(R.id.weather_card_layout));
+		mOtherControl = new OtherControl(getApplicationContext(),
+				(LinearLayout) findViewById(R.id.other_card_layout),
+				mSerialPortControl);
 		mRecCardControl = new RecCardControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.rec_layout));
 
-		// only chinese brand have
-		if (checkLocale("CN")) {
-			mWeatherController = new WeatherController(getApplicationContext(),
-					(LinearLayout) findViewById(R.id.weather_card_layout));
-			mMusicCardControl = new MusicCardControl(getApplicationContext(),
-					(LinearLayout) findViewById(R.id.music_card_layout));
-		}
 	}
 
 	private void init(PagedView view) {
@@ -191,10 +216,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		initIndicator(view);
 
 	}
-
-	Boolean checkLocale(String str) {
-		return getResources().getConfiguration().locale.getCountry()
-				.equals(str);
+	
+	Boolean checkLocale(String str){		
+		return getResources().getConfiguration().locale.getCountry().equals(str);
 	}
 
 	private View getNewPage(int resid) {
@@ -250,20 +274,19 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	}
 
 	private void init_event() {
+		// rec_card
+		naviCardLayout = (FrameLayout) findViewById(R.id.navi_car_layout);
+		naviCardLayout.setOnClickListener(this);
 
-		findViewById(R.id.navi_car_layout).setOnClickListener(this);
-		findViewById(R.id.ev_bt_app).setOnClickListener(this);
-		findViewById(R.id.ev_radio_app).setOnClickListener(this);
-		findViewById(R.id.radio_layout).setOnClickListener(this);
-		findViewById(R.id.record_layout).setOnClickListener(this);
-		findViewById(R.id.video_layout).setOnClickListener(this);
-		findViewById(R.id.aux_layout).setOnClickListener(this);
+		ev_nav_compss = (ImageView) findViewById(R.id.ev_nav_compss);
 
-		if (checkLocale("CN")) {
-			findViewById(R.id.navigation_one_button).setOnClickListener(this);
-		} else {
-			findViewById(R.id.ev_music_app).setOnClickListener(this);
-		}
+		ev_bt_app = (ImageView) findViewById(R.id.ev_bt_app);
+		ev_bt_app.setOnClickListener(this);
+
+		ev_radio_app = (ImageView) findViewById(R.id.ev_radio_app);
+		ev_radio_app.setOnClickListener(this);
+
+		findViewById(R.id.navigation_one_button).setOnClickListener(this);
 
 	}
 
@@ -271,57 +294,24 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		case R.id.record_layout:
-			Intent recIntent = getPackageManager().getLaunchIntentForPackage(
-					"com.srtc.pingwang");
-			startActivitySafely(v, recIntent, null);
-			break;
-		case R.id.radio_layout:
-			Intent radioTntent = new Intent();
-			radioTntent.setClassName("com.console.radio",
-					"com.console.radio.MainActivity");
-			startActivitySafely(v, radioTntent, null);
+		case R.id.navi_car_layout:
+			startNavi(v);
 			break;
 		case R.id.ev_bt_app:
 			Intent btIntent = getPackageManager().getLaunchIntentForPackage(
 					"com.mtk.bluetooth");
 			startActivitySafely(v, btIntent, null);
 			break;
-		case R.id.ev_music_app:
-			Intent musicIntent = new Intent();
-			musicIntent.setClassName("com.google.android.music",
-					"com.android.music.activitymanagement.TopLevelActivity");
-			startActivitySafely(v, musicIntent, null);
-
-			break;
-		case R.id.navi_car_layout:
-			startNavi(v);
+		case R.id.ev_radio_app:
+			Intent radioTntent = getPackageManager().getLaunchIntentForPackage(
+					"cn.colink.fm");
+			startActivitySafely(v, radioTntent, null);
 			break;
 		case R.id.navigation_one_button:
 			Intent intentnavi = new Intent();
 			intentnavi.setClassName("com.share.android",
 					"com.tianan.home.MainActivity");
 			startActivitySafely(v, intentnavi, null);
-			break;
-		case R.id.video_layout:
-			Log.i("cxs","=========video_layout========="+checkLocale("CN"));
-			if (checkLocale("CN")) {
-				Intent videoIntent = new Intent();
-				videoIntent.setClassName("com.mxtech.videoplayer.pro",
-						"com.mxtech.videoplayer.pro.ActivityMediaList");
-				startActivitySafely(v, videoIntent, null);
-			} else {
-				Intent videoIntent = getPackageManager()
-						.getLaunchIntentForPackage("com.google.android.videos");
-				startActivitySafely(v, videoIntent, null);
-			}
-			break;
-		case R.id.aux_layout:
-			Intent auxIntent = new Intent();
-			auxIntent.setClassName("com.console.auxapp",
-					"com.console.auxapp.MainActivity");
-			auxIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivitySafely(v, auxIntent, null);
 			break;
 		default:
 			break;
@@ -332,31 +322,14 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		// TODO Auto-generated method stub
 		int mapType = Settings.System.getInt(getContentResolver(),
 				Constact.MAP_INDEX, 0);
-		if (checkLocale("CN")) {
-			if (mapType == 0) {
-				Intent naviIntent = getPackageManager()
-						.getLaunchIntentForPackage("com.baidu.navi");
-				startActivitySafely(v, naviIntent, null);
-			} else {
-				Intent naviIntent = getPackageManager()
-						.getLaunchIntentForPackage("com.autonavi.amapauto");
-				startActivitySafely(v, naviIntent, null);
-			}
+		if (mapType == 0) {
+			Intent naviIntent = getPackageManager().getLaunchIntentForPackage(
+					"com.baidu.navi");
+			startActivitySafely(v, naviIntent, null);
 		} else {
-			if (mapType == 0) {
-				Intent naviIntent = getPackageManager()
-						.getLaunchIntentForPackage("com.here.app.maps");
-				startActivitySafely(v, naviIntent, null);
-			} else if (mapType == 1) {
-				Intent naviIntent = getPackageManager()
-						.getLaunchIntentForPackage(
-								"com.google.android.apps.maps");
-				startActivitySafely(v, naviIntent, null);
-			} else if (mapType == 2) {
-				Intent naviIntent = getPackageManager()
-						.getLaunchIntentForPackage("com.waze");
-				startActivitySafely(v, naviIntent, null);
-			}
+			Intent naviIntent = getPackageManager().getLaunchIntentForPackage(
+					"com.autonavi.amapauto");
+			startActivitySafely(v, naviIntent, null);
 		}
 	}
 
@@ -456,8 +429,10 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		if (e2.getY() - e1.getY() > verticalMinDistance
 				&& Math.abs(velocityY) > minVelocity
 				&& Math.abs(e1.getX() - e2.getX()) < horizontalMaxDistance) {
+			// �л�Activity
 			Intent intent = new Intent(MainActivity.this, AppActivity.class);
 			startActivity(intent);
+			// Toast.makeText(this, "��������", Toast.LENGTH_SHORT).show();
 			overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
 
 		}
