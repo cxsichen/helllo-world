@@ -57,12 +57,8 @@ public class SerialPortControlService extends Service {
 	private static int basValue = 7;
 	private static int rowValue = 7;
 	private static int colValue = 7;
-	private static boolean  isNaving=false;
+	private static boolean isNaving = false;
 
-	private final String[] Applist = { "com.console.radio",
-			"cn.kuwo.kwmusiccar", "com.mxtech.videoplayer.pro",
-			"com.mtk.bluetooth", "com.console.equalizer", "com.baidu.navi",
-			"com.autonavi.amapauto", "com.srtc.pingwang", "com.console.auxapp" }; // 与系统发过来的值对应
 	private final String[] modeApplist = { "com.console.radio",
 			"cn.kuwo.kwmusiccar", "com.mxtech.videoplayer.pro",
 			"com.mtk.bluetooth", "com.console.auxapp", "com.console.equalizer",
@@ -135,12 +131,7 @@ public class SerialPortControlService extends Service {
 					sendMsg("F5020000" + BytesUtil.intToHexString(mode));
 					startModeActivty(mode);
 
-					Intent intent = new Intent();
-					intent.setClassName("com.console.parking",
-							"com.console.parking.MainActivity");
-					intent.addCategory(Intent.CATEGORY_DEFAULT);
-					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(intent);
+					startActiviyByPackageName("com.console.parking");
 				}
 				/*
 				 * 启动can协议服务
@@ -192,16 +183,11 @@ public class SerialPortControlService extends Service {
 
 				break;
 			case Contacts.MSG_BACK_CAR: // 处理倒车事件
-				Log.i("cxs","=====start parking ========getTopActivity=====");
+				Log.i("cxs", "=====start parking ========getTopActivity=====");
 				if (!getTopActivity(SerialPortControlService.this).equals(
 						"com.console.parking")) {
-				Log.i("cxs","=====start parking ====now =========");
-					Intent intent = new Intent();
-					intent.setClassName("com.console.parking",
-							"com.console.parking.MainActivity");
-					intent.addCategory(Intent.CATEGORY_DEFAULT);
-					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(intent);
+					Log.i("cxs", "=====start parking ====now =========");
+					startActiviyByPackageName("com.console.parking");
 				}
 				break;
 			case Contacts.MSG_APP_CHANGE:
@@ -237,6 +223,7 @@ public class SerialPortControlService extends Service {
 					}
 					break;
 				case "cn.kuwo.kwmusiccar":
+				case "com.google.android.music":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 1) {
 						PreferenceUtil
 								.setMode(SerialPortControlService.this, 1);
@@ -244,6 +231,7 @@ public class SerialPortControlService extends Service {
 					}
 					break;
 				case "com.mxtech.videoplayer.pro":
+				case "com.google.android.videos":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 2) {
 						PreferenceUtil
 								.setMode(SerialPortControlService.this, 2);
@@ -286,6 +274,9 @@ public class SerialPortControlService extends Service {
 					break;
 				case "com.baidu.navi":
 				case "com.autonavi.amapauto":
+				case "com.here.app.maps":
+				case "com.google.android.apps.maps":
+				case "com.waze":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 6) {
 						PreferenceUtil
 								.setMode(SerialPortControlService.this, 6);
@@ -352,15 +343,26 @@ public class SerialPortControlService extends Service {
 
 	private void startModeActivty(int mode) {
 		// TODO Auto-generated method stub
-		// if when acc off ,the naving is process 
-		if(isNaving){
-			mode=6;
+		// if when acc off ,the naving is process
+		if (isNaving) {
+			mode = 6;
 		}
 		switch (mode) {
 		case 1: // 酷我
-			Log.i("cxs", "--------MSG_ACCON_MSG------mKwapi-------");
-			mKwapi.startAPP(SerialPortControlService.this, true);
+			if (checkLocale("CN")) {
+				Log.i("cxs", "--------MSG_ACCON_MSG------mKwapi-------");
+				mKwapi.startAPP(SerialPortControlService.this, true);
+			} else {
+				startActiviyByPackageName("com.google.android.music");
+			}
 			break;
+		case 2:
+			if (checkLocale("CN")) {
+				openApplication(SerialPortControlService.this,
+						modeApplist[mode]);
+			} else {
+				startActiviyByPackageName("com.google.android.videos");
+			}
 		case 6:
 			Log.i("cxs", "--------MSG_ACCON_MSG------startNavi-------");
 			startNavi();
@@ -376,19 +378,23 @@ public class SerialPortControlService extends Service {
 
 	private void startNavi() {
 		// TODO Auto-generated method stub
-		int mapType = Settings.System.getInt(getContentResolver(),
-				Constact.MAP_INDEX, 0);
-		if (mapType == 0) {
-			Intent naviIntent = getPackageManager().getLaunchIntentForPackage(
-					"com.baidu.navi");
-			naviIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(naviIntent);
-		} else {
-			Intent naviIntent = getPackageManager().getLaunchIntentForPackage(
-					"com.autonavi.amapauto");
-			naviIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(naviIntent);
-		}
+			int mapType = Settings.System.getInt(getContentResolver(),
+					Constact.MAP_INDEX, 0);
+			if (checkLocale("CN")) {
+				if (mapType == 0) {
+					startActiviyByPackageName("com.baidu.navi");
+				} else {
+					startActiviyByPackageName("com.autonavi.amapauto");
+				}
+			} else {
+				if (mapType == 0) {
+					startActiviyByPackageName("com.here.app.maps");
+				} else if (mapType == 1) {
+					startActiviyByPackageName("com.google.android.apps.maps");
+				} else if (mapType == 2) {
+					startActiviyByPackageName("com.waze");
+				}
+			}
 	}
 
 	public static boolean openApplication(Context context, String pkgName) {
@@ -423,7 +429,7 @@ public class SerialPortControlService extends Service {
 											getContentResolver(),
 											Constact.BACK_CAR, 1));
 					if (android.provider.Settings.System.getInt(
-							getContentResolver(), Constact.BACK_CAR, 1) != 1) {
+							getContentResolver(), Constact.BACK_CAR, 0) != 1) {
 						android.provider.Settings.System.putInt(
 								getContentResolver(), Constact.BACK_CAR, 1);
 					}
@@ -436,7 +442,7 @@ public class SerialPortControlService extends Service {
 											getContentResolver(),
 											Constact.BACK_CAR, 1));
 					if (android.provider.Settings.System.getInt(
-							getContentResolver(), Constact.BACK_CAR, 0) != 0) {
+							getContentResolver(), Constact.BACK_CAR, 1) != 0) {
 						android.provider.Settings.System.putInt(
 								getContentResolver(), Constact.BACK_CAR, 0);
 
@@ -612,7 +618,6 @@ public class SerialPortControlService extends Service {
 					// TODO: handle exception
 					e.printStackTrace();
 				}
-
 			}
 		}, 1000 * 10);
 	}
@@ -882,10 +887,10 @@ public class SerialPortControlService extends Service {
 		// TODO Auto-generated method stub
 		if (state == 1) {
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 100);
-		}else{
-			isNaving=(android.provider.Settings.System.getInt(
-					getContentResolver(), Constact.NAVING_STATUS, 0)==1);
-			Log.i("cxs","=====acc off   insNaving ============="+isNaving);
+		} else {
+			isNaving = (android.provider.Settings.System.getInt(
+					getContentResolver(), Constact.NAVING_STATUS, 0) == 1);
+			Log.i("cxs", "=====acc off   insNaving =============" + isNaving);
 		}
 	}
 
@@ -990,6 +995,23 @@ public class SerialPortControlService extends Service {
 
 	public void setDataCallback(DataCallback dataCallback) {
 		this.mDataCallback = dataCallback;
+	}
+
+	Boolean checkLocale(String str) {
+		return getResources().getConfiguration().locale.getCountry()
+				.equals(str);
+	}
+
+	private void startActiviyByPackageName(String packageName) {
+		try {
+			Intent intent = getPackageManager().getLaunchIntentForPackage(
+					packageName);
+			intent.addCategory(Intent.CATEGORY_DEFAULT);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 }
