@@ -23,5 +23,10 @@ public class UtilsStatus {
 
     //文件枷锁控制
     public static final int INDEX_FILE_LOCK = 3;
+    
+    //ADAS 状态有三种: 0,关闭; 1,静音模式; 2,全功能模式;
+    //ADAS Settings
+    public static final int INDEX_ADAS = 4;
+
 }
 

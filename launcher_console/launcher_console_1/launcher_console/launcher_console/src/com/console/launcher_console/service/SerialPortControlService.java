@@ -134,13 +134,8 @@ public class SerialPortControlService extends Service {
 							+ mode);
 					sendMsg("F5020000" + BytesUtil.intToHexString(mode));
 					startModeActivty(mode);
-
-					Intent intent = new Intent();
-					intent.setClassName("com.console.parking",
-							"com.console.parking.MainActivity");
-					intent.addCategory(Intent.CATEGORY_DEFAULT);
-					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(intent);
+					
+					mHandler.sendEmptyMessageDelayed(Contacts.MSG_BACK_CAR,1000);
 				}
 				/*
 				 * 启动can协议服务
@@ -183,6 +178,7 @@ public class SerialPortControlService extends Service {
 					 * "     模式错误  现在自动修正。\n 如果还不对应，请重新打开应用",
 					 * Toast.LENGTH_LONG).show();
 					 */
+					
 					sendMsg("F5020000"
 							+ BytesUtil.intToHexString(PreferenceUtil
 									.getMode(SerialPortControlService.this)));
@@ -224,10 +220,10 @@ public class SerialPortControlService extends Service {
 						sendMsg("F5020000" + BytesUtil.intToHexString(0));
 						// 暂停音乐
 						stopKWMusic();
-						// 切换到收音状态
+						/*// 切换到收音状态
 						Settings.System.putInt(getContentResolver(),
 								Constact.FMSTATUS, 0);
-						Change2FM = true;
+						Change2FM = true;*/
 						// 切到收音模式的时候 发收音音量值
 						int value = android.provider.Settings.System.getInt(
 								getContentResolver(),
@@ -310,12 +306,12 @@ public class SerialPortControlService extends Service {
 				}
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_CHECK_MODE,
 						2 * 1000);
-				// 收音模式
+			/*	// 收音模式
 				if (!Change2FM) {
 					Settings.System.putInt(getContentResolver(),
 							Constact.FMSTATUS, 1);
 				}
-				Change2FM = false;
+				Change2FM = false;*/
 				break;
 			default:
 				break;
@@ -881,7 +877,7 @@ public class SerialPortControlService extends Service {
 	private void handleAccState(int state) {
 		// TODO Auto-generated method stub
 		if (state == 1) {
-			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 100);
+			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 1000);
 		}else{
 			isNaving=(android.provider.Settings.System.getInt(
 					getContentResolver(), Constact.NAVING_STATUS, 0)==1);

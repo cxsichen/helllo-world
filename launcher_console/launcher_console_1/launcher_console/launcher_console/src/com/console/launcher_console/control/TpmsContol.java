@@ -1,457 +1,258 @@
 package com.console.launcher_console.control;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.console.launcher_console.R;
-
-import android.bluetooth.BluetoothAdapter;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.TextureView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class TpmsContol extends BroadcastReceiver {
-	public static final String CARD_AUTHORITY = "com.inetwp.softwareservice.CardProvider";
-	public static final Uri CARD_URL = Uri.parse("content://" + CARD_AUTHORITY
-			+ "/card");
-	private static final String BLUETOOTH_STATE_CHANGED = "android.bluetooth.adapter.action.STATE_CHANGED";
-	private static final String BLUETOOTH_ACTION = "android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED";
+import com.console.launcher_console.R;
+import com.console.launcher_console.util.Constact;
 
-	public static final String LEFT_FRONT_KP = "left_front_kp"; // 左前
-	public static final String LEFT_FRONT_TEMP = "left_front_temp";// 左前℃
-	public static final String LEFT_FRONT_ID = "left_front_id"; // 左前设备ID
-	public static final String LEFT_FRONT_VOLTAGE = "left_front_voltage";// 电量
-	public static final String LEFT_FRONT_STATE = "left_front_state";// 状态
-
-	public static final String RIGHT_FRONT_KP = "right_front_kp"; // 右前
-	public static final String RIGHT_FRONT_TEMP = "right_front_temp"; // 右前℃
-	public static final String RIGHT_FRONT_ID = "right_front_id"; // 右前ID
-	public static final String RIGHT_FRONT_VOLTAGE = "right_front_voltage";
-	public static final String RIGHT_FRONT_STATE = "right_front_state";// 状态
-
-	public static final String RIGHT_REAR_KP = "right_rear_kp"; // 右后
-	public static final String RIGHT_REAR_TEMP = "right_rear_temp"; // 右后℃
-	public static final String RIGHT_REAR_ID = "right_rear_id";// 右后ID
-	public static final String RIGHT_REAR_VOLTAGE = "right_rear_voltage";
-	public static final String RIGHT_REAR_STATE = "right_rear_state";// 状态
-
-	public static final String LEFT_REAR_KP = "left_rear_kp"; // 左后
-	public static final String LEFT_REAR_TEMP = "left_rear_temp"; // 左后℃
-	public static final String LEFT_REAR_ID = "left_rear_id"; // 左后ID
-	public static final String LEFT_REAR_VOLTAGE = "left_rear_voltage";
-	public static final String LEFT_REAR_STATE = "left_rear_state";// 状态
-	public static final String LF_SIGNAL = "lf_signal"; // 左前信号
-	public static final String LR_SIGNAL = "lr_signal";
-	public static final String RF_SIGNAL = "rf_signal";
-	public static final String RR_SIGNAL = "rr_signal";
-
-	public static final String TMPS_TV_MAX = "tmps_tv_max"; // 胎压上限
-	public static final String TMPS_TV_MIN = "tmps_tv_min";// 胎压下限
-	public static final String TMPS_TV_TEMP = "tmps_tv_temp";// 温度上限
+public class TpmsContol implements OnClickListener {
+	public static final String TAG = "TpmsContol";// 胎压
+	private static final Uri CARD_URL = Uri
+			.parse("content://aicare.net.cn.itpms/tpms");
+	// id;设备方位：1-左前，2-左后，3-右前，4-右后
+	public static final long LEFT_FRONT = 1L;
+	public static final long LEFT_REAR = 2L;
+	public static final long RIGHT_FRONT = 3L;
+	public static final long RIGHT_REAR = 4L;
+	public static final String PRESSURE = "pressure";// 胎压
+	public static final String TEMP = "temp";// 温度
+	public static final String IS_NO_SIGNAL = "is_No_Signal";// 是否有信号：0-有信号，1-无信号
+	public static final String IS_LOW_VOLTAGE = "is_Low_Voltage";// 0-电量正常，1-电量低
+	public static final String IS_HIGH_TEMP = "is_High_Temp";// 0-温度正常，1-温度过高
+	public static final String IS_HIGH_PRESSURE = "is_High_Pressure";// 值：0和1,1表示胎压过高
+	public static final String IS_LOW_PRESSURE = "is_Low_Pressure";// 值：0和1,1表示胎压过低
+	public static final String IS_LEAK = "is_Leak";// 0-正常，1-漏气
+	public static final String TEMP_UNIT = "temp_Unit";// 温度单位：℃，℉
+	public static final String PRESSURE_UNIT = "pressure_Unit";// 气压单位：Bar,Kpa,Psi
 	private final int TEXTCOLOR = 0x57FFFFFF;
 
 	private static final String LEAK_CAR = "漏气";
-	private static final String NO_SIGNAL = "无信号";
+	// private static final String NO_SIGNAL = "无信号";
+	public static final long NORMAL = 0L;
+	public static final long NO_NORMAL = 1L;
 
-	FrameLayout tpmsLayout;
-	Context context;
+	private Long id;// 设备方位：1-左前，2-左后，3-右前，4-右后
+	private String pressure;// 胎压
+	private String temp;// 温度
+	private Long isNoSignal;// 是否有信号：0-有信号，1-无信号
+	private Long isLowVoltage;// 0-电量正常，1-电量低
+	private Long isHighTemp;// 0-温度正常，1-温度过高
+	private Long isHighPressure;// 值：0和1,1表示胎压过高
+	private Long isLowPressure;// 值：0和1,1表示胎压过低
+	private Long isLeak;// 0-正常，1-漏气
+	private String tempUnit;// 温度单位：℃，℉
+	private String pressureUnit;// 气压单位：Bar,Kpa,Psi
+	private RelativeLayout tpmsLayout;
+	private Context mContext;
 
-	private TextView flPress;
-	private TextView frPress;
-	private TextView blPress;
-	private TextView brPress;
+	private TextView lfPress;
+	private TextView rfPress;
+	private TextView lrPress;
+	private TextView rrPress;
 
-	private TextView flTemp;
-	private TextView frTemp;
-	private TextView blTemp;
-	private TextView brTemp;
+	private TextView lfTemp;
+	private TextView rfTemp;
+	private TextView lrTemp;
+	private TextView rrTemp;
 
-	private ImageView flBattery;
-	private ImageView frBattery;
-	private ImageView blBattery;
-	private ImageView brBattery;
-	private Cursor cardservice;
-
-	private LinearLayout tpmsDataLayout;
+	private ImageView lfBattery;
+	private ImageView rfBattery;
+	private ImageView lrBattery;
+	private ImageView rrBattery;
+	private Cursor cursor;
 
 	private AlphaAnimation alphaAnimation = null;
-	private BluetoothAdapter mBluetoothAdapter = null;
+
+	public TpmsContol(Context context, RelativeLayout layout) {
+		tpmsLayout = layout;
+		this.mContext = context;
+		init();
+		registerContentObserver();
+		queryTyreData();
+	}
+
+	/**
+	 * 以string形式取出tpms对象
+	 * */
+	private void queryTyreData() {
+		try {
+			cursor = mContext.getContentResolver().query(CARD_URL, null, null,
+					null, null);
+			Log.e(TAG, "cursor:" + cursor);
+			ConvertToStorage(cursor);
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
+	}
+
+	/**
+	 * 通过Cursor取出tpms对象
+	 * */
+	private void ConvertToStorage(Cursor cursor) {
+		int resultCounts = cursor.getCount();
+		if (resultCounts == 0 || !cursor.moveToFirst()) {
+			return;
+		}
+		for (int i = 0; i < resultCounts; i++) {
+			id = cursor.getLong(0);
+			pressure = cursor.getString(cursor.getColumnIndex("pressure"));
+			temp = cursor.getString(cursor.getColumnIndex("temp"));
+			isNoSignal = cursor.getLong(cursor.getColumnIndex("is_No_Signal"));
+			isLowVoltage = cursor.getLong(cursor
+					.getColumnIndex("is_Low_Voltage"));
+			isHighTemp = cursor.getLong(cursor.getColumnIndex("is_High_Temp"));
+			isHighPressure = cursor.getLong(cursor
+					.getColumnIndex("is_High_Pressure"));
+			isLowPressure = cursor.getLong(cursor
+					.getColumnIndex("is_Low_Pressure"));
+			isLeak = cursor.getLong(cursor.getColumnIndex("is_Leak"));
+			tempUnit = cursor.getString(cursor.getColumnIndex("temp_Unit"));
+			pressureUnit = cursor.getString(cursor
+					.getColumnIndex("pressure_Unit"));
+			if (Constact.DEBUG) {
+				Log.e(TAG, "id:" + id + "  pressure:" + pressure + "  temp:"
+						+ temp + "  isNoSignal:" + isNoSignal
+						+ "  isLowVoltage:" + isLowVoltage + "  isHighTemp:"
+						+ isHighTemp + "  isLowPressure:" + isLowPressure
+						+ "  isLeak:" + isLeak + "  tempUnit:" + tempUnit
+						+ "  pressureUnit:" + pressureUnit);
+			}
+			if (id == LEFT_FRONT) {
+				uiDisplay(lfPress, lfTemp, lfBattery);
+			} else if (id == LEFT_REAR) {
+				uiDisplay(lrPress, lrTemp, lrBattery);
+			} else if (id == RIGHT_FRONT) {
+				uiDisplay(rfPress, rfTemp, rfBattery);
+			} else if (id == RIGHT_REAR) {
+				uiDisplay(rrPress, rrTemp, rrBattery);
+			}
+			cursor.moveToNext();
+		}
+	}
+
+	private void uiDisplay(TextView presssureT, TextView tempT,
+			ImageView batteryI) {
+		presssureT.setText(pressure + pressureUnit);
+		tempT.setText(temp + tempUnit);
+		twinkleTy(presssureT, isHighPressure, isLowPressure);
+		twinkleWd(tempT, isHighTemp);
+		batteryState(batteryI, isLowVoltage);
+		if (isLeak == NO_NORMAL) {
+			tempT.setText(LEAK_CAR);
+			tempT.setTextColor(Color.RED);
+		}/*
+		 * else if (isNoSignal==NO_NORMAL) { flTemp.setText(NO_SIGNAL);
+		 * flTemp.setTextColor(Color.RED); }
+		 */
+	}
+
+	@Override
+	public void onClick(View v) {
+		try {
+			
+			if (isAppInstalled(mContext, "com.android.usbhost")) {
+				openApplication(mContext,"com.android.usbhost");
+			}else if (isAppInstalled(mContext, "aicare.net.cn.itpms")) {
+				openApplication(mContext,"aicare.net.cn.itpms");
+			} else {
+				openApplication(mContext,"com.inetwp.cardservice");
+			}
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+		}
+	}
+
+	// 注册胎压监听
+	private void registerContentObserver() {
+		mContext.getContentResolver().registerContentObserver(CARD_URL, false,
+				cardser);
+	}
+
+	public void unregisterContentObserver() {
+		mContext.getContentResolver().unregisterContentObserver(cardser);
+	}
 
 	private ContentObserver cardser = new ContentObserver(new Handler()) {
 		@Override
 		public void onChange(boolean selfChange) {
-			if (tpmsDataLayout.getVisibility() == View.INVISIBLE) {
-				showTpms();
-				return;
-			}
 			queryTyreData();
 		}
 	};
 
-	private void queryTyreData() {
-		try {
-			cardservice = context.getContentResolver().query(CARD_URL, null,
-					null, null, null);
-			if (cardservice != null && cardservice.moveToNext()) {
-				String lf_device_id = cardservice.getString(cardservice
-						.getColumnIndex(LEFT_FRONT_ID));
-				String lr_device_id = cardservice.getString(cardservice
-						.getColumnIndex(LEFT_REAR_ID));
-				String rf_device_id = cardservice.getString(cardservice
-						.getColumnIndex(RIGHT_FRONT_ID));
-				String rr_device_id = cardservice.getString(cardservice
-						.getColumnIndex(RIGHT_REAR_ID));
-
-				if (isEmpty(lf_device_id) && isEmpty(lr_device_id)
-						&& isEmpty(rf_device_id) && isEmpty(rr_device_id)) {
-					goneTpms();
-					return;
-				}
-
-				// 胎压上限
-				String tmps_tv_max = cardservice.getString(cardservice
-						.getColumnIndex(TMPS_TV_MAX));
-				// 胎压下限
-				String tmps_tv_min = cardservice.getString(cardservice
-						.getColumnIndex(TMPS_TV_MIN));
-				// 温度上限
-				String tmps_tv_temp = cardservice.getString(cardservice
-						.getColumnIndex(TMPS_TV_TEMP));
-				if (lf_device_id != null) {
-					String left_font_KP = cardservice.getString(cardservice
-							.getColumnIndex(LEFT_FRONT_KP));
-					String left_font_TM = cardservice.getString(cardservice
-							.getColumnIndex(LEFT_FRONT_TEMP));
-					if ("--".equals(left_font_TM)) {
-						flPress.setTextColor(TEXTCOLOR);
-						flTemp.setTextColor(TEXTCOLOR);
-					}
-					flPress.setText(left_font_KP + "kPa");
-					flTemp.setText(left_font_TM + "℃");
-					if (!"".equals(lf_device_id)) {
-						twinkleTy(flPress, tmps_tv_max, tmps_tv_min,
-								left_font_KP);
-						twinkleWd(flTemp, tmps_tv_temp, left_font_TM);
-						String state = cardservice.getString(cardservice
-								.getColumnIndex(LEFT_FRONT_STATE));
-						if (lf_device_id.length() == 5) {
-							batteryState5(state, flBattery);
-						} else if (lf_device_id.length() == 6) {
-							batteryState6(cardservice.getString(cardservice
-									.getColumnIndex(LEFT_FRONT_VOLTAGE)),
-									flBattery);
-						}
-						if ("LEAK".equals(state)) {
-							flTemp.setText(LEAK_CAR);
-							flTemp.setTextColor(Color.RED);
-						}/*
-						 * else if(cardservice.getString(cardservice
-						 * .getColumnIndex(LF_SIGNAL)).equals("false")){
-						 * left_F_TP.setText(NO_SIGNAL);
-						 * left_F_TP.setTextColor(Color.RED); }
-						 */
-					} else {
-						stopWarnAnimation(flPress);
-						stopWarnAnimation(flTemp);
-						setElectricImage(flBattery, false);
-					}
-				}
-
-				// zl_tai
-				if (rf_device_id != null) {
-					String right_front_KP = cardservice.getString(cardservice
-							.getColumnIndex(RIGHT_FRONT_KP));
-					String right_front_TM = cardservice.getString(cardservice
-							.getColumnIndex(RIGHT_FRONT_TEMP));
-					if ("--".equals(right_front_TM)) {
-						frPress.setTextColor(Color.WHITE);
-						frTemp.setTextColor(Color.WHITE);
-					}
-					frPress.setText(right_front_KP + "kPa");
-					frTemp.setText(right_front_TM + "℃");
-					if (!"".equals(rf_device_id)) {
-						twinkleTy(frPress, tmps_tv_max, tmps_tv_min,
-								right_front_KP);
-						twinkleWd(frTemp, tmps_tv_temp, right_front_TM);
-						String state = cardservice.getString(cardservice
-								.getColumnIndex(RIGHT_FRONT_STATE));
-						if (rf_device_id.length() == 5) {
-							batteryState5(state, frBattery);
-						} else if (rf_device_id.length() == 6) {
-							batteryState6(cardservice.getString(cardservice
-									.getColumnIndex(RIGHT_FRONT_VOLTAGE)),
-									frBattery);
-						}
-						if ("LEAK".equals(state)) {
-							frTemp.setText(LEAK_CAR);
-							frTemp.setTextColor(Color.RED);
-						}/*
-						 * else if(cardservice.getString(cardservice
-						 * .getColumnIndex(RF_SIGNAL)).equals("false")){
-						 * right_F_TP.setText(NO_SIGNAL);
-						 * right_F_TP.setTextColor(Color.RED); }
-						 */
-					} else {
-						stopWarnAnimation(frPress);
-						stopWarnAnimation(frTemp);
-						setElectricImage(frBattery, false);
-					}
-				}
-
-				if (lr_device_id != null) {
-					String left_rear_KP = cardservice.getString(cardservice
-							.getColumnIndex(LEFT_REAR_KP));
-					String left_rear_TM = cardservice.getString(cardservice
-							.getColumnIndex(LEFT_REAR_TEMP));
-					if ("--".equals(left_rear_TM)) {
-						blPress.setTextColor(Color.WHITE);
-						blTemp.setTextColor(Color.WHITE);
-					}
-					blPress.setText(left_rear_KP + "kPa");
-					blTemp.setText(left_rear_TM + "℃");
-					if (!"".equals(lr_device_id)) {
-						twinkleTy(blPress, tmps_tv_max, tmps_tv_min,
-								left_rear_KP);
-						twinkleWd(blTemp, tmps_tv_temp, left_rear_TM);
-						String state = cardservice.getString(cardservice
-								.getColumnIndex(LEFT_REAR_STATE));
-						if (lr_device_id.length() == 5) {
-							batteryState5(state, blBattery);
-
-						} else if (lr_device_id.length() == 6) {
-							batteryState6(cardservice.getString(cardservice
-									.getColumnIndex(LEFT_REAR_VOLTAGE)),
-									blBattery);
-						}
-						if ("LEAK".equals(state)) {
-							blTemp.setText(LEAK_CAR);
-							blTemp.setTextColor(Color.RED);
-						}/*
-						 * else if(cardservice.getString(cardservice
-						 * .getColumnIndex(LR_SIGNAL)).equals("false")){
-						 * left_R_TP.setText(NO_SIGNAL);
-						 * left_R_TP.setTextColor(Color.RED); }
-						 */
-					} else {
-						stopWarnAnimation(blPress);
-						stopWarnAnimation(blTemp);
-						setElectricImage(blBattery, false);
-					}
-				}
-
-				if (rr_device_id != null) {
-					String right_rear_KP = cardservice.getString(cardservice
-							.getColumnIndex(RIGHT_REAR_KP));
-					String right_rear_TM = cardservice.getString(cardservice
-							.getColumnIndex(RIGHT_REAR_TEMP));
-					if ("--".equals(right_rear_TM)) {
-						brPress.setTextColor(Color.WHITE);
-						brTemp.setTextColor(Color.WHITE);
-					}
-					brPress.setText(right_rear_KP + "kPa");
-					brTemp.setText(right_rear_TM + "℃");
-					if (!"".equals(rr_device_id)) {
-						twinkleTy(brPress, tmps_tv_max, tmps_tv_min,
-								right_rear_KP);
-						twinkleWd(brTemp, tmps_tv_temp, right_rear_TM);
-						String state = cardservice.getString(cardservice
-								.getColumnIndex(RIGHT_REAR_STATE));
-						if (rr_device_id.length() == 5) {
-							batteryState5(state, brBattery);
-						} else if (rr_device_id.length() == 6) {
-							batteryState6(cardservice.getString(cardservice
-									.getColumnIndex(RIGHT_REAR_VOLTAGE)),
-									brBattery);
-						}
-						if ("LEAK".equals(state)) {
-							brTemp.setText(LEAK_CAR);
-							brTemp.setTextColor(Color.RED);
-						}/*
-						 * else if(cardservice.getString(cardservice
-						 * .getColumnIndex(RR_SIGNAL)).equals("false")){
-						 * right_R_TP.setText(NO_SIGNAL);
-						 * right_R_TP.setTextColor(Color.RED); }
-						 */
-					} else {
-						stopWarnAnimation(brPress);
-						stopWarnAnimation(brTemp);
-						setElectricImage(brBattery, false);
-
-					}
-				}
-			}
-			if (cardservice != null) {
-				cardservice.close();
-			}
-		} catch (Exception e) {
-			Log.e("inet_zl", "taiya-Exception");
-		}
-	}
-
-	public TpmsContol(Context context, FrameLayout layout) {
-		tpmsLayout = layout;
-		this.context = context;
-		init();
-		registerContentObserver();
-		queryTyreData();
-
-	}
-
-	private void registerContentObserver() {
-		// TODO Auto-generated method stub
-		context.getContentResolver().registerContentObserver(CARD_URL, false,
-				cardser);
-		IntentFilter mIntentFilter = new IntentFilter();
-		mIntentFilter.addAction(BLUETOOTH_STATE_CHANGED);
-		mIntentFilter.addAction(BLUETOOTH_ACTION);
-		context.registerReceiver(this, mIntentFilter);
-	}
-
-	public void unregisterContentObserver() {
-		// TODO Auto-generated method stub
-		context.getContentResolver().unregisterContentObserver(cardser);
-		context.unregisterReceiver(this);
-
-	}
-
 	private void init() {
-		// TODO Auto-generated method stub
-		flPress = (TextView) tpmsLayout.findViewById(R.id.pressure_fl);
-		frPress = (TextView) tpmsLayout.findViewById(R.id.pressure_fr);
-		blPress = (TextView) tpmsLayout.findViewById(R.id.pressure_bl);
-		brPress = (TextView) tpmsLayout.findViewById(R.id.pressure_br);
+		lfPress = (TextView) tpmsLayout.findViewById(R.id.pressure_fl);
+		rfPress = (TextView) tpmsLayout.findViewById(R.id.pressure_fr);
+		lrPress = (TextView) tpmsLayout.findViewById(R.id.pressure_bl);
+		rrPress = (TextView) tpmsLayout.findViewById(R.id.pressure_br);
 
-		flTemp = (TextView) tpmsLayout.findViewById(R.id.temperature_fl);
-		frTemp = (TextView) tpmsLayout.findViewById(R.id.temperature_fr);
-		blTemp = (TextView) tpmsLayout.findViewById(R.id.temperature_bl);
-		brTemp = (TextView) tpmsLayout.findViewById(R.id.temperature_br);
+		lfTemp = (TextView) tpmsLayout.findViewById(R.id.temperature_fl);
+		rfTemp = (TextView) tpmsLayout.findViewById(R.id.temperature_fr);
+		lrTemp = (TextView) tpmsLayout.findViewById(R.id.temperature_bl);
+		rrTemp = (TextView) tpmsLayout.findViewById(R.id.temperature_br);
 
-		flBattery = (ImageView) tpmsLayout.findViewById(R.id.battery_fl);
-		frBattery = (ImageView) tpmsLayout.findViewById(R.id.battery_fr);
-		blBattery = (ImageView) tpmsLayout.findViewById(R.id.battery_bl);
-		brBattery = (ImageView) tpmsLayout.findViewById(R.id.battery_br);
-		tpmsDataLayout = (LinearLayout) tpmsLayout
-				.findViewById(R.id.tpms_data_layout);
+		lfBattery = (ImageView) tpmsLayout.findViewById(R.id.battery_fl);
+		rfBattery = (ImageView) tpmsLayout.findViewById(R.id.battery_fr);
+		lrBattery = (ImageView) tpmsLayout.findViewById(R.id.battery_bl);
+		rrBattery = (ImageView) tpmsLayout.findViewById(R.id.battery_br);
 
-		tpmsLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				try {
-					if(isAppInstalled(context,"aicare.net.cn.itpms")){
-						ComponentName mComponentNames = new ComponentName(
-								"aicare.net.cn.itpms",
-								"aicare.net.cn.itpms.act.WelcomeActivity");
-						Intent intents = new Intent();
-						intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						intents.setComponent(mComponentNames);
-						context.startActivity(intents);	
-					}else{
-						ComponentName mComponentNames = new ComponentName(
-								"com.inetwp.cardservice",
-								"com.inetwp.card.DrawerMainActivity");
-						Intent intents = new Intent();
-						intents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						intents.setComponent(mComponentNames);
-						context.startActivity(intents);						
-					}
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		tpmsLayout.findViewById(R.id.tpms_btn).setOnClickListener(this);
 
 		alphaAnimation = new AlphaAnimation(0.1f, 1.0f);
 		alphaAnimation.setDuration(500);
 		alphaAnimation.setRepeatCount(Animation.INFINITE);
 		alphaAnimation.setRepeatMode(Animation.REVERSE);
 		alphaAnimation.start();
-
-		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-	}
-
-	private void goneTpms() {
-		// tpmsDataLayout.setVisibility(View.INVISIBLE);
-	}
-
-	private void showTpms() {
-		tpmsDataLayout.setVisibility(View.VISIBLE);
-	}
-
-	private boolean isEmpty(String str) {
-		if (str == null)
-			return true;
-		if ("null".equals(str))
-			return true;
-		if ("".equals(str.trim()))
-			return true;
-		return false;
 	}
 
 	// ==================taiya================================
 	// zl
 	// 温度高于上限的时候判断是否报警
-	private void twinkleWd(TextView view, String max, String value) {
-		if (!"--".equals(value)) {
-			if (Double.parseDouble(value) > Double.parseDouble(max)) {
-				startWarnAnimation(view);
-			} else {
-				stopWarnAnimation(view);
-			}
+	private void twinkleWd(TextView view, long highstate) {
+		if (highstate == NO_NORMAL) {
+			startWarnAnimation(view);
+		} else {
+			stopWarnAnimation(view);
 		}
 	}
 
 	// 胎压异常的时候判断是否报警
-	private void twinkleTy(TextView view, String max, String min, String value) {
-		// 达到区间值，即闪烁
-		if (!"--".equals(value)) {
-			if (Double.parseDouble(value) > Double.parseDouble(max)
-					|| Double.parseDouble(value) < Double.parseDouble(min)) {
-				startWarnAnimation(view);
-			} else {
-				stopWarnAnimation(view);
-			}
+	private void twinkleTy(TextView view, long highstate, long lowstate) {
+		if (highstate == NO_NORMAL || lowstate == NO_NORMAL) {
+			startWarnAnimation(view);
+		} else {
+			stopWarnAnimation(view);
 		}
 	}
 
-	// 判断ID长度为5的电量状态，图片闪烁(比较设备状态)
-	private void batteryState5(String state, ImageView view) {
-		if ("BATTERY_ERROR".equals(state)) {
+	// 判断电量状态，图片闪烁(比较设备状态)
+	private void batteryState(ImageView view, long state) {
+		if (state == NO_NORMAL) {
 			setElectricImage(view, true);
 		} else {
 			setElectricImage(view, false);
-		}
-	}
-
-	// 判断ID长度为6的电量状态，图片闪烁（比较电压值）
-	private void batteryState6(String stateValue, ImageView view) {
-		if (!"--".equals(stateValue)) {
-			if (Double.parseDouble(stateValue) < 2.4) {
-				setElectricImage(view, true);
-			} else {
-				setElectricImage(view, false);
-			}
 		}
 	}
 
@@ -468,10 +269,7 @@ public class TpmsContol extends BroadcastReceiver {
 
 	// 警告、文字闪烁
 	private void startWarnAnimation(TextView view) {
-		// Log.e("zline",
-		// "-------startWarnAnimation----------"+view.getCurrentTextColor());
 		if (view.getCurrentTextColor() != Color.RED) {
-			// Log.e("zline", "-------RED----------"+Color.RED);
 			view.setTextColor(Color.RED);
 			startAnim(view);
 		}
@@ -497,96 +295,46 @@ public class TpmsContol extends BroadcastReceiver {
 		view.clearAnimation();
 	}
 
-	// 获取蓝牙当前状态
-	private int getBluetoothStat() {
-		return mBluetoothAdapter.getState();
-	}
-
-	private void refreshTpms() {
-		switch (getBluetoothStat()) {
-		case BluetoothAdapter.STATE_ON:
-			noNullDisplay();
-			break;
-		case BluetoothAdapter.STATE_TURNING_ON:
-			Log.e("zline", "-------STATE_TURNING_ON----------");
-			break;
-		case BluetoothAdapter.STATE_OFF:
-			goneTpms();
-			Log.e("zline", "-------STATE_OFF----------");
-			break;
-		case BluetoothAdapter.STATE_TURNING_OFF:
-			Log.e("zline", "-------STATE_TURNING_OFF----------");
-			break;
-		}
-	}
-
-	public String getID(int posion) {
-		String deveceID = "";
+	@SuppressWarnings("unused")
+	public boolean isAppInstalled(Context context, String packageName) {
+		if (packageName == null || "".equals(packageName))
+			return false;
 		try {
-			cardservice = context.getContentResolver().query(CARD_URL, null,
-					null, null, null);
-			if (cardservice != null && cardservice.moveToNext()) {
-
-				if (posion == 0) {
-
-					deveceID = cardservice.getString(cardservice
-							.getColumnIndex(LEFT_FRONT_ID));
-				} else if (posion == 1) {
-
-					deveceID = cardservice.getString(cardservice
-							.getColumnIndex(LEFT_REAR_ID));
-
-				} else if (posion == 2) {
-
-					deveceID = cardservice.getString(cardservice
-							.getColumnIndex(RIGHT_FRONT_ID));
-
-				} else if (posion == 3) {
-
-					deveceID = cardservice.getString(cardservice
-							.getColumnIndex(RIGHT_REAR_ID));
-				}
-
-			}
-
-			if (cardservice != null) {
-				cardservice.close();
-			}
-		} catch (Exception e) {
-			Log.e("inet_zl", "taiya-Exception");
+			ApplicationInfo info = context.getPackageManager()
+					.getApplicationInfo(packageName,
+							PackageManager.GET_UNINSTALLED_PACKAGES);
+			return true;
+		} catch (NameNotFoundException e) {
+			return false;
 		}
-
-		return deveceID;
-	}
-
-	private void noNullDisplay() {
-		if (!isEmpty(getID(0)) || !isEmpty(getID(1)) || !isEmpty(getID(2))
-				|| !isEmpty(getID(3))) {
-			showTpms();
-		}
-	}
-
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		// TODO Auto-generated method stub
-		final String action = intent.getAction();
-		if (action.equals(BLUETOOTH_STATE_CHANGED)
-				|| action.equals(BLUETOOTH_ACTION)) {
-			refreshTpms();
-		}
+		/*
+		 * final PackageManager packageManager = context.getPackageManager();
+		 * List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
+		 * List<String> pName = new ArrayList<String>(); if (pinfo != null) {
+		 * for (int i = 0; i < pinfo.size(); i++) { String pn =
+		 * pinfo.get(i).packageName; pName.add(pn); } } return
+		 * pName.contains(packageName);
+		 */
 	}
 	
-	public boolean isAppInstalled(Context context, String packageName) {  
-        final PackageManager packageManager = context.getPackageManager();  
-        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);  
-        List<String> pName = new ArrayList<String>();  
-        if (pinfo != null) {  
-            for (int i = 0; i < pinfo.size(); i++) {  
-                String pn = pinfo.get(i).packageName;  
-                pName.add(pn);  
-            }  
-        }  
-        return pName.contains(packageName);  
-    }  
+	public static boolean openApplication(Context context, String pkgName) {
+		if (TextUtils.isEmpty(pkgName)) {
+			return false;
+		}
+        try {
+    		Intent intent = context.getPackageManager().getLaunchIntentForPackage(
+    				pkgName);
+    		if (intent == null) {
+    			return false;
+    		}
+    		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    		context.startActivity(intent);
+    		return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+
+	}
 
 }

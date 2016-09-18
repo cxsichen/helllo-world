@@ -186,7 +186,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		mBTCardControl = new BTCardControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.bt_card_layout));
 		mTpmsContol = new TpmsContol(getApplicationContext(),
-				(FrameLayout) findViewById(R.id.tpms_layout));
+				(RelativeLayout) findViewById(R.id.tpms_layout));
 		mFmCardControl = new FmCardControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.fm_layout), mSerialPortControl);
 

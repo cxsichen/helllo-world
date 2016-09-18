@@ -68,8 +68,8 @@ public class Contacts {
     public static final String HEX_SOUND_CAR_LEFT = "F50500000A";
     public static final String HEX_SOUND_CAR_RIGHT = "F50500000B";
     public static final String HEX_SOUND_CAR_RESET = "F50500000E";
-    public static final String FM_NEXT = "F50600001C";
-    public static final String FM_PRE = "F50600001B";
+    public static final String FM_NEXT = "F506000000";
+    public static final String FM_PRE = "F506000007";
     public static final String FM_PLAY = "F502000009";
     public static final String HEX_NEXT_SHORT_MOVE = "F506000000";
 	public static final String HEX_PRE_SHORT_MOVE = "F506000007";

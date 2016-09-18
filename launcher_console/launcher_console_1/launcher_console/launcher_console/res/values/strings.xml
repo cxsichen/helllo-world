@@ -54,4 +54,8 @@
     <string name="turn">转</string>
     
     <string name="temperature_degree">℃</string>
+    
+    <string name="tyre">0Kpa</string>
+    <string name="temp">0℃</string>
+   
 </resources>

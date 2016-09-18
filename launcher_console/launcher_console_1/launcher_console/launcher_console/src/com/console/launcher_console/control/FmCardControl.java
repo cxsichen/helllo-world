@@ -98,14 +98,18 @@ public class FmCardControl implements OnClickListener {
 	
 	private void  changePlayButton(){
 		Log.i("cxs","---------changePlayButton---------------");
-		int mode = Settings.System.getInt(context.getContentResolver(),
-				Constact.FMSTATUS,0);
-		if(mode==1){
-			((ImageView) fmCardLayout.findViewById(R.id.fm_play))
-			.setImageResource(R.drawable.ic_music_play);
-		}else{
-			((ImageView) fmCardLayout.findViewById(R.id.fm_play))
-			.setImageResource(R.drawable.ic_music_pause);
+		try {
+			int mode = Settings.System.getInt(context.getContentResolver(),
+					Constact.FMSTATUS,0);
+			if(mode==1){
+				((ImageView) fmCardLayout.findViewById(R.id.fm_play))
+				.setImageResource(R.drawable.ic_music_play);
+			}else{
+				((ImageView) fmCardLayout.findViewById(R.id.fm_play))
+				.setImageResource(R.drawable.ic_music_pause);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 	
@@ -184,13 +188,13 @@ public class FmCardControl implements OnClickListener {
 	public void setFmValue(byte[] value) {
 		if (value[0] == Contacts.RADIO_MSG) {
 			if (value[2] == (int) 0x01) {				
-				((ImageView) fmCardLayout.findViewById(R.id.fm_play))
-						.setImageResource(R.drawable.ic_music_play);
+			//	((ImageView) fmCardLayout.findViewById(R.id.fm_play))
+			//			.setImageResource(R.drawable.ic_music_play);
 				Settings.System.putInt(context.getContentResolver(),
 						Constact.FMSTATUS,1);
 			} else {
-				((ImageView) fmCardLayout.findViewById(R.id.fm_play))
-						.setImageResource(R.drawable.ic_music_pause);
+				//((ImageView) fmCardLayout.findViewById(R.id.fm_play))
+				//		.setImageResource(R.drawable.ic_music_pause);
 				Settings.System.putInt(context.getContentResolver(),
 						Constact.FMSTATUS,0);
 			}

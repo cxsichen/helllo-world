@@ -1,43 +1,27 @@
 package com.console.launcher_console.control;
 
-import java.util.List;
-import java.util.Set;
-
 import com.console.launcher_console.R;
+import com.console.launcher_console.util.Constact;
 import com.softwinner.un.tool.util.UNJni;
 import com.softwinner.un.tool.util.UtilsStatus;
-import com.softwinner.un.tool.utilex.UNLog;
 import com.softwinner.un.tool.video.UNVideoViewHelper;
 import com.srtc.pingwang.ISrtcService;
 import com.srtc.pingwang.IVideoListener;
 
-import android.bluetooth.BluetoothA2dp;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothHeadset;
-import android.bluetooth.BluetoothProfile;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.database.ContentObserver;
 import android.os.Handler;
-import android.os.Handler.Callback;
-import android.os.HandlerThread;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 		View.OnClickListener {
@@ -72,7 +56,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			// UNLog.debug_print(UNLog.LV_DEBUG, TAG,
 			// "cxs =================handleMessage msg what = "
 			// + msg.what);
-			Log.i(TAG,"========handleMessage==============="+msg.what);
+			Log.i(TAG, "========handleMessage===============" + msg.what);
 			switch (msg.what) {
 			case MSG_UPDATE_BUTTON:
 				syncButtonStatus();
@@ -121,38 +105,55 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 				Context.BIND_AUTO_CREATE);
 		Log.e(TAG, "---------------------------bindservice ret = " + ret);
 
+		// 监控adas状态
+		context.getContentResolver()
+				.registerContentObserver(
+						android.provider.Settings.System
+								.getUriFor(Constact.ADAS_STATE),
+						true, mAdasStateObserver);
+		setAdasSetting(getAdasStatus());
 	}
 
 	public void resumeVideoPreview() {
 		if (mService == null) {
-			Log.i(TAG,"========resumeVideoPreview===bind agin===mService========");
+			Log.i(TAG,
+					"========resumeVideoPreview===bind agin===mService========");
 			Intent intent = new Intent(
 					"com.softwinner.un.tool.service.SrtcService");
 			intent.setPackage("com.srtc.pingwang");
 			boolean ret = context.bindService(intent, mServiceConnection,
 					Context.BIND_AUTO_CREATE);
 		}
-		Log.i(TAG,"========resumeVideoPreview===============");
+		Log.i(TAG, "========resumeVideoPreview===============");
 		mResume = true;
+		// 如果正在打开设备 则返回
+		if (mWorkHandler.hasMessages(MSG_START_STREAM)) {
+			return;
+		}
 		mWorkHandler.removeMessages(MSG_START_STREAM);
 		mWorkHandler.removeMessages(MSG_STOP_STREAM);
-		mWorkHandler.sendEmptyMessageDelayed(MSG_START_STREAM, 100);
+		mWorkHandler.sendEmptyMessageDelayed(MSG_START_STREAM, 500);
 	}
 
 	public void pauseVideoPreview() {
-		Log.i("cxs", "======pauseVideoPreview=========");
 		mResume = false;
+		// 如果正在关闭设备 则返回
+		if (mWorkHandler.hasMessages(MSG_STOP_STREAM)) {
+			return;
+		}
 		mWorkHandler.removeMessages(MSG_START_STREAM);
 		mWorkHandler.removeMessages(MSG_STOP_STREAM);
-		mWorkHandler.sendEmptyMessageDelayed(MSG_STOP_STREAM, 0);
+		mWorkHandler.sendEmptyMessageDelayed(MSG_STOP_STREAM, 500);
 	}
 
 	public void stopVideoPreview() {
 		Log.i("cxs", "======stopVideoPreviews=========");
 		mWorkHandler.removeMessages(MSG_START_STREAM);
 		mWorkHandler.removeMessages(MSG_STOP_STREAM);
-		mWorkHandler.sendEmptyMessageDelayed(MSG_STOP_STREAM, 0);
+		mWorkHandler.sendEmptyMessageDelayed(MSG_STOP_STREAM, 500);
 		context.unbindService(mServiceConnection);
+		context.getContentResolver().unregisterContentObserver(
+				mAdasStateObserver);
 	}
 
 	private ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -172,6 +173,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
+			resetFlags();
 			mService = null;
 			Log.e(TAG, "service disconnected");
 		}
@@ -183,8 +185,6 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			Log.e(TAG, "startVideoStream 2 client not connect!!!");
 			return;
 		}
-		// if (!isStartVideoStream && !isStartingVideoStream &&
-		// !isStopingVideoStream) {
 
 		try {
 			if (mService.getConnectStatus() == 0) {
@@ -225,7 +225,12 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 
 		int ret = UNJni.jni_initNetServer();
 		Log.e(TAG, "startVideoStream 5 jni_initNetServer ret = " + ret);
-
+		if (ret < 0) {
+			Log.e(TAG,
+					"startVideoStream 5 jni_initNetServer erro ~~~~~~~~~~~~~~~ ret = "
+							+ ret);
+			return;
+		}
 		ret = 0;
 		try {
 			ret = mService.startVideo();
@@ -235,29 +240,16 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 		Log.e(TAG, "startVideoStream 5 startVideo ret = " + ret);
 
 		if (1 == ret) {
-			// isStartingVideoStream = true;
 			UNJni.jni_startDisplay(mUNVideoViewHelper);
 		}
 		mWorkHandler.sendEmptyMessageDelayed(MSG_UPDATE_BUTTON, 500);
-		// }
 	}
 
 	public void stopVideoStream() {
 
 		UNJni.jni_deInitNetServer();
 
-		Log.e(TAG, "stopVideoStream in");// isStartVideoStream =
-											// "+isStartVideoStream );
-		// if (isStartVideoStream) {
-		// try {
-		// if (mService.getConnectStatus() == 0) {
-		// return;
-		// }
-		// } catch (RemoteException e) {
-		// e.printStackTrace();
-		// }
-		// isStartVideoStream = false;
-		// isStopingVideoStream = true;
+		Log.e(TAG, "stopVideoStream in");
 
 		mRelativeLayout.post(new Runnable() {
 			@Override
@@ -277,23 +269,11 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			Log.e(TAG, "stopVideoStream client not connect!!!");
 		}
 		UNJni.jni_stopDisplay();
-		// } else if (isStartingVideoStream) {
-		//
-		// mRelativeLayout.postDelayed(new Runnable() {
-		// @Override
-		// public void run() {
-		// stopVideoStream();
-		// }
-		// }, 1000);
-		// }
 	}
 
 	private void resetFlags() {
-		mWorkHandler.sendEmptyMessage(MSG_STOP_STREAM);
-
-		// isStartVideoStream = false;
-		// isStartingVideoStream = false;
-		// isStopingVideoStream = false;
+		mWorkHandler.sendEmptyMessageDelayed(MSG_STOP_STREAM, 500);
+		Log.e(TAG, "resetFlags send stop stream 3");
 	}
 
 	private IVideoListener.Stub mVideoListener = new IVideoListener.Stub() {
@@ -303,7 +283,6 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			Log.e(TAG, "+++++++++++++++++++onConnectStatusChange connected = "
 					+ connected);
 			if (1 == connected && mResume) {
-				//mWorkHandler.sendEmptyMessage(MSG_START_STREAM);
 				resumeVideoPreview();
 			} else {
 				resetFlags();
@@ -336,6 +315,13 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 				} else {
 					Log.i(TAG, "-----lock fail---------------------");
 				}
+			case UtilsStatus.INDEX_ADAS:
+				if (state >= 0) {
+					Log.i(TAG, "-----ADAS state---------------------" + state);
+				} else {
+					Log.i(TAG, "-----ADAS fail---------------------");
+				}
+				setAdasSetting(state);			
 				break;
 			default:
 				break;
@@ -456,6 +442,91 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 						+ record_status);
 			}
 		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// 监控adas状态
+	private AdasStateObserver mAdasStateObserver = new AdasStateObserver();
+
+	public class AdasStateObserver extends ContentObserver {
+		public AdasStateObserver() {
+			super(null);
+		}
+
+		@Override
+		public void onChange(boolean selfChange) {
+			super.onChange(selfChange);
+			syncAdasStatus();
+		}
+	}
+	/**
+	 * 设置adas状态的系统数据库
+	 * @param status
+	 */
+	private void setAdasSetting(int status){
+		if(status>0){
+			android.provider.Settings.System.putInt(
+					context.getContentResolver(), Constact.ADAS_STATE, 1);
+		}else{
+			android.provider.Settings.System.putInt(
+					context.getContentResolver(), Constact.ADAS_STATE, 0);
+		}
+	}
+	/**
+	 * 根据adas状态的系统数据库设置adas的状态
+	 * @param status
+	 */	
+	private void syncAdasStatus(){
+		int state = android.provider.Settings.System.getInt(
+				context.getContentResolver(), Constact.ADAS_STATE, 0);
+		if(getAdasStatus()>0&&state==0){
+			setAdasStatus(state);
+		}
+		if(getAdasStatus()<=0&&state==1){
+			setAdasStatus(state);
+		}
+	}
+	//静音状态保存
+    static int adasStausSave=1;
+    //设备无连接或者设置出错的时候 adas默认关闭
+	private int getAdasStatus() {
+		try {
+			if (mService != null) {
+				int status = mService.getStatus(UtilsStatus.INDEX_ADAS);
+				if(status>0){
+					adasStausSave=status;
+				}
+				if(status==-1){
+					setAdasSetting(status);
+				}
+				return status;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			setAdasSetting(-1);
+			return -1;
+		}
+		setAdasSetting(-1);
+		return -1;
+	}
+
+	private void setAdasStatus(int status) {
+		try {
+			if (mService != null) {
+				if (status < 0 || status >= 2) {
+					status = 0; 
+				}
+				if(status>0){
+					status=adasStausSave;
+				}
+				int ret = mService.setStatus(UtilsStatus.INDEX_ADAS, status);
+				// TODO: 判断返回ret，给出对应的回应
+				Log.i(TAG, "=======ADAS设置命令 ret ========" + ret);
+			}
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

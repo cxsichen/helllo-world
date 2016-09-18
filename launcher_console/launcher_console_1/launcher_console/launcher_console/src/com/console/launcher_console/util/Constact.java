@@ -7,6 +7,7 @@ public interface Constact {
 	public final static String STOPNAVI="com.inet.broadcast.stoptnavi";
 	public final static String STARTNAVI="com.inet.broadcast.startnavi";
 	public static final String ACC_STATE = "acc_state";
+	public static final String ADAS_STATE = "adas_state";
 	public static final String TTS_SHOW = "tts_show";
 	public static final String BACK_CAR = "back_car_state";        //1 是倒车  0是倒完车
 	public static final String NAVING_STATUS = "naving_status";        
@@ -30,5 +31,6 @@ public interface Constact {
     public final static String USER_SAVE_BRIGHTNESS= "user_brightness";
     public final static String FACTORY_SOUND="factory_sound";
     public final static int DEFAULT_BRIGHTNESS = 110;
+    public final static boolean DEBUG = true;
 
 }

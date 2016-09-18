@@ -74,7 +74,7 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 
 	private ISerialPortService mISpService;
 	
-	private String[] applist = { "com.mediatek.datatransfer",
+	private String[] applist = { "com.mediatek.datatransfer","com.inet.consoleservices",
 			"com.android.email", "com.inet.mtk.cardplay",
 			"com.android.soundrecorder", "com.android.calendar",
 			"com.mediatek.fmradio", "com.android.quicksearchbox",
