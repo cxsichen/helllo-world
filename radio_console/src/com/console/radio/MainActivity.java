@@ -220,6 +220,8 @@ public class MainActivity extends Activity implements OnClickListener,
 
 		initAmLayout();
 		initFmLayout();
+		Settings.System.putInt(getContentResolver(),
+				Contacts.FMSTATUS, 0);
 		changePlayButton();
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Contacts.FMSTATUS),

@@ -62,7 +62,7 @@
                 android:layout_gravity="bottom"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:scaleType="center"
-                android:src="@drawable/ic_play" />
+                android:src="@drawable/ic_stop" />
 
         <ImageView
             android:id="@+id/scan_button"
