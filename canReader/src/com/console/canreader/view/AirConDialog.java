@@ -3,6 +3,7 @@ package com.console.canreader.view;
 import com.console.canreader.R;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.Contacts;
+import com.console.canreader.utils.Trace;
 
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -150,12 +151,26 @@ public class AirConDialog extends Dialog {
 			leftTemperature.setText("HI");
 		if (canInfo.DEPUTY_DRIVING_POSITON_TEMP == 255)
 			rightTemperature.setText("HI");
+		if(canInfo.DRIVING_POSITON_TEMP == -1){
+			leftTemperature.setAlpha(0.12f);
+		}else{
+			leftTemperature.setAlpha(1f);
+		}
+		if(canInfo.DEPUTY_DRIVING_POSITON_TEMP == -1){
+			rightTemperature.setAlpha(0.12f);
+		}else{
+			rightTemperature.setAlpha(1f);
+		}
 		
 		//-1表示自动
         if(canInfo.AIR_RATE==-1){
-        	rightAirVolume.setText("AUTO");
-    		leftAirVolume.setText("AUTO");
+        	rightAirVolume.setTextSize(22);
+        	leftAirVolume.setTextSize(22);
+        	rightAirVolume.setText("Auto");
+    		leftAirVolume.setText("Auto");
         }else{
+        	rightAirVolume.setTextSize(42);
+        	leftAirVolume.setTextSize(42);
         	rightAirVolume.setText(String.valueOf(canInfo.AIR_RATE));
     		leftAirVolume.setText(String.valueOf(canInfo.AIR_RATE));	
         }
@@ -183,10 +198,7 @@ public class AirConDialog extends Dialog {
 		} else {
 			rearWindowDefrost.setAlpha(0.12f);
 		}
-		Log.i("cxs1", "==========canInfo.LARGE_LANTERN_INDICATOR========"
-				+ canInfo.LARGE_LANTERN_INDICATOR);
-		Log.i("cxs1", "==========canInfo.SMALL_LANTERN_INDICATOR========"
-				+ canInfo.SMALL_LANTERN_INDICATOR);
+
 		if (canInfo.LARGE_LANTERN_INDICATOR == 0
 				&& canInfo.SMALL_LANTERN_INDICATOR == 0) {
 			lanterIndicator.setAlpha(0.12f);
@@ -218,8 +230,6 @@ public class AirConDialog extends Dialog {
 		} else {
 			acIndicator.setAlpha(0.12f);
 		}
-		Log.i("cxs1", "=========canInfo.LEFT_SEAT_TEMP=========="
-				+ canInfo.LEFT_SEAT_TEMP);
 		if (canInfo.LEFT_SEAT_TEMP == 0) {
 			leftSeatHeat.setAlpha(0.12f);
 		} else {

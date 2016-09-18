@@ -38,22 +38,28 @@ public class SerialPort {
 	private static SerialPort mInstance;
 
 	private final static String DEV_FILE = "/dev/ttyMT1";
-	private final static int SERIAL_PORT_BT = 38400;
+	private static int SERIAL_PORT_BT = 38400;
 
 	private SerialPort(String device, int baudrate, int flags)
 			throws SecurityException, IOException {
-
 		mFd = open(device, baudrate, flags);
 		if (mFd == null) {
 			throw new IOException();
+		}
+		if(mFileInputStream!=null){
+			mFileInputStream.close();
+		}
+		if(mFileOutputStream!=null){
+			mFileOutputStream.close();
 		}
 		mFileInputStream = new FileInputStream(mFd);
 		mFileOutputStream = new FileOutputStream(mFd);
 	}
 
-	public static SerialPort getInstance() throws SecurityException,
+	public static SerialPort getInstance(int port) throws SecurityException,
 			IOException, InvalidParameterException {
-		if (null == mInstance) {
+		if (null == mInstance||port!=SERIAL_PORT_BT) {
+			SERIAL_PORT_BT=port;
 			synchronized (SerialPort.class) {
 				mInstance = new SerialPort(DEV_FILE, SERIAL_PORT_BT, 0);
 			}

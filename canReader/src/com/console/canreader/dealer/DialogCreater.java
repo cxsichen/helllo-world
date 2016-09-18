@@ -160,11 +160,11 @@ public class DialogCreater {
     /*-------------------显示空调界面  start--------------------*/
 	static int[] airConStatus = { -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1,
 			-1, 0, 0, 0, 0, 0 };
+	static float[] airConStatusFloat={0f,0f};
 
 	public static void showAirConDialog(Context context, CanInfo canInfo,
 			CallBack mCallBack) {
 		// TODO Auto-generated method stub
-		
 		if (canInfo.AIR_CONDITIONER_STATUS != airConStatus[0]
 				|| canInfo.AC_INDICATOR_STATUS != airConStatus[1]
 				|| canInfo.CYCLE_INDICATOR != airConStatus[2]
@@ -176,8 +176,8 @@ public class DialogCreater {
 				|| canInfo.PARALLEL_AIR_INDICATOR != airConStatus[8]
 				|| canInfo.DOWNWARD_AIR_INDICATOR != airConStatus[9]
 				|| canInfo.AIR_RATE != airConStatus[10]
-				|| (int) canInfo.DRIVING_POSITON_TEMP != airConStatus[11]
-				|| (int) canInfo.DEPUTY_DRIVING_POSITON_TEMP != airConStatus[12]
+				|| (float) canInfo.DRIVING_POSITON_TEMP != airConStatusFloat[0]
+				|| (float) canInfo.DEPUTY_DRIVING_POSITON_TEMP != airConStatusFloat[1]
 				|| canInfo.LEFT_SEAT_TEMP != airConStatus[13]
 				|| canInfo.RIGTHT_SEAT_TEMP != airConStatus[14]
 				) {
@@ -196,8 +196,8 @@ public class DialogCreater {
 			
 			
 			airConStatus[10] = canInfo.AIR_RATE;
-			airConStatus[11] = (int) canInfo.DRIVING_POSITON_TEMP;
-			airConStatus[12] = (int) canInfo.DEPUTY_DRIVING_POSITON_TEMP;
+			airConStatusFloat[0] = (float) canInfo.DRIVING_POSITON_TEMP;
+			airConStatusFloat[1] = (float) canInfo.DEPUTY_DRIVING_POSITON_TEMP;
 			airConStatus[13] = canInfo.LEFT_SEAT_TEMP;
 			airConStatus[14] = canInfo.RIGTHT_SEAT_TEMP;
 			

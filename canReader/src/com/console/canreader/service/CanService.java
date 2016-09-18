@@ -3,6 +3,7 @@ package com.console.canreader.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.InvalidParameterException;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
@@ -45,6 +46,8 @@ public class CanService extends Service {
 
 	private static final String TAG = "BindService";
 	public final static int BUFFER_SIZE = 1024;
+	private static int SERIAL_PORT_BT_38400 = 38400;
+	private static int SERIAL_PORT_BT_19200 = 19200;
 
 	private InputStream mInputStream;
 	private OutputStream mOutputStream;
@@ -75,9 +78,9 @@ public class CanService extends Service {
 				byte[] mPacket = (byte[]) msg.obj;
 				// Broadcast to all clients the new value.
 				Trace.i("packet : " + BytesUtil.bytesToHexString(mPacket));
-				Log.i("cxs", "==========handleMessage===========");
 				info = BeanFactory.getCanInfo(CanService.this, mPacket,
 						canType, carType);
+				Log.i("cxs", "==========info===========" + info);
 				if (info != null)
 					if (info.getCanInfo() != null)
 						dealCanInfo();
@@ -155,17 +158,72 @@ public class CanService extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
+		canType = PreferenceUtil.getCANTYPE(this);
+		carType = PreferenceUtil.getCARTYPE(this);
+		chooseSerialPort();
+		initSerialPortThread();
+		init();
+	}
+
+	/**
+	 * 选择串口
+	 */
+	private void chooseSerialPort() {
+		switch (canType) {
+		case 0: // 睿志诚
+			switch (carType) {
+			case 17:// 奔腾X80 海马M3
+			case 18:
+				initSerialPort(SERIAL_PORT_BT_19200);
+				break;
+			default:
+				initSerialPort(SERIAL_PORT_BT_38400);
+				break;
+			}
+			break;
+		case 1: // 尚摄
+			initSerialPort(SERIAL_PORT_BT_38400);
+			break;
+		default:
+			initSerialPort(SERIAL_PORT_BT_38400);
+			break;
+		}
+	}
+
+	private void initSerialPort(int port) {
 		try {
-			mInputStream = SerialPort.getInstance().getInputStream();
-			mOutputStream = SerialPort.getInstance().getOutputStream();
+			mInputStream = SerialPort.getInstance(port).getInputStream();
+			mOutputStream = SerialPort.getInstance(port).getOutputStream();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 初始化读写线程
+	 */
+	private void initSerialPortThread() {
+		try {
 			mReadDataFromSpThread = new ReadDataFromSpThread();
 			mReadDataFromSpThread.start();
 			mSendDataToSpThread = new SendDataToSpThread();
 			mSendDataToSpThread.start();
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		init();
+	}
+
+	/**
+	 * 重置串口
+	 */
+	private void resetSerialPort() {
+		canType = PreferenceUtil.getCANTYPE(this);
+		carType = PreferenceUtil.getCARTYPE(this);
+		chooseSerialPort();
+		// 清空原先的数据
+		BeanFactory.setInfoEmpty();
 	}
 
 	private AccStateObserver mAccStateObserver = new AccStateObserver();
@@ -211,8 +269,7 @@ public class CanService extends Service {
 
 	private void init() {
 		// TODO Auto-generated method stub
-		canType = PreferenceUtil.getCANTYPE(this);
-		carType = PreferenceUtil.getCARTYPE(this);
+
 		// 监控车型和协议选择
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Contacts.CANTYPE),
@@ -244,8 +301,8 @@ public class CanService extends Service {
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
 			canType = PreferenceUtil.getCANTYPE(CanService.this);
-			// 清空原先的数据
-			BeanFactory.setInfoEmpty();
+			resetSerialPort();
+
 		}
 	}
 
@@ -260,8 +317,7 @@ public class CanService extends Service {
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
 			carType = PreferenceUtil.getCARTYPE(CanService.this);
-			// 清空原先的数据
-			BeanFactory.setInfoEmpty();
+			resetSerialPort();
 		}
 	}
 
@@ -269,7 +325,8 @@ public class CanService extends Service {
 		// TODO Auto-generated method stub
 		switch (canType) {
 		case 0: // 睿志诚
-			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
+			if (carType != 17 && carType != 18)// 奔腾X80 海马M3
+				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			break;
 		case 1: // 尚摄
 			break;
@@ -373,7 +430,17 @@ public class CanService extends Service {
 				try {
 					switch (canType) {
 					case 0:
-						readRZCCanPort(); // 睿志诚数据帧
+						switch (carType) {
+						case 17: // 奔腾X80
+							readRZCCanPort_1();
+							break;
+						case 18: // 海马M3
+							readRZCCanPort_2();
+							break;
+						default:
+							readRZCCanPort();// 睿志诚通用数据帧
+							break;
+						}
 						break;
 					case 1:
 						readSSCanPort(); // 尚摄数据帧
@@ -478,7 +545,7 @@ public class CanService extends Service {
 
 		/*-------------------尚摄数据帧-----end------------------*/
 
-		/*-------------------睿志诚据帧-----start-----------------*/
+		/*-------------------睿志诚据数据帧----start-----------------*/
 		private boolean isRZCAValidPacket(final byte[] packet) {
 			byte sum = 0;
 
@@ -526,7 +593,107 @@ public class CanService extends Service {
 
 		}
 
-		/*-------------------睿志诚据帧----------end-------------*/
+		/*-------------------睿志诚据数据帧----------end-------------*/
+
+		/*-------------------睿志诚第二种数据帧-----start-----------------*/
+		private boolean isRZCAValidPacket_1(final byte[] packet) {
+			byte sum = 0;
+
+			for (int i = 1; i < packet.length - 1; i++) {
+				sum += packet[i];
+			}
+			sum = (byte) (sum & 0xff);
+			if (packet[packet.length - 1] == sum) {
+				return true;
+			}
+			return false;
+		}
+
+		private void readRZCCanPort_1() throws IOException {
+			// TODO Auto-generated method stub
+			byte data = (byte) mInputStream.read();
+			if (data == (byte) Contacts.VOLK_HEAD_CODE_1) {
+				Trace.i("packet : " + data);
+				byte len = mReadByte();
+				byte mode = mReadByte();
+				byte[] packet = new byte[len + 1];
+				packet[0] = (byte) Contacts.VOLK_HEAD_CODE_1;
+				packet[1] = len;
+				packet[2] = mode;
+				for (int i = 3; i < len + 1; i++) {
+					packet[i] = mReadByte();
+				}
+				synchronized (lock1) {
+					if (isRZCAValidPacket_1(packet)) {
+						dealWithPacketData(packet);
+					} else {
+						Trace.i("packet read failed");
+					}
+				}
+				packet = null;
+			}
+
+		}
+
+		/*-------------------睿志诚第二种数据帧---------end-------------*/
+
+		/*-------------------睿志诚第三种数据帧-----start-----------------*/
+		private boolean isRZCAValidPacket_2(final byte[] packet) {
+			byte sum = 0;
+
+			for (int i = 1; i < packet.length - 1; i++) {
+				sum += packet[i];
+			}
+			sum = (byte) (sum & 0xff);
+			if (packet[packet.length - 1] == sum) {
+				return true;
+			}
+			return false;
+		}
+
+		private void readRZCCanPort_2() throws IOException {
+			// TODO Auto-generated method stub
+			byte data = (byte) mInputStream.read();
+			byte len = 0;
+			byte mode = 0;
+			byte[] packet = null;
+			switch (data) {
+			case (byte) Contacts.VOLK_HEAD_CODE_2:
+				len = mReadByte();
+				mode = mReadByte();
+				packet = new byte[len + 1];
+				packet[0] = (byte) Contacts.VOLK_HEAD_CODE_2;
+				packet[1] = len;
+				packet[2] = mode;
+				for (int i = 3; i < len + 1; i++) {
+					packet[i] = mReadByte();
+				}
+				break;
+			case (byte) Contacts.VOLK_HEAD_CODE_1:
+				packet = new byte[6];
+				packet[0] = (byte) Contacts.VOLK_HEAD_CODE_1;
+				for (int i = 1; i < 6; i++) {
+					packet[i] = mReadByte();
+				}
+				break;
+			default:
+				break;
+			}
+
+			if (packet != null) {
+				synchronized (lock1) {
+					if (isRZCAValidPacket_2(packet)) {
+						dealWithPacketData(packet);
+					} else {
+						Trace.i("packet read failed");
+					}
+				}
+				packet = null;
+			}
+
+		}
+
+		/*-------------------睿志诚第三种数据帧---------end-------------*/
 
 		private void dealWithPacketData(byte[] packet) {
 			Message dataMsg = new Message();
@@ -567,7 +734,6 @@ public class CanService extends Service {
 			e.printStackTrace();
 		}
 	}
-
 
 	// aidl server binder
 	private final RemoteCallbackList<ICanCallback> mCallbacks = new RemoteCallbackList<ICanCallback>();

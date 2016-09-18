@@ -46,7 +46,7 @@ public class CanInfo implements Parcelable {
 	//  空调状态都是on off
 	public int AIR_CONDITIONER_STATUS = -1;    //空调开关
 	public int AC_INDICATOR_STATUS = 0;        //AC状态
-	public int CYCLE_INDICATOR = 0;            //内外循环指示   0不显示
+	public int CYCLE_INDICATOR = 0;            //内外循环指示  2不显示        0外循环  1内循环
 	public int LARGE_LANTERN_INDICATOR = 0;    //大auto
 	public int SMALL_LANTERN_INDICATOR = 0;     //小auto
 	public int DAUL_LAMP_INDICATOR = 0;    
@@ -58,8 +58,8 @@ public class CanInfo implements Parcelable {
 	public int DOWNWARD_AIR_INDICATOR = 0;     //吹脚
 	public int AIRCON_SHOW_REQUEST = 0;           
 	public int AIR_RATE = 0;	             //风速        -1是自动 其他的都是数值
-	public float DRIVING_POSITON_TEMP = 0;   // 驾驶位置处温度	  low对应0  high对应255 
-	public float DEPUTY_DRIVING_POSITON_TEMP = 0; // 副驾驶位置处温度
+	public float DRIVING_POSITON_TEMP = 0;   // 驾驶位置处温度	  low对应0  high对应255  -1 表示不显示
+	public float DEPUTY_DRIVING_POSITON_TEMP = 0; // 副驾驶位置处温度  low对应0  high对应255  -1 表示不显示
 	// 座椅加热信息
 
 	public int AQS_CIRCLE = -1;

@@ -12,9 +12,6 @@ public class BeanFactory {
 
 	public static AnalyzeUtils getCanInfo(Context context, byte[] mPacket,
 			int canType, int carType) {
-		Log.i("cxs","========canType=========="+canType);
-	    Log.i("cxs","========carType=========="+carType);
-	    
 		switch (canType) {
 		case 0: // 睿志诚
 			switch (carType) {
@@ -29,7 +26,7 @@ public class BeanFactory {
 				break;
 			case 3:                          //丰田 丰田锐志
 			case 4:  
-				getRZCToyota(mPacket);
+				getRZCToyota(mPacket);		 //丰田 丰田CAMRY
 				break;
 			case 8:                           //日产
 				getRZCNISSAN(mPacket);
@@ -46,8 +43,25 @@ public class BeanFactory {
 			case 12:                           //本田DA
 				getRZCHondaDA(mPacket);
 				break;
-			default:
-						
+			case 13:							//别克 GM通用
+				getRZCBuickGM(mPacket);
+				break;
+			case 14:							//福特锐界
+				getRZCEDGE(mPacket);
+				break;
+			case 15:							//荣威360
+				getRZCRoewe360(mPacket);
+				break;
+			case 16:							//MG GS MG锐腾
+				getRZCMGGS(mPacket);
+				break;
+			case 17:							//奔腾X80
+				getRZCBESTURNx80(mPacket);
+				break;
+			case 18:							//海马M3
+				getRZCFHCm3(mPacket);
+				break;
+			default:						
 				break;
 			}
 			break;
@@ -78,6 +92,52 @@ public class BeanFactory {
 		return mAnalyzeUtils;
 	}
 	
+	private static void getRZCBESTURNx80(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCBESTURNx80(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,2);//第三位是信息type位
+		}
+	}
+	
+	private static void getRZCFHCm3(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCFHCm3(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,2);//第三位是信息type位
+		}
+	}
+	
+	private static void getRZCMGGS(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCMGGS(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	private static void getRZCRoewe360(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCRoewe360(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	private static void getRZCEDGE(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCEDGE(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	
+	private static void getRZCBuickGM(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCBuickGM(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+
 	public static void setInfoEmpty(){
 		mAnalyzeUtils=null;
 	}

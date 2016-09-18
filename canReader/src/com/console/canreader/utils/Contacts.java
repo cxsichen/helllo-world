@@ -197,6 +197,8 @@ public class Contacts {
 	public static final int VOLBAR = 0x7E;
 	public static final int BLINK = -1;
 	public static final int VOLK_HEAD_CODE = 0x2e;
+	public static final int VOLK_HEAD_CODE_1 = 0xfd;
+	public static final int VOLK_HEAD_CODE_2 = 0xfc;
 	public static final int SS_HEAD_CODE_1 = 0x5A;
 	public static final int SS_HEAD_CODE_2 = 0xA5;
 
