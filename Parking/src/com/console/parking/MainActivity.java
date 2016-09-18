@@ -67,7 +67,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			case FINISHMSG:
 				if(android.provider.Settings.System.getInt(
 						getContentResolver(), BACKCARSTATE, 1)==0){			        
-					finish();
+				finish();
 				}
 				break;
 			case FINISH:
