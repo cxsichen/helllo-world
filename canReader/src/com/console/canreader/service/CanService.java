@@ -80,7 +80,6 @@ public class CanService extends Service {
 				Trace.i("packet : " + BytesUtil.bytesToHexString(mPacket));
 				info = BeanFactory.getCanInfo(CanService.this, mPacket,
 						canType, carType);
-				Log.i("cxs", "==========info===========" + info);
 				if (info != null)
 					if (info.getCanInfo() != null)
 						dealCanInfo();

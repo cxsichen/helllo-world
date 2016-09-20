@@ -61,7 +61,6 @@ public class ObdView extends ViewPageFactory {
 	@Override
 	public void showView(CanInfo caninfo) {
 		// TODO Auto-generated method stub
-		Log.i("cxs1", "=======showView========" + caninfo.HANDBRAKE_STATUS);
 		if (caninfo.REMAIN_FUEL != -1)
 			oil.setText(caninfo.REMAIN_FUEL + " L");
 		if (caninfo.BATTERY_VOLTAGE != -1)

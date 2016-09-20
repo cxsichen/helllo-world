@@ -178,7 +178,6 @@ public class RZCFHCm3 extends AnalyzeUtils {
 		mCanInfo.PARALLEL_AIR_INDICATOR = (int) ((msg[2] >> 3) & 0x01);
 		mCanInfo.SMALL_LANTERN_INDICATOR = (int) ((msg[2] >> 2) & 0x01);
 		mCanInfo.AC_INDICATOR_STATUS = (int) ((msg[2] >> 0) & 0x01);
-		Log.i("cxs","======MAX_FRONT_LAMP_INDICATOR========"+mCanInfo.MAX_FRONT_LAMP_INDICATOR);
 
 		mCanInfo.AIR_RATE = (int) (msg[3] & 0x0f);
 	}

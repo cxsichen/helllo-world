@@ -139,7 +139,6 @@ public class KeyDealer {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			Log.i("cxs1","----------myReceiver----------"+intent.getAction());
 			switch (intent.getAction()) {
 			case KEYCODE_VOLUME_UP:
 				mHandler.sendEmptyMessageDelayed(Contacts.VOL_UP, 0);

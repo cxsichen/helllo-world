@@ -152,7 +152,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		Log.i("cxs", "====canReader=====onCreate===");
 		setContentView(R.layout.main);
 		bindService();
 		initView();
@@ -165,7 +164,6 @@ public class MainActivity extends Activity {
 		super.onPause();
 		mHandler.removeMessages(Contacts.MSG_GET_MSG);
 		isResume = false;
-
 	}
 
 	@Override
