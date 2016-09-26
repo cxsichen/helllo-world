@@ -70,7 +70,7 @@ public class CanInfo implements Parcelable {
 	
 
 	/*
-	 * 后雷达信息
+	 * 后雷达信息                             0不显示  1最近（报警）      4最远
 	 */
 	public int BACK_LEFT_DISTANCE = 0;                 //左后雷达
 	public int BACK_MIDDLE_LEFT_DISTANCE = 0;           //左后中雷达

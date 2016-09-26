@@ -1,9 +1,12 @@
 package com.console.canreader.utils;
 
 public class Contacts {
-	/*
-	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
-	 * PHONE 6：mute 7：SRC 8：SPEECH/MIC 9:answer phone 10:hangup phone
+
+	/**
+	 * 
+	 * @author okg 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup
+	 *         4：menu down 5： PHONE 6：mute 7：SRC 8：SPEECH/MIC 9:answer phone
+	 *         10:hangup phone
 	 */
 	public final static class KEYEVENT {
 		public static final int VOLUP = 1;
@@ -16,12 +19,69 @@ public class Contacts {
 		public static final int SPEECH = 8;
 		public static final int ANSWER = 9;
 		public static final int HANGUP = 10;
+		public static final int MENU_LONG_UP = 11;
+		public static final int MENU_LONG_DOWN = 12;
+		public static final int CANINFOPAGE = 13;
+	}
+
+	/**
+	 * 睿志诚 0 
+	 * 尚摄 1
+	 */
+
+	public final static class CANTYPEGROUP {
+		public static final int RAISE = 0;
+		public static final int HIWORLD = 1;
+	}
+
+	/**
+	 * Volkswagen 大众车系    0 
+	 * VolkswagenGolf 大众高尔夫   1
+	 * Honda 本田凌派 杰德 歌诗图    2
+	 * Toyota 丰田CAMRY RAV4    3 
+	 * ToyotaReiz 丰田锐志    4
+	 * GE 通用    5
+	 * FG580 风光580 6
+	 * PeugeotCitroen 标致系列  7
+	 * Nissan 日产系列   8
+	 * Trumpche 广汽传祺  9
+	 * Focus 福特通用  10
+	 * HondaCRV 本田CRV    11
+	 * HondaDA 本田DA      12
+	 * BuickGM 别克通用   13
+	 * EDGE 福特锐界    14
+	 * Roewe360 荣威360  15
+	 * MGGS 名爵锐腾   16
+	 * BESTURNX80 奔腾X80 17
+	 * FHCM3 海马M3   18
+	 */
+	public final static class CARTYPEGROUP {
+		public static final int Volkswagen = 0;
+		public static final int VolkswagenGolf = 1;
+		public static final int Honda = 2;
+		public static final int Toyota = 3;
+		public static final int ToyotaReiz = 4;
+		public static final int GE = 5;
+		public static final int FG580 = 6;
+		public static final int PeugeotCitroen = 7;
+		public static final int Nissan = 8;
+		public static final int Trumpche = 9;
+		public static final int Focus = 10;
+		public static final int HondaCRV = 11;
+		public static final int HondaDA = 12;
+		public static final int BuickGM = 13;
+		public static final int EDGE = 14;
+		public static final int Roewe360 = 15;
+		public static final int MGGS = 16;
+		public static final int BESTURNX80 = 17;
+		public static final int FHCM3 = 18;
+		
 	}
 
 	public final static String CARTYPE = "carType";
 	public final static String CANTYPE = "canType";
 	public static final String MODE = "Console_mode"; // 声音模式
-	public static final String KEY_VOLUME_VALUE = "volume_value";
+	public static final String KEY_VOLUME_VALUE = "volume_value";   //收音机音量
 	public static final String BACK_CAR = "back_car_state";
 	public static final String ACC_STATE = "acc_state";
 
@@ -37,6 +97,7 @@ public class Contacts {
 	public static final int TEL_HANDUP = 10;
 	public static final int MENU_LONG_UP = 11;
 	public static final int MENU_LONG_DOWN = 12;
+	public static final int CANINFOPAGE = 13;
 
 	public static final int MSG_RADIO_DATA = 0x01;
 	public static final int MSG_UPDATA_UI = 0x02;

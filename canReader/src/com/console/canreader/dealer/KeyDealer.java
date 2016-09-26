@@ -9,8 +9,11 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.console.canreader.R;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.Contacts;
 
@@ -27,12 +30,12 @@ public class KeyDealer {
 	public static final String ACTION_TEL_HANDUP = "com.console.TEL_HANDUP";
 	public static final String ACTION_MENU_LONG_UP = "com.console.MENU_LONG_UP";
 	public static final String ACTION_MENU_LONG_DOWN = "com.console.MENU_LONG_DOWN";
-	
-	//音量加减和mute由这里处理，其他发到外面处理
+
+	// 音量加减和mute由这里统一处理，其他发到外面处理
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
 	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
-	//音量加减和mute由这里处理，其他发到外面处理
+	// 音量加减和mute由这里统一处理，其他发到外面处理
 	public static final String ACTION_RAIDO_VOL_DOWN = "com.console.RAIDO_VOL_DOWN";
 	public static final String ACTION_RAIDO_VOL_UP = "com.console.RAIDO_VOL_UP";
 
@@ -53,17 +56,19 @@ public class KeyDealer {
 			case Contacts.VOL_UP:
 				Log.i("cxs", "-----1111--msg.VOL_UP-------");
 				if (mAudioManager == null)
-		    	mAudioManager = (AudioManager) context
-					.getSystemService(Context.AUDIO_SERVICE);
-				cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+					mAudioManager = (AudioManager) context
+							.getSystemService(Context.AUDIO_SERVICE);
+				cur_music = mAudioManager
+						.getStreamVolume(AudioManager.STREAM_MUSIC);
 				handleVolume(context, cur_music + SETP_VOLUME);
 				break;
 			case Contacts.VOL_DOWN:
 				Log.i("cxs", "-------msg.VOL_DOWN-------");
 				if (mAudioManager == null)
-	    		mAudioManager = (AudioManager) context
-					.getSystemService(Context.AUDIO_SERVICE);
-				cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+					mAudioManager = (AudioManager) context
+							.getSystemService(Context.AUDIO_SERVICE);
+				cur_music = mAudioManager
+						.getStreamVolume(AudioManager.STREAM_MUSIC);
 				handleVolume(context, cur_music - SETP_VOLUME);
 				break;
 			case Contacts.MENU_UP:
@@ -107,6 +112,10 @@ public class KeyDealer {
 			case Contacts.MENU_LONG_DOWN:
 				Log.i("cxs", "-------msg.MENU_LONG_DOWN-------");
 				handleMenuLongDown();
+				break;
+			case Contacts.KEYEVENT.CANINFOPAGE:
+				Log.i("cxs", "-------msg.CANINFOPAGE-------");
+				handleCanInfoPage();
 				break;
 			default:
 				break;
@@ -154,7 +163,7 @@ public class KeyDealer {
 			}
 		}
 	};
-	
+
 	private class ValumeObserver extends BroadcastReceiver {
 
 		@Override
@@ -167,14 +176,14 @@ public class KeyDealer {
 							.getSystemService(Context.AUDIO_SERVICE);
 				cur_music = mAudioManager
 						.getStreamVolume(AudioManager.STREAM_MUSIC);
-				//mute相关
+				// mute相关
 				if (cur_music > 0) {
 					save_music = 0;
 				}
 			}
 		}
 	}
-
+/*
 	protected void handleRadioVolUP() {
 		int valume = Settings.System.getInt(context.getContentResolver(),
 				Contacts.KEY_VOLUME_VALUE, 0);
@@ -189,6 +198,10 @@ public class KeyDealer {
 		valume = (valume - 1) < 0 ? 0 : (valume - 1);
 		Settings.System.putInt(context.getContentResolver(),
 				Contacts.KEY_VOLUME_VALUE, valume);
+	}
+*/
+	protected void handleCanInfoPage() {
+		openApplication(context,"com.console.canreader");
 	}
 
 	protected void handleMenuLongDown() {
@@ -269,7 +282,7 @@ public class KeyDealer {
 	protected void dealWith(Context context, CanInfo canInfo) {
 		// TODO Auto-generated method stub
 
-		if (canInfo.STEERING_BUTTON_STATUS == 0) {			
+		if (canInfo.STEERING_BUTTON_STATUS == 0) {
 			mHandler.removeMessages(Contacts.MENU_LONG_UP);
 			mHandler.removeMessages(Contacts.MENU_LONG_DOWN);
 			PRESSFREE = true;
@@ -316,13 +329,18 @@ public class KeyDealer {
 				mHandler.sendEmptyMessageDelayed(Contacts.MIC, 200);
 				break;
 			case Contacts.TEL_ANSWER:
-				Log.i("cxs","======dealWith==TEL_ANSWER=====");
+				Log.i("cxs", "======dealWith==TEL_ANSWER=====");
 				mHandler.removeMessages(Contacts.TEL_ANSWER);
 				mHandler.sendEmptyMessageDelayed(Contacts.TEL_ANSWER, 200);
 				break;
 			case Contacts.TEL_HANDUP:
 				mHandler.removeMessages(Contacts.TEL_HANDUP);
 				mHandler.sendEmptyMessageDelayed(Contacts.TEL_HANDUP, 200);
+				break;
+			case Contacts.KEYEVENT.CANINFOPAGE:
+				mHandler.removeMessages(Contacts.KEYEVENT.CANINFOPAGE);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.CANINFOPAGE,
+						200);
 				break;
 			default:
 				break;
@@ -345,7 +363,7 @@ public class KeyDealer {
 		mAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
 				currVolume, 0);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_RING,
-				currVolume> 15?15:currVolume, 0);
+				currVolume > 15 ? 15 : currVolume, 0);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
 				currVolume > 15 ? 15 : currVolume, 1);
 		mAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL,
@@ -355,5 +373,29 @@ public class KeyDealer {
 		Settings.System.putInt(context.getContentResolver(),
 				Contacts.KEY_VOLUME_VALUE, currVolume * 3);
 	}
+	
+	public static boolean openApplication(Context context, String pkgName) {
+		if (TextUtils.isEmpty(pkgName)) {
+			Toast.makeText(context, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
+			return false;
+		}
+        try {
+    		Intent intent = context.getPackageManager().getLaunchIntentForPackage(
+    				pkgName);
+    		if (intent == null) {
+    			Toast.makeText(context, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
+    			return false;
+    		}
+    		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    		context.startActivity(intent);
+    		return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			Toast.makeText(context, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
+			return false;
+		}
+
+	}
+
 
 }

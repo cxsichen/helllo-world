@@ -125,22 +125,26 @@ public class CanService extends Service {
 				mKeyDealer.dealCanKeyEvent(CanService.this, info.getCanInfo());
 				break;
 			case 3:
-				DialogCreater.showAirConDialog(CanService.this,
-						info.getCanInfo(), // 空调事件处理
-						new CallBack() {
+				if (carType != Contacts.CARTYPEGROUP.PeugeotCitroen) {       //标致的空调有单独的控制界面
+					DialogCreater.showAirConDialog(CanService.this,
+							info.getCanInfo(), // 空调事件处理
+							new CallBack() {
 
-							@Override
-							public void sendShowMsg() {
-								// TODO Auto-generated method stub
-								if (canType == 0 && carType == 0)
-									writeCanPort(BytesUtil
-											.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO));
-								if (canType == 0 && carType == 1)
-									writeCanPort(BytesUtil
-											.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_0_1));
+								@Override
+								public void sendShowMsg() {
+									// TODO Auto-generated method stub
+									if (canType == Contacts.CANTYPEGROUP.RAISE
+											&& carType == Contacts.CARTYPEGROUP.Volkswagen)
+										writeCanPort(BytesUtil
+												.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO));
+									if (canType == Contacts.CANTYPEGROUP.RAISE
+											&& carType == Contacts.CARTYPEGROUP.VolkswagenGolf)
+										writeCanPort(BytesUtil
+												.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_0_1));
 
-							}
-						});
+								}
+							});
+				}
 				break;
 			case 10:
 				DialogCreater.showUnlockWaringInfo(CanService.this, // 车身信息报警处理
@@ -169,10 +173,11 @@ public class CanService extends Service {
 	 */
 	private void chooseSerialPort() {
 		switch (canType) {
-		case 0: // 睿志诚
+		case Contacts.CANTYPEGROUP.RAISE: // 睿志诚
 			switch (carType) {
-			case 17:// 奔腾X80 海马M3
-			case 18:
+			case Contacts.CARTYPEGROUP.PeugeotCitroen: // 标致
+			case Contacts.CARTYPEGROUP.BESTURNX80:// 奔腾X80 海马M3
+			case Contacts.CARTYPEGROUP.FHCM3:
 				initSerialPort(SERIAL_PORT_BT_19200);
 				break;
 			default:
@@ -180,7 +185,7 @@ public class CanService extends Service {
 				break;
 			}
 			break;
-		case 1: // 尚摄
+		case Contacts.CANTYPEGROUP.HIWORLD: // 尚摄
 			initSerialPort(SERIAL_PORT_BT_38400);
 			break;
 		default:
@@ -323,11 +328,15 @@ public class CanService extends Service {
 	private void connectCanDevice() {
 		// TODO Auto-generated method stub
 		switch (canType) {
-		case 0: // 睿志诚
-			if (carType != 17 && carType != 18)// 奔腾X80 海马M3
+		case Contacts.CANTYPEGROUP.RAISE: // 睿志诚
+			if (carType != Contacts.CARTYPEGROUP.BESTURNX80
+					&& carType != Contacts.CARTYPEGROUP.FHCM3
+					&& carType != Contacts.CARTYPEGROUP.PeugeotCitroen)// 奔腾X80
+																		// 海马M3
+																		// 标致
 				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			break;
-		case 1: // 尚摄
+		case Contacts.CANTYPEGROUP.HIWORLD: // 尚摄
 			break;
 		default:
 			break;
@@ -426,14 +435,17 @@ public class CanService extends Service {
 		public void run() {
 			Trace.d("ReadDataFromSpThread start...");
 			while (mInputStream != null && !isInterrupted()) {
+				Log.i("cxs", "=========canType=======" + canType);
+				Log.i("cxs", "=========carType=======" + carType);
 				try {
 					switch (canType) {
-					case 0:
+					case Contacts.CANTYPEGROUP.RAISE:
 						switch (carType) {
-						case 17: // 奔腾X80
+						case Contacts.CARTYPEGROUP.PeugeotCitroen: // 标致
+						case Contacts.CARTYPEGROUP.BESTURNX80: // 奔腾X80
 							readRZCCanPort_1();
 							break;
-						case 18: // 海马M3
+						case Contacts.CARTYPEGROUP.FHCM3: // 海马M3
 							readRZCCanPort_2();
 							break;
 						default:
@@ -441,7 +453,7 @@ public class CanService extends Service {
 							break;
 						}
 						break;
-					case 1:
+					case Contacts.CANTYPEGROUP.HIWORLD:
 						readSSCanPort(); // 尚摄数据帧
 						break;
 					default:
@@ -611,6 +623,7 @@ public class CanService extends Service {
 		private void readRZCCanPort_1() throws IOException {
 			// TODO Auto-generated method stub
 			byte data = (byte) mInputStream.read();
+			Log.i("cxs", "==readRZCCanPort_1========");
 			if (data == (byte) Contacts.VOLK_HEAD_CODE_1) {
 				Trace.i("packet : " + data);
 				byte len = mReadByte();

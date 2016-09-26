@@ -42,5 +42,6 @@
     <string name="untie">untie</string>
     <string name="not_put">not put</string>
     <string name="too_low">too low</string>
-    <string name="day">天</string>
+    <string name="day">day</string>
+    <string name="activity_not_found">Activity not found</string>
 </resources>

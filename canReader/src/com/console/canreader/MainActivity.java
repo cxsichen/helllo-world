@@ -17,6 +17,7 @@ import com.console.canreader.utils.PreferenceUtil;
 import com.console.canreader.utils.ViewPagerAdapter;
 import com.console.canreader.view.ObdView;
 import com.console.canreader.view.ViewPageFactory;
+import com.console.canreader.view.PeugeotCitroen.PeuAirConView;
 import com.console.canreader.view.VolkswagenGolfView.GolfView1;
 import com.console.canreader.view.VolkswagenGolfView.GolfView2;
 import com.console.canreader.view.VolkswagenGolfView.GolfView3;
@@ -87,12 +88,12 @@ public class MainActivity extends Activity {
 			case Contacts.MSG_GET_MSG:
 				// 大众主动获取数据
 
-				if (canType == 0 && carType == 0) {
+				if (canType == Contacts.CANTYPEGROUP.RAISE && carType == Contacts.CARTYPEGROUP.Volkswagen) {
 					sendMsg(Contacts.HEX_GET_CAR_INFO);
 					mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 2000);
 				}
 
-				if (canType == 0 && carType == 1) {
+				if (canType == Contacts.CANTYPEGROUP.RAISE && carType ==Contacts.CARTYPEGROUP.VolkswagenGolf) {
 					sendMsg("2e90026300");
 					sendMsg("2e90026310");
 					sendMsg("2e90026311");
@@ -118,10 +119,10 @@ public class MainActivity extends Activity {
 				break;
 
 			case Contacts.MSG_ONCE_GET_MSG:
-				if (canType == 0) {
+				if (canType == Contacts.CANTYPEGROUP.RAISE) {
 					sendMsg(Contacts.CONNECTMSG);
 				}
-				if (canType == 0 && carType == 0) {
+				if (canType == Contacts.CANTYPEGROUP.RAISE && carType == Contacts.CARTYPEGROUP.Volkswagen) {
 					sendMsg(Contacts.HEX_GET_CAR_INFO_1);
 					sendMsg(Contacts.HEX_GET_CAR_INFO_3);
 				}
@@ -154,7 +155,7 @@ public class MainActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
 		bindService();
-		initView();
+	//	initView();
 	}
 
 	@Override
@@ -228,41 +229,63 @@ public class MainActivity extends Activity {
 		vp.setOffscreenPageLimit(2);
 		if (vpAdapter == null)
 			vpAdapter = new ViewPagerAdapter(viewsFactory);
-		if (PreferenceUtil.getCARTYPE(this) == 1 && carType != 1) { // 大众高尔夫
+		if(PreferenceUtil.getCARTYPE(this)!=carType){
+			switch (PreferenceUtil.getCARTYPE(this)) {
+			case Contacts.CARTYPEGROUP.PeugeotCitroen:
+				carType = PreferenceUtil.getCARTYPE(this);
+				vp.removeAllViews();
+				viewsFactory.clear();
+				
+				ViewPageFactory pageView1 = new ObdView(this,
+						R.layout.dashboard_main);
+				viewsFactory.add(pageView1);
+				
+				ViewPageFactory peuAirConView = new PeuAirConView(this,
+						R.layout.ac_controler_peugeot_408);
+				viewsFactory.add(peuAirConView);
+								
+				vpAdapter.notifyDataSetChanged();
+				break;
+			case Contacts.CARTYPEGROUP.VolkswagenGolf:
+				carType = PreferenceUtil.getCARTYPE(this);
 
-			carType = PreferenceUtil.getCARTYPE(this);
+				vp.removeAllViews();
+				viewsFactory.clear();
 
-			vp.removeAllViews();
-			viewsFactory.clear();
+				ViewPageFactory pageView = new ObdView(this,
+						R.layout.dashboard_main);
+				viewsFactory.add(pageView);
 
-			ViewPageFactory pageView = new ObdView(this,
-					R.layout.dashboard_main);
-			viewsFactory.add(pageView);
+				ViewPageFactory GolfView1 = new GolfView1(this,
+						R.layout.carinfo_layout_1);
+				viewsFactory.add(GolfView1);
 
-			ViewPageFactory GolfView1 = new GolfView1(this,
-					R.layout.carinfo_layout_1);
-			viewsFactory.add(GolfView1);
+				ViewPageFactory GolfView2 = new GolfView2(this,
+						R.layout.carinfo_layout_2);
+				viewsFactory.add(GolfView2);
 
-			ViewPageFactory GolfView2 = new GolfView2(this,
-					R.layout.carinfo_layout_2);
-			viewsFactory.add(GolfView2);
+				ViewPageFactory GolfView3 = new GolfView3(this,
+						R.layout.carinfo_layout_3);
+				viewsFactory.add(GolfView3);
 
-			ViewPageFactory GolfView3 = new GolfView3(this,
-					R.layout.carinfo_layout_3);
-			viewsFactory.add(GolfView3);
+				ViewPageFactory GolfView4 = new GolfView4(this,
+						R.layout.carinfo_layout_4);
+				viewsFactory.add(GolfView4);
 
-			ViewPageFactory GolfView4 = new GolfView4(this,
-					R.layout.carinfo_layout_4);
-			viewsFactory.add(GolfView4);
+				vpAdapter.notifyDataSetChanged();
+				break;
 
-			vpAdapter.notifyDataSetChanged();
-		} else if (PreferenceUtil.getCARTYPE(this) != 1) {
-			vp.removeAllViews();
-			viewsFactory.clear();
-			ViewPageFactory pageView = new ObdView(this,
-					R.layout.dashboard_main);
-			viewsFactory.add(pageView);
-			vpAdapter.notifyDataSetChanged();
+			default:
+				vp.removeAllViews();
+				viewsFactory.clear();
+				
+				ViewPageFactory pageViewDefalut = new ObdView(this,
+						R.layout.dashboard_main);
+				viewsFactory.add(pageViewDefalut);
+				vpAdapter.notifyDataSetChanged();
+				break;
+			}
+			
 		}
 		vp.setAdapter(vpAdapter);
 

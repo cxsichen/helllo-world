@@ -28,6 +28,9 @@ public class BeanFactory {
 			case 4:  
 				getRZCToyota(mPacket);		 //丰田 丰田CAMRY
 				break;
+			case 7:                           //标致
+				getRZCPeugeot(mPacket);
+				break;
 			case 8:                           //日产
 				getRZCNISSAN(mPacket);
 				break;
@@ -92,9 +95,17 @@ public class BeanFactory {
 		return mAnalyzeUtils;
 	}
 	
+	private static void getRZCPeugeot(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCPeugeot(mPacket,2);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,2);//第三位是信息type位
+		}
+	}
+	
 	private static void getRZCBESTURNx80(byte[] mPacket) {
 		if (mAnalyzeUtils == null) {
-			mAnalyzeUtils = new RZCBESTURNx80(mPacket,1);
+			mAnalyzeUtils = new RZCBESTURNx80(mPacket,2);
 		} else {
 			mAnalyzeUtils.analyze(mPacket,2);//第三位是信息type位
 		}
@@ -102,7 +113,7 @@ public class BeanFactory {
 	
 	private static void getRZCFHCm3(byte[] mPacket) {
 		if (mAnalyzeUtils == null) {
-			mAnalyzeUtils = new RZCFHCm3(mPacket,1);
+			mAnalyzeUtils = new RZCFHCm3(mPacket,2);
 		} else {
 			mAnalyzeUtils.analyze(mPacket,2);//第三位是信息type位
 		}
