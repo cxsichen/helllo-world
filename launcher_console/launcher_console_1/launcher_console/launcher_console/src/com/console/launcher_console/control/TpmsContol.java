@@ -20,6 +20,7 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.console.launcher_console.R;
 import com.console.launcher_console.util.Constact;
@@ -319,12 +320,14 @@ public class TpmsContol implements OnClickListener {
 	
 	public static boolean openApplication(Context context, String pkgName) {
 		if (TextUtils.isEmpty(pkgName)) {
+			Toast.makeText(context, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
 			return false;
 		}
         try {
     		Intent intent = context.getPackageManager().getLaunchIntentForPackage(
     				pkgName);
     		if (intent == null) {
+    			Toast.makeText(context, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
     			return false;
     		}
     		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -332,6 +335,7 @@ public class TpmsContol implements OnClickListener {
     		return true;
 		} catch (Exception e) {
 			// TODO: handle exception
+			Toast.makeText(context, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
 			return false;
 		}
 

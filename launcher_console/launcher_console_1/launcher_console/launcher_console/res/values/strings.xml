@@ -57,5 +57,5 @@
     
     <string name="tyre">0Kpa</string>
     <string name="temp">0℃</string>
-   
+     <string name="guide">guide</string>
 </resources>

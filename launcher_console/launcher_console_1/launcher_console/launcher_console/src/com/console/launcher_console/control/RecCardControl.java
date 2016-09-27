@@ -352,7 +352,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		case R.id.video_layout:
+/*		case R.id.video_layout:
 			try {
 				Intent recIntent = context.getPackageManager()
 						.getLaunchIntentForPackage("com.srtc.pingwang");
@@ -361,7 +361,7 @@ public class RecCardControl implements UNVideoViewHelper.UNVideoViewListener,
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			break;
+			break;*/
 		case R.id.RecordButton:
 			if (null != mService) {
 				try {

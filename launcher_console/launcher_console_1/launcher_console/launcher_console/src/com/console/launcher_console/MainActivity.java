@@ -34,6 +34,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -77,12 +80,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private LinearLayout indicatorLayout;
 	private static final int default_page = 1;
 	private static final int fm_page = 0;
-	private LocationClient mLocationClient;
-	private LocationMode lmode = LocationMode.Hight_Accuracy;
-	private String tempcoor = "bd09ll";
-
-	MyLatLng A = new MyLatLng(113.249648, 23.401553);
-	MyLatLng B = new MyLatLng(113.246033, 23.403362);
 
 	public static ImageView ev_point;
 	public static Drawable drawable;
@@ -111,6 +108,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	float deg;
 	private float predeg = 0;
 	int currentIndex = 1;
+
+	private static final String RECAPP_1 = "com.srtc.pingwang";
+	private static final String RECAPP_2 = "com.cam.dod";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -196,8 +196,10 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		mOtherControl = new OtherControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.other_card_layout),
 				mSerialPortControl);
-		mRecCardControl = new RecCardControl(getApplicationContext(),
-				(LinearLayout) findViewById(R.id.rec_layout));
+		if (isAppInstalled(this, RECAPP_1)) {
+			mRecCardControl = new RecCardControl(getApplicationContext(),
+					(LinearLayout) findViewById(R.id.rec_layout));
+		}
 
 	}
 
@@ -216,9 +218,10 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		initIndicator(view);
 
 	}
-	
-	Boolean checkLocale(String str){		
-		return getResources().getConfiguration().locale.getCountry().equals(str);
+
+	Boolean checkLocale(String str) {
+		return getResources().getConfiguration().locale.getCountry()
+				.equals(str);
 	}
 
 	private View getNewPage(int resid) {
@@ -285,7 +288,14 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 		ev_radio_app = (ImageView) findViewById(R.id.ev_radio_app);
 		ev_radio_app.setOnClickListener(this);
-
+		if (isAppInstalled(this, RECAPP_1)) {
+			findViewById(R.id.video_layout).setOnClickListener(this);
+		} else if (isAppInstalled(this, RECAPP_2)) {
+			findViewById(R.id.rec_layout).setOnClickListener(this);
+			findViewById(R.id.LockButton).setOnClickListener(this);
+			findViewById(R.id.RecordButton).setOnClickListener(this);
+			findViewById(R.id.CaptureButton).setOnClickListener(this);
+		}
 		findViewById(R.id.navigation_one_button).setOnClickListener(this);
 
 	}
@@ -294,6 +304,18 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
+		case R.id.video_layout:
+			Intent recIntent = getPackageManager().getLaunchIntentForPackage(
+					RECAPP_1);
+			recIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivitySafely(v, recIntent, null);
+			break;
+		case R.id.rec_layout:
+			Intent recIntent1 = getPackageManager().getLaunchIntentForPackage(
+					RECAPP_2);
+			recIntent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivitySafely(v, recIntent1, null);
+			break;
 		case R.id.navi_car_layout:
 			startNavi(v);
 			break;
@@ -500,6 +522,20 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		return;
+	}
+
+	@SuppressWarnings("unused")
+	public boolean isAppInstalled(Context context, String packageName) {
+		if (packageName == null || "".equals(packageName))
+			return false;
+		try {
+			ApplicationInfo info = context.getPackageManager()
+					.getApplicationInfo(packageName,
+							PackageManager.GET_UNINSTALLED_PACKAGES);
+			return true;
+		} catch (NameNotFoundException e) {
+			return false;
+		}
 	}
 
 }

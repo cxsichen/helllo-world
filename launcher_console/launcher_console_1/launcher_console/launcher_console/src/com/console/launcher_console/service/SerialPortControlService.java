@@ -135,7 +135,7 @@ public class SerialPortControlService extends Service {
 					sendMsg("F5020000" + BytesUtil.intToHexString(mode));
 					startModeActivty(mode);
 					
-					mHandler.sendEmptyMessageDelayed(Contacts.MSG_BACK_CAR,1000);
+					mHandler.sendEmptyMessageDelayed(Contacts.MSG_BACK_CAR,100);
 				}
 				/*
 				 * 启动can协议服务
@@ -188,9 +188,9 @@ public class SerialPortControlService extends Service {
 
 				break;
 			case Contacts.MSG_BACK_CAR: // 处理倒车事件
-				Log.i("cxs","=====start parking ========getTopActivity=====");
-				if (!getTopActivity(SerialPortControlService.this).equals(
-						"com.console.parking")) {
+			//	if (!getTopActivity(SerialPortControlService.this).equals(
+			//			"com.console.parking")) {
+				if(true){
 				Log.i("cxs","=====start parking ====now =========");
 					Intent intent = new Intent();
 					intent.setClassName("com.console.parking",
@@ -290,6 +290,7 @@ public class SerialPortControlService extends Service {
 
 					break;
 				case "com.srtc.pingwang":
+				case "com.cam.dod":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 7) {
 						PreferenceUtil
 								.setMode(SerialPortControlService.this, 7);
@@ -877,8 +878,10 @@ public class SerialPortControlService extends Service {
 	private void handleAccState(int state) {
 		// TODO Auto-generated method stub
 		if (state == 1) {
-			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 1000);
+			mHandler.removeMessages(Contacts.MSG_ACCON_MSG);
+			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 500);
 		}else{
+			mHandler.removeMessages(Contacts.MSG_ACCON_MSG);
 			isNaving=(android.provider.Settings.System.getInt(
 					getContentResolver(), Constact.NAVING_STATUS, 0)==1);
 			Log.i("cxs","=====acc off   insNaving ============="+isNaving);

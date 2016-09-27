@@ -120,6 +120,9 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 			if (tps != null && tps.moveToNext()) {
 				if (tps.getString(tps.getColumnIndex(IS_NAVING)).equals("1")) {
 
+					android.provider.Settings.System.putInt(
+							context.getContentResolver(), Constact.NAVING_STATUS, 1);
+					
 					if (!showNaviLayout) {
 						showNaviLayout = true;
 						showLayout(naviLayout);
@@ -174,6 +177,8 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 							+ context.getString(R.string.remind_time_unit));
 
 				} else {
+					android.provider.Settings.System.putInt(
+							context.getContentResolver(), Constact.NAVING_STATUS, 0);
 					mHandler.sendEmptyMessageDelayed(1, 5*1000);
 				}
 				if (tps != null) {
@@ -196,13 +201,17 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 		// TODO Auto-generated method stub
 		Trace.i("-----onReceive------" + intent.getAction());
 		switch (intent.getAction()) {
-		case STOPNAVI:			
+		case STOPNAVI:		
+			android.provider.Settings.System.putInt(
+					context.getContentResolver(), Constact.NAVING_STATUS, 0);
 			showNaviLayout = false;
 			showLayout(compassLayout);
 			hideLayout(naviLayout);
 			mHandler.removeMessages(1);
 			break;
 		case STARTNAVI:
+			android.provider.Settings.System.putInt(
+					context.getContentResolver(), Constact.NAVING_STATUS, 1);
 			showNaviLayout = true;
 			showLayout(naviLayout);
 			hideLayout(compassLayout);
@@ -218,11 +227,11 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 				R.anim.fade_in);
 		vg.startAnimation(animation);
 		vg.setVisibility(View.VISIBLE);
-		if(vg==naviLayout){
+/*		if(vg==naviLayout){
 			 Log.i("cxs","=========navi start============");
 			 android.provider.Settings.System.putInt(
 					context.getContentResolver(), Constact.NAVING_STATUS, 1);
-		}
+		}*/
 	}
 
 	private void hideLayout(ViewGroup vg) {
@@ -231,10 +240,10 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 				R.anim.fade_out);
 		vg.startAnimation(animation);
 		vg.setVisibility(View.GONE);
-		if(vg==naviLayout){
+/*		if(vg==naviLayout){
 			 Log.i("cxs","=========navi stop============");
 			 android.provider.Settings.System.putInt(
 					context.getContentResolver(), Constact.NAVING_STATUS, 0);
-		}
+		}*/
 	}
 }
