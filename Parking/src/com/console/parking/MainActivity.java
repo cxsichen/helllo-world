@@ -1,5 +1,7 @@
 package com.console.parking;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -42,36 +44,59 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 
 	private Camera camera;// 声明相机
 	private TextureView surface;
+	private SurfaceTexture mSurfaceTexture;
 	private int screenHeight = 0;
 	private LinearLayout parkingLayout;
 	private dataControl mRadarControl;
 	private static final String BACKCARSTATE = "back_car_state";
 	private static final int BACKCARSTATEMSG = 1;
 	private static final int FINISHMSG = 2;
-	private static final int FINISH = 3;
-	private final static String BACKTRACK = "backingTrack"; 
-	private final static String VIDEOMIRROR = "videoMirroring"; 
+	private static final int OPENCAMERA = 5;
+	private static final int CLOSECAMERA = 6;
+	private final static String BACKTRACK = "backingTrack";
+	private final static String VIDEOMIRROR = "videoMirroring";
 	private static final String SEND_BACK_CAR_OFF = "com.console.SEND_BACK_CAR_OFF";
 	private Button button;
+	IntentFilter filter;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case BACKCARSTATEMSG:
 				mHandler.sendEmptyMessageDelayed(BACKCARSTATEMSG, 1000);
-				if(android.provider.Settings.System.getInt(
-						getContentResolver(), BACKCARSTATE, 1)==0){
-					mHandler.sendEmptyMessageDelayed(FINISHMSG, 0);
-				}	
-				break;
-			case FINISHMSG:
-				if(android.provider.Settings.System.getInt(
-						getContentResolver(), BACKCARSTATE, 1)==0){			        
-				finish();
+				if (android.provider.Settings.System.getInt(
+						getContentResolver(), BACKCARSTATE, 1) == 0) {
+					mHandler.sendEmptyMessageDelayed(FINISHMSG, 500);
 				}
 				break;
-			case FINISH:
-				finish();
+			case FINISHMSG:
+				if (android.provider.Settings.System.getInt(
+						getContentResolver(), BACKCARSTATE, 1) == 0) {
+					finish();
+					//moveTaskToBack(true);
+				}
+				break;
+			case OPENCAMERA:
+				openCamera();
+				if (camera != null&&mSurfaceTexture!=null) {
+					Camera.Parameters mParams = camera.getParameters();
+
+					mParams.setPreviewSize(720, 240);
+					camera.setParameters(mParams);
+					try {
+						camera.setPreviewTexture(mSurfaceTexture);
+					} catch (IOException t) {
+					}
+					// camera.startPreview();
+					camera.startPreview();
+					surface.setAlpha(1.0f);
+					surface.setRotation(0f);
+				} else {
+					mHandler.sendEmptyMessageDelayed(OPENCAMERA, 500);
+				}
+				break;
+			case CLOSECAMERA:
+				closeCamera();
 				break;
 			default:
 				break;
@@ -94,34 +119,42 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 						| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 						| View.SYSTEM_UI_FLAG_FULLSCREEN
 						| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
 		setContentView(R.layout.activity_main);
-		initView();
-		initControl();
-		
+		init();
+	
+	}
+
+	private void init() {
+		// TODO Auto-generated method stub
+		// 初始化can数据读取控制
+		parkingLayout = (LinearLayout) findViewById(R.id.parking_layout);
+		mRadarControl = new dataControl(this, parkingLayout);
+		// 初始化camera显示界面
+		surface = (TextureView) findViewById(R.id.camera_surface);
+		surface.setSurfaceTextureListener(this);
+		//
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(BACKCARSTATE), true,
 				mBackCarObserver);
-		mHandler.sendEmptyMessageDelayed(BACKCARSTATEMSG, 2000);
+		mHandler.sendEmptyMessageDelayed(BACKCARSTATEMSG, 1000);
 		doRegisterReceiver();
 	}
-	
+
 	private void doRegisterReceiver() {
 		// TODO Auto-generated method stub
-		IntentFilter filter = new IntentFilter();
+		filter = new IntentFilter();
 		filter.addAction(SEND_BACK_CAR_OFF);
 		registerReceiver(myReceiver, filter);
 	}
-	
+
+	/*----------------------------监控结束状态------------------------*/
 	private BroadcastReceiver myReceiver = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			switch (intent.getAction()) {
 			case SEND_BACK_CAR_OFF:
-				Message msg = new Message();
-				msg.what = FINISH;
-				mHandler.sendMessage(msg);
+				mHandler.sendEmptyMessage(FINISHMSG);
 				break;
 			default:
 				break;
@@ -148,87 +181,74 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private void handleBackCar(int state) {
 		// TODO Auto-generated method stub
 		if (state == 0) {
-		//	mHandler.sendEmptyMessageDelayed(BACKCARSTATEMSG, 0);
-		} 
+			mHandler.sendEmptyMessageDelayed(FINISHMSG, 0);
+		}
 	}
 
-	private void initControl() {
-		// TODO Auto-generated method stub
-		parkingLayout = (LinearLayout) findViewById(R.id.parking_layout);
-		mRadarControl = new dataControl(this, parkingLayout);
-	}
-
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		// TODO Auto-generated method stub
-		super.onWindowFocusChanged(hasFocus);
-		// changeSurfaceView();
-	}
-	
+	/*----------------------------Resume------------------------*/
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		Log.i("cxs","=====parking====onResume======");
-		openCamera();
-		getSetting();
-		com.example.cjc7150.MainActivity.setmode((byte) 1);
 		super.onResume();
-		
+		if (readChannelFile() != 1)
+			com.example.cjc7150.MainActivity.setmode((byte) 1);
+		// 设置界面
+		getSetting();
+
 	}
-	
+
 	private void getSetting() {
 		// TODO Auto-generated method stub
 		int backTrackState = android.provider.Settings.System.getInt(
 				getContentResolver(), BACKTRACK, 1);
-		Log.i("cxs","=======backTrackState========="+backTrackState);
-		if(backTrackState==1){
+		if (backTrackState == 1) {
 			findViewById(R.id.rail_line).setVisibility(View.VISIBLE);
-		}else{
+		} else {
 			findViewById(R.id.rail_line).setVisibility(View.GONE);
 		}
-		
+
 		int videoMirrorState = android.provider.Settings.System.getInt(
 				getContentResolver(), VIDEOMIRROR, 1);
-		Log.i("cxs","=======videoMirrorState========="+videoMirrorState);
-		if(videoMirrorState==1){
+		if (videoMirrorState == 1) {
 			Matrix transform = new Matrix();
 			transform.setScale(1, 1, 0, 0);
 			surface.setTransform(transform);
-		}else{
+		} else {
 			Matrix transform = new Matrix();
 			transform.setScale(-1, 1, 400, 0);
 			surface.setTransform(transform);
 		}
 	}
 
+	/*----------------------------Resume------------------------*/
+
+	/*----------------------------Pause-------------------------*/
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
-		Log.i("cxs","=====parking====onPause======");
-		com.example.cjc7150.MainActivity.setmode((byte) 0);
-		closeCamera();
 		super.onPause();
 	}
+
+	/*----------------------------Pause-------------------------*/
 
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-		Log.i("cxs","=====parking====onDestroy======");
-		com.example.cjc7150.MainActivity.setmode((byte) 0);
 		super.onDestroy();
-		closeCamera();
+		mHandler.removeMessages(OPENCAMERA);
+		mHandler.sendEmptyMessageDelayed(CLOSECAMERA, 0);
+		getContentResolver().unregisterContentObserver(mBackCarObserver);
+		mHandler.removeMessages(BACKCARSTATEMSG);
+		unregisterReceiver(myReceiver);
 		if (mRadarControl != null) {
 			mRadarControl.unBindService();
 		}
-		getContentResolver().unregisterContentObserver(mBackCarObserver);
-		unregisterReceiver(myReceiver);
 		surface = null;
 	}
 
 	private void openCamera() {
 		// TODO Auto-generated method stub
 		if (camera == null) {
-			Log.i("cxs","=====parking====openCamera======");
 			try {
 				camera = Camera.open();
 				camera.setDisplayOrientation(0);
@@ -242,39 +262,20 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private void closeCamera() {
 		// TODO Auto-generated method stub
 		if (camera != null) {
-			Log.i("cxs","=====parking====closeCamera======");
 			camera.stopPreview();
 			camera.release();
-			camera = null;		
+			camera = null;
 		}
-
-	}
-
-	private void initView() {
-		// TODO Auto-generated method stub
-		surface = (TextureView) findViewById(R.id.camera_surface);
-		surface.setSurfaceTextureListener(this);
 	}
 
 	@Override
 	public void onSurfaceTextureAvailable(SurfaceTexture surface, int width,
 			int height) {
 		// TODO Auto-generated method stub
-		Log.i("cxs","=====parking====onSurfaceTextureAvailable======");
-		openCamera();
-		if (camera != null) {
-			Camera.Parameters mParams = camera.getParameters();
+		// 打开摄像头
+		this.mSurfaceTexture=surface;
+		mHandler.sendEmptyMessageDelayed(OPENCAMERA, 0);
 
-			mParams.setPreviewSize(720, 240);
-			camera.setParameters(mParams);
-			try {
-				camera.setPreviewTexture(surface);
-			} catch (IOException t) {
-			}
-			camera.startPreview();
-			this.surface.setAlpha(1.0f);
-			this.surface.setRotation(0f);
-		}
 	}
 
 	@Override
@@ -296,13 +297,36 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		return;
 	}
-	
-	
+
+	public final static String CHANNEL_FILE = "/sys/class/gpio/cjc5150/value";
+
+	public static int readChannelFile() {
+
+		FileInputStream fis = null;
+		byte[] rBuf = new byte[10];
+		int channel = -1;
+		try {
+			fis = new FileInputStream(CHANNEL_FILE);
+			fis.read(rBuf);
+			fis.close();
+			if (rBuf[0] == 48) {
+				channel = 0;
+			} else if (rBuf[0] == 49) {
+				channel = 1;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			return channel;
+		}
+	}
 
 }
