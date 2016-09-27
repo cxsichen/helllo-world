@@ -1,5 +1,7 @@
 package com.console.auxapp;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.app.Activity;
@@ -31,6 +33,45 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private Camera camera;// ÉùÃ÷Ïà»ú
 	private TextureView surface;
 	private TextView auxHint;
+	private SurfaceTexture mSurfaceTexture;
+	private static final int OPENCAMERA = 5;
+	private static final int CLOSECAMERA = 6;
+	
+	Handler mHandler=new Handler(){
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 1:
+				com.example.cjc7150.MainActivity.setmode((byte) 0);
+				break;
+			case OPENCAMERA:
+				openCamera();
+				com.example.cjc7150.MainActivity.setmode((byte) 0);
+				if (camera != null&&mSurfaceTexture!=null) {
+					Camera.Parameters mParams = camera.getParameters();
+
+					mParams.setPreviewSize(720, 240);
+					camera.setParameters(mParams);
+					try {
+						camera.setPreviewTexture(mSurfaceTexture);
+					} catch (IOException t) {
+					}
+					// camera.startPreview();
+					camera.startPreview();
+					surface.setAlpha(1.0f);
+					surface.setRotation(0f);
+				} else {
+					mHandler.sendEmptyMessageDelayed(OPENCAMERA, 500);
+				}
+				break;
+			case CLOSECAMERA:
+				closeCamera();
+				break;
+			default:
+				break;
+			}
+			
+		};
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,17 +91,17 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
-		if (com.example.cjc7150.MainActivity.getmode() != 0)
-			com.example.cjc7150.MainActivity.setmode((byte) 0);
+		mHandler.sendEmptyMessageDelayed(OPENCAMERA, 1000);
 		super.onResume();
-		openCamera();
+		
 	}
 
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		closeCamera();
+		mHandler.removeMessages(OPENCAMERA);
+		mHandler.sendEmptyMessageDelayed(CLOSECAMERA, 0);
 	}
 
 	@Override
@@ -108,6 +149,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	public void onSurfaceTextureAvailable(SurfaceTexture surface, int width,
 			int height) {
 		// TODO Auto-generated method stub
+		mSurfaceTexture=surface;
 		openCamera();
 		if (camera != null) {
 			Camera.Parameters mParams = camera.getParameters();
@@ -143,5 +185,32 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		// TODO Auto-generated method stub
 		auxHint.setVisibility(View.GONE);
 	}
+	
+	public final static String CHANNEL_FILE = "/sys/class/gpio/cjc5150/value";
+	
+    public static int readChannelFile() {
+
+        FileInputStream fis = null;
+        byte[] rBuf = new byte[10];
+        int channel = -1;
+        try
+        {
+            fis = new FileInputStream(CHANNEL_FILE);
+            fis.read(rBuf);
+            fis.close();
+            Log.i("cxs","===rBuf[0]==========="+rBuf[0]);
+            if (rBuf[0] == 48) {            //ASCII
+            	channel = 0;
+            } else if (rBuf[0] == 49) {
+            	channel = 1;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            return channel;
+        }
+    }
 
 }
