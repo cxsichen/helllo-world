@@ -60,6 +60,9 @@ public class CanService extends Service {
 
 	private int canType = -1; // 盒子厂家 0：睿志诚 1：尚摄
 	private int carType = -1; // 车型 0:大众
+	
+	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
+	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
 
 	interface SerialPortWriteTask {
 		public void excute();
@@ -161,11 +164,40 @@ public class CanService extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
+		Log.i("cxs","===canservice==onCreate=========");
 		canType = PreferenceUtil.getCANTYPE(this);
 		carType = PreferenceUtil.getCARTYPE(this);
 		chooseSerialPort();
 		initSerialPortThread();
 		init();
+	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		// TODO Auto-generated method stub	
+		String command=intent.getStringExtra("keyEvent");
+		if(command!=null){
+			dealCommand(command);
+		}
+		return super.onStartCommand(intent, flags, startId);
+	}
+	/**
+	 * deal the user's requset  that send to this service
+	 * @param command
+	 */	
+	private void dealCommand(String command){
+		if(mKeyDealer==null)
+			mKeyDealer=KeyDealer.getInstance(this);
+		switch (command) {
+		case KEYCODE_VOLUME_UP:
+			mKeyDealer.handleVolUp();
+			break;
+		case KEYCODE_VOLUME_DOWN:
+			mKeyDealer.handleVolDown();
+			break;
+		default:
+			break;
+		}
 	}
 
 	/**
@@ -362,7 +394,6 @@ public class CanService extends Service {
 		mOutputStream = null;
 		super.onDestroy();
 		new Timer().schedule(new TimerTask() {
-
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
@@ -374,7 +405,6 @@ public class CanService extends Service {
 					// TODO: handle exception
 					e.printStackTrace();
 				}
-
 			}
 		}, 1000 * 10);
 	}
@@ -623,7 +653,6 @@ public class CanService extends Service {
 		private void readRZCCanPort_1() throws IOException {
 			// TODO Auto-generated method stub
 			byte data = (byte) mInputStream.read();
-			Log.i("cxs", "==readRZCCanPort_1========");
 			if (data == (byte) Contacts.VOLK_HEAD_CODE_1) {
 				Trace.i("packet : " + data);
 				byte len = mReadByte();

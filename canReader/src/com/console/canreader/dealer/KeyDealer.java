@@ -55,21 +55,11 @@ public class KeyDealer {
 			switch (msg.what) {
 			case Contacts.VOL_UP:
 				Log.i("cxs", "-----1111--msg.VOL_UP-------");
-				if (mAudioManager == null)
-					mAudioManager = (AudioManager) context
-							.getSystemService(Context.AUDIO_SERVICE);
-				cur_music = mAudioManager
-						.getStreamVolume(AudioManager.STREAM_MUSIC);
-				handleVolume(context, cur_music + SETP_VOLUME);
+				handleVolUp();
 				break;
 			case Contacts.VOL_DOWN:
 				Log.i("cxs", "-------msg.VOL_DOWN-------");
-				if (mAudioManager == null)
-					mAudioManager = (AudioManager) context
-							.getSystemService(Context.AUDIO_SERVICE);
-				cur_music = mAudioManager
-						.getStreamVolume(AudioManager.STREAM_MUSIC);
-				handleVolume(context, cur_music - SETP_VOLUME);
+				handleVolDown();
 				break;
 			case Contacts.MENU_UP:
 				Log.i("cxs", "-------msg.MENU_UP-------");
@@ -183,25 +173,22 @@ public class KeyDealer {
 			}
 		}
 	}
-/*
-	protected void handleRadioVolUP() {
-		int valume = Settings.System.getInt(context.getContentResolver(),
-				Contacts.KEY_VOLUME_VALUE, 0);
-		valume = (valume + 1) > 48 ? 48 : (valume + 1);
-		Settings.System.putInt(context.getContentResolver(),
-				Contacts.KEY_VOLUME_VALUE, valume);
-	}
 
-	protected void handleRadioVolDown() {
-		int valume = Settings.System.getInt(context.getContentResolver(),
-				Contacts.KEY_VOLUME_VALUE, 0);
-		valume = (valume - 1) < 0 ? 0 : (valume - 1);
-		Settings.System.putInt(context.getContentResolver(),
-				Contacts.KEY_VOLUME_VALUE, valume);
-	}
-*/
+	/*
+	 * protected void handleRadioVolUP() { int valume =
+	 * Settings.System.getInt(context.getContentResolver(),
+	 * Contacts.KEY_VOLUME_VALUE, 0); valume = (valume + 1) > 48 ? 48 : (valume
+	 * + 1); Settings.System.putInt(context.getContentResolver(),
+	 * Contacts.KEY_VOLUME_VALUE, valume); }
+	 * 
+	 * protected void handleRadioVolDown() { int valume =
+	 * Settings.System.getInt(context.getContentResolver(),
+	 * Contacts.KEY_VOLUME_VALUE, 0); valume = (valume - 1) < 0 ? 0 : (valume -
+	 * 1); Settings.System.putInt(context.getContentResolver(),
+	 * Contacts.KEY_VOLUME_VALUE, valume); }
+	 */
 	protected void handleCanInfoPage() {
-		openApplication(context,"com.console.canreader");
+		openApplication(context, "com.console.canreader");
 	}
 
 	protected void handleMenuLongDown() {
@@ -258,6 +245,22 @@ public class KeyDealer {
 		} else if (cur_music == 0 && save_music != 0) {
 			handleVolume(context, save_music);
 		}
+	}
+
+	public void handleVolUp() {
+		if (mAudioManager == null)
+			mAudioManager = (AudioManager) context
+					.getSystemService(Context.AUDIO_SERVICE);
+		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+		handleVolume(context, cur_music + SETP_VOLUME);
+	}
+
+	public void handleVolDown() {
+		if (mAudioManager == null)
+			mAudioManager = (AudioManager) context
+					.getSystemService(Context.AUDIO_SERVICE);
+		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+		handleVolume(context, cur_music - SETP_VOLUME);
 	}
 
 	public static KeyDealer getInstance(Context context) {
@@ -373,29 +376,31 @@ public class KeyDealer {
 		Settings.System.putInt(context.getContentResolver(),
 				Contacts.KEY_VOLUME_VALUE, currVolume * 3);
 	}
-	
+
 	public static boolean openApplication(Context context, String pkgName) {
 		if (TextUtils.isEmpty(pkgName)) {
-			Toast.makeText(context, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, R.string.activity_not_found,
+					Toast.LENGTH_SHORT).show();
 			return false;
 		}
-        try {
-    		Intent intent = context.getPackageManager().getLaunchIntentForPackage(
-    				pkgName);
-    		if (intent == null) {
-    			Toast.makeText(context, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
-    			return false;
-    		}
-    		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    		context.startActivity(intent);
-    		return true;
+		try {
+			Intent intent = context.getPackageManager()
+					.getLaunchIntentForPackage(pkgName);
+			if (intent == null) {
+				Toast.makeText(context, R.string.activity_not_found,
+						Toast.LENGTH_SHORT).show();
+				return false;
+			}
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(intent);
+			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
-			Toast.makeText(context, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, R.string.activity_not_found,
+					Toast.LENGTH_SHORT).show();
 			return false;
 		}
 
 	}
-
 
 }
