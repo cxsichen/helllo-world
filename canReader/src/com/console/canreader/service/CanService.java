@@ -174,10 +174,12 @@ public class CanService extends Service {
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
+		if(intent!=null){
 		String command=intent.getStringExtra("keyEvent");
 		if(command!=null){
 			dealCommand(command);
+		}
 		}
 		return super.onStartCommand(intent, flags, startId);
 	}

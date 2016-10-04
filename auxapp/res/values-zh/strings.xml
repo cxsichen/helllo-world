@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AUX</string>
+       <string name="app_name">AUX</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="aux_signal">AUX Signal</string>
-    <string name="aux_no_signal">AUX have no signal</string>
+    <string name="aux_signal">AUX信号</string>
+    <string name="aux_no_signal">AUX无信号输入</string>
 
 </resources>

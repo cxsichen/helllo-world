@@ -1,11 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="Volkswagen_items">
+
+    <string-array name="CanType">
+        <item>RZC</item>
+        <item>SS</item>
+    </string-array>
+    <string-array name="CarType">
+        <item>Volkswagen</item>
+        <item>VolkswagenGolf</item>
+        <item>Honda</item>
+        <item>Toyota</item>
+        <item>GE</item>
+        <item>FG580</item>
+        <item>PeugeotCitroen</item>
+        <item>Nissan</item>
+        <item>Trumpche</item>
+        <item>Focus</item>
+        <item>HondaCRV</item>
+        <item>HondaDA</item>
+        <item>BuickGM</item>
+        <item>EDGE</item>
+        <item>Roewe360</item>
+        <item>MGGS</item>
+        <item>BESTURNX80</item>
+        <item>FHCM3</item>
+    </string-array>
+    <string-array name="RZC_Volkswagen_items">
         <item>车辆信息</item>
     </string-array>
-    
-    <string-array name="Volkswagen_activity">
+    <string-array name="RZC_Volkswagen_activity">
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+    </string-array>
+    <string-array name="RZC_VolkswagenGolf_items">
+        <item>车辆信息</item>
+        <item>行驶数据</item>
+    </string-array>
+    <string-array name="RZC_VolkswagenGolf_activity">
+        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+        <item>com.console.canreader.activity.VolkswagenGolf.DrivingDataActivity</item>
     </string-array>
 
 </resources>

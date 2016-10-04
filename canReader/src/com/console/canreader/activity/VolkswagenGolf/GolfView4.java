@@ -1,4 +1,4 @@
-package com.console.canreader.activity.VolkswagenGolfView;
+package com.console.canreader.activity.VolkswagenGolf;
 
 import java.text.DecimalFormat;
 

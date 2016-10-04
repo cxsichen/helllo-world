@@ -43,4 +43,5 @@
     <string name="not_put">未 放</string>
     <string name="too_low">过 低</string>
     <string name="activity_not_found">暂无此服务.</string>
+    <string name="not_more_offer">暂无额外信息</string>
 </resources>

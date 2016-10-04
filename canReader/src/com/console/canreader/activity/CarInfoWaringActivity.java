@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.console.canreader.R;
 import com.console.canreader.activity.PeugeotCitroen.PeuAirConView;
-import com.console.canreader.activity.VolkswagenGolfView.GolfView1;
-import com.console.canreader.activity.VolkswagenGolfView.GolfView2;
-import com.console.canreader.activity.VolkswagenGolfView.GolfView3;
-import com.console.canreader.activity.VolkswagenGolfView.GolfView4;
+import com.console.canreader.activity.VolkswagenGolf.GolfView1;
+import com.console.canreader.activity.VolkswagenGolf.GolfView2;
+import com.console.canreader.activity.VolkswagenGolf.GolfView3;
+import com.console.canreader.activity.VolkswagenGolf.GolfView4;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.Contacts;
 import com.console.canreader.utils.DensityUtils;
@@ -123,6 +123,7 @@ public class CarInfoWaringActivity extends baseActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		initView();
 	}
 
 	@Override
@@ -140,9 +141,7 @@ public class CarInfoWaringActivity extends baseActivity {
 		super.onResume();
 
 		mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 2000);
-		mHandler.sendEmptyMessageDelayed(Contacts.MSG_ONCE_GET_MSG, 5000);
-
-		initView();
+		mHandler.sendEmptyMessageDelayed(Contacts.MSG_ONCE_GET_MSG, 5000);		
 		isResume = true;
 
 	}
@@ -156,7 +155,11 @@ public class CarInfoWaringActivity extends baseActivity {
 		vp.setOffscreenPageLimit(2);
 		if (vpAdapter == null)
 			vpAdapter = new ViewPagerAdapter(viewsFactory);
-		if (PreferenceUtil.getCARTYPE(this) != carType) {
+		ViewPageFactory pageViewDefalut = new ObdView(this,
+				R.layout.dashboard_main);
+		viewsFactory.add(pageViewDefalut);
+		
+/*		if (PreferenceUtil.getCARTYPE(this) != carType) {
 			switch (PreferenceUtil.getCARTYPE(this)) {
 			case Contacts.CARTYPEGROUP.PeugeotCitroen:
 				carType = PreferenceUtil.getCARTYPE(this);
@@ -213,11 +216,9 @@ public class CarInfoWaringActivity extends baseActivity {
 				break;
 			}
 
-		}
+		}*/
 		vp.setAdapter(vpAdapter);
-
 		initIndicator();
-
 		canType = PreferenceUtil.getCANTYPE(this);
 		carType = PreferenceUtil.getCARTYPE(this);
 	}
