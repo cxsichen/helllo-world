@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Volkswagen_items">
+        <item>车辆信息</item>
+    </string-array>
+    
+    <string-array name="Volkswagen_activity">
+        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+    </string-array>
+
+</resources>

@@ -110,7 +110,9 @@ public class Contacts {
 	public static final int MSG_SEND_MSG = 0x09;
 	public static final int MSG_GET_MSG = 0x0a;
 	public static final int MSG_ONCE_GET_MSG = 0x0b;
-
+	public static final int MSG_SERVICE_CONNECTED = 0x0c;
+	public static final int MSG_SERVICE_DISCONNECTED = 0x0d;
+	
 	public static final int MSG_DIGLOG_HIDE = 0x0F;
 
 	public static final String ACK = "ff";

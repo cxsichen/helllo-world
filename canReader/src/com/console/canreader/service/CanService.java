@@ -440,7 +440,7 @@ public class CanService extends Service {
 				synchronized (lock1) {
 					try {
 						mOutputStream.write(packet);
-					} catch (IOException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}

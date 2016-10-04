@@ -92,7 +92,7 @@ public class DialogCreater {
 								WARNSTART, 1);
 						Intent intent = new Intent();
 						intent.setClassName(context,
-								"com.console.canreader.MainActivity");
+								"com.console.canreader.activity.CarInfoWaringActivity");
 						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						context.startActivity(intent);
 					}
