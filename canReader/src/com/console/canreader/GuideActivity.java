@@ -47,7 +47,7 @@ public class GuideActivity extends Activity {
 		startService(new Intent(this, CanService.class));
 		
 		canType = PreferenceUtil.getCANTYPE(this);
-		carType = PreferenceUtil.getCANTYPE(this);
+		carType = PreferenceUtil.getCARTYPE(this);
 		initGuideView(canType,carType);
 
 		getContentResolver().registerContentObserver(
@@ -104,6 +104,10 @@ public class GuideActivity extends Activity {
 		String[] carTypeName = res.getStringArray(R.array.CarType);
 		String[] canTypeName = res.getStringArray(R.array.CanType);
 		initListView(canTypeName[canType], carTypeName[carType]);
+		Log.i("cxs","=========canType======"+canType);
+		Log.i("cxs","=========carType======"+canType);
+		Log.i("cxs","=========cacanTypeName[canType]======"+canTypeName[canType]);
+		Log.i("cxs","=========carTypeName[carType]======"+carTypeName[carType]);
 	}
 
 	private void initListView(String Cantype, String Cartype) {

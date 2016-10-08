@@ -70,6 +70,9 @@ public class BeanFactory {
 			case 20:							//宝骏730 560 
 				getRZCBaoJun(mPacket);  
 				break;
+			case 21:							//瑞风S3
+				getRZCJAC(mPacket);  
+				break;
 			default:						
 				break;
 			}
@@ -100,6 +103,15 @@ public class BeanFactory {
 		}
 		return mAnalyzeUtils;
 	}
+	
+	private static void getRZCJAC(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCJAC(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	
 	
 	private static void getRZCBaoJun(byte[] mPacket) {
 		if (mAnalyzeUtils == null) {
