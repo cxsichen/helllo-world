@@ -78,7 +78,8 @@ public class baseActivity extends Activity {
 			case Contacts.MSG_UPDATA_UI:
 				mCaninfo = (CanInfo) msg.obj;
 				if (mCaninfo != null) {
-					show(mCaninfo);
+					if(mCaninfo.CHANGE_STATUS == 10)
+					   show(mCaninfo);
 				}
 				break;
 			case Contacts.MSG_SERVICE_CONNECTED:

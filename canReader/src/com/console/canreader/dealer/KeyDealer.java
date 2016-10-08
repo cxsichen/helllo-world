@@ -279,7 +279,7 @@ public class KeyDealer {
 	}
 
 	long lastSendTime = 0;
-	// PRESSFREE为false表示未收到按键释放的事件 这时候只有menu长按可以响应
+	
 	Boolean PRESSFREE = true;
 
 	protected void dealWith(Context context, CanInfo canInfo) {
@@ -332,7 +332,6 @@ public class KeyDealer {
 				mHandler.sendEmptyMessageDelayed(Contacts.MIC, 200);
 				break;
 			case Contacts.TEL_ANSWER:
-				Log.i("cxs", "======dealWith==TEL_ANSWER=====");
 				mHandler.removeMessages(Contacts.TEL_ANSWER);
 				mHandler.sendEmptyMessageDelayed(Contacts.TEL_ANSWER, 200);
 				break;

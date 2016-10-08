@@ -96,7 +96,6 @@ public class RZCHonda extends AnalyzeUtils {
 		} else {
 			mCanInfo.STERRING_WHELL_STATUS = 65536 - temp;
 		}
-
 	}
 
 	void analyzeFrontRaderData(byte[] msg) {

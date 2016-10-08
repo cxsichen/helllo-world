@@ -5,17 +5,19 @@
         <item>RZC</item>
         <item>SS</item>
     </string-array>
+    
     <string-array name="CarType">
         <item>Volkswagen</item>
         <item>VolkswagenGolf</item>
         <item>Honda</item>
         <item>Toyota</item>
+        <item>ToyotaRZ</item>
         <item>GE</item>
         <item>FG580</item>
         <item>PeugeotCitroen</item>
         <item>Nissan</item>
         <item>Trumpche</item>
-        <item>Focus</item>
+        <item>Focus</item>        
         <item>HondaCRV</item>
         <item>HondaDA</item>
         <item>BuickGM</item>
@@ -24,13 +26,20 @@
         <item>MGGS</item>
         <item>BESTURNX80</item>
         <item>FHCM3</item>
+        <item>JingKooM20</item>
+        <item>Baojun</item>
     </string-array>
+    
+    <!-- 大众  -->
     <string-array name="RZC_Volkswagen_items">
         <item>车辆信息</item>
     </string-array>
     <string-array name="RZC_Volkswagen_activity">
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
     </string-array>
+    <!-- 大众  -->
+    
+    <!-- 大众高尔夫  -->
     <string-array name="RZC_VolkswagenGolf_items">
         <item>车辆信息</item>
         <item>行驶数据</item>
@@ -39,5 +48,27 @@
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
         <item>com.console.canreader.activity.VolkswagenGolf.DrivingDataActivity</item>
     </string-array>
+    <!-- 大众高尔夫  -->
+    
+    
+    <!-- 北汽威旺M20  -->
+    <string-array name="RZC_JingKooM20_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="RZC_JingKooM20_activity">
+        <item>com.console.canreader.activity.JingKooM20.DrivingDataActivity</item>
+    </string-array>
+    <!-- 北汽威旺M20  -->
+    
+        <!-- 宝骏730 560  -->
+    <string-array name="RZC_Baojun_items">
+        <item>车辆信息</item>
+   <!--      <item>软件版本</item> -->
+    </string-array>
+    <string-array name="RZC_Baojun_activity">
+        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+       <!--  <item>com.console.canreader.activity.Baojun.DrivingDataActivity</item> -->
+    </string-array>
+    <!-- 宝骏730 560  -->
 
 </resources>

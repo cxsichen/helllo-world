@@ -140,7 +140,7 @@ public class CanInfo implements Parcelable {
 	public int FUEL_WARING_SIGN = 0;           //没油报警
 	public int BATTERY_WARING_SIGN = 0;        //没电报警
 	
-	
+	/*-----------------------------------------------------*/
 	
 	public int RANGE=0;                         //续航里程
 	public int RANGE_UNIT=0;                         //续航里程单位

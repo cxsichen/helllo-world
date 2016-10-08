@@ -164,7 +164,6 @@ public class CanService extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		Log.i("cxs","===canservice==onCreate=========");
 		canType = PreferenceUtil.getCANTYPE(this);
 		carType = PreferenceUtil.getCARTYPE(this);
 		chooseSerialPort();
@@ -283,8 +282,9 @@ public class CanService extends Service {
 	private void handleAccState(int state) {
 		// TODO Auto-generated method stub
 		if (state == 1) {
-			// acc on清空原先的数据
+			// acc on清空原先的数据   重新建立连接
 			BeanFactory.setInfoEmpty();
+			connectCanDevice();
 		}
 	}
 
@@ -315,8 +315,10 @@ public class CanService extends Service {
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Contacts.CARTYPE),
 				true, mCarTypeObserver);
-
+		
+        //与盒子建立连接，盒子发送初始数据到车机
 		connectCanDevice();
+		
 		mKeyDealer = KeyDealer.getInstance(CanService.this); // 初始化按键事件处理
 																// 里面有音量加减的监听
 		getContentResolver().registerContentObserver(
@@ -467,8 +469,6 @@ public class CanService extends Service {
 		public void run() {
 			Trace.d("ReadDataFromSpThread start...");
 			while (mInputStream != null && !isInterrupted()) {
-				Log.i("cxs", "=========canType=======" + canType);
-				Log.i("cxs", "=========carType=======" + carType);
 				try {
 					switch (canType) {
 					case Contacts.CANTYPEGROUP.RAISE:
@@ -809,7 +809,7 @@ public class CanService extends Service {
 		@Override
 		public CanInfo getCanInfo() throws RemoteException {
 			// TODO Auto-generated method stub
-			if (info != null)
+			if (info != null)			
 				return info.getCanInfo();
 			else
 				return null;

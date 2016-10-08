@@ -45,10 +45,11 @@ public class GuideActivity extends Activity {
 		guideLayout = (LinearLayout) findViewById(R.id.guide_layout);
 		listView = (ListView) findViewById(R.id.listView);
 		startService(new Intent(this, CanService.class));
-		initGuideView();
 		
 		canType = PreferenceUtil.getCANTYPE(this);
 		carType = PreferenceUtil.getCANTYPE(this);
+		initGuideView(canType,carType);
+
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Contacts.CANTYPE),
 				true, mCanTypeObserver);
@@ -97,11 +98,8 @@ public class GuideActivity extends Activity {
 	}
 
 
-	private void initGuideView() {
+	private void initGuideView(int canType,int carType) {
 		// TODO Auto-generated method stub
-		canType = PreferenceUtil.getCANTYPE(this);
-		carType = PreferenceUtil.getCARTYPE(this);
-
 		Resources res = getResources();
 		String[] carTypeName = res.getStringArray(R.array.CarType);
 		String[] canTypeName = res.getStringArray(R.array.CanType);

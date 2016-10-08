@@ -18,10 +18,10 @@ public class BeanFactory {
 			case 0:                           //大众
 				getRZCVolkswagen(mPacket);
 				break;
-			case 1:                           //大众高尔夫          未完成
+			case 1:                           //大众高尔夫          
 				getRZCVolkswagenGolf(mPacket);
 				break;
-			case 2:                           //本田                         未完成
+			case 2:                           //本田                   
 				getRZCHonda(mPacket);
 				break;
 			case 3:                          //丰田 丰田锐志
@@ -64,6 +64,12 @@ public class BeanFactory {
 			case 18:							//海马M3
 				getRZCFHCm3(mPacket);
 				break;
+			case 19:							//北汽威旺M20 
+				getRZCJingKooM20(mPacket);  
+				break;
+			case 20:							//宝骏730 560 
+				getRZCBaoJun(mPacket);  
+				break;
 			default:						
 				break;
 			}
@@ -93,6 +99,22 @@ public class BeanFactory {
 			break;
 		}
 		return mAnalyzeUtils;
+	}
+	
+	private static void getRZCBaoJun(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCBaoJun(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
+	}
+	
+	private static void getRZCJingKooM20(byte[] mPacket) {
+		if (mAnalyzeUtils == null) {
+			mAnalyzeUtils = new RZCJingKooM20(mPacket,1);
+		} else {
+			mAnalyzeUtils.analyze(mPacket,1);//第二位是信息type位
+		}
 	}
 	
 	private static void getRZCPeugeot(byte[] mPacket) {
