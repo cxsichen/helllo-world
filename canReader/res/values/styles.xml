@@ -204,5 +204,22 @@
         <item name="android:textColor">@android:color/holo_blue_light</item>
         <item name="android:textSize">26sp</item>
     </style>
+    
+        <!--Pressure and temperature data text style-->
+    <style name="dataTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <!--Style of the parent of data text (RelativeLayout)-->
+    <style name="dataParentStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 
 </resources>

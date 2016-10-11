@@ -31,7 +31,7 @@ public class baseActivity extends Activity {
 	private int carType = -1; // 车型 0:大众
 
 	/**
-	 * 数据变化 需要改变界面的时候调用
+	 * 数据变化 需要改变界面的时候调用 界面获取焦点和有数据反馈的时候会调用
 	 */
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
@@ -78,8 +78,8 @@ public class baseActivity extends Activity {
 			case Contacts.MSG_UPDATA_UI:
 				mCaninfo = (CanInfo) msg.obj;
 				if (mCaninfo != null) {
-					if(mCaninfo.CHANGE_STATUS == 10)
-					   show(mCaninfo);
+					if (mCaninfo.CHANGE_STATUS == 10)
+						show(mCaninfo);
 				}
 				break;
 			case Contacts.MSG_SERVICE_CONNECTED:
@@ -237,7 +237,17 @@ public class baseActivity extends Activity {
 	public void sendMsg(String msg) {
 		try {
 			if (mISpService != null) {
-				mISpService.sendDataToSp(BytesUtil.addRZCCheckBit(msg));
+				switch (canType) {
+				case Contacts.CANTYPEGROUP.RAISE:
+					mISpService.sendDataToSp(BytesUtil.addRZCCheckBit(msg));
+					break;
+				case Contacts.CANTYPEGROUP.HIWORLD:
+					mISpService.sendDataToSp(BytesUtil.addSSCheckBit(msg));
+					break;
+				default:
+					break;
+				}
+
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();

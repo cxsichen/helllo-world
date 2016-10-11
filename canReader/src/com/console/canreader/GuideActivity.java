@@ -8,13 +8,17 @@ import com.console.canreader.utils.Contacts;
 import com.console.canreader.utils.PreferenceUtil;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
+import android.hardware.input.InputManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,10 +48,10 @@ public class GuideActivity extends Activity {
 		setContentView(R.layout.guide_layout);
 		guideLayout = (LinearLayout) findViewById(R.id.guide_layout);
 		listView = (ListView) findViewById(R.id.listView);
-		startService(new Intent(this, CanService.class));
-		
+		startService(new Intent(this, CanService.class));		
 		canType = PreferenceUtil.getCANTYPE(this);
 		carType = PreferenceUtil.getCARTYPE(this);
+		//carType = 21;
 		initGuideView(canType,carType);
 
 		getContentResolver().registerContentObserver(
@@ -56,6 +60,8 @@ public class GuideActivity extends Activity {
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Contacts.CARTYPE),
 				true, mCarTypeObserver);
+		
+		
 	}
 	
 	@Override
@@ -104,10 +110,6 @@ public class GuideActivity extends Activity {
 		String[] carTypeName = res.getStringArray(R.array.CarType);
 		String[] canTypeName = res.getStringArray(R.array.CanType);
 		initListView(canTypeName[canType], carTypeName[carType]);
-		Log.i("cxs","=========canType======"+canType);
-		Log.i("cxs","=========carType======"+canType);
-		Log.i("cxs","=========cacanTypeName[canType]======"+canTypeName[canType]);
-		Log.i("cxs","=========carTypeName[carType]======"+carTypeName[carType]);
 	}
 
 	private void initListView(String Cantype, String Cartype) {

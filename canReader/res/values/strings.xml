@@ -45,5 +45,11 @@
     <string name="day">day</string>
     <string name="activity_not_found">Activity not found</string>
     <string name="not_more_offer">no more informaiton offer</string>
-    <string name="software_version">软件版本：</string>
+    <string name="software_version">Software Version：</string>
+    <string name="pressure_unit">Kpa</string>
+    <string name="tpmstemp_unit">℃</string>
+    <string name="lock_setting_title">Door lock set option flag</string>
+    <string name="control_setting_title">Remote setting</string>
+    <string name="compact_monitor_setting_title">Collision / detection system settings</string>
+
 </resources>

@@ -28,6 +28,7 @@
         <item>FHCM3</item>
         <item>JingKooM20</item>
         <item>Baojun</item>
+        <item>JAC</item>
     </string-array>
     
     <!-- 大众  -->
@@ -50,6 +51,43 @@
     </string-array>
     <!-- 大众高尔夫  -->
     
+     <!-- 本田  -->
+    <string-array name="SS_Toyota_items">
+        <item>车辆信息</item>
+        <item>设定信息</item>
+        <item>历史油耗</item>
+        <item>行程油耗</item>
+        <item>油电混合信息</item>
+        <item>软件版本</item>
+    </string-array>
+    <string-array name="SS_Toyota_activity">
+        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+        <item>com.console.canreader.activity.Toyota.SettingActivity</item>
+        <item>com.console.canreader.activity.Toyota.HistoryOilConActivity</item>
+        <item>com.console.canreader.activity.Toyota.TripOilConActivity</item>
+        <item>com.console.canreader.activity.Toyota.OilEleActivity</item>
+        <item>com.console.canreader.activity.Toyota.DrivingDataActivity</item>
+    </string-array>
+    <!-- 本田  -->
+    
+    <!-- 奔腾X80 -->
+    <string-array name="RZC_BESTURNX80_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="RZC_BESTURNX80_activity">
+        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+    </string-array>
+    <!-- 奔腾X80 -->
+    
+    
+    <!-- 海马M3  -->
+    <string-array name="RZC_FHCM3_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="RZC_FHCM3_activity">
+        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+    </string-array>
+    <!-- 海马M3 -->
     
     <!-- 北汽威旺M20  -->
     <string-array name="RZC_JingKooM20_items">
@@ -60,15 +98,39 @@
     </string-array>
     <!-- 北汽威旺M20  -->
     
-        <!-- 宝骏730 560  -->
+    <!-- 宝骏730 560  -->
     <string-array name="RZC_Baojun_items">
         <item>车辆信息</item>
-   <!--      <item>软件版本</item> -->
     </string-array>
     <string-array name="RZC_Baojun_activity">
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
-       <!--  <item>com.console.canreader.activity.Baojun.DrivingDataActivity</item> -->
     </string-array>
     <!-- 宝骏730 560  -->
+    
+    
+    <!-- 瑞风S3  -->
+    <string-array name="RZC_JAC_items">
+        <item>车辆信息</item>
+        <item>胎压界面</item>
+    </string-array>
+    <string-array name="RZC_JAC_activity">
+        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+        <item>com.console.canreader.activity.JAC.TpmsActivity</item>
+    </string-array>
+    <!-- 瑞风S3  -->
+    
+      <string-array name="auto_lamp_sensitivity_entries">
+        <item>等级1</item>
+        <item>等级2</item>
+        <item>等级3</item>
+        <item>等级4</item>
+    </string-array>
+    
+    <string-array name="auto_lamp_sensitivity_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>   
 
 </resources>

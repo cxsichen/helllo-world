@@ -47,7 +47,43 @@
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-
+        
+        <activity
+            android:name="com.console.canreader.activity.JAC.TpmsActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+         <activity
+            android:name="com.console.canreader.activity.Toyota.SettingActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+         <activity
+            android:name="com.console.canreader.activity.Toyota.DrivingDataActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+         <activity
+            android:name="com.console.canreader.activity.Toyota.OilEleActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+         <activity
+            android:name="com.console.canreader.activity.Toyota.TripOilConActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+          <activity
+            android:name="com.console.canreader.activity.Toyota.HistoryOilConActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
         <service
             android:name="com.console.canreader.service.CanService"
             android:enabled="true"

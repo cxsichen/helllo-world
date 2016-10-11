@@ -12,6 +12,7 @@ public class BeanFactory {
 
 	public static AnalyzeUtils getCanInfo(Context context, byte[] mPacket,
 			int canType, int carType) {
+		//carType=21;
 		switch (canType) {
 		case 0: // î£Ö¾³Ï
 			switch (carType) {

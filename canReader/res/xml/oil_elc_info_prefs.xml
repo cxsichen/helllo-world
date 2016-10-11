@@ -1,0 +1,33 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="电量" >
+        <Preference
+            android:key="IS_POWER_MIXING"
+            android:title="油电混合车型" />
+        <Preference
+            android:key="BATTERY_LEVEL"
+            android:title="电池电量" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="设备状态" >
+        <Preference
+            android:key="MOTOR_DRIVE_BATTERY"
+            android:title="马达驱动电池" />
+        <Preference
+            android:key="MOTOR_DRIVE_WHEEL"
+            android:title="马达驱动车轮" />
+        <Preference
+            android:key="ENGINE_DRIVE_MOTOR"
+            android:title="发动机驱动马达" />
+        <Preference
+            android:key="ENGINE_DRIVE_WHEEL"
+            android:title="发动机驱动车轮" />
+        <Preference
+            android:key="BATTERY_DRIVE_MOTOR"
+            android:title="电池驱动马达" />
+        <Preference
+            android:key="WHEEL_DRIVE_MOTOR"
+            android:title="车轮驱动马达" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

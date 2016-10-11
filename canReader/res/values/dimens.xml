@@ -7,5 +7,5 @@
     <dimen name="fan_assets_margin">40dp</dimen>
     <dimen name="fan_assets_height">72dp</dimen>
     <dimen name="fan_assets_width">48dp</dimen>
-
+    <dimen name="data_width">96dp</dimen>
 </resources>

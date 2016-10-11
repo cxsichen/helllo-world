@@ -373,6 +373,9 @@ public class CanService extends Service {
 				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			break;
 		case Contacts.CANTYPEGROUP.HIWORLD: // …–…„
+			if (carType == Contacts.CARTYPEGROUP.Toyota){
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0103"));  //∑·ÃÔRAV4 »Ÿ∑≈
+			}
 			break;
 		default:
 			break;
@@ -547,7 +550,6 @@ public class CanService extends Service {
 				}
 			}
 		}
-
 		private void readSSCanPort() throws IOException {
 			// TODO Auto-generated method stub
 			byte data1 = mReadByte();

@@ -44,4 +44,8 @@
     <string name="too_low">过 低</string>
     <string name="activity_not_found">暂无此服务.</string>
     <string name="not_more_offer">暂无额外信息</string>
+    <string name="software_version">软件版本：</string>
+    <string name="lock_setting_title">门锁设定选项标志</string>
+      <string name="control_setting_title">遥控设定</string>
+      <string name="compact_monitor_setting_title">冲撞/检测系统设定</string>
 </resources>

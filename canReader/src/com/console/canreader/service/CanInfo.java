@@ -98,7 +98,7 @@ public class CanInfo implements Parcelable {
 	 */
 
 	public int PARKING_ASSIT_STATUS = 0;
-	public int RADAR_ALARM_STATUS = 0;
+	public int RADAR_ALARM_STATUS = 1;                           //1为显示 0为不显示
 	/*
 	 * 方向盘转角
 	 */
@@ -164,7 +164,7 @@ public class CanInfo implements Parcelable {
 	public float SPEED_LONG_TERM = 0;           //长时间平均车速
 	public int TRAVELLINGTIME_LONG_TERM = 0;  //长时间行驶时间
 	
-	public String VEHICLE_NO = "";  //汽车编号
+	public String VEHICLE_NO = "";  //汽车编号 
 	
 	public int INSPECTON_DAYS_STATUS = 0;  //车况检查状态
 	public int INSPECTON_DAYS = 0;  //车况检查天数
@@ -180,6 +180,71 @@ public class CanInfo implements Parcelable {
 	public int OILCHANGE_SERVICE_DISTANCE_STATUS = 0;  //更换机油保养里程状况
 	public int OILCHANGE_SERVICE_DISTANCE = 0;  //更换机油保养里程
 	
+	public int TPMS_FL_TEMP=0;            //前左车轮温度
+	public int TPMS_FR_TEMP=0;            //前右车轮温度
+	public int TPMS_BL_TEMP=0;            //后左车轮温度
+	public int TPMS_BR_TEMP=0;            //后右车轮温度
+	
+	public float TPMS_FL_PRESSUE=0;      //前左车轮压力
+	public float TPMS_FR_PRESSUE=0;       //前右车轮压力
+	public float TPMS_BL_PRESSUE=0;       //后左车轮压力
+	public float TPMS_BR_PRESSUE=0;       //后右车轮压力
+	
+	/*
+	 * 0x00：表示正常无警告。 
+	 * 0x01：红色警告，胎压出现异常。 
+	 * 0x02：红灯闪烁，胎压出现异常（漏气等）。 
+	 * 0x03：黄色警告，胎压偏高或者偏低。 其它值保留
+	 */
+	
+	public int TPMS_FL_WARING=0;        //前左车轮报警
+	public int TPMS_FR_WARING=0;        //前右车轮报警
+	public int TPMS_BL_WARING=0;        //后左车轮报警
+	public int TPMS_BR_WARING=0;        //后右车轮报警
+	
+	public int AIRCON_WITH_AUTO=0;     //空调与auto键联动
+	public int CYCLE_WITH_AUTO=0;     //内外循环与auto键联动
+	public int LAMP_WHEN_LOCK=0;      //上锁开锁时紧急灯响应
+	public int INTELLIGENT_LOCK=0;     //智能车锁和一键启动
+	public int AUTOMATIC_CAP_SENSEITIVITY=0;   //自动灯头灵敏度
+	
+	public String VERSION = "";  //软件版本 
+	
+	public int IS_POWER_MIXING = 0;  //汽车动力类型  1为油电混合 
+	public int BATTERY_LEVEL = 0;  //电池电量  无单位
+	public int MOTOR_DRIVE_BATTERY=0;  //马达驱动电池
+	public int MOTOR_DRIVE_WHEEL=0;    //马达驱动车轮
+	public int ENGINE_DRIVE_MOTOR=0;   //发动机驱动马达
+	public int ENGINE_DRIVE_WHEEL=0;   //发动机驱动车轮
+	public int BATTERY_DRIVE_MOTOR=0;  //电池驱动马达
+	public int WHEEL_DRIVE_MOTOR=0;    //车轮驱动马达
+	
+	/*-----行程  油耗-----*/
+	public float TRIP_OIL_CONSUMPTION_0=0;
+	public float TRIP_OIL_CONSUMPTION_1=0;
+	public float TRIP_OIL_CONSUMPTION_2=0;
+	public float TRIP_OIL_CONSUMPTION_3=0;
+	public float TRIP_OIL_CONSUMPTION_4=0;
+	public float TRIP_OIL_CONSUMPTION_5=0;
+	public int TRIP_OIL_CONSUMPTION_UNIT=0; 
+	
+	/*----历史  油耗-----*/
+	public float HISTORY_OIL_CONSUMPTION_1=0;
+	public float HISTORY_OIL_CONSUMPTION_2=0;
+	public float HISTORY_OIL_CONSUMPTION_3=0;
+	public float HISTORY_OIL_CONSUMPTION_4=0;
+	public float HISTORY_OIL_CONSUMPTION_5=0;
+	public float HISTORY_OIL_CONSUMPTION_6=0;
+	public float HISTORY_OIL_CONSUMPTION_7=0;
+	public float HISTORY_OIL_CONSUMPTION_8=0;
+	public float HISTORY_OIL_CONSUMPTION_9=0;
+	public float HISTORY_OIL_CONSUMPTION_10=0;
+	public float HISTORY_OIL_CONSUMPTION_11=0;
+	public float HISTORY_OIL_CONSUMPTION_12=0;
+	public float HISTORY_OIL_CONSUMPTION_13=0;
+	public float HISTORY_OIL_CONSUMPTION_14=0;
+	public float HISTORY_OIL_CONSUMPTION_15=0;
+	public int HISTORY_OIL_CONSUMPTION_UNIT=0;
 	
 	public CanInfo(){
 		
