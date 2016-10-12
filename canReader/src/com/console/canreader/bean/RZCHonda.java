@@ -92,9 +92,9 @@ public class RZCHonda extends AnalyzeUtils {
 		// TODO Auto-generated method stub
 		int temp = ((int) msg[4] & 0xFF) << 8 | ((int) msg[3] & 0xFF);
 		if (temp < 32767) {
-			mCanInfo.STERRING_WHELL_STATUS = -temp;
+			mCanInfo.STERRING_WHELL_STATUS = -temp/(1200/540);
 		} else {
-			mCanInfo.STERRING_WHELL_STATUS = 65536 - temp;
+			mCanInfo.STERRING_WHELL_STATUS = (65536 - temp)/(1200/540);
 		}
 	}
 
