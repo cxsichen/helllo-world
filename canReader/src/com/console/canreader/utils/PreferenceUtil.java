@@ -19,6 +19,9 @@ public class PreferenceUtil {
 	}
 
 	public static String getFirstTwoString(Context context, String str) {
+		if (str == null) {
+			return "";
+		}
 		if (str.length() <= 2) {
 			return str;
 		} else {
@@ -29,7 +32,7 @@ public class PreferenceUtil {
 				return str.substring(0, 2);
 			}
 		}
-		return null;
+		return "";
 	}
 
 }
