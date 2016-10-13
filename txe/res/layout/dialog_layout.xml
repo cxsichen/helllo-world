@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    android:layout_marginLeft="16dp"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存配置"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical" >
+
+        <LinearLayout style="@style/dialog_layout" >
+
+            <TextView
+                style="@style/dialog_text"
+                android:text="是否保存如下配置:" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/dialog_layout" >
+
+            <TextView
+                style="@style/dialog_text"
+                android:text="盒子:" />
+
+            <TextView
+                android:id="@+id/canType_title"
+                style="@style/dialog_text"
+                android:text="尚摄" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/dialog_layout" >
+
+            <TextView
+                style="@style/dialog_text"
+                android:text="品牌:" />
+
+            <TextView
+                android:id="@+id/carType_title"
+                style="@style/dialog_text"
+                android:text="大众" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/dialog_layout" >
+
+            <TextView
+                style="@style/dialog_text"
+                android:text="型号:" />
+
+            <TextView
+                android:id="@+id/sort_title"
+                style="@style/dialog_text"
+                android:text="Polo" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/dialog_layout" >
+
+            <TextView
+                style="@style/dialog_text"
+                android:text="配置:" />
+
+            <TextView
+                android:id="@+id/configuration_title"
+                style="@style/dialog_text"
+                android:text="非MQB" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" 
+        android:layout_marginRight="16dp"
+        android:gravity="right|center_vertical">
+        
+        <TextView 
+            android:id="@+id/dialog_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:textColor="@android:color/holo_blue_light"
+            android:text="取消"
+            />
+        
+         <TextView 
+            android:id="@+id/dialog_save" 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_blue_light"
+            android:text="保存"
+            />
+         
+    </LinearLayout>
+
+</LinearLayout>
