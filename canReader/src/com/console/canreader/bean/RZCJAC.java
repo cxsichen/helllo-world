@@ -10,7 +10,10 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCJAC extends AnalyzeUtils {
+	
 
+    //数据类型
+	public static final int comID=1;
 	// 方向盘按键
 	public static final int STEERING_BUTTON_DATA = 0x21;
 	// 基本信息
@@ -19,22 +22,19 @@ public class RZCJAC extends AnalyzeUtils {
 	public static final int CAR_INFO_DATA_2 = 0x38;
 	public static final int CAR_INFO_DATA_3 = 0x39;
 
-	public RZCJAC(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
+
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case STEERING_BUTTON_DATA:
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeSteeringButtonData(msg);

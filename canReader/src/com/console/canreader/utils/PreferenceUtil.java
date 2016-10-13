@@ -5,53 +5,31 @@ import android.content.SharedPreferences;
 import android.provider.Settings;
 
 public class PreferenceUtil {
-	
 
-
-	public static int getCARTYPE(Context context) {
-		int mode=4;
+	public static String getCANName(Context context) {
+		String mode = "";
 		try {
-			mode = Settings.System.getInt(context.getContentResolver(),
-					Contacts.CARTYPE,0);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}		
-		return mode;
-	}
-
-	public static void setCARTYPE(Context context, int value) {	
-		try {
-			Settings.System.putInt(context.getContentResolver(),
-					Contacts.CARTYPE,value);
+			mode = Settings.System.getString(context.getContentResolver(),
+					Contacts.CAN_CLASS_NAME);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-	}
-	
-	
-	public static int getCANTYPE(Context context) {
-		int mode=4;
-		try {
-			mode = Settings.System.getInt(context.getContentResolver(),
-					Contacts.CANTYPE,0);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}		
 		return mode;
 	}
 
-	public static void setCANTYPE(Context context, int value) {	
-		try {
-			Settings.System.putInt(context.getContentResolver(),
-					Contacts.CANTYPE,value);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+	public static String getFirstTwoString(Context context, String str) {
+		if (str.length() <= 2) {
+			return str;
+		} else {
+			if (str.substring(0, 3).equals(Contacts.CANFISRTNAMEGROUP.RAISE)) {
+				return str.substring(0, 3);
+			} else if (str.substring(0, 2).equals(
+					Contacts.CANFISRTNAMEGROUP.HIWORLD)) {
+				return str.substring(0, 2);
+			}
 		}
+		return null;
 	}
-	
 
 }

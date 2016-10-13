@@ -9,7 +9,8 @@ import com.console.canreader.utils.BytesUtil;
 import android.util.Log;
 
 public class SSToyota extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 3;
 	// 空调信息
 	public static final int AIR_CONDITIONER_DATA = 0x82;
 	// 雷达信息
@@ -25,30 +26,25 @@ public class SSToyota extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA_4 = 0xF0;
 	// 车身信息
-    public static final int CAR_INFO_DATA_5 = 0x1F;
-    // 车身信息
-    public static final int CAR_INFO_DATA_6 = 0x16;
- // 车身信息
-    public static final int CAR_INFO_DATA_7 = 0x17;
-    
+	public static final int CAR_INFO_DATA_5 = 0x1F;
+	// 车身信息
+	public static final int CAR_INFO_DATA_6 = 0x16;
+	// 车身信息
+	public static final int CAR_INFO_DATA_7 = 0x17;
 
-	public SSToyota(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
-		super.analyzeEach(msg, i);
+		super.analyzeEach(msg);
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case AIR_CONDITIONER_DATA:
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
@@ -177,7 +173,7 @@ public class SSToyota extends AnalyzeUtils {
 		mCanInfo.AUTOMATIC_CAP_SENSEITIVITY = (int) ((msg[7] >> 0) & 0x07);
 
 	}
-	
+
 	static String carInfoSave_4 = "";
 
 	void analyzeCarInfoData_4(byte[] msg) {
@@ -187,21 +183,22 @@ public class SSToyota extends AnalyzeUtils {
 		} else {
 			carInfoSave_4 = BytesUtil.bytesToHexString(msg);
 		}
-		int len=((int) msg[2] & 0xFF);
-		byte[] acscii=new byte[len];
-		for(int i=0;i<len;i++){
-			acscii[i]=msg[i+4];
-			
-		}		
+		int len = ((int) msg[2] & 0xFF);
+		byte[] acscii = new byte[len];
+		for (int i = 0; i < len; i++) {
+			acscii[i] = msg[i + 4];
+
+		}
 		try {
-			mCanInfo.VERSION  =new String(acscii,"GBK");			
+			mCanInfo.VERSION = new String(acscii, "GBK");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	static String carInfoSave_5 = "";
+
 	void analyzeCarInfoData_5(byte[] msg) {
 		if (carInfoSave_5.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -209,22 +206,21 @@ public class SSToyota extends AnalyzeUtils {
 		} else {
 			carInfoSave_5 = BytesUtil.bytesToHexString(msg);
 		}
-		
-		mCanInfo.IS_POWER_MIXING=(int) ((msg[4] >> 7) & 0x01);
-		mCanInfo.BATTERY_LEVEL=(int) ((msg[4] >> 0) & 0x07);
-		
-		mCanInfo.MOTOR_DRIVE_BATTERY=(int) ((msg[5] >> 0) & 0x07);
-		mCanInfo.MOTOR_DRIVE_WHEEL=(int) ((msg[5] >> 1) & 0x07);
-		mCanInfo.ENGINE_DRIVE_MOTOR=(int) ((msg[5] >> 2) & 0x07);
-		mCanInfo.ENGINE_DRIVE_WHEEL=(int) ((msg[5] >> 3) & 0x07);
-		mCanInfo.BATTERY_DRIVE_MOTOR=(int) ((msg[5] >> 4) & 0x07);
-		mCanInfo.WHEEL_DRIVE_MOTOR=(int) ((msg[5] >> 5) & 0x07);
+
+		mCanInfo.IS_POWER_MIXING = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.BATTERY_LEVEL = (int) ((msg[4] >> 0) & 0x07);
+
+		mCanInfo.MOTOR_DRIVE_BATTERY = (int) ((msg[5] >> 0) & 0x07);
+		mCanInfo.MOTOR_DRIVE_WHEEL = (int) ((msg[5] >> 1) & 0x07);
+		mCanInfo.ENGINE_DRIVE_MOTOR = (int) ((msg[5] >> 2) & 0x07);
+		mCanInfo.ENGINE_DRIVE_WHEEL = (int) ((msg[5] >> 3) & 0x07);
+		mCanInfo.BATTERY_DRIVE_MOTOR = (int) ((msg[5] >> 4) & 0x07);
+		mCanInfo.WHEEL_DRIVE_MOTOR = (int) ((msg[5] >> 5) & 0x07);
 
 	}
-	
-	
-	
+
 	static String carInfoSave_6 = "";
+
 	void analyzeCarInfoData_6(byte[] msg) {
 		if (carInfoSave_6.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -232,35 +228,36 @@ public class SSToyota extends AnalyzeUtils {
 		} else {
 			carInfoSave_6 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.TRIP_OIL_CONSUMPTION_0= (((int) msg[4] & 0xFF) * 256 + ((int) msg[5] & 0xFF))/10f;
-		mCanInfo.TRIP_OIL_CONSUMPTION_1= (((int) msg[6] & 0xFF) * 256 + ((int) msg[7] & 0xFF))/10f;
-		mCanInfo.TRIP_OIL_CONSUMPTION_2= (((int) msg[8] & 0xFF) * 256 + ((int) msg[9] & 0xFF))/10f;
-		
-		mCanInfo.TRIP_OIL_CONSUMPTION_3= (((int) msg[10] & 0xFF) * 256 + ((int) msg[11] & 0xFF))/10f;
-		mCanInfo.TRIP_OIL_CONSUMPTION_4= (((int) msg[12] & 0xFF) * 256 + ((int) msg[13] & 0xFF))/10f;
-		mCanInfo.TRIP_OIL_CONSUMPTION_5= (((int) msg[14] & 0xFF) * 256 + ((int) msg[15] & 0xFF))/10f;
+		mCanInfo.TRIP_OIL_CONSUMPTION_0 = (((int) msg[4] & 0xFF) * 256 + ((int) msg[5] & 0xFF)) / 10f;
+		mCanInfo.TRIP_OIL_CONSUMPTION_1 = (((int) msg[6] & 0xFF) * 256 + ((int) msg[7] & 0xFF)) / 10f;
+		mCanInfo.TRIP_OIL_CONSUMPTION_2 = (((int) msg[8] & 0xFF) * 256 + ((int) msg[9] & 0xFF)) / 10f;
 
-		mCanInfo.TRIP_OIL_CONSUMPTION_UNIT=(int) ((msg[16] >> 0) & 0xFF);
+		mCanInfo.TRIP_OIL_CONSUMPTION_3 = (((int) msg[10] & 0xFF) * 256 + ((int) msg[11] & 0xFF)) / 10f;
+		mCanInfo.TRIP_OIL_CONSUMPTION_4 = (((int) msg[12] & 0xFF) * 256 + ((int) msg[13] & 0xFF)) / 10f;
+		mCanInfo.TRIP_OIL_CONSUMPTION_5 = (((int) msg[14] & 0xFF) * 256 + ((int) msg[15] & 0xFF)) / 10f;
+
+		mCanInfo.TRIP_OIL_CONSUMPTION_UNIT = (int) ((msg[16] >> 0) & 0xFF);
 	}
-	
-	public float HISTORY_OIL_CONSUMPTION_1=0;
-	public float HISTORY_OIL_CONSUMPTION_2=0;
-	public float HISTORY_OIL_CONSUMPTION_3=0;
-	public float HISTORY_OIL_CONSUMPTION_4=0;
-	public float HISTORY_OIL_CONSUMPTION_5=0;
-	public float HISTORY_OIL_CONSUMPTION_6=0;
-	public float HISTORY_OIL_CONSUMPTION_7=0;
-	public float HISTORY_OIL_CONSUMPTION_8=0;
-	public float HISTORY_OIL_CONSUMPTION_9=0;
-	public float HISTORY_OIL_CONSUMPTION_10=0;
-	public float HISTORY_OIL_CONSUMPTION_11=0;
-	public float HISTORY_OIL_CONSUMPTION_12=0;
-	public float HISTORY_OIL_CONSUMPTION_13=0;
-	public float HISTORY_OIL_CONSUMPTION_14=0;
-	public float HISTORY_OIL_CONSUMPTION_15=0;
-	public int HISTORY_OIL_CONSUMPTION_UNIT=0;
-	
+
+	public float HISTORY_OIL_CONSUMPTION_1 = 0;
+	public float HISTORY_OIL_CONSUMPTION_2 = 0;
+	public float HISTORY_OIL_CONSUMPTION_3 = 0;
+	public float HISTORY_OIL_CONSUMPTION_4 = 0;
+	public float HISTORY_OIL_CONSUMPTION_5 = 0;
+	public float HISTORY_OIL_CONSUMPTION_6 = 0;
+	public float HISTORY_OIL_CONSUMPTION_7 = 0;
+	public float HISTORY_OIL_CONSUMPTION_8 = 0;
+	public float HISTORY_OIL_CONSUMPTION_9 = 0;
+	public float HISTORY_OIL_CONSUMPTION_10 = 0;
+	public float HISTORY_OIL_CONSUMPTION_11 = 0;
+	public float HISTORY_OIL_CONSUMPTION_12 = 0;
+	public float HISTORY_OIL_CONSUMPTION_13 = 0;
+	public float HISTORY_OIL_CONSUMPTION_14 = 0;
+	public float HISTORY_OIL_CONSUMPTION_15 = 0;
+	public int HISTORY_OIL_CONSUMPTION_UNIT = 0;
+
 	static String carInfoSave_7 = "";
+
 	void analyzeCarInfoData_7(byte[] msg) {
 		if (carInfoSave_7.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -268,29 +265,26 @@ public class SSToyota extends AnalyzeUtils {
 		} else {
 			carInfoSave_7 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.HISTORY_OIL_CONSUMPTION_1= (((int) msg[4] & 0xFF) * 256 + ((int) msg[5] & 0xFF))/10f;
-		mCanInfo.HISTORY_OIL_CONSUMPTION_2= (((int) msg[6] & 0xFF) * 256 + ((int) msg[7] & 0xFF))/10f;
-		mCanInfo.HISTORY_OIL_CONSUMPTION_3= (((int) msg[8] & 0xFF) * 256 + ((int) msg[9] & 0xFF))/10f;		
-		mCanInfo.HISTORY_OIL_CONSUMPTION_4= (((int) msg[10] & 0xFF) * 256 + ((int) msg[11] & 0xFF))/10f;
-		mCanInfo.HISTORY_OIL_CONSUMPTION_5= (((int) msg[12] & 0xFF) * 256 + ((int) msg[13] & 0xFF))/10f;
-		
-		mCanInfo.HISTORY_OIL_CONSUMPTION_6= (((int) msg[14] & 0xFF) * 256 + ((int) msg[15] & 0xFF))/10f;
-		mCanInfo.HISTORY_OIL_CONSUMPTION_7= (((int) msg[16] & 0xFF) * 256 + ((int) msg[17] & 0xFF))/10f;
-		mCanInfo.HISTORY_OIL_CONSUMPTION_8= (((int) msg[18] & 0xFF) * 256 + ((int) msg[19] & 0xFF))/10f;		
-		mCanInfo.HISTORY_OIL_CONSUMPTION_9= (((int) msg[20] & 0xFF) * 256 + ((int) msg[21] & 0xFF))/10f;
-		mCanInfo.HISTORY_OIL_CONSUMPTION_10= (((int) msg[22] & 0xFF) * 256 + ((int) msg[23] & 0xFF))/10f;
-		
-		mCanInfo.HISTORY_OIL_CONSUMPTION_11= (((int) msg[24] & 0xFF) * 256 + ((int) msg[25] & 0xFF))/10f;
-		mCanInfo.HISTORY_OIL_CONSUMPTION_12= (((int) msg[26] & 0xFF) * 256 + ((int) msg[27] & 0xFF))/10f;
-		mCanInfo.HISTORY_OIL_CONSUMPTION_13= (((int) msg[28] & 0xFF) * 256 + ((int) msg[29] & 0xFF))/10f;		
-		mCanInfo.HISTORY_OIL_CONSUMPTION_14= (((int) msg[30] & 0xFF) * 256 + ((int) msg[31] & 0xFF))/10f;
-		mCanInfo.HISTORY_OIL_CONSUMPTION_15= (((int) msg[32] & 0xFF) * 256 + ((int) msg[33] & 0xFF))/10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_1 = (((int) msg[4] & 0xFF) * 256 + ((int) msg[5] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_2 = (((int) msg[6] & 0xFF) * 256 + ((int) msg[7] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_3 = (((int) msg[8] & 0xFF) * 256 + ((int) msg[9] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_4 = (((int) msg[10] & 0xFF) * 256 + ((int) msg[11] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_5 = (((int) msg[12] & 0xFF) * 256 + ((int) msg[13] & 0xFF)) / 10f;
 
-		mCanInfo.HISTORY_OIL_CONSUMPTION_UNIT=(int) ((msg[64] >> 0) & 0xFF);
+		mCanInfo.HISTORY_OIL_CONSUMPTION_6 = (((int) msg[14] & 0xFF) * 256 + ((int) msg[15] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_7 = (((int) msg[16] & 0xFF) * 256 + ((int) msg[17] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_8 = (((int) msg[18] & 0xFF) * 256 + ((int) msg[19] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_9 = (((int) msg[20] & 0xFF) * 256 + ((int) msg[21] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_10 = (((int) msg[22] & 0xFF) * 256 + ((int) msg[23] & 0xFF)) / 10f;
+
+		mCanInfo.HISTORY_OIL_CONSUMPTION_11 = (((int) msg[24] & 0xFF) * 256 + ((int) msg[25] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_12 = (((int) msg[26] & 0xFF) * 256 + ((int) msg[27] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_13 = (((int) msg[28] & 0xFF) * 256 + ((int) msg[29] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_14 = (((int) msg[30] & 0xFF) * 256 + ((int) msg[31] & 0xFF)) / 10f;
+		mCanInfo.HISTORY_OIL_CONSUMPTION_15 = (((int) msg[32] & 0xFF) * 256 + ((int) msg[33] & 0xFF)) / 10f;
+
+		mCanInfo.HISTORY_OIL_CONSUMPTION_UNIT = (int) ((msg[64] >> 0) & 0xFF);
 	}
-
-
-
 
 	static String carInfoSave = "";
 	static int buttonTemp = 0;

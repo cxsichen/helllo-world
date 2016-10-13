@@ -7,7 +7,8 @@ import com.console.canreader.utils.BytesUtil;
 import android.util.Log;
 
 public class SSGE extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 3;
 	// DataType
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x12;
@@ -49,23 +50,19 @@ public class SSGE extends AnalyzeUtils {
 	// 环境温度信息
 	public static int AMBIENT_TEMP_INFO = 0x51;
 
-	public SSGE(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
-		super.analyzeEach(msg, i);
+		super.analyzeEach(msg);
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case AIR_CONDITIONER_DATA:
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
@@ -148,14 +145,13 @@ public class SSGE extends AnalyzeUtils {
 	}
 
 	static String carBasicInfo = "";
-	
+
 	/*
-	 * 方向盘按键
-	 * STEERING_BUTTON_MODE
-	 * 0：无按键或释放       1：vol+   2：vol-   3：menuup  4：menu down 
-	 * 5： PHONE  6：mute   7：SRC  8：SPEECH/MIC  9:answer phone    10:hangup phone 
+	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
+	 * PHONE 6：mute 7：SRC 8：SPEECH/MIC 9:answer phone 10:hangup phone
 	 */
-	static int keyCode[]={0,1,2,8,9,-1,3,4,4,5,6};
+	static int keyCode[] = { 0, 1, 2, 8, 9, -1, 3, 4, 4, 5, 6 };
+
 	void analyzeCarBasicInfoData(byte[] msg) {
 		if (carBasicInfo.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -172,16 +168,16 @@ public class SSGE extends AnalyzeUtils {
 			}
 
 		} else {
-			if (mCanInfo.STERRING_WHELL_STATUS != 65536-temp) {
-				mCanInfo.STERRING_WHELL_STATUS = 65536-temp;
+			if (mCanInfo.STERRING_WHELL_STATUS != 65536 - temp) {
+				mCanInfo.STERRING_WHELL_STATUS = 65536 - temp;
 				mCanInfo.CHANGE_STATUS = 8;
 			}
 		}
 
 		temp = (int) (msg[6] & 0xFF);
-		for(int i=0;i<keyCode.length;i++){
-			if(temp==keyCode[i]){
-				temp=i;
+		for (int i = 0; i < keyCode.length; i++) {
+			if (temp == keyCode[i]) {
+				temp = i;
 				break;
 			}
 		}
@@ -189,7 +185,7 @@ public class SSGE extends AnalyzeUtils {
 			mCanInfo.STEERING_BUTTON_MODE = temp;
 			mCanInfo.CHANGE_STATUS = 2;
 		}
-		
+
 		temp = (int) (msg[7] & 0xFF);
 		if (mCanInfo.STEERING_BUTTON_STATUS != temp) {
 			mCanInfo.STEERING_BUTTON_STATUS = temp;
@@ -315,6 +311,5 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.OUTSIDE_TEMPERATURE = ((int) (msg[15] & 0xff)) * 0.5f - 40f;
 
 	}
-
 
 }

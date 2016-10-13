@@ -6,7 +6,8 @@ import com.console.canreader.service.CanInfo;
 import android.util.Log;
 
 public class RZCTrumpche extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 1;
 	// Head Code
 	public static final int HEAD_CODE = 0x2e;
 	// DataType
@@ -24,22 +25,18 @@ public class RZCTrumpche extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x24;
 
-	public RZCTrumpche(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case AIR_CONDITIONER_DATA:
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
@@ -120,7 +117,7 @@ public class RZCTrumpche extends AnalyzeUtils {
 		// TODO Auto-generated method stub
 
 		int N = (int) (msg[4] & 0xff);
-		
+
 		mCanInfo.BACK_LEFT_DISTANCE = (((int) (msg[5] & 0xff)) == N ? 0
 				: (((((float) (msg[5] & 0xff)) / (N / 4f)) + 1) > 4 ? 4
 						: (int) ((((float) (msg[5] & 0xff)) / (N / 4f)) + 1)));

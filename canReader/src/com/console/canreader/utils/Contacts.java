@@ -25,13 +25,45 @@ public class Contacts {
 	}
 
 	/**
-	 * 睿志诚 0 
-	 * 尚摄 1
+	 * 睿志诚  
+	 * 尚摄 
 	 */
+	public final static class CANFISRTNAMEGROUP {
+		public static final String  RAISE = "RZC";
+		public static final String HIWORLD = "SS";
+	}
 
-	public final static class CANTYPEGROUP {
-		public static final int RAISE = 0;
-		public static final int HIWORLD = 1;
+
+	public final static class CANNAMEGROUP {
+		/*--------------睿志诚-----------*/
+		public static final String  RZCVolkswagen = "RZCVolkswagen";           //大众
+		public static final String  RZCVolkswagenGolf = "RZCVolkswagenGolf";   //大众高尔夫	
+		public static final String  RZCNISSAN = "RZCNISSAN";                   //日产	
+		public static final String  RZCTrumpche = "RZCTrumpche";               //广汽传祺		
+		public static final String  RZCHondaDA = "RZCHondaDA";                 //本田DA	
+		public static final String  RZCHondaCRV = "RZCHondaCRV";               //本田CRV		
+		public static final String  RZCFOCUS = "RZCFOCUS";                     //福克斯	
+		public static final String  RZCHonda = "RZCHonda";                     //本田   		
+		public static final String  RZCToyota = "RZCToyota";                   //丰田 丰田CAMRY
+		public static final String  RZCBuickGM = "RZCBuickGM";                  //别克 GM通用
+		public static final String  RZCEDGE = "RZCEDGE";                        //福特锐界
+		public static final String  RZCRoewe360 = "RZCRoewe360";                        //荣威360
+		public static final String  RZCMGGS = "RZCMGGS";                        //MG GS MG锐腾
+		public static final String  RZCFHCm3 = "RZCFHCm3";                      //海马M3
+		public static final String  RZCBESTURNx80 = "RZCBESTURNx80";            //奔腾X80
+		public static final String  RZCPeugeot = "RZCPeugeot";                    //标致
+		public static final String  RZCJAC = "RZCJAC";                          //瑞风S3
+		public static final String  RZCBaoJun = "RZCBaoJun";                    //宝骏730 560 
+		public static final String  RZCJingKooM20 = "RZCJingKooM20";                  //北汽威旺M20
+		/*--------------睿志诚-----------*/
+		
+		/*--------------尚摄-----------*/
+		public static final String  SSDFFG = "SSDFFG";                       //风光580
+		public static final String  SSGE = "SSGE";                           //通用
+		public static final String  SSToyota = "SSToyota";                   //丰田
+		public static final String  SSHonda = "SSHonda";                     //本田
+		public static final String  SSToyotaRZ = "SSToyotaRZ";               //丰田锐志
+		/*--------------尚摄-----------*/
 	}
 
 	/**
@@ -78,8 +110,8 @@ public class Contacts {
 		
 	}
 
-	public final static String CARTYPE = "carType";
-	public final static String CANTYPE = "canType";
+	public static final String CAN_INFORMATON = "CAN_Informaion";
+	public static final String CAN_CLASS_NAME = "CAN_Class_Name";
 	public static final String MODE = "Console_mode"; // 声音模式
 	public static final String KEY_VOLUME_VALUE = "volume_value";   //收音机音量
 	public static final String BACK_CAR = "back_car_state";

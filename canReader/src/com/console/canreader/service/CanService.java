@@ -58,8 +58,8 @@ public class CanService extends Service {
 	AnalyzeUtils info = null;
 	public static final Object lock1 = new Object();
 
-	private int canType = -1; // 盒子厂家 0：睿志诚 1：尚摄
-	private int carType = -1; // 车型 0:大众
+    private String canName="";
+    private String canFirtName="";
 	
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
@@ -82,7 +82,7 @@ public class CanService extends Service {
 				// Broadcast to all clients the new value.
 				Trace.i("packet : " + BytesUtil.bytesToHexString(mPacket));
 				info = BeanFactory.getCanInfo(CanService.this, mPacket,
-						canType, carType);
+						canName);
 				if (info != null)
 					if (info.getCanInfo() != null)
 						dealCanInfo();
@@ -128,7 +128,7 @@ public class CanService extends Service {
 				mKeyDealer.dealCanKeyEvent(CanService.this, info.getCanInfo());
 				break;
 			case 3:
-				if (carType != Contacts.CARTYPEGROUP.PeugeotCitroen) {       //标致的空调有单独的控制界面
+				if (info.getCanInfo().AIR_CONDITIONER_CONTROL==0) {       //像标致的空调有单独的控制界面 则AIR_CONDITIONER_CONTROL置1，不弹界面
 					DialogCreater.showAirConDialog(CanService.this,
 							info.getCanInfo(), // 空调事件处理
 							new CallBack() {
@@ -136,14 +136,7 @@ public class CanService extends Service {
 								@Override
 								public void sendShowMsg() {
 									// TODO Auto-generated method stub
-									if (canType == Contacts.CANTYPEGROUP.RAISE
-											&& carType == Contacts.CARTYPEGROUP.Volkswagen)
-										writeCanPort(BytesUtil
-												.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO));
-									if (canType == Contacts.CANTYPEGROUP.RAISE
-											&& carType == Contacts.CARTYPEGROUP.VolkswagenGolf)
-										writeCanPort(BytesUtil
-												.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_0_1));
+								   sendMsgGetTemp();
 
 								}
 							});
@@ -164,11 +157,15 @@ public class CanService extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		canType = PreferenceUtil.getCANTYPE(this);
-		carType = PreferenceUtil.getCARTYPE(this);
+		syncCanName();
 		chooseSerialPort();
 		initSerialPortThread();
 		init();
+	}
+	
+	private void syncCanName(){
+		canName = PreferenceUtil.getCANName(this);
+		canFirtName=PreferenceUtil.getFirstTwoString(this, canName);
 	}
 	
 	@Override
@@ -205,12 +202,12 @@ public class CanService extends Service {
 	 * 选择串口
 	 */
 	private void chooseSerialPort() {
-		switch (canType) {
-		case Contacts.CANTYPEGROUP.RAISE: // 睿志诚
-			switch (carType) {
-			case Contacts.CARTYPEGROUP.PeugeotCitroen: // 标致
-			case Contacts.CARTYPEGROUP.BESTURNX80:// 奔腾X80 海马M3
-			case Contacts.CARTYPEGROUP.FHCM3:
+		switch (PreferenceUtil.getFirstTwoString(this, canName)) {
+		case Contacts.CANFISRTNAMEGROUP.RAISE: // 睿志诚
+			switch (canName) {
+			case Contacts.CANNAMEGROUP.RZCPeugeot: // 标致
+			case Contacts.CANNAMEGROUP.RZCBESTURNx80:// 奔腾X80 海马M3
+			case Contacts.CANNAMEGROUP.RZCFHCm3:
 				initSerialPort(SERIAL_PORT_BT_19200);
 				break;
 			default:
@@ -218,7 +215,7 @@ public class CanService extends Service {
 				break;
 			}
 			break;
-		case Contacts.CANTYPEGROUP.HIWORLD: // 尚摄
+		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			initSerialPort(SERIAL_PORT_BT_38400);
 			break;
 		default:
@@ -256,8 +253,7 @@ public class CanService extends Service {
 	 * 重置串口
 	 */
 	private void resetSerialPort() {
-		canType = PreferenceUtil.getCANTYPE(this);
-		carType = PreferenceUtil.getCARTYPE(this);
+		syncCanName();
 		chooseSerialPort();
 		// 清空原先的数据
 		BeanFactory.setInfoEmpty();
@@ -310,11 +306,8 @@ public class CanService extends Service {
 
 		// 监控车型和协议选择
 		getContentResolver().registerContentObserver(
-				android.provider.Settings.System.getUriFor(Contacts.CANTYPE),
-				true, mCanTypeObserver);
-		getContentResolver().registerContentObserver(
-				android.provider.Settings.System.getUriFor(Contacts.CARTYPE),
-				true, mCarTypeObserver);
+				android.provider.Settings.System.getUriFor(Contacts.CAN_CLASS_NAME),
+				true, mCanNameObserver);
 		
         //与盒子建立连接，盒子发送初始数据到车机
 		connectCanDevice();
@@ -330,58 +323,22 @@ public class CanService extends Service {
 				true, mAccStateObserver);
 	}
 
-	private CanTypeObserver mCanTypeObserver = new CanTypeObserver();
+	private CanNameObserver mCanNameObserver = new CanNameObserver();
 
-	public class CanTypeObserver extends ContentObserver {
-		public CanTypeObserver() {
+	public class CanNameObserver extends ContentObserver {
+		public CanNameObserver() {
 			super(null);
 		}
 
 		@Override
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
-			canType = PreferenceUtil.getCANTYPE(CanService.this);
+			syncCanName();
 			resetSerialPort();
 
 		}
 	}
 
-	private CarTypeObserver mCarTypeObserver = new CarTypeObserver();
-
-	public class CarTypeObserver extends ContentObserver {
-		public CarTypeObserver() {
-			super(null);
-		}
-
-		@Override
-		public void onChange(boolean selfChange) {
-			super.onChange(selfChange);
-			carType = PreferenceUtil.getCARTYPE(CanService.this);
-			resetSerialPort();
-		}
-	}
-
-	private void connectCanDevice() {
-		// TODO Auto-generated method stub
-		switch (canType) {
-		case Contacts.CANTYPEGROUP.RAISE: // 睿志诚
-			if (carType != Contacts.CARTYPEGROUP.BESTURNX80
-					&& carType != Contacts.CARTYPEGROUP.FHCM3
-					&& carType != Contacts.CARTYPEGROUP.PeugeotCitroen)// 奔腾X80
-																		// 海马M3
-																		// 标致
-				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
-			break;
-		case Contacts.CANTYPEGROUP.HIWORLD: // 尚摄
-			if (carType == Contacts.CARTYPEGROUP.Toyota){
-				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0103"));  //丰田RAV4 荣放
-			}
-			break;
-		default:
-			break;
-		}
-
-	}
 
 	@Override
 	public void onDestroy() {
@@ -397,6 +354,7 @@ public class CanService extends Service {
 				mSendDataToSpThread.interrupt();
 		}
 		getContentResolver().unregisterContentObserver(mBackCarObserver);
+		getContentResolver().unregisterContentObserver(mCanNameObserver);	
 		mInputStream = null;
 		mOutputStream = null;
 		super.onDestroy();
@@ -473,14 +431,14 @@ public class CanService extends Service {
 			Trace.d("ReadDataFromSpThread start...");
 			while (mInputStream != null && !isInterrupted()) {
 				try {
-					switch (canType) {
-					case Contacts.CANTYPEGROUP.RAISE:
-						switch (carType) {
-						case Contacts.CARTYPEGROUP.PeugeotCitroen: // 标致
-						case Contacts.CARTYPEGROUP.BESTURNX80: // 奔腾X80
+					switch (canFirtName) {
+					case Contacts.CANFISRTNAMEGROUP.RAISE:
+						switch (canName) {
+						case Contacts.CANNAMEGROUP.RZCPeugeot: // 标致
+						case Contacts.CANNAMEGROUP.RZCBESTURNx80: // 奔腾X80
 							readRZCCanPort_1();
 							break;
-						case Contacts.CARTYPEGROUP.FHCM3: // 海马M3
+						case Contacts.CANNAMEGROUP.RZCFHCm3: // 海马M3
 							readRZCCanPort_2();
 							break;
 						default:
@@ -488,7 +446,7 @@ public class CanService extends Service {
 							break;
 						}
 						break;
-					case Contacts.CANTYPEGROUP.HIWORLD:
+					case Contacts.CANFISRTNAMEGROUP.HIWORLD:
 						readSSCanPort(); // 尚摄数据帧
 						break;
 					default:
@@ -818,5 +776,42 @@ public class CanService extends Service {
 		}
 
 	};
+	
+	/**
+	 * 空调界面获取外部温度
+	 */	
+	private void sendMsgGetTemp(){
+		if (canName.equals(Contacts.CANNAMEGROUP.RZCVolkswagen))
+			writeCanPort(BytesUtil
+					.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO));
+		if (canName.equals(Contacts.CANNAMEGROUP.RZCVolkswagenGolf))
+			writeCanPort(BytesUtil
+					.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_0_1));
+	}
+	
+	/**
+	 * 连接Can设备需要发送的初始化命令
+	 */
+	private void connectCanDevice() {
+		// TODO Auto-generated method stub
+		switch (canFirtName) {
+		case Contacts.CANFISRTNAMEGROUP.RAISE: // 睿志诚
+			if (!canName.equals(Contacts.CANNAMEGROUP.RZCBESTURNx80)
+					&& !canName.equals(Contacts.CANNAMEGROUP.RZCFHCm3)
+					&&  !canName.equals(Contacts.CANNAMEGROUP.RZCPeugeot))// 奔腾X80
+																		// 海马M3
+																		// 标致
+				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
+			break;
+		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
+			if (canName.equals(Contacts.CANNAMEGROUP.SSToyota)){
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0103"));  //丰田RAV4 荣放
+			}
+			break;
+		default:
+			break;
+		}
+
+	}
 
 }

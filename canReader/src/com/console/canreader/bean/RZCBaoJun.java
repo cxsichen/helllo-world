@@ -9,7 +9,8 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCBaoJun extends AnalyzeUtils {
-
+	  //数据类型
+		public static final int comID=1;
 	// 基本信息
 	public static final int CAR_INFO_DATA = 0x28;
 	public static final int CAR_INFO_DATA_1 = 0x7f;
@@ -22,22 +23,18 @@ public class RZCBaoJun extends AnalyzeUtils {
 	// 方向盘转角
     public static final int STEERING_TURN_DATA = 0x30;
     
-	public RZCBaoJun(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case CAR_INFO_DATA:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData(msg);

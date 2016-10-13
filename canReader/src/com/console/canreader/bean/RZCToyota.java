@@ -7,7 +7,8 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCToyota extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 1;
 	// Head Code
 	public static final int HEAD_CODE = 0x2e;
 	// DataType
@@ -25,22 +26,19 @@ public class RZCToyota extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x24;
 
-	public RZCToyota(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
+
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case AIR_CONDITIONER_DATA:
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
@@ -93,14 +91,13 @@ public class RZCToyota extends AnalyzeUtils {
 
 	void analyzeSteeringTurnData(byte[] msg) {
 		// TODO Auto-generated method stub
-		
+
 		int temp = ((int) msg[4] & 0xFF) << 8 | ((int) msg[3] & 0xFF);
-		if (temp < (0xfff/2)) {
-			mCanInfo.STERRING_WHELL_STATUS = (int) (temp*1.4);
+		if (temp < (0xfff / 2)) {
+			mCanInfo.STERRING_WHELL_STATUS = (int) (temp * 1.4);
 		} else {
-			mCanInfo.STERRING_WHELL_STATUS = (int) ((temp- 0xfff)*1.4);
+			mCanInfo.STERRING_WHELL_STATUS = (int) ((temp - 0xfff) * 1.4);
 		}
-		
 
 	}
 
@@ -171,8 +168,7 @@ public class RZCToyota extends AnalyzeUtils {
 			temp = (int) (msg[6] & 0xff);
 
 			if (temp >= 0x20) {
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = 16 + (temp - 0x20)
-						* 0.5f;
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = 16 + (temp - 0x20) * 0.5f;
 			} else {
 				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = temp == 0 ? 0
 						: temp == 0x1f ? 255 : (18f + (temp - 1) * 0.5f);

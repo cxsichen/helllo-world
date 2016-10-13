@@ -6,7 +6,8 @@ import com.console.canreader.service.CanInfo;
 import android.util.Log;
 
 public class RZCVolkswagen extends AnalyzeUtils {
-
+	//数据类型
+    public static final int comID=1;
 	// Head Code
 	public static int HEAD_CODE = 0x2e;
 	// DataType
@@ -41,52 +42,49 @@ public class RZCVolkswagen extends AnalyzeUtils {
 	// 环境温度信息
 	public static int AMBIENT_TEMP_INFO = 0x51;
 
-	public RZCVolkswagen(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
+
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			if ((int) (msg[i] & 0xFF) == BACK_LIGHT_DATA) {
+			if ((int) (msg[comID] & 0xFF) == BACK_LIGHT_DATA) {
 				mCanInfo.CHANGE_STATUS = 0;
 				analyzeBackLightData(msg);
-			} else if ((int) (msg[i] & 0xFF) == CAR_SPEED_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == CAR_SPEED_DATA) {
 				mCanInfo.CHANGE_STATUS = 1;
 				analyzeCarSpeedData(msg);
-			} else if ((int) (msg[i] & 0xFF) == STEERING_BUTTON_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == STEERING_BUTTON_DATA) {
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeSteeringButtonData(msg);
-			} else if ((int) (msg[i] & 0xFF) == AIR_CONDITIONER_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == AIR_CONDITIONER_DATA) {
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
-			} else if ((int) (msg[i] & 0xFF) == BACK_RADER_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == BACK_RADER_DATA) {
 				mCanInfo.CHANGE_STATUS = 4;
 				analyzeBackRaderData(msg);
-			} else if ((int) (msg[i] & 0xFF) == FRONT_RADER_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == FRONT_RADER_DATA) {
 				mCanInfo.CHANGE_STATUS = 5;
 				analyzeFrontRaderData(msg);
-			} else if ((int) (msg[i] & 0xFF) == BASIC_INFO_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == BASIC_INFO_DATA) {
 				mCanInfo.CHANGE_STATUS = 6;
 				analyzeBasicInfoData(msg);
-			} else if ((int) (msg[i] & 0xFF) == PARK_ASSIT_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == PARK_ASSIT_DATA) {
 				mCanInfo.CHANGE_STATUS = 7;
 				analyzeParkAssitData(msg);
-			} else if ((int) (msg[i] & 0xFF) == STEERING_TURN_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == STEERING_TURN_DATA) {
 				mCanInfo.CHANGE_STATUS = 8;
 				analyzeSteeringTurnData(msg);
-			} else if ((int) (msg[i] & 0xFF) == POWER_AMPLIFIER_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == POWER_AMPLIFIER_DATA) {
 				mCanInfo.CHANGE_STATUS = 9;
 				analyzePowerAmplifierData(msg);
-			} else if ((int) (msg[i] & 0xFF) == CAR_INFO_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == CAR_INFO_DATA) {
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData(msg);
 			}else{

@@ -7,7 +7,8 @@ import com.console.canreader.utils.BytesUtil;
 import android.util.Log;
 
 public class SSToyotaRZ extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 3;
 	// 空调信息
 	public static final int AIR_CONDITIONER_DATA = 0x82;
 	// 雷达信息
@@ -17,28 +18,24 @@ public class SSToyotaRZ extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA_1 = 0x13;
 
-	public SSToyotaRZ(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
-		super.analyzeEach(msg, i);
+		super.analyzeEach(msg);
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
-			//无空调信息
-/*			case AIR_CONDITIONER_DATA:
-				mCanInfo.CHANGE_STATUS = 3;
-				analyzeAirConditionData(msg);
-				break;*/         
+			switch ((int) (msg[comID] & 0xFF)) {
+			// 无空调信息
+			/*
+			 * case AIR_CONDITIONER_DATA: mCanInfo.CHANGE_STATUS = 3;
+			 * analyzeAirConditionData(msg); break;
+			 */
 			case CAR_INFO_DATA:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData(msg);
@@ -54,11 +51,11 @@ public class SSToyotaRZ extends AnalyzeUtils {
 			default:
 				break;
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 	}
 
 	static String radarSave = "";
@@ -101,10 +98,10 @@ public class SSToyotaRZ extends AnalyzeUtils {
 		} else {
 			carInfoSave_1 = BytesUtil.bytesToHexString(msg);
 		}
-		
+
 		int time = ((int) msg[10] & 0xFF) * 256 + ((int) msg[11] & 0xFF);
 		int speed = ((int) msg[12] & 0xFF) * 256 + ((int) msg[13] & 0xFF);
-		mCanInfo.DRIVING_DISTANCE = time*speed/60;
+		mCanInfo.DRIVING_DISTANCE = time * speed / 60;
 	}
 
 	static String carInfoSave = "";
@@ -139,7 +136,7 @@ public class SSToyotaRZ extends AnalyzeUtils {
 		}
 
 		// 按键 CHANGE_STATUS=2
-        
+
 		if (buttonTemp != (int) (msg[6] & 0xFF)) {
 			buttonTemp = (int) (msg[6] & 0xFF);
 			switch (buttonTemp) {
@@ -187,15 +184,15 @@ public class SSToyotaRZ extends AnalyzeUtils {
 		}
 
 		// 报警 CHANGE_STATUS=10
-		
+
 		mCanInfo.TRUNK_STATUS = (int) ((msg[8] >> 3) & 0x01);
 		mCanInfo.RIGHT_BACKDOOR_STATUS = (int) ((msg[8] >> 5) & 0x01);
 		mCanInfo.LEFT_BACKDOOR_STATUS = (int) ((msg[8] >> 4) & 0x01);
 		mCanInfo.RIGHT_FORONTDOOR_STATUS = (int) ((msg[8] >> 7) & 0x01);
 		mCanInfo.LEFT_FORONTDOOR_STATUS = (int) ((msg[8] >> 6) & 0x01);
 
-	//	mCanInfo.ENGINE_SPEED = ((int) msg[12] & 0xFF) * 256
-	//			+ ((int) msg[13] & 0xFF);
+		// mCanInfo.ENGINE_SPEED = ((int) msg[12] & 0xFF) * 256
+		// + ((int) msg[13] & 0xFF);
 		mCanInfo.HANDBRAKE_STATUS = (int) ((msg[4] >> 3) & 0x01);
 		mCanInfo.DRIVING_SPEED = ((int) msg[5] & 0xFF);
 		mCanInfo.DISINFECTON_STATUS = -1;

@@ -8,7 +8,8 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCBESTURNx80 extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 2;
 	// Head Code
 	public static final int HEAD_CODE = 0x2e;
 	// DataType
@@ -23,22 +24,18 @@ public class RZCBESTURNx80 extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x24;
 
-	public RZCBESTURNx80(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case AIR_CONDITIONER_DATA:
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
@@ -67,6 +64,7 @@ public class RZCBESTURNx80 extends AnalyzeUtils {
 	}
 
 	static String steerSave = "";
+
 	void analyzeSteeringTurnData(byte[] msg) {
 		// TODO Auto-generated method stub
 		if (steerSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -75,7 +73,7 @@ public class RZCBESTURNx80 extends AnalyzeUtils {
 		} else {
 			steerSave = BytesUtil.bytesToHexString(msg);
 		}
-		
+
 		int temp = (int) ((msg[3] >> 7) & 0x01);
 		if (temp == 0) { // 左转 正数
 			mCanInfo.STERRING_WHELL_STATUS = (((int) msg[3] & 0x7F) << 8 | ((int) msg[4] & 0xFF)) / 10;
@@ -85,16 +83,17 @@ public class RZCBESTURNx80 extends AnalyzeUtils {
 	}
 
 	static String radarSave = "";
+
 	void analyzeBackRaderData(byte[] msg) {
 		// TODO Auto-generated method stub
-		
+
 		if (radarSave.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
 			return;
 		} else {
 			radarSave = BytesUtil.bytesToHexString(msg);
 		}
-		
+
 		if (((int) (msg[3] & 0xff)) == 0) {
 			int N = (int) (msg[4] & 0xff);
 
@@ -132,6 +131,7 @@ public class RZCBESTURNx80 extends AnalyzeUtils {
 	}
 
 	static String airConSave = "";
+
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub
 		if (airConSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -164,6 +164,7 @@ public class RZCBESTURNx80 extends AnalyzeUtils {
 	 * PHONE 6：mute 7：SRC 8：SPEECH/MIC 9:answer phone 10:hangup phone
 	 */
 	static String buttonSave = "";
+
 	void analyzeSteeringButtonData(byte[] msg) {
 		// TODO Auto-generated method stub
 		if (buttonSave.equals(BytesUtil.bytesToHexString(msg))) {

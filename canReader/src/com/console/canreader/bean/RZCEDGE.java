@@ -6,7 +6,8 @@ import com.console.canreader.service.CanInfo;
 import android.util.Log;
 
 public class RZCEDGE extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 1;
 	// Head Code
 	public static int HEAD_CODE = 0x2e;
 	// DataType
@@ -41,57 +42,53 @@ public class RZCEDGE extends AnalyzeUtils {
 	// 环境温度信息
 	public static int AMBIENT_TEMP_INFO = 0x51;
 
-	public RZCEDGE(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			if ((int) (msg[i] & 0xFF) == BACK_LIGHT_DATA) {
+			if ((int) (msg[comID] & 0xFF) == BACK_LIGHT_DATA) {
 				mCanInfo.CHANGE_STATUS = 0;
 				analyzeBackLightData(msg);
-			} else if ((int) (msg[i] & 0xFF) == CAR_SPEED_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == CAR_SPEED_DATA) {
 				mCanInfo.CHANGE_STATUS = 1;
 				analyzeCarSpeedData(msg);
-			} else if ((int) (msg[i] & 0xFF) == STEERING_BUTTON_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == STEERING_BUTTON_DATA) {
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeSteeringButtonData(msg);
-			} else if ((int) (msg[i] & 0xFF) == AIR_CONDITIONER_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == AIR_CONDITIONER_DATA) {
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
-			} else if ((int) (msg[i] & 0xFF) == BACK_RADER_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == BACK_RADER_DATA) {
 				mCanInfo.CHANGE_STATUS = 4;
 				analyzeBackRaderData(msg);
-			} else if ((int) (msg[i] & 0xFF) == FRONT_RADER_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == FRONT_RADER_DATA) {
 				mCanInfo.CHANGE_STATUS = 5;
 				analyzeFrontRaderData(msg);
 			}
-//			else if ((int) (msg[i] & 0xFF) == BASIC_INFO_DATA) {
-//				mCanInfo.CHANGE_STATUS = 6;
-//				analyzeBasicInfoData(msg);
-//			}
-			else if ((int) (msg[i] & 0xFF) == PARK_ASSIT_DATA) {
+			// else if ((int) (msg[i] & 0xFF) == BASIC_INFO_DATA) {
+			// mCanInfo.CHANGE_STATUS = 6;
+			// analyzeBasicInfoData(msg);
+			// }
+			else if ((int) (msg[comID] & 0xFF) == PARK_ASSIT_DATA) {
 				mCanInfo.CHANGE_STATUS = 7;
 				analyzeParkAssitData(msg);
-			} else if ((int) (msg[i] & 0xFF) == STEERING_TURN_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == STEERING_TURN_DATA) {
 				mCanInfo.CHANGE_STATUS = 8;
 				analyzeSteeringTurnData(msg);
-			} else if ((int) (msg[i] & 0xFF) == POWER_AMPLIFIER_DATA) {
+			} else if ((int) (msg[comID] & 0xFF) == POWER_AMPLIFIER_DATA) {
 				mCanInfo.CHANGE_STATUS = 9;
-			//	analyzePowerAmplifierData(msg);
-			} else if ((int) (msg[i] & 0xFF) == CAR_INFO_DATA) {
+				// analyzePowerAmplifierData(msg);
+			} else if ((int) (msg[comID] & 0xFF) == CAR_INFO_DATA) {
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData(msg);
-			}else{
+			} else {
 				mCanInfo.CHANGE_STATUS = 8888;
 			}
 
@@ -111,9 +108,8 @@ public class RZCEDGE extends AnalyzeUtils {
 			mCanInfo.RIGHT_BACKDOOR_STATUS = (int) ((msg[3] >> 5) & 0x01);
 			mCanInfo.LEFT_BACKDOOR_STATUS = (int) ((msg[3] >> 4) & 0x01);
 			mCanInfo.TRUNK_STATUS = (int) ((msg[3] >> 3) & 0x01);
-			mCanInfo.HOOD_STATUS=(int) ((msg[3] >> 2) & 0x01);
-			
-			
+			mCanInfo.HOOD_STATUS = (int) ((msg[3] >> 2) & 0x01);
+
 			break;
 		case 2:
 			mCanInfo.ENGINE_SPEED = (int) (msg[4] & 0xFF) * 256
@@ -156,53 +152,61 @@ public class RZCEDGE extends AnalyzeUtils {
 	void analyzeSteeringTurnData(byte[] msg) {
 		// TODO Auto-generated method stub
 		int temp = ((int) msg[4] & 0xFF) << 8 | ((int) msg[3] & 0xFF);
-		if (temp >22768) {
-			mCanInfo.STERRING_WHELL_STATUS = -1*(((temp ^ 0xff)+1)-32768)*54/1000;
+		if (temp > 22768) {
+			mCanInfo.STERRING_WHELL_STATUS = -1 * (((temp ^ 0xff) + 1) - 32768)
+					* 54 / 1000;
 		} else {
-			mCanInfo.STERRING_WHELL_STATUS = temp*54/1000 ;
+			mCanInfo.STERRING_WHELL_STATUS = temp * 54 / 1000;
 		}
 
 	}
 
 	void analyzeParkAssitData(byte[] msg) {
 		// TODO Auto-generated method stub
-		//mCanInfo.PARKING_ASSIT_STATUS = (int) ((msg[3] >> 1) & 0x01);
-		if((int) ((msg[3] >> 2) & 0x01)==1&&(int) ((msg[3] >> 3) & 0x01)==1){
+		// mCanInfo.PARKING_ASSIT_STATUS = (int) ((msg[3] >> 1) & 0x01);
+		if ((int) ((msg[3] >> 2) & 0x01) == 1
+				&& (int) ((msg[3] >> 3) & 0x01) == 1) {
 			mCanInfo.RADAR_ALARM_STATUS = 1;
-		}else{
+		} else {
 			mCanInfo.RADAR_ALARM_STATUS = 0;
 		}
 	}
 
 	void analyzeBasicInfoData(byte[] msg) {
 		// TODO Auto-generated method stub
-//		mCanInfo.LIGHT_MSG = (int) ((msg[3] >> 2) & 0x01);
-//		mCanInfo.STOPING_STATUS = (int) ((msg[3] >> 1) & 0x01);
-//		mCanInfo.REVERSE_GEAR_STATUS = (int) ((msg[3] >> 0) & 0x01);
+		// mCanInfo.LIGHT_MSG = (int) ((msg[3] >> 2) & 0x01);
+		// mCanInfo.STOPING_STATUS = (int) ((msg[3] >> 1) & 0x01);
+		// mCanInfo.REVERSE_GEAR_STATUS = (int) ((msg[3] >> 0) & 0x01);
 	}
 
 	void analyzeFrontRaderData(byte[] msg) {
 		// TODO Auto-generated method stub
-		double a=(msg[3] & 0xff)/8.0f ;
+		double a = (msg[3] & 0xff) / 8.0f;
 		mCanInfo.FRONT_LEFT_DISTANCE = (int) Math.ceil(a);
-		 a=(msg[4] & 0xff)/2.0f ;
-		mCanInfo.FRONT_MIDDLE_LEFT_DISTANCE = (int) Math.ceil(a);;
-		 a=(msg[5] & 0xff)/2.0f ;
-		mCanInfo.FRONT_MIDDLE_RIGHT_DISTANCE = (int) Math.ceil(a);;
-		 a=(msg[6] & 0xff)/2.0f ;
-		mCanInfo.FRONT_RIGHT_DISTANCE = (int) Math.ceil(a);;
+		a = (msg[4] & 0xff) / 2.0f;
+		mCanInfo.FRONT_MIDDLE_LEFT_DISTANCE = (int) Math.ceil(a);
+		;
+		a = (msg[5] & 0xff) / 2.0f;
+		mCanInfo.FRONT_MIDDLE_RIGHT_DISTANCE = (int) Math.ceil(a);
+		;
+		a = (msg[6] & 0xff) / 2.0f;
+		mCanInfo.FRONT_RIGHT_DISTANCE = (int) Math.ceil(a);
+		;
 	}
 
 	void analyzeBackRaderData(byte[] msg) {
 		// TODO Auto-generated method stub
-		double a=(msg[3] & 0xff)/8.0f ;
+		double a = (msg[3] & 0xff) / 8.0f;
 		mCanInfo.BACK_LEFT_DISTANCE = (int) Math.ceil(a);
-		 a=(msg[4] & 0xff)/2.0f ;
-		mCanInfo.BACK_LEFT_DISTANCE = (int) Math.ceil(a);;
-		 a=(msg[5] & 0xff)/2.0f ;
-		mCanInfo.BACK_LEFT_DISTANCE = (int) Math.ceil(a);;
-		 a=(msg[6] & 0xff)/2.0f ;
-		mCanInfo.BACK_LEFT_DISTANCE = (int) Math.ceil(a);;
+		a = (msg[4] & 0xff) / 2.0f;
+		mCanInfo.BACK_LEFT_DISTANCE = (int) Math.ceil(a);
+		;
+		a = (msg[5] & 0xff) / 2.0f;
+		mCanInfo.BACK_LEFT_DISTANCE = (int) Math.ceil(a);
+		;
+		a = (msg[6] & 0xff) / 2.0f;
+		mCanInfo.BACK_LEFT_DISTANCE = (int) Math.ceil(a);
+		;
 	}
 
 	void analyzeAirConditionData(byte[] msg) {
@@ -222,63 +226,64 @@ public class RZCEDGE extends AnalyzeUtils {
 		mCanInfo.AIRCON_SHOW_REQUEST = (int) ((msg[4] >> 4) & 0x01);
 		mCanInfo.AIR_RATE = (int) (msg[4] & 0x0f);
 
-//		int temp = (int) (msg[5] & 0xff);
-//		mCanInfo.DRIVING_POSITON_TEMP = temp == 0 ? 0 : temp == 31 ? 255
-//				: (18 + (temp - 1) * 0.5f);
-//
-//		temp = (int) (msg[6] & 0xff);
-//		mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = temp == 0 ? 0 : temp == 31 ? 255
-//				: (18 + (temp - 1) * 0.5f);
+		// int temp = (int) (msg[5] & 0xff);
+		// mCanInfo.DRIVING_POSITON_TEMP = temp == 0 ? 0 : temp == 31 ? 255
+		// : (18 + (temp - 1) * 0.5f);
+		//
+		// temp = (int) (msg[6] & 0xff);
+		// mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = temp == 0 ? 0 : temp == 31 ?
+		// 255
+		// : (18 + (temp - 1) * 0.5f);
 
-//		mCanInfo.AQS_CIRCLE = (int) ((msg[7] >> 7) & 0x01);
-//		mCanInfo.LEFT_SEAT_TEMP = (int) ((msg[7] >> 4) & 0x03);
-//		mCanInfo.RIGTHT_SEAT_TEMP = (int) ((msg[7] >> 0) & 0x03);
-		if((msg[7]&0xff)>=0xd8){
-			mCanInfo.OUTSIDE_TEMPERATURE=-1*(((msg[8]&0xff) ^ 0xff)+1);
-		}else{
-			mCanInfo.OUTSIDE_TEMPERATURE=(float)(msg[8]&0xff);
+		// mCanInfo.AQS_CIRCLE = (int) ((msg[7] >> 7) & 0x01);
+		// mCanInfo.LEFT_SEAT_TEMP = (int) ((msg[7] >> 4) & 0x03);
+		// mCanInfo.RIGTHT_SEAT_TEMP = (int) ((msg[7] >> 0) & 0x03);
+		if ((msg[7] & 0xff) >= 0xd8) {
+			mCanInfo.OUTSIDE_TEMPERATURE = -1 * (((msg[8] & 0xff) ^ 0xff) + 1);
+		} else {
+			mCanInfo.OUTSIDE_TEMPERATURE = (float) (msg[8] & 0xff);
 		}
-		int temp=(msg[8]&0xff);
-		if(temp<=0x3c){//摄氏度
-			if((temp>=0x1f)&&(temp<=0x3b)){
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP=(temp-0x1f)*0.5f+15.5f;
-			}else if(temp<0x1f){
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP=0;
-			}else{
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP=255;
+		int temp = (msg[8] & 0xff);
+		if (temp <= 0x3c) {// 摄氏度
+			if ((temp >= 0x1f) && (temp <= 0x3b)) {
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = (temp - 0x1f) * 0.5f + 15.5f;
+			} else if (temp < 0x1f) {
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = 0;
+			} else {
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = 255;
 			}
-		}else{
-			if((temp>=0x78)&&(temp<=0xAA)){
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP=(temp-0x1f)+60;
-			}else if(temp<0x78){
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP=0;
-			}else{
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP=255;
+		} else {
+			if ((temp >= 0x78) && (temp <= 0xAA)) {
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = (temp - 0x1f) + 60;
+			} else if (temp < 0x78) {
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = 0;
+			} else {
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = 255;
 			}
 		}
 		switch (msg[9] & 0x03) {
 		case 0:
-			mCanInfo.LEFT_SEAT_TEMP=0;
+			mCanInfo.LEFT_SEAT_TEMP = 0;
 			break;
 		case 1:
-			mCanInfo.LEFT_SEAT_TEMP=1;
+			mCanInfo.LEFT_SEAT_TEMP = 1;
 			break;
 		case 2:
-			mCanInfo.LEFT_SEAT_TEMP=2;
+			mCanInfo.LEFT_SEAT_TEMP = 2;
 			break;
 
 		default:
 			break;
 		}
-		switch ((msg[9]>>2) & 0x03) {
+		switch ((msg[9] >> 2) & 0x03) {
 		case 0:
-			mCanInfo.RIGTHT_SEAT_TEMP=0;
+			mCanInfo.RIGTHT_SEAT_TEMP = 0;
 			break;
 		case 1:
-			mCanInfo.RIGTHT_SEAT_TEMP=1;
+			mCanInfo.RIGTHT_SEAT_TEMP = 1;
 			break;
 		case 2:
-			mCanInfo.RIGTHT_SEAT_TEMP=2;
+			mCanInfo.RIGTHT_SEAT_TEMP = 2;
 			break;
 
 		default:
@@ -294,7 +299,8 @@ public class RZCEDGE extends AnalyzeUtils {
 
 	void analyzeCarSpeedData(byte[] msg) {
 		// TODO Auto-generated method stub
-	//	mCanInfo.CAR_SPEED_DATA = (((int) msg[3] & 0xFF) << 8 | ((int) msg[4] & 0xFF)) / 16;
+		// mCanInfo.CAR_SPEED_DATA = (((int) msg[3] & 0xFF) << 8 | ((int) msg[4]
+		// & 0xFF)) / 16;
 	}
 
 	void analyzeBackLightData(byte[] msg) {

@@ -7,7 +7,8 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCHondaCRV extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 1;
 	// Head Code
 	public static final int HEAD_CODE = 0x2e;
 	// DataType
@@ -16,22 +17,19 @@ public class RZCHondaCRV extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x24;
 
-	public RZCHondaCRV(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
+
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case STEERING_BUTTON_DATA:
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeSteeringButtonData(msg);

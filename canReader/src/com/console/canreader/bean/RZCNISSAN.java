@@ -6,7 +6,9 @@ import com.console.canreader.service.CanInfo;
 import android.util.Log;
 
 public class RZCNISSAN extends AnalyzeUtils {
-    
+	
+	// 数据类型
+	public static final int comID = 1;
 	// Head Code
 	public static final int HEAD_CODE = 0x2e;
 	// DataType
@@ -39,22 +41,17 @@ public class RZCNISSAN extends AnalyzeUtils {
 	// 环境温度信息
 	public static final int AMBIENT_TEMP_INFO = 0x51;
 
-	public RZCNISSAN(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case STEERING_BUTTON_DATA:
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeSteeringButtonData(msg);

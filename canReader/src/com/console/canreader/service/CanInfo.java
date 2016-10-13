@@ -246,6 +246,8 @@ public class CanInfo implements Parcelable {
 	public float HISTORY_OIL_CONSUMPTION_15=0;
 	public int HISTORY_OIL_CONSUMPTION_UNIT=0;
 	
+	public int AIR_CONDITIONER_CONTROL = 0;         //空调是否有界面控制，如果为1则有，不需要自动弹框
+	
 	public CanInfo(){
 		
 	}

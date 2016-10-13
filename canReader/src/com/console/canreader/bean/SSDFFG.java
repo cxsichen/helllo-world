@@ -7,7 +7,8 @@ import com.console.canreader.utils.BytesUtil;
 import android.util.Log;
 
 public class SSDFFG extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 3;
 	// DataType
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x12;
@@ -23,23 +24,19 @@ public class SSDFFG extends AnalyzeUtils {
 	public static final int RADAR_DATA = 0x41;
 
 
-	public SSDFFG(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
-		super.analyzeEach(msg, i);
+		super.analyzeEach(msg);
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case AIR_CONDITIONER_DATA:
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
@@ -101,7 +98,7 @@ public class SSDFFG extends AnalyzeUtils {
 	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
 	 * PHONE 6：mute 7：SRC 8：SPEECH/MIC 9:answer phone 10:hangup phone
 	 */
-	int keyCode[] = { 0, 1, 2, 13, 14, 5, 3, 12, 23, -1,-1 };
+	int keyCode[] = { 0, 1, 2, 13, 14, 5, 3, 12, 23, -1, -1 };
 
 	void analyzeCarBasicInfoData(byte[] msg) {
 		if (carBasicInfo.equals(BytesUtil.bytesToHexString(msg))) {
@@ -151,7 +148,7 @@ public class SSDFFG extends AnalyzeUtils {
 		mCanInfo.RIGHT_FORONTDOOR_STATUS = (int) ((msg[6] >> 6) & 0x01);
 		mCanInfo.LEFT_FORONTDOOR_STATUS = (int) ((msg[6] >> 7) & 0x01);
 
-		mCanInfo.SAFETY_BELT_STATUS = (int) ((msg[6] >> 2) & 0x01)==0?1:0;
+		mCanInfo.SAFETY_BELT_STATUS = (int) ((msg[6] >> 2) & 0x01) == 0 ? 1 : 0;
 
 	}
 

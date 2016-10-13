@@ -8,9 +8,13 @@ public abstract class AnalyzeUtils {
 
 	CanInfo mCanInfo;
 
-	public AnalyzeUtils(byte[] msg, int i) {
+	public AnalyzeUtils() {
+
+	}
+	
+	public void init(byte[] msg){
 		mCanInfo = new CanInfo();
-		analyze(msg, i);
+		analyze(msg);
 	}
 
 	public CanInfo getCanInfo() {
@@ -28,9 +32,9 @@ public abstract class AnalyzeUtils {
     * CAR_INFO_DATA---------------------mCanInfo.CHANGE_STATUS = 10        报警状态（车门报警，车身信息报警）
     *                                                                      车身信息
     */
-	public void analyze(byte[] msg, int i) {
+	public void analyze(byte[] msg) {
 		// TODO Auto-generated method stub
-		analyzeEach(msg, i);
+		analyzeEach(msg);
 		if (mAnalyzeUtilsCallback != null)
 			mAnalyzeUtilsCallback.onChange(mCanInfo.CHANGE_STATUS);
 
@@ -47,7 +51,7 @@ public abstract class AnalyzeUtils {
 		this.mAnalyzeUtilsCallback = mAnalyzeUtilsCallback;
 	}
 
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 
 	}

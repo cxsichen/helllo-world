@@ -32,27 +32,27 @@
     </string-array>
     
     <!-- 大众  -->
-    <string-array name="RZC_Volkswagen_items">
+    <string-array name="RZCVolkswagen_items">
         <item>车辆信息</item>
     </string-array>
-    <string-array name="RZC_Volkswagen_activity">
+    <string-array name="RZCVolkswagen_activity">
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
     </string-array>
     <!-- 大众  -->
     
     <!-- 大众高尔夫  -->
-    <string-array name="RZC_VolkswagenGolf_items">
+    <string-array name="RZCVolkswagenGolf_items">
         <item>车辆信息</item>
         <item>行驶数据</item>
     </string-array>
-    <string-array name="RZC_VolkswagenGolf_activity">
+    <string-array name="RZCVolkswagenGolf_activity">
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
         <item>com.console.canreader.activity.VolkswagenGolf.DrivingDataActivity</item>
     </string-array>
     <!-- 大众高尔夫  -->
     
      <!-- 本田  -->
-    <string-array name="SS_Toyota_items">
+    <string-array name="SSToyota_items">
         <item>车辆信息</item>
         <item>设定信息</item>
         <item>历史油耗</item>
@@ -60,7 +60,7 @@
         <item>油电混合信息</item>
         <item>软件版本</item>
     </string-array>
-    <string-array name="SS_Toyota_activity">
+    <string-array name="SSToyota_activity">
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
         <item>com.console.canreader.activity.Toyota.SettingActivity</item>
         <item>com.console.canreader.activity.Toyota.HistoryOilConActivity</item>
@@ -71,49 +71,49 @@
     <!-- 本田  -->
     
     <!-- 奔腾X80 -->
-    <string-array name="RZC_BESTURNX80_items">
+    <string-array name="RZCBESTURNX80_items">
         <item>车辆信息</item>
     </string-array>
-    <string-array name="RZC_BESTURNX80_activity">
+    <string-array name="RZCBESTURNX80_activity">
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
     </string-array>
     <!-- 奔腾X80 -->
     
     
     <!-- 海马M3  -->
-    <string-array name="RZC_FHCM3_items">
+    <string-array name="RZCFHCM3_items">
         <item>车辆信息</item>
     </string-array>
-    <string-array name="RZC_FHCM3_activity">
+    <string-array name="RZCFHCM3_activity">
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
     </string-array>
     <!-- 海马M3 -->
     
     <!-- 北汽威旺M20  -->
-    <string-array name="RZC_JingKooM20_items">
+    <string-array name="RZCJingKooM20_items">
         <item>车辆信息</item>
     </string-array>
-    <string-array name="RZC_JingKooM20_activity">
+    <string-array name="RZCJingKooM20_activity">
         <item>com.console.canreader.activity.JingKooM20.DrivingDataActivity</item>
     </string-array>
     <!-- 北汽威旺M20  -->
     
     <!-- 宝骏730 560  -->
-    <string-array name="RZC_Baojun_items">
+    <string-array name="RZCBaojun_items">
         <item>车辆信息</item>
     </string-array>
-    <string-array name="RZC_Baojun_activity">
+    <string-array name="RZCBaojun_activity">
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
     </string-array>
     <!-- 宝骏730 560  -->
     
     
     <!-- 瑞风S3  -->
-    <string-array name="RZC_JAC_items">
+    <string-array name="RZCJAC_items">
         <item>车辆信息</item>
         <item>胎压界面</item>
     </string-array>
-    <string-array name="RZC_JAC_activity">
+    <string-array name="RZCJAC_activity">
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
         <item>com.console.canreader.activity.JAC.TpmsActivity</item>
     </string-array>

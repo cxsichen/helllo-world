@@ -8,7 +8,8 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCFHCm3 extends AnalyzeUtils {
-
+	  //数据类型
+		public static final int comID=2;
 	// Head Code
 	public static final int HEAD_CODE = 0x2e;
 	// DataType
@@ -23,24 +24,20 @@ public class RZCFHCm3 extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x24;
 
-	public RZCFHCm3(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
 			switch (msg[0]) {
 			case (byte) Contacts.VOLK_HEAD_CODE_2:
-				switch ((int) (msg[i] & 0xFF)) {
+				switch ((int) (msg[comID] & 0xFF)) {
 				case STEERING_TURN_DATA:
 					mCanInfo.CHANGE_STATUS = 8;
 					analyzeSteeringTurnData(msg);

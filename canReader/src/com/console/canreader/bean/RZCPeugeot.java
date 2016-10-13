@@ -8,7 +8,8 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCPeugeot extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 2;
 	// Head Code
 	public static final int HEAD_CODE = 0x2e;
 	// DataType
@@ -24,22 +25,19 @@ public class RZCPeugeot extends AnalyzeUtils {
 	public static final int CAR_INFO_DATA = 0x38;
 	public static final int CAR_INFO_DATA_1 = 0x36;
 
-	public RZCPeugeot(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
+
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case AIR_CONDITIONER_DATA:
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
@@ -112,7 +110,6 @@ public class RZCPeugeot extends AnalyzeUtils {
 		mCanInfo.HOOD_STATUS = (int) ((msg[3] >> 2) & 0x01);
 		mCanInfo.SAFETY_BELT_STATUS = (int) ((msg[3] >> 1) & 0x01);
 
-
 		mCanInfo.HANDBRAKE_STATUS = (int) ((msg[6] >> 1) & 0x01);
 
 		/*
@@ -131,12 +128,12 @@ public class RZCPeugeot extends AnalyzeUtils {
 		} else {
 			steerSave = BytesUtil.bytesToHexString(msg);
 		}
-        
+
 		int temp = ((int) msg[4] & 0xFF) << 8 | ((int) msg[3] & 0xFF);
 		if (temp < 32767) {
-			mCanInfo.STERRING_WHELL_STATUS = temp/10;
+			mCanInfo.STERRING_WHELL_STATUS = temp / 10;
 		} else {
-			mCanInfo.STERRING_WHELL_STATUS = (temp - 65536)/10;
+			mCanInfo.STERRING_WHELL_STATUS = (temp - 65536) / 10;
 		}
 	}
 
@@ -202,32 +199,32 @@ public class RZCPeugeot extends AnalyzeUtils {
 		} else {
 			airConSave = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.AIR_CONDITIONER_STATUS=(int) ((msg[3] >> 7) & 0x01);
-		mCanInfo.AC_INDICATOR_STATUS=(int) ((msg[3] >> 6) & 0x01);
+		mCanInfo.AIR_CONDITIONER_STATUS = (int) ((msg[3] >> 7) & 0x01);
+		mCanInfo.AC_INDICATOR_STATUS = (int) ((msg[3] >> 6) & 0x01);
 		mCanInfo.CYCLE_INDICATOR = (int) ((msg[3] >> 5) & 0x01);
-		mCanInfo.SMALL_LANTERN_INDICATOR= (int) ((msg[3] >> 3) & 0x01);
-		mCanInfo.REAR_LAMP_INDICATOR= (int) ((msg[3] >> 0) & 0x01);
+		mCanInfo.SMALL_LANTERN_INDICATOR = (int) ((msg[3] >> 3) & 0x01);
+		mCanInfo.REAR_LAMP_INDICATOR = (int) ((msg[3] >> 0) & 0x01);
 
-		mCanInfo.UPWARD_AIR_INDICATOR= (int) ((msg[4] >> 7) & 0x01);
-		mCanInfo.PARALLEL_AIR_INDICATOR= (int) ((msg[4] >> 6) & 0x01);
-		mCanInfo.DOWNWARD_AIR_INDICATOR= (int) ((msg[4] >> 5) & 0x01);
-		
-		mCanInfo.AIR_RATE= (int) ((msg[4] >> 0) & 0x0f);
-		mCanInfo.MAX_FRONT_LAMP_INDICATOR=(int) ((msg[7] >> 7) & 0x01);
+		mCanInfo.UPWARD_AIR_INDICATOR = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.PARALLEL_AIR_INDICATOR = (int) ((msg[4] >> 6) & 0x01);
+		mCanInfo.DOWNWARD_AIR_INDICATOR = (int) ((msg[4] >> 5) & 0x01);
+
+		mCanInfo.AIR_RATE = (int) ((msg[4] >> 0) & 0x0f);
+		mCanInfo.MAX_FRONT_LAMP_INDICATOR = (int) ((msg[7] >> 7) & 0x01);
 
 		int temp = (int) ((msg[7] >> 0) & 0x01);
 		int temp1 = (int) (msg[5] & 0xff);
 		int temp2 = (int) (msg[6] & 0xff);
-		if(temp==0){   //摄氏
+		if (temp == 0) { // 摄氏
 			mCanInfo.DRIVING_POSITON_TEMP = temp1 == 0 ? 0
-					: temp1 == 0xFF ? 255 :temp1*0.5f;
+					: temp1 == 0xFF ? 255 : temp1 * 0.5f;
 			mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = temp2 == 0 ? 0
-					: temp2 == 0xFF ? 255 :temp2*0.5f;
-		}else{         //华氏
+					: temp2 == 0xFF ? 255 : temp2 * 0.5f;
+		} else { // 华氏
 			mCanInfo.DRIVING_POSITON_TEMP = temp1 == 0 ? 0
-					: temp1 == 0xFF ? 255 :temp1;
+					: temp1 == 0xFF ? 255 : temp1;
 			mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = temp2 == 0 ? 0
-					: temp2 == 0xFF ? 255 :temp2;
+					: temp2 == 0xFF ? 255 : temp2;
 		}
 	}
 

@@ -10,7 +10,9 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCVolkswagenGolf extends AnalyzeUtils {
-
+	
+	//数据类型
+    public static final int comID=1;
 	// DataType
 	// 方向盘按键
 	public final static int STEERING_BUTTON_DATA = 0x20;
@@ -30,22 +32,18 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 	// 方向盘转角
 	public final static int STEERING_TURN_DATA = 0x29;
 
-	public RZCVolkswagenGolf(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case STEERING_BUTTON_DATA:
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeSteeringButtonData(msg);

@@ -1,8 +1,6 @@
 package com.console.canreader;
 
 import com.console.canreader.activity.baseActivity;
-import com.console.canreader.activity.baseActivity.CanTypeObserver;
-import com.console.canreader.activity.baseActivity.CarTypeObserver;
 import com.console.canreader.service.CanService;
 import com.console.canreader.utils.Contacts;
 import com.console.canreader.utils.PreferenceUtil;
@@ -37,8 +35,8 @@ public class GuideActivity extends Activity {
 
 	LinearLayout guideLayout;
 
-	private int canType = -1;
-	private int carType = -1;
+    private String canName="";
+    private String canFirtName="";
 	ListView listView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +47,13 @@ public class GuideActivity extends Activity {
 		guideLayout = (LinearLayout) findViewById(R.id.guide_layout);
 		listView = (ListView) findViewById(R.id.listView);
 		startService(new Intent(this, CanService.class));		
-		canType = PreferenceUtil.getCANTYPE(this);
-		carType = PreferenceUtil.getCARTYPE(this);
+		syncCanName();
 		//carType = 21;
-		initGuideView(canType,carType);
+		initListView(canName);
 
 		getContentResolver().registerContentObserver(
-				android.provider.Settings.System.getUriFor(Contacts.CANTYPE),
-				true, mCanTypeObserver);
-		getContentResolver().registerContentObserver(
-				android.provider.Settings.System.getUriFor(Contacts.CARTYPE),
-				true, mCarTypeObserver);
+				android.provider.Settings.System.getUriFor(Contacts.CAN_CLASS_NAME),
+				true, mCanNameObserver);
 		
 		
 	}
@@ -68,60 +62,36 @@ public class GuideActivity extends Activity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		getContentResolver().unregisterContentObserver(mCanTypeObserver);
-		getContentResolver().unregisterContentObserver(mCarTypeObserver);
+		getContentResolver().unregisterContentObserver(mCanNameObserver);
 	}
 	
-	private CanTypeObserver mCanTypeObserver = new CanTypeObserver();
+	private CanNameObserver mCanNameObserver = new CanNameObserver();
 
-	public class CanTypeObserver extends ContentObserver {
-		public CanTypeObserver() {
+	public class CanNameObserver extends ContentObserver {
+		public CanNameObserver() {
+			
 			super(null);
 		}
 
 		@Override
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
-			if (canType != PreferenceUtil.getCANTYPE(GuideActivity.this))
+			if (!canName.equals(PreferenceUtil.getCANName(GuideActivity.this)))
 				finish();
 
 		}
 	}
 
-	private CarTypeObserver mCarTypeObserver = new CarTypeObserver();
-
-	public class CarTypeObserver extends ContentObserver {
-		public CarTypeObserver() {
-			super(null);
-		}
-
-		@Override
-		public void onChange(boolean selfChange) {
-			super.onChange(selfChange);
-			if (carType != PreferenceUtil.getCARTYPE(GuideActivity.this))
-				finish();
-		}
-	}
-
-
-	private void initGuideView(int canType,int carType) {
-		// TODO Auto-generated method stub
-		Resources res = getResources();
-		String[] carTypeName = res.getStringArray(R.array.CarType);
-		String[] canTypeName = res.getStringArray(R.array.CanType);
-		initListView(canTypeName[canType], carTypeName[carType]);
-	}
-
-	private void initListView(String Cantype, String Cartype) {
+	private void initListView(String canName) {
 		
 		try {
 			Resources res = getResources();
 			int itemsId = getResources().getIdentifier(
-					Cantype + "_" + Cartype + "_items", "array", getPackageName());
+					canName + "_items", "array", getPackageName());
 			String[] items = res.getStringArray(itemsId);
 
 			int activityId = getResources().getIdentifier(
-					Cantype + "_" + Cartype + "_activity", "array",
+					canName + "_activity", "array",
 					getPackageName());
 			final String[] activity = res.getStringArray(activityId);
 			 
@@ -159,5 +129,11 @@ public class GuideActivity extends Activity {
 		}
 		
 	}
+	
+	private void syncCanName(){
+		canName = PreferenceUtil.getCANName(this);
+		canFirtName=PreferenceUtil.getFirstTwoString(this, canName);
+	}
+	
 
 }

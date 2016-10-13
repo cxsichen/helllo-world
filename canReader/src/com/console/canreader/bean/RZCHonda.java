@@ -7,7 +7,8 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCHonda extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 1;
 	// 方向盘按键
 	public static final int STEERING_BUTTON_DATA = 0x20;
 	// 空调信息
@@ -22,22 +23,17 @@ public class RZCHonda extends AnalyzeUtils {
 	public static final int FRONT_RADER_DATA = 0x23;
 
 
-	public RZCHonda(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case CAR_INFO_DATA:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData(msg);
@@ -92,9 +88,9 @@ public class RZCHonda extends AnalyzeUtils {
 		// TODO Auto-generated method stub
 		int temp = ((int) msg[4] & 0xFF) << 8 | ((int) msg[3] & 0xFF);
 		if (temp < 32767) {
-			mCanInfo.STERRING_WHELL_STATUS = -temp/(1200/540);
+			mCanInfo.STERRING_WHELL_STATUS = -temp / (1200 / 540);
 		} else {
-			mCanInfo.STERRING_WHELL_STATUS = (65536 - temp)/(1200/540);
+			mCanInfo.STERRING_WHELL_STATUS = (65536 - temp) / (1200 / 540);
 		}
 	}
 

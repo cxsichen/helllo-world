@@ -5,8 +5,6 @@ import com.console.canreader.service.CanInfo;
 import com.console.canreader.service.CanService;
 import com.console.canreader.service.ICanCallback;
 import com.console.canreader.service.ICanService;
-import com.console.canreader.service.CanService.CanTypeObserver;
-import com.console.canreader.service.CanService.CarTypeObserver;
 import com.console.canreader.utils.BytesUtil;
 import com.console.canreader.utils.Contacts;
 import com.console.canreader.utils.PreferenceUtil;
@@ -27,8 +25,8 @@ import android.view.Window;
 public class baseActivity extends Activity {
 	CanInfo mCaninfo;
 
-	private int canType = -1; // 盒子厂家 0：睿志诚 1：尚摄
-	private int carType = -1; // 车型 0:大众
+	 private String canName="";
+	 private String canFirtName="";
 
 	/**
 	 * 数据变化 需要改变界面的时候调用 界面获取焦点和有数据反馈的时候会调用
@@ -102,47 +100,30 @@ public class baseActivity extends Activity {
 		bindService();
 
 		// 监控车型和协议选择
-		canType = PreferenceUtil.getCANTYPE(this);
-		carType = PreferenceUtil.getCANTYPE(this);
+		syncCanName();
 		getContentResolver().registerContentObserver(
-				android.provider.Settings.System.getUriFor(Contacts.CANTYPE),
-				true, mCanTypeObserver);
-		getContentResolver().registerContentObserver(
-				android.provider.Settings.System.getUriFor(Contacts.CARTYPE),
-				true, mCarTypeObserver);
+				android.provider.Settings.System.getUriFor(Contacts.CAN_CLASS_NAME),
+				true, mCanNameObserver);
 
 	}
 
-	private CanTypeObserver mCanTypeObserver = new CanTypeObserver();
+	private CanNameObserver mCanNameObserver = new CanNameObserver();
 
-	public class CanTypeObserver extends ContentObserver {
-		public CanTypeObserver() {
+	public class CanNameObserver extends ContentObserver {
+		public CanNameObserver() {
 			super(null);
 		}
 
 		@Override
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
-			if (canType != PreferenceUtil.getCANTYPE(baseActivity.this))
+			if (!canName.equals( PreferenceUtil.getCANName(baseActivity.this)))
 				finish();
 
 		}
 	}
 
-	private CarTypeObserver mCarTypeObserver = new CarTypeObserver();
 
-	public class CarTypeObserver extends ContentObserver {
-		public CarTypeObserver() {
-			super(null);
-		}
-
-		@Override
-		public void onChange(boolean selfChange) {
-			super.onChange(selfChange);
-			if (carType != PreferenceUtil.getCARTYPE(baseActivity.this))
-				finish();
-		}
-	}
 
 	@Override
 	protected void onResume() {
@@ -177,8 +158,7 @@ public class baseActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		unBindService();
-		getContentResolver().unregisterContentObserver(mCanTypeObserver);
-		getContentResolver().unregisterContentObserver(mCarTypeObserver);
+		getContentResolver().unregisterContentObserver(mCanNameObserver);
 	}
 
 	/**
@@ -237,11 +217,11 @@ public class baseActivity extends Activity {
 	public void sendMsg(String msg) {
 		try {
 			if (mISpService != null) {
-				switch (canType) {
-				case Contacts.CANTYPEGROUP.RAISE:
+				switch (canFirtName) {
+				case Contacts.CANFISRTNAMEGROUP.RAISE:
 					mISpService.sendDataToSp(BytesUtil.addRZCCheckBit(msg));
 					break;
-				case Contacts.CANTYPEGROUP.HIWORLD:
+				case Contacts.CANFISRTNAMEGROUP.HIWORLD:
 					mISpService.sendDataToSp(BytesUtil.addSSCheckBit(msg));
 					break;
 				default:
@@ -252,6 +232,11 @@ public class baseActivity extends Activity {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void syncCanName(){
+		canName = PreferenceUtil.getCANName(this);
+		canFirtName=PreferenceUtil.getFirstTwoString(this, canName);
 	}
 
 }

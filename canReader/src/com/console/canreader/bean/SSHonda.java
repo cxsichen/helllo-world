@@ -7,7 +7,8 @@ import com.console.canreader.utils.BytesUtil;
 import android.util.Log;
 
 public class SSHonda extends AnalyzeUtils {
-
+	// 数据类型
+	public static final int comID = 3;
 	// 空调信息
 	public static final int AIR_CONDITIONER_DATA = 0x31;
 	// 雷达信息
@@ -17,24 +18,19 @@ public class SSHonda extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA_1 = 0x12;
 
-   
-	public SSHonda(byte[] msg, int i) {
-		// TODO Auto-generated constructor stub
-		super(msg, i);
-	}
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
 
 	@Override
-	public void analyzeEach(byte[] msg, int i) {
+	public void analyzeEach(byte[] msg) {
 		// TODO Auto-generated method stub
-		super.analyzeEach(msg, i);
+		super.analyzeEach(msg);
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[i] & 0xFF)) {
+			switch ((int) (msg[comID] & 0xFF)) {
 			case AIR_CONDITIONER_DATA:
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
@@ -60,8 +56,6 @@ public class SSHonda extends AnalyzeUtils {
 		}
 
 	}
-	
-
 
 	static String radarSave = "";
 	static int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -75,22 +69,30 @@ public class SSHonda extends AnalyzeUtils {
 		}
 
 		mCanInfo.BACK_LEFT_DISTANCE = (((int) (msg[4] & 0xFF)) == 0xff) ? 0
-				: (((int) (msg[4] & 0xFF)) == 0) ? 0:(5-((int) (msg[4] & 0xFF)));
+				: (((int) (msg[4] & 0xFF)) == 0) ? 0
+						: (5 - ((int) (msg[4] & 0xFF)));
 		mCanInfo.BACK_MIDDLE_LEFT_DISTANCE = (((int) (msg[5] & 0xFF)) == 0xff) ? 0
-				: (((int) (msg[5] & 0xFF)) == 0) ? 0:(5-((int) (msg[5] & 0xFF)));
+				: (((int) (msg[5] & 0xFF)) == 0) ? 0
+						: (5 - ((int) (msg[5] & 0xFF)));
 		mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE = (((int) (msg[6] & 0xFF)) == 0xff) ? 0
-				:(((int) (msg[6] & 0xFF)) == 0) ? 0: (5-((int) (msg[6] & 0xFF)));
+				: (((int) (msg[6] & 0xFF)) == 0) ? 0
+						: (5 - ((int) (msg[6] & 0xFF)));
 		mCanInfo.BACK_RIGHT_DISTANCE = (((int) (msg[7] & 0xFF)) == 0xff) ? 0
-				: (((int) (msg[7] & 0xFF)) == 0) ? 0:(5-((int) (msg[7] & 0xFF)));
+				: (((int) (msg[7] & 0xFF)) == 0) ? 0
+						: (5 - ((int) (msg[7] & 0xFF)));
 
 		mCanInfo.FRONT_LEFT_DISTANCE = (((int) (msg[8] & 0xFF)) == 0xff) ? 0
-				: (((int) (msg[8] & 0xFF)) == 0) ? 0:(5-((int) (msg[8] & 0xFF)));
+				: (((int) (msg[8] & 0xFF)) == 0) ? 0
+						: (5 - ((int) (msg[8] & 0xFF)));
 		mCanInfo.FRONT_MIDDLE_LEFT_DISTANCE = (((int) (msg[9] & 0xFF)) == 0xff) ? 0
-				: (((int) (msg[9] & 0xFF)) == 0) ? 0:(5-((int) (msg[9] & 0xFF)));
+				: (((int) (msg[9] & 0xFF)) == 0) ? 0
+						: (5 - ((int) (msg[9] & 0xFF)));
 		mCanInfo.FRONT_MIDDLE_RIGHT_DISTANCE = (((int) (msg[10] & 0xFF)) == 0xff) ? 0
-				: (((int) (msg[10] & 0xFF)) == 0) ? 0:(5-((int) (msg[10] & 0xFF)));
+				: (((int) (msg[10] & 0xFF)) == 0) ? 0
+						: (5 - ((int) (msg[10] & 0xFF)));
 		mCanInfo.FRONT_RIGHT_DISTANCE = (((int) (msg[11] & 0xFF)) == 0xff) ? 0
-				:(((int) (msg[11] & 0xFF)) == 0) ? 0:(5- ((int) (msg[11] & 0xFF)));
+				: (((int) (msg[11] & 0xFF)) == 0) ? 0
+						: (5 - ((int) (msg[11] & 0xFF)));
 
 	}
 
@@ -131,9 +133,9 @@ public class SSHonda extends AnalyzeUtils {
 		// 方向盘转角 CHANGE_STATUS=8
 		int temp = 0;
 		if ((int) ((msg[10] >> 7) & 0x01) == 0) {
-			temp = -(((int) msg[10] & 0x7F) *256 +((int) msg[11] & 0xFF)) / 10;
+			temp = -(((int) msg[10] & 0x7F) * 256 + ((int) msg[11] & 0xFF)) / 10;
 		} else {
-			temp = (((int) msg[10] & 0x7F) *256 + ((int) msg[11] & 0xFF)) / 10;
+			temp = (((int) msg[10] & 0x7F) * 256 + ((int) msg[11] & 0xFF)) / 10;
 		}
 
 		if (mCanInfo.STERRING_WHELL_STATUS != temp) {
