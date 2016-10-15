@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">音效控制</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="defaultEF">默认</string>
+    <string name="rock">摇滚</string>
+    <string name="popular">流行</string>
+    <string name="jazz">爵士</string>
+    <string name="classic">经典</string>
+    <string name="reset">复位</string>
+    <string name="tre">高音</string>
+    <string name="mid">中音</string>
+    <string name="bas">低音</string>
+
+</resources>

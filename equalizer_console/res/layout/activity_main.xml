@@ -29,7 +29,7 @@
                 android:id="@+id/defaultEf_button"
                 style="@style/SoundStyleText"
                 android:background="@drawable/bg_btn_selected"
-                android:text="默认" />
+                android:text="@string/defaultEF" />
 
             <View
                 android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                  android:id="@+id/rockEf_button"
                 style="@style/SoundStyleText"
                 android:elevation="4dp"
-                android:text="摇滚" />
+                android:text="@string/rock" />
 
             <View
                 android:layout_width="match_parent"
@@ -51,7 +51,7 @@
             <TextView
                 android:id="@+id/popularEf_button"
                 style="@style/SoundStyleText"
-                android:text="流行" />
+                android:text="@string/popular" />
 
             <View
                 android:layout_width="match_parent"
@@ -61,7 +61,7 @@
             <TextView
                 android:id="@+id/jazzEf_button"
                 style="@style/SoundStyleText"
-                android:text="爵士" />
+                android:text="@string/jazz" />
 
             <View
                 android:layout_width="match_parent"
@@ -71,7 +71,7 @@
             <TextView
                 android:id="@+id/classicEf_button"
                 style="@style/SoundStyleText"
-                android:text="经典" />
+                android:text="@string/classic" />
 
         </LinearLayout>
 
@@ -84,7 +84,7 @@
              android:id="@+id/reset_button"
             style="@style/SoundStyleText"
             android:background="@drawable/btn_bg_selector"
-            android:text="复位" />
+            android:text="@string/reset" />
 
 
     </LinearLayout>
@@ -123,7 +123,7 @@
         <!--Label-->
         <TextView
             style="@style/EqSliderText"
-            android:text="高音" />
+            android:text="@string/tre" />
 
     </LinearLayout>
 
@@ -160,7 +160,7 @@
         <!--Label-->
         <TextView
             style="@style/EqSliderText"
-            android:text="中音" />
+            android:text="@string/mid" />
 
     </LinearLayout>
 
@@ -197,7 +197,7 @@
         <!--Label-->
         <TextView
             style="@style/EqSliderText"
-            android:text="低音" />
+            android:text="@string/bas" />
 
     </LinearLayout>
 
