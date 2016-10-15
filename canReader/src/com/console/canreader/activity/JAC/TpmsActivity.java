@@ -18,7 +18,7 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.console.canreader.R;
-import com.console.canreader.activity.baseActivity;
+import com.console.canreader.activity.BaseActivity;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.Contacts;
 import com.console.canreader.utils.DensityUtils;
@@ -27,7 +27,7 @@ import com.console.canreader.utils.ViewPagerAdapter;
 import com.console.canreader.view.ObdView;
 import com.console.canreader.view.ViewPageFactory;
 
-public class TpmsActivity extends baseActivity {
+public class TpmsActivity extends BaseActivity {
 
 	private TextView pressure_fl;
 	private TextView pressure_fr;

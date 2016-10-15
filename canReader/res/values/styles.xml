@@ -15,12 +15,7 @@
     <style name="Theme.AppCompat.Light.NoActionBar" parent="android:Widget"></style>
     <!-- Application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--
-        Customize your theme here.>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item
-        -->
+        <item name="@android:attr/actionBarSize">80px</item>
     </style>
 
     <!-- Status Group Text -->
@@ -220,6 +215,38 @@
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center_vertical</item>
+    </style>
+ 
+     <!--Main Menu RelativeLayout-->
+    <style name="mainMenuRelativeLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:visibility">gone</item>
+    </style>
+    
+        <!--Main Menu Item Icon-->
+    <style name="mainMenuIcon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+    
+        <!--Main Menu Item Label-->
+    <style name="mainMenuLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+    
+        <!--Main Menu Divider-->
+    <style name="mainMenuDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">128dp</item>
+        <item name="android:background">#1FFFFFFF</item>
     </style>
 
 </resources>

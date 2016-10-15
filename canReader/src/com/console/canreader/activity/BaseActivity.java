@@ -19,14 +19,15 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Window;
 
-public class baseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
 	CanInfo mCaninfo;
 
-	 private String canName="";
-	 private String canFirtName="";
+	 public static String canName="";
+	 public static String canFirtName="";
 
 	/**
 	 * 数据变化 需要改变界面的时候调用 界面获取焦点和有数据反馈的时候会调用
@@ -96,7 +97,6 @@ public class baseActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		bindService();
 
 		// 监控车型和协议选择
@@ -117,7 +117,7 @@ public class baseActivity extends Activity {
 		@Override
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
-			if (!canName.equals( PreferenceUtil.getCANName(baseActivity.this)))
+			if (!canName.equals( PreferenceUtil.getCANName(BaseActivity.this)))
 				finish();
 
 		}

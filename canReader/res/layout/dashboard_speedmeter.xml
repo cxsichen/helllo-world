@@ -26,7 +26,7 @@
         android:layout_width="80dp"
         android:layout_height="36dp"
         android:layout_gravity="right|center_vertical"
-        android:layout_marginRight="68dp"
+        android:layout_marginRight="58dp"
         android:text="0 KM/H" />
 
     <ImageView

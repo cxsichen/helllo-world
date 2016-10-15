@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@drawable/tab_holo"
+    android:paddingBottom="8dp"
+    android:paddingLeft="30dip"
+    android:paddingRight="30dip"
+    android:paddingTop="8dp"
+    android:textColor="@android:color/holo_blue_light"
+    android:textSize="16sp" />

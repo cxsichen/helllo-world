@@ -29,6 +29,12 @@ public class DialogCreater {
 
 	private static AirConDialog airCondialog;
 	private static UnlockWaringDialog unlockWaringDialog;
+	public static final String CAN_WARNING = "com.console.canWaring";
+	public static final String BATTRYT_WARNING = "com.console.battery.canWaring";
+    public static final String FUEL_CAN_WARNING = "com.console.fuel.canWaring";
+	public static final String HANDBRAKE_WARNING = "com.console.handbrake.canWaring";
+	public static final String SEATBELT_WARNING = "com.console.seatbelt.canWaring";
+	public static final String WASHER_WARNING = "com.console.wahser.canWaring";
 	
 	/*-------------------显示车门报警  start--------------------*/
 	public static void showUnlockWaringDialog(Context context, CanInfo canInfo) {
@@ -39,6 +45,7 @@ public class DialogCreater {
 				|| canInfo.LEFT_FORONTDOOR_STATUS == 1
 				|| canInfo.TRUNK_STATUS == 1
 				|| canInfo.HOOD_STATUS == 1) {
+			
 			if (unlockWaringDialog == null) {
 				unlockWaringDialog = new UnlockWaringDialog(context,
 						R.style.MyDialog);
@@ -65,6 +72,9 @@ public class DialogCreater {
 	
 	/*-------------------显示车门报警  end--------------------*/
 	
+
+
+	
 	/*-------------------显示车身信息报警  start--------------------*/
 	static int[] waringStatus = { 0, 0, 0, 0, 0 };
 	private static final String WARNSTART = "warn_start";
@@ -81,8 +91,19 @@ public class DialogCreater {
 			waringStatus[2] = canInfo.SAFETY_BELT_STATUS;
 			waringStatus[3] = canInfo.DISINFECTON_STATUS;
 			waringStatus[4] = canInfo.HANDBRAKE_STATUS;
-
-			for (int i = 0; i < waringStatus.length; i++) {
+			
+			Log.i("cxs","========showUnlockWaringInfo==========");
+			
+			android.provider.Settings.System.putInt(context.getContentResolver(), BATTRYT_WARNING, canInfo.BATTERY_WARING_SIGN);
+			android.provider.Settings.System.putInt(context.getContentResolver(), FUEL_CAN_WARNING, canInfo.FUEL_WARING_SIGN);
+			android.provider.Settings.System.putInt(context.getContentResolver(), HANDBRAKE_WARNING, canInfo.HANDBRAKE_STATUS);
+			android.provider.Settings.System.putInt(context.getContentResolver(), SEATBELT_WARNING, canInfo.SAFETY_BELT_STATUS);
+			android.provider.Settings.System.putInt(context.getContentResolver(), WASHER_WARNING, canInfo.DISINFECTON_STATUS);
+			/*int temp=android.provider.Settings.System.getInt(context.getContentResolver(), CAN_WARNING, 0);
+			android.provider.Settings.System.putInt(context.getContentResolver(), CAN_WARNING, temp==0?1:0);*/
+			Intent intent=new Intent(CAN_WARNING);
+			context.sendBroadcast(intent);
+		/*	for (int i = 0; i < waringStatus.length; i++) {
 				if (waringStatus[i] == 1) {
 					
 					String topActivty = getTopActivity(context);
@@ -97,7 +118,7 @@ public class DialogCreater {
 						context.startActivity(intent);
 					}
 				}
-			}
+			}*/
 		}
 	}
 	/*-------------------显示车身信息报警  end--------------------*/

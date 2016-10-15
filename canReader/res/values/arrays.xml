@@ -1,42 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string-array name="CanType">
-        <item>RZC</item>
-        <item>SS</item>
-    </string-array>
-    
-    <string-array name="CarType">
-        <item>Volkswagen</item>
-        <item>VolkswagenGolf</item>
-        <item>Honda</item>
-        <item>Toyota</item>
-        <item>ToyotaRZ</item>
-        <item>GE</item>
-        <item>FG580</item>
-        <item>PeugeotCitroen</item>
-        <item>Nissan</item>
-        <item>Trumpche</item>
-        <item>Focus</item>        
-        <item>HondaCRV</item>
-        <item>HondaDA</item>
-        <item>BuickGM</item>
-        <item>EDGE</item>
-        <item>Roewe360</item>
-        <item>MGGS</item>
-        <item>BESTURNX80</item>
-        <item>FHCM3</item>
-        <item>JingKooM20</item>
-        <item>Baojun</item>
-        <item>JAC</item>
-    </string-array>
+<resources>     
+     <!--   main menu 对应-->
+     <!--   车辆信息      CarInfoActivity-->
+     <!--   车辆设置      CarSettingAcitivity-->
+     <!--   空调控制       MenuAcAcitivity-->
+     <!--   光盘控制       MenuCdAcitivity-->
+     <!--   原车功放       MenuPaAcitivity-->
+     <!--   全景                 MenuPanoramaAcitivity-->
+     <!--   关于                MenuAboutAcitivity-->
     
     <!-- 大众  -->
+    <string-array name="RZCVolkswagen_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
     <string-array name="RZCVolkswagen_items">
         <item>车辆信息</item>
     </string-array>
-    <string-array name="RZCVolkswagen_activity">
-        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+    <string-array name="RZCVolkswagen_fragment">
+        <item>com.console.canreader.fragment.RZCVolkswagen.CarInfoFragment</item>  
     </string-array>
     <!-- 大众  -->
     

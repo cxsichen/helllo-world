@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.FrameLayout.LayoutParams;
 
-public class CarInfoWaringActivity extends baseActivity {
+public class CarInfoWaringActivity extends BaseActivity {
 	public static final String TEST = "2e810101";
 
 	private String canName = "";
@@ -99,22 +99,6 @@ public class CarInfoWaringActivity extends baseActivity {
 		}
 	};
 
-	private void checkStartMode(CanInfo mCanInfo) {
-		// TODO Auto-generated method stub
-		int mode = Settings.System.getInt(getContentResolver(), WARNSTART, 0);
-		if (mode == 1) {
-			if (vp != null)
-				vp.setCurrentItem(0);
-		}
-		if (mode == 1 && mCanInfo.FUEL_WARING_SIGN != 1
-				&& mCanInfo.BATTERY_WARING_SIGN != 1
-				&& mCanInfo.SAFETY_BELT_STATUS != 1
-				&& mCanInfo.DISINFECTON_STATUS != 1
-				&& mCanInfo.HANDBRAKE_STATUS != 1) {
-			moveTaskToBack(true);
-		}
-	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -155,51 +139,6 @@ public class CarInfoWaringActivity extends baseActivity {
 		ViewPageFactory pageViewDefalut = new ObdView(this,
 				R.layout.dashboard_main);
 		viewsFactory.add(pageViewDefalut);
-
-		/*
-		 * if (PreferenceUtil.getCARTYPE(this) != carType) { switch
-		 * (PreferenceUtil.getCARTYPE(this)) { case
-		 * Contacts.CARTYPEGROUP.PeugeotCitroen: carType =
-		 * PreferenceUtil.getCARTYPE(this); vp.removeAllViews();
-		 * viewsFactory.clear();
-		 * 
-		 * ViewPageFactory pageView1 = new ObdView(this,
-		 * R.layout.dashboard_main); viewsFactory.add(pageView1);
-		 * 
-		 * ViewPageFactory peuAirConView = new PeuAirConView(this,
-		 * R.layout.ac_controler_peugeot_408); viewsFactory.add(peuAirConView);
-		 * 
-		 * vpAdapter.notifyDataSetChanged(); break; case
-		 * Contacts.CARTYPEGROUP.VolkswagenGolf: carType =
-		 * PreferenceUtil.getCARTYPE(this);
-		 * 
-		 * vp.removeAllViews(); viewsFactory.clear();
-		 * 
-		 * ViewPageFactory pageView = new ObdView(this,
-		 * R.layout.dashboard_main); viewsFactory.add(pageView);
-		 * 
-		 * ViewPageFactory GolfView1 = new GolfView1(this,
-		 * R.layout.carinfo_layout_1); viewsFactory.add(GolfView1);
-		 * 
-		 * ViewPageFactory GolfView2 = new GolfView2(this,
-		 * R.layout.carinfo_layout_2); viewsFactory.add(GolfView2);
-		 * 
-		 * ViewPageFactory GolfView3 = new GolfView3(this,
-		 * R.layout.carinfo_layout_3); viewsFactory.add(GolfView3);
-		 * 
-		 * ViewPageFactory GolfView4 = new GolfView4(this,
-		 * R.layout.carinfo_layout_4); viewsFactory.add(GolfView4);
-		 * 
-		 * vpAdapter.notifyDataSetChanged(); break;
-		 * 
-		 * default: vp.removeAllViews(); viewsFactory.clear();
-		 * 
-		 * ViewPageFactory pageViewDefalut = new ObdView(this,
-		 * R.layout.dashboard_main); viewsFactory.add(pageViewDefalut);
-		 * vpAdapter.notifyDataSetChanged(); break; }
-		 * 
-		 * }
-		 */
 		vp.setAdapter(vpAdapter);
 		initIndicator();
 		syncCanName();
@@ -276,7 +215,6 @@ public class CarInfoWaringActivity extends baseActivity {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
-			checkStartMode(mCaninfo);
 			if (mCaninfo.CHANGE_STATUS == 10) {
 				for (ViewPageFactory mViewPageFactory : viewsFactory) {
 					mViewPageFactory.showView(mCaninfo);

@@ -3,6 +3,7 @@ package com.console.canreader.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
+import android.util.Log;
 
 public class PreferenceUtil {
 
@@ -14,6 +15,9 @@ public class PreferenceUtil {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}
+		if(mode==null){
+			mode = "RZCVolkswagen";
 		}
 		return mode;
 	}

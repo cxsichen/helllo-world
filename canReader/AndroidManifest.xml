@@ -37,6 +37,53 @@
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
+        
+        <activity
+            android:name="com.console.canreader.activity.CarInfoActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        <activity
+            android:name="com.console.canreader.activity.CarSettingAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        <activity
+            android:name="com.console.canreader.activity.MenuAcAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        <activity
+            android:name="com.console.canreader.activity.MenuCdAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        <activity
+            android:name="com.console.canreader.activity.MenuPaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        
+        <activity
+            android:name="com.console.canreader.activity.MenuPanoramaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        
+        <activity
+            android:name="com.console.canreader.activity.MenuAboutAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        
+        
         <activity
             android:name="com.console.canreader.activity.VolkswagenGolf.DrivingDataActivity"
             android:label="@string/app_name"
