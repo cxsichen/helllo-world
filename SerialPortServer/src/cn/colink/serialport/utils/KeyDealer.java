@@ -7,9 +7,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
-
-
 
 public class KeyDealer {
 
@@ -23,14 +22,13 @@ public class KeyDealer {
 	public static final String ACTION_TEL_ANSWER = "com.console.TEL_ANSWER";
 	public static final String ACTION_TEL_HANDUP = "com.console.TEL_HANDUP";
 	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
-	
+
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
 	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
 
 	static Context context;
 	static KeyDealer mKeyDealer;
-
 
 	public Handler mHandler = new Handler() {
 
@@ -101,8 +99,6 @@ public class KeyDealer {
 		this.context = context;
 	}
 
-
-	
 	protected void handlePlayPause() {
 		Intent intent = new Intent();
 		intent.setAction(ACTION_PLAY_PAUSE);
@@ -111,48 +107,47 @@ public class KeyDealer {
 
 	protected void handleMainMenu() {
 		try {
-			Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);  
-			  
-			mHomeIntent.addCategory(Intent.CATEGORY_HOME);  
-			mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK  
-			                | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);  
-			context.startActivity(mHomeIntent);  
+			Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
+
+			mHomeIntent.addCategory(Intent.CATEGORY_HOME);
+			mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+					| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+			context.startActivity(mHomeIntent);
 		} catch (Exception e) {
 			// TODO: handle exception
-		}	
+		}
 	}
 
 	protected void handlePower() {
 		try {
 			Intent intent = new Intent();
-			intent.setClassName("com.console.nodisturb", "com.console.nodisturb.MainActivity");
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
+			intent.setClassName("com.console.nodisturb",
+					"com.console.nodisturb.MainActivity");
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(intent);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}	
+		}
 	}
-	
+
 	protected void handleMute() {
 		Intent intent = new Intent();
 		intent.setAction(KEYCODE_VOLUME_MUTE);
 		context.sendBroadcast(intent);
 	}
-	
+
 	protected void handleVolumeUp() {
 		Intent intent = new Intent();
 		intent.setAction(KEYCODE_VOLUME_UP);
 		context.sendBroadcast(intent);
 	}
-	
-	
+
 	protected void handleVolumeDown() {
 		Intent intent = new Intent();
 		intent.setAction(KEYCODE_VOLUME_DOWN);
 		context.sendBroadcast(intent);
 	}
-
 
 	protected void handleTelAnswer() {
 		Intent intent = new Intent();
@@ -167,15 +162,19 @@ public class KeyDealer {
 	}
 
 	protected void handleMenuUp() {
-		Intent intent = new Intent();
-		intent.setAction(ACTION_MENU_UP);
-		context.sendBroadcast(intent);
+		if (getMode(context) != 0) {
+			Intent intent = new Intent();
+			intent.setAction(ACTION_MENU_UP);
+			context.sendBroadcast(intent);
+		}
 	}
 
 	protected void handleMenuDown() {
-		Intent intent = new Intent();
-		intent.setAction(ACTION_MENU_DOWN);
-		context.sendBroadcast(intent);
+		if (getMode(context) != 0) {
+			Intent intent = new Intent();
+			intent.setAction(ACTION_MENU_DOWN);
+			context.sendBroadcast(intent);
+		}
 	}
 
 	protected void handleTel() {
@@ -183,7 +182,6 @@ public class KeyDealer {
 		intent.setAction(ACTION_TEL);
 		context.sendBroadcast(intent);
 	}
-
 
 	public static KeyDealer getInstance(Context context) {
 		if (mKeyDealer == null) {
@@ -229,7 +227,7 @@ public class KeyDealer {
 				mHandler.sendEmptyMessageDelayed(Contacts.K_NEXT, 200);
 				break;
 			case Contacts.TEL:
-			case (byte) Contacts.K_PHONE_UP:            //改为接听和挂断一起
+			case (byte) Contacts.K_PHONE_UP: // 改为接听和挂断一起
 				mHandler.removeMessages(Contacts.TEL);
 				mHandler.sendEmptyMessageDelayed(Contacts.TEL, 200);
 				break;
@@ -238,10 +236,12 @@ public class KeyDealer {
 				mHandler.removeMessages(Contacts.MIC);
 				mHandler.sendEmptyMessageDelayed(Contacts.MIC, 200);
 				break;
-/*			case (byte) Contacts.K_PHONE_UP:
-				mHandler.removeMessages(Contacts.K_PHONE_UP);
-				mHandler.sendEmptyMessageDelayed(Contacts.K_PHONE_UP, 200);
-				break;*/
+			/*
+			 * case (byte) Contacts.K_PHONE_UP:
+			 * mHandler.removeMessages(Contacts.K_PHONE_UP);
+			 * mHandler.sendEmptyMessageDelayed(Contacts.K_PHONE_UP, 200);
+			 * break;
+			 */
 			case (byte) Contacts.K_PHONE_DN:
 				mHandler.removeMessages(Contacts.K_PHONE_DN);
 				mHandler.sendEmptyMessageDelayed(Contacts.K_PHONE_DN, 200);
@@ -264,5 +264,18 @@ public class KeyDealer {
 		}
 	}
 
+	public static final String MODE = "Console_mode";
+
+	public int getMode(Context context) {
+		int mode = 4;
+		try {
+			mode = Settings.System
+					.getInt(context.getContentResolver(), MODE, 0);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return mode;
+	}
 
 }

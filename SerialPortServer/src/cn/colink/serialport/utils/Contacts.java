@@ -6,8 +6,8 @@ public class Contacts {
 	public static final int K_MAINMENU = 0x6E;
 
 	public static final int K_AVMUTE = 0x58;
-	public static final int K_NEXT = 0x1C;
-	public static final int K_PREV = 0x1E;
+	public static final int K_NEXT = 0x1E;
+	public static final int K_PREV = 0x1C;
 
 	public static final int K_VOLUP = 0x56;
 	public static final int K_VOLDN = 0x57;
