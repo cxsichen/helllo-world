@@ -101,8 +101,7 @@ public class dataControl {
 
 	private void updateView(CanInfo canInfo) {
 		// TODO Auto-generated method stub
-		Log.i("Parking", "==canInfo.STERRING_WHELL_STATUS========="
-				+ canInfo.STERRING_WHELL_STATUS);
+
 		try {
 			switch (canInfo.CHANGE_STATUS) {
 			case 11:
@@ -141,6 +140,32 @@ public class dataControl {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}
+		
+		if(canInfo.RADAR_ALARM_STATUS==0){
+			/*
+			 * 后雷达信息
+			 */
+			canInfo.BACK_LEFT_DISTANCE = 0;
+			canInfo.BACK_MIDDLE_LEFT_DISTANCE = 0;
+			canInfo.BACK_MIDDLE_RIGHT_DISTANCE = 0;
+			canInfo.BACK_RIGHT_DISTANCE = 0;
+			/*
+			 * 前雷达信息
+			 */
+			canInfo.FRONT_LEFT_DISTANCE = 0;
+			canInfo.FRONT_MIDDLE_LEFT_DISTANCE = 0;
+			canInfo.FRONT_MIDDLE_RIGHT_DISTANCE = 0;
+			canInfo.FRONT_RIGHT_DISTANCE = 0;
+			
+			f1Rd.setImageResource(f1Draws[canInfo.FRONT_LEFT_DISTANCE]);
+			f2Rd.setImageResource(f2Draws[canInfo.FRONT_MIDDLE_LEFT_DISTANCE]);
+			f3Rd.setImageResource(f3Draws[canInfo.FRONT_MIDDLE_RIGHT_DISTANCE]);
+			f4Rd.setImageResource(f4Draws[canInfo.FRONT_RIGHT_DISTANCE]);
+			r1Rd.setImageResource(r1Draws[canInfo.BACK_LEFT_DISTANCE]);
+			r2Rd.setImageResource(r2Draws[canInfo.BACK_MIDDLE_LEFT_DISTANCE]);
+			r3Rd.setImageResource(r3Draws[canInfo.BACK_MIDDLE_RIGHT_DISTANCE]);
+			r4Rd.setImageResource(r4Draws[canInfo.BACK_RIGHT_DISTANCE]);
 		}
 
 	}

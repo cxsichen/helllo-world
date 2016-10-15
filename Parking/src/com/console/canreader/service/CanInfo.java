@@ -52,17 +52,17 @@ public class CanInfo implements Parcelable {
 	/*
 	 * 后雷达信息
 	 */
-	public int BACK_LEFT_DISTANCE = -1;
-	public int BACK_MIDDLE_LEFT_DISTANCE = -1;
-	public int BACK_MIDDLE_RIGHT_DISTANCE = -1;
-	public int BACK_RIGHT_DISTANCE = -1;
+	public int BACK_LEFT_DISTANCE = 0;
+	public int BACK_MIDDLE_LEFT_DISTANCE = 0;
+	public int BACK_MIDDLE_RIGHT_DISTANCE = 0;
+	public int BACK_RIGHT_DISTANCE = 0;
 	/*
 	 * 前雷达信息
 	 */
-	public int FRONT_LEFT_DISTANCE = -1;
-	public int FRONT_MIDDLE_LEFT_DISTANCE = -1;
-	public int FRONT_MIDDLE_RIGHT_DISTANCE = -1;
-	public int FRONT_RIGHT_DISTANCE = -1;
+	public int FRONT_LEFT_DISTANCE = 0;
+	public int FRONT_MIDDLE_LEFT_DISTANCE = 0;
+	public int FRONT_MIDDLE_RIGHT_DISTANCE = 0;
+	public int FRONT_RIGHT_DISTANCE = 0;
 	/*
 	 * 基本信息
 	 */
@@ -73,7 +73,7 @@ public class CanInfo implements Parcelable {
 	 * 泊车辅助状态
 	 */
 	public int PARKING_ASSIT_STATUS = 0;
-	public int RADAR_ALARM_STATUS = 0;
+	public int RADAR_ALARM_STATUS = 1;
 	/*
 	 * 方向盘转角
 	 */

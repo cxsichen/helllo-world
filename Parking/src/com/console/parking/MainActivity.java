@@ -9,6 +9,7 @@ import com.console.parking.control.dataControl;
 import com.console.parking.util.DisplayUtil;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,8 @@ import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.media.AudioManager;
+import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -58,6 +61,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private static final String SEND_BACK_CAR_OFF = "com.console.SEND_BACK_CAR_OFF";
 	private Button button;
 	IntentFilter filter;
+	private static final String DIS_DIALOG="com.inet.broadcast.no_disturb";
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -73,12 +77,12 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 				if (android.provider.Settings.System.getInt(
 						getContentResolver(), BACKCARSTATE, 1) == 0) {
 					finish();
-					//moveTaskToBack(true);
+					// moveTaskToBack(true);
 				}
 				break;
 			case OPENCAMERA:
 				openCamera();
-				if (camera != null&&mSurfaceTexture!=null) {
+				if (camera != null && mSurfaceTexture != null) {
 					Camera.Parameters mParams = camera.getParameters();
 
 					mParams.setPreviewSize(720, 240);
@@ -121,7 +125,8 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 						| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 		setContentView(R.layout.activity_main);
 		init();
-	
+		requestAudioFocus();
+		
 	}
 
 	private void init() {
@@ -137,7 +142,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 				android.provider.Settings.System.getUriFor(BACKCARSTATE), true,
 				mBackCarObserver);
 		mHandler.sendEmptyMessageDelayed(BACKCARSTATEMSG, 1000);
-		doRegisterReceiver();
+		doRegisterReceiver();	
 	}
 
 	private void doRegisterReceiver() {
@@ -194,7 +199,13 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			com.example.cjc7150.MainActivity.setmode((byte) 1);
 		// 设置界面
 		getSetting();
+        dismissSysDialog();		
+	}
 
+	private void dismissSysDialog() {
+		// TODO Auto-generated method stub
+		Intent intent=new Intent(DIS_DIALOG);
+		sendBroadcast(intent);
 	}
 
 	private void getSetting() {
@@ -226,7 +237,8 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
-		super.onPause();
+		super.onPause();	
+		
 	}
 
 	/*----------------------------Pause-------------------------*/
@@ -244,6 +256,8 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			mRadarControl.unBindService();
 		}
 		surface = null;
+		abandonAudioFocus();
+
 	}
 
 	private void openCamera() {
@@ -273,7 +287,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			int height) {
 		// TODO Auto-generated method stub
 		// 打开摄像头
-		this.mSurfaceTexture=surface;
+		this.mSurfaceTexture = surface;
 		mHandler.sendEmptyMessageDelayed(OPENCAMERA, 0);
 
 	}
@@ -327,6 +341,33 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		} finally {
 			return channel;
 		}
+	}
+
+	private AudioManager mAudioManager;
+
+	private int requestAudioFocus() {
+		return getAudioManager().requestAudioFocus(OnAudioFocusChangeListener,
+				AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+	}
+
+	OnAudioFocusChangeListener OnAudioFocusChangeListener = new OnAudioFocusChangeListener() {
+
+		@Override
+		public void onAudioFocusChange(int focusChange) {
+			
+			
+		}
+	};
+
+	private void abandonAudioFocus() {
+		getAudioManager().abandonAudioFocus(OnAudioFocusChangeListener);
+	}
+
+	private AudioManager getAudioManager() {
+		if (mAudioManager == null) {
+			mAudioManager = (AudioManager) getSystemService(Service.AUDIO_SERVICE);
+		}
+		return mAudioManager;
 	}
 
 }
