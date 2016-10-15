@@ -33,15 +33,14 @@ public class MyDialog extends Dialog {
 		this.context = context;
 	}
 
-	public MyDialog(Context context, String canTye, String carType,
-			String sort, String configuration,String name, int theme) {
+	public MyDialog(Context context, CanInfoMsg canInfoMsg, int theme) {
 		super(context, theme);
 		this.context = context;
-		this.canType = canTye;
-		this.carType = carType;
-		this.sort = sort;
-		this.name =name;
-		this.configuration = configuration;
+		this.canType = canInfoMsg.getCanTye();
+		this.carType = canInfoMsg.getCarType();
+		this.sort = canInfoMsg.getSort();
+		this.name =canInfoMsg.getName();
+		this.configuration = canInfoMsg.getConfiguration();
 	}
 
 	private View.OnClickListener clickListener = new View.OnClickListener() {
@@ -71,10 +70,7 @@ public class MyDialog extends Dialog {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
-		Log.i("cxs", "=====onTouchEvent getX======" + event.getX());
-		Log.i("cxs", "=====onTouchEvent getY======");
 		if (isShowing() && event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-			Log.i("cxs", "=====ACTION_OUTSIDE getY======");
 			return true;
 		}
 		return false;

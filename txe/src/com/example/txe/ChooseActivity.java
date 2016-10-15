@@ -9,28 +9,34 @@ import java.util.ListIterator;
 
 import com.example.txe.ChooseFragment.CallBack;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 public class ChooseActivity extends Activity {
 
 	private SQLiteDatabase db;
 	private List<ChooseFragment> fragmentList;
-	private int fragmentLevel = 1;
-
+	private int fragmentLevel = 0;
+    private String[] titles={"盒子","品牌","型号","配置"};
+	private ActionBar actionBar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.guide_layout);
 		openDataBase();
+		actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		initFragment();
-		fragmentList.get(0).setCanItem(queryByParentId(0), null);
+		fragmentList.get(0).setCanItem(queryByParentId(0));
+		actionBar.setTitle(titles[0]);
 		for (int i = 0; i < fragmentList.size(); i++) {
 			fragmentList.get(i).setCallBack(new CallBack() {
 
@@ -39,16 +45,10 @@ public class ChooseActivity extends Activity {
 					// TODO Auto-generated method stub
 					if (canItem.getLevel() < 4) { // 跳转到下一级
 						goToNext(canItem);
-					} else { //
-						fragmentList.get(3).showDialog(
-								fragmentList.get(0).getParentTitle(),
-								fragmentList.get(1).getParentTitle(),
-								fragmentList.get(2).getParentTitle(),
-								fragmentList.get(3).getParentTitle(),
-								canItem.getTitle(), canItem.getName());
+					} else { //						
+						 fragmentList.get(3).showDialog(queryCanInfoMsgById(canItem));
 					}
 				}
-
 				@Override
 				public void onFinish() {
 					// TODO Auto-generated method stub
@@ -58,32 +58,64 @@ public class ChooseActivity extends Activity {
 			});
 		}
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			onBackPressed();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		if (fragmentLevel != 0) {
-			goToPre();
+			if (fragmentList.get(fragmentLevel).getCanItem() != null)
+				if (fragmentList.get(fragmentLevel).getCanItem().size() > 0)
+					goToPre(fragmentList.get(fragmentLevel).getCanItem().get(0));
 		} else {
 			super.onBackPressed();
 		}
 	}
 
-	private void goToPre() {
+	/**
+	 * 跳转到上一级
+	 * 
+	 * @param canItem
+	 */
+
+	private void goToPre(CanItem canItem) {
 		// TODO Auto-generated method stub
-		switchContent(fragmentList.get(fragmentLevel),
-				fragmentList.get(fragmentLevel - 1));
-		fragmentLevel = fragmentLevel - 1;
+		int level = canItem.getLevel();
+		fragmentList.get(level - 2).setCanItem(
+				queryBychildId(canItem.getParentId()));
+		switchContent(fragmentList.get(level - 1), fragmentList.get(level - 2));
+		fragmentLevel = level - 2;
+		actionBar.setTitle(titles[fragmentLevel]);
 	}
+
+	/**
+	 * 跳转到下一级
+	 * 
+	 * @param canItem
+	 */
 
 	private void goToNext(CanItem canItem) {
 		// TODO Auto-generated method stub
 		int level = canItem.getLevel();
-		fragmentList.get(level).setCanItem(queryByParentId(canItem.getId()),
-				canItem.getTitle());
+		fragmentList.get(level).setCanItem(queryByParentId(canItem.getId()));
 		switchContent(fragmentList.get(level - 1), fragmentList.get(level));
 		fragmentLevel = level;
+		actionBar.setTitle(titles[fragmentLevel]);
 	}
+
+	/**
+	 * 直接初始化4个fragment做显示使用 因为只有4级，只需要改变fragment的内容就行了
+	 */
 
 	private void initFragment() {
 		// TODO Auto-generated method stub
@@ -102,6 +134,58 @@ public class ChooseActivity extends Activity {
 		super.onDestroy();
 		closeDataBase();
 	}
+
+	/**
+	 * 根据下一级的一个子item寻找父级的节点
+	 * 
+	 * @param childId
+	 * @return
+	 */
+
+	private List<CanItem> queryBychildId(int childId) {
+		if (db == null) {
+			openDataBase();
+		}
+		List<CanItem> list = new ArrayList<CanItem>();
+		Cursor cursor = db.rawQuery("select * from aa where id=?",
+				new String[] { String.valueOf(childId) });
+		int parentId = 0;
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				parentId = cursor.getInt(cursor.getColumnIndex("parentId"));
+			}
+			cursor.close();
+		}
+		Cursor parentIdCursor = db.rawQuery(
+				"select * from aa where parentId=?",
+				new String[] { String.valueOf(parentId) });
+
+		if (parentIdCursor != null) {
+			while (parentIdCursor.moveToNext()) {
+				CanItem canItem = new CanItem();
+				canItem.setId(parentIdCursor.getInt(parentIdCursor
+						.getColumnIndex("id")));
+				canItem.setParentId(parentIdCursor.getInt(parentIdCursor
+						.getColumnIndex("parentId")));
+				canItem.setLevel(parentIdCursor.getInt(parentIdCursor
+						.getColumnIndex("level")));
+				canItem.setTitle(parentIdCursor.getString(parentIdCursor
+						.getColumnIndex("title")));
+				canItem.setName(parentIdCursor.getString(parentIdCursor
+						.getColumnIndex("name")));
+				list.add(canItem);
+			}
+			cursor.close();
+		}
+		return list;
+	}
+
+	/**
+	 * 根据一个子item寻找下一级的内容
+	 * 
+	 * @param childId
+	 * @return
+	 */
 
 	private List<CanItem> queryByParentId(int parentId) {
 		if (db == null) {
@@ -125,6 +209,59 @@ public class ChooseActivity extends Activity {
 			cursor.close();
 		}
 		return list;
+	}
+
+	/**
+	 * 根据id查找所有信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	private CanInfoMsg queryCanInfoMsgById(CanItem canItem) {
+		CanInfoMsg mCanInfoMsg = new CanInfoMsg();
+		mCanInfoMsg.setName(canItem.getName());
+		mCanInfoMsg.setConfiguration(canItem.getTitle());
+		if (db == null) {
+			openDataBase();
+		}
+		Cursor cursor = null;
+		int id = canItem.getParentId();
+		cursor = db.rawQuery("select * from aa where id=?",
+				new String[] { String.valueOf(id) });
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				mCanInfoMsg.setSort(cursor.getString(cursor
+						.getColumnIndex("title")));
+				id=cursor.getInt(cursor
+						.getColumnIndex("parentId"));
+			}
+			cursor.close();
+		}
+		
+		cursor = db.rawQuery("select * from aa where id=?",
+				new String[] { String.valueOf(id) });
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				mCanInfoMsg.setCarType(cursor.getString(cursor
+						.getColumnIndex("title")));
+				id=cursor.getInt(cursor
+						.getColumnIndex("parentId"));
+			}
+			cursor.close();
+		}
+		
+		cursor = db.rawQuery("select * from aa where id=?",
+				new String[] { String.valueOf(id) });
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				mCanInfoMsg.setCanTye(cursor.getString(cursor
+						.getColumnIndex("title")));
+				id=cursor.getInt(cursor
+						.getColumnIndex("parentId"));
+			}
+			cursor.close();
+		}
+		return mCanInfoMsg;
 	}
 
 	private void openDataBase() {

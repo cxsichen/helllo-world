@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >  
+    <item  
+        android:id="@+id/action_import"  
+        android:orderInCategory="100"  
+        android:showAsAction="always"  
+        android:title="导入配置"/>  
+   <item  
+        android:id="@+id/action_export"  
+        android:orderInCategory="100"  
+        android:showAsAction="always"  
+        android:title="导出配置"/>  
+</menu> 

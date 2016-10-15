@@ -20,7 +20,6 @@ public class ChooseFragment extends Fragment {
 	private ListViewAdapter listViewAdapter;
 	private ListView listView;
 	LayoutInflater inflater;
-	private String parentTitle;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -47,8 +46,8 @@ public class ChooseFragment extends Fragment {
 		return view;
 	}
 
-	public void showDialog(String none,String canTye,String carType,String sort,String configuration,String name){
-		MyDialog dialog = new MyDialog(getActivity(), canTye, carType, sort,configuration,name,
+	public void showDialog(CanInfoMsg canInfoMsg){
+		MyDialog dialog = new MyDialog(getActivity(), canInfoMsg,
 				R.style.MyDialog);
 		dialog.setCallBack(new MyDialog.CallBack() {
 			
@@ -64,15 +63,17 @@ public class ChooseFragment extends Fragment {
 		dialog.show();
 	}
 	
-	public String  getParentTitle(){
-		return parentTitle;
-	}
-	public void setCanItem(List<CanItem> list,String parentTitle) {
-		this.parentTitle=parentTitle;
+
+	public void setCanItem(List<CanItem> list) {
 		this.list = list;	
-		if (listView != null) {			
+		if (listView != null) {		
+			listViewAdapter = new ListViewAdapter(inflater, list);
 			listView.setAdapter(listViewAdapter);
 		}
+	}
+	
+	public List<CanItem>  getCanItem() {
+		return list;
 	}
 	
 	interface CallBack{
