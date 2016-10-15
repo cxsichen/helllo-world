@@ -233,7 +233,7 @@ public class TpmsContol implements OnClickListener {
 	// 温度高于上限的时候判断是否报警
 	private void twinkleWd(TextView view, long highstate) {
 		if (highstate == NO_NORMAL) {
-			startWarnAnimation(view);
+			startWarnAnimation(view);		
 		} else {
 			stopWarnAnimation(view);
 		}

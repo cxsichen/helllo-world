@@ -57,8 +57,8 @@ public class SerialPortControlService extends Service {
 	private static int basValue = 7;
 	private static int rowValue = 7;
 	private static int colValue = 7;
-	private static boolean  isNaving=false;
-
+	private static boolean isNaving = false;
+	private static boolean isAcconOver = true;
 	private final String[] Applist = { "com.console.radio",
 			"cn.kuwo.kwmusiccar", "com.mxtech.videoplayer.pro",
 			"com.mtk.bluetooth", "com.console.equalizer", "com.baidu.navi",
@@ -112,51 +112,6 @@ public class SerialPortControlService extends Service {
 						&& (float) msg.obj != 0)
 					sendMsg(getMsgString((int) ((float) msg.obj * 100), 1));
 				break;
-			case Contacts.MSG_ACCON_MSG:
-				/*
-				 * acc on 后自动返回之前开启的模式对应的app
-				 */
-				int parkingState = android.provider.Settings.System.getInt(
-						getContentResolver(), Constact.BACK_CAR, 0);
-				Log.i("cxs", "--------MSG_ACCON_MSG------parkingState-------"
-						+ parkingState);
-				if (parkingState != 1) {
-					int mode = PreferenceUtil
-							.getMode(SerialPortControlService.this);
-					Log.i("cxs", "--------MSG_ACCON_MSG------mode---0----"
-							+ mode);
-					sendMsg("F5020000" + BytesUtil.intToHexString(mode));
-					startModeActivty(mode);
-				} else { // 当处在倒车状态是 先进模式app后进入倒车
-					int mode = PreferenceUtil
-							.getMode(SerialPortControlService.this);
-					Log.i("cxs", "--------MSG_ACCON_MSG------mode----1---"
-							+ mode);
-					sendMsg("F5020000" + BytesUtil.intToHexString(mode));
-					startModeActivty(mode);
-					
-					mHandler.sendEmptyMessageDelayed(Contacts.MSG_BACK_CAR,100);
-				}
-				/*
-				 * 启动can协议服务
-				 */
-				Intent canIntent = new Intent(
-						"com.console.canreader.service.CanService");
-				canIntent.setPackage("com.console.canreader");
-				startService(canIntent);
-				/*
-				 * 发送音效的高低音值
-				 */
-				sendEquValue();
-
-				/*
-				 * 发送媒体音量
-				 */
-				Message msg1 = new Message();
-				msg1.what = Contacts.MSG_FACTORY_SOUND;
-				mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
-				mHandler.sendMessageDelayed(msg1, 100);
-				break;
 			case Contacts.MSG_SEND_FIRST_MSG:
 				int launchMode = PreferenceUtil
 						.getMode(SerialPortControlService.this);
@@ -178,7 +133,7 @@ public class SerialPortControlService extends Service {
 					 * "     模式错误  现在自动修正。\n 如果还不对应，请重新打开应用",
 					 * Toast.LENGTH_LONG).show();
 					 */
-					
+
 					sendMsg("F5020000"
 							+ BytesUtil.intToHexString(PreferenceUtil
 									.getMode(SerialPortControlService.this)));
@@ -188,10 +143,12 @@ public class SerialPortControlService extends Service {
 
 				break;
 			case Contacts.MSG_BACK_CAR: // 处理倒车事件
-			//	if (!getTopActivity(SerialPortControlService.this).equals(
-			//			"com.console.parking")) {
-				if(true){
-				Log.i("cxs","=====start parking ====now =========");
+				// if (!getTopActivity(SerialPortControlService.this).equals(
+				// "com.console.parking")) {
+				Log.i("cxs", "--------MSG_BACK_CAR_2222222222222------parkingState-------"
+						+ isAcconOver);
+				if (isAcconOver) {
+					Log.i("cxs", "=====start parking ====now =========");
 					Intent intent = new Intent();
 					intent.setClassName("com.console.parking",
 							"com.console.parking.MainActivity");
@@ -220,10 +177,11 @@ public class SerialPortControlService extends Service {
 						sendMsg("F5020000" + BytesUtil.intToHexString(0));
 						// 暂停音乐
 						stopKWMusic();
-						/*// 切换到收音状态
-						Settings.System.putInt(getContentResolver(),
-								Constact.FMSTATUS, 0);
-						Change2FM = true;*/
+						/*
+						 * // 切换到收音状态
+						 * Settings.System.putInt(getContentResolver(),
+						 * Constact.FMSTATUS, 0); Change2FM = true;
+						 */
 						// 切到收音模式的时候 发收音音量值
 						int value = android.provider.Settings.System.getInt(
 								getContentResolver(),
@@ -307,12 +265,72 @@ public class SerialPortControlService extends Service {
 				}
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_CHECK_MODE,
 						2 * 1000);
-			/*	// 收音模式
-				if (!Change2FM) {
-					Settings.System.putInt(getContentResolver(),
-							Constact.FMSTATUS, 1);
-				}
-				Change2FM = false;*/
+				/*
+				 * // 收音模式 if (!Change2FM) {
+				 * Settings.System.putInt(getContentResolver(),
+				 * Constact.FMSTATUS, 1); } Change2FM = false;
+				 */
+				break;
+			case Contacts.MSG_ACCON_MSG:
+				isAcconOver = false;
+				/*
+				 * 启动can协议服务
+				 */
+				Intent canIntent = new Intent(
+						"com.console.canreader.service.CanService");
+				canIntent.setPackage("com.console.canreader");
+				startService(canIntent);
+				/*
+				 * 发送音效的高低音值
+				 */
+				sendEquValue();
+
+				/*
+				 * 发送媒体音量
+				 */
+				Message msg1 = new Message();
+				msg1.what = Contacts.MSG_FACTORY_SOUND;
+				mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
+				mHandler.sendMessageDelayed(msg1, 100);
+
+				/*
+				 * acc on 后自动返回之前开启的模式对应的app
+				 */
+
+				Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
+
+				mHomeIntent.addCategory(Intent.CATEGORY_HOME);
+				mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+				startActivity(mHomeIntent);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_1, 200);
+
+				break;
+			case Contacts.MSG_ACCON_MSG_1:
+				int mode = PreferenceUtil
+						.getMode(SerialPortControlService.this);
+				Log.i("cxs", "--------MSG_ACCON_MSG------mode---0----" + mode);
+				sendMsg("F5020000" + BytesUtil.intToHexString(mode));
+				startModeActivty(mode);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_2,
+						8000);
+				break;
+			case Contacts.MSG_ACCON_MSG_2:
+				int parkingState = android.provider.Settings.System.getInt(
+						getContentResolver(), Constact.BACK_CAR, 0);
+				Log.i("cxs", "--------MSG_ACCON_MSG_2------parkingState-------"
+						+ parkingState);
+				if (parkingState == 1) {
+					Intent intent = new Intent();
+					intent.setClassName("com.console.parking",
+							"com.console.parking.MainActivity");
+					intent.addCategory(Intent.CATEGORY_DEFAULT);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
+				}			
+				isAcconOver = true;
+				Log.i("cxs", "--------MSG_ACCON_MSG_2222222222222------parkingState-------"
+						+ parkingState);
 				break;
 			default:
 				break;
@@ -349,9 +367,9 @@ public class SerialPortControlService extends Service {
 
 	private void startModeActivty(int mode) {
 		// TODO Auto-generated method stub
-		// if when acc off ,the naving is process 
-		if(isNaving){
-			mode=6;
+		// if when acc off ,the naving is process
+		if (isNaving) {
+			mode = 6;
 		}
 		switch (mode) {
 		case 1: // 酷我
@@ -567,8 +585,20 @@ public class SerialPortControlService extends Service {
 		bindSpService();
 		doRegisterReceiver();
 		doRegisterContentObserver();
+		checkBackCar();
 		mKwapi = KWAPI.createKWAPI(this, "auto");
 
+	}
+
+	private void checkBackCar() {
+		// TODO Auto-generated method stub
+		/*
+		 * 倒车检测
+		 */				
+		int backstate = android.provider.Settings.System.getInt(
+				getContentResolver(), Constact.BACK_CAR, 0);
+		Log.i("cxs","====MSG_SEND_FIRST_MSG=backstate===="+backstate);
+		handleBackCar(backstate);
 	}
 
 	@Override
@@ -730,6 +760,7 @@ public class SerialPortControlService extends Service {
 			super.onChange(selfChange);
 			int state = android.provider.Settings.System.getInt(
 					getContentResolver(), Constact.BACK_CAR, 0);
+			Log.i("cxs","========handleBackCar======"+state);
 			handleBackCar(state);
 		}
 	}
@@ -880,11 +911,11 @@ public class SerialPortControlService extends Service {
 		if (state == 1) {
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG);
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 500);
-		}else{
+		} else {
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG);
-			isNaving=(android.provider.Settings.System.getInt(
-					getContentResolver(), Constact.NAVING_STATUS, 0)==1);
-			Log.i("cxs","=====acc off   insNaving ============="+isNaving);
+			isNaving = (android.provider.Settings.System.getInt(
+					getContentResolver(), Constact.NAVING_STATUS, 0) == 1);
+			Log.i("cxs", "=====acc off   insNaving =============" + isNaving);
 		}
 	}
 

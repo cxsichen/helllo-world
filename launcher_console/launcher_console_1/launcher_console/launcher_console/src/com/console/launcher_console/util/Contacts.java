@@ -19,6 +19,8 @@ public class Contacts {
 	public static final int MSG_BACK_OFF_CAR = 0x13;
 	public static final int MSG_RADIO_VALUME_CHANGE = 0x14;
 	public static final int MSG_FACTORY_SOUND = 0x15;
+	public static final int MSG_ACCON_MSG_1 = 0x16;
+	public static final int MSG_ACCON_MSG_2 = 0x17;
 	
 	public static final String HEX_AUTO_SCAN = "F506000019";
 	public static final String HEX_START = "F000000001";
