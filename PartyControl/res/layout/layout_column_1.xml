@@ -70,7 +70,7 @@
         <ImageView
             android:id="@+id/icFtbw"
             style="@style/keyIconStyle"
-            android:src="@drawable/ic_skip_previous" />
+            android:src="@drawable/ic_skip_next" />
 
         <Button
             android:id="@+id/mMainNextBtn"
@@ -88,7 +88,7 @@
         <ImageView
             android:id="@+id/icSkipNext"
             style="@style/keyIconStyle"
-            android:src="@drawable/ic_skip_next" />
+            android:src="@drawable/ic_skip_previous" />
 
         <Button
             android:id="@+id/mMainPreBtn"
