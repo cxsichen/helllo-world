@@ -190,7 +190,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.i("cxs","========onCreate()===========");
 		this.getWindow().setFlags(FLAG_HOMEKEY_DISPATCHED,
 				FLAG_HOMEKEY_DISPATCHED);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
