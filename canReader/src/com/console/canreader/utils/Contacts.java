@@ -60,9 +60,15 @@ public class Contacts {
 		/*--------------尚摄-----------*/
 		public static final String  SSDFFG = "SSDFFG";                       //风光580
 		public static final String  SSGE = "SSGE";                           //通用
-		public static final String  SSToyota = "SSToyota";                   //丰田
+		//丰田
+		public static final String  SSToyota = "SSToyota";    
+		public static final String  SSToyotaBD = "SSToyotaBD";               
+		public static final String  SSToyotaRZ = "SSToyotaRZ";  
+		public static final String  SSToyotaRAV4 = "SSToyotaRAV4";  
+		public static final String  SSToyotaKMR = "SSToyotaKMR"; 
+		public static final String  SSToyotaKLL = "SSToyotaKLL";  
+		//丰田
 		public static final String  SSHonda = "SSHonda";                     //本田
-		public static final String  SSToyotaRZ = "SSToyotaRZ";               //丰田锐志
 		/*--------------尚摄-----------*/
 	}
 

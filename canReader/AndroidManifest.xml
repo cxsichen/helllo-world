@@ -37,9 +37,14 @@
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
         <activity
             android:name="com.console.canreader.activity.CarInfoActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        <activity
+            android:name="com.console.canreader.activity.MenuPaSelectActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
@@ -55,35 +60,26 @@
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
         <activity
             android:name="com.console.canreader.activity.MenuCdAcitivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
         <activity
             android:name="com.console.canreader.activity.MenuPaAcitivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
-        
         <activity
             android:name="com.console.canreader.activity.MenuPanoramaAcitivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
-        
         <activity
             android:name="com.console.canreader.activity.MenuAboutAcitivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
-        
-        
         <activity
             android:name="com.console.canreader.activity.VolkswagenGolf.DrivingDataActivity"
             android:label="@string/app_name"
@@ -94,43 +90,37 @@
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
         <activity
             android:name="com.console.canreader.activity.JAC.TpmsActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
-         <activity
+        <activity
             android:name="com.console.canreader.activity.Toyota.SettingActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
-         <activity
+        <activity
             android:name="com.console.canreader.activity.Toyota.DrivingDataActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
-         <activity
+        <activity
             android:name="com.console.canreader.activity.Toyota.OilEleActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
-         <activity
+        <activity
             android:name="com.console.canreader.activity.Toyota.TripOilConActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
-          <activity
+        <activity
             android:name="com.console.canreader.activity.Toyota.HistoryOilConActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        
+
         <service
             android:name="com.console.canreader.service.CanService"
             android:enabled="true"

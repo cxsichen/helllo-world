@@ -14,7 +14,7 @@ public class BeanFactory {
 			String canName) {
 		if(mAnalyzeUtils==null){
 			try {
-				Class classManager = Class.forName("com.console.canreader.bean."+canName);
+				Class classManager = Class.forName("com.console.canreader.bean."+adjustcanName(canName));
 				mAnalyzeUtils=(AnalyzeUtils) classManager.newInstance();
 				mAnalyzeUtils.init(mPacket);
 			} catch (Exception e) {
@@ -28,6 +28,22 @@ public class BeanFactory {
 		
 	}
 	
+	private static String adjustcanName(String canName) {
+		// TODO Auto-generated method stub
+		switch (canName) {
+		case Contacts.CANNAMEGROUP.SSToyotaBD:         //…–…„∑·ÃÔœµ¡–
+		case Contacts.CANNAMEGROUP.SSToyotaRZ:
+		case Contacts.CANNAMEGROUP.SSToyotaRAV4:
+		case Contacts.CANNAMEGROUP.SSToyotaKMR:	
+		case Contacts.CANNAMEGROUP.SSToyotaKLL:	
+			canName=Contacts.CANNAMEGROUP.SSToyota;
+			break;
+		default:
+			break;
+		}
+		return canName;
+	}
+
 	public static void setInfoEmpty(){
 		mAnalyzeUtils=null;
 	}

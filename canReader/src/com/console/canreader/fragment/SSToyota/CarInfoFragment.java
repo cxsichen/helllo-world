@@ -1,4 +1,4 @@
-package com.console.canreader.fragment.RZCVolkswagen;
+package com.console.canreader.fragment.SSToyota;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +105,7 @@ public class CarInfoFragment extends BaseFragment {
 		if (vpAdapter == null)
 			vpAdapter = new ViewPagerAdapter(viewsFactory);
 		ViewPageFactory pageViewDefalut = new ObdView(getActivity(),
-				R.layout.dashboard_main);
+				R.layout.dashboard_main_1);
 		viewsFactory.add(pageViewDefalut);
 		vp.setAdapter(vpAdapter);
 		initIndicator(view);

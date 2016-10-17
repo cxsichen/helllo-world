@@ -40,8 +40,8 @@ public class MenuAboutAcitivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
-			if (!mCaninfo.VEHICLE_NO.equals(version.getText())) {
-				version.setText(mCaninfo.VEHICLE_NO);
+			if (!mCaninfo.VERSION.equals(version.getText())) {
+				version.setText(mCaninfo.VERSION);
 			}
 		}
 

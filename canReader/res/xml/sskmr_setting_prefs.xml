@@ -1,0 +1,93 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/lock_setting_title" >
+        
+        <SwitchPreference
+            android:key="AUTO_LOCK_SETTING"
+            android:summaryOff="关"
+            android:summaryOn="开"
+            android:title="自动落锁设定" />
+        
+         <SwitchPreference
+            android:key="AUTO_OPEN_LOCK"
+            android:summaryOff="仅驾驶员车门"
+            android:summaryOn="所有车门"
+            android:title="智能自动解锁设定" />
+         
+         <SwitchPreference
+            android:key="DRIVER_LINK_LOCK"
+            android:summaryOff="关"
+            android:summaryOn="开"
+            android:title="驾驶员开门联动解锁设定" />
+         
+         <SwitchPreference
+            android:key="AUTO_OPEN_LOCK_P"
+            android:summaryOff="关"
+            android:summaryOn="开"
+            android:title="自动解锁设定（P档）" />
+         
+         
+         <SwitchPreference
+            android:key="AUTO_LOCK_P"
+            android:summaryOff="关"
+            android:summaryOn="开"
+            android:title="自动落锁设定（P档）" />
+          
+        <SwitchPreference
+            android:key="AIRCON_WITH_AUTO"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="空调与auto键联动" />
+        
+        <SwitchPreference
+            android:key="CYCLE_WITH_AUTO"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="内外循环与auto键联动" />
+    </PreferenceCategory>
+
+   <PreferenceCategory android:title="@string/control_setting_title" >
+        <SwitchPreference
+            android:key="LAMP_WHEN_LOCK"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="上锁开锁时紧急灯响应" />
+        
+        <SwitchPreference
+            android:key="INTELLIGENT_LOCK"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="智能车锁和一键启动" />
+        
+        <SwitchPreference
+            android:key="TWICE_KEY_OPEN_LOCK"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="钥匙两次按下解锁设定" />
+        
+        <SwitchPreference
+            android:key="TWICE_BUTTON_OPEN_LOCK"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="按钮两次按下解锁设定" />
+    </PreferenceCategory>
+    
+      <PreferenceCategory android:title="@string/compact_monitor_setting_title" >
+         <ListPreference
+                android:key="AUTOMATIC_CAP_SENSEITIVITY"
+                android:title="自动灯头灵敏度设定"
+                android:persistent="false"
+                android:entries="@array/auto_lamp_sensitivity_entries"
+                android:entryValues="@array/auto_lamp_sensitivity_values" />
+         <ListPreference
+                android:key="AUTOMATIC_LAMP_CLOSE"
+                android:title="车内照明关闭时间"
+                android:persistent="false"
+                android:entries="@array/auto_lamp_close_entries"
+                android:entryValues="@array/auto_lamp_close_values" />
+    </PreferenceCategory>
+    
+   
+    
+
+</PreferenceScreen>

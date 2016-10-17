@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="泊车辅助设定信息" >
+        <Preference
+            android:key="IS_RADAR_SHOW"
+            android:title="雷达显示" />
+        <Preference
+            android:key="RADAR_WARING_VOLUME"
+            android:title="报警音量" />
+         <Preference
+            android:key="FRONT_RADAR_DISTANCE"
+            android:title="前雷达距离" />
+          <Preference
+            android:key="BACK_RADAR_DISTANCE"
+            android:title="后雷达距离" />        
+    </PreferenceCategory>
+    
+
+</PreferenceScreen>

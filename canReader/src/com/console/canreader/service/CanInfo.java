@@ -201,12 +201,7 @@ public class CanInfo implements Parcelable {
 	public int TPMS_FR_WARING=0;        //前右车轮报警
 	public int TPMS_BL_WARING=0;        //后左车轮报警
 	public int TPMS_BR_WARING=0;        //后右车轮报警
-	
-	public int AIRCON_WITH_AUTO=0;     //空调与auto键联动
-	public int CYCLE_WITH_AUTO=0;     //内外循环与auto键联动
-	public int LAMP_WHEN_LOCK=0;      //上锁开锁时紧急灯响应
-	public int INTELLIGENT_LOCK=0;     //智能车锁和一键启动
-	public int AUTOMATIC_CAP_SENSEITIVITY=0;   //自动灯头灵敏度
+
 	
 	public String VERSION = "";  //软件版本 
 	
@@ -246,6 +241,38 @@ public class CanInfo implements Parcelable {
 	public float HISTORY_OIL_CONSUMPTION_15=0;
 	public int HISTORY_OIL_CONSUMPTION_UNIT=0;
 	
+	/*----雷达信息-----*/
+	public int IS_RADAR_SHOW=0;            //雷达显示
+	public int RADAR_WARING_VOLUME=0;      //报警音量
+	public int FRONT_RADAR_DISTANCE=0;     //前雷达距离
+	public int BACK_RADAR_DISTANCE=0;      //后雷达距离
+	
+	/*----功放-----*/
+	public int EQL_VOLUME=0;            //音量
+	public int LR_BALANCE=0;            //左右平衡
+	public int FB_BALANCE=0;           //前后平衡
+	public int BAS_VOLUME=0;            //低音值
+	public int MID_VOLUME=0;            //中音值
+	public int TRE_VOLUME=0;            //高音值
+	public int VOL_LINK_CARSPEED=0;     //音量与车速联动
+	public int DSP_SURROUND=0;          //DSP环绕
+	
+	/*----落锁设定-----*/
+	public  int AUTO_LOCK_SETTING=0;    //自动落锁设定
+	public  int AUTO_OPEN_LOCK=0;       //智能解锁设定
+	public  int DRIVER_LINK_LOCK=0;    //驾驶员开门联动解锁设定
+	public  int AUTO_OPEN_LOCK_P=0;       //自动解锁设定（P档）
+	public  int AUTO_LOCK_P=0;    //自动落锁设定（P档）
+	public int AIRCON_WITH_AUTO=0;     //空调与auto键联动
+	public int CYCLE_WITH_AUTO=0;     //内外循环与auto键联动
+	/*----遥控设定-----*/
+	public int LAMP_WHEN_LOCK=0;      //上锁开锁时紧急灯响应
+	public int INTELLIGENT_LOCK=0;     //智能车锁和一键启动
+	public int TWICE_KEY_OPEN_LOCK=0;     //钥匙两次按下解锁设定
+	public int TWICE_BUTTON_OPEN_LOCK=0;     //按钮两次按下解锁设定
+	
+	public int AUTOMATIC_CAP_SENSEITIVITY=0;   //自动灯头灵敏度
+	public int  AUTOMATIC_LAMP_CLOSE=0;        //车内照明关闭时间
 	public int AIR_CONDITIONER_CONTROL = 0;         //空调是否有界面控制，如果为1则有，不需要自动弹框
 	
 	public CanInfo(){

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="horizontal">
+
+    <!--Speedmeter-->
+    <include layout="@layout/dashboard_speedmeter_1" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+
+        <!--Fuel Status-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/icFuel"
+                style="@style/FuelAndRpmIcons"
+                android:src="@drawable/ic_obd_fuel" />
+
+            <TextView
+                android:id="@+id/oil"
+                style="@style/FuelAndRpmText"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/icFuel"
+                android:text="" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_dashboard_collapse_top" />
+        </RelativeLayout>
+
+        <!--Status Group-->
+        <include
+            layout="@layout/dashboard_status_group"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="80dp"
+            android:layout_weight="1" />
+
+        <!--RPM Status-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/icRpm"
+                style="@style/FuelAndRpmIcons"
+                android:src="@drawable/ic_obd_rpm" />
+
+            <TextView
+                android:id="@+id/enginee"
+                style="@style/FuelAndRpmText"
+                android:layout_toRightOf="@+id/icRpm"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_dashboard_collapse_bottom" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

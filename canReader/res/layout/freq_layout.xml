@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent" >
+
+    <ImageView
+        android:id="@+id/pre_button"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="72dp"
+        android:background="@drawable/ripple_bg"
+        android:scaleType="center"
+        android:src="@drawable/ic_previous" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="bottom" >
+
+        <TextView
+            android:id="@+id/freq_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="1"
+            android:textColor="@android:color/white"
+            android:textSize="72sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/next_button"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="72dp"
+        android:background="@drawable/ripple_bg"
+        android:scaleType="center"
+        android:src="@drawable/ic_next" />
+
+</RelativeLayout>

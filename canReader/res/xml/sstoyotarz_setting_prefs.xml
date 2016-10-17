@@ -1,0 +1,11 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="自动解锁" >
+        <SwitchPreference
+            android:key="AUTO_OPEN_LOCK"
+            android:summaryOff="仅驾驶员车门"
+            android:summaryOn="所有车门"
+            android:title="智能自动解锁设定" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -102,7 +102,9 @@ public class BytesUtil {
 			// String tmp = Integer.toHexString(255 - sum).toUpperCase();
 			String tmp = Integer.toHexString(sum).toUpperCase();
 			if (tmp.length() > 2) {
-				tmp = tmp.substring(1);
+				tmp = tmp.substring(tmp.length()-2,tmp.length());
+			}else if(tmp.length()==1){
+				tmp="0"+tmp;
 			}
 			return str + tmp;
 		}
@@ -135,5 +137,5 @@ public class BytesUtil {
 
 		return stringBuilder.toString();
 	}
-
+	
 }

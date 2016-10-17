@@ -51,6 +51,11 @@ public class BaseActivity extends FragmentActivity {
 		// TODO Auto-generated method stub
 		firstShow();
 	}
+	
+	public CanInfo getCanInfo() throws RemoteException{
+		CanInfo tempInfo = mISpService.getCanInfo();
+		return tempInfo;
+	}
 
 	private void firstShow() {
 		// TODO Auto-generated method stub
@@ -217,11 +222,12 @@ public class BaseActivity extends FragmentActivity {
 	public void sendMsg(String msg) {
 		try {
 			if (mISpService != null) {
+				Log.i("cxs","=====canFirtName======"+canFirtName);
 				switch (canFirtName) {
 				case Contacts.CANFISRTNAMEGROUP.RAISE:
 					mISpService.sendDataToSp(BytesUtil.addRZCCheckBit(msg));
 					break;
-				case Contacts.CANFISRTNAMEGROUP.HIWORLD:
+				case Contacts.CANFISRTNAMEGROUP.HIWORLD:					
 					mISpService.sendDataToSp(BytesUtil.addSSCheckBit(msg));
 					break;
 				default:

@@ -51,5 +51,9 @@
     <string name="lock_setting_title">Door lock set option flag</string>
     <string name="control_setting_title">Remote setting</string>
     <string name="compact_monitor_setting_title">Collision / detection system settings</string>
+    <string name="tre">TRE</string>
+    <string name="mid">MID</string>
+    <string name="bas">BAS</string>
+    <string name="volume">音量</string>
 
 </resources>

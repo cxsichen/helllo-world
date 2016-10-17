@@ -28,6 +28,160 @@
     </string-array>
     <!-- 大众  -->
     
+    <!-- 丰田  -->
+    
+    <!-- 尚摄 丰田霸道 -->
+    <string-array name="SSToyotaBD_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>1</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+    <string-array name="SSToyotaBD_items">
+        <item>车辆信息</item>
+        <item>历史油耗</item>
+        <item>油电混合信息</item>
+        <item>泊车辅助设定信息</item>
+    </string-array>
+    <string-array name="SSToyotaBD_fragment">
+        <item>com.console.canreader.fragment.SSToyota.CarInfoFragment</item> 
+        <item>com.console.canreader.fragment.SSToyota.HistoryOilConFragment</item>  
+        <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.RadarInfoFragment</item>    
+    </string-array>
+    <!-- 尚摄 丰田霸道 -->
+    
+    <!-- 尚摄 丰田锐志 -->
+    <string-array name="SSToyotaRZ_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+    <string-array name="SSToyotaRZ_items">
+        <item>车辆信息</item>
+        <item>历史油耗</item>
+        <item>行程油耗</item>
+        <item>油电混合信息</item>
+    </string-array>
+    <string-array name="SSToyotaRZ_fragment">
+        <item>com.console.canreader.fragment.SSToyota.CarInfoFragment</item> 
+        <item>com.console.canreader.fragment.SSToyota.HistoryOilConFragment</item>  
+        <item>com.console.canreader.fragment.SSToyota.TrilOilConFragment</item>  
+        <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item> 
+    </string-array>
+    
+      <string-array name="SSToyotaRZ_SettingFragment">
+        <item>com.console.canreader.fragment.SSToyota.RZCarSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 丰田锐志-->
+    
+    
+    <!-- 尚摄 RAV4 -->
+    <string-array name="SSToyotaRAV4_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+    <string-array name="SSToyotaRAV4_items">
+        <item>车辆信息</item>
+        <item>历史油耗</item>
+        <item>行程油耗</item>
+        <item>油电混合信息</item>
+    </string-array>
+    <string-array name="SSToyotaRAV4_fragment">
+        <item>com.console.canreader.fragment.SSToyota.CarInfoFragment</item> 
+        <item>com.console.canreader.fragment.SSToyota.HistoryOilConFragment</item>  
+        <item>com.console.canreader.fragment.SSToyota.TrilOilConFragment</item>  
+        <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item> 
+    </string-array>
+    
+      <string-array name="SSToyotaRAV4_SettingFragment">
+        <item>com.console.canreader.fragment.SSToyota.RAV4CarSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 RAV4-->
+    
+     <!-- 尚摄 凯美瑞 -->
+    <string-array name="SSToyotaKMR_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+    <string-array name="SSToyotaKMR_items">
+        <item>车辆信息</item>
+        <item>历史油耗</item>
+        <item>行程油耗</item>
+        <item>油电混合信息</item>
+    </string-array>
+    <string-array name="SSToyotaKMR_fragment">
+        <item>com.console.canreader.fragment.SSToyota.CarInfoFragment</item> 
+        <item>com.console.canreader.fragment.SSToyota.HistoryOilConFragment</item>  
+        <item>com.console.canreader.fragment.SSToyota.TrilOilConFragment</item>  
+        <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item> 
+    </string-array>
+    
+      <string-array name="SSToyotaKMR_SettingFragment">
+        <item>com.console.canreader.fragment.SSToyota.KMRCarSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 凯美瑞-->
+    
+         <!-- 尚摄 卡罗拉 -->
+    <string-array name="SSToyotaKLL_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+    <string-array name="SSToyotaKLL_items">
+        <item>车辆信息</item>
+        <item>油电混合信息</item>
+    </string-array>
+    <string-array name="SSToyotaKLL_fragment">
+        <item>com.console.canreader.fragment.SSToyota.CarInfoFragment</item>   
+        <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item> 
+    </string-array>
+    
+      <string-array name="SSToyotaKLL_SettingFragment">
+        <item>com.console.canreader.fragment.SSToyota.KLLCarSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄卡罗拉-->
+    
+    
+    <!-- 丰田  -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!-- 大众高尔夫  -->
     <string-array name="RZCVolkswagenGolf_items">
         <item>车辆信息</item>
@@ -119,6 +273,20 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
-    </string-array>   
+    </string-array>  
+    
+     <string-array name="auto_lamp_close_entries">
+        <item>无效</item>
+        <item>7.5s</item>
+        <item>15s</item>
+        <item>30s</item>
+    </string-array>
+    
+    <string-array name="auto_lamp_close_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array> 
 
 </resources>

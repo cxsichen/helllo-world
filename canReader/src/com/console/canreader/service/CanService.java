@@ -58,9 +58,9 @@ public class CanService extends Service {
 	AnalyzeUtils info = null;
 	public static final Object lock1 = new Object();
 
-    private String canName="";
-    private String canFirtName="";
-	
+	private String canName = "";
+	private String canFirtName = "";
+
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
 
@@ -81,8 +81,8 @@ public class CanService extends Service {
 				byte[] mPacket = (byte[]) msg.obj;
 				// Broadcast to all clients the new value.
 				Trace.i("packet : " + BytesUtil.bytesToHexString(mPacket));
-				info = BeanFactory.getCanInfo(CanService.this, mPacket,
-						canName);
+				info = BeanFactory
+						.getCanInfo(CanService.this, mPacket, canName);
 				if (info != null)
 					if (info.getCanInfo() != null)
 						dealCanInfo();
@@ -128,7 +128,8 @@ public class CanService extends Service {
 				mKeyDealer.dealCanKeyEvent(CanService.this, info.getCanInfo());
 				break;
 			case 3:
-				if (info.getCanInfo().AIR_CONDITIONER_CONTROL==0) {       //像标致的空调有单独的控制界面 则AIR_CONDITIONER_CONTROL置1，不弹界面
+				if (info.getCanInfo().AIR_CONDITIONER_CONTROL == 0) { // 像标致的空调有单独的控制界面
+																		// 则AIR_CONDITIONER_CONTROL置1，不弹界面
 					DialogCreater.showAirConDialog(CanService.this,
 							info.getCanInfo(), // 空调事件处理
 							new CallBack() {
@@ -136,7 +137,7 @@ public class CanService extends Service {
 								@Override
 								public void sendShowMsg() {
 									// TODO Auto-generated method stub
-								   sendMsgGetTemp();
+									sendMsgGetTemp();
 
 								}
 							});
@@ -162,30 +163,32 @@ public class CanService extends Service {
 		initSerialPortThread();
 		init();
 	}
-	
-	private void syncCanName(){
+
+	private void syncCanName() {
 		canName = PreferenceUtil.getCANName(this);
-		canFirtName=PreferenceUtil.getFirstTwoString(this, canName);
+		canFirtName = PreferenceUtil.getFirstTwoString(this, canName);
 	}
-	
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		if(intent!=null){
-		String command=intent.getStringExtra("keyEvent");
-		if(command!=null){
-			dealCommand(command);
-		}
+		if (intent != null) {
+			String command = intent.getStringExtra("keyEvent");
+			if (command != null) {
+				dealCommand(command);
+			}
 		}
 		return super.onStartCommand(intent, flags, startId);
 	}
+
 	/**
-	 * deal the user's requset  that send to this service
+	 * deal the user's requset that send to this service
+	 * 
 	 * @param command
-	 */	
-	private void dealCommand(String command){
-		if(mKeyDealer==null)
-			mKeyDealer=KeyDealer.getInstance(this);
+	 */
+	private void dealCommand(String command) {
+		if (mKeyDealer == null)
+			mKeyDealer = KeyDealer.getInstance(this);
 		switch (command) {
 		case KEYCODE_VOLUME_UP:
 			mKeyDealer.handleVolUp();
@@ -278,7 +281,7 @@ public class CanService extends Service {
 	private void handleAccState(int state) {
 		// TODO Auto-generated method stub
 		if (state == 1) {
-			// acc on清空原先的数据   重新建立连接
+			// acc on清空原先的数据 重新建立连接
 			BeanFactory.setInfoEmpty();
 			connectCanDevice();
 		}
@@ -305,13 +308,15 @@ public class CanService extends Service {
 		// TODO Auto-generated method stub
 
 		// 监控车型和协议选择
-		getContentResolver().registerContentObserver(
-				android.provider.Settings.System.getUriFor(Contacts.CAN_CLASS_NAME),
-				true, mCanNameObserver);
-		
-        //与盒子建立连接，盒子发送初始数据到车机
+		getContentResolver()
+				.registerContentObserver(
+						android.provider.Settings.System
+								.getUriFor(Contacts.CAN_CLASS_NAME),
+						true, mCanNameObserver);
+
+		// 与盒子建立连接，盒子发送初始数据到车机
 		connectCanDevice();
-		
+
 		mKeyDealer = KeyDealer.getInstance(CanService.this); // 初始化按键事件处理
 																// 里面有音量加减的监听
 		getContentResolver().registerContentObserver(
@@ -339,7 +344,6 @@ public class CanService extends Service {
 		}
 	}
 
-
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
@@ -354,7 +358,7 @@ public class CanService extends Service {
 				mSendDataToSpThread.interrupt();
 		}
 		getContentResolver().unregisterContentObserver(mBackCarObserver);
-		getContentResolver().unregisterContentObserver(mCanNameObserver);	
+		getContentResolver().unregisterContentObserver(mCanNameObserver);
 		mInputStream = null;
 		mOutputStream = null;
 		super.onDestroy();
@@ -508,6 +512,7 @@ public class CanService extends Service {
 				}
 			}
 		}
+
 		private void readSSCanPort() throws IOException {
 			// TODO Auto-generated method stub
 			byte data1 = mReadByte();
@@ -769,26 +774,25 @@ public class CanService extends Service {
 		@Override
 		public CanInfo getCanInfo() throws RemoteException {
 			// TODO Auto-generated method stub
-			if (info != null)			
+			if (info != null)
 				return info.getCanInfo();
 			else
 				return null;
 		}
 
 	};
-	
+
 	/**
 	 * 空调界面获取外部温度
-	 */	
-	private void sendMsgGetTemp(){
+	 */
+	private void sendMsgGetTemp() {
 		if (canName.equals(Contacts.CANNAMEGROUP.RZCVolkswagen))
-			writeCanPort(BytesUtil
-					.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO));
+			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO));
 		if (canName.equals(Contacts.CANNAMEGROUP.RZCVolkswagenGolf))
 			writeCanPort(BytesUtil
 					.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_0_1));
 	}
-	
+
 	/**
 	 * 连接Can设备需要发送的初始化命令
 	 */
@@ -798,14 +802,15 @@ public class CanService extends Service {
 		case Contacts.CANFISRTNAMEGROUP.RAISE: // 睿志诚
 			if (!canName.equals(Contacts.CANNAMEGROUP.RZCBESTURNx80)
 					&& !canName.equals(Contacts.CANNAMEGROUP.RZCFHCm3)
-					&&  !canName.equals(Contacts.CANNAMEGROUP.RZCPeugeot))// 奔腾X80
-																		// 海马M3
-																		// 标致
+					&& !canName.equals(Contacts.CANNAMEGROUP.RZCPeugeot))// 奔腾X80
+																			// 海马M3
+																			// 标致
 				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			break;
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
-			if (canName.equals(Contacts.CANNAMEGROUP.SSToyota)){
-				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0103"));  //丰田RAV4 荣放
+			if (canName.equals(Contacts.CANNAMEGROUP.SSToyota)) {
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0103")); // 丰田RAV4
+																		// 荣放
 			}
 			break;
 		default:

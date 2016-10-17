@@ -4,6 +4,8 @@ import com.console.canreader.service.CanInfo;
 
 
 
+
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,14 +18,14 @@ import android.widget.TextView;
 public class BaseFragment extends Fragment {
 
 	protected int index;
-	private CarInfoActivity carInfoActivity;
+	private BaseActivity carInfoActivity;
 	public BaseFragment() {
 
 	}
 	
-	public void setIndex(int index,CarInfoActivity carInfoActivity) {
+	public void setIndex(int index,BaseActivity carSettingAcitivity) {
 		this.index = index;
-		this.carInfoActivity=carInfoActivity;
+		this.carInfoActivity=carSettingAcitivity;
 	}
 
 	@Override

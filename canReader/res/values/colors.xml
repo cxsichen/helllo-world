@@ -7,4 +7,5 @@
     <color name="colorAccent">#009688</color>
     <color name="ivTint">#FF0000</color>
     <color name="colorText">#DFFFFFFF</color> 
+    <color name="app_bg">#F5F5F5</color>
 </resources>
