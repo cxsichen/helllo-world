@@ -29,7 +29,9 @@
                 android:text="车辆信息" />
         </RelativeLayout>
 
-        <View style="@style/mainMenuDivider" />
+        <View 
+            android:id="@+id/mCarInfoDivider"
+            style="@style/mainMenuDivider" />
 
         <RelativeLayout 
             android:id="@+id/mCarSettingsLayout"
@@ -46,7 +48,9 @@
                 android:text="车辆设置" />
         </RelativeLayout>
 
-        <View style="@style/mainMenuDivider" />
+        <View
+            android:id="@+id/mCarSettingsDivider" 
+            style="@style/mainMenuDivider" />
 
         <RelativeLayout 
             android:id="@+id/mMenuAcLayout"
@@ -63,7 +67,9 @@
                 android:text="空调控制" />
         </RelativeLayout>
 
-        <View style="@style/mainMenuDivider" />
+        <View 
+            android:id="@+id/mMenuAcDivider" 
+            style="@style/mainMenuDivider" />
 
         <RelativeLayout
             android:id="@+id/mMenuCdLayout"
@@ -80,7 +86,9 @@
                 android:text="光盘控制" />
         </RelativeLayout>
 
-        <View style="@style/mainMenuDivider" />
+        <View 
+             android:id="@+id/mMenuCdDivider" 
+            style="@style/mainMenuDivider" />
 
         <RelativeLayout 
             android:id="@+id/mMenuPaLayout"
@@ -97,7 +105,9 @@
                 android:text="原车功放" />
         </RelativeLayout>
 
-        <View style="@style/mainMenuDivider" />
+        <View 
+            android:id="@+id/mMenuPaDivider" 
+            style="@style/mainMenuDivider" />
 
         <RelativeLayout 
             android:id="@+id/mMenuPanoramaLayout"
@@ -114,7 +124,9 @@
                 android:text="全景" />
         </RelativeLayout>
 
-        <View style="@style/mainMenuDivider" />
+        <View 
+            android:id="@+id/mMenuPanoramaDivider" 
+            style="@style/mainMenuDivider" />
 
         <RelativeLayout 
             android:id="@+id/mMenuAboutLayout"
@@ -130,5 +142,9 @@
                 android:layout_below="@+id/icMenuAbout"
                 android:text="关于" />
         </RelativeLayout>
+        
+        <View 
+            android:id="@+id/mMenuAboutDivider" 
+            style="@style/mainMenuDivider" />
     </LinearLayout>
 </RelativeLayout>

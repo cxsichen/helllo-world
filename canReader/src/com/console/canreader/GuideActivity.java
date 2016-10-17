@@ -52,6 +52,9 @@ public class GuideActivity extends Activity {
 	int[] itemIdGroup = { R.id.mCarInfoLayout, R.id.mCarSettingsLayout,
 			R.id.mMenuAcLayout, R.id.mMenuCdLayout, R.id.mMenuPaLayout,
 			R.id.mMenuPanoramaLayout, R.id.mMenuAboutLayout };
+	int[] dividerIdGroup = { R.id.mCarInfoDivider, R.id.mCarSettingsDivider,
+			R.id.mMenuAcDivider, R.id.mMenuCdDivider, R.id.mMenuPaDivider,
+			R.id.mMenuPanoramaDivider, R.id.mMenuAboutDivider };
 
 	private RelativeLayout mCarInfoLayout;
 	private RelativeLayout mCarSettingsLayout;
@@ -77,9 +80,11 @@ public class GuideActivity extends Activity {
 		initView(canName);
 
 	}
+
 	/**
 	 * 根据配置文件筛选可用的activity
-	 * @param canName 
+	 * 
+	 * @param canName
 	 */
 
 	private void initView(String canName) {
@@ -105,6 +110,10 @@ public class GuideActivity extends Activity {
 			for (int i = 0; i < items.length; i++) {
 				if (items[i].equals("1")) {
 					findViewById(itemIdGroup[i]).setVisibility(View.VISIBLE);
+					if (dividerIdGroup[i] != R.id.mMenuAboutDivider) {
+						findViewById(dividerIdGroup[i]).setVisibility(
+								View.VISIBLE);
+					}
 					findViewById(itemIdGroup[i]).setTag(i);
 					findViewById(itemIdGroup[i]).setOnClickListener(
 							new OnClickListener() {
@@ -135,6 +144,7 @@ public class GuideActivity extends Activity {
 		super.onDestroy();
 		getContentResolver().unregisterContentObserver(mCanNameObserver);
 	}
+
 	/**
 	 * 检测can类型，如果有变化，则关闭apk，再开时重新初始化
 	 */
