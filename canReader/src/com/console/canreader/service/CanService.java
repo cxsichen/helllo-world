@@ -796,6 +796,12 @@ public class CanService extends Service {
 	/**
 	 * 连接Can设备需要发送的初始化命令
 	 */
+	public static final String  SSToyotaBD = "SSToyotaBD";               
+	public static final String  SSToyotaRZ = "SSToyotaRZ";  
+	public static final String  SSToyotaRAV4 = "SSToyotaRAV4";  
+	public static final String  SSToyotaKMR = "SSToyotaKMR"; 
+	public static final String  SSToyotaKLL = "SSToyotaKLL"; 
+	
 	private void connectCanDevice() {
 		// TODO Auto-generated method stub
 		switch (canFirtName) {
@@ -808,15 +814,29 @@ public class CanService extends Service {
 				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			break;
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
-			if (canName.equals(Contacts.CANNAMEGROUP.SSToyota)) {
-				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0103")); // 丰田RAV4
-																		// 荣放
+			switch (canName) {
+			case Contacts.CANNAMEGROUP.SSToyotaBD:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0101")); //丰田 霸道  
+				break;
+			case Contacts.CANNAMEGROUP.SSToyotaRZ:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0102")); //丰田 锐志
+				break;
+			case Contacts.CANNAMEGROUP.SSToyotaRAV4:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0103")); //丰田 RAV4
+				break;
+			case Contacts.CANNAMEGROUP.SSToyotaKMR:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0104")); //丰田 凯美瑞
+				break;
+			case Contacts.CANNAMEGROUP.SSToyotaKLL:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0105")); // 丰田 卡罗拉
+				break;
+			default:
+				break;
 			}
 			break;
 		default:
 			break;
 		}
-
 	}
 
 }

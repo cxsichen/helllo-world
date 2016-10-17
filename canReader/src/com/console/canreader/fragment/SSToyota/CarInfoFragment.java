@@ -52,9 +52,6 @@ public class CarInfoFragment extends BaseFragment {
 			switch (msg.what) {
 			case Contacts.MSG_GET_MSG:
 				// 大众主动获取数据
-				sendMsg(Contacts.CONNECTMSG);
-				sendMsg(Contacts.HEX_GET_CAR_INFO);
-				mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 5000);
 				break;
 			default:
 				break;
@@ -65,6 +62,8 @@ public class CarInfoFragment extends BaseFragment {
 	public CarInfoFragment() {
 
 	}
+	
+
 
 	@Override
 	public void show(CanInfo mCaninfo) {
@@ -93,6 +92,12 @@ public class CarInfoFragment extends BaseFragment {
 		View view = inflater.inflate(R.layout.main, container, false);
 		initView(view);
 		return view;
+	}
+	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
 	}
 
 	private void initView(View view) {

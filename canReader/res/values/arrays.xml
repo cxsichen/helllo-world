@@ -79,7 +79,11 @@
         <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item> 
     </string-array>
     
-      <string-array name="SSToyotaRZ_SettingFragment">
+     <string-array name="SSToyotaRZ_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+    
+      <string-array name="SSToyotaRZ_setting_fragment">
         <item>com.console.canreader.fragment.SSToyota.RZCarSettingsFragment</item> 
     </string-array>
     <!-- 尚摄 丰田锐志-->
@@ -109,7 +113,11 @@
         <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item> 
     </string-array>
     
-      <string-array name="SSToyotaRAV4_SettingFragment">
+    <string-array name="SSToyotaRAV4_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+    
+      <string-array name="SSToyotaRAV4_setting_fragment">
         <item>com.console.canreader.fragment.SSToyota.RAV4CarSettingsFragment</item> 
     </string-array>
     <!-- 尚摄 RAV4-->
@@ -138,7 +146,11 @@
         <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item> 
     </string-array>
     
-      <string-array name="SSToyotaKMR_SettingFragment">
+     <string-array name="SSToyotaKMR_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+    
+     <string-array name="SSToyotaKMR_setting_fragment">
         <item>com.console.canreader.fragment.SSToyota.KMRCarSettingsFragment</item> 
     </string-array>
     <!-- 尚摄 凯美瑞-->
@@ -163,7 +175,11 @@
         <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item> 
     </string-array>
     
-      <string-array name="SSToyotaKLL_SettingFragment">
+     <string-array name="SSToyotaKLL_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+    
+      <string-array name="SSToyotaKLL_setting_fragment">
         <item>com.console.canreader.fragment.SSToyota.KLLCarSettingsFragment</item> 
     </string-array>
     <!-- 尚摄卡罗拉-->

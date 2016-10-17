@@ -62,11 +62,11 @@ public class Contacts {
 		public static final String  SSGE = "SSGE";                           //通用
 		//丰田
 		public static final String  SSToyota = "SSToyota";    
-		public static final String  SSToyotaBD = "SSToyotaBD";               
-		public static final String  SSToyotaRZ = "SSToyotaRZ";  
-		public static final String  SSToyotaRAV4 = "SSToyotaRAV4";  
-		public static final String  SSToyotaKMR = "SSToyotaKMR"; 
-		public static final String  SSToyotaKLL = "SSToyotaKLL";  
+		public static final String  SSToyotaBD = "SSToyotaBD";             //霸道  
+		public static final String  SSToyotaRZ = "SSToyotaRZ";             //锐志
+		public static final String  SSToyotaRAV4 = "SSToyotaRAV4";         //RAV4
+		public static final String  SSToyotaKMR = "SSToyotaKMR";           //凯美瑞
+		public static final String  SSToyotaKLL = "SSToyotaKLL";           //卡罗拉
 		//丰田
 		public static final String  SSHonda = "SSHonda";                     //本田
 		/*--------------尚摄-----------*/

@@ -94,6 +94,13 @@ public class CarInfoFragment extends BaseFragment {
 		initView(view);
 		return view;
 	}
+	
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		mHandler.removeMessages(Contacts.MSG_GET_MSG);
+	}
 
 	private void initView(View view) {
 		// TODO Auto-generated method stub
@@ -109,7 +116,6 @@ public class CarInfoFragment extends BaseFragment {
 		viewsFactory.add(pageViewDefalut);
 		vp.setAdapter(vpAdapter);
 		initIndicator(view);
-
 	}
 
 	/**
