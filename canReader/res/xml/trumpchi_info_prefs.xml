@@ -1,0 +1,22 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/car_info_title" >
+        <Preference
+            android:key="Park_setting"
+            android:title="@string/car_info_brake_pull" />
+        <Preference
+            android:key="REV_setting"
+            android:title="@string/car_info_REV_no" />
+        <Preference
+            android:key="ILL_setting"
+            android:title="@string/car_info_ILL_close" />
+        <Preference
+            android:key="safety_setting"
+            android:title="@string/car_info_safe_yes" />
+        <Preference
+            android:key="ESP_setting"
+            android:summary="0"
+            android:title="@string/car_info_ESP" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

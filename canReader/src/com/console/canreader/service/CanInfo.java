@@ -49,6 +49,8 @@ public class CanInfo implements Parcelable {
 	public int DAUL_LAMP_INDICATOR = 0;
 	public int MAX_FRONT_LAMP_INDICATOR = 0; // 前窗除雾
 	public int REAR_LAMP_INDICATOR = 0; // 后窗除雾
+	public int AC_MAX_STATUS = -1; 			   //AC MAX
+	public int AUTO_STATUS = 0;			   //Auto开关
 	// 风速及风向信息
 	public int UPWARD_AIR_INDICATOR = 0; // 吹前窗
 	public int PARALLEL_AIR_INDICATOR = 0; // 吹身
@@ -325,6 +327,54 @@ public class CanInfo implements Parcelable {
 	            
 	
 	public int AIR_CONDITIONER_CONTROL = 0; // 空调是否有界面控制，如果为1则有，不需要自动弹框
+	
+	
+	/*-------------------add by xyw start----------------------------------*/
+	public int CAR_GEAR_STATUS = -1;							//车身档位，-1表示无效 1P 2N 3R 4D 5S
+	public int CAR_BACK_STATUS = -1;							//倒车状态          0非倒档    1倒挡
+	public int CAR_ILL_STATUS = -1;								//ILL灯光          0大灯关闭    1大灯打开
+	public int CAR_VOLUME_KNOB=0;									//音量旋钮的值
+	public int CAR_VOLUME_KNOB_UP=0;								//音量旋钮增加的值
+	public int CAR_VOLUME_KNOB_DOWN=0;								//音量旋减少的值
+	public int CAR_SELECTOR_KNOB=0;									//选择旋钮值
+	public int CAR_SELECTOR_KNOB_UP=0;								//选择旋钮 增加的值
+	public int CAR_SELECTOR_KNOB_DOWN=0;							//音量旋钮减少的值
+	public int LINK_SOS_STATUS=0;								//Link SoS通讯    0退出  1LINK  2SOS
+	public int LANGUAGE_CHANGE=1;								//语言设置1中文 2 英文
+	public int AUTO_COMPRESSOR_STATUS=0;						//AUTO时压缩机状态    1开 0关
+	public int AUTO_CYCLE_STATUS=0;								//AUTO时内外循环控制方式   1自动  0手动
+	public int AIR_COMFORTABLE_STATUS=0;						//空调舒适曲线设置  00缓慢 01正常 02快速
+	public int AIR_ANION_STATUS=0;									//负离子模式  1开启  0关闭
+	public int DRIVING_POSITION_SETTING=0;						//驾驶座椅自动加热设置 1开  0关
+	public int DEPUTY_DRIVING_POSITION_SETTING=0;				//副驾驶座椅自动加热设置 1开  0关
+	public int POSITION_WELCOME_SETTING=0;						//座椅迎宾功能设置  1开启  0关闭
+	public int KEY_INTELLIGENCE=0;								//智能钥匙自动识别座椅  1开启 0关闭
+	public int SPEED_OVER_SETTING=0;							//驾驶辅助超速报警  速度=Data3*10km/h
+	public int WARNING_VOLUME=0;								//驾驶辅助组合仪表报警音量    0低   1中  2高
+	public int REMOTE_POWER_TIME=0;								//驾驶辅助远程上电时间    0-30分钟
+	public int REMOTE_START_TIME=0;								//驾驶辅助远程启动时间 0-30分钟
+	public int DRIVER_CHANGE_MODE=0;							//驾驶辅助转向模式  0运动  1标准  2舒适
+	public int REMOTE_UNLOCK=0;									//遥控解锁   1仅左前门  0所有车门
+	public int SPEED_LOCK=0;									//车速上锁  1开 0关 
+	public int AUTO_UNLOCK;										//自动解锁  1开 0关 
+	public int REMOTE_FRONT_LEFT=0;								//遥控左前窗和天窗   1开 0关
+	public int FRONT_WIPER_CARE=0;								//前雨刮维护功能  1开  0关
+	public int REAR_WIPER_STATUS=0;								//后雨刮倒挡自动刮刷功能  1开 0关
+	public int OUTSIDE_MIRROR_STATUS=0;							//外后视镜自动折叠  1开 0关
+	public int GO_HOME_LAMP_STATUS=0;							//伴我回家照明  0关闭 1仅近光灯  2近光后雾
+	public int FOG_LAMP_STATUS=0;								//雾灯转向辅助  1开 0关
+	public int DAYTIME_LAMP_STATUS=0;							//日间行车灯  1开 0关
+	public int AUTO_LAMP_STATUS;								//自动灯光灵敏度  0低  1中 2高
+	
+	public int ESP_ENABLE=1;                                    //方向盘转角  1有效 0无效
+	public int HOLOGRAM_ENABLE=1;								//全息影像设置 1有效 0无效
+	public int CAT_SETTTING_ENABLE=1;							//车辆设置信息 1有限 0无效
+	public int PANEL_SSETTING_ENABLE=1;							//面板按键信息 1有效 0无效
+	public int AIR_INFO_ENABLE=1;								//空调信息  1有效 0无效
+	
+	public int CAMERA_DIAPLAY_ENABLE=0;							//摄像头显示开关  0关 1开
+	public int CAMERA_MODE=1;									//全景摄像头模式 1前+全    2前+右侧     3后+全     4 水平停车+全     5垂直停车+全
+	/*-------------------add by xyw end----------------------------------*/
 
 	public CanInfo() {
 

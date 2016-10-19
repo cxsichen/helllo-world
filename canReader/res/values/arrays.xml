@@ -289,9 +289,118 @@
         <item>com.console.canreader.fragment.SSHonda.TpmsSettingsFragment</item>
     </string-array>
     <!-- 尚摄 16款思域 -->
-
-
     <!-- 本田 -->
+    
+    <!-- 广汽传祺 -->
+        <!-- add by xyw start-->
+         <!-- 尚摄 广汽传祺GA6 -->
+    <string-array name="SSTrumpchiGA6_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+        <string-array name="SSTrumpchiGA6_items">
+        <item>车辆信息</item>
+        <item>车身信息使能标志</item>
+    </string-array>
+    <string-array name="SSTrumpchiGA6_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarInfoFragment</item>
+          <item>com.console.canreader.fragment.SSTrumpchi.GA6CarEnableInfoFragment</item> 
+    </string-array>
+    <string-array name="SSTrumpchiGA6_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSTrumpchiGA6_setting_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 广汽传祺GA6-->
+    
+    <!-- 尚摄 广汽传祺GS4高配 -->
+    <string-array name="SSTrumpchiGS4HIGH_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+        <string-array name="SSTrumpchiGS4HIGH_items">
+        <item>车辆信息</item>
+        <item>Link/SOS通讯</item>
+        <item>车身信息使能标志</item>
+    </string-array>
+    <string-array name="SSTrumpchiGS4HIGH_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarInfoFragment</item>
+           <item>com.console.canreader.fragment.SSTrumpchi.GS4HIGHLinkSOSFragment</item> 
+          <item>com.console.canreader.fragment.SSTrumpchi.GS4CarEnableInfoFragment</item> 
+    </string-array>
+    <string-array name="SSTrumpchiGS4HIGH_setting_items">
+        <item>车辆设定</item>
+         <item>空调控制</item>
+    </string-array>
+      <string-array name="SSTrumpchiGS4HIGH_setting_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarSettingsFragment</item> 
+         <item>com.console.canreader.fragment.SSTrumpchi.GS4HIGHCarAirSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 广汽传祺GS4高配-->
+    
+    <!-- 尚摄 广汽传祺GS4通用 -->
+    <string-array name="SSTrumpchiGS4_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+        <string-array name="SSTrumpchiGS4_items">
+        <item>车辆信息</item>
+        <item>车身信息使能标志</item>
+    </string-array>
+    <string-array name="SSTrumpchiGS4_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarInfoFragment</item>
+          <item>com.console.canreader.fragment.SSTrumpchi.GS4CarEnableInfoFragment</item> 
+    </string-array>
+    <string-array name="SSTrumpchiGS4_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSTrumpchiGS4_setting_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 广汽传祺GS4高配-->
+    
+     <!-- 尚摄 广汽传祺GS5通用 -->
+    <string-array name="SSTrumpchiGS5_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>1</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+        <string-array name="SSTrumpchiGS5_items">
+        <item>车辆信息</item>
+        <item>车身信息使能标志</item>
+    </string-array>
+    <string-array name="SSTrumpchiGS5_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiGS5CarInfoFragment</item>
+          <item>com.console.canreader.fragment.SSTrumpchi.GS5CarEnableInfoFragment</item> 
+    </string-array>
+    
+    <!-- 尚摄 广汽传祺GS5通用-->
+    <!-- add by xyw start end --> 
+     <!-- 广汽传祺 -->
 
 
     <!-- 大众高尔夫 -->
@@ -567,4 +676,80 @@
         <item>6</item>
         <item>7</item>
     </string-array>
+    
+        <!-- add by xyw start -->
+        <string-array name="language_entries">
+        <item>中文</item>
+        <item>英文</item>
+    </string-array>  
+     <string-array name="language_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array> 
+     <string-array name="car_info_AIR_COMFORTABLE_STATUS_entries">
+        <item>缓慢</item>
+        <item>正常</item>
+          <item>快速</item>
+    </string-array>  
+     <string-array name="car_info_AIR_COMFORTABLE_STATUS_values">
+         <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     <string-array name="car_info_entries">
+        <item>低</item>
+        <item>中</item>
+          <item>高</item>
+    </string-array>  
+     <string-array name="car_info_values">
+         <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     <string-array name="car_info_DRIVER_CHANGE_MODE_entries">
+        <item>运动</item>
+        <item>标准</item>
+          <item>舒适</item>
+    </string-array>  
+     <string-array name="car_info_DRIVER_CHANGE_MODE_values">
+         <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+       <string-array name="car_info_REMOTE_UNLOCK_entries">
+        <item>所有车门</item>
+        <item>仅左前门</item>
+    </string-array>  
+     <string-array name="car_info_REMOTE_UNLOCK_values">
+         <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="car_info_GO_HOME_LAMP_STATUS_entries">
+        <item>关闭</item>
+        <item>仅近光灯</item>
+        <item>近光后雾</item>
+    </string-array>  
+     <string-array name="car_info_GO_HOME_LAMP_STATUS_values">
+         <item>0</item>
+        <item>1</item>
+         <item>2</item>
+    </string-array>
+    
+     <string-array name="car_info_position_heat_entries">
+        <item>不加热</item>
+        <item>1级</item>
+        <item>2级</item>
+        <item>3级</item>
+    </string-array>  
+     <string-array name="car_info_position_heat_values">
+         <item>0</item>
+        <item>1</item>
+         <item>2</item>
+          <item>3</item>
+    </string-array>
+     
+     <!-- add by xyw end -->
 </resources>

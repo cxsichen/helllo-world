@@ -91,8 +91,7 @@ public class DialogCreater {
 			waringStatus[2] = canInfo.SAFETY_BELT_STATUS;
 			waringStatus[3] = canInfo.DISINFECTON_STATUS;
 			waringStatus[4] = canInfo.HANDBRAKE_STATUS;
-			
-			Log.i("cxs","========showUnlockWaringInfo==========");
+
 			
 			android.provider.Settings.System.putInt(context.getContentResolver(), BATTRYT_WARNING, canInfo.BATTERY_WARING_SIGN);
 			android.provider.Settings.System.putInt(context.getContentResolver(), FUEL_CAN_WARNING, canInfo.FUEL_WARING_SIGN);

@@ -22,6 +22,10 @@ public class Contacts {
 		public static final int MENU_LONG_UP = 11;
 		public static final int MENU_LONG_DOWN = 12;
 		public static final int CANINFOPAGE = 13;
+		public static final int KNOBVOLUME = 14;
+		public static final int KNOBSELECTOR = 15;
+		public static final int POWER = 16;
+		public static final int FM_AM = 17;
 	}
 
 	/**
@@ -71,6 +75,13 @@ public class Contacts {
 		public static final String  SSHonda = "SSHonda";                     //本田
 		public static final String  SSHondaSY = "SSHondaSY";                     //16款思域
 		public static final String  SSHondaLP = "SSHondaLP";                     //本田凌派
+		
+		//广汽传祺
+		public static final String  SSTrumpchi = "SSTrumpchi";           //广汽传祺
+		public static final String  SSTrumpchiGA6 = "SSTrumpchiGA6";     //广汽传祺GA6
+		public static final String  SSTrumpchiGS4 = "SSTrumpchiGS4";     //广汽传祺GS4
+		public static final String  SSTrumpchiGS4HIGH = "SSTrumpchiGS4HIGH";     //广汽传祺GS4高配
+		public static final String  SSTrumpchiGS5 = "SSTrumpchiGS5";     //广汽传祺GS5
 		/*--------------尚摄-----------*/
 	}
 

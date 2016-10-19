@@ -53,6 +53,10 @@ public class KeyDealer {
 
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
+			case Contacts.KEYEVENT.KNOBVOLUME:
+				Log.i("cxs", "-----1111--msg.KNOBVOLUME------");
+				handleKnobVolume(msg.arg1, msg.arg2);
+				break;
 			case Contacts.VOL_UP:
 				Log.i("cxs", "-----1111--msg.VOL_UP-------");
 				handleVolUp();
@@ -254,6 +258,13 @@ public class KeyDealer {
 		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 		handleVolume(context, cur_music + SETP_VOLUME);
 	}
+	public void handleKnobVolume(int up,int down) {
+		if (mAudioManager == null)
+			mAudioManager = (AudioManager) context
+					.getSystemService(Context.AUDIO_SERVICE);
+		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+		handleVolume(context, cur_music + up-down);
+	}
 
 	public void handleVolDown() {
 		if (mAudioManager == null)
@@ -285,7 +296,30 @@ public class KeyDealer {
     //´¦Àí
 	protected void dealWith(Context context, CanInfo canInfo) {
 		// TODO Auto-generated method stub
-
+ 
+		Log.i("cxs", "--canInfo.STEERING_BUTTON_MODE:---"+canInfo.STEERING_BUTTON_MODE);
+		if(canInfo.STEERING_BUTTON_MODE==Contacts.KEYEVENT.KNOBVOLUME){
+			if (System.currentTimeMillis() - lastSendTime > 200) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg=new Message();
+				msg.what=Contacts.KEYEVENT.KNOBVOLUME;
+				msg.arg1=canInfo.CAR_VOLUME_KNOB_UP;
+				msg.arg2=canInfo.CAR_VOLUME_KNOB_DOWN;
+				mHandler.sendMessage(msg);
+			}
+		}
+		if(canInfo.STEERING_BUTTON_MODE==Contacts.KEYEVENT.KNOBSELECTOR){
+			if (System.currentTimeMillis() - lastSendTime > 200) {
+				lastSendTime = System.currentTimeMillis();
+				if(canInfo.CAR_SELECTOR_KNOB_UP>0){
+					handleMenuUp();
+				}else{
+					handleMenuDown();
+				}
+				
+			}
+		}
+		
 		if (canInfo.STEERING_BUTTON_STATUS == 0) {
 			mHandler.removeMessages(Contacts.MENU_LONG_UP);
 			mHandler.removeMessages(Contacts.MENU_LONG_DOWN);
@@ -344,6 +378,25 @@ public class KeyDealer {
 				mHandler.removeMessages(Contacts.KEYEVENT.CANINFOPAGE);
 				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.CANINFOPAGE,
 						200);
+				break;
+			case Contacts.KEYEVENT.FM_AM:
+				Intent i=new Intent();
+				i.setClassName("com.console.radio", "com.console.radio.MainActivity");
+				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				context.startActivity(i);
+				break;	
+			case Contacts.KEYEVENT.POWER:
+				Log.i("cxs", "power start");
+				try {
+					
+				 Intent intent = new Intent();
+                 intent.setClassName("com.console.nodisturb", "com.console.nodisturb.MainActivity");
+                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                 context.startActivity(intent);
+				} catch (Exception e) {
+					Log.i("cxs", "power end --");
+				}
+				Log.i("cxs", "power end");
 				break;
 			default:
 				break;

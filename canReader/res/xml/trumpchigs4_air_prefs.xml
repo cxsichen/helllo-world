@@ -1,0 +1,18 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/car_info_title" >
+         <ListPreference
+            android:entries="@array/car_info_position_heat_entries"
+            android:entryValues="@array/car_info_position_heat_values"
+            android:key="position_heat_left"
+            android:persistent="false"
+            android:title="@string/position_heat_left" />
+          <ListPreference
+            android:entries="@array/car_info_position_heat_entries"
+            android:entryValues="@array/car_info_position_heat_values"
+            android:key="position_heat_right"
+            android:persistent="false"
+            android:title="@string/position_heat_right" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

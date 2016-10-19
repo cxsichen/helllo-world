@@ -48,4 +48,102 @@
     <string name="lock_setting_title">门锁设定选项标志</string>
       <string name="control_setting_title">遥控设定</string>
       <string name="compact_monitor_setting_title">冲撞/检测系统设定</string>
+      
+      <!-- add by xyw start -->
+      <string name="car_info_title">车身状态</string>
+      <string name="car_info_setting_title">车身信息</string>
+       <string name="car_info_setting_title2">车辆设置信息</string>
+      <string name="car_info_brake_pull">手刹拉起</string>
+      <string name="car_info_brake_down">手刹释放</string>
+      <string name="car_info_REV_yes">倒档状态</string>
+      <string name="car_info_REV_no">非倒档状态</string>
+      <string name="car_info_ILL_open">大灯开启</string>
+      <string name="car_info_ILL_close">大灯关闭</string>
+      <string name="car_info_safe_yes">已系安全带</string>
+      <string name="car_info_safe_no">未系安全带</string>
+      <string name="car_info_ESP">方向盘转角</string>
+      <string name="car_info_turn_left">左转</string>
+      <string name="car_info_turn_right">右转</string>
+      <string name="car_info_ESP_du">度</string>
+      <string name="str_minute">分钟</string>
+       <string name="str_kmh">Km/h</string>
+       <string name="position_heat_left">左座椅加热等级</string>
+       <string name="position_heat_right">右座椅加热等级</string>
+       <string name="communication_Link_SOS">Link/SOS通讯</string>
+        <string name="communication_Link_SOS_0">退出通讯</string>
+         <string name="communication_Link_SOS_1">进入Link通讯</string>
+          <string name="communication_Link_SOS_2">进入SOS通讯</string>
+       
+      
+      <string name="car_info_open">开</string>
+       <string name="car_info_close">关</string>
+        <string name="car_info_di">低</string>
+         <string name="car_info_zhong">中</string>
+          <string name="car_info_gao">高</string>
+          
+      <string name="car_info_LANGUAGE_CHANGE">语言设置</string>
+       <string name="car_info_LANGUAGE_CHANGE_1">中文</string>
+        <string name="car_info_LANGUAGE_CHANGE_2">英文</string>
+         <string name="car_info_AUTO_COMPRESSOR_STATUS">AUTO时压缩机状态</string>
+         <string name="car_info_AUTO_CYCLE_STATUS">AUTO时内外循环控制方式</string>
+         <string name="car_info_AUTO_CYCLE_STATUS_1">自动</string>
+         <string name="car_info_AUTO_CYCLE_STATUS_0">手动</string>
+          <string name="car_info_AIR_COMFORTABLE_STATUS">空调舒适曲线设置</string>
+          <string name="car_info_AIR_COMFORTABLE_STATUS_0">缓慢</string>
+          <string name="car_info_AIR_COMFORTABLE_STATUS_1">正常</string>
+          <string name="car_info_AIR_COMFORTABLE_STATUS_2">快速</string>
+           <string name="car_info_AIR_ANION_STATUS">负离子模式</string>
+            <string name="car_info_DRIVING_POSITION_SETTING">驾驶座椅自动加热设置</string>
+            <string name="car_info_DEPUTY_DRIVING_POSITION_SETTING">副驾驶座椅自动加热设置</string>
+            <string name="car_info_POSITION_WELCOME_SETTING">座椅迎宾功能设置</string>
+            
+            <string name="car_info_KEY_INTELLIGENCE">智能钥匙自动识别座椅</string>
+            <string name="car_info_WARNING_VOLUME">驾驶辅助组合仪表报警音量</string>
+            <string name="car_info_WARNING_VOLUME_0">低</string>
+            <string name="car_info_WARNING_VOLUME_1">中</string>
+            <string name="car_info_WARNING_VOLUME_2">高</string>
+            <string name="car_info_DRIVER_CHANGE_MODE">驾驶辅助转向模式</string>
+            <string name="car_info_DRIVER_CHANGE_MODE_0">运动</string>
+            <string name="car_info_DRIVER_CHANGE_MODE_1">标准</string>
+            <string name="car_info_DRIVER_CHANGE_MODE_2">舒适</string>
+            <string name="car_info_REMOTE_UNLOCK">遥控解锁</string>
+            <string name="car_info_REMOTE_UNLOCK_1">仅左前门 </string>
+            <string name="car_info_REMOTE_UNLOCK_0">所有车门</string>
+            
+            <string name="car_info_SPEED_LOCK">车速上锁</string>
+            <string name="car_info_AUTO_UNLOCK">自动解锁</string>
+            <string name="car_info_REMOTE_FRONT_LEFT">遥控左前窗和天窗</string>
+            <string name="car_info_FRONT_WIPER_CARE">前雨刮维护功能</string>
+            <string name="car_info_REAR_WIPER_STATUS">后雨刮倒挡自动刮刷功能</string>
+            <string name="car_info_OUTSIDE_MIRROR_STATUS">外后视镜自动折叠</string>
+            <string name="car_info_GO_HOME_LAMP_STATUS">伴我回家照明</string>
+             <string name="car_info_GO_HOME_LAMP_STATUS_0">关闭</string>
+              <string name="car_info_GO_HOME_LAMP_STATUS_1">仅近光灯</string>
+               <string name="car_info_GO_HOME_LAMP_STATUS_2">近光后雾</string>
+            
+             <string name="car_info_FOG_LAMP_STATUS">雾灯转向辅助</string>
+              <string name="car_info_DAYTIME_LAMP_STATUS">日间行车灯</string>
+              
+                <string name="car_info_AUTO_LAMP_STATUS">自动灯光灵敏度</string>
+                <string name="car_info_AUTO_LAMP_STATUS_0">低</string>
+                <string name="car_info_AUTO_LAMP_STATUS_1">中</string>
+                <string name="car_info_AUTO_LAMP_STATUS_2">高</string>
+                
+                 <string name="car_info_SPEED_OVER_SETTING">驾驶辅助超速报警 </string>
+                  <string name="car_info_REMOTE_POWER_TIME">驾驶辅助远程上电时间  </string>
+                   <string name="car_info_REMOTE_START_TIME">驾驶辅助远程启动时间 </string>
+            <!--  
+	public int SPEED_OVER_SETTING=0;							//驾驶辅助超速报警  速度=Data3*10km/h
+	
+	public int REMOTE_POWER_TIME=0;								//驾驶辅助远程上电时间    0-30分钟
+	public int REMOTE_START_TIME=0;								//驾驶辅助远程启动时间 0-30分钟
+	-->
+	<string name="car_info_panorama">全景影像设置</string>
+	<string name="car_info_setting">车辆设置信息</string>
+	<string name="car_info_panel">面板按键信息</string>
+	<string name="car_info_AIR">空调信息</string>
+	<string name="car_info_enable">有效</string>
+	<string name="car_info_unable">无效</string>
+	
+        <!-- add by xyw end -->
 </resources>

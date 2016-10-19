@@ -42,6 +42,12 @@ public class BeanFactory {
 		case Contacts.CANNAMEGROUP.SSHondaLP:
 			canName=Contacts.CANNAMEGROUP.SSHonda;
 			break;
+		case Contacts.CANNAMEGROUP.SSTrumpchiGA6:	 //¹ãÆû´«ì÷
+		case Contacts.CANNAMEGROUP.SSTrumpchiGS4:
+		case Contacts.CANNAMEGROUP.SSTrumpchiGS4HIGH:
+		case Contacts.CANNAMEGROUP.SSTrumpchiGS5:
+			canName=Contacts.CANNAMEGROUP.SSTrumpchi;
+			break;
 		default:
 			break;
 		}

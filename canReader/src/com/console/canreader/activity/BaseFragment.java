@@ -91,8 +91,8 @@ public class BaseFragment extends Fragment {
 	 */
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
-		Log.i("cxs","=baseFragment==AUTO_LOCK_TIME=====e===="+mCaninfo.AUTO_LOCK_TIME);
 	}
+	
 
 	/**
 	 * 服务链接时调用
