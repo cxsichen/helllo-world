@@ -48,7 +48,11 @@ public class RadarInfoFragment extends BaseFragment {
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
 			if (settingsFragment != null) {
-				settingsFragment.syncView(mCaninfo);
+				try {
+					settingsFragment.syncView(mCaninfo);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}				
 			}
 		}
 
@@ -85,6 +89,11 @@ public class RadarInfoFragment extends BaseFragment {
 			p2 = (Preference) findPreference("RADAR_WARING_VOLUME");
 			p3 = (Preference) findPreference("FRONT_RADAR_DISTANCE");
 			p4 = (Preference) findPreference("BACK_RADAR_DISTANCE");
+			
+			if(oilEleActivity!=null){
+				if(oilEleActivity.getCanInfo()!=null)
+					syncView(oilEleActivity.getCanInfo());
+			}
 		}
 
 		public void syncView(CanInfo mCaninfo) {

@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:entries="@array/air_rate_entries"
+        android:entryValues="@array/air_rate_values"
+        android:key="AIR_RATE"
+        android:persistent="false"
+        android:title="风量控制" />
+
+    <SwitchPreference
+        android:key="AC_INDICATOR_STATUS"
+        android:summaryOff="关闭"
+        android:summaryOn="打开"
+        android:title="AC开关" />
+
+</PreferenceScreen>

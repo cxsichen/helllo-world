@@ -47,14 +47,15 @@ public class GuideActivity extends Activity {
 			"com.console.canreader.activity.MenuCdAcitivity",
 			"com.console.canreader.activity.MenuPaAcitivity",
 			"com.console.canreader.activity.MenuPanoramaAcitivity",
+			"com.console.canreader.activity.MenuTpmsAcitivity",
 			"com.console.canreader.activity.MenuAboutAcitivity" };
 
 	int[] itemIdGroup = { R.id.mCarInfoLayout, R.id.mCarSettingsLayout,
 			R.id.mMenuAcLayout, R.id.mMenuCdLayout, R.id.mMenuPaLayout,
-			R.id.mMenuPanoramaLayout, R.id.mMenuAboutLayout };
+			R.id.mMenuPanoramaLayout,R.id.mMenuTpmsLayout, R.id.mMenuAboutLayout };
 	int[] dividerIdGroup = { R.id.mCarInfoDivider, R.id.mCarSettingsDivider,
 			R.id.mMenuAcDivider, R.id.mMenuCdDivider, R.id.mMenuPaDivider,
-			R.id.mMenuPanoramaDivider, R.id.mMenuAboutDivider };
+			R.id.mMenuPanoramaDivider,R.id.mMenuTpmsDivider, R.id.mMenuAboutDivider };
 
 	private RelativeLayout mCarInfoLayout;
 	private RelativeLayout mCarSettingsLayout;
@@ -78,7 +79,6 @@ public class GuideActivity extends Activity {
 								.getUriFor(Contacts.CAN_CLASS_NAME),
 						true, mCanNameObserver);
 		initView(canName);
-
 	}
 
 	/**
@@ -162,7 +162,6 @@ public class GuideActivity extends Activity {
 			super.onChange(selfChange);
 			if (!canName.equals(PreferenceUtil.getCANName(GuideActivity.this)))
 				finish();
-
 		}
 	}
 

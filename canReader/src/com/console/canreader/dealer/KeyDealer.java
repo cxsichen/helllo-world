@@ -281,7 +281,8 @@ public class KeyDealer {
 	long lastSendTime = 0;
 	
 	Boolean PRESSFREE = true;
-
+	
+    //¥¶¿Ì
 	protected void dealWith(Context context, CanInfo canInfo) {
 		// TODO Auto-generated method stub
 

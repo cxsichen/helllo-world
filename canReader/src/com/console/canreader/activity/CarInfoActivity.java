@@ -109,12 +109,12 @@ public class CarInfoActivity extends BaseActivity {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					Log.i("cxs","=====e=========="+e);
+					Log.i("cxs", "=====e==========" + e);
 				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			Log.i("cxs","=====e=========="+e);
+			Log.i("cxs", "=====e==========" + e);
 		}
 	}
 
@@ -171,7 +171,8 @@ public class CarInfoActivity extends BaseActivity {
 		super.show(mCaninfo);
 		if (fragments != null) {
 			for (BaseFragment fragment : fragments) {
-				fragment.show(mCaninfo);
+				if (fragment.getResumeStatus())
+					fragment.show(mCaninfo);
 			}
 		}
 	}

@@ -6,22 +6,21 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class CanInfo implements Parcelable {
-	
-    /**
+
+	/**
 	 * mCanInfo.CHANGE_STATUS表示更改的状态
 	 * 
-	 * STEERING_BUTTON_DATA--------------mCanInfo.CHANGE_STATUS = 2         按键状态
-	 * AIR_CONDITIONER_DATA--------------mCanInfo.CHANGE_STATUS = 3         空调状态
-	 * BACK_RADER_DATA-------------------mCanInfo.CHANGE_STATUS = 4         后雷达状态
-	 * FRONT_RADER_DATA------------------mCanInfo.CHANGE_STATUS = 5         前雷达状态
-	 * RADAR_DATA------------------------mCanInfo.CHANGE_STATUS = 11        雷达状态（前后都有）
-	 * STEERING_TURN_DATA----------------mCanInfo.CHANGE_STATUS = 8         方向盘状态
-	 * CAR_INFO_DATA---------------------mCanInfo.CHANGE_STATUS = 10        报警状态（车门报警，车身信息报警）
-	 *                                                                      车身信息
+	 * STEERING_BUTTON_DATA--------------mCanInfo.CHANGE_STATUS = 2 按键状态
+	 * AIR_CONDITIONER_DATA--------------mCanInfo.CHANGE_STATUS = 3 空调状态
+	 * BACK_RADER_DATA-------------------mCanInfo.CHANGE_STATUS = 4 后雷达状态
+	 * FRONT_RADER_DATA------------------mCanInfo.CHANGE_STATUS = 5 前雷达状态
+	 * RADAR_DATA------------------------mCanInfo.CHANGE_STATUS = 11 雷达状态（前后都有）
+	 * STEERING_TURN_DA+TA----------------mCanInfo.CHANGE_STATUS = 8 方向盘状态
+	 * CAR_INFO_DATA---------------------mCanInfo.CHANGE_STATUS = 10
+	 * 报警状态（车门报警，车身信息报警） 车身信息
 	 */
 
 	public int CHANGE_STATUS = 8888;
-	
 
 	public int HEAD_CODE = 0;
 	/*
@@ -33,59 +32,54 @@ public class CanInfo implements Parcelable {
 	 */
 	public int CAR_SPEED_DATA = -1;
 	/*
-	 * 方向盘按键
-	 * STEERING_BUTTON_MODE
-	 * 0：无按键或释放       1：vol+   2：vol-   3：menuup  4：menu down 
-	 * 5： PHONE  6：mute   7：SRC  8：SPEECH/MIC
+	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
+	 * PHONE 6：mute 7：SRC 8：SPEECH/MIC
 	 */
 	public int STEERING_BUTTON_MODE = 0;
 	public int STEERING_BUTTON_STATUS = 0;
 	/*
 	 * 空调信息
 	 */
-	//  空调状态都是on off
-	public int AIR_CONDITIONER_STATUS = -1;    //空调开关
-	public int AC_INDICATOR_STATUS = 0;        //AC状态
-	public int CYCLE_INDICATOR = 0;            //内外循环指示  2不显示        0外循环  1内循环
-	public int LARGE_LANTERN_INDICATOR = 0;    //大auto
-	public int SMALL_LANTERN_INDICATOR = 0;     //小auto
-	public int DAUL_LAMP_INDICATOR = 0;    
-	public int MAX_FRONT_LAMP_INDICATOR = 0;   //前窗除雾
-	public int REAR_LAMP_INDICATOR = 0;        //后窗除雾
+	// 空调状态都是on off
+	public int AIR_CONDITIONER_STATUS = -1; // 空调开关
+	public int AC_INDICATOR_STATUS = 0; // AC状态
+	public int CYCLE_INDICATOR = 0; // 内外循环指示 2不显示 0外循环 1内循环
+	public int LARGE_LANTERN_INDICATOR = 0; // 大auto
+	public int SMALL_LANTERN_INDICATOR = 0; // 小auto
+	public int DAUL_LAMP_INDICATOR = 0;
+	public int MAX_FRONT_LAMP_INDICATOR = 0; // 前窗除雾
+	public int REAR_LAMP_INDICATOR = 0; // 后窗除雾
 	// 风速及风向信息
-	public int UPWARD_AIR_INDICATOR = 0;       //吹前窗
-	public int PARALLEL_AIR_INDICATOR = 0;     //吹身
-	public int DOWNWARD_AIR_INDICATOR = 0;     //吹脚
-	public int AIRCON_SHOW_REQUEST = 0;           
-	public int AIR_RATE = 0;	             //风速        -1是自动 其他的都是数值
-	public float DRIVING_POSITON_TEMP = 0;   // 驾驶位置处温度	  low对应0  high对应255  -1 表示不显示
-	public float DEPUTY_DRIVING_POSITON_TEMP = 0; // 副驾驶位置处温度  low对应0  high对应255  -1 表示不显示
+	public int UPWARD_AIR_INDICATOR = 0; // 吹前窗
+	public int PARALLEL_AIR_INDICATOR = 0; // 吹身
+	public int DOWNWARD_AIR_INDICATOR = 0; // 吹脚
+	public int AIRCON_SHOW_REQUEST = 0;
+	public int AIR_RATE = 0; // 风速 -1是自动 其他的都是数值
+	public float DRIVING_POSITON_TEMP = 0; // 驾驶位置处温度 low对应0 high对应255 -1 表示不显示
+	public float DEPUTY_DRIVING_POSITON_TEMP = 0; // 副驾驶位置处温度 low对应0 high对应255
+													// -1 表示不显示
 	// 座椅加热信息
 
 	public int AQS_CIRCLE = -1;
 
-	
-	public int LEFT_SEAT_TEMP = -1;          //左座椅温度
-	public int RIGTHT_SEAT_TEMP = -1;       //右座椅温度
-	
+	public int LEFT_SEAT_TEMP = -1; // 左座椅温度
+	public int RIGTHT_SEAT_TEMP = -1; // 右座椅温度
 
 	/*
-	 * 后雷达信息                             0不显示  1最近（报警）      4最远
+	 * 后雷达信息 0不显示 1最近（报警） 4最远
 	 */
-	public int BACK_LEFT_DISTANCE = 0;                 //左后雷达
-	public int BACK_MIDDLE_LEFT_DISTANCE = 0;           //左后中雷达
-	public int BACK_MIDDLE_RIGHT_DISTANCE = 0;           //右后中雷达
-	public int BACK_RIGHT_DISTANCE = 0;                 //右后雷达
+	public int BACK_LEFT_DISTANCE = 0; // 左后雷达
+	public int BACK_MIDDLE_LEFT_DISTANCE = 0; // 左后中雷达
+	public int BACK_MIDDLE_RIGHT_DISTANCE = 0; // 右后中雷达
+	public int BACK_RIGHT_DISTANCE = 0; // 右后雷达
 
-	
 	/*
 	 * 前雷达信息
 	 */
-	public int FRONT_LEFT_DISTANCE = 0;                 //左前雷达
-	public int FRONT_MIDDLE_LEFT_DISTANCE = 0;         //左前中雷达
-	public int FRONT_MIDDLE_RIGHT_DISTANCE = 0;          //右前中雷达
-	public int FRONT_RIGHT_DISTANCE = 0;                //右前雷达
-	
+	public int FRONT_LEFT_DISTANCE = 0; // 左前雷达
+	public int FRONT_MIDDLE_LEFT_DISTANCE = 0; // 左前中雷达
+	public int FRONT_MIDDLE_RIGHT_DISTANCE = 0; // 右前中雷达
+	public int FRONT_RIGHT_DISTANCE = 0; // 右前雷达
 
 	/*
 	 * 基本信息
@@ -98,12 +92,12 @@ public class CanInfo implements Parcelable {
 	 */
 
 	public int PARKING_ASSIT_STATUS = 0;
-	public int RADAR_ALARM_STATUS = 1;                           //1为显示 0为不显示
+	public int RADAR_ALARM_STATUS = 1; // 1为显示 0为不显示
 	/*
 	 * 方向盘转角
 	 */
-	public int STERRING_WHELL_STATUS = 0;                    //方向盘转角           -540 到 540
-	                                                        //ESP>0  左转        ESP<0 右转             
+	public int STERRING_WHELL_STATUS = 0; // 方向盘转角 -540 到 540
+											// ESP>0 左转 ESP<0 右转
 	/*
 	 * 功放状态POWER_AMPLIFIER_DATA
 	 */
@@ -118,168 +112,223 @@ public class CanInfo implements Parcelable {
 	/*
 	 * 车身信息CAR_INFO_DATA
 	 */
-	public int SAFETY_BELT_STATUS = -1;                          //安全带状态     -1表示无此功能         0正常 1报警
-	public int DISINFECTON_STATUS = -1;                          //清洁液状态     -1表示无此功能
-	public int HANDBRAKE_STATUS = -1;                           //手刹状态          0正常 1报警
-	
-	public int HOOD_STATUS = 0;                                   //引擎盖    0关 1开
-	public int TRUNK_STATUS = 0;                                 //后盖报警
-	public int RIGHT_BACKDOOR_STATUS = 0;                       //右后门
-	public int LEFT_BACKDOOR_STATUS = 0;                       //左后门
-	public int RIGHT_FORONTDOOR_STATUS = 0;                   //右前门
-	public int LEFT_FORONTDOOR_STATUS = 0;                   //左前门
+	public int SAFETY_BELT_STATUS = -1; // 安全带状态 -1表示无此功能 0正常 1报警
+	public int DISINFECTON_STATUS = -1; // 清洁液状态 -1表示无此功能
+	public int HANDBRAKE_STATUS = -1; // 手刹状态 0正常 1报警
 
+	public int HOOD_STATUS = 0; // 引擎盖 0关 1开
+	public int TRUNK_STATUS = 0; // 后盖报警
+	public int RIGHT_BACKDOOR_STATUS = 0; // 右后门
+	public int LEFT_BACKDOOR_STATUS = 0; // 左后门
+	public int RIGHT_FORONTDOOR_STATUS = 0; // 右前门
+	public int LEFT_FORONTDOOR_STATUS = 0; // 左前门
 
-	public int ENGINE_SPEED = -1;                           //发动机转速 -1表示无此功能
-	public float DRIVING_SPEED = 0;                        //瞬时车速
-	public float BATTERY_VOLTAGE = -1;        //电池电量       -1表示无此功能 
-	public float OUTSIDE_TEMPERATURE = 0;   //窗外温度
-	public int DRIVING_DISTANCE = 0;             //行车里程
-	public int REMAIN_FUEL = -1;                  //剩余油量     -1表示无此功能 
+	public int ENGINE_SPEED = -1; // 发动机转速 -1表示无此功能
+	public float DRIVING_SPEED = 0; // 瞬时车速
+	public float BATTERY_VOLTAGE = -1; // 电池电量 -1表示无此功能
+	public float OUTSIDE_TEMPERATURE = 0; // 窗外温度
+	public int DRIVING_DISTANCE = 0; // 行车里程
+	public int REMAIN_FUEL = -1; // 剩余油量 -1表示无此功能
 
-	public int FUEL_WARING_SIGN = 0;           //没油报警
-	public int BATTERY_WARING_SIGN = 0;        //没电报警
-	
+	public int FUEL_WARING_SIGN = 0; // 没油报警
+	public int BATTERY_WARING_SIGN = 0; // 没电报警
+
 	/*-----------------------------------------------------*/
-	
-	public int RANGE=0;                         //续航里程
-	public int RANGE_UNIT=0;                         //续航里程单位
-	 
-	public int DISTANCE_UNIT=0;                 //行驶里程单位
-	public int CONSUMPTION_UNIT=0;                 //平均油耗单位
-	public int SPEED_UNIT=0;                 //平均车速单位
-	
-	public float DISTANCE_SINCE_START = 0;        //自启动行驶里程
-	public float CONSUMPTION_SINCE_START = 0;     //自启动平均油耗
-	public float SPEED_SINCE_START = 0;           //自启动平均车速
-	public int TRAVELLINGTIME_SINCE_START = 0;  //自启动行驶时间
-	
-	public float DISTANCE_SINCE_REFUELING = 0;     //自加油行驶里程
-	public float CONSUMPTION_SINCE_REFUELING = 0;   //自加油平均油耗
-	public float SPEED_SINCE_REFUELINGT = 0;           //自加油平均车速
-	public int TRAVELLINGTIME_SINCE_REFUELINGT = 0;  //自加油行驶时间
-	
-	public float DISTANCE_LONG_TERM = 0;           //长时间行驶里程
-	public float CONSUMPTION_LONG_TERM = 0;        //长时间平均油耗
-	public float SPEED_LONG_TERM = 0;           //长时间平均车速
-	public int TRAVELLINGTIME_LONG_TERM = 0;  //长时间行驶时间
-	
-	public String VEHICLE_NO = "";  //汽车编号 
-	
-	public int INSPECTON_DAYS_STATUS = 0;  //车况检查状态
-	public int INSPECTON_DAYS = 0;  //车况检查天数
-	
-	public int INSPECTON_DISTANCE_UNIT = 0;  //车况检查里程单位
-	public int INSPECTON_DISTANCE_STATUS = 0;  //车况检查里程状况
-	public int INSPECTON_DISTANCE = 0;  //车况检查里程
-	
-	public int OILCHANGE_SERVICE_DAYS_STATUS = 0;  //更换机油保养天数状况
-	public int OILCHANGE_SERVICE_DAYS = 0;  //更换机油保养天数
-	
-	public int OILCHANGE_SERVICE_DISTANCE_UNIT = 0;  //更换机油保养里程单位
-	public int OILCHANGE_SERVICE_DISTANCE_STATUS = 0;  //更换机油保养里程状况
-	public int OILCHANGE_SERVICE_DISTANCE = 0;  //更换机油保养里程
-	
-	public int TPMS_FL_TEMP=0;            //前左车轮温度
-	public int TPMS_FR_TEMP=0;            //前右车轮温度
-	public int TPMS_BL_TEMP=0;            //后左车轮温度
-	public int TPMS_BR_TEMP=0;            //后右车轮温度
-	
-	public float TPMS_FL_PRESSUE=0;      //前左车轮压力
-	public float TPMS_FR_PRESSUE=0;       //前右车轮压力
-	public float TPMS_BL_PRESSUE=0;       //后左车轮压力
-	public float TPMS_BR_PRESSUE=0;       //后右车轮压力
-	
+
+	/*-----------------油耗---------里程---------------------------*/
+	public float INSTANT_CONSUMPTION = 0; // 瞬时油耗
+	public int INSTANT_CONSUMPTION_UNIT = 0; // 瞬时油耗单位
+	public float CURRENT_AVERAGE_CONSUMPTION = 0; // 当前平均油耗
+	public float HISTORY_AVERAGE_CONSUMPTION = 0; // 历史平均油耗
+	public int CUR_HIS_AVERAGE_CONSUMPTION_UNIT = 0; // 当前/历史油耗单位
+
+	public float AVERAGE_CONSUMPTION = 0; // 平均油耗
+	public int AVERAGE_CONSUMPTION_UNIT = 0; // 平均油耗单位
+
+	public int CONSUMPTION_RANGE = 0; // 油耗量程
+	public float TRIP_A = 0; // trip A
+	public int TRIP_A_UNIT = 0; // trip A 单位
+
+	public float TRIP_A_1 = 0;
+	public float TRIP_A_1_AVERAGE_CONSUMPTION = 0;
+	public float TRIP_A_2 = 0;
+	public float TRIP_A_2_AVERAGE_CONSUMPTION = 0;
+	public float TRIP_A_3 = 0;
+	public float TRIP_A_3_AVERAGE_CONSUMPTION = 0;
+
+	public int RANGE = 0; // 续航里程
+	public int RANGE_UNIT = 0; // 续航里程单位
+
+	public int DISTANCE_UNIT = 0; // 行驶里程单位
+	public int CONSUMPTION_UNIT = 0; // 平均油耗单位
+	public int SPEED_UNIT = 0; // 平均车速单位
+
+	public float DISTANCE_SINCE_START = 0; // 自启动行驶里程
+	public float CONSUMPTION_SINCE_START = 0; // 自启动平均油耗
+	public float SPEED_SINCE_START = 0; // 自启动平均车速
+	public int TRAVELLINGTIME_SINCE_START = 0; // 自启动行驶时间
+
+	public float DISTANCE_SINCE_REFUELING = 0; // 自加油行驶里程
+	public float CONSUMPTION_SINCE_REFUELING = 0; // 自加油平均油耗
+	public float SPEED_SINCE_REFUELINGT = 0; // 自加油平均车速
+	public int TRAVELLINGTIME_SINCE_REFUELINGT = 0; // 自加油行驶时间
+
+	public float DISTANCE_LONG_TERM = 0; // 长时间行驶里程
+	public float CONSUMPTION_LONG_TERM = 0; // 长时间平均油耗
+	public float SPEED_LONG_TERM = 0; // 长时间平均车速
+	public int TRAVELLINGTIME_LONG_TERM = 0; // 长时间行驶时间
+
+	public String VEHICLE_NO = ""; // 汽车编号
+
+	public int INSPECTON_DAYS_STATUS = 0; // 车况检查状态
+	public int INSPECTON_DAYS = 0; // 车况检查天数
+
+	public int INSPECTON_DISTANCE_UNIT = 0; // 车况检查里程单位
+	public int INSPECTON_DISTANCE_STATUS = 0; // 车况检查里程状况
+	public int INSPECTON_DISTANCE = 0; // 车况检查里程
+
+	public int OILCHANGE_SERVICE_DAYS_STATUS = 0; // 更换机油保养天数状况
+	public int OILCHANGE_SERVICE_DAYS = 0; // 更换机油保养天数
+
+	public int OILCHANGE_SERVICE_DISTANCE_UNIT = 0; // 更换机油保养里程单位
+	public int OILCHANGE_SERVICE_DISTANCE_STATUS = 0; // 更换机油保养里程状况
+	public int OILCHANGE_SERVICE_DISTANCE = 0; // 更换机油保养里程
+
+	public int TPMS_FL_TEMP = 0; // 前左车轮温度
+	public int TPMS_FR_TEMP = 0; // 前右车轮温度
+	public int TPMS_BL_TEMP = 0; // 后左车轮温度
+	public int TPMS_BR_TEMP = 0; // 后右车轮温度
+
+	public float TPMS_FL_PRESSUE = 0; // 前左车轮压力
+	public float TPMS_FR_PRESSUE = 0; // 前右车轮压力
+	public float TPMS_BL_PRESSUE = 0; // 后左车轮压力
+	public float TPMS_BR_PRESSUE = 0; // 后右车轮压力
+
 	/*
-	 * 0x00：表示正常无警告。 
-	 * 0x01：红色警告，胎压出现异常。 
-	 * 0x02：红灯闪烁，胎压出现异常（漏气等）。 
+	 * 0x00：表示正常无警告。 0x01：红色警告，胎压出现异常。 0x02：红灯闪烁，胎压出现异常（漏气等）。
 	 * 0x03：黄色警告，胎压偏高或者偏低。 其它值保留
 	 */
-	
-	public int TPMS_FL_WARING=0;        //前左车轮报警
-	public int TPMS_FR_WARING=0;        //前右车轮报警
-	public int TPMS_BL_WARING=0;        //后左车轮报警
-	public int TPMS_BR_WARING=0;        //后右车轮报警
 
-	
-	public String VERSION = "";  //软件版本 
-	
-	public int IS_POWER_MIXING = 0;  //汽车动力类型  1为油电混合 
-	public int BATTERY_LEVEL = 0;  //电池电量  无单位
-	public int MOTOR_DRIVE_BATTERY=0;  //马达驱动电池
-	public int MOTOR_DRIVE_WHEEL=0;    //马达驱动车轮
-	public int ENGINE_DRIVE_MOTOR=0;   //发动机驱动马达
-	public int ENGINE_DRIVE_WHEEL=0;   //发动机驱动车轮
-	public int BATTERY_DRIVE_MOTOR=0;  //电池驱动马达
-	public int WHEEL_DRIVE_MOTOR=0;    //车轮驱动马达
-	
+	public int TPMS_FL_WARING = 0; // 前左车轮报警
+	public int TPMS_FR_WARING = 0; // 前右车轮报警
+	public int TPMS_BL_WARING = 0; // 后左车轮报警
+	public int TPMS_BR_WARING = 0; // 后右车轮报警
+
+	public String VERSION = ""; // 软件版本
+
+	public int IS_POWER_MIXING = 0; // 汽车动力类型 1为油电混合
+	public int BATTERY_LEVEL = 0; // 电池电量 无单位
+	public int MOTOR_DRIVE_BATTERY = 0; // 马达驱动电池
+	public int MOTOR_DRIVE_WHEEL = 0; // 马达驱动车轮
+	public int ENGINE_DRIVE_MOTOR = 0; // 发动机驱动马达
+	public int ENGINE_DRIVE_WHEEL = 0; // 发动机驱动车轮
+	public int BATTERY_DRIVE_MOTOR = 0; // 电池驱动马达
+	public int WHEEL_DRIVE_MOTOR = 0; // 车轮驱动马达
+
 	/*-----行程  油耗-----*/
-	public float TRIP_OIL_CONSUMPTION_0=0;
-	public float TRIP_OIL_CONSUMPTION_1=0;
-	public float TRIP_OIL_CONSUMPTION_2=0;
-	public float TRIP_OIL_CONSUMPTION_3=0;
-	public float TRIP_OIL_CONSUMPTION_4=0;
-	public float TRIP_OIL_CONSUMPTION_5=0;
-	public int TRIP_OIL_CONSUMPTION_UNIT=0; 
-	
+	public float TRIP_OIL_CONSUMPTION_0 = 0;
+	public float TRIP_OIL_CONSUMPTION_1 = 0;
+	public float TRIP_OIL_CONSUMPTION_2 = 0;
+	public float TRIP_OIL_CONSUMPTION_3 = 0;
+	public float TRIP_OIL_CONSUMPTION_4 = 0;
+	public float TRIP_OIL_CONSUMPTION_5 = 0;
+	public int TRIP_OIL_CONSUMPTION_UNIT = 0;
+
 	/*----历史  油耗-----*/
-	public float HISTORY_OIL_CONSUMPTION_1=0;
-	public float HISTORY_OIL_CONSUMPTION_2=0;
-	public float HISTORY_OIL_CONSUMPTION_3=0;
-	public float HISTORY_OIL_CONSUMPTION_4=0;
-	public float HISTORY_OIL_CONSUMPTION_5=0;
-	public float HISTORY_OIL_CONSUMPTION_6=0;
-	public float HISTORY_OIL_CONSUMPTION_7=0;
-	public float HISTORY_OIL_CONSUMPTION_8=0;
-	public float HISTORY_OIL_CONSUMPTION_9=0;
-	public float HISTORY_OIL_CONSUMPTION_10=0;
-	public float HISTORY_OIL_CONSUMPTION_11=0;
-	public float HISTORY_OIL_CONSUMPTION_12=0;
-	public float HISTORY_OIL_CONSUMPTION_13=0;
-	public float HISTORY_OIL_CONSUMPTION_14=0;
-	public float HISTORY_OIL_CONSUMPTION_15=0;
-	public int HISTORY_OIL_CONSUMPTION_UNIT=0;
-	
+	public float HISTORY_OIL_CONSUMPTION_1 = 0;
+	public float HISTORY_OIL_CONSUMPTION_2 = 0;
+	public float HISTORY_OIL_CONSUMPTION_3 = 0;
+	public float HISTORY_OIL_CONSUMPTION_4 = 0;
+	public float HISTORY_OIL_CONSUMPTION_5 = 0;
+	public float HISTORY_OIL_CONSUMPTION_6 = 0;
+	public float HISTORY_OIL_CONSUMPTION_7 = 0;
+	public float HISTORY_OIL_CONSUMPTION_8 = 0;
+	public float HISTORY_OIL_CONSUMPTION_9 = 0;
+	public float HISTORY_OIL_CONSUMPTION_10 = 0;
+	public float HISTORY_OIL_CONSUMPTION_11 = 0;
+	public float HISTORY_OIL_CONSUMPTION_12 = 0;
+	public float HISTORY_OIL_CONSUMPTION_13 = 0;
+	public float HISTORY_OIL_CONSUMPTION_14 = 0;
+	public float HISTORY_OIL_CONSUMPTION_15 = 0;
+	public int HISTORY_OIL_CONSUMPTION_UNIT = 0;
+
 	/*----雷达信息-----*/
-	public int IS_RADAR_SHOW=0;            //雷达显示
-	public int RADAR_WARING_VOLUME=0;      //报警音量
-	public int FRONT_RADAR_DISTANCE=0;     //前雷达距离
-	public int BACK_RADAR_DISTANCE=0;      //后雷达距离
-	
+	public int IS_RADAR_SHOW = 0; // 雷达显示
+	public int RADAR_WARING_VOLUME = 0; // 报警音量
+	public int FRONT_RADAR_DISTANCE = 0; // 前雷达距离
+	public int BACK_RADAR_DISTANCE = 0; // 后雷达距离
+
 	/*----功放-----*/
-	public int EQL_VOLUME=0;            //音量
-	public int LR_BALANCE=0;            //左右平衡
-	public int FB_BALANCE=0;           //前后平衡
-	public int BAS_VOLUME=0;            //低音值
-	public int MID_VOLUME=0;            //中音值
-	public int TRE_VOLUME=0;            //高音值
-	public int VOL_LINK_CARSPEED=0;     //音量与车速联动
-	public int DSP_SURROUND=0;          //DSP环绕
-	
+	public int EQL_VOLUME = 0; // 音量
+	public int LR_BALANCE = 0; // 左右平衡
+	public int FB_BALANCE = 0; // 前后平衡
+	public int BAS_VOLUME = 0; // 低音值
+	public int MID_VOLUME = 0; // 中音值
+	public int TRE_VOLUME = 0; // 高音值
+	public int VOL_LINK_CARSPEED = 0; // 音量与车速联动
+	public int DSP_SURROUND = 0; // DSP环绕
+
 	/*----落锁设定-----*/
-	public  int AUTO_LOCK_SETTING=0;    //自动落锁设定
-	public  int AUTO_OPEN_LOCK=0;       //智能解锁设定
-	public  int DRIVER_LINK_LOCK=0;    //驾驶员开门联动解锁设定
-	public  int AUTO_OPEN_LOCK_P=0;       //自动解锁设定（P档）
-	public  int AUTO_LOCK_P=0;    //自动落锁设定（P档）
-	public int AIRCON_WITH_AUTO=0;     //空调与auto键联动
-	public int CYCLE_WITH_AUTO=0;     //内外循环与auto键联动
+	public int AUTO_LOCK_SETTING = 0; // 自动落锁设定
+	public int AUTO_OPEN_LOCK = 0; // 智能解锁设定
+	public int DRIVER_LINK_LOCK = 0; // 驾驶员开门联动解锁设定
+	public int AUTO_OPEN_LOCK_P = 0; // 自动解锁设定（P档）
+	public int AUTO_LOCK_P = 0; // 自动落锁设定（P档）
+	public int AIRCON_WITH_AUTO = 0; // 空调与auto键联动
+	public int CYCLE_WITH_AUTO = 0; // 内外循环与auto键联动
 	/*----遥控设定-----*/
-	public int LAMP_WHEN_LOCK=0;      //上锁开锁时紧急灯响应
-	public int INTELLIGENT_LOCK=0;     //智能车锁和一键启动
-	public int TWICE_KEY_OPEN_LOCK=0;     //钥匙两次按下解锁设定
-	public int TWICE_BUTTON_OPEN_LOCK=0;     //按钮两次按下解锁设定
+	public int LAMP_WHEN_LOCK = 0; // 上锁开锁时紧急灯响应
+	public int INTELLIGENT_LOCK = 0; // 智能车锁和一键启动
+	public int TWICE_KEY_OPEN_LOCK = 0; // 钥匙两次按下解锁设定
+	public int TWICE_BUTTON_OPEN_LOCK = 0; // 按钮两次按下解锁设定
+
+	public int AUTOMATIC_CAP_SENSEITIVITY = 0; // 自动灯头灵敏度
+	public int AUTOMATIC_LAMP_CLOSE = 0; // 车内照明关闭时间
 	
-	public int AUTOMATIC_CAP_SENSEITIVITY=0;   //自动灯头灵敏度
-	public int  AUTOMATIC_LAMP_CLOSE=0;        //车内照明关闭时间
-	public int AIR_CONDITIONER_CONTROL = 0;         //空调是否有界面控制，如果为1则有，不需要自动弹框
+	public int REMOTELOCK_BEEP_SIGN = 0; // 遥控门锁蜂鸣器提示
+	public int REMOTELOCK_SIDELAMP_SIGN = 0; // 遥控门锁车边灯提示
+	public int SPEECH_WARING_VOLUME = 0; // 语音报警系统的音量
+	public int REMOTE_START_SYSTEM = 0; // 遥控启动系统
 	
-	public CanInfo(){
-		
+	/*----门锁设定状态-----*/
+	public int LOCK_PERSONAL_SETTING = 0;   // 离开锁止个性化设定
+	public int AUTO_LOCK_TIME = 0;   // 自动重锁时间
+	public int REMOTE_LOCK_SIGN = 0;   // 遥控落锁提示  
+
+	/*--  摄像头模式-----*/
+	public int BACK_CAMERA_MODE = 0; // 后摄像头模式
+	public int LEFT_CAMERA_SWITCH = 0; // 右摄像头开关
+	
+	/*--  灯光设定-----*/
+	public int WIPER_LINK_LAMP = 0; //雨刷和自动大灯联动个性化设定
+	public int AUTO_LIGHT_SENSEITIVITY = 0; //自动车内照明灵敏度
+	public int AUTO_LIGHTING_SENSEITIVITY = 0; //自动点灯灵敏度
+	public int FRONT_LAMP_OFF_TIME = 0; //前大灯自动熄灭时间
+	public int LAMP_TURN_DARK_TIME = 0; //车内灯光减光时间
+	
+	/*-----驾驶辅助系统设定--------*/
+	public int LANE_DEPARTURE = 0; //车道偏离辅助系统设定
+	public int PAUSE_LKAS_SIGN = 0; //暂停LKAS提示音
+	public int DETECT_FRONT_CAR = 0; //ACC前车探知提示音
+	public int FRONT_DANGER_WAIRNG_DISTANCE = 0; //设定前方危险警告距离
+
+	/*-----显示屏状态--------*/
+	public int RATATIONAL_RATE = 0; //转速提示
+	public int MSG_NOTIFICATION = 0; //新消息提醒
+	public int ENGINEE_AUTO_CONTROL = 0; //发动机节能自动启停提示
+	public int ENERGY_BACKGROUND_LIGHT = 0; //节能模式的背景照明
+	public int ADJUST_WARING_VOLUME = 0;   //调整报警音量  
+	
+	public int SWITCH_TRIPB_SETTING=0;     //里程B重设条件的切换
+	public int SWITCH_TRIPA_SETTING=0;     //里程A重设条件的切换
+	public int ADJUST_OUTSIDE_TEMP=0;     //调节外部气温显示
+	            
+	
+	public int AIR_CONDITIONER_CONTROL = 0; // 空调是否有界面控制，如果为1则有，不需要自动弹框
+
+	public CanInfo() {
+
 	}
-
-
 
 	@Override
 	public int describeContents() {
@@ -472,8 +521,6 @@ public class CanInfo implements Parcelable {
 		FUEL_WARING_SIGN = in.readInt();
 		BATTERY_WARING_SIGN = in.readInt();
 	}
-
-
 
 	@Override
 	public String toString() {

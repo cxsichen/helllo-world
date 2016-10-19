@@ -87,7 +87,6 @@ public class CarSettingAcitivity extends BaseActivity {
 	private void initData() {
 		// TODO Auto-generated method stub
 		fragments = new ArrayList<BaseFragment>();
-		Log.i("cxs","=======canName + setting_items===="+canName + "_setting_items");
 		try {
 			Resources res = getResources();
 			int itemsId = getResources().getIdentifier(canName + "_setting_items",
@@ -97,14 +96,12 @@ public class CarSettingAcitivity extends BaseActivity {
 			int fragmentId = getResources().getIdentifier(
 					canName + "_setting_fragment", "array", getPackageName());
 			mFragmentTitles = res.getStringArray(fragmentId);
-			Log.i("cxs","====mFragmentTitles========"+mFragmentTitles.length);
 			for (int i = 0; i < mFragmentTitles.length && i < mTitles.length; i++) {
 				try {
 					Class classManager = Class.forName(mFragmentTitles[i]);
 					BaseFragment mFragment = (BaseFragment) classManager
 							.newInstance();
 					fragments.add(mFragment);
-					Log.i("cxs","====mFragment========"+mFragment);
 					mFragment.setIndex(i, CarSettingAcitivity.this);
 
 				} catch (Exception e) {

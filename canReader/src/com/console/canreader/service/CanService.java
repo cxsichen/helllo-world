@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.InvalidParameterException;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
@@ -87,11 +88,13 @@ public class CanService extends Service {
 					if (info.getCanInfo() != null)
 						dealCanInfo();
 				break;
+			case Contacts.MSG_MSG_CYCLE:
+				sendCycleMsg();
+				break;
 			default:
 				break;
 			}
 		}
-
 	};
 
 	// 处理接收到的Can信息
@@ -284,6 +287,8 @@ public class CanService extends Service {
 			// acc on清空原先的数据 重新建立连接
 			BeanFactory.setInfoEmpty();
 			connectCanDevice();
+		} else {
+			mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
 		}
 	}
 
@@ -376,6 +381,7 @@ public class CanService extends Service {
 				}
 			}
 		}, 1000 * 10);
+		mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
 	}
 
 	private class SendDataToSpThread extends Thread {
@@ -794,16 +800,46 @@ public class CanService extends Service {
 	}
 
 	/**
+	 * 每分钟循环发送
+	 */
+
+	private void sendCycleMsg() {
+		// TODO Auto-generated method stub
+		switch (canFirtName) {
+		case Contacts.CANFISRTNAMEGROUP.RAISE: // 睿志诚
+			break;
+		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
+			switch (canName) {
+			case Contacts.CANNAMEGROUP.SSHonda:
+			case Contacts.CANNAMEGROUP.SSHondaSY:
+				Calendar c = Calendar.getInstance();
+				int hour = c.get(Calendar.HOUR_OF_DAY);
+				int minute = c.get(Calendar.MINUTE);
+				int second = c.get(Calendar.SECOND);
+				writeCanPort(BytesUtil.addSSCheckBit("5AA503B5"
+						+ BytesUtil.changIntHex(hour)
+						+ BytesUtil.changIntHex(minute)
+						+ BytesUtil.changIntHex(second))); // 本田同步时间
+				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE, 1000 * 60);
+				break;				
+			default:
+				break;
+			}
+			break;
+		default:
+			break;
+		}
+		
+	}
+
+	/**
 	 * 连接Can设备需要发送的初始化命令
 	 */
-	public static final String  SSToyotaBD = "SSToyotaBD";               
-	public static final String  SSToyotaRZ = "SSToyotaRZ";  
-	public static final String  SSToyotaRAV4 = "SSToyotaRAV4";  
-	public static final String  SSToyotaKMR = "SSToyotaKMR"; 
-	public static final String  SSToyotaKLL = "SSToyotaKLL"; 
-	
+
 	private void connectCanDevice() {
 		// TODO Auto-generated method stub
+		mHandler.sendEmptyMessage(Contacts.MSG_MSG_CYCLE);
 		switch (canFirtName) {
 		case Contacts.CANFISRTNAMEGROUP.RAISE: // 睿志诚
 			if (!canName.equals(Contacts.CANNAMEGROUP.RZCBESTURNx80)
@@ -816,16 +852,17 @@ public class CanService extends Service {
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			switch (canName) {
 			case Contacts.CANNAMEGROUP.SSToyotaBD:
-				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0101")); //丰田 霸道  
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0101")); // 丰田 霸道
 				break;
 			case Contacts.CANNAMEGROUP.SSToyotaRZ:
-				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0102")); //丰田 锐志
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0102")); // 丰田 锐志
 				break;
 			case Contacts.CANNAMEGROUP.SSToyotaRAV4:
-				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0103")); //丰田 RAV4
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0103")); // 丰田
+																		// RAV4
 				break;
 			case Contacts.CANNAMEGROUP.SSToyotaKMR:
-				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0104")); //丰田 凯美瑞
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0104")); // 丰田 凯美瑞
 				break;
 			case Contacts.CANNAMEGROUP.SSToyotaKLL:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0105")); // 丰田 卡罗拉

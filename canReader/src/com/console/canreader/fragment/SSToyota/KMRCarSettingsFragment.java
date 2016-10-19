@@ -52,7 +52,11 @@ public class KMRCarSettingsFragment extends BaseFragment {
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
 			if (settingsFragment != null) {
-				settingsFragment.syncView(mCaninfo);
+				try {
+					settingsFragment.syncView(mCaninfo);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}			
 			}
 		}
 
@@ -128,6 +132,11 @@ public class KMRCarSettingsFragment extends BaseFragment {
 			mAutoCapPref.setOnPreferenceChangeListener(this);
 			p12= (ListPreference) findPreference("AUTOMATIC_LAMP_CLOSE");
 			p12.setOnPreferenceChangeListener(this);
+			
+			if(settingActivity!=null){
+				if(settingActivity.getCanInfo()!=null)
+					syncView(settingActivity.getCanInfo());
+			}
 		}
 
 		public void syncView(CanInfo mCaninfo) {

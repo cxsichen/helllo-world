@@ -71,7 +71,8 @@ public class BytesUtil {
 	public static byte intToByte(int i) {
 		return Integer.valueOf(Integer.toHexString(i), 16).byteValue();
 	}
-    //睿志诚数据添加数据位
+
+	// 睿志诚数据添加数据位
 	public static String addRZCCheckBit(String str) {
 		byte[] b = hexStringToBytes(str);
 		byte sum = 0;
@@ -79,35 +80,45 @@ public class BytesUtil {
 		for (int i = 1; i < b.length; i++) {
 			sum += b[i];
 		}
-		sum = (byte) ((sum)^0xff);
+		sum = (byte) ((sum) ^ 0xff);
 		// String tmp = Integer.toHexString(255 - sum).toUpperCase();
 		String tmp = Integer.toHexString(sum);
 		if (tmp.length() > 2) {
-			tmp = tmp.substring(tmp.length()-2,tmp.length());
-		}else if(tmp.length()==1){
-			tmp="0"+tmp;
+			tmp = tmp.substring(tmp.length() - 2, tmp.length());
+		} else if (tmp.length() == 1) {
+			tmp = "0" + tmp;
 		}
 		return str + tmp;
 	}
-	
-	//尚摄数据添加数据位
-		public static String addSSCheckBit(String str) {
-			byte[] b = hexStringToBytes(str);
-			int sum = 0;
 
-			for (int i = 2; i < b.length; i++) {
-				sum = sum + b[i];
-			}
-			sum = (byte) (((byte)sum&(byte)0xFF)-1);
-			// String tmp = Integer.toHexString(255 - sum).toUpperCase();
-			String tmp = Integer.toHexString(sum).toUpperCase();
-			if (tmp.length() > 2) {
-				tmp = tmp.substring(tmp.length()-2,tmp.length());
-			}else if(tmp.length()==1){
-				tmp="0"+tmp;
-			}
-			return str + tmp;
+	// 尚摄数据添加数据位
+	public static String addSSCheckBit(String str) {
+		byte[] b = hexStringToBytes(str);
+		int sum = 0;
+
+		for (int i = 2; i < b.length; i++) {
+			sum = sum + b[i];
 		}
+		sum = (byte) (((byte) sum & (byte) 0xFF) - 1);
+		// String tmp = Integer.toHexString(255 - sum).toUpperCase();
+		String tmp = Integer.toHexString(sum).toUpperCase();
+		if (tmp.length() > 2) {
+			tmp = tmp.substring(tmp.length() - 2, tmp.length());
+		} else if (tmp.length() == 1) {
+			tmp = "0" + tmp;
+		}
+		return str + tmp;
+	}
+
+	public static String changIntHex(int sum) {
+		String tmp = Integer.toHexString(sum).toUpperCase();
+		if (tmp.length() > 2) {
+			tmp = tmp.substring(tmp.length() - 2, tmp.length());
+		} else if (tmp.length() == 1) {
+			tmp = "0" + tmp;
+		}
+		return tmp;
+	}
 
 	public static String makeEfMsg(int tre, int bas, int ver, int hon) {
 		StringBuilder stringBuilder = new StringBuilder("F8");
@@ -137,5 +148,5 @@ public class BytesUtil {
 
 		return stringBuilder.toString();
 	}
-	
+
 }

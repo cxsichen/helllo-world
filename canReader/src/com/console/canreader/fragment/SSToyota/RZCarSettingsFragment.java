@@ -51,7 +51,11 @@ public class RZCarSettingsFragment extends BaseFragment {
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
 			if (settingsFragment != null) {
-				settingsFragment.syncView(mCaninfo);
+				try {
+					settingsFragment.syncView(mCaninfo);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}				
 			}
 		}
 
@@ -84,6 +88,11 @@ public class RZCarSettingsFragment extends BaseFragment {
 			addPreferencesFromResource(R.xml.sstoyotarz_setting_prefs);
 			p1 = (SwitchPreference) findPreference("AUTO_OPEN_LOCK");
 			p1.setOnPreferenceChangeListener(this);
+			
+			if(oilEleActivity!=null){
+				if(oilEleActivity.getCanInfo()!=null)
+					syncView(oilEleActivity.getCanInfo());
+			}
 		}
 
 		public void syncView(CanInfo mCaninfo) {

@@ -127,6 +127,26 @@
         <View 
             android:id="@+id/mMenuPanoramaDivider" 
             style="@style/mainMenuDivider" />
+        
+        
+        <RelativeLayout 
+            android:id="@+id/mMenuTpmsLayout"
+            style="@style/mainMenuRelativeLayout" >
+
+            <ImageView
+                android:id="@+id/icMenuTpms"
+                style="@style/mainMenuIcon"
+                android:src="@drawable/ic_menu_tpms" />
+
+            <TextView
+                style="@style/mainMenuLabel"
+                android:layout_below="@+id/icMenuTpms"
+                android:text="胎压检测" />
+        </RelativeLayout>
+        
+        <View 
+            android:id="@+id/mMenuTpmsDivider" 
+            style="@style/mainMenuDivider" />
 
         <RelativeLayout 
             android:id="@+id/mMenuAboutLayout"

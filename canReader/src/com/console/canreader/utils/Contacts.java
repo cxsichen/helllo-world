@@ -69,6 +69,8 @@ public class Contacts {
 		public static final String  SSToyotaKLL = "SSToyotaKLL";           //卡罗拉
 		//丰田
 		public static final String  SSHonda = "SSHonda";                     //本田
+		public static final String  SSHondaSY = "SSHondaSY";                     //16款思域
+		public static final String  SSHondaLP = "SSHondaLP";                     //本田凌派
 		/*--------------尚摄-----------*/
 	}
 
@@ -150,6 +152,7 @@ public class Contacts {
 	public static final int MSG_ONCE_GET_MSG = 0x0b;
 	public static final int MSG_SERVICE_CONNECTED = 0x0c;
 	public static final int MSG_SERVICE_DISCONNECTED = 0x0d;
+	public static final int MSG_MSG_CYCLE= 0x10;
 	
 	public static final int MSG_DIGLOG_HIDE = 0x0F;
 

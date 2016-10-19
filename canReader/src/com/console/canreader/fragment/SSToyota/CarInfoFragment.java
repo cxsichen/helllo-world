@@ -72,7 +72,11 @@ public class CarInfoFragment extends BaseFragment {
 		if (mCaninfo != null) {
 			if (mCaninfo.CHANGE_STATUS == 10) {
 				for (ViewPageFactory mViewPageFactory : viewsFactory) {
-					mViewPageFactory.showView(mCaninfo);
+					try {
+						mViewPageFactory.showView(mCaninfo);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}				
 				}
 			}
 		}

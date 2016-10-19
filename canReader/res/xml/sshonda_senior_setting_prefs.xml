@@ -1,0 +1,107 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="灯光设定" >
+        <SwitchPreference
+            android:key="WIPER_LINK_LAMP"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="雨刷和自动大灯联动个性化设定" />
+
+        <ListPreference
+            android:entries="@array/lamp_sensitivity_entries"
+            android:entryValues="@array/lamp_sensitivity_values"
+            android:key="AUTO_LIGHT_SENSEITIVITY"
+            android:persistent="false"
+            android:title="自动车内照明灵敏度" />
+        <ListPreference
+            android:entries="@array/lamp_sensitivity_entries"
+            android:entryValues="@array/lamp_sensitivity_values"
+            android:key="AUTO_LIGHTING_SENSEITIVITY"
+            android:persistent="false"
+            android:title="自动点灯灵敏度" />
+        <ListPreference
+            android:entries="@array/lamp_off_time_entries"
+            android:entryValues="@array/lamp_off_time_values"
+            android:key="FRONT_LAMP_OFF_TIME"
+            android:persistent="false"
+            android:title="前大灯自动熄灭时间" />
+        <ListPreference
+            android:entries="@array/lamp_dark_time_entries"
+            android:entryValues="@array/lamp_dark_time_values"
+            android:key="LAMP_TURN_DARK_TIME"
+            android:persistent="false"
+            android:title="车内灯光减光时间" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="遥控设定" >
+        <SwitchPreference
+            android:key="REMOTELOCK_BEEP_SIGN"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="遥控门锁蜂鸣器提示" />
+        <SwitchPreference
+            android:key="REMOTELOCK_SIDELAMP_SIGN"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="遥控门锁车边灯提示" />
+        <SwitchPreference
+            android:key="SPEECH_WARING_VOLUME"
+            android:summaryOff="小"
+            android:summaryOn="大"
+            android:title="语音报警系统的音量" />
+        <SwitchPreference
+            android:key="REMOTE_START_SYSTEM"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="遥控启动系统" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="门锁设定" >
+        <SwitchPreference
+            android:key="LOCK_PERSONAL_SETTING"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="离开锁止个性化设定" />
+
+        <ListPreference
+            android:entries="@array/auto_lock_time_entries"
+            android:entryValues="@array/auto_lock_time_values"
+            android:key="AUTO_LOCK_TIME"
+            android:persistent="false"
+            android:title="自动重锁时间" />
+
+        <SwitchPreference
+            android:key="REMOTE_LOCK_SIGN"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="遥控落锁提示" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="驾驶辅助系统设定" >
+        <ListPreference
+            android:entries="@array/lane_dep_entries"
+            android:entryValues="@array/lane_dep_values"
+            android:key="LANE_DEPARTURE"
+            android:persistent="false"
+            android:title="车道偏离辅助系统设定" />
+        
+        <SwitchPreference
+            android:key="PAUSE_LKAS_SIGN"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="暂停LKAS提示音" />
+        
+        <SwitchPreference
+            android:key="DETECT_FRONT_CAR"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="ACC前车探知提示音" />
+        
+        <ListPreference
+            android:entries="@array/danger_distance_entries"
+            android:entryValues="@array/danger_distance_values"
+            android:key="FRONT_DANGER_WAIRNG_DISTANCE"
+            android:persistent="false"
+            android:title="设定前方危险警告距离" />
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>

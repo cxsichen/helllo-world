@@ -53,7 +53,9 @@ public class BaseActivity extends FragmentActivity {
 	}
 	
 	public CanInfo getCanInfo() throws RemoteException{
-		CanInfo tempInfo = mISpService.getCanInfo();
+		CanInfo tempInfo=null;
+		if(mISpService!=null)
+			tempInfo = mISpService.getCanInfo();
 		return tempInfo;
 	}
 
@@ -222,7 +224,6 @@ public class BaseActivity extends FragmentActivity {
 	public void sendMsg(String msg) {
 		try {
 			if (mISpService != null) {
-				Log.i("cxs","=====canFirtName======"+canFirtName);
 				switch (canFirtName) {
 				case Contacts.CANFISRTNAMEGROUP.RAISE:
 					mISpService.sendDataToSp(BytesUtil.addRZCCheckBit(msg));

@@ -52,7 +52,11 @@ public class RAV4CarSettingsFragment extends BaseFragment {
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
 			if (settingsFragment != null) {
-				settingsFragment.syncView(mCaninfo);
+				try {
+					settingsFragment.syncView(mCaninfo);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}		
 			}
 		}
 
@@ -97,6 +101,11 @@ public class RAV4CarSettingsFragment extends BaseFragment {
 			mLampLockPref.setOnPreferenceChangeListener(this);
 			mIntelligentPref.setOnPreferenceChangeListener(this);
 			mAutoCapPref.setOnPreferenceChangeListener(this);
+			
+			if(settingActivity!=null){
+				if(settingActivity.getCanInfo()!=null)
+					syncView(settingActivity.getCanInfo());
+			}
 		}
 
 		public void syncView(CanInfo mCaninfo) {

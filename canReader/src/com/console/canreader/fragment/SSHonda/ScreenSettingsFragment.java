@@ -1,4 +1,4 @@
-package com.console.canreader.fragment.SSToyota;
+package com.console.canreader.fragment.SSHonda;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -19,10 +19,11 @@ import android.widget.TextView;
 import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.activity.Toyota.OilEleActivity;
+import com.console.canreader.activity.Toyota.SettingActivity;
 import com.console.canreader.activity.Toyota.OilEleActivity.SettingsFragment;
 import com.console.canreader.service.CanInfo;
 
-public class CarSettingsFragment extends BaseFragment {
+public class ScreenSettingsFragment extends BaseFragment {
 
 	private TextView version;
 	SettingsFragment settingsFragment;
@@ -55,10 +56,9 @@ public class CarSettingsFragment extends BaseFragment {
 					settingsFragment.syncView(mCaninfo);
 				} catch (Exception e) {
 					// TODO: handle exception
-				}			
+				}
 			}
 		}
-
 	}
 
 	@Override
@@ -72,67 +72,101 @@ public class CarSettingsFragment extends BaseFragment {
 	}
 
 	public class SettingsFragment extends PreferenceFragment implements
-	OnPreferenceChangeListener {
+			OnPreferenceChangeListener {
 
-		SwitchPreference p1;
-		CarSettingsFragment oilEleActivity;
+		private SwitchPreference p1;
+		private ListPreference p2;
 
-		public SettingsFragment(CarSettingsFragment oilEleActivity) {
-			this.oilEleActivity = oilEleActivity;
+		ScreenSettingsFragment settingActivity;
+		
+		private Boolean ISRESUME=false;
+
+		public SettingsFragment(ScreenSettingsFragment settingActivity) {
+			this.settingActivity = settingActivity;
 		}
 
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.sstoyotarz_setting_prefs);
-			p1 = (SwitchPreference) findPreference("AUTO_OPEN_LOCK");
+			addPreferencesFromResource(R.xml.sshonda_screen_setting_prefs);
+
+			p1 = (SwitchPreference) findPreference("LEFT_CAMERA_SWITCH");
 			p1.setOnPreferenceChangeListener(this);
+
+			p2 = (ListPreference) findPreference("BACK_CAMERA_MODE");
+			p2.setOnPreferenceChangeListener(this);
 			
-			if(oilEleActivity!=null){
-				if(oilEleActivity.getCanInfo()!=null)
-					syncView(oilEleActivity.getCanInfo());
+			if(settingActivity!=null){
+				if(settingActivity.getCanInfo()!=null)
+					syncView(settingActivity.getCanInfo());
 			}
 		}
+		
 
 		public void syncView(CanInfo mCaninfo) {
-			p1.setChecked(mCaninfo.AUTO_OPEN_LOCK==0);
+			p1.setChecked(mCaninfo.LEFT_CAMERA_SWITCH == 1);
+			p2.setValue(String.valueOf(mCaninfo.BACK_CAMERA_MODE - 1));
+			updatePreferenceDescription(p2, mCaninfo.BACK_CAMERA_MODE - 1);
 		}
-		
-		private void updatePreferenceDescription(ListPreference preference,int currentTimeout) {
-	        String summary;
-	            final CharSequence[] entries = preference.getEntries();
-	            final CharSequence[] values = preference.getEntryValues();
-	            if (entries == null || entries.length == 0) {
-	                summary = "";
-	            } else {
-	                int best = 0;
-	                for (int i = 0; i < values.length; i++) {
-	                    int timeout = Integer.parseInt(values[i].toString());
-	                    if (currentTimeout == timeout) {
-	                        best = i;
-	                        break;
-	                    }
-	                }
-		            if (entries.length != 0) {
-		                summary =  entries[best].toString();
-		            } else {
-		                summary = "";
-		            }
 
-	            }
-	        preference.setSummary(summary);
-	    }
+		private void updatePreferenceDescription(ListPreference preference,
+				int currentTimeout) {
+			String summary;
+			final CharSequence[] entries = preference.getEntries();
+			final CharSequence[] values = preference.getEntryValues();
+			if (entries == null || entries.length == 0) {
+				summary = "";
+			} else {
+				int best = 0;
+				for (int i = 0; i < values.length; i++) {
+					int timeout = Integer.parseInt(values[i].toString());
+					if (currentTimeout == timeout) {
+						best = i;
+						break;
+					}
+				}
+				if (entries.length != 0) {
+					summary = entries[best].toString();
+				} else {
+					summary = "";
+				}
+
+			}
+			preference.setSummary(summary);
+		}
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			// TODO Auto-generated method stub
 			final String key = preference.getKey();
 			switch (key) {
-			case "AUTO_OPEN_LOCK":
-				if (oilEleActivity != null) {
-					Log.i("cxs1","====onPreferenceChange=========="+key);
-					oilEleActivity.sendMsg("5AA5036A0102"+((boolean) newValue ?"00":"01"));
+			case "LEFT_CAMERA_SWITCH":
+				if (settingActivity != null) {
+					settingActivity.sendMsg("5AA502F207"
+							+ ((boolean) newValue ? "01" : "00"));
+				}
+				break;
+			case "BACK_CAMERA_MODE":
+				if (settingActivity != null) {
+					try {
+						int value = Integer.parseInt((String) newValue);
+						switch (value) {
+						case 0:
+							settingActivity.sendMsg("5AA502F201FF");
+							break;
+						case 1:
+							settingActivity.sendMsg("5AA502F202FF");
+							break;
+						case 2:
+							settingActivity.sendMsg("5AA502F203FF");
+							break;
+						default:
+							break;
+						}
+						updatePreferenceDescription(p2, value);
+					} catch (NumberFormatException e) {
+					}
 				}
 				break;
 			default:
@@ -140,7 +174,5 @@ public class CarSettingsFragment extends BaseFragment {
 			}
 			return true;
 		}
-
 	}
-
 }
