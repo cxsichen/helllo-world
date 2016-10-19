@@ -7,6 +7,13 @@ import android.util.Log;
 
 public class PreferenceUtil {
 
+	private final static String CARTYPE = "carType";
+	private final static String CANTYPE = "canType";
+	static String[] CanTypeGroup={"RZC","SS"};
+	static String[] CarTypeGroup={"Volkswagen","VolkswagenGolf","Honda","Toyota","ToyotaRZ",
+			"GE","DFFG","Peugeot","NISSAN","Trumpche",
+			"FOCUS","HondaCRV","HondaDA","BuickGM","EDGE","Roewe360","MGGS",
+			"BESTURNx80","CFHCm3"};
 	public static String getCANName(Context context) {
 		String mode = "";
 		try {
@@ -16,10 +23,24 @@ public class PreferenceUtil {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		if(mode==null){
-			mode = "RZCVolkswagen";
+		if(mode==""||mode==null){
+			mode =initCanName(context);
 		}
 		return mode;
+	}
+	
+	private static String  initCanName(Context context){
+		String temp="RZCVolkswagen";
+		int carTypeValue = Settings.System.getInt(context.getContentResolver(), CARTYPE, 0);
+		int canTypeValue = Settings.System.getInt(context.getContentResolver(), CANTYPE, 0);
+		try {
+			temp=CanTypeGroup[canTypeValue]+CarTypeGroup[carTypeValue];
+			Settings.System.putString(context.getContentResolver(),
+					Contacts.CAN_CLASS_NAME,temp);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}		
+		return temp;
 	}
 
 	public static String getFirstTwoString(Context context, String str) {
