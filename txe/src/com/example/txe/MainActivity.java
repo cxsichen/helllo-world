@@ -11,13 +11,10 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;
 
-
-
-
-
-
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -83,24 +80,51 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_import:
-			Boolean ImportResult=false;
+			Boolean ImportResult = false;
 			try {
-				ImportResult=xmlUtils.getSettings(MainActivity.this);
+				ImportResult = xmlUtils.getSettings(MainActivity.this);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				ImportResult=false;
+				ImportResult = false;
 			}
-			Toast.makeText(getApplication(), ImportResult?"导入成功":"导入失败", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplication(), ImportResult ? "导入成功" : "导入失败",
+					Toast.LENGTH_SHORT).show();
 			return true;
 		case R.id.action_export:
-			Boolean ExportResult=xmlUtils.createADXML(MainActivity.this);
-			Toast.makeText(getApplication(), ExportResult?"导出成功 \n 保存路径 "+"/sdcard/console_setting.xml":"导出失败", Toast.LENGTH_SHORT).show();
+			new AlertDialog.Builder(this)
+					.setTitle("提示")
+					.setMessage("是否导出配置到" + xmlUtils.DIR_PATH)
+					.setNegativeButton("取消",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// TODO Auto-generated method stub
+
+								}
+
+							})
+					.setPositiveButton("确定",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// TODO Auto-generated method stub
+									Boolean ExportResult = xmlUtils.createADXML(MainActivity.this);
+									Toast.makeText(
+											getApplication(),
+											ExportResult ? "导出成功 \n 保存路径 "
+													+ "/sdcard/console_setting.xml" : "导出失败",
+											Toast.LENGTH_SHORT).show();
+								}
+							}).show();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
-	
 }
