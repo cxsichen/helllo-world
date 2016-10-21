@@ -64,8 +64,6 @@ public class dataControl {
 			switch (msg.what) {
 			case 1:
 				// dealwithPacket(Volkswagen)msg.obj);
-				Log.i("cxs", "==cxs==hahah===Volkswagen========="
-						+ ((CanInfo) msg.obj).toString());
 				updateView((CanInfo) msg.obj);
 				break;
 			default:
