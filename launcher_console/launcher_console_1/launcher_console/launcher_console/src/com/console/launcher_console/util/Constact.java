@@ -32,5 +32,11 @@ public interface Constact {
     public final static String FACTORY_SOUND="factory_sound";
     public final static int DEFAULT_BRIGHTNESS = 110;
     public final static boolean DEBUG = true;
-
+    public static final String RADIO_FREQ_ACTION = "action.colink.startFM";
+    public static final String SEND_APP_CHANGE = "com.console.sendAppChange";
+    public static final String SEND_BACK_CAR_OFF = "com.console.SEND_BACK_CAR_OFF";
+	public static final String TEMP_HIGH_KEYEVENT = "android.intent.action.TEMP_HIGH_KEYEVENT";
+	public static final String TEMP_NORMAL_KEYEVENT = "android.intent.action.TEMP_NORMAL_KEYEVENT";
+	public static final String BOOT_COMPLETED_ACTION = "android.intent.action.BOOT_COMPLETED";
+	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
 }

@@ -19,11 +19,15 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Service;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -40,13 +44,14 @@ import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 public class SerialPortControlService extends Service {
 
 	private ISerialPortService mISpService;
 	private KWAPI mKwapi;
-	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
+	
 
 	int volumeValue;
 	/**
@@ -72,10 +77,7 @@ public class SerialPortControlService extends Service {
 
 	private final int[] Modes = { 0x06, 0x04, 0x05, 0x0B, 0X09, 0x11, 0x0A,
 			0x0E };
-	private static final String BOOT_COMPLETED_ACTION = "android.intent.action.BOOT_COMPLETED";
-	private static final String RADIO_FREQ_ACTION = "action.colink.startFM";
-	private static final String SEND_APP_CHANGE = "com.console.sendAppChange";
-	private static final String SEND_BACK_CAR_OFF = "com.console.SEND_BACK_CAR_OFF";
+	
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -145,8 +147,6 @@ public class SerialPortControlService extends Service {
 			case Contacts.MSG_BACK_CAR: // 处理倒车事件
 				// if (!getTopActivity(SerialPortControlService.this).equals(
 				// "com.console.parking")) {
-				Log.i("cxs", "--------MSG_BACK_CAR_2222222222222------parkingState-------"
-						+ isAcconOver);
 				if (isAcconOver) {
 					Log.i("cxs", "=====start parking ====now =========");
 					Intent intent = new Intent();
@@ -169,6 +169,7 @@ public class SerialPortControlService extends Service {
 				case "cn.coogo.hardware.service":
 				case "com.android.stk":
 				case "com.android.settings":
+				case "com.console.nodisturb":
 					break;
 				case "com.console.radio":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 0) {
@@ -312,8 +313,7 @@ public class SerialPortControlService extends Service {
 				Log.i("cxs", "--------MSG_ACCON_MSG------mode---0----" + mode);
 				sendMsg("F5020000" + BytesUtil.intToHexString(mode));
 				startModeActivty(mode);
-				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_2,
-						8000);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_2, 8000);
 				break;
 			case Contacts.MSG_ACCON_MSG_2:
 				int parkingState = android.provider.Settings.System.getInt(
@@ -327,10 +327,11 @@ public class SerialPortControlService extends Service {
 					intent.addCategory(Intent.CATEGORY_DEFAULT);
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
-				}			
+				}
 				isAcconOver = true;
-				Log.i("cxs", "--------MSG_ACCON_MSG_2222222222222------parkingState-------"
-						+ parkingState);
+				Log.i("cxs",
+						"--------MSG_ACCON_MSG_2222222222222------parkingState-------"
+								+ parkingState);
 				break;
 			default:
 				break;
@@ -456,7 +457,7 @@ public class SerialPortControlService extends Service {
 								getContentResolver(), Constact.BACK_CAR, 0);
 
 						Intent intent = new Intent();
-						intent.setAction(SEND_BACK_CAR_OFF);
+						intent.setAction(Constact.SEND_BACK_CAR_OFF);
 						sendBroadcast(intent);
 					}
 				} else {
@@ -537,8 +538,6 @@ public class SerialPortControlService extends Service {
 			try {
 				int value = Settings.System.getInt(getContentResolver(),
 						Settings.System.SCREEN_BRIGHTNESS, 0);
-				Log.i("cxs", "=========SCREEN_BRIGHTNESS=====value=========="
-						+ value);
 				if (value > Constact.DEFAULT_BRIGHTNESS) {
 					Settings.System.putInt(getContentResolver(),
 							Constact.USER_SAVE_BRIGHTNESS, value);
@@ -555,9 +554,6 @@ public class SerialPortControlService extends Service {
 			try {
 				int value = Settings.System.getInt(getContentResolver(),
 						Constact.USER_SAVE_BRIGHTNESS, 0);
-				Log.i("cxs",
-						"=========USER_SAVE_BRIGHTNESS=====value=========="
-								+ value);
 				if (value > Constact.DEFAULT_BRIGHTNESS) {
 					Settings.System.putInt(getContentResolver(),
 							Settings.System.SCREEN_BRIGHTNESS, value);
@@ -594,10 +590,10 @@ public class SerialPortControlService extends Service {
 		// TODO Auto-generated method stub
 		/*
 		 * 倒车检测
-		 */				
+		 */
 		int backstate = android.provider.Settings.System.getInt(
 				getContentResolver(), Constact.BACK_CAR, 0);
-		Log.i("cxs","====MSG_SEND_FIRST_MSG=backstate===="+backstate);
+		Log.i("cxs", "====MSG_SEND_FIRST_MSG=backstate====" + backstate);
 		handleBackCar(backstate);
 	}
 
@@ -760,7 +756,7 @@ public class SerialPortControlService extends Service {
 			super.onChange(selfChange);
 			int state = android.provider.Settings.System.getInt(
 					getContentResolver(), Constact.BACK_CAR, 0);
-			Log.i("cxs","========handleBackCar======"+state);
+			Log.i("cxs", "========handleBackCar======" + state);
 			handleBackCar(state);
 		}
 	}
@@ -915,40 +911,57 @@ public class SerialPortControlService extends Service {
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG);
 			isNaving = (android.provider.Settings.System.getInt(
 					getContentResolver(), Constact.NAVING_STATUS, 0) == 1);
-			Log.i("cxs", "=====acc off   insNaving =============" + isNaving);
 		}
 	}
 
 	private void stopKWMusic() {
-		Intent stopMusicIntent = new Intent(ACTION_STOP_MUSIC);
+		Intent stopMusicIntent = new Intent(Constact.ACTION_STOP_MUSIC);
 		sendBroadcast(stopMusicIntent);
 	}
 
 	private void doRegisterReceiver() {
 		// TODO Auto-generated method stub
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(BOOT_COMPLETED_ACTION);
-		filter.addAction(RADIO_FREQ_ACTION);
+		filter.addAction(Constact.BOOT_COMPLETED_ACTION);
+		filter.addAction(Constact.RADIO_FREQ_ACTION);
+		filter.addAction(Constact.TEMP_HIGH_KEYEVENT);
+		filter.addAction(Constact.TEMP_NORMAL_KEYEVENT);
 		registerReceiver(myReceiver, filter);
 	}
-
+	Dialog dialog;
 	private BroadcastReceiver myReceiver = new BroadcastReceiver() {
-
+		
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			switch (intent.getAction()) {
-			case BOOT_COMPLETED_ACTION:
+			case Constact.BOOT_COMPLETED_ACTION:
 				Message msg = new Message();
 				msg.what = Contacts.MSG_SEND_FIRST_MSG;
 				mHandler.sendMessage(msg);
 				break;
-			case RADIO_FREQ_ACTION:
+			case Constact.RADIO_FREQ_ACTION:
 				float freq = intent.getFloatExtra("fm_fq", 0);
-				Log.i("cxs", "-==--------RADIO_FREQ_ACTION----freq----" + freq);
 				Message freqmsg = new Message();
 				freqmsg.what = Contacts.MSG_RADIO_FREQ_MEG;
 				freqmsg.obj = freq;
 				mHandler.sendMessageDelayed(freqmsg, 1000);
+				break;
+			case Constact.TEMP_HIGH_KEYEVENT:   //处理高温报警
+				stopKWMusic();
+				/*if(dialog==null){
+				dialog = new AlertDialog.Builder(SerialPortControlService.this).setIcon(
+					     android.R.drawable.btn_star).setTitle("提示").setMessage(
+					     "设备温度过高，请暂停影音播放").setNegativeButton("确定", null).create();
+				dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+				}
+				dialog.show();*/
+				break;
+			case Constact.TEMP_NORMAL_KEYEVENT:    //结束高温报警
+				/*if(dialog!=null){
+				   if(dialog.isShowing()){
+					   dialog.dismiss();
+				   }	
+				}*/
 				break;
 			default:
 				break;
@@ -970,7 +983,7 @@ public class SerialPortControlService extends Service {
 
 		@Override
 		public void readDataFromServer(byte[] bytes) throws RemoteException {
-			Trace.i("readDataFromServer" + bytes);
+		//	Trace.i("readDataFromServer" + bytes);
 			Message msg = new Message();
 			msg.what = Contacts.MSG_UPDATA_UI;
 			msg.obj = bytes;
