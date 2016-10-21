@@ -92,6 +92,11 @@ public class GA6CarEnableInfoFragment extends BaseFragment {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.trumpchiga6_enable_prefs);
 			initView();
+			
+			if(settingActivity!=null){
+				if(settingActivity.getCanInfo()!=null)
+					syncView(settingActivity.getCanInfo());
+			}
 		}
 
 		private void initView() {

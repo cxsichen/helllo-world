@@ -26,6 +26,10 @@ public class Contacts {
 		public static final int KNOBSELECTOR = 15;
 		public static final int POWER = 16;
 		public static final int FM_AM = 17;
+		public static final int MUSIC = 18;
+		public static final int PHONE_APP = 19;
+		public static final int HOME = 20;
+		public static final int MAP = 21;
 	}
 
 	/**
@@ -82,6 +86,10 @@ public class Contacts {
 		public static final String  SSTrumpchiGS4 = "SSTrumpchiGS4";     //广汽传祺GS4
 		public static final String  SSTrumpchiGS4HIGH = "SSTrumpchiGS4HIGH";     //广汽传祺GS4高配
 		public static final String  SSTrumpchiGS5 = "SSTrumpchiGS5";     //广汽传祺GS5
+		
+		//现代起亚
+		public static final String  SSHyundai = "SSHyundai";       //现代起亚
+		public static final String  SSHyundai16MT = "SSHyundai16MT";   //16款名图		
 		/*--------------尚摄-----------*/
 	}
 

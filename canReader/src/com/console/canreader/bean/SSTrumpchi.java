@@ -221,8 +221,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 
 	}
 
-	int knob0;
-	int knob1;
+
 	static String KnobButtonDataSave="";
 	private void analyzeKnobButtonData(byte[] msg) {
 		
@@ -235,36 +234,18 @@ public class SSTrumpchi extends AnalyzeUtils {
 		if ((msg[5] & 0xff) == 0) {
 			return;
 		}
-		knob0 = msg[5] & 0xff;
-		if (knob0 - knob1 > 0) {
-			if ((msg[4] & 0x03) == 0x01) {
-				mCanInfo.CAR_VOLUME_KNOB= msg[5] & 0xff;
-				mCanInfo.CAR_VOLUME_KNOB_UP = knob0 - knob1;
-				mCanInfo.CAR_VOLUME_KNOB_DOWN = 0;
-				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUME;
-			} else {
-				mCanInfo.CAR_SELECTOR_KNOB= msg[5] & 0xff;
-				mCanInfo.CAR_SELECTOR_KNOB_UP = knob0 - knob1;
-				mCanInfo.CAR_SELECTOR_KNOB_DOWN = 0;
-				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBSELECTOR;
-			}
-		} else {
-			if ((msg[4] & 0x03) == 0x01) {
-				mCanInfo.CAR_VOLUME_KNOB= msg[5] & 0xff;
-				mCanInfo.CAR_VOLUME_KNOB_UP=0;
-				mCanInfo.CAR_VOLUME_KNOB_DOWN =knob1 - knob0;
-				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUME;
-			} else {
-				mCanInfo.CAR_SELECTOR_KNOB= msg[5] & 0xff;
-				mCanInfo.CAR_SELECTOR_KNOB_UP=0;
-				mCanInfo.CAR_SELECTOR_KNOB_DOWN =knob1 - knob0;
-				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBSELECTOR;
-			}
-		}
-//		Trace.i("-=====" + mCanInfo.CAR_VOLUME_KNOB + "---"
-//				+ mCanInfo.CAR_SELECTOR_KNOB);
-		mCanInfo.CHANGE_STATUS=2;
-		knob1 = knob0;
+		mCanInfo.CAR_VOLUME_KNOB=msg[5] & 0xff;
+		switch ((msg[4] & 0x03)) {
+		case 0x01:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUME;	
+			break;
+		case 0x02:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBSELECTOR;	
+			break;
+		default:
+			break;
+		}	
+		mCanInfo.CHANGE_STATUS = 2;
 	}
 	static String VirtualDataSave = "";
 	private void analyzeVirtualData(byte[] msg) {
@@ -321,10 +302,9 @@ public class SSTrumpchi extends AnalyzeUtils {
 		case 0x38://MODE
 			break;
 		case 0x39://SCAN
-			break;
-			
-			
+			break;			
 		default:
+			mCanInfo.STEERING_BUTTON_MODE=0;
 			break;
 		}
 		temp=(int)(msg[5] & 0xff);

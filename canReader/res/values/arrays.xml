@@ -400,7 +400,41 @@
     
     <!-- 尚摄 广汽传祺GS5通用-->
     <!-- add by xyw start end --> 
-     <!-- 广汽传祺 -->
+    <!-- 广汽传祺 -->
+    <!-- 现代起亚 -->
+    <!-- 尚摄 现代起亚通用 -->
+    <string-array name="SSHyundai_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>1</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+     <string-array name="SSHyundai_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSHyundai_setting_fragment">
+        <item>com.console.canreader.fragment.SSHyundai.CarTypeSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 现代起亚通用 --> 
+    
+    <!-- 尚摄 现代起亚16名图 -->
+    <string-array name="SSHyundai16MT_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>1</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <!-- 尚摄 现代起亚16名图 -->    
+    <!-- 现代起亚 -->
+     
 
 
     <!-- 大众高尔夫 -->
@@ -752,4 +786,27 @@
     </string-array>
      
      <!-- add by xyw end -->
+     
+     <string-array name="sshyundai_car_type_entries">
+        <item>Ix35</item>
+        <item>Ix45</item>
+        <item>索纳塔8</item>
+        <item>索纳塔9</item>
+        <item>名图</item>
+        <item>途胜</item>
+        <item>领动</item>
+        <item>16K5</item>
+        <item>16KX5</item>
+    </string-array>  
+     <string-array name="sshyundai_car_type_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
 </resources>

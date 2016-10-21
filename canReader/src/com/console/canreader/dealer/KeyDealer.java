@@ -11,11 +11,13 @@ import android.os.Message;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.console.canreader.R;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.Contacts;
+import com.console.canreader.utils.PreferenceUtil;
 
 public class KeyDealer {
 
@@ -30,6 +32,7 @@ public class KeyDealer {
 	public static final String ACTION_TEL_HANDUP = "com.console.TEL_HANDUP";
 	public static final String ACTION_MENU_LONG_UP = "com.console.MENU_LONG_UP";
 	public static final String ACTION_MENU_LONG_DOWN = "com.console.MENU_LONG_DOWN";
+	public static final String ACTION_MUSIC_START = "com.console.MUSIC_START";
 
 	// 音量加减和mute由这里统一处理，其他发到外面处理
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
@@ -53,10 +56,6 @@ public class KeyDealer {
 
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
-			case Contacts.KEYEVENT.KNOBVOLUME:
-				Log.i("cxs", "-----1111--msg.KNOBVOLUME------");
-				handleKnobVolume(msg.arg1, msg.arg2);
-				break;
 			case Contacts.VOL_UP:
 				Log.i("cxs", "-----1111--msg.VOL_UP-------");
 				handleVolUp();
@@ -111,10 +110,38 @@ public class KeyDealer {
 				Log.i("cxs", "-------msg.CANINFOPAGE-------");
 				handleCanInfoPage();
 				break;
+			case Contacts.KEYEVENT.FM_AM:
+				Log.i("cxs", "-------Contacts.KEYEVENT.FM_AM-------");
+				handleFmAm();
+				break;
+			case Contacts.KEYEVENT.MUSIC:
+				Log.i("cxs", "-------Contacts.KEYEVENT.MUSIC-------");
+				handleMUSIC();
+				break;
+			case Contacts.KEYEVENT.PHONE_APP:
+				Log.i("cxs", "-------Contacts.KEYEVENT.PHONE_APP-------");
+				handlePHONE_APP();
+				break;
+			case Contacts.KEYEVENT.HOME:
+				Log.i("cxs", "-------Contacts.KEYEVENT.HOME-------");
+				handleHOME();
+				break;
+			case Contacts.KEYEVENT.MAP:
+				Log.i("cxs", "-------Contacts.KEYEVENT.MAP-------");
+				handleMAP();
+				break;
+			case Contacts.KEYEVENT.KNOBVOLUME:
+				Log.i("cxs", "-------Contacts.KEYEVENT.KNOBVOLUME-------");
+				handleKnobVolume(msg.arg1);
+				break;
+			case Contacts.KEYEVENT.KNOBSELECTOR:
+				Log.i("cxs", "-------Contacts.KEYEVENT.KNOBSELECTOR-------");
+				handleKnobSelector(msg.arg1);
+				break;
 			default:
 				break;
 			}
-		};
+		}
 	};
 
 	public KeyDealer(Context context) {
@@ -191,6 +218,113 @@ public class KeyDealer {
 	 * 1); Settings.System.putInt(context.getContentResolver(),
 	 * Contacts.KEY_VOLUME_VALUE, valume); }
 	 */
+	/**
+	 * acc on后清除旋钮保存值
+	 */
+	public void clearKnobValue(){
+		PreferenceUtil.setKnobVolValue(context,0);
+		PreferenceUtil.setKnobSelValue(context,0);
+	}
+
+
+	public void handleKnobSelector(int knobValue) {
+		int  temp=knobValue-PreferenceUtil.getKnobSelValue(context);
+		if(temp>125){
+			temp=temp-256;
+		}
+		if(temp<-125){
+			temp=256+temp;
+		}
+		Log.i("cxs","==handleKnobSelector=temp=="+temp);
+		if(temp>0){
+			handleMenuDown();
+		}else{
+			handleMenuUp();
+		}
+		PreferenceUtil.setKnobSelValue(context,knobValue);
+	}
+	
+
+	public void handleKnobVolume(int knobValue) {
+		if (mAudioManager == null)
+			mAudioManager = (AudioManager) context
+					.getSystemService(Context.AUDIO_SERVICE);
+		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+		int  temp=knobValue-PreferenceUtil.getKnobVolValue(context);
+		//处理循环
+		if(temp>125){
+			temp=temp-256;
+		}
+		if(temp<-125){
+			temp=256+temp;
+		}
+		//处理值操作间隔		
+		if(temp>0){
+			temp=(temp/2)<1?1:(temp/2);
+		}else if(temp<0){
+			temp=(temp/2)>-1?-1:(temp/2);
+		}
+		handleVolume(context, cur_music + temp);
+		PreferenceUtil.setKnobVolValue(context,knobValue);
+	}
+	
+	protected void handlePower() {
+		try {
+			Intent intent = new Intent();
+			intent.setClassName("com.console.nodisturb",
+					"com.console.nodisturb.MainActivity");
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(intent);
+			context.startActivity(intent);
+		} catch (Exception e) {
+		}
+	}
+
+	private void handleMAP() {
+		// TODO Auto-generated method stub
+		startNavi();
+	}
+	
+	private void startNavi() {
+		// TODO Auto-generated method stub
+		int mapType = Settings.System.getInt(context.getContentResolver(),
+				"MAP_INDEX", 0);
+		if (mapType == 0) {
+			openApplication(context, "com.baidu.navi");
+		} else {
+			openApplication(context, "com.autonavi.amapauto");
+		}
+	}
+
+	private void handleHOME() {
+		// TODO Auto-generated method stub
+		try {
+			Intent home = new Intent(Intent.ACTION_MAIN);
+			home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			home.addCategory(Intent.CATEGORY_HOME);
+			home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(home);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	private void handlePHONE_APP() {
+		// TODO Auto-generated method stub
+		openApplication(context, "com.mtk.bluetooth");
+	}
+
+	private void handleMUSIC() {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent();
+		intent.setAction(ACTION_MUSIC_START);
+		context.sendBroadcast(intent);
+	};
+
+	protected void handleFmAm() {
+		openApplication(context, "com.console.radio");
+	}
+
 	protected void handleCanInfoPage() {
 		openApplication(context, "com.console.canreader");
 	}
@@ -258,13 +392,6 @@ public class KeyDealer {
 		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 		handleVolume(context, cur_music + SETP_VOLUME);
 	}
-	public void handleKnobVolume(int up,int down) {
-		if (mAudioManager == null)
-			mAudioManager = (AudioManager) context
-					.getSystemService(Context.AUDIO_SERVICE);
-		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-		handleVolume(context, cur_music + up-down);
-	}
 
 	public void handleVolDown() {
 		if (mAudioManager == null)
@@ -290,33 +417,31 @@ public class KeyDealer {
 	}
 
 	long lastSendTime = 0;
-	
+
 	Boolean PRESSFREE = true;
-	
-    //处理
+     
+	static public int CAR_VOLUME_KNOB=0;	
+	// 处理
 	protected void dealWith(Context context, CanInfo canInfo) {
 		// TODO Auto-generated method stub
- 
-		Log.i("cxs", "--canInfo.STEERING_BUTTON_MODE:---"+canInfo.STEERING_BUTTON_MODE);
-		if(canInfo.STEERING_BUTTON_MODE==Contacts.KEYEVENT.KNOBVOLUME){
-			if (System.currentTimeMillis() - lastSendTime > 200) {
+
+		// 音量旋钮 选择旋钮
+		if (canInfo.STEERING_BUTTON_MODE == Contacts.KEYEVENT.KNOBVOLUME) {
+			if (System.currentTimeMillis() - lastSendTime > 500) {
 				lastSendTime = System.currentTimeMillis();
-				Message msg=new Message();
-				msg.what=Contacts.KEYEVENT.KNOBVOLUME;
-				msg.arg1=canInfo.CAR_VOLUME_KNOB_UP;
-				msg.arg2=canInfo.CAR_VOLUME_KNOB_DOWN;
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.KNOBVOLUME;
+				msg.arg1 = canInfo.CAR_VOLUME_KNOB;
 				mHandler.sendMessage(msg);
 			}
 		}
-		if(canInfo.STEERING_BUTTON_MODE==Contacts.KEYEVENT.KNOBSELECTOR){
-			if (System.currentTimeMillis() - lastSendTime > 200) {
+		if (canInfo.STEERING_BUTTON_MODE == Contacts.KEYEVENT.KNOBSELECTOR) {
+			if (System.currentTimeMillis() - lastSendTime > 500) {
 				lastSendTime = System.currentTimeMillis();
-				if(canInfo.CAR_SELECTOR_KNOB_UP>0){
-					handleMenuUp();
-				}else{
-					handleMenuDown();
-				}
-				
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.KNOBSELECTOR;
+				msg.arg1 = canInfo.CAR_VOLUME_KNOB;
+				mHandler.sendMessage(msg);
 			}
 		}
 		
@@ -380,23 +505,25 @@ public class KeyDealer {
 						200);
 				break;
 			case Contacts.KEYEVENT.FM_AM:
-				Intent i=new Intent();
-				i.setClassName("com.console.radio", "com.console.radio.MainActivity");
-				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				context.startActivity(i);
-				break;	
-			case Contacts.KEYEVENT.POWER:
-				Log.i("cxs", "power start");
-				try {
-					
-				 Intent intent = new Intent();
-                 intent.setClassName("com.console.nodisturb", "com.console.nodisturb.MainActivity");
-                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                 context.startActivity(intent);
-				} catch (Exception e) {
-					Log.i("cxs", "power end --");
-				}
-				Log.i("cxs", "power end");
+				mHandler.removeMessages(Contacts.KEYEVENT.FM_AM);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.FM_AM, 200);
+				break;
+			case Contacts.KEYEVENT.MUSIC:
+				mHandler.removeMessages(Contacts.KEYEVENT.MUSIC);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.MUSIC, 200);
+				break;
+			case Contacts.KEYEVENT.PHONE_APP:
+				mHandler.removeMessages(Contacts.KEYEVENT.PHONE_APP);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.PHONE_APP,
+						200);
+				break;
+			case Contacts.KEYEVENT.HOME:
+				mHandler.removeMessages(Contacts.KEYEVENT.HOME);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.HOME, 200);
+				break;
+			case Contacts.KEYEVENT.MAP:
+				mHandler.removeMessages(Contacts.KEYEVENT.MAP);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.MAP, 200);
 				break;
 			default:
 				break;

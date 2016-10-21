@@ -269,6 +269,7 @@ public class CanInfo implements Parcelable {
 	public int TRE_VOLUME = 0; // 高音值
 	public int VOL_LINK_CARSPEED = 0; // 音量与车速联动
 	public int DSP_SURROUND = 0; // DSP环绕
+	public int EQL_MUTE = 0; // 静音
 
 	/*----落锁设定-----*/
 	public int AUTO_LOCK_SETTING = 0; // 自动落锁设定
@@ -325,6 +326,7 @@ public class CanInfo implements Parcelable {
 	public int SWITCH_TRIPA_SETTING=0;     //里程A重设条件的切换
 	public int ADJUST_OUTSIDE_TEMP=0;     //调节外部气温显示
 	            
+	public int CAR_TYPE=0;   //车型设置
 	
 	public int AIR_CONDITIONER_CONTROL = 0; // 空调是否有界面控制，如果为1则有，不需要自动弹框
 	
@@ -376,6 +378,8 @@ public class CanInfo implements Parcelable {
 	public int CAMERA_MODE=1;									//全景摄像头模式 1前+全    2前+右侧     3后+全     4 水平停车+全     5垂直停车+全
 	/*-------------------add by xyw end----------------------------------*/
 
+	
+   
 	public CanInfo() {
 
 	}

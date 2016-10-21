@@ -9,12 +9,16 @@ import android.util.Log;
 public class BeanFactory {
 
 	private static AnalyzeUtils mAnalyzeUtils;
+	private static String utilCanName=null;
 	
 	public static AnalyzeUtils getCanInfo(Context context, byte[] mPacket,
 			String canName) {
 		if(mAnalyzeUtils==null){
 			try {
-				Class classManager = Class.forName("com.console.canreader.bean."+adjustcanName(canName));
+				if(utilCanName==null){
+					utilCanName=adjustcanName(canName);
+				}
+				Class classManager = Class.forName("com.console.canreader.bean."+adjustcanName(utilCanName));
 				mAnalyzeUtils=(AnalyzeUtils) classManager.newInstance();
 				mAnalyzeUtils.init(mPacket);
 			} catch (Exception e) {
@@ -24,8 +28,7 @@ public class BeanFactory {
 		}else{
 			mAnalyzeUtils.analyze(mPacket);
 		}
-		return mAnalyzeUtils;
-		
+		return mAnalyzeUtils;	
 	}
 	
 	private static String adjustcanName(String canName) {
@@ -48,6 +51,9 @@ public class BeanFactory {
 		case Contacts.CANNAMEGROUP.SSTrumpchiGS5:
 			canName=Contacts.CANNAMEGROUP.SSTrumpchi;
 			break;
+		case Contacts.CANNAMEGROUP.SSHyundai16MT:
+			canName=Contacts.CANNAMEGROUP.SSHyundai;
+			break;
 		default:
 			break;
 		}
@@ -56,6 +62,7 @@ public class BeanFactory {
 
 	public static void setInfoEmpty(){
 		mAnalyzeUtils=null;
+		utilCanName=null;
 	}
 	
 }

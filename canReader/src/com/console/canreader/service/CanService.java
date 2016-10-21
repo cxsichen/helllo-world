@@ -1,3 +1,5 @@
+
+
 package com.console.canreader.service;
 
 import java.io.IOException;
@@ -86,7 +88,8 @@ public class CanService extends Service {
 						.getCanInfo(CanService.this, mPacket, canName);
 				if (info != null)
 					if (info.getCanInfo() != null)
-						dealCanInfo();
+						if (info.getCanInfo().CHANGE_STATUS != 8888)
+							dealCanInfo();
 				break;
 			case Contacts.MSG_MSG_CYCLE:
 				sendCycleMsg();
@@ -286,6 +289,9 @@ public class CanService extends Service {
 		if (state == 1) {
 			// acc on清空原先的数据 重新建立连接
 			BeanFactory.setInfoEmpty();
+           // acc on清空按键旋钮保存值
+			if (mKeyDealer != null)
+				mKeyDealer.clearKnobValue();
 			connectCanDevice();
 		} else {
 			mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
@@ -798,6 +804,28 @@ public class CanService extends Service {
 			writeCanPort(BytesUtil
 					.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_0_1));
 	}
+	
+	private void syncTimeWithMsg(String str){
+		Calendar c = Calendar.getInstance();
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int minute = c.get(Calendar.MINUTE);
+		int second = c.get(Calendar.SECOND);
+		writeCanPort(BytesUtil.addSSCheckBit(str
+				+ BytesUtil.changIntHex(hour)
+				+ BytesUtil.changIntHex(minute)
+				+ BytesUtil.changIntHex(second)));
+	}
+	
+	private void syncTimeWithMsgMT(){
+		Calendar c = Calendar.getInstance();
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int minute = c.get(Calendar.MINUTE);
+		int second = c.get(Calendar.SECOND);
+		writeCanPort(BytesUtil.addSSCheckBit("5AA50ACB00"
+				+ BytesUtil.changIntHex(hour)
+				+ BytesUtil.changIntHex(minute)
+				+ "0000"+"01"+"00000000"));
+	}
 
 	/**
 	 * 每分钟循环发送
@@ -812,17 +840,17 @@ public class CanService extends Service {
 			switch (canName) {
 			case Contacts.CANNAMEGROUP.SSHonda:
 			case Contacts.CANNAMEGROUP.SSHondaSY:
-				Calendar c = Calendar.getInstance();
-				int hour = c.get(Calendar.HOUR_OF_DAY);
-				int minute = c.get(Calendar.MINUTE);
-				int second = c.get(Calendar.SECOND);
-				writeCanPort(BytesUtil.addSSCheckBit("5AA503B5"
-						+ BytesUtil.changIntHex(hour)
-						+ BytesUtil.changIntHex(minute)
-						+ BytesUtil.changIntHex(second))); // 本田同步时间
+				syncTimeWithMsg("5AA503B5"); // 本田同步时间
 				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
-				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE, 1000 * 60);
-				break;				
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
+						1000 * 60);
+				break;
+			case Contacts.CANNAMEGROUP.SSHyundai16MT:
+				syncTimeWithMsgMT(); // 16款名图同步时间
+				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
+						1000 * 60);
+				break;
 			default:
 				break;
 			}
@@ -830,7 +858,7 @@ public class CanService extends Service {
 		default:
 			break;
 		}
-		
+
 	}
 
 	/**

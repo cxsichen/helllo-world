@@ -1,7 +1,6 @@
-package com.console.canreader.fragment.SSTrumpchi;
+package com.console.canreader.fragment.SSHyundai;
 
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -10,8 +9,11 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,19 +25,19 @@ import com.console.canreader.activity.Toyota.OilEleActivity;
 import com.console.canreader.activity.Toyota.SettingActivity;
 import com.console.canreader.activity.Toyota.OilEleActivity.SettingsFragment;
 import com.console.canreader.service.CanInfo;
-import com.console.canreader.utils.BytesUtil;
+import com.console.canreader.utils.PreferenceUtil;
 
-public class GS4HIGHCarAirSettingsFragment extends BaseFragment {
+public class CarTypeSettingsFragment extends BaseFragment {
 
-	private TextView version;
+
 	SettingsFragment settingsFragment;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.fragment_activity_layout,
-				container, false);
+		View view = inflater.inflate(R.layout.fragment_activity_layout_1, container,
+				false);
 		initView(view);
 		initFragment();
 		return view;
@@ -45,22 +47,21 @@ public class GS4HIGHCarAirSettingsFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		settingsFragment = new SettingsFragment(this);
 		getActivity().getFragmentManager().beginTransaction()
-				.replace(R.id.content_layout, settingsFragment).commit();
+				.replace(R.id.content_layout_1, settingsFragment).commit();
 	}
 
 	@Override
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
-		try {
-
-			super.show(mCaninfo);
-			if (mCaninfo != null) {
-				if (settingsFragment != null) {
+		super.show(mCaninfo);
+		if (mCaninfo != null) {
+			if (settingsFragment != null) {
+				try {
 					settingsFragment.syncView(mCaninfo);
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
 	}
@@ -72,18 +73,18 @@ public class GS4HIGHCarAirSettingsFragment extends BaseFragment {
 	}
 
 	private void initView(View view) {
-
+	
 	}
+
 
 	public class SettingsFragment extends PreferenceFragment implements
 			OnPreferenceChangeListener {
 
-		private ListPreference position_heat_left;
-		private ListPreference position_heat_right;
+		private ListPreference p2;
 
-		GS4HIGHCarAirSettingsFragment settingActivity;
+		CarTypeSettingsFragment settingActivity;
 
-		public SettingsFragment(GS4HIGHCarAirSettingsFragment settingActivity) {
+		public SettingsFragment(CarTypeSettingsFragment settingActivity) {
 			this.settingActivity = settingActivity;
 		}
 
@@ -91,30 +92,22 @@ public class GS4HIGHCarAirSettingsFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.trumpchigs4_air_prefs);
-			initView();
+			addPreferencesFromResource(R.xml.sshyundai_cartype_setting_prefs);
+
+			p2 = (ListPreference) findPreference("CAR_TYPE");
+			p2.setOnPreferenceChangeListener(this);
 			
 			if(settingActivity!=null){
 				if(settingActivity.getCanInfo()!=null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}
-
-		private void initView() {
-			position_heat_left = (ListPreference) findPreference("position_heat_left");
-			position_heat_right = (ListPreference) findPreference("position_heat_right");
-			position_heat_left.setOnPreferenceChangeListener(this);
-			position_heat_right.setOnPreferenceChangeListener(this);
-		}
+		
+		String[] titles={"","ix35¡¢Ë÷ÄÉËþ8","ix45(ÐÂÊ¤´ï)¡¢K5","ÃûÍ¼¡¢Ë÷ÄÉËþ9","Í¾Ê¤¡¢KX5¡¢Áì¶¯"};
 
 		public void syncView(CanInfo mCaninfo) {
-			CharSequence[] a = position_heat_left.getEntries();
-			position_heat_left
-					.setSummary(a[mCaninfo.LEFT_SEAT_TEMP].toString());
-			a = position_heat_right.getEntries();
-			position_heat_right.setSummary(a[mCaninfo.RIGTHT_SEAT_TEMP]
-					.toString());
-
+			PreferenceUtil.setHyundaiCarType(getActivity(), mCaninfo.CAR_TYPE);
+			p2.setSummary(titles[mCaninfo.CAR_TYPE]);
 		}
 
 		private void updatePreferenceDescription(ListPreference preference,
@@ -147,33 +140,22 @@ public class GS4HIGHCarAirSettingsFragment extends BaseFragment {
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			// TODO Auto-generated method stub
 			final String key = preference.getKey();
-			Log.i("cxs", "==onPreferenceChange-key===" + key);
 			switch (key) {
-			case "position_heat_left":
+			case "CAR_TYPE":
 				if (settingActivity != null) {
-					int value = Integer.parseInt((String) newValue);
-					CharSequence[] a = position_heat_left.getEntries();
-					position_heat_left.setSummary(a[value].toString());
-					settingActivity.sendMsg("5AA5023B0F"
-							+ BytesUtil.intToHexString(value));
+					try {
+						int value = Integer.parseInt((String) newValue);
+		                settingActivity.sendMsg("5AA502242"+String.valueOf(value)+"00");
+		                updatePreferenceDescription(p2,value);
+					} catch (NumberFormatException e) {
+					}
 				}
 				break;
-			case "position_heat_right":
-				if (settingActivity != null) {
-					int value = Integer.parseInt((String) newValue);
-					CharSequence[] a = position_heat_right.getEntries();
-					position_heat_right.setSummary(a[value].toString());
-					settingActivity.sendMsg("5AA5023B10"
-							+ BytesUtil.intToHexString(value));
-				}
-				break;
-
 			default:
 				break;
 			}
 			return true;
 		}
-
 	}
 
 }

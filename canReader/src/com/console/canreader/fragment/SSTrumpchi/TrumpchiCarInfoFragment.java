@@ -93,6 +93,10 @@ public class TrumpchiCarInfoFragment extends BaseFragment {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.trumpchi_info_prefs);
 			initView();
+			if(settingActivity!=null){
+				if(settingActivity.getCanInfo()!=null)
+					syncView(settingActivity.getCanInfo());
+			}
 		}
 
 		private void initView() {

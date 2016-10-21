@@ -6,7 +6,8 @@ import android.provider.Settings;
 import android.util.Log;
 
 public class PreferenceUtil {
-
+	
+	public static final String KEY_SSHyundai_CAR_TYPE = "KEY_SSHyundai_CAR_TYPE";
 	private final static String CARTYPE = "carType";
 	private final static String CANTYPE = "canType";
 	static String[] CanTypeGroup={"RZC","SS"};
@@ -14,6 +15,7 @@ public class PreferenceUtil {
 			"GE","DFFG","Peugeot","NISSAN","Trumpchi",
 			"FOCUS","HondaCRV","HondaDA","BuickGM","EDGE","Roewe360","MGGS",
 			"BESTURNx80","CFHCm3"};
+	
 	public static String getCANName(Context context) {
 		String mode = "";
 		try {
@@ -30,10 +32,10 @@ public class PreferenceUtil {
 	}
 	
 	private static String  initCanName(Context context){
-		String temp="RZCVolkswagen";
-		int carTypeValue = Settings.System.getInt(context.getContentResolver(), CARTYPE, 0);
-		int canTypeValue = Settings.System.getInt(context.getContentResolver(), CANTYPE, 0);
+		String temp="RZCVolkswagen";	
 		try {
+			int carTypeValue = Settings.System.getInt(context.getContentResolver(), CARTYPE, 0);
+			int canTypeValue = Settings.System.getInt(context.getContentResolver(), CANTYPE, 0);
 			temp=CanTypeGroup[canTypeValue]+CarTypeGroup[carTypeValue];
 			Settings.System.putString(context.getContentResolver(),
 					Contacts.CAN_CLASS_NAME,temp);
@@ -59,5 +61,46 @@ public class PreferenceUtil {
 		}
 		return "";
 	}
+	
+	private static SharedPreferences getPreferences(Context context) {
+		return context.getSharedPreferences(context.getPackageName(), 0);
+	}
+
+	private static SharedPreferences.Editor getPreferencesEditor(Context context) {
+		return context.getSharedPreferences(context.getPackageName(), 0).edit();
+	}
+	
+	public static int getHyundaiCarType(Context context) {
+		SharedPreferences pref = getPreferences(context);
+		return pref.getInt(KEY_SSHyundai_CAR_TYPE, 0);
+	}
+
+	public static void setHyundaiCarType(Context context, int value) {
+		SharedPreferences.Editor editor = getPreferencesEditor(context);
+		editor.putInt(KEY_SSHyundai_CAR_TYPE, value).apply();
+	}
+	
+	
+	public static int getKnobVolValue(Context context) {
+		SharedPreferences pref = getPreferences(context);
+		return pref.getInt("KnobVolValue", 0);
+	}
+
+	public static void setKnobVolValue(Context context, int value) {
+		SharedPreferences.Editor editor = getPreferencesEditor(context);
+		editor.putInt("KnobVolValue", value).apply();
+	}
+	
+	
+	public static int getKnobSelValue(Context context) {
+		SharedPreferences pref = getPreferences(context);
+		return pref.getInt("KnobSelValue", 0);
+	}
+
+	public static void setKnobSelValue(Context context, int value) {
+		SharedPreferences.Editor editor = getPreferencesEditor(context);
+		editor.putInt("KnobSelValue", value).apply();
+	}
+
 
 }

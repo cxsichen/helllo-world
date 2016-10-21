@@ -1,4 +1,4 @@
-package com.console.canreader.activity;
+package com.console.canreader.fragment.SSToyota;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,13 +120,16 @@ public class MenuPaSelectActivity extends BaseActivity implements
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
-		if (mCaninfo != null) {
-			freq_tv.setText(mCaninfo.EQL_VOLUME+"");
-			if (settingsFragment != null) {
-				settingsFragment.syncView(mCaninfo);
+		try {
+			if (mCaninfo != null) {
+				freq_tv.setText(mCaninfo.EQL_VOLUME+"");
+				if (settingsFragment != null) {
+					settingsFragment.syncView(mCaninfo);
+				}
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-
 	}
 
 	@Override

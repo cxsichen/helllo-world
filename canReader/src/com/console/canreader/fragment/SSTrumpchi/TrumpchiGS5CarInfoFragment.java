@@ -92,6 +92,10 @@ public class TrumpchiGS5CarInfoFragment extends BaseFragment {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.trumpchigs5_info_prefs);
 			initView();
+			if(settingActivity!=null){
+				if(settingActivity.getCanInfo()!=null)
+					syncView(settingActivity.getCanInfo());
+			}
 		}
 
 		private void initView() {

@@ -24,8 +24,9 @@ import android.util.Log;
 import android.view.Window;
 
 public class BaseActivity extends FragmentActivity {
-	CanInfo mCaninfo;
+	public CanInfo mCaninfo;
 
+	 Boolean IsResume=false;
 	 public static String canName="";
 	 public static String canFirtName="";
 
@@ -84,7 +85,7 @@ public class BaseActivity extends FragmentActivity {
 			case Contacts.MSG_UPDATA_UI:
 				mCaninfo = (CanInfo) msg.obj;
 				if (mCaninfo != null) {
-					if (mCaninfo.CHANGE_STATUS == 10)
+					if (mCaninfo.CHANGE_STATUS == 10&&IsResume)
 						show(mCaninfo);
 				}
 				break;
@@ -136,6 +137,7 @@ public class BaseActivity extends FragmentActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		IsResume=true;
 		firstShow();
 		try {
 			if (mISpService != null)
@@ -152,6 +154,7 @@ public class BaseActivity extends FragmentActivity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
+		IsResume=false;
 		try {
 			if (mISpService != null)
 				mISpService.removeCliend(mICallback);
