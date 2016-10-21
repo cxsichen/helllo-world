@@ -138,15 +138,19 @@ public class KeyDealer {
 	}
 
 	protected void handleVolumeUp() {
-		Intent intent = new Intent();
-		intent.setAction(KEYCODE_VOLUME_UP);
-		context.sendBroadcast(intent);
+		Intent intent= new Intent();
+        intent.setClassName("com.console.canreader", "com.console.canreader.service.CanService");
+        intent.putExtra("keyEvent", KEYCODE_VOLUME_UP);
+        context.startService(intent);
+
 	}
 
 	protected void handleVolumeDown() {
-		Intent intent = new Intent();
-		intent.setAction(KEYCODE_VOLUME_DOWN);
-		context.sendBroadcast(intent);
+		 Intent intent= new Intent();
+         intent.setClassName("com.console.canreader", "com.console.canreader.service.CanService");
+         intent.putExtra("keyEvent", KEYCODE_VOLUME_DOWN);
+         context.startService(intent);
+
 	}
 
 	protected void handleTelAnswer() {
