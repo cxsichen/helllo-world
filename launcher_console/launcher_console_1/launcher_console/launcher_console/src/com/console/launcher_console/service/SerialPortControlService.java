@@ -170,6 +170,7 @@ public class SerialPortControlService extends Service {
 				case "com.android.stk":
 				case "com.android.settings":
 				case "com.console.nodisturb":
+				case "com.android.systemui":
 					break;
 				case "com.console.radio":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 0) {

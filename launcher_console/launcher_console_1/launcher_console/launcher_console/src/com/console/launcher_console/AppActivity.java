@@ -86,7 +86,7 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 			,"com.baidu.navi","cn.lzl.partycontrol","com.mtk.bluetooth","com.srtc.pingwang",
 			"com.android.settings","com.android.deskclock","com.console.radio",
 			"com.share.android","com.console.equalizer","com.xbkpnotification",
-			"com.console.auxapp","com.inetwp.cardservice","com.mediatek.mco",
+			"com.console.auxapp","com.inetwp.cardservice","com.mediatek.mco","com.example.txe",
 			"com.mxtech.videoplayer.pro","com.console.parking","com.android.stk","com.example.mtk10263.whatsTemp"};    //屏蔽显示列表
 
 	@Override
