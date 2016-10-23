@@ -92,6 +92,10 @@ public class MenuPaAcitivity extends Activity {
 		case Contacts.CANNAMEGROUP.SSHyundai16MT:
 			startPaAcitivy("com.console.canreader.fragment.SSHyundai.MenuPaAcitivity");
 			break;
+		case Contacts.CANNAMEGROUP.SSNissan: 
+		case Contacts.CANNAMEGROUP.SSNissanWithout360:
+			startPaAcitivy("com.console.canreader.fragment.SSNissan.MenuPaAcitivity");
+			break;
 		default:
 			break;
 		}

@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    >
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="12dp"
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true"/>
+    
+<!--      <TextView      
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@android:color/black"
+        android:text="title"/> -->
+
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		    android:paddingLeft="72dp"
+		    android:paddingRight="16dp"
+		    android:layout_marginLeft="36dp"
+		    android:layout_marginRight="16dp"
+		    android:layout_marginBottom="7dp"
+        android:max="45"
+        android:progress="24"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

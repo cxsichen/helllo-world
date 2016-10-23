@@ -90,6 +90,9 @@ public class Contacts {
 		//现代起亚
 		public static final String  SSHyundai = "SSHyundai";       //现代起亚
 		public static final String  SSHyundai16MT = "SSHyundai16MT";   //16款名图		
+		//日产
+		public static final String  SSNissan = "SSNissan";                   //日产	
+		public static final String  SSNissanWithout360 = "SSNissanWithout360";                   //日产	
 		/*--------------尚摄-----------*/
 	}
 
@@ -324,5 +327,7 @@ public class Contacts {
 	public static final int VOLK_HEAD_CODE_2 = 0xfc;
 	public static final int SS_HEAD_CODE_1 = 0x5A;
 	public static final int SS_HEAD_CODE_2 = 0xA5;
+	public static final int SS_HEAD_CODE_3 = 0xAA;
+	public static final int SS_HEAD_CODE_4 = 0x55;
 
 }

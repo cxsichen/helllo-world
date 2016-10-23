@@ -54,6 +54,9 @@ public class BeanFactory {
 		case Contacts.CANNAMEGROUP.SSHyundai16MT:
 			canName=Contacts.CANNAMEGROUP.SSHyundai;
 			break;
+		case Contacts.CANNAMEGROUP.SSNissanWithout360:
+			canName=Contacts.CANNAMEGROUP.SSNissan;
+			break;
 		default:
 			break;
 		}

@@ -139,6 +139,18 @@
             android:launchMode="singleTask" >
         </activity>
         <!-- 功放activity -->
+        <!-- 功放activity -->
+        <activity
+            android:name="com.console.canreader.fragment.SSNissan.MenuPaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.fragment.SSNissan.MenuPaSelectActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 功放activity -->
         <service
             android:name="com.console.canreader.service.CanService"
             android:enabled="true"

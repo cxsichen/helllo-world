@@ -432,9 +432,63 @@
         <item>0</item><!-- 胎压 -->
         <item>1</item> <!-- 关于  -->
     </string-array>
+         <string-array name="SSHyundai16MT_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSHyundai16MT_setting_fragment">
+        <item>com.console.canreader.fragment.SSHyundai.CarTypeSettingsFragment</item> 
+    </string-array>
     <!-- 尚摄 现代起亚16名图 -->    
     <!-- 现代起亚 -->
+    
+    <!-- 日产 -->
+    <!-- 尚摄 日产带360全景-->
+    <string-array name="SSNissan_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>1</item> <!-- 原车功放  -->
+        <item>1</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <string-array name="SSNissan_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSNissan_setting_fragment">
+        <item>com.console.canreader.fragment.SSNissan.CarTypeSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 日产带360全景 -->   
+    
+    <!-- 尚摄 日产不带360全景-->
+    <string-array name="SSNissanWithout360_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>1</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <string-array name="SSNissanWithout360_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSNissanWithout360_setting_fragment">
+        <item>com.console.canreader.fragment.SSNissan.CarTypeSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 日产不带360全景 -->    
      
+    <!-- 日产 -->
+    
+    
+    
+    
+    
+    
+    
+    
 
 
     <!-- 大众高尔夫 -->

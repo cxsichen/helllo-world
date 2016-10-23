@@ -94,7 +94,7 @@ public class CanInfo implements Parcelable {
 	 */
 
 	public int PARKING_ASSIT_STATUS = 0;
-	public int RADAR_ALARM_STATUS = 1; // 1为显示 0为不显示
+	public int RADAR_ALARM_STATUS = 1; // 雷达1为显示 0为不显示
 	/*
 	 * 方向盘转角
 	 */
@@ -270,6 +270,9 @@ public class CanInfo implements Parcelable {
 	public int VOL_LINK_CARSPEED = 0; // 音量与车速联动
 	public int DSP_SURROUND = 0; // DSP环绕
 	public int EQL_MUTE = 0; // 静音
+	public int SEAT_SOUND=0;  //驾驶座音场状态
+	public int BOSE_CENTERPOINT=0; //BOSE CenterPoint状态
+	public int SURROND_VOLUME=0; //环绕音量
 
 	/*----落锁设定-----*/
 	public int AUTO_LOCK_SETTING = 0; // 自动落锁设定

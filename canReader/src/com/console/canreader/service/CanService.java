@@ -1,5 +1,3 @@
-
-
 package com.console.canreader.service;
 
 import java.io.IOException;
@@ -289,7 +287,7 @@ public class CanService extends Service {
 		if (state == 1) {
 			// acc on清空原先的数据 重新建立连接
 			BeanFactory.setInfoEmpty();
-           // acc on清空按键旋钮保存值
+			// acc on清空按键旋钮保存值
 			if (mKeyDealer != null)
 				mKeyDealer.clearKnobValue();
 			connectCanDevice();
@@ -463,7 +461,15 @@ public class CanService extends Service {
 						}
 						break;
 					case Contacts.CANFISRTNAMEGROUP.HIWORLD:
-						readSSCanPort(); // 尚摄数据帧
+						switch (canName) {
+						case Contacts.CANNAMEGROUP.SSNissan:
+						case Contacts.CANNAMEGROUP.SSNissanWithout360:
+							readSSCanPort_1(); //日产
+							break;
+						default:
+							readSSCanPort(); // 尚摄数据帧
+							break;
+						}
 						break;
 					default:
 						break;
@@ -545,6 +551,80 @@ public class CanService extends Service {
 					if (isSSAValidPacket(packet)) {
 						if (mOutputStream != null) {
 							mSSACK(mode);
+						}
+
+						// if (System.currentTimeMillis() - lastSendTime > 100)
+						// {
+						// lastSendTime = System.currentTimeMillis();
+						dealWithPacketData(packet);
+						// }
+					} else {
+						Trace.i("packet read failed");
+						if (mOutputStream != null)
+							mOutputStream.write((byte) 0x0f);
+					}
+				}
+				packet = null;
+			}
+
+		}
+
+		/*-------------------尚摄数据帧-----end------------------*/
+		
+		/*-------------------尚摄第二种数据帧----------start-------------*/
+		private boolean isSSAValidPacket_1(final byte[] packet) {
+			byte sum = 0;
+
+			for (int i = 2; i < packet.length - 1; i++) {
+				sum += packet[i];
+			}
+			// sum = (byte) ((byte) 0xff - sum);
+			sum = (byte) (((byte) sum & (byte) 0xFF) - 1);
+			if (packet[packet.length - 1] == sum) {
+				return true;
+			}
+			return false;
+		}
+
+		// 数据位接收成功响应
+		private void mSSACK_1(byte mode) {
+			byte[] packet = new byte[6];
+			packet[0] = (byte) Contacts.SS_HEAD_CODE_3;
+			packet[1] = (byte) Contacts.SS_HEAD_CODE_4;
+			packet[2] = 0x01;
+			packet[3] = (byte) 0xFF;
+			packet[4] = mode; // 对应的模式位
+			packet[5] = (byte) (((packet[2] + packet[3] + packet[4]) & (byte) 0xff) - 1);
+			if (mOutputStream != null) {
+				try {
+					mOutputStream.write(packet);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		private void readSSCanPort_1() throws IOException {
+			// TODO Auto-generated method stub
+			byte data1 = mReadByte();
+			byte data2 = mReadByte();
+			if (data1 == (byte) Contacts.SS_HEAD_CODE_3
+					&& data2 == (byte) Contacts.SS_HEAD_CODE_4) {
+				byte len = mReadByte();
+				byte mode = mReadByte();
+				byte[] packet = new byte[len + 5];
+				packet[0] = (byte) Contacts.SS_HEAD_CODE_3;
+				packet[1] = (byte) Contacts.SS_HEAD_CODE_4;
+				packet[2] = len;
+				packet[3] = mode;
+				for (int i = 0; i < len + 1; i++) {
+					packet[4 + i] = mReadByte();
+				}
+				synchronized (lock1) {
+					if (isSSAValidPacket_1(packet)) {
+						if (mOutputStream != null) {
+							mSSACK_1(mode);
 						}
 
 						// if (System.currentTimeMillis() - lastSendTime > 100)
@@ -804,27 +884,36 @@ public class CanService extends Service {
 			writeCanPort(BytesUtil
 					.addRZCCheckBit(Contacts.HEX_GET_CAR_INFO_0_1));
 	}
-	
-	private void syncTimeWithMsg(String str){
+
+	private void syncTimeWithMsg(String str) {
 		Calendar c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY);
 		int minute = c.get(Calendar.MINUTE);
 		int second = c.get(Calendar.SECOND);
-		writeCanPort(BytesUtil.addSSCheckBit(str
-				+ BytesUtil.changIntHex(hour)
-				+ BytesUtil.changIntHex(minute)
-				+ BytesUtil.changIntHex(second)));
+		writeCanPort(BytesUtil
+				.addSSCheckBit(str + BytesUtil.changIntHex(hour)
+						+ BytesUtil.changIntHex(minute)
+						+ BytesUtil.changIntHex(second)));
 	}
-	
-	private void syncTimeWithMsgMT(){
+
+	private void syncTimeWithMsgMT() {
 		Calendar c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY);
 		int minute = c.get(Calendar.MINUTE);
 		int second = c.get(Calendar.SECOND);
 		writeCanPort(BytesUtil.addSSCheckBit("5AA50ACB00"
-				+ BytesUtil.changIntHex(hour)
-				+ BytesUtil.changIntHex(minute)
-				+ "0000"+"01"+"00000000"));
+				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
+				+ "0000" + "01" + "00000000"));
+	}
+	
+	private void syncTimeWithMsgRC() {
+		Calendar c = Calendar.getInstance();
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int minute = c.get(Calendar.MINUTE);
+		int second = c.get(Calendar.SECOND);
+		writeCanPort(BytesUtil.addSSCheckBit("AA550ACB000000"
+				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
+				+ "0100" + "000000"));
 	}
 
 	/**
@@ -847,6 +936,13 @@ public class CanService extends Service {
 				break;
 			case Contacts.CANNAMEGROUP.SSHyundai16MT:
 				syncTimeWithMsgMT(); // 16款名图同步时间
+				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
+						1000 * 60);
+				break;
+			case Contacts.CANNAMEGROUP.SSNissan:
+			case Contacts.CANNAMEGROUP.SSNissanWithout360:
+				syncTimeWithMsgRC(); // 日产同步时间
 				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
 						1000 * 60);

@@ -28,6 +28,7 @@ public class PreferenceUtil {
 		if(mode==""||mode==null){
 			mode =initCanName(context);
 		}
+		Log.i("cxs","========mode======="+mode);
 		return mode;
 	}
 	
