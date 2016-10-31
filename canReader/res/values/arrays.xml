@@ -289,6 +289,28 @@
         <item>com.console.canreader.fragment.SSHonda.TpmsSettingsFragment</item>
     </string-array>
     <!-- 尚摄 16款思域 -->
+    
+     <!-- 尚摄 本田12CRV-->
+    <string-array name="SSHonda12CRV_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>0</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSHonda12CRV_items">
+        <item>多媒体信息</item>
+        <item>蓝牙源信息</item>
+    </string-array>
+    <string-array name="SSHonda12CRV_fragment">
+        <item>com.console.canreader.fragment.SSHonda12CRV.MediaFragment</item>
+        <item>com.console.canreader.fragment.SSHonda12CRV.BluetoothFragment</item>
+    </string-array>
+    <!-- 尚摄 本田12CRV -->
+    
     <!-- 本田 -->
     
     <!-- 广汽传祺 -->
@@ -385,7 +407,7 @@
         <item>0</item> <!-- 空调控制  -->
         <item>0</item> <!-- 光盘控制  -->
         <item>0</item> <!-- 原车功放  -->
-        <item>1</item> <!-- 全景  -->
+        <item>0</item> <!-- 全景  -->
         <item>0</item><!-- 胎压 -->
         <item>1</item> <!-- 关于  -->
     </string-array>
@@ -481,6 +503,149 @@
     <!-- 尚摄 日产不带360全景 -->    
      
     <!-- 日产 -->
+    <!-- 通用 -->
+    <!-- 尚摄 通用-->
+    <string-array name="SSGE_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>1</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于 -->
+    </string-array>
+    <string-array name="SSGE_items">
+        <item>车辆信息</item>
+        <item>油耗、里程信息</item>
+    </string-array>
+    <string-array name="SSGE_fragment">
+        <item>com.console.canreader.fragment.SSGE.CarInfoFragment</item> 
+        <item>com.console.canreader.fragment.SSGE.ConDisInfoFragment</item> 
+    </string-array>
+    <string-array name="SSGE_setting_items">
+        <item>OnStar信息</item>
+        <item>蓝牙信息</item>
+        <item>车型面板设置</item>
+        <item>空调系统设定</item>
+        <item>冲撞/监测系统设定</item>
+        <item>舒适性/方便性设定</item>
+        <item>门锁设定</item>
+        <item>遥控设定</item>
+        <item>照明设定</item>
+        <item>仪表显示及运动模式设定</item>
+        <item>语言设定</item>      
+    </string-array>
+    <string-array name="SSGE_setting_fragment">
+        <item>com.console.canreader.fragment.SSGE.OnstarSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSGE.BluetoothSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSGE.CarTypeSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSGE.AirConSettingsFragment</item>  
+        <item>com.console.canreader.fragment.SSGE.CrashSettingsFragment</item>  
+        <item>com.console.canreader.fragment.SSGE.ConvenienceSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSGE.LockSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSGE.RemoteControlSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSGE.LightSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSGE.DisplaySettingsFragment</item>
+        <item>com.console.canreader.fragment.SSGE.LanguageSettingsFragment</item> 
+    </string-array>
+
+     <!-- 尚摄 通用-->  
+    
+    <!-- 通用 -->
+    
+    <!-- 上汽  -->
+    <!-- 尚摄  荣威360  -->
+    <string-array name="SSRoewe360_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>1</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <!-- 尚摄  荣威360  -->   
+    <!-- 上汽  -->
+    
+     <!-- 福特  -->
+     
+     <!-- 尚摄  全系通用（16款撼路者、翼博、翼虎等）  -->
+    <string-array name="SSFord_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+     <string-array name="SSFord_items">
+        <item>车身信息</item>
+    </string-array>
+    <string-array name="SSFord_fragment">
+        <item>com.console.canreader.fragment.SSFord.CarTypeSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄  全系通用（16款撼路者、翼博、翼虎等）  -->   
+    
+      <!-- 尚摄  2015款锐界  -->
+    <string-array name="SSFordEDGE_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+     <string-array name="SSFordEDGE_items">
+        <item>车身信息</item>
+    </string-array>
+    <string-array name="SSFordEDGE_fragment">
+        <item>com.console.canreader.fragment.SSFord.CarTypeSettingsFragment</item> 
+    </string-array>
+      <string-array name="SSFordEDGE_setting_items">
+        <item>语言设定</item>
+    </string-array>
+      <string-array name="SSFordEDGE_setting_fragment">
+         <item>com.console.canreader.fragment.SSFord.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄  2015款锐界  --> 
+    
+     <!-- 尚摄  2015款福克斯  -->
+    <string-array name="SSFordFocus_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+     <string-array name="SSFordFocus_items">
+        <item>车身信息</item>
+        <item>油耗、里程信息</item>
+    </string-array>
+    <string-array name="SSFordFocus_fragment">
+        <item>com.console.canreader.fragment.SSFord.CarTypeSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSFord.OilDisFragment</item> 
+    </string-array>
+    <!-- 尚摄  2015款福克斯  -->   
+     
+     
+     <!-- 福特  -->
+    
+    
+    
+    
+    
     
     
     
@@ -863,4 +1028,199 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+    
+    <string-array name="ssge_car_type_entries">
+        <item>爱唯欧、克鲁兹、英朗、迈锐宝、君威</item>
+        <item>君越、GL8</item>
+        <item>昂科拉</item>
+    </string-array>  
+     <string-array name="ssge_car_type_values">
+        <item>1</item>
+        <item>2</item>
+        <item>5</item>
+    </string-array>
+    
+      <string-array name="ssge_auto_wind_entries">
+        <item>低</item>
+        <item>中</item>
+        <item>高</item>
+    </string-array>  
+     <string-array name="ssge_auto_wind_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     <string-array name="ssge_aircon_mode_entries">
+        <item>关</item>
+        <item>开</item>
+        <item>上次设置</item>
+    </string-array>  
+     <string-array name="ssge_aircon_mode_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+      <string-array name="ssge_air_quality_entries">
+        <item>低敏感度</item>
+        <item>高敏感度</item>
+    </string-array>  
+     <string-array name="ssge_air_quality_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    
+      <string-array name="ssge_air_autozone_entries">
+        <item>统一设置</item>
+        <item>分区设置</item>
+        <item>上次设置</item>
+    </string-array>  
+     <string-array name="ssge_air_autozone_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     
+      <string-array name="ssge_backarea_temp_entries">
+        <item>关</item>
+        <item>同前区一样</item>
+        <item>上次设定</item>
+    </string-array>  
+     <string-array name="ssge_backarea_temp_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     
+      <string-array name="ssge_remote_autoheat_entries">
+        <item>关</item>
+        <item>驾驶员和乘客</item>
+        <item>驾驶员</item>
+    </string-array>  
+     <string-array name="ssge_remote_autoheat_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+          <string-array name="ssge_park_assit_entries">
+        <item>关</item>
+        <item>开</item>
+        <item>拖车补偿</item>
+    </string-array>  
+     <string-array name="ssge_park_assit_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     
+        <string-array name="ssge_crash_ready_entries">
+        <item>关闭</item>
+        <item>报警</item>
+        <item>报警和制动</item>
+    </string-array>  
+     <string-array name="ssge_crash_ready_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     
+          
+      <string-array name="ssge_convenience_ripe_entries">
+        <item>关</item>
+        <item>转向柱收缩</item>
+        <item>转向管柱提升</item>
+        <item>转向管柱收缩和提升</item>
+    </string-array>  
+     <string-array name="ssge_convenience_ripe_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+               
+    <string-array name="ssge_open_lock_s_entries">
+        <item>关</item>
+        <item>拔出点火开关钥匙仅驾驶员车门解锁</item>
+        <item>拔出点火开关钥匙所有车门解锁</item>
+    </string-array>  
+     <string-array name="ssge_open_lock_s_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+    <string-array name="ssge_open_lock_z_entries">
+        <item>关</item>
+        <item>切入驻车档仅驾驶员车门解锁</item>
+        <item>切入驻车档所有车门解锁</item>
+    </string-array>  
+    <string-array name="ssge_open_lock_z_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+    <string-array name="ssge_lock_feedback_entries">
+        <item>仅灯光</item>
+        <item>灯光与喇叭</item>
+        <item>仅喇叭</item>
+        <item>关</item>
+    </string-array>  
+    <string-array name="ssge_lock_feedback_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+      <string-array name="ssge_away_autolock_entries">
+        <item>关</item>
+        <item>开</item>
+        <item>喇叭鸣叫启用</item>
+    </string-array>  
+    <string-array name="ssge_away_autolock_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+      <string-array name="ssge_light_locklamp_entries">
+        <item>关</item>
+        <item>30s</item>
+        <item>60s</item>
+        <item>120s</item>
+    </string-array>  
+    <string-array name="ssge_light_locklamp_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+   <string-array name="spingarr">
+     <item>English</item>  
+     <item>Chinese</item>   
+     <item>German</item>  
+     <item>Iitalian</item>   
+     <item>French</item>  
+     <item>Swedish</item>  
+     <item>Spanish</item>  
+     <item>Dutch</item>
+     <item>Portug</item> 
+     <item>Turkish</item> 
+     <item>Japanese</item>  
+     <item>Norweg</item>  
+     <item>Finnish</item>  
+     <item>Danish</item>  
+     <item>Greek</item>  
+     <item>Arabic</item>    
+    </string-array>
+    
 </resources>

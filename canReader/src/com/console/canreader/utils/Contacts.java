@@ -13,23 +13,54 @@ public class Contacts {
 		public static final int VOLDOW = 2;
 		public static final int MENUUP = 3;
 		public static final int MENUDOWN = 4;
-		public static final int PHONE = 5;
+		public static final int PHONE = 5;                  //电话接听和挂断合一
 		public static final int MUTE = 6;
 		public static final int SRC = 7;
 		public static final int SPEECH = 8;
-		public static final int ANSWER = 9;
-		public static final int HANGUP = 10;
+		public static final int ANSWER = 9;                 //电话接听
+		public static final int HANGUP = 10;                 //电话挂断
 		public static final int MENU_LONG_UP = 11;
 		public static final int MENU_LONG_DOWN = 12;
-		public static final int CANINFOPAGE = 13;
-		public static final int KNOBVOLUME = 14;
-		public static final int KNOBSELECTOR = 15;
-		public static final int POWER = 16;
-		public static final int FM_AM = 17;
-		public static final int MUSIC = 18;
-		public static final int PHONE_APP = 19;
-		public static final int HOME = 20;
-		public static final int MAP = 21;
+		public static final int CANINFOPAGE = 13;              
+		public static final int POWER = 16;                     //打开免打扰 app
+		public static final int FM_AM = 17;                    //打开radio app
+		public static final int MUSIC = 18;                    //打开音乐app
+		public static final int PHONE_APP = 19;                //打开蓝牙电话app
+		public static final int HOME = 20;                     //返回主界面
+		public static final int MAP = 21;                      //打开地图
+		public static final int AUX = 22;                       //打开AUX
+		public static final int MUSIC_PLAY_PAUSE = 23;           //打开音乐暂停和播放
+		public static final int ANSWER_WITH_MENUUP = 24;     //接听键和上一曲
+		public static final int HANGUP_WITH_MENUDOWN = 25;   //挂断键和下一曲
+		public static final int NUM1 = 31;   //数字键1
+		public static final int NUM2 = 32;   //数字键2
+		public static final int NUM3 = 33;   //数字键3
+		public static final int NUM4 = 34;   //数字键4
+		public static final int NUM5 = 35;   //数字键5
+		public static final int NUM6 = 36;   //数字键6
+		public static final int NUM7 = 37;   //数字键7
+		public static final int NUM8 = 38;   //数字键8
+		public static final int NUM9 = 39;   //数字键9
+		public static final int NUM0 = 40;   //数字键0
+		public static final int NUMSTAR = 41;   //数字键*
+		public static final int POUND = 42;  //数字键#
+		public static final int DPAD_UP = 43;  //方向盘上
+		public static final int DPAD_DOWN = 44;  //方向盘下
+		public static final int DPAD_LEFT = 45;  //方向盘左
+		public static final int DPAD_RIHGT = 46;  //方向盘右
+		public static final int ENTER = 47;  //确认
+		public static final int DEL = 48;  //删除
+		public static final int BACK = 49;  //返回
+		
+		
+		/*-----------无按键状态--------*/
+		public static final int KNOBVOLUME = 14;            //音量旋钮  无按键状态
+		public static final int KNOBSELECTOR = 15;         //选择旋钮  无按键状态
+		public static final int VOICE_FM = 26;               //打开radio app   无按键状态
+		public static final int FM_CHANGE_FREQUENCY = 27;               //打开radio app   无按键状态
+		public static final int VOICE_MENUUP = 28;              
+		public static final int VOICE_MENUDOWN = 29;               
+		public static final int VOICE_MUSIC_PLAY_PAUSE = 30;               
 	}
 
 	/**
@@ -67,7 +98,7 @@ public class Contacts {
 		
 		/*--------------尚摄-----------*/
 		public static final String  SSDFFG = "SSDFFG";                       //风光580
-		public static final String  SSGE = "SSGE";                           //通用
+		
 		//丰田
 		public static final String  SSToyota = "SSToyota";    
 		public static final String  SSToyotaBD = "SSToyotaBD";             //霸道  
@@ -75,10 +106,11 @@ public class Contacts {
 		public static final String  SSToyotaRAV4 = "SSToyotaRAV4";         //RAV4
 		public static final String  SSToyotaKMR = "SSToyotaKMR";           //凯美瑞
 		public static final String  SSToyotaKLL = "SSToyotaKLL";           //卡罗拉
-		//丰田
+		//本田
 		public static final String  SSHonda = "SSHonda";                     //本田
 		public static final String  SSHondaSY = "SSHondaSY";                     //16款思域
 		public static final String  SSHondaLP = "SSHondaLP";                     //本田凌派
+		public static final String  SSHonda12CRV = "SSHonda12CRV";                     //12CRV
 		
 		//广汽传祺
 		public static final String  SSTrumpchi = "SSTrumpchi";           //广汽传祺
@@ -91,8 +123,16 @@ public class Contacts {
 		public static final String  SSHyundai = "SSHyundai";       //现代起亚
 		public static final String  SSHyundai16MT = "SSHyundai16MT";   //16款名图		
 		//日产
-		public static final String  SSNissan = "SSNissan";                   //日产	
+		public static final String  SSNissan = "SSNissan";                   //日产360	
 		public static final String  SSNissanWithout360 = "SSNissanWithout360";                   //日产	
+		//通用
+		public static final String  SSGE = "SSGE";                           //通用
+		//上汽荣威
+		public static final String  SSRoewe360 = "SSRoewe360";                           //荣威360
+		//福特
+		public static final String  SSFord = "SSFord";  
+		public static final String  SSFordFocus = "SSFordFocus";                  //2015款福克斯
+		public static final String  SSFordEDGE = "SSFordEDGE";                        //2015款锐界
 		/*--------------尚摄-----------*/
 	}
 

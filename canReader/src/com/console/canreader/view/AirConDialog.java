@@ -221,7 +221,6 @@ public class AirConDialog extends Dialog {
 				}
 			}
 		}
-
 		outsideTemp.setText(canInfo.OUTSIDE_TEMPERATURE
 				+ context.getString(R.string.temp_unit) + "\n" + "OUT");
 

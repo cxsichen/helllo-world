@@ -1,0 +1,49 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <SwitchPreference
+        android:key="CONVENIENCE_SEAT_PARK_MOVE"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="驾驶员座椅停车移位设定" />
+
+    <ListPreference
+        android:entries="@array/ssge_convenience_ripe_entries"
+        android:entryValues="@array/ssge_convenience_ripe_values"
+        android:key="CONVENIENCE_RIPE_PARK_MOVE"
+        android:persistent="false"
+        android:title="转向管柱离车移位设定" />
+
+    <SwitchPreference
+        android:key="CONVENIENCE_OUTERMIRROR_PARK_LEAN"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="外后视镜倒车自动倾斜设定" />
+     <SwitchPreference
+        android:key="CONVENIENCE_OUTERMIRROR_PARK_FOLD"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="外后视镜自动折叠设定" />
+    <SwitchPreference
+        android:key="CONVENIENCE_DRIVER_PRIVATE_SETTING"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="驾驶员个性设置设定" />
+    <SwitchPreference
+        android:key="CONVENIENCE_REVERSE_BACKWIPE_AUTO"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="倒档自动后窗雨刷" />
+    <SwitchPreference
+        android:key="CONVENIENCE_RIPE_PARK_LEAN"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="转向管柱离车倾斜设定" />
+    
+      <SwitchPreference
+        android:key="CONVENIENCE_AUTO_WIPE"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="自动雨刮" />
+
+</PreferenceScreen>

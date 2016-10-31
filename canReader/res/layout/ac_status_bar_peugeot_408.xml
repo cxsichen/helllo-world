@@ -11,6 +11,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:src="@drawable/ic_menu" />
 
     <View
@@ -21,6 +22,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:src="@drawable/stat_seat_heating_left_3" />
 
     <View
@@ -29,6 +31,7 @@
         android:layout_weight="1" />
 
     <ImageView
+        android:id="@+id/iv7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/stat_windshield_defrost" />
@@ -41,6 +44,18 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+          android:visibility="gone"
+        android:src="@drawable/stat_recirculation_outside" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/iv8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/stat_recirculation_outside" />
 
     <View
@@ -51,16 +66,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/stat_rear_window_defrost" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:visibility="gone"
         android:src="@drawable/stat_seat_heating_right_3" />
 
     <View
@@ -69,6 +75,7 @@
         android:layout_weight="1" />
 
     <TextView
+        android:id="@+id/tv13"
         style="@style/AcStatusText"
         android:layout_width="48dp"
         android:layout_height="48dp"

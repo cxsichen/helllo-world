@@ -39,11 +39,17 @@ public class MenuPaAcitivity extends BaseActivity {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Contacts.MSG_UPDATA_UI:
-				seekBarTRE.setNumProgress(mCaninfo.TRE_VOLUME);
-				seekBarMID.setNumProgress(mCaninfo.MID_VOLUME);
-				seekBarBAS.setNumProgress(mCaninfo.BAS_VOLUME);
-				seekBarVOL.setNumProgress(mCaninfo.EQL_VOLUME);
-				mCarSelectedView.setPosition(mCaninfo.LR_BALANCE, mCaninfo.FB_BALANCE);
+				try {
+					CanInfo caninfo=getCanInfo();
+					seekBarTRE.setNumProgress(caninfo.TRE_VOLUME);
+					seekBarMID.setNumProgress(caninfo.MID_VOLUME);
+					seekBarBAS.setNumProgress(caninfo.BAS_VOLUME);
+					seekBarVOL.setNumProgress(caninfo.EQL_VOLUME);
+					mCarSelectedView.setPosition(caninfo.LR_BALANCE, caninfo.FB_BALANCE);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			
 				break;
 			default:
 				break;
@@ -186,13 +192,14 @@ public class MenuPaAcitivity extends BaseActivity {
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);   
-		mHandler.sendEmptyMessageDelayed(Contacts.MSG_UPDATA_UI, 500);
+		//mHandler.sendEmptyMessageDelayed(Contacts.MSG_UPDATA_UI, 500);
 	}
 
 	@Override
 	public void serviceConnected() {
 		// TODO Auto-generated method stub
 		super.serviceConnected();
+		mHandler.sendEmptyMessageDelayed(Contacts.MSG_UPDATA_UI, 500);
 	}
 
 }

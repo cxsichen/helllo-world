@@ -1,5 +1,7 @@
 package com.console.canreader.utils;
 
+
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
@@ -7,6 +9,7 @@ import android.util.Log;
 
 public class PreferenceUtil {
 	
+	public static final String MODE = "Console_mode";
 	public static final String KEY_SSHyundai_CAR_TYPE = "KEY_SSHyundai_CAR_TYPE";
 	private final static String CARTYPE = "carType";
 	private final static String CANTYPE = "canType";
@@ -101,6 +104,29 @@ public class PreferenceUtil {
 	public static void setKnobSelValue(Context context, int value) {
 		SharedPreferences.Editor editor = getPreferencesEditor(context);
 		editor.putInt("KnobSelValue", value).apply();
+	}
+	
+
+	public static int getMode(Context context) {
+		int mode=4;
+		try {
+			mode = Settings.System.getInt(context.getContentResolver(),
+					MODE,0);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}		
+		return mode;
+	}
+
+	public static void setMode(Context context, int value) {	
+		try {
+			Settings.System.putInt(context.getContentResolver(),
+					MODE,value);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 

@@ -108,13 +108,16 @@ public class GS4HIGHCarAirSettingsFragment extends BaseFragment {
 		}
 
 		public void syncView(CanInfo mCaninfo) {
-			CharSequence[] a = position_heat_left.getEntries();
-			position_heat_left
-					.setSummary(a[mCaninfo.LEFT_SEAT_TEMP].toString());
-			a = position_heat_right.getEntries();
-			position_heat_right.setSummary(a[mCaninfo.RIGTHT_SEAT_TEMP]
-					.toString());
-
+			try {
+				CharSequence[] a = position_heat_left.getEntries();
+				position_heat_left
+						.setSummary(a[mCaninfo.LEFT_SEAT_TEMP].toString());
+				a = position_heat_right.getEntries();
+				position_heat_right.setSummary(a[mCaninfo.RIGTHT_SEAT_TEMP]
+						.toString());
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 
 		private void updatePreferenceDescription(ListPreference preference,

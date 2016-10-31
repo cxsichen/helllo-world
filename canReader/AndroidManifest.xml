@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.console.canreader"
+    android:sharedUserId="android.uid.system"
     android:versionCode="1"
     android:versionName="1.0" >
+    <!--     android:sharedUserId="android.uid.system" -->
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -151,6 +153,20 @@
             android:launchMode="singleTask" >
         </activity>
         <!-- 功放activity -->
+        <!-- 胎压activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSGE.TpmsActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 胎压activity -->
+         <!-- 胎压activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSGE.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 胎压activity -->
         <service
             android:name="com.console.canreader.service.CanService"
             android:enabled="true"

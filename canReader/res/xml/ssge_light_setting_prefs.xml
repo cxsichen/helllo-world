@@ -1,0 +1,26 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    
+   
+	
+    <SwitchPreference
+        android:key="LIGHT_CARLAMP_SETTING"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="寻车灯功能设定" />
+
+    <ListPreference
+        android:entries="@array/ssge_light_locklamp_entries"
+        android:entryValues="@array/ssge_light_locklamp_values"
+        android:key="LIGHT_LOCKLAMP_SETTING"
+        android:persistent="false"
+        android:title="落锁大灯延时设定" />
+
+    <Preference
+        android:key="LIGHT_RIHGTTURN_LAMP_SETTING"
+        android:title="右转向灯" />
+    <Preference
+        android:key="LIGHT_LEFTTURN_LAMP_SETTING"
+        android:title="左转向灯" />
+
+</PreferenceScreen>

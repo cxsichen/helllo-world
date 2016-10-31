@@ -273,15 +273,11 @@ public class CanInfo implements Parcelable {
 	public int SEAT_SOUND=0;  //驾驶座音场状态
 	public int BOSE_CENTERPOINT=0; //BOSE CenterPoint状态
 	public int SURROND_VOLUME=0; //环绕音量
+	
+	/*-----360全景摄像头------*/
+	public int PANORAMA_STATUS=0;  //360全景状态
 
-	/*----落锁设定-----*/
-	public int AUTO_LOCK_SETTING = 0; // 自动落锁设定
-	public int AUTO_OPEN_LOCK = 0; // 智能解锁设定
-	public int DRIVER_LINK_LOCK = 0; // 驾驶员开门联动解锁设定
-	public int AUTO_OPEN_LOCK_P = 0; // 自动解锁设定（P档）
-	public int AUTO_LOCK_P = 0; // 自动落锁设定（P档）
-	public int AIRCON_WITH_AUTO = 0; // 空调与auto键联动
-	public int CYCLE_WITH_AUTO = 0; // 内外循环与auto键联动
+
 	/*----遥控设定-----*/
 	public int LAMP_WHEN_LOCK = 0; // 上锁开锁时紧急灯响应
 	public int INTELLIGENT_LOCK = 0; // 智能车锁和一键启动
@@ -295,22 +291,89 @@ public class CanInfo implements Parcelable {
 	public int REMOTELOCK_SIDELAMP_SIGN = 0; // 遥控门锁车边灯提示
 	public int SPEECH_WARING_VOLUME = 0; // 语音报警系统的音量
 	public int REMOTE_START_SYSTEM = 0; // 遥控启动系统
+
+	public int REMOTECONTROL_LOCK_FEEDBACK=0; //遥控落锁反馈设定
+	public int REMOTECONTROL_UNLOCK_FEEDBACK=0; //遥控解锁反馈设定
+	public int REMOTECONTROL_UNLOCK=0; //遥控解锁设定
+	public int REMOTECONTROL_UNLOCK_AUTORELOCK=0; //遥控解锁车门自动重锁设定
+	public int REMOTECONTROL_RELOCK_DOOR=0; //重锁遥控打开的门的设定
+	public int REMOTECONTROL_KEY_AUTORECOGNIZE=0; //驾驶员钥匙自动识别设定
+	public int REMOTECONTROL_START=0; //远程启动设定
+	public int REMOTECONTROL_NEAR_AUTOUNLOCK=0; //智能近车解锁设定
 	
-	/*----门锁设定状态-----*/
+	public int REMOTECONTROL_AWAY_AUTOLOCK=0; //智能离车落锁设定
+	public int REMOTECONTROL_KEYLEF_ALARM=0; //钥匙遗忘提醒设定
+	public int REMOTECONTROL_MOVE_DOOR=0; //遥控滑移门设置
+	public int REMOTECONTROL_WINDOW_CONTROL=0; //遥控车窗控制
+	
+	/*----照明设定-----*/
+	public int LIGHT_CARLAMP_SETTING=0; //寻车灯功能设定
+	public int LIGHT_LOCKLAMP_SETTING=0; //落锁大灯延时设定
+	public int LIGHT_RIHGTTURN_LAMP_SETTING=0; //右转向灯
+	public int LIGHT_LEFTTURN_LAMP_SETTING=0; //左转向灯
+	
+	/*----落锁设定 门锁设定状态-----*/
 	public int LOCK_PERSONAL_SETTING = 0;   // 离开锁止个性化设定
 	public int AUTO_LOCK_TIME = 0;   // 自动重锁时间
-	public int REMOTE_LOCK_SIGN = 0;   // 遥控落锁提示  
-
+	public int REMOTE_LOCK_SIGN = 0;   // 遥控落锁提示 
+	
+	
+	public int AUTO_OPEN_LOCK = 0; // 智能解锁设定
+	public int DRIVER_LINK_LOCK = 0; // 驾驶员开门联动解锁设定
+	public int AUTO_OPEN_LOCK_P = 0; // 自动解锁设定（P档）
+	public int AUTO_LOCK_P = 0; // 自动落锁设定（P档）
+	public int AIRCON_WITH_AUTO = 0; // 空调与auto键联动
+	public int CYCLE_WITH_AUTO = 0; // 内外循环与auto键联动
+	
+	public int LOCK_OPENDOOR_WITHOUTLOCK=0; //防止开门自动自动落锁设定
+	public int AUTO_LOCK_SETTING = 0; // 自动落锁设定
+	public int AUTO_OPEN_LOCK_Z = 0; // 自动解锁设定（自动档）
+	public int LOCK_DELAY_LOCK=0;   //延迟落锁设定
+	public int AUTO_OPEN_LOCK_S = 0; // 自动解锁设定（手动档）
+	
+	/*--  蓝牙模式-----*/
+	public String BLUETOOTH_PASSWARD="";      //蓝牙配对密码
+	public String BLUETOOTH_NAME="";      //蓝牙电话名称
+	public int BLUETOOTH_MODE=0;      //蓝牙电话名称
+	
 	/*--  摄像头模式-----*/
 	public int BACK_CAMERA_MODE = 0; // 后摄像头模式
 	public int LEFT_CAMERA_SWITCH = 0; // 右摄像头开关
 	
+	/*-- onstar 安吉星-----*/
+	public int ONSTAR_STATUS= 0; // 安吉星状态
+	public int ONSTAR_PHONE_TYPE = 0; // 安吉星通话类型
+	public int ONSTAR_PHONE_SIGN = 0; // 安吉星通话标志
+	
+	public int ONSTAR_PHONE_HOUR = 0; // 通话时间-小时
+	public int ONSTAR_PHONE_MINUTE = 0; // 通话时间-分钟
+	public int ONSTAR_PHONE_SECOND = 0; // 通话时间-秒
+	public int ONSTAR_LEFTIME_1 = 0; // 剩余时间高位
+	public int ONSTAR_LEFTIME_2 = 0; // 剩余时间低位
+	public int ONSTAR_EFFECTTIME_YEAR_1 = 0; // 有效期-年 高位
+	public int ONSTAR_EFFECTTIME_YEAR_2 = 0; // 有效期-年 低位
+	public int ONSTAR_EFFECTTIME_MOUTH = 0; // 有效期-月
+	public int ONSTAR_EFFECTTIME_DAY = 0; // 有效期-日
+	
+	public int ONSTAR_WARING_STATUS = 0; // 警告信息状态
+	public int ONSTAR_WARING_TYPE = 0; // 警告信息类型
+	
+	public String ONSTAR_RECEIVE_PHONE = ""; // 接收号码
 	/*--  灯光设定-----*/
 	public int WIPER_LINK_LAMP = 0; //雨刷和自动大灯联动个性化设定
 	public int AUTO_LIGHT_SENSEITIVITY = 0; //自动车内照明灵敏度
 	public int AUTO_LIGHTING_SENSEITIVITY = 0; //自动点灯灵敏度
 	public int FRONT_LAMP_OFF_TIME = 0; //前大灯自动熄灭时间
 	public int LAMP_TURN_DARK_TIME = 0; //车内灯光减光时间
+	
+	/*--  多媒体信息-----*/
+	public int MULTI_MEIDA_SOURCE=0;           //当前源
+	public int MULTI_MEIDA_PLAYING_NUM=0;       //当前播放曲目
+	public int MULTI_MEIDA_WHOLE_NUM=0;       //总曲目
+	public int MULTI_MEIDA_PLAYING_MINUTE=0;       //当前播放时间 分钟
+	public int MULTI_MEIDA_PLAYING_SECOND=0;       //当前播放时间 秒
+	public int MULTI_MEIDA_PLAYING_PROGRESS=0;       //当前播放进度
+	public int MULTI_MEIDA_PLAYING_STATUS=0;       //多媒体状态
 	
 	/*-----驾驶辅助系统设定--------*/
 	public int LANE_DEPARTURE = 0; //车道偏离辅助系统设定
@@ -328,12 +391,57 @@ public class CanInfo implements Parcelable {
 	public int SWITCH_TRIPB_SETTING=0;     //里程B重设条件的切换
 	public int SWITCH_TRIPA_SETTING=0;     //里程A重设条件的切换
 	public int ADJUST_OUTSIDE_TEMP=0;     //调节外部气温显示
-	            
+	
+	/*------仪表显示设定信息-----*/
+	public int DISPLAY_ECO_MIXPOWER=0;     //混合动力ECO指示设定
+	public int DISPLAY_NAVI_MSG=0;     //仪表导航信息设定
+	public int DISPLAY_SPEED_RANG=0;     //速度范围提示模式设定
+	/*------运动模式-----*/
+	public int SPORT_ENGINE_STATUS=0;     //运动模式发动机状态设定
+	public int SPORT_BACKLIGHT_MODE=0;     //运动模式背光模式设定
+	
 	public int CAR_TYPE=0;   //车型设置
 	
 	public int AIR_CONDITIONER_CONTROL = 0; // 空调是否有界面控制，如果为1则有，不需要自动弹框
 	
+	/*----空调 设置-----*/
+	public int AIRCON_AUTO_WIND=0;     //自动风量模式设定
+	public int AIRCON_MODE=0;          //空调模式设定
+	public int AIRCON_AIR_QUALITY=0;   //空气质量传感器设定
+	public int AIRCON_AUTOZONE_TEMP=0; //自动区域温度设定
+	public int AIRCON_SEAT_AUTOVENT=0;          //座椅自动通风设定
+	public int AIRCON_SEAT_AUTOHEAT=0;          //座椅自动加热设定
+	public int AIRCON_CONTORL_AUTOVENT=0;          //遥控启动座椅自动通风
+	public int AIRCON_CONTORL_AUTOHEAT=0;          //遥控启动座椅自动加热
 	
+	public int AIRCON_BACKAREA_TEMP=0;          //后座区域温度
+	public int AIRCON_FRONT_DEMIST=0;          //前窗自动去雾
+	public int AIRCON_BACK_DEMIST=0;          //后窗自动去雾
+	public int AIRCON_REMOTE_START=0;          //遥控启动空调
+	public int AIRCON_AIR_QUALITY_1=0;          //空气质量传感器1设定
+	public int AIRCON_CONTORL_AUTOHEAT_1=0;          //遥控启动座椅自动加热1
+	
+	/*----冲撞/监测系统----*/
+	public int CRASHPROOF_SIDE_BLIND_AREA=0;          //侧盲区报警系统
+	public int CRASHPROOF_WARING=0;          //防撞报警类型设定
+	public int CRASHPROOF_PART_ASSIT=0;          //泊车辅助系统设定（带拖车补偿）
+	public int CRASHPROOF_24GHZ_RADAR=0;          //24GHZ雷达设定
+	public int CRASHPROOF_AUTO_READY=0;          //自动防撞准备
+	public int CRASHPROOF_CARSTATUS_NOTIFY=0;          //汽车状态通知
+	public int CRASHPROOF_RAMPWAY_ASSIT=0;          //坡道辅助系统
+	
+	/*----舒适性/方便性设定----*/
+	public int CONVENIENCE_SEAT_PARK_MOVE=0;     //驾驶员座椅停车移位设定
+	public int CONVENIENCE_RIPE_PARK_MOVE=0;     //转向管柱离车移位设定
+	public int CONVENIENCE_OUTERMIRROR_PARK_LEAN=0;     //外后视镜倒车自动倾斜设定
+	public int CONVENIENCE_OUTERMIRROR_PARK_FOLD=0;     //外后视镜自动折叠设定
+	public int CONVENIENCE_DRIVER_PRIVATE_SETTING=0;     //驾驶员个性设置设定
+	public int CONVENIENCE_REVERSE_BACKWIPE_AUTO=0;     //倒档自动后窗雨刷
+	public int CONVENIENCE_RIPE_PARK_LEAN=0;     //转向管柱离车倾斜设定
+	public int CONVENIENCE_AUTO_WIPE=0;     //自动雨刮
+	
+	public float FREQUENCY_VALUE=0;              //频率值
+	public float TEMP_UNIT=0;              //温度单位
 	/*-------------------add by xyw start----------------------------------*/
 	public int CAR_GEAR_STATUS = -1;							//车身档位，-1表示无效 1P 2N 3R 4D 5S
 	public int CAR_BACK_STATUS = -1;							//倒车状态          0非倒档    1倒挡
@@ -470,6 +578,7 @@ public class CanInfo implements Parcelable {
 
 		dest.writeInt(FUEL_WARING_SIGN);
 		dest.writeInt(BATTERY_WARING_SIGN);
+		dest.writeInt(CAMERA_MODE);	
 	}
 
 	public static final Parcelable.Creator<CanInfo> CREATOR = new Parcelable.Creator<CanInfo>() {
@@ -577,6 +686,7 @@ public class CanInfo implements Parcelable {
 
 		FUEL_WARING_SIGN = in.readInt();
 		BATTERY_WARING_SIGN = in.readInt();
+		CAMERA_MODE= in.readInt();
 	}
 
 	@Override

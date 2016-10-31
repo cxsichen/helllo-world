@@ -1,5 +1,7 @@
 package com.console.canreader.dealer;
 
+import java.io.IOException;
+
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,6 +13,7 @@ import android.os.Message;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -33,6 +36,8 @@ public class KeyDealer {
 	public static final String ACTION_MENU_LONG_UP = "com.console.MENU_LONG_UP";
 	public static final String ACTION_MENU_LONG_DOWN = "com.console.MENU_LONG_DOWN";
 	public static final String ACTION_MUSIC_START = "com.console.MUSIC_START";
+	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
+	public static final String RADIO_FREQ_ACTION = "action.colink.startFM";
 
 	// 音量加减和mute由这里统一处理，其他发到外面处理
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
@@ -79,6 +84,10 @@ public class KeyDealer {
 			case Contacts.MUTE:
 				Log.i("cxs", "-------msg.MUTE-------");
 				handleMute();
+				break;
+			case Contacts.KEYEVENT.POWER:
+				Log.i("cxs", "-------msg.POWER-------");
+				handlePower();
 				break;
 			case Contacts.SRC:
 			case Contacts.MIC:
@@ -130,6 +139,14 @@ public class KeyDealer {
 				Log.i("cxs", "-------Contacts.KEYEVENT.MAP-------");
 				handleMAP();
 				break;
+			case Contacts.KEYEVENT.AUX:
+				Log.i("cxs", "-------Contacts.KEYEVENT.AUX-------");
+				handleAUX();
+				break;
+			case Contacts.KEYEVENT.MUSIC_PLAY_PAUSE:
+				Log.i("cxs", "-------Contacts.KEYEVENT.MUSIC_PLAY_PAUSE-------");
+				handleMUSIC_PLAY_PAUSE();
+				break;
 			case Contacts.KEYEVENT.KNOBVOLUME:
 				Log.i("cxs", "-------Contacts.KEYEVENT.KNOBVOLUME-------");
 				handleKnobVolume(msg.arg1);
@@ -137,6 +154,97 @@ public class KeyDealer {
 			case Contacts.KEYEVENT.KNOBSELECTOR:
 				Log.i("cxs", "-------Contacts.KEYEVENT.KNOBSELECTOR-------");
 				handleKnobSelector(msg.arg1);
+				break;
+			case Contacts.KEYEVENT.ANSWER_WITH_MENUUP:
+				Log.i("cxs",
+						"-------Contacts.KEYEVENT.ANSWER_WITH_MENUUP-------");
+				handleANSWER_WITH_MENUUP();
+				break;
+			case Contacts.KEYEVENT.HANGUP_WITH_MENUDOWN:
+				Log.i("cxs",
+						"-------Contacts.KEYEVENT.HANGUP_WITH_MENUDOWN-------");
+				handleHANGUP_WITH_MENUDOWN();
+				break;
+			case Contacts.KEYEVENT.FM_CHANGE_FREQUENCY:
+				Log.i("cxs",
+						"-------Contacts.KEYEVENT.FM_CHANGE_FREQUENCY-------");
+				handleFM_CHANGE_FREQUENCY((float) msg.obj);
+				break;
+			case Contacts.KEYEVENT.NUM1:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUM1-------");
+				handleNUM1();
+				break;
+			case Contacts.KEYEVENT.NUM2:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUM2-------");
+				handleNUM2();
+				break;
+			case Contacts.KEYEVENT.NUM3:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUM3-------");
+				handleNUM3();
+				break;
+			case Contacts.KEYEVENT.NUM4:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUM4-------");
+				handleNUM4();
+				break;
+			case Contacts.KEYEVENT.NUM5:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUM5-------");
+				handleNUM5();
+				break;
+			case Contacts.KEYEVENT.NUM6:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUM6-------");
+				handleNUM6();
+				break;
+			case Contacts.KEYEVENT.NUM7:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUM7-------");
+				handleNUM7();
+				break;
+			case Contacts.KEYEVENT.NUM8:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUM8-------");
+				handleNUM8();
+				break;
+			case Contacts.KEYEVENT.NUM9:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUM9-------");
+				handleNUM9();
+				break;
+			case Contacts.KEYEVENT.NUM0:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUM0-------");
+				handleNUM0();
+				break;
+			case Contacts.KEYEVENT.NUMSTAR:
+				Log.i("cxs", "-------Contacts.KEYEVENT.NUMSTAR-------");
+				handleNUMSTAR();
+				break;
+			case Contacts.KEYEVENT.POUND:
+				Log.i("cxs", "-------Contacts.KEYEVENT.POUND-------");
+				handlePOUND();
+				break;
+			case Contacts.KEYEVENT.DPAD_UP:
+				Log.i("cxs", "-------Contacts.KEYEVENT.DPAD_UP-------");
+				handleDPAD_UP();
+				break;
+			case Contacts.KEYEVENT.DPAD_DOWN:
+				Log.i("cxs", "-------Contacts.KEYEVENT.DPAD_DOWN-------");
+				handleDPAD_DOWN();
+				break;
+			case Contacts.KEYEVENT.DPAD_LEFT:
+				Log.i("cxs", "-------Contacts.KEYEVENT.DPAD_LEFT-------");
+				handleDPAD_LEFT();
+				break;
+			case Contacts.KEYEVENT.DPAD_RIHGT:
+				Log.i("cxs", "-------Contacts.KEYEVENT.DPAD_RIHGT-------");
+				handleDPAD_RIHGT();
+				break;
+			case Contacts.KEYEVENT.ENTER:
+				Log.i("cxs", "-------Contacts.KEYEVENT.ENTER-------");
+				handleENTER();
+				break;
+			case Contacts.KEYEVENT.DEL:
+				Log.i("cxs", "-------Contacts.KEYEVENT.DEL-------");
+				handleDEL();
+				break;
+			case Contacts.KEYEVENT.BACK:
+				Log.i("cxs", "-------Contacts.KEYEVENT.BACK-------");
+				handleBACK();
 				break;
 			default:
 				break;
@@ -221,53 +329,127 @@ public class KeyDealer {
 	/**
 	 * acc on后清除旋钮保存值
 	 */
-	public void clearKnobValue(){
-		PreferenceUtil.setKnobVolValue(context,0);
-		PreferenceUtil.setKnobSelValue(context,0);
+	public void clearKnobValue() {
+		PreferenceUtil.setKnobVolValue(context, 0);
+		PreferenceUtil.setKnobSelValue(context, 0);
 	}
-
 
 	public void handleKnobSelector(int knobValue) {
-		int  temp=knobValue-PreferenceUtil.getKnobSelValue(context);
-		if(temp>125){
-			temp=temp-256;
+		int temp = knobValue - PreferenceUtil.getKnobSelValue(context);
+		if (temp > 125) {
+			temp = temp - 256;
 		}
-		if(temp<-125){
-			temp=256+temp;
+		if (temp < -125) {
+			temp = 256 + temp;
 		}
-		Log.i("cxs","==handleKnobSelector=temp=="+temp);
-		if(temp>0){
+		Log.i("cxs", "==handleKnobSelector=temp==" + temp);
+		if (temp > 0) {
 			handleMenuDown();
-		}else{
+		} else {
 			handleMenuUp();
 		}
-		PreferenceUtil.setKnobSelValue(context,knobValue);
+		PreferenceUtil.setKnobSelValue(context, knobValue);
 	}
-	
 
 	public void handleKnobVolume(int knobValue) {
 		if (mAudioManager == null)
 			mAudioManager = (AudioManager) context
 					.getSystemService(Context.AUDIO_SERVICE);
 		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-		int  temp=knobValue-PreferenceUtil.getKnobVolValue(context);
-		//处理循环
-		if(temp>125){
-			temp=temp-256;
+		int temp = knobValue - PreferenceUtil.getKnobVolValue(context);
+		// 处理循环
+		if (temp > 125) {
+			temp = temp - 256;
 		}
-		if(temp<-125){
-			temp=256+temp;
+		if (temp < -125) {
+			temp = 256 + temp;
 		}
-		//处理值操作间隔		
-		if(temp>0){
-			temp=(temp/2)<1?1:(temp/2);
-		}else if(temp<0){
-			temp=(temp/2)>-1?-1:(temp/2);
+		// 处理值操作间隔
+		if (temp > 0) {
+			temp = (temp / 2) < 1 ? 1 : (temp / 2);
+		} else if (temp < 0) {
+			temp = (temp / 2) > -1 ? -1 : (temp / 2);
 		}
 		handleVolume(context, cur_music + temp);
-		PreferenceUtil.setKnobVolValue(context,knobValue);
+		PreferenceUtil.setKnobVolValue(context, knobValue);
 	}
-	
+
+	protected void handleNUM1() {
+		actionKey(KeyEvent.KEYCODE_1);
+	}
+
+	protected void handleNUM2() {
+		actionKey(KeyEvent.KEYCODE_2);
+	}
+
+	protected void handleNUM3() {
+		actionKey(KeyEvent.KEYCODE_3);
+	}
+
+	protected void handleNUM4() {
+		actionKey(KeyEvent.KEYCODE_4);
+	}
+
+	protected void handleNUM5() {
+		actionKey(KeyEvent.KEYCODE_5);
+	}
+
+	protected void handleNUM6() {
+		actionKey(KeyEvent.KEYCODE_6);
+	}
+
+	protected void handleNUM7() {
+		actionKey(KeyEvent.KEYCODE_7);
+	}
+
+	protected void handleNUM8() {
+		actionKey(KeyEvent.KEYCODE_8);
+	}
+
+	protected void handleNUM9() {
+		actionKey(KeyEvent.KEYCODE_9);
+	}
+
+	protected void handleNUM0() {
+		actionKey(KeyEvent.KEYCODE_0);
+	}
+
+	protected void handleNUMSTAR() {
+		actionKey(KeyEvent.KEYCODE_STAR);
+	}
+
+	protected void handlePOUND() {
+		actionKey(KeyEvent.KEYCODE_POUND);
+	}
+
+	protected void handleDPAD_UP() {
+		actionKey(KeyEvent.KEYCODE_DPAD_UP);
+	}
+
+	protected void handleDPAD_DOWN() {
+		actionKey(KeyEvent.KEYCODE_DPAD_DOWN);
+	}
+
+	protected void handleDPAD_LEFT() {
+		actionKey(KeyEvent.KEYCODE_DPAD_LEFT);
+	}
+
+	protected void handleDPAD_RIHGT() {
+		actionKey(KeyEvent.KEYCODE_DPAD_RIGHT);
+	}
+
+	protected void handleENTER() {
+		actionKey(KeyEvent.KEYCODE_DPAD_RIGHT);
+	}
+
+	protected void handleDEL() {
+		actionKey(KeyEvent.KEYCODE_DEL);
+	}
+
+	protected void handleBACK() {
+		actionKey(KeyEvent.KEYCODE_BACK);
+	}
+
 	protected void handlePower() {
 		try {
 			Intent intent = new Intent();
@@ -280,11 +462,49 @@ public class KeyDealer {
 		}
 	}
 
+	private void handleANSWER_WITH_MENUUP() {
+		// TODO Auto-generated method stub
+		if (PreferenceUtil.getMode(context) == 3) {
+			handleTelAnswer();
+		} else {
+			handleMenuUp();
+		}
+	}
+
+	private void handleFM_CHANGE_FREQUENCY(float value) {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent();
+		intent.setAction(RADIO_FREQ_ACTION);
+		intent.putExtra("fm_fq", value);
+		context.sendBroadcast(intent);
+	}
+
+	private void handleHANGUP_WITH_MENUDOWN() {
+		// TODO Auto-generated method stub
+		if (PreferenceUtil.getMode(context) == 3) {
+			handleTelHandUp();
+		} else {
+			handleMenuDown();
+		}
+	}
+
+	private void handleMUSIC_PLAY_PAUSE() {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent();
+		intent.setAction(ACTION_PLAY_PAUSE);
+		context.sendBroadcast(intent);
+	}
+
+	private void handleAUX() {
+		// TODO Auto-generated method stub
+		openApplication(context, "com.console.auxapp");
+	}
+
 	private void handleMAP() {
 		// TODO Auto-generated method stub
 		startNavi();
 	}
-	
+
 	private void startNavi() {
 		// TODO Auto-generated method stub
 		int mapType = Settings.System.getInt(context.getContentResolver(),
@@ -419,14 +639,16 @@ public class KeyDealer {
 	long lastSendTime = 0;
 
 	Boolean PRESSFREE = true;
-     
-	static public int CAR_VOLUME_KNOB=0;	
+
+	static public int CAR_VOLUME_KNOB = 0;
+
 	// 处理
 	protected void dealWith(Context context, CanInfo canInfo) {
 		// TODO Auto-generated method stub
 
-		// 音量旋钮 选择旋钮
-		if (canInfo.STEERING_BUTTON_MODE == Contacts.KEYEVENT.KNOBVOLUME) {
+		// 音量旋钮 选择旋钮 语音命令
+		switch (canInfo.STEERING_BUTTON_MODE) {
+		case Contacts.KEYEVENT.KNOBVOLUME:
 			if (System.currentTimeMillis() - lastSendTime > 500) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
@@ -434,8 +656,8 @@ public class KeyDealer {
 				msg.arg1 = canInfo.CAR_VOLUME_KNOB;
 				mHandler.sendMessage(msg);
 			}
-		}
-		if (canInfo.STEERING_BUTTON_MODE == Contacts.KEYEVENT.KNOBSELECTOR) {
+			break;
+		case Contacts.KEYEVENT.KNOBSELECTOR:
 			if (System.currentTimeMillis() - lastSendTime > 500) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
@@ -443,8 +665,52 @@ public class KeyDealer {
 				msg.arg1 = canInfo.CAR_VOLUME_KNOB;
 				mHandler.sendMessage(msg);
 			}
+			break;
+		case Contacts.KEYEVENT.VOICE_FM:
+			if (System.currentTimeMillis() - lastSendTime > 500) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.FM_AM;
+				mHandler.sendMessage(msg);
+			}
+			break;
+		case Contacts.KEYEVENT.VOICE_MENUUP:
+			if (System.currentTimeMillis() - lastSendTime > 500) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.MENUUP;
+				mHandler.sendMessage(msg);
+			}
+			break;
+		case Contacts.KEYEVENT.VOICE_MENUDOWN:
+			if (System.currentTimeMillis() - lastSendTime > 500) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.MENUDOWN;
+				mHandler.sendMessage(msg);
+			}
+			break;
+		case Contacts.KEYEVENT.VOICE_MUSIC_PLAY_PAUSE:
+			if (System.currentTimeMillis() - lastSendTime > 500) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.MUSIC_PLAY_PAUSE;
+				mHandler.sendMessage(msg);
+			}
+			break;
+		case Contacts.KEYEVENT.FM_CHANGE_FREQUENCY:
+			if (System.currentTimeMillis() - lastSendTime > 500) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.FM_CHANGE_FREQUENCY;
+				msg.obj = canInfo.FREQUENCY_VALUE;
+				mHandler.sendMessage(msg);
+			}
+			break;
+		default:
+			break;
 		}
-		
+
 		if (canInfo.STEERING_BUTTON_STATUS == 0) {
 			mHandler.removeMessages(Contacts.MENU_LONG_UP);
 			mHandler.removeMessages(Contacts.MENU_LONG_DOWN);
@@ -521,9 +787,111 @@ public class KeyDealer {
 				mHandler.removeMessages(Contacts.KEYEVENT.HOME);
 				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.HOME, 200);
 				break;
+			case Contacts.KEYEVENT.POWER:
+				mHandler.removeMessages(Contacts.KEYEVENT.POWER);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.POWER, 200);
+				break;
 			case Contacts.KEYEVENT.MAP:
 				mHandler.removeMessages(Contacts.KEYEVENT.MAP);
 				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.MAP, 200);
+				break;
+			case Contacts.KEYEVENT.AUX:
+				mHandler.removeMessages(Contacts.KEYEVENT.AUX);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.AUX, 200);
+				break;
+			case Contacts.KEYEVENT.MUSIC_PLAY_PAUSE:
+				mHandler.removeMessages(Contacts.KEYEVENT.MUSIC_PLAY_PAUSE);
+				mHandler.sendEmptyMessageDelayed(
+						Contacts.KEYEVENT.MUSIC_PLAY_PAUSE, 200);
+				break;
+			case Contacts.KEYEVENT.ANSWER_WITH_MENUUP:
+				mHandler.removeMessages(Contacts.KEYEVENT.ANSWER_WITH_MENUUP);
+				mHandler.sendEmptyMessageDelayed(
+						Contacts.KEYEVENT.ANSWER_WITH_MENUUP, 200);
+				break;
+			case Contacts.KEYEVENT.HANGUP_WITH_MENUDOWN:
+				mHandler.removeMessages(Contacts.KEYEVENT.HANGUP_WITH_MENUDOWN);
+				mHandler.sendEmptyMessageDelayed(
+						Contacts.KEYEVENT.HANGUP_WITH_MENUDOWN, 200);
+				break;
+			case Contacts.KEYEVENT.NUM1:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUM1);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUM1, 200);
+				break;
+			case Contacts.KEYEVENT.NUM2:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUM2);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUM2, 200);
+				break;
+			case Contacts.KEYEVENT.NUM3:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUM3);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUM3, 200);
+				break;
+			case Contacts.KEYEVENT.NUM4:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUM4);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUM4, 200);
+				break;
+			case Contacts.KEYEVENT.NUM5:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUM5);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUM5, 200);
+				break;
+			case Contacts.KEYEVENT.NUM6:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUM6);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUM6, 200);
+				break;
+			case Contacts.KEYEVENT.NUM7:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUM7);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUM7, 200);
+				break;
+			case Contacts.KEYEVENT.NUM8:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUM8);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUM8, 200);
+				break;
+			case Contacts.KEYEVENT.NUM9:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUM9);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUM9, 200);
+				break;
+			case Contacts.KEYEVENT.NUM0:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUM0);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUM0, 200);
+				break;
+			case Contacts.KEYEVENT.NUMSTAR:
+				mHandler.removeMessages(Contacts.KEYEVENT.NUMSTAR);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.NUMSTAR, 200);
+				break;
+			case Contacts.KEYEVENT.POUND:
+				mHandler.removeMessages(Contacts.KEYEVENT.POUND);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.POUND, 200);
+				break;
+			case Contacts.KEYEVENT.DPAD_UP:
+				mHandler.removeMessages(Contacts.KEYEVENT.DPAD_UP);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.DPAD_UP, 200);
+				break;
+			case Contacts.KEYEVENT.DPAD_DOWN:
+				mHandler.removeMessages(Contacts.KEYEVENT.DPAD_DOWN);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.DPAD_DOWN,
+						200);
+				break;
+			case Contacts.KEYEVENT.DPAD_LEFT:
+				mHandler.removeMessages(Contacts.KEYEVENT.DPAD_LEFT);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.DPAD_LEFT,
+						200);
+				break;
+			case Contacts.KEYEVENT.DPAD_RIHGT:
+				mHandler.removeMessages(Contacts.KEYEVENT.DPAD_RIHGT);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.DPAD_RIHGT,
+						200);
+				break;
+			case Contacts.KEYEVENT.ENTER:
+				mHandler.removeMessages(Contacts.KEYEVENT.ENTER);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.ENTER, 200);
+				break;
+			case Contacts.KEYEVENT.DEL:
+				mHandler.removeMessages(Contacts.KEYEVENT.DEL);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.DEL, 200);
+				break;
+			case Contacts.KEYEVENT.BACK:
+				mHandler.removeMessages(Contacts.KEYEVENT.BACK);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.BACK, 200);
 				break;
 			default:
 				break;
@@ -579,6 +947,16 @@ public class KeyDealer {
 			Toast.makeText(context, R.string.activity_not_found,
 					Toast.LENGTH_SHORT).show();
 			return false;
+		}
+	}
+
+	public void actionKey(final int keyCode) {
+		try {
+			Runtime runtime = Runtime.getRuntime();
+			runtime.exec("input keyevent " + keyCode);
+		} catch (IOException e) {
+			Log.e("wrc", "------actionKey--" + e.getMessage());
+			e.printStackTrace();
 		}
 
 	}

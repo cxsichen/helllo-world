@@ -22,6 +22,8 @@ public class SSNissan extends AnalyzeUtils {
 	public static final int CAR_INFO_DATA_2 = 0xA6;
 	// 雷达信息
     public static final int RADAR_DATA = 0x41;
+ // 车身信息
+ 	public static final int CAR_INFO_DATA_3 = 0xF2;
     
 	public CanInfo getCanInfo() {
 		return mCanInfo;
@@ -40,6 +42,10 @@ public class SSNissan extends AnalyzeUtils {
 			case CAR_INFO_DATA_2:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_2(msg);
+				break;
+			case CAR_INFO_DATA_3:
+				mCanInfo.CHANGE_STATUS = 20;
+				analyzeCarInfoData_3(msg);
 				break;
 			case CAR_INFO_DATA:
 				mCanInfo.CHANGE_STATUS = 10;
@@ -165,13 +171,17 @@ public class SSNissan extends AnalyzeUtils {
 		mCanInfo.SURROND_VOLUME=(int) ((msg[11]>>0)& 0xff);	
 	}
 	
-	
-	
-	
-	
-	
-	
+	static String carInfoSave_3 = "";
 
+	void analyzeCarInfoData_3(byte[] msg) {
+		if (carInfoSave_3.equals(BytesUtil.bytesToHexString(msg))) {
+			mCanInfo.CHANGE_STATUS = 8888;
+			return;
+		} else {
+			carInfoSave_3 = BytesUtil.bytesToHexString(msg);
+		}
+		mCanInfo.PANORAMA_STATUS=(int) (msg[4] & 0xff);
+	}
 	static String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {

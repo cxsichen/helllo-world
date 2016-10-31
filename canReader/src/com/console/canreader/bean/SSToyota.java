@@ -33,6 +33,8 @@ public class SSToyota extends AnalyzeUtils {
 	public static final int CAR_INFO_DATA_7 = 0x17;
 	// 车身功放信息
 	public static final int CAR_INFO_DATA_8 = 0xA6;
+	// 车身功放信息
+	public static final int CAR_INFO_DATA_9 = 0xE8;
 
 
 	public CanInfo getCanInfo() {
@@ -86,6 +88,10 @@ public class SSToyota extends AnalyzeUtils {
 			case CAR_INFO_DATA_8:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_8(msg);
+				break;
+			case CAR_INFO_DATA_9:
+				mCanInfo.CHANGE_STATUS = 20;
+				analyzeCarInfoData_9(msg);
 				break;
 			case RADAR_DATA:
 				mCanInfo.CHANGE_STATUS = 11;
@@ -289,6 +295,19 @@ public class SSToyota extends AnalyzeUtils {
 		mCanInfo.HISTORY_OIL_CONSUMPTION_15 = (((int) msg[32] & 0xFF) * 256 + ((int) msg[33] & 0xFF)) / 10f;
 
 		mCanInfo.HISTORY_OIL_CONSUMPTION_UNIT = (int) ((msg[64] >> 0) & 0xFF);
+	}
+	
+	static String carInfoSave_9 = "";
+
+	void analyzeCarInfoData_9(byte[] msg) {
+		if (carInfoSave_9.equals(BytesUtil.bytesToHexString(msg))) {
+			mCanInfo.CHANGE_STATUS = 8888;
+			return;
+		} else {
+			carInfoSave_9 = BytesUtil.bytesToHexString(msg);
+		}
+		mCanInfo.PANORAMA_STATUS = (int) ((msg[7] >> 0) & 0xFF);
+
 	}
 	
 	static String carInfoSave_8 = "";

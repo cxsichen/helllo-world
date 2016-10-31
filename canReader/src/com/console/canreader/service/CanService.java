@@ -118,6 +118,11 @@ public class CanService extends Service {
 			mReaderCallback.Callback(info.getCanInfo());
 		}
 
+		if (info.getCanInfo().CHANGE_STATUS == 20) {
+			DialogCreater.dealPanoramaEvent(CanService.this, // 360全景处理
+					info.getCanInfo());
+		}
+
 		// 根据can信息处理事件
 		int parkingState = android.provider.Settings.System.getInt(
 				getContentResolver(), Contacts.BACK_CAR, 0); // 倒车的时候不处理任何弹框事件
@@ -222,8 +227,15 @@ public class CanService extends Service {
 				break;
 			}
 			break;
-		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
-			initSerialPort(SERIAL_PORT_BT_38400);
+		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄		
+			switch (canName) {
+			case Contacts.CANNAMEGROUP.SSHonda12CRV: 
+				initSerialPort(SERIAL_PORT_BT_19200);
+				break;
+			default:
+				initSerialPort(SERIAL_PORT_BT_38400);
+				break;
+			}
 			break;
 		default:
 			initSerialPort(SERIAL_PORT_BT_38400);
@@ -464,7 +476,8 @@ public class CanService extends Service {
 						switch (canName) {
 						case Contacts.CANNAMEGROUP.SSNissan:
 						case Contacts.CANNAMEGROUP.SSNissanWithout360:
-							readSSCanPort_1(); //日产
+						case Contacts.CANNAMEGROUP.SSHonda12CRV:
+							readSSCanPort_1(); // 日产
 							break;
 						default:
 							readSSCanPort(); // 尚摄数据帧
@@ -570,7 +583,7 @@ public class CanService extends Service {
 		}
 
 		/*-------------------尚摄数据帧-----end------------------*/
-		
+
 		/*-------------------尚摄第二种数据帧----------start-------------*/
 		private boolean isSSAValidPacket_1(final byte[] packet) {
 			byte sum = 0;
@@ -905,7 +918,7 @@ public class CanService extends Service {
 				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
 				+ "0000" + "01" + "00000000"));
 	}
-	
+
 	private void syncTimeWithMsgRC() {
 		Calendar c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -929,6 +942,7 @@ public class CanService extends Service {
 			switch (canName) {
 			case Contacts.CANNAMEGROUP.SSHonda:
 			case Contacts.CANNAMEGROUP.SSHondaSY:
+			case Contacts.CANNAMEGROUP.SSRoewe360: // 荣威360
 				syncTimeWithMsg("5AA503B5"); // 本田同步时间
 				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
@@ -943,6 +957,12 @@ public class CanService extends Service {
 			case Contacts.CANNAMEGROUP.SSNissan:
 			case Contacts.CANNAMEGROUP.SSNissanWithout360:
 				syncTimeWithMsgRC(); // 日产同步时间
+				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
+						1000 * 60);
+				break;
+			case Contacts.CANNAMEGROUP.SSHonda12CRV:
+				syncTimeWithMsg("AA5503B5"); // 本田同步时间
 				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
 						1000 * 60);
@@ -990,6 +1010,18 @@ public class CanService extends Service {
 				break;
 			case Contacts.CANNAMEGROUP.SSToyotaKLL:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0105")); // 丰田 卡罗拉
+				break;
+			case Contacts.CANNAMEGROUP.SSTrumpchi:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240100")); // 广汽传祺
+			case Contacts.CANNAMEGROUP.SSTrumpchiGA6:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240100")); // 广汽传祺GA6
+				break;
+			case Contacts.CANNAMEGROUP.SSTrumpchiGS4: // 广汽传祺GS4
+			case Contacts.CANNAMEGROUP.SSTrumpchiGS4HIGH: // 广汽传祺GS4高配
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240200"));
+				break;
+			case Contacts.CANNAMEGROUP.SSTrumpchiGS5:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240300")); // 广汽传祺GS5
 				break;
 			default:
 				break;

@@ -8,4 +8,7 @@
     <color name="ivTint">#FF0000</color>
     <color name="colorText">#DFFFFFFF</color> 
     <color name="app_bg">#F5F5F5</color>
+     <color name="text_color">#009688</color>
+    <color name="dial_bg">#263238</color>
+     <color name="divider_bg">#4c565b</color>
 </resources>

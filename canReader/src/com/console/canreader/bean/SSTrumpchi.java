@@ -96,7 +96,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 				analyzeCarInfoEnableData(msg);
 				break;
 			case CAR_CAMERA_STATUS:
-				mCanInfo.CHANGE_STATUS = 10;
+				mCanInfo.CHANGE_STATUS = 20;
 				analyzeCarCameraStatusData(msg);
 				break;
 //			case CAR_BASIC_INFO_DATA:
@@ -119,7 +119,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 		} else {
 			CarCameraStatusDataSave = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.CAMERA_DIAPLAY_ENABLE=msg[4] &0x0f;
+		mCanInfo.PANORAMA_STATUS=msg[4] &0x0f;
 		mCanInfo.CAMERA_MODE=msg[5] &0x0f;
 	}
 	static String CarInfoEnableDataSave="";

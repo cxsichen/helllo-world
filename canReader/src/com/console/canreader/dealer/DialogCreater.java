@@ -22,8 +22,10 @@ import android.view.WindowManager;
 import com.console.canreader.R;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.BytesUtil;
+import com.console.canreader.utils.Contacts;
 import com.console.canreader.view.AirConDialog;
 import com.console.canreader.view.UnlockWaringDialog;
+
 
 public class DialogCreater {
 
@@ -72,7 +74,24 @@ public class DialogCreater {
 	
 	/*-------------------显示车门报警  end--------------------*/
 	
-
+	/*-------------------处理360全景 start--------------------*/
+	public static void dealPanoramaEvent(Context context, CanInfo canInfo) {
+		if(canInfo.PANORAMA_STATUS==1){
+			if (android.provider.Settings.System.getInt(
+					context.getContentResolver(), Contacts.BACK_CAR, 1) != 1) {
+				android.provider.Settings.System.putInt(
+						context.getContentResolver(), Contacts.BACK_CAR, 1);
+			}
+		}else if(canInfo.PANORAMA_STATUS==0){
+			if (android.provider.Settings.System.getInt(
+					context.getContentResolver(), Contacts.BACK_CAR, 0) != 0) {
+				android.provider.Settings.System.putInt(
+						context.getContentResolver(), Contacts.BACK_CAR, 0);
+			}
+		}	
+	}
+	
+	/*-------------------处理360全景  end--------------------*/
 
 	
 	/*-------------------显示车身信息报警  start--------------------*/

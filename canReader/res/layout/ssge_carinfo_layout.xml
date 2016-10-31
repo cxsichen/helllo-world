@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="3"
+        android:orientation="vertical" >
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="瞬时油耗" />
+
+            <TextView
+                android:id="@+id/tv1"
+                style="@style/PageViewTextView"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="--" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="续航里程" />
+
+            <TextView
+                android:id="@+id/tv2"
+                style="@style/PageViewTextView"
+                android:text="--" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="总里程" />
+
+            <TextView
+                android:id="@+id/tv3"
+                style="@style/PageViewTextView"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="--" />
+
+            <TextView
+                android:id="@+id/carCheckDaysTitle"
+                style="@style/PageViewTextView"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/tv4"
+                style="@style/PageViewTextView"
+                android:text="" />
+        </LinearLayout>
+
+        <View style="@style/verDivide" />
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="平均油耗1" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/tv5"
+                style="@style/PageViewTextView"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="--" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="小计里程1" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/tv6"
+                style="@style/PageViewTextView"
+                android:text="--" />
+
+            <View style="@style/honDivide" />
+        </LinearLayout>
+
+        <View style="@style/verDivide" />
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="平均油耗2" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/tv7"
+                style="@style/PageViewTextView"
+                android:text="--" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="小计里程2" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/tv8"
+                style="@style/PageViewTextView"
+                android:text="--" />
+
+            <View style="@style/honDivide" />
+        </LinearLayout>
+
+        <View style="@style/verDivide" />
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="平均油耗3" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/tv9"
+                style="@style/PageViewTextView"
+                android:text="--" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="小计里程3" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/tv10"
+                style="@style/PageViewTextView"
+                android:text="--" />
+
+            <View style="@style/honDivide" />
+        </LinearLayout>
+
+        <View style="@style/verDivide" />
+    </LinearLayout>
+
+</LinearLayout>
