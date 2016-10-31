@@ -311,6 +311,34 @@
     </string-array>
     <!-- 尚摄 本田12CRV -->
     
+    
+       <!-- 尚摄 本田15CRV -->
+    <string-array name="SSHonda15CRV_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSHonda15CRV_items">
+        <item>本次驾驶状况</item>
+        <item>历史驾驶状况</item>
+    </string-array>
+    <string-array name="SSHonda15CRV_fragment">
+        <item>com.console.canreader.fragment.SSHonda.CurrentDriveFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.HistoryDriveFragment</item>
+    </string-array>
+    <string-array name="SSHonda15CRV_setting_items">
+        <item>原车屏设置</item>
+    </string-array>
+    <string-array name="SSHonda15CRV_setting_fragment">
+        <item>com.console.canreader.fragment.SSHonda.ScreenSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄 本田15CRV -->
+    
     <!-- 本田 -->
     
     <!-- 广汽传祺 -->

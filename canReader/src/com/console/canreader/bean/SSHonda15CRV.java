@@ -5,39 +5,28 @@ import java.io.UnsupportedEncodingException;
 import com.console.canreader.bean.AnalyzeUtils.AnalyzeUtilsCallback;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.BytesUtil;
+import com.console.canreader.utils.Contacts;
 
 import android.util.Log;
 
-public class SSHonda extends AnalyzeUtils {
+public class SSHonda15CRV extends AnalyzeUtils {
 	// 数据类型
 	public static final int comID = 3;
-	// 空调信息
-	public static final int AIR_CONDITIONER_DATA = 0x31;
-	// 雷达信息
-	public static final int RADAR_DATA = 0x41;
 	// 车身信息
-	public static final int CAR_INFO_DATA = 0x11;
-	// 车身信息
-	public static final int CAR_INFO_DATA_1 = 0x12;
-	// 车身信息
-	public static final int CAR_INFO_DATA_2 = 0x16;
-	// 车身信息
-	public static final int CAR_INFO_DATA_3 = 0x17;
-	// 车身信息
+    public static final int CAR_INFO_DATA = 0x11;
+    // 车身信息
+ 	public static final int CAR_INFO_DATA_1 = 0x12;	
+    // 雷达信息
+ 	public static final int RADAR_DATA = 0x41;
+ // 车身信息
     public static final int CAR_INFO_DATA_4 = 0xE8;
-     // 车身信息
-    public static final int CAR_INFO_DATA_5 = 0x67;
-    // 车身信息
-    public static final int CAR_INFO_DATA_6 = 0x66;
- // 车身信息
-    public static final int CAR_INFO_DATA_7 = 0x65;
- // 车身信息
-    public static final int CAR_INFO_DATA_8 = 0x68;
-    // 车身信息
-    public static final int CAR_INFO_DATA_9 = 0x69;
     // 车身信息
     public static final int CAR_INFO_DATA_10 = 0xF0;
-
+ // 车身信息
+ 	public static final int CAR_INFO_DATA_3 = 0x17;
+ // 车身信息
+ 	public static final int CAR_INFO_DATA_2 = 0x16;
+ 	
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
@@ -50,10 +39,6 @@ public class SSHonda extends AnalyzeUtils {
 			if (msg == null)
 				return;
 			switch ((int) (msg[comID] & 0xFF)) {
-			case AIR_CONDITIONER_DATA:
-				mCanInfo.CHANGE_STATUS = 3;
-				analyzeAirConditionData(msg);
-				break;
 			case CAR_INFO_DATA:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData(msg);
@@ -61,47 +46,27 @@ public class SSHonda extends AnalyzeUtils {
 			case CAR_INFO_DATA_1:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_1(msg);
-				break;
-			case CAR_INFO_DATA_2:
-				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData_2(msg);
-				break;
-			case CAR_INFO_DATA_3:
-				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData_3(msg);
+				break;				
+			case RADAR_DATA:
+				mCanInfo.CHANGE_STATUS = 11;
+				analyzeRadarData(msg);
 				break;
 			case CAR_INFO_DATA_4:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_4(msg);
 				break;
-			case CAR_INFO_DATA_5:
+			case CAR_INFO_DATA_3:
 				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData_5(msg);
+				analyzeCarInfoData_3(msg);
 				break;
-			case CAR_INFO_DATA_6:
+			case CAR_INFO_DATA_2:
 				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData_6(msg);
-				break;
-			case CAR_INFO_DATA_7:
-				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData_7(msg);
-				break;
-			case CAR_INFO_DATA_8:
-				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData_8(msg);
-				break;
-			case CAR_INFO_DATA_9:
-				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData_9(msg);
+				analyzeCarInfoData_2(msg);
 				break;
 			case CAR_INFO_DATA_10:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_10(msg);
-				break;
-			case RADAR_DATA:
-				mCanInfo.CHANGE_STATUS = 11;
-				analyzeRadarData(msg);
-				break;
+				break;	
 			default:
 				break;
 			}
@@ -148,6 +113,7 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.FRONT_RIGHT_DISTANCE = (((int) (msg[11] & 0xFF)) == 0xff) ? 0
 				: (((int) (msg[11] & 0xFF)) == 0) ? 0
 						: (5 - ((int) (msg[11] & 0xFF)));
+		mCanInfo.RADAR_ALARM_STATUS=(int) (msg[14] & 0xFF);
 
 	}
 
@@ -192,7 +158,7 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.AVERAGE_CONSUMPTION_UNIT = (int) ((msg[16] >> 4) & 0x03);
 		mCanInfo.CUR_HIS_AVERAGE_CONSUMPTION_UNIT = (int) ((msg[16] >> 2) & 0x03);
 		mCanInfo.INSTANT_CONSUMPTION_UNIT = (int) ((msg[16] >> 2) & 0x03);
-		int temp = (int) ((msg[17] >> 0) & 0xFF);
+		int temp = (int) ((msg[14] >> 0) & 0xFF);
 		mCanInfo.CONSUMPTION_RANGE = rangs[temp];
 	}
 
@@ -369,38 +335,26 @@ public class SSHonda extends AnalyzeUtils {
 			buttonTemp = (int) (msg[6] & 0xFF);
 			switch (buttonTemp) {
 			case 0x01:
-				mCanInfo.STEERING_BUTTON_MODE = 1;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOLUP;
 				break;
 			case 0x02:
-				mCanInfo.STEERING_BUTTON_MODE = 2;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOLDOW;
 				break;
 			case 0x04:
-				mCanInfo.STEERING_BUTTON_MODE = 8;
+			case 0x0B:
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.SRC;
 				break;
 			case 0x05:
-				mCanInfo.STEERING_BUTTON_MODE = 9;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.ANSWER;
 				break;
 			case 0x06:
-				mCanInfo.STEERING_BUTTON_MODE = 10;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HANGUP;
 				break;
 			case 0x08:
-				mCanInfo.STEERING_BUTTON_MODE = 3;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUUP;
 				break;
 			case 0x09:
-				mCanInfo.STEERING_BUTTON_MODE = 4;
-				break;
-			case 0x0A:
-				mCanInfo.STEERING_BUTTON_MODE = 6;
-				break;
-			case 0x0B:
-			case 0x0C:
-				mCanInfo.STEERING_BUTTON_MODE = 8;
-				break;
-			case 0x0D:
-				mCanInfo.STEERING_BUTTON_MODE = 3;
-				break;
-			case 0x0E:
-				mCanInfo.STEERING_BUTTON_MODE = 4;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUDOWN;
 				break;
 			default:
 				mCanInfo.STEERING_BUTTON_MODE = 0;
@@ -425,12 +379,6 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.SAFETY_BELT_STATUS = -1;
 		mCanInfo.REMAIN_FUEL = -1;
 		mCanInfo.BATTERY_VOLTAGE = -1;
-		/*
-		 * mCanInfo.FUEL_WARING_SIGN = (int) ((msg[10] >> 7) & 0x01);
-		 * mCanInfo.BATTERY_WARING_SIGN = (int) ((msg[10] >> 6) & 0x01);
-		 * mCanInfo.HANDBRAKE_STATUS = (int) (msg[12] & 0xFF);
-		 * mCanInfo.BATTERY_VOLTAGE = ((int) (msg[11] & 0xFF)) * 0.1f;
-		 */
 	}
 
 	static String airConSave = "";

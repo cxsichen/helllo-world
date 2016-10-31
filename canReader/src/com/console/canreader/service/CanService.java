@@ -941,6 +941,7 @@ public class CanService extends Service {
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			switch (canName) {
 			case Contacts.CANNAMEGROUP.SSHonda:
+			case Contacts.CANNAMEGROUP.SSHonda15CRV:
 			case Contacts.CANNAMEGROUP.SSHondaSY:
 			case Contacts.CANNAMEGROUP.SSRoewe360: // 荣威360
 				syncTimeWithMsg("5AA503B5"); // 本田同步时间
@@ -995,6 +996,9 @@ public class CanService extends Service {
 			break;
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			switch (canName) {
+			case Contacts.CANNAMEGROUP.SSHonda15CRV:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D020B")); // 本田15CRV
+				break;
 			case Contacts.CANNAMEGROUP.SSToyotaBD:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D0101")); // 丰田 霸道
 				break;

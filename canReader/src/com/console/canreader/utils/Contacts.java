@@ -111,7 +111,7 @@ public class Contacts {
 		public static final String  SSHondaSY = "SSHondaSY";                     //16款思域
 		public static final String  SSHondaLP = "SSHondaLP";                     //本田凌派
 		public static final String  SSHonda12CRV = "SSHonda12CRV";                     //12CRV
-		
+		public static final String  SSHonda15CRV = "SSHonda15CRV";                     //15CRV
 		//广汽传祺
 		public static final String  SSTrumpchi = "SSTrumpchi";           //广汽传祺
 		public static final String  SSTrumpchiGA6 = "SSTrumpchiGA6";     //广汽传祺GA6

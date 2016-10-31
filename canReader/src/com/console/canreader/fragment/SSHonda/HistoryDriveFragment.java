@@ -1,5 +1,7 @@
 package com.console.canreader.fragment.SSHonda;
 
+import java.text.DecimalFormat;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,11 +33,13 @@ public class HistoryDriveFragment extends BaseFragment implements
 	private TextView tv8;
 	
 	private Button button1;
+	DecimalFormat df; 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		df= new DecimalFormat(".00");
 		View view = inflater.inflate(R.layout.sshonda_history_drive_layout,
 				container, false);
 		initView(view);
@@ -50,7 +54,7 @@ public class HistoryDriveFragment extends BaseFragment implements
 		if (mCaninfo.TRIP_A == 1677721.5) {
 			updateTextView(tv1, "--");
 		} else {
-			updateTextView(tv1, mCaninfo.TRIP_A
+			updateTextView(tv1, df.format(mCaninfo.TRIP_A)
 					+ (mCaninfo.TRIP_A_UNIT == 0 ? "km" : "mile") + "");
 		}
 
@@ -59,7 +63,7 @@ public class HistoryDriveFragment extends BaseFragment implements
 		} else {
 			updateTextView(
 					tv2,
-					mCaninfo.AVERAGE_CONSUMPTION
+					df.format(mCaninfo.AVERAGE_CONSUMPTION)
 							+ (mCaninfo.AVERAGE_CONSUMPTION_UNIT == 0 ? "mpg"
 									: mCaninfo.AVERAGE_CONSUMPTION_UNIT == 1 ? "km/L"
 											: "L/100km") + "");
@@ -68,7 +72,7 @@ public class HistoryDriveFragment extends BaseFragment implements
 		if (mCaninfo.TRIP_A_1 == 1677721.5) {
 			updateTextView(tv3, "--");
 		} else {
-			updateTextView(tv3, mCaninfo.TRIP_A_1
+			updateTextView(tv3, df.format(mCaninfo.TRIP_A_1)
 					+ (mCaninfo.TRIP_A_UNIT == 0 ? "km" : "mile") + "");
 		}
 
@@ -77,7 +81,7 @@ public class HistoryDriveFragment extends BaseFragment implements
 		} else {
 			updateTextView(
 					tv4,
-					mCaninfo.TRIP_A_1_AVERAGE_CONSUMPTION
+					df.format(mCaninfo.TRIP_A_1_AVERAGE_CONSUMPTION)
 							+ (mCaninfo.AVERAGE_CONSUMPTION_UNIT == 0 ? "mpg"
 									: mCaninfo.AVERAGE_CONSUMPTION_UNIT == 1 ? "km/L"
 											: "L/100km") + "");
@@ -87,7 +91,7 @@ public class HistoryDriveFragment extends BaseFragment implements
 		if (mCaninfo.TRIP_A_2 == 1677721.5) {
 			updateTextView(tv5, "--");
 		} else {
-			updateTextView(tv5, mCaninfo.TRIP_A_2
+			updateTextView(tv5,df.format(mCaninfo.TRIP_A_2)
 					+ (mCaninfo.TRIP_A_UNIT == 0 ? "km" : "mile") + "");
 		}
 
@@ -96,7 +100,7 @@ public class HistoryDriveFragment extends BaseFragment implements
 		} else {
 			updateTextView(
 					tv6,
-					mCaninfo.TRIP_A_2_AVERAGE_CONSUMPTION
+					df.format(mCaninfo.TRIP_A_2_AVERAGE_CONSUMPTION)
 							+ (mCaninfo.AVERAGE_CONSUMPTION_UNIT == 0 ? "mpg"
 									: mCaninfo.AVERAGE_CONSUMPTION_UNIT == 1 ? "km/L"
 											: "L/100km") + "");
@@ -105,7 +109,7 @@ public class HistoryDriveFragment extends BaseFragment implements
 		if (mCaninfo.TRIP_A_3 == 1677721.5) {
 			updateTextView(tv7, "--");
 		} else {
-			updateTextView(tv7, mCaninfo.TRIP_A_3
+			updateTextView(tv7, df.format(mCaninfo.TRIP_A_3)
 					+ (mCaninfo.TRIP_A_UNIT == 0 ? "km" : "mile") + "");
 		}
 
@@ -114,7 +118,7 @@ public class HistoryDriveFragment extends BaseFragment implements
 		} else {
 			updateTextView(
 					tv8,
-					mCaninfo.TRIP_A_3_AVERAGE_CONSUMPTION
+					df.format(mCaninfo.TRIP_A_3_AVERAGE_CONSUMPTION)
 							+ (mCaninfo.AVERAGE_CONSUMPTION_UNIT == 0 ? "mpg"
 									: mCaninfo.AVERAGE_CONSUMPTION_UNIT == 1 ? "km/L"
 											: "L/100km") + "");

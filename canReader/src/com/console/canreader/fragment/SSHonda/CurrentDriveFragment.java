@@ -1,5 +1,7 @@
 package com.console.canreader.fragment.SSHonda;
 
+import java.text.DecimalFormat;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,11 +26,13 @@ public class CurrentDriveFragment extends BaseFragment implements
 	private TextView tv2;
 	private TextView tv3;
 	private TextView tv4;
+	DecimalFormat df; 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		df= new DecimalFormat(".00");
 		View view = inflater.inflate(R.layout.sshonda_current_drive_layout,
 				container, false);
 		initView(view);
@@ -42,7 +46,7 @@ public class CurrentDriveFragment extends BaseFragment implements
 		if(mCaninfo.CURRENT_AVERAGE_CONSUMPTION==6553.5){
 			updateTextView(tv2,"--");
 		}else{
-			updateTextView(tv2, mCaninfo.CURRENT_AVERAGE_CONSUMPTION
+			updateTextView(tv2, df.format(mCaninfo.CURRENT_AVERAGE_CONSUMPTION)
 					+ (mCaninfo.CUR_HIS_AVERAGE_CONSUMPTION_UNIT == 0 ? "mpg"
 					: mCaninfo.CUR_HIS_AVERAGE_CONSUMPTION_UNIT == 1 ? "km/L"
 							: "L/100km" )+ "");
@@ -51,7 +55,7 @@ public class CurrentDriveFragment extends BaseFragment implements
 		if(mCaninfo.HISTORY_AVERAGE_CONSUMPTION==6553.5){
 			updateTextView(tv3,"--");
 		}else{
-			updateTextView(tv3, mCaninfo.HISTORY_AVERAGE_CONSUMPTION
+			updateTextView(tv3, df.format(mCaninfo.HISTORY_AVERAGE_CONSUMPTION)
 					+ (mCaninfo.CUR_HIS_AVERAGE_CONSUMPTION_UNIT == 0 ? "mpg"
 					: mCaninfo.CUR_HIS_AVERAGE_CONSUMPTION_UNIT == 1 ? "km/L"
 							: "L/100km") + "");
@@ -64,7 +68,9 @@ public class CurrentDriveFragment extends BaseFragment implements
 			updateTextView(tv4, mCaninfo.RANGE + (mCaninfo.RANGE_UNIT == 1 ? "mile"
 					: "km" )+ "");
 		}
-		updateTextView(tv1, mCaninfo.INSTANT_CONSUMPTION + "");
+		updateTextView(tv1, df.format(mCaninfo.INSTANT_CONSUMPTION) + (mCaninfo.INSTANT_CONSUMPTION_UNIT == 0 ? "mpg"
+				: mCaninfo.INSTANT_CONSUMPTION_UNIT == 1 ? "km/L"
+						: "L/100km" )+"");
 		
 
 
