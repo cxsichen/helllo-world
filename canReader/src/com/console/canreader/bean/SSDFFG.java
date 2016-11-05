@@ -1,5 +1,7 @@
 package com.console.canreader.bean;
 
+import java.io.UnsupportedEncodingException;
+
 import com.console.canreader.bean.AnalyzeUtils.AnalyzeUtilsCallback;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.BytesUtil;
@@ -22,6 +24,8 @@ public class SSDFFG extends AnalyzeUtils {
 	public static final int CAR_BASIC_INFO_DATA = 0x11;
 	// 雷达信息
 	public static final int RADAR_DATA = 0x41;
+	// 车身基本信息
+	public static final int CAR_INFO_DATA_3 = 0xF0;
 
 
 
@@ -51,6 +55,10 @@ public class SSDFFG extends AnalyzeUtils {
 			case RADAR_DATA:
 				mCanInfo.CHANGE_STATUS = 4;
 				analyzeRadarData(msg);
+				break;
+			case CAR_INFO_DATA_3:
+				mCanInfo.CHANGE_STATUS = 10;
+				analyzeCarInfoData_3(msg);
 				break;
 			default:
 				break;
@@ -121,6 +129,9 @@ public class SSDFFG extends AnalyzeUtils {
 			}
 		}
 		if (mCanInfo.STEERING_BUTTON_MODE != temp) {
+			if(temp==8){
+				temp=21;
+			}		
 			mCanInfo.STEERING_BUTTON_MODE = temp;
 			mCanInfo.CHANGE_STATUS = 2;
 		}
@@ -130,6 +141,33 @@ public class SSDFFG extends AnalyzeUtils {
 			mCanInfo.STEERING_BUTTON_STATUS = temp;
 			mCanInfo.CHANGE_STATUS = 2;
 		}
+	}
+	
+	static String carInfoSave_3 = "";
+
+	void analyzeCarInfoData_3(byte[] msg) {
+		// TODO Auto-generated method stub
+		if (carInfoSave_3.equals(BytesUtil.bytesToHexString(msg))) {
+			mCanInfo.CHANGE_STATUS = 8888;
+			return;
+		} else {
+			carInfoSave_3 = BytesUtil.bytesToHexString(msg);
+		}
+		
+		int len = ((int) msg[2] & 0xFF);
+		byte[] acscii = new byte[len];
+		for (int i = 0; i < len; i++) {
+			acscii[i] = msg[i + 4];
+
+		}
+		try {
+			mCanInfo.VERSION = new String(acscii, "GBK");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
 	}
 
 	static String carInfoSave = "";

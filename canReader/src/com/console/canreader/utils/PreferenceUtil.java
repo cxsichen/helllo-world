@@ -16,8 +16,8 @@ public class PreferenceUtil {
 	static String[] CanTypeGroup={"RZC","SS"};
 	static String[] CarTypeGroup={"Volkswagen","VolkswagenGolf","Honda","Toyota","ToyotaRZ",
 			"GE","DFFG","Peugeot","NISSAN","Trumpchi",
-			"FOCUS","HondaCRV","HondaDA","BuickGM","EDGE","Roewe360","MGGS",
-			"BESTURNx80","CFHCm3"};
+			"Ford","HondaCRV","HondaDA","BuickGM","GE","Roewe360","MGGS",
+			"BESTURNx80","FHCm3"};
 	
 	public static String getCANName(Context context) {
 		String mode = "";

@@ -7,7 +7,7 @@ import com.console.canreader.utils.Trace;
 
 import android.util.Log;
 
-public class RZCBuickGM extends AnalyzeUtils {
+public class RZCGE extends AnalyzeUtils {
 	// 数据类型
 	public static final int comID = 1;
 	// Head Code

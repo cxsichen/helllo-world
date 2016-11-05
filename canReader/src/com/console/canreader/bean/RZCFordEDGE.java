@@ -5,7 +5,7 @@ import com.console.canreader.service.CanInfo;
 
 import android.util.Log;
 
-public class RZCEDGE extends AnalyzeUtils {
+public class RZCFordEDGE extends AnalyzeUtils {
 	// 数据类型
 	public static final int comID = 1;
 	// Head Code

@@ -13,149 +13,134 @@ public class Contacts {
 		public static final int VOLDOW = 2;
 		public static final int MENUUP = 3;
 		public static final int MENUDOWN = 4;
-		public static final int PHONE = 5;                  //电话接听和挂断合一
+		public static final int PHONE = 5; // 电话接听和挂断合一
 		public static final int MUTE = 6;
 		public static final int SRC = 7;
 		public static final int SPEECH = 8;
-		public static final int ANSWER = 9;                 //电话接听
-		public static final int HANGUP = 10;                 //电话挂断
+		public static final int ANSWER = 9; // 电话接听
+		public static final int HANGUP = 10; // 电话挂断
 		public static final int MENU_LONG_UP = 11;
 		public static final int MENU_LONG_DOWN = 12;
-		public static final int CANINFOPAGE = 13;              
-		public static final int POWER = 16;                     //打开免打扰 app
-		public static final int FM_AM = 17;                    //打开radio app
-		public static final int MUSIC = 18;                    //打开音乐app
-		public static final int PHONE_APP = 19;                //打开蓝牙电话app
-		public static final int HOME = 20;                     //返回主界面
-		public static final int MAP = 21;                      //打开地图
-		public static final int AUX = 22;                       //打开AUX
-		public static final int MUSIC_PLAY_PAUSE = 23;           //打开音乐暂停和播放
-		public static final int ANSWER_WITH_MENUUP = 24;     //接听键和上一曲
-		public static final int HANGUP_WITH_MENUDOWN = 25;   //挂断键和下一曲
-		public static final int NUM1 = 31;   //数字键1
-		public static final int NUM2 = 32;   //数字键2
-		public static final int NUM3 = 33;   //数字键3
-		public static final int NUM4 = 34;   //数字键4
-		public static final int NUM5 = 35;   //数字键5
-		public static final int NUM6 = 36;   //数字键6
-		public static final int NUM7 = 37;   //数字键7
-		public static final int NUM8 = 38;   //数字键8
-		public static final int NUM9 = 39;   //数字键9
-		public static final int NUM0 = 40;   //数字键0
-		public static final int NUMSTAR = 41;   //数字键*
-		public static final int POUND = 42;  //数字键#
-		public static final int DPAD_UP = 43;  //方向盘上
-		public static final int DPAD_DOWN = 44;  //方向盘下
-		public static final int DPAD_LEFT = 45;  //方向盘左
-		public static final int DPAD_RIHGT = 46;  //方向盘右
-		public static final int ENTER = 47;  //确认
-		public static final int DEL = 48;  //删除
-		public static final int BACK = 49;  //返回
-		
-		
+		public static final int CANINFOPAGE = 13;
+		public static final int POWER = 16; // 打开免打扰 app
+		public static final int FM_AM = 17; // 打开radio app
+		public static final int MUSIC = 18; // 打开音乐app
+		public static final int PHONE_APP = 19; // 打开蓝牙电话app
+		public static final int HOME = 20; // 返回主界面
+		public static final int MAP = 21; // 打开地图
+		public static final int AUX = 22; // 打开AUX
+		public static final int MUSIC_PLAY_PAUSE = 23; // 打开音乐暂停和播放
+		public static final int ANSWER_WITH_MENUUP = 24; // 接听键和上一曲
+		public static final int HANGUP_WITH_MENUDOWN = 25; // 挂断键和下一曲
+		public static final int NUM1 = 31; // 数字键1
+		public static final int NUM2 = 32; // 数字键2
+		public static final int NUM3 = 33; // 数字键3
+		public static final int NUM4 = 34; // 数字键4
+		public static final int NUM5 = 35; // 数字键5
+		public static final int NUM6 = 36; // 数字键6
+		public static final int NUM7 = 37; // 数字键7
+		public static final int NUM8 = 38; // 数字键8
+		public static final int NUM9 = 39; // 数字键9
+		public static final int NUM0 = 40; // 数字键0
+		public static final int NUMSTAR = 41; // 数字键*
+		public static final int POUND = 42; // 数字键#
+		public static final int DPAD_UP = 43; // 方向盘上
+		public static final int DPAD_DOWN = 44; // 方向盘下
+		public static final int DPAD_LEFT = 45; // 方向盘左
+		public static final int DPAD_RIHGT = 46; // 方向盘右
+		public static final int ENTER = 47; // 确认
+		public static final int DEL = 48; // 删除
+		public static final int BACK = 49; // 返回
+
 		/*-----------无按键状态--------*/
-		public static final int KNOBVOLUME = 14;            //音量旋钮  无按键状态
-		public static final int KNOBSELECTOR = 15;         //选择旋钮  无按键状态
-		public static final int VOICE_FM = 26;               //打开radio app   无按键状态
-		public static final int FM_CHANGE_FREQUENCY = 27;               //打开radio app   无按键状态
-		public static final int VOICE_MENUUP = 28;              
-		public static final int VOICE_MENUDOWN = 29;               
-		public static final int VOICE_MUSIC_PLAY_PAUSE = 30;               
+		public static final int KNOBVOLUME = 14; // 音量旋钮 无按键状态
+		public static final int KNOBSELECTOR = 15; // 选择旋钮 无按键状态
+		public static final int VOICE_FM = 26; // 打开radio app 无按键状态
+		public static final int FM_CHANGE_FREQUENCY = 27; // 打开radio app 无按键状态
+		public static final int VOICE_MENUUP = 28;
+		public static final int VOICE_MENUDOWN = 29;
+		public static final int VOICE_MUSIC_PLAY_PAUSE = 30;
 	}
 
 	/**
-	 * 睿志诚  
-	 * 尚摄 
+	 * 睿志诚 尚摄
 	 */
 	public final static class CANFISRTNAMEGROUP {
-		public static final String  RAISE = "RZC";
+		public static final String RAISE = "RZC";
 		public static final String HIWORLD = "SS";
 	}
 
-
 	public final static class CANNAMEGROUP {
 		/*--------------睿志诚-----------*/
-		public static final String  RZCVolkswagen = "RZCVolkswagen";           //大众
-		public static final String  RZCVolkswagenGolf = "RZCVolkswagenGolf";   //大众高尔夫	
-		public static final String  RZCNISSAN = "RZCNISSAN";                   //日产	
-		public static final String  RZCTrumpche = "RZCTrumpche";               //广汽传祺		
-		public static final String  RZCHondaDA = "RZCHondaDA";                 //本田DA	
-		public static final String  RZCHondaCRV = "RZCHondaCRV";               //本田CRV		
-		public static final String  RZCFOCUS = "RZCFOCUS";                     //福克斯	
-		public static final String  RZCHonda = "RZCHonda";                     //本田   		
-		public static final String  RZCToyota = "RZCToyota";                   //丰田 丰田CAMRY
-		public static final String  RZCBuickGM = "RZCBuickGM";                  //别克 GM通用
-		public static final String  RZCEDGE = "RZCEDGE";                        //福特锐界
-		public static final String  RZCRoewe360 = "RZCRoewe360";                        //荣威360
-		public static final String  RZCMGGS = "RZCMGGS";                        //MG GS MG锐腾
-		public static final String  RZCFHCm3 = "RZCFHCm3";                      //海马M3
-		public static final String  RZCBESTURNx80 = "RZCBESTURNx80";            //奔腾X80
-		public static final String  RZCPeugeot = "RZCPeugeot";                    //标致
-		public static final String  RZCJAC = "RZCJAC";                          //瑞风S3
-		public static final String  RZCBaoJun = "RZCBaoJun";                    //宝骏730 560 
-		public static final String  RZCJingKooM20 = "RZCJingKooM20";                  //北汽威旺M20
+		public static final String RZCVolkswagen = "RZCVolkswagen"; // 大众
+		public static final String RZCVolkswagenGolf = "RZCVolkswagenGolf"; // 大众高尔夫
+		public static final String RZCNISSAN = "RZCNISSAN"; // 日产
+		public static final String RZCTrumpchi = "RZCTrumpchi"; // 广汽传祺
+		public static final String RZCHondaDA = "RZCHondaDA"; // 本田DA
+		public static final String RZCHondaCRV = "RZCHondaCRV"; // 本田CRV
+		public static final String RZCFord = "RZCFord"; // 福克斯
+		public static final String RZCHonda = "RZCHonda"; // 本田
+		public static final String RZCToyota = "RZCToyota"; // 丰田 丰田CAMRY
+		public static final String RZCBuickGM = "RZCBuickGM"; // 别克 GM通用
+		public static final String RZCEDGE = "RZCEDGE"; // 福特锐界
+		public static final String RZCRoewe360 = "RZCRoewe360"; // 荣威360
+		public static final String RZCMGGS = "RZCMGGS"; // MG GS MG锐腾
+		public static final String RZCFHCm3 = "RZCFHCm3"; // 海马M3
+		public static final String RZCBESTURNx80 = "RZCBESTURNx80"; // 奔腾X80
+		public static final String RZCPeugeot = "RZCPeugeot"; // 标致
+		public static final String RZCJAC = "RZCJAC"; // 瑞风S3
+		public static final String RZCBaoJun = "RZCBaoJun"; // 宝骏730 560
+		public static final String RZCJingKooM20 = "RZCJingKooM20"; // 北汽威旺M20
 		/*--------------睿志诚-----------*/
-		
+
 		/*--------------尚摄-----------*/
-		public static final String  SSDFFG = "SSDFFG";                       //风光580
-		
-		//丰田
-		public static final String  SSToyota = "SSToyota";    
-		public static final String  SSToyotaBD = "SSToyotaBD";             //霸道  
-		public static final String  SSToyotaRZ = "SSToyotaRZ";             //锐志
-		public static final String  SSToyotaRAV4 = "SSToyotaRAV4";         //RAV4
-		public static final String  SSToyotaKMR = "SSToyotaKMR";           //凯美瑞
-		public static final String  SSToyotaKLL = "SSToyotaKLL";           //卡罗拉
-		//本田
-		public static final String  SSHonda = "SSHonda";                     //本田
-		public static final String  SSHondaSY = "SSHondaSY";                     //16款思域
-		public static final String  SSHondaLP = "SSHondaLP";                     //本田凌派
-		public static final String  SSHonda12CRV = "SSHonda12CRV";                     //12CRV
-		public static final String  SSHonda15CRV = "SSHonda15CRV";                     //15CRV
-		//广汽传祺
-		public static final String  SSTrumpchi = "SSTrumpchi";           //广汽传祺
-		public static final String  SSTrumpchiGA6 = "SSTrumpchiGA6";     //广汽传祺GA6
-		public static final String  SSTrumpchiGS4 = "SSTrumpchiGS4";     //广汽传祺GS4
-		public static final String  SSTrumpchiGS4HIGH = "SSTrumpchiGS4HIGH";     //广汽传祺GS4高配
-		public static final String  SSTrumpchiGS5 = "SSTrumpchiGS5";     //广汽传祺GS5
-		
-		//现代起亚
-		public static final String  SSHyundai = "SSHyundai";       //现代起亚
-		public static final String  SSHyundai16MT = "SSHyundai16MT";   //16款名图		
-		//日产
-		public static final String  SSNissan = "SSNissan";                   //日产360	
-		public static final String  SSNissanWithout360 = "SSNissanWithout360";                   //日产	
-		//通用
-		public static final String  SSGE = "SSGE";                           //通用
-		//上汽荣威
-		public static final String  SSRoewe360 = "SSRoewe360";                           //荣威360
-		//福特
-		public static final String  SSFord = "SSFord";  
-		public static final String  SSFordFocus = "SSFordFocus";                  //2015款福克斯
-		public static final String  SSFordEDGE = "SSFordEDGE";                        //2015款锐界
+
+		// 丰田
+		public static final String SSToyota = "SSToyota";
+		public static final String SSToyotaBD = "SSToyotaBD"; // 霸道
+		public static final String SSToyotaRZ = "SSToyotaRZ"; // 锐志
+		public static final String SSToyotaRAV4 = "SSToyotaRAV4"; // RAV4
+		public static final String SSToyotaKMR = "SSToyotaKMR"; // 凯美瑞
+		public static final String SSToyotaKLL = "SSToyotaKLL"; // 卡罗拉
+		// 本田
+		public static final String SSHonda = "SSHonda"; // 本田
+		public static final String SSHondaSY = "SSHondaSY"; // 16款思域
+		public static final String SSHondaLP = "SSHondaLP"; // 本田凌派
+		public static final String SSHonda12CRV = "SSHonda12CRV"; // 12CRV
+		public static final String SSHonda15CRV = "SSHonda15CRV"; // 15CRV
+		// 广汽传祺
+		public static final String SSTrumpchi = "SSTrumpchi"; // 广汽传祺
+		public static final String SSTrumpchiGA6 = "SSTrumpchiGA6"; // 广汽传祺GA6
+		public static final String SSTrumpchiGS4 = "SSTrumpchiGS4"; // 广汽传祺GS4
+		public static final String SSTrumpchiGS4HIGH = "SSTrumpchiGS4HIGH"; // 广汽传祺GS4高配
+		public static final String SSTrumpchiGS5 = "SSTrumpchiGS5"; // 广汽传祺GS5
+
+		// 现代起亚
+		public static final String SSHyundai = "SSHyundai"; // 现代起亚
+		public static final String SSHyundai16MT = "SSHyundai16MT"; // 16款名图
+		// 日产
+		public static final String SSNissan = "SSNissan"; // 日产360
+		public static final String SSNissanWithout360 = "SSNissanWithout360"; // 日产
+		// 通用
+		public static final String SSGE = "SSGE"; // 通用
+		// 上汽
+		public static final String SSRoewe360 = "SSRoewe360"; // 荣威360
+		public static final String SSMGGS = "SSMGGS";         // 名爵锐腾
+		// 福特
+		public static final String SSFord = "SSFord";
+		public static final String SSFordFocus = "SSFordFocus"; // 2015款福克斯
+		public static final String SSFordEDGE = "SSFordEDGE"; // 2015款锐界
+		// 东风
+		public static final String SSDFFG = "SSDFFG"; // 风光580
 		/*--------------尚摄-----------*/
 	}
 
 	/**
-	 * Volkswagen 大众车系    0 
-	 * VolkswagenGolf 大众高尔夫   1
-	 * Honda 本田凌派 杰德 歌诗图    2
-	 * Toyota 丰田CAMRY RAV4    3 
-	 * ToyotaReiz 丰田锐志    4
-	 * GE 通用    5
-	 * FG580 风光580 6
-	 * PeugeotCitroen 标致系列  7
-	 * Nissan 日产系列   8
-	 * Trumpche 广汽传祺  9
-	 * Focus 福特通用  10
-	 * HondaCRV 本田CRV    11
-	 * HondaDA 本田DA      12
-	 * BuickGM 别克通用   13
-	 * EDGE 福特锐界    14
-	 * Roewe360 荣威360  15
-	 * MGGS 名爵锐腾   16
-	 * BESTURNX80 奔腾X80 17
-	 * FHCM3 海马M3   18
+	 * Volkswagen 大众车系 0 VolkswagenGolf 大众高尔夫 1 Honda 本田凌派 杰德 歌诗图 2 Toyota
+	 * 丰田CAMRY RAV4 3 ToyotaReiz 丰田锐志 4 GE 通用 5 FG580 风光580 6 PeugeotCitroen
+	 * 标致系列 7 Nissan 日产系列 8 Trumpche 广汽传祺 9 Focus 福特通用 10 HondaCRV 本田CRV 11
+	 * HondaDA 本田DA 12 BuickGM 别克通用 13 EDGE 福特锐界 14 Roewe360 荣威360 15 MGGS 名爵锐腾
+	 * 16 BESTURNX80 奔腾X80 17 FHCM3 海马M3 18
 	 */
 	public final static class CARTYPEGROUP {
 		public static final int Volkswagen = 0;
@@ -177,13 +162,13 @@ public class Contacts {
 		public static final int MGGS = 16;
 		public static final int BESTURNX80 = 17;
 		public static final int FHCM3 = 18;
-		
+
 	}
 
 	public static final String CAN_INFORMATON = "CAN_Informaion";
 	public static final String CAN_CLASS_NAME = "CAN_Class_Name";
 	public static final String MODE = "Console_mode"; // 声音模式
-	public static final String KEY_VOLUME_VALUE = "volume_value";   //收音机音量
+	public static final String KEY_VOLUME_VALUE = "volume_value"; // 收音机音量
 	public static final String BACK_CAR = "back_car_state";
 	public static final String ACC_STATE = "acc_state";
 
@@ -214,8 +199,8 @@ public class Contacts {
 	public static final int MSG_ONCE_GET_MSG = 0x0b;
 	public static final int MSG_SERVICE_CONNECTED = 0x0c;
 	public static final int MSG_SERVICE_DISCONNECTED = 0x0d;
-	public static final int MSG_MSG_CYCLE= 0x10;
-	
+	public static final int MSG_MSG_CYCLE = 0x10;
+
 	public static final int MSG_DIGLOG_HIDE = 0x0F;
 
 	public static final String ACK = "ff";

@@ -242,6 +242,12 @@ public class DialogCreater {
 			airConStatus[13] = canInfo.LEFT_SEAT_TEMP;
 			airConStatus[14] = canInfo.RIGTHT_SEAT_TEMP;
 			
+			if(airCondialog != null){
+				if (!airCondialog.isShowing()) {
+					mCallBack.sendShowMsg();
+					airCondialog.show();
+				}
+			}
 
 			if (airCondialog == null) {
 				airCondialog = new AirConDialog(context, R.style.MyDialog);
@@ -252,11 +258,8 @@ public class DialogCreater {
 				dialogWindow.setGravity(Gravity.BOTTOM);// ÏÔÊ¾ÔÚµ×²¿
 			}
 
-			if (!airCondialog.isShowing()) {
-				mCallBack.sendShowMsg();
-				airCondialog.show();
-			}
-			airCondialog.setCanInfo(canInfo);
+			if(airCondialog != null)
+				airCondialog.setCanInfo(canInfo);
 		}
 
 		

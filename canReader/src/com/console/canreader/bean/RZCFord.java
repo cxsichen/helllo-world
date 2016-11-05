@@ -6,7 +6,7 @@ import com.console.canreader.utils.Contacts;
 
 import android.util.Log;
 
-public class RZCFOCUS extends AnalyzeUtils {
+public class RZCFord extends AnalyzeUtils {
 	// 数据类型
 	public static final int comID = 1;
 	// Head Code

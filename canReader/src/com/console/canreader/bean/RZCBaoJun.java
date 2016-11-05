@@ -177,7 +177,7 @@ public class RZCBaoJun extends AnalyzeUtils {
 			acscii[i]=msg[i+3];
 		}
 		try {
-			mCanInfo.VEHICLE_NO =new String(acscii,"GBK");			
+			mCanInfo.VERSION =new String(acscii,"GBK");			
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

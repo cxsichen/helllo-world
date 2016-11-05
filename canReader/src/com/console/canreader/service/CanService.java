@@ -302,6 +302,7 @@ public class CanService extends Service {
 			// acc on清空按键旋钮保存值
 			if (mKeyDealer != null)
 				mKeyDealer.clearKnobValue();
+			// acc on重新发送连接数据
 			connectCanDevice();
 		} else {
 			mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
@@ -996,6 +997,9 @@ public class CanService extends Service {
 			break;
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			switch (canName) {
+			case Contacts.CANNAMEGROUP.SSDFFG:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240226")); // 风光580
+				break;
 			case Contacts.CANNAMEGROUP.SSHonda15CRV:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA5022D020B")); // 本田15CRV
 				break;

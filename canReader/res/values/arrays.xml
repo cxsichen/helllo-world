@@ -13,6 +13,7 @@
 
 
     <!-- 大众 -->
+    <!-- 睿志诚 大众 -->
     <string-array name="RZCVolkswagen_main">
         <item>1</item><!-- 车辆信息 -->
         <item>0</item><!-- 车辆设置 -->
@@ -21,7 +22,7 @@
         <item>0</item><!-- 原车功放 -->
         <item>0</item><!-- 全景 -->
         <item>0</item><!-- 胎压 -->
-        <item>1</item><!-- 关于 -->
+        <item>0</item><!-- 关于 -->
     </string-array>
     <string-array name="RZCVolkswagen_items">
         <item>车辆信息</item>
@@ -29,6 +30,34 @@
     <string-array name="RZCVolkswagen_fragment">
         <item>com.console.canreader.fragment.RZCVolkswagen.CarInfoFragment</item>
     </string-array>
+     <!-- 睿志诚 大众 -->
+     
+     <!-- 睿志诚 高尔夫7 -->
+    <string-array name="RZCVolkswagenGolf_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>0</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>0</item><!-- 关于 -->
+    </string-array>
+    <string-array name="RZCVolkswagenGolf_items">
+        <item>车辆信息</item>
+        <item>自启动起信息</item>
+        <item>自加油起信息</item>
+        <item>长时间信息</item>
+        <item>保养信息</item>
+    </string-array>
+    <string-array name="RZCVolkswagenGolf_fragment">
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment1</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment2</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment3</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment4</item>
+    </string-array>
+    <!-- 睿志诚 高尔夫7 -->
     <!-- 大众 -->
 
 
@@ -668,12 +697,42 @@
     <!-- 尚摄  2015款福克斯  -->   
      
      
-     <!-- 福特  -->
+    <!-- 福特   -->
+     
+    <!-- 上汽  -->
+    <!-- 尚摄  风光580  --> 
+    <string-array name="SSDFFG_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
     
+    <!-- 尚摄  风光580  -->    
     
+         
+    <!-- 上汽   -->
     
+    <!-- 上汽通用五菱  -->   
+    <!-- 睿志诚  宝骏730 560 -->
+    <string-array name="RZCBaoJun_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item> <!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+        
+    </string-array>
+    <!-- 睿志诚  宝骏730 560 -->
     
-    
+    <!-- 上汽通用五菱   -->
     
     
     
@@ -684,16 +743,7 @@
     
 
 
-    <!-- 大众高尔夫 -->
-    <string-array name="RZCVolkswagenGolf_items">
-        <item>车辆信息</item>
-        <item>行驶数据</item>
-    </string-array>
-    <string-array name="RZCVolkswagenGolf_activity">
-        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
-        <item>com.console.canreader.activity.VolkswagenGolf.DrivingDataActivity</item>
-    </string-array>
-    <!-- 大众高尔夫 -->
+
 
 
     <!-- 本田 -->
@@ -746,14 +796,7 @@
     <!-- 北汽威旺M20 -->
 
 
-    <!-- 宝骏730 560 -->
-    <string-array name="RZCBaojun_items">
-        <item>车辆信息</item>
-    </string-array>
-    <string-array name="RZCBaojun_activity">
-        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
-    </string-array>
-    <!-- 宝骏730 560 -->
+
 
 
     <!-- 瑞风S3 -->
