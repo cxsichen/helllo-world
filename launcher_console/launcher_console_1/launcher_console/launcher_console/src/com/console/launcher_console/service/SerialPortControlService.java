@@ -125,9 +125,21 @@ public class SerialPortControlService extends Service {
 				Message msg2 = new Message();
 				msg2.what = Contacts.MSG_FACTORY_SOUND;
 				mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
-				mHandler.sendMessageDelayed(msg2, 100);
+				mHandler.sendMessageDelayed(msg2, 20*1000);
 				break;
 			case Contacts.MSG_CHECK_MODE:
+				if(PreferenceUtil.getMode(SerialPortControlService.this)==8){  //喜马拉雅
+					if(PreferenceUtil
+							.getCheckMode(SerialPortControlService.this)==1){  //喜马拉雅对应音乐
+						return;
+					}else{
+						sendMsg("F5020000"
+								+ BytesUtil.intToHexString(1));
+						mHandler.sendEmptyMessageDelayed(Contacts.MSG_CHECK_MODE,
+								2 * 1000);
+						return;
+					}
+				}
 				if (PreferenceUtil.getMode(SerialPortControlService.this) != PreferenceUtil
 						.getCheckMode(SerialPortControlService.this)) {
 					/*
@@ -293,7 +305,7 @@ public class SerialPortControlService extends Service {
 				Message msg1 = new Message();
 				msg1.what = Contacts.MSG_FACTORY_SOUND;
 				mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
-				mHandler.sendMessageDelayed(msg1, 100);
+				mHandler.sendMessageDelayed(msg1, 20*1000);
 
 				/*
 				 * acc on 后自动返回之前开启的模式对应的app

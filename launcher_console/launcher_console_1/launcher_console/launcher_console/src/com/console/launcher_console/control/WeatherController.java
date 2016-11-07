@@ -289,7 +289,7 @@ public class WeatherController {
 			@Override
 			public void run() {
 				HttpClient httpClient = new DefaultHttpClient();
-				HttpParams httpParameters = new BasicHttpParams();
+				HttpParams httpParameters = new BasicHttpParams();   
 				HttpConnectionParams.setSoTimeout(httpParameters, 3000);
 				HttpGet httpGet = new HttpGet(url);
 				try {

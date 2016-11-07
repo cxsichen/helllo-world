@@ -190,12 +190,15 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		mFmCardControl = new FmCardControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.fm_layout), mSerialPortControl);
 
-		if (checkLocale("CN"))
+		if (checkLocale("CN")){
 			mWeatherController = new WeatherController(getApplicationContext(),
 					(LinearLayout) findViewById(R.id.weather_card_layout));
+		}
+		
 		mOtherControl = new OtherControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.other_card_layout),
 				mSerialPortControl);
+		
 		if (isAppInstalled(this, RECAPP_1)) {
 			mRecCardControl = new RecCardControl(getApplicationContext(),
 					(LinearLayout) findViewById(R.id.rec_layout));

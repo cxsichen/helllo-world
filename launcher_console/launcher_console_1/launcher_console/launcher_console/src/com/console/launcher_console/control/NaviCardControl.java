@@ -167,8 +167,7 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 										.getColumnIndex(TOTAL_REMAIN_TIME))
 								* 1000));
 					}
-
-					remainMessage.setText(tps.getInt(tps
+					updateRemainMessage(remainMessage,tps.getInt(tps
 							.getColumnIndex(TOTAL_REMAIN_DISTANCE))
 							/ 1000
 							+ context.getString(R.string.remind_distance_unit)
@@ -187,6 +186,14 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+	}
+	
+	static String RemainMessageSave="";
+	public void updateRemainMessage(TextView remainMessage,String str){
+		if(!RemainMessageSave.equals(str)){
+			RemainMessageSave=str;
+			remainMessage.setText(str);
 		}
 	}
 
