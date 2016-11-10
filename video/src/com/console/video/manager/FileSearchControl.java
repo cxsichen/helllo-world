@@ -38,13 +38,18 @@ public class FileSearchControl {
 		storageList = StorageUtil.listAvaliableStorage(mContext);
 		mVolumeList = (ListView) view.findViewById(R.id.volume_list);
 		mFileList = (ListView) view.findViewById(R.id.file_list);
+		StorageAdapter mStorageAdapter=new StorageAdapter(mContext);
+		mVolumeList.setAdapter(mStorageAdapter);
 
 	}
 
 	class StorageAdapter extends BaseAdapter {
 
 		private LayoutInflater mInflater;
-
+		
+		int[] storageDrawable={R.drawable.menu_flash,R.drawable.menu_sd,R.drawable.menu_usb};
+		int[] storageSelectDrawable={R.drawable.menu_flash_sel,R.drawable.menu_sd_sel,R.drawable.menu_usb_sel};
+		
 		public StorageAdapter(Context context) {
 			this.mInflater = LayoutInflater.from(context);
 		}
@@ -87,23 +92,11 @@ public class FileSearchControl {
 				convertView.setTag(holder);
 
 			} else {
-
 				holder = (ViewHolder) convertView.getTag();
 			}
 
-			holder.img.setBackgroundResource((Integer) mData.get(position).get(
-					"img"));
-			holder.title.setText((String) mData.get(position).get("title"));
-			holder.info.setText((String) mData.get(position).get("info"));
-
-			holder.viewBtn.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					showInfo();
-				}
-			});
-
+			holder.img.setImageResource(storageDrawable[storageList.get(position).getType()]);
+			holder.title.setText(storageList.get(position).path);
 			return convertView;
 		}
 
