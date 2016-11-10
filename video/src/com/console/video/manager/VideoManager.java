@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.console.video.R;
 import com.console.video.bean.StorageInfo;
-import com.console.video.util.StorageList;
+import com.console.video.util.StorageUtil;
 
 import android.content.Context;
 import android.util.Log;
@@ -23,9 +23,9 @@ public class VideoManager {
 	}
 	private void init(Context mContext,RelativeLayout mRelativeLayout) {
 		// TODO Auto-generated method stub
-		mFileSearchControl=new FileSearchControl(mRelativeLayout.findViewById(R.id.file_search_layout));
+		mFileSearchControl=new FileSearchControl(mContext,mRelativeLayout.findViewById(R.id.file_search_layout));
 		
-		List<StorageInfo> list=StorageList.listAvaliableStorage(mContext);
+		List<StorageInfo> list=StorageUtil.listAvaliableStorage(mContext);
 		Log.i("cxs","=====StorageInfo==list==1==="+list.size());
 		for(StorageInfo a:list){
 			Log.i("cxs","=====StorageInfo==path==1==="+a.path);
