@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_layout"
+    tools:context="com.console.video.MainActivity" >
+
+       <com.console.video.view.FlingGalleryView
+        android:id="@+id/fgv_player_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" >
+
+        <include layout="@layout/main01" />
+
+        <include layout="@layout/main02" />
+
+        <include
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            layout="@layout/main03" />
+        
+    </com.console.video.view.FlingGalleryView>
+
+</RelativeLayout>
