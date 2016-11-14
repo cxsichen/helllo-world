@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="20dp" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SOS状态" />
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:id="@+id/SOS_STATUS"
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关闭" />
+        </LinearLayout>
+
+
+        <CheckBox
+            android:id="@+id/ENGINE_START_STATUS"
+            style="@style/sty_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="发动机启停状态" />
+         <CheckBox
+            android:id="@+id/ENGINE_START_STATUS_ENABLE"
+            style="@style/sty_checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="发动机启停使能" />
+
+        <CheckBox
+            android:id="@+id/UNIT_TEMPERATURE_ENABLE"
+            style="@style/sty_checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="温度使能" />
+
+        <CheckBox
+            android:id="@+id/UNIT_CONSUMPTION_ENABLE"
+            style="@style/sty_checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="油耗使能" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="温度单位" />
+
+            <Spinner
+                android:id="@+id/UNIT_TEMPERATURE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/car_info_temp_unit_entries" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="油耗单位" />
+
+            <Spinner
+                  android:id="@+id/UNIT_CONSUMPTION"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/car_info_obd_unit_entries" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="语言设置" />
+
+            <Spinner
+                android:id="@+id/LANGUAGE_CHANGE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/car_info_language_entries" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:paddingTop="10dp" >
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="日期时间设置" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/TIME_YEAR"
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="4"
+                android:gravity="center_horizontal"
+                android:inputType="number"
+                android:text="2016" >
+            </EditText>
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="年" />
+
+            <EditText
+                android:id="@+id/TIME_MONTH"
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="4"
+                android:gravity="center_horizontal"
+                android:inputType="number"
+                android:text="11" >
+            </EditText>
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="月" />
+
+            <EditText
+                android:id="@+id/TIME_DAY"
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="4"
+                android:gravity="center_horizontal"
+                android:inputType="number"
+                android:text="11" >
+            </EditText>
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="日" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/TIME_HOUR"
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="4"
+                android:gravity="center_horizontal"
+                android:inputType="number"
+                android:text="11" >
+            </EditText>
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="时" />
+
+            <EditText
+                android:id="@+id/TIME_MINUTE"
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="4"
+                android:gravity="center_horizontal"
+                android:inputType="number"
+                android:text="11" >
+            </EditText>
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="分" />
+
+            <EditText
+                android:id="@+id/TIME_SECOND"
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="4"
+                android:gravity="center_horizontal"
+                android:inputType="number"
+                android:text="11"
+                android:visibility="invisible" >
+            </EditText>
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="秒"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:paddingTop="10dp" >
+
+            <TextView
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间格式" />
+
+            <Spinner
+                android:id="@+id/TIME_FORMAT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/car_info_time_format_entries" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
