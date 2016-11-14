@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.console.canreader.R;
+import com.console.canreader.activity.CarInfoActivity;
+import com.console.canreader.activity.MenuAcAcitivity;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.Contacts;
 import com.console.canreader.utils.PreferenceUtil;
@@ -246,6 +248,14 @@ public class KeyDealer {
 				Log.i("cxs", "-------Contacts.KEYEVENT.BACK-------");
 				handleBACK();
 				break;
+			case Contacts.KEYEVENT.AIRCONTROLER:
+				Log.i("cxs", "-------Contacts.KEYEVENT.AIRCONTROLER-------");
+				startAcForAir();
+				break;
+			case Contacts.KEYEVENT.CARINFO:
+				Log.i("cxs", "-------Contacts.KEYEVENT.CARINFO-------");
+				startAcForCarInfo();
+				break;
 			default:
 				break;
 			}
@@ -349,6 +359,27 @@ public class KeyDealer {
 			handleMenuUp();
 		}
 		PreferenceUtil.setKnobSelValue(context, knobValue);
+	}
+	
+	
+	private void startAcForCarInfo() {
+		try {
+			Intent i=new Intent(context, CarInfoActivity.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(i);
+		} catch (Exception e) {
+			Log.i("xxx", "start startAcForCarInfo error");
+		}
+	}
+
+	private void startAcForAir() {
+		try {
+			Intent i=new Intent(context, MenuAcAcitivity.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(i);
+		} catch (Exception e) {
+			Log.i("xxx", "start startAcForAir error");
+		}
 	}
 
 	public void handleKnobVolume(int knobValue) {
@@ -591,7 +622,7 @@ public class KeyDealer {
 		context.sendBroadcast(intent);
 	}
 
-	protected void handleMute() {
+	public void handleMute() {
 		// TODO Auto-generated method stub
 		if (mAudioManager == null)
 			mAudioManager = (AudioManager) context
@@ -892,6 +923,14 @@ public class KeyDealer {
 			case Contacts.KEYEVENT.BACK:
 				mHandler.removeMessages(Contacts.KEYEVENT.BACK);
 				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.BACK, 200);
+				break;
+			case Contacts.KEYEVENT.AIRCONTROLER:
+				mHandler.removeMessages(Contacts.KEYEVENT.AIRCONTROLER);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.AIRCONTROLER, 200);
+				break;
+			case Contacts.KEYEVENT.CARINFO:
+				mHandler.removeMessages(Contacts.KEYEVENT.CARINFO);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.CARINFO, 200);
 				break;
 			default:
 				break;

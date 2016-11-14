@@ -139,6 +139,19 @@ public class DialogCreater {
 			}*/
 		}
 	}
+	public static void clearUnlockWaringData(Context context){
+		android.provider.Settings.System.putInt(context.getContentResolver(), BATTRYT_WARNING, 0);
+		android.provider.Settings.System.putInt(context.getContentResolver(), FUEL_CAN_WARNING, 0);
+		android.provider.Settings.System.putInt(context.getContentResolver(), HANDBRAKE_WARNING, 0);
+		android.provider.Settings.System.putInt(context.getContentResolver(), SEATBELT_WARNING,0);
+		android.provider.Settings.System.putInt(context.getContentResolver(), WASHER_WARNING, 0);
+		Intent intent=new Intent(CAN_WARNING);
+		context.sendBroadcast(intent);
+		for(int i=0;i<waringStatus.length;i++){
+			waringStatus[i]=0;
+		}
+	}
+	
 	/*-------------------显示车身信息报警  end--------------------*/
 	public static String getTopActivity(Context context) {
 		if (context == null) {
@@ -248,6 +261,9 @@ public class DialogCreater {
 					airCondialog.show();
 				}
 			}
+			
+			if(airCondialog != null)
+				airCondialog.setCanInfo(canInfo);
 
 			if (airCondialog == null) {
 				airCondialog = new AirConDialog(context, R.style.MyDialog);
@@ -256,10 +272,7 @@ public class DialogCreater {
 
 				Window dialogWindow = airCondialog.getWindow();
 				dialogWindow.setGravity(Gravity.BOTTOM);// 显示在底部
-			}
-
-			if(airCondialog != null)
-				airCondialog.setCanInfo(canInfo);
+			}		
 		}
 
 		

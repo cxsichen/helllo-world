@@ -10,9 +10,9 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCVolkswagenGolf extends AnalyzeUtils {
-	
-	//数据类型
-    public static final int comID=1;
+
+	// 数据类型
+	public static final int comID = 1;
 	// DataType
 	// 方向盘按键
 	public final static int STEERING_BUTTON_DATA = 0x20;
@@ -31,7 +31,9 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 	public final static int CAR_INFO_DATA_4 = 0x63;
 	// 方向盘转角
 	public final static int STEERING_TURN_DATA = 0x29;
-
+	// 软件版本
+	public final static int CAR_INFO_DATA_5 = 0x30;
+	public final static int CAR_INFO_DATA_6 = 0x40;
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
@@ -79,6 +81,14 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 			case CAR_INFO_DATA_4:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_4(msg);
+				break;
+			case CAR_INFO_DATA_5:
+				mCanInfo.CHANGE_STATUS = 10;
+				analyzeCarInfoData_5(msg);
+				break;
+			case CAR_INFO_DATA_6:
+				mCanInfo.CHANGE_STATUS = 10;
+				analyzeCarInfoData_6(msg);
 				break;
 			case STEERING_TURN_DATA:
 				mCanInfo.CHANGE_STATUS = 8;
@@ -151,57 +161,102 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 			break;
 		case 0x50:
 			mCanInfo.TRAVELLINGTIME_SINCE_START = (((int) (msg[4] & 0xFF))
-					+ (((int) (msg[5] & 0xFF)) << 8)
-					+ (((int) (msg[6] & 0xFF)) << 16));
+					+ (((int) (msg[5] & 0xFF)) << 8) + (((int) (msg[6] & 0xFF)) << 16));
 			break;
 		case 0x51:
-			mCanInfo.TRAVELLINGTIME_SINCE_REFUELINGT =  (((int) (msg[4] & 0xFF))
-					+ (((int) (msg[5] & 0xFF)) << 8)
-					+ (((int) (msg[6] & 0xFF)) << 16));
+			mCanInfo.TRAVELLINGTIME_SINCE_REFUELINGT = (((int) (msg[4] & 0xFF))
+					+ (((int) (msg[5] & 0xFF)) << 8) + (((int) (msg[6] & 0xFF)) << 16));
 			break;
 		case 0x52:
-			mCanInfo.TRAVELLINGTIME_LONG_TERM =  (((int) (msg[4] & 0xFF))
-					+ (((int) (msg[5] & 0xFF)) << 8)
-					+ (((int) (msg[6] & 0xFF)) << 16));
+			mCanInfo.TRAVELLINGTIME_LONG_TERM = (((int) (msg[4] & 0xFF))
+					+ (((int) (msg[5] & 0xFF)) << 8) + (((int) (msg[6] & 0xFF)) << 16));
 			break;
 		default:
 			break;
 		}
 	}
 
+	void analyzeCarInfoData_6(byte[] msg) {
+		int len = ((int) msg[2] & 0xFF);
+		switch ((int) msg[3] & 0xFF) {
+		case 0x00:
+			mCanInfo.LANGUAGE_CHANGE = (int) msg[4] & 0xFF;
+			break;
+		case 0x10:
+			mCanInfo.ESC_SYSTEM = (int) msg[4] & 0xFF;
+			break;
+		case 0x20:
+			mCanInfo.TYPES_SPEED_WARNING = (int) (msg[4] >> 0) & 0x01;
+			mCanInfo.TYPES_SPEED_UNIT = (int) (msg[4] >> 1) & 0x01;
+			mCanInfo.TYPES_SPEED = (int) (msg[5] >> 0) & 0xFF;
+			break;
+		case 0x30:
+			mCanInfo.LANE_DEPARTURE = (int) (msg[4] >> 0) & 0x01;
+			mCanInfo.DRIVER_ALERT_SYSTEM = (int) (msg[4] >> 1) & 0x01;
+			break;
+		case 0x31:
+			mCanInfo.LAST_DISTANCE_SELECTED =  (int) (msg[4] >> 0) & 0x01; //上次选择的车距
+			mCanInfo.FRONT_ASSIST_ACTIVE =  (int) (msg[4] >> 1) & 0x01; //前部辅助系统激活
+			mCanInfo.FRONT_ASSIST_ADVANCE_WARNING = (int) (msg[4] >> 2) & 0x01;//前部辅助系统预警
+			mCanInfo.FRONT_ASSIST_DISPLAY_DISTANCHE_WARNING =  (int) (msg[4] >> 3) & 0x01;//显示距离报警
+			mCanInfo.ACC_DRIVER_PROGRAM = (int) (msg[5] >> 0) & 0x0F; //ACC-行驶程序
+			mCanInfo.ACC_DISTANCE = (int) (msg[5] >> 4) & 0x0F; //ACC-车距
+			break;
+			
+		default:
+			break;
+		}
+	}
+
+	void analyzeCarInfoData_5(byte[] msg) {
+		int len = ((int) msg[2] & 0xFF);
+		byte[] acscii = new byte[len];
+		for (int i = 0; i < len - 1; i++) {
+			acscii[i] = msg[i + 4];
+		}
+		try {
+			mCanInfo.VERSION = new String(acscii, "GBK");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	void analyzeCarInfoData_4(byte[] msg) {
 		switch (((int) msg[3] & 0xFF)) {
 		case 0x00:
-			int len=((int) msg[2] & 0xFF);
-			byte[] acscii=new byte[len];
-			for(int i=0;i<len-1;i++){
-				acscii[i]=msg[i+4];
+			int len = ((int) msg[2] & 0xFF);
+			byte[] acscii = new byte[len];
+			for (int i = 0; i < len - 1; i++) {
+				acscii[i] = msg[i + 4];
 			}
 			try {
-				mCanInfo.VEHICLE_NO =new String(acscii,"GBK");
+				mCanInfo.VEHICLE_NO = new String(acscii, "GBK");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
 		case 0x10:
-			
-			mCanInfo.INSPECTON_DAYS_STATUS = ((int) (msg[4]>>0) & 0x0F);  
-			mCanInfo.INSPECTON_DAYS =  ((int)msg[5]& 0xFF)+(((int)msg[6]& 0xFF)<<8); 
+
+			mCanInfo.INSPECTON_DAYS_STATUS = ((int) (msg[4] >> 0) & 0x0F);
+			mCanInfo.INSPECTON_DAYS = ((int) msg[5] & 0xFF)
+					+ (((int) msg[6] & 0xFF) << 8);
 			break;
-		case 0x11:		
-			mCanInfo.INSPECTON_DISTANCE_UNIT = ((int) (msg[4]>>4) & 0x0F); 
-			mCanInfo.INSPECTON_DISTANCE_STATUS = ((int) (msg[4]>>0) & 0x0F);  
-			mCanInfo.INSPECTON_DISTANCE =  (((int)msg[5]& 0xFF)+(((int)msg[6]& 0xFF)<<8)); 
+		case 0x11:
+			mCanInfo.INSPECTON_DISTANCE_UNIT = ((int) (msg[4] >> 4) & 0x0F);
+			mCanInfo.INSPECTON_DISTANCE_STATUS = ((int) (msg[4] >> 0) & 0x0F);
+			mCanInfo.INSPECTON_DISTANCE = (((int) msg[5] & 0xFF) + (((int) msg[6] & 0xFF) << 8));
 			break;
-		case 0x20:			
-			mCanInfo.OILCHANGE_SERVICE_DAYS_STATUS = ((int) (msg[4]>>0) & 0x0F);  
-			mCanInfo.OILCHANGE_SERVICE_DAYS =  ((int)msg[5]& 0xFF)+(((int)msg[6]& 0xFF)<<8); 
+		case 0x20:
+			mCanInfo.OILCHANGE_SERVICE_DAYS_STATUS = ((int) (msg[4] >> 0) & 0x0F);
+			mCanInfo.OILCHANGE_SERVICE_DAYS = ((int) msg[5] & 0xFF)
+					+ (((int) msg[6] & 0xFF) << 8);
 			break;
 		case 0x21:
-			mCanInfo.OILCHANGE_SERVICE_DISTANCE_UNIT = ((int) (msg[4]>>4) & 0x0F);  
-			mCanInfo.OILCHANGE_SERVICE_DISTANCE_STATUS = ((int) (msg[4]>>0) & 0x0F); 
-			mCanInfo.OILCHANGE_SERVICE_DISTANCE = (((int)msg[5]& 0xFF)+(((int)msg[6]& 0xFF)<<8));  
+			mCanInfo.OILCHANGE_SERVICE_DISTANCE_UNIT = ((int) (msg[4] >> 4) & 0x0F);
+			mCanInfo.OILCHANGE_SERVICE_DISTANCE_STATUS = ((int) (msg[4] >> 0) & 0x0F);
+			mCanInfo.OILCHANGE_SERVICE_DISTANCE = (((int) msg[5] & 0xFF) + (((int) msg[6] & 0xFF) << 8));
 			break;
 		default:
 			break;

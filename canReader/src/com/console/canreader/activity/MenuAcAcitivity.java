@@ -2,6 +2,7 @@ package com.console.canreader.activity;
 
 import com.console.canreader.R;
 import com.console.canreader.activity.MenuTpmsAcitivity.CanNameObserver;
+import com.console.canreader.fragment.SSPeugeot.AirControlerSSPeugeot408;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.Contacts;
 import com.console.canreader.utils.PreferenceUtil;
@@ -26,10 +27,11 @@ public class MenuAcAcitivity extends BaseActivity {
 						android.provider.Settings.System
 								.getUriFor(Contacts.CAN_CLASS_NAME),
 						true, mCanNameObserver);
-		chooseTpmsActivity();
+		chooseAcActivity();
 		finish();
 	}
-	private void startTpmsAcitivy(String str) {
+
+	private void startAcAcitivy(String str) {
 		try {
 			Intent intent = new Intent();
 			intent.setClassName("com.console.canreader", str);
@@ -57,8 +59,8 @@ public class MenuAcAcitivity extends BaseActivity {
 		@Override
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
-			if (!canName.equals(PreferenceUtil
-					.getCANName(MenuAcAcitivity.this)))
+			if (!canName
+					.equals(PreferenceUtil.getCANName(MenuAcAcitivity.this)))
 				finish();
 
 		}
@@ -69,11 +71,15 @@ public class MenuAcAcitivity extends BaseActivity {
 		canFirtName = PreferenceUtil.getFirstTwoString(this, canName);
 	}
 
-	private void chooseTpmsActivity() {
+	private void chooseAcActivity() {
 		// TODO Auto-generated method stub
 		switch (canName) {
 		case Contacts.CANNAMEGROUP.SSGE:
-			startTpmsAcitivy("com.console.canreader.fragment.SSGE.AirContorlActivity");
+			startAcAcitivy("com.console.canreader.fragment.SSGE.AirContorlActivity");
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeot:
+		case Contacts.CANNAMEGROUP.SSPeugeot408:
+			startActivity(new Intent(this, AirControlerSSPeugeot408.class));
 			break;
 		default:
 			break;

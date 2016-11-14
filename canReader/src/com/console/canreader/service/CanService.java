@@ -64,6 +64,7 @@ public class CanService extends Service {
 
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
+	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
 
 	interface SerialPortWriteTask {
 		public void excute();
@@ -181,7 +182,7 @@ public class CanService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		if (intent != null) {
+		if (intent != null) {		
 			String command = intent.getStringExtra("keyEvent");
 			if (command != null) {
 				dealCommand(command);
@@ -196,6 +197,7 @@ public class CanService extends Service {
 	 * @param command
 	 */
 	private void dealCommand(String command) {
+		
 		if (mKeyDealer == null)
 			mKeyDealer = KeyDealer.getInstance(this);
 		switch (command) {
@@ -205,6 +207,9 @@ public class CanService extends Service {
 		case KEYCODE_VOLUME_DOWN:
 			mKeyDealer.handleVolDown();
 			break;
+		case KEYCODE_VOLUME_MUTE:
+			mKeyDealer.handleMute();
+			break;			
 		default:
 			break;
 		}
@@ -275,7 +280,13 @@ public class CanService extends Service {
 		syncCanName();
 		chooseSerialPort();
 		// 清空原先的数据
+		clearData();
+	}
+	// 清空原先的数据
+	private void clearData(){
 		BeanFactory.setInfoEmpty();
+		info=null;
+		DialogCreater.clearUnlockWaringData(this);		
 	}
 
 	private AccStateObserver mAccStateObserver = new AccStateObserver();
@@ -298,7 +309,7 @@ public class CanService extends Service {
 		// TODO Auto-generated method stub
 		if (state == 1) {
 			// acc on清空原先的数据 重新建立连接
-			BeanFactory.setInfoEmpty();
+			clearData();
 			// acc on清空按键旋钮保存值
 			if (mKeyDealer != null)
 				mKeyDealer.clearKnobValue();
@@ -362,7 +373,6 @@ public class CanService extends Service {
 			super.onChange(selfChange);
 			syncCanName();
 			resetSerialPort();
-
 		}
 	}
 
@@ -993,6 +1003,8 @@ public class CanService extends Service {
 					&& !canName.equals(Contacts.CANNAMEGROUP.RZCPeugeot))// 奔腾X80
 																			// 海马M3
 																			// 标致
+				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.DISCONNECTMSG));
+				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			break;
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
@@ -1030,6 +1042,70 @@ public class CanService extends Service {
 				break;
 			case Contacts.CANNAMEGROUP.SSTrumpchiGS5:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240300")); // 广汽传祺GS5
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeot:					//标致  世嘉
+			case Contacts.CANNAMEGROUP.SSPeugeotSEGA:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240100"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeotC4:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240200"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeotC4L: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240300"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeotC5: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240400"));
+				break;
+				
+			case Contacts.CANNAMEGROUP.SSPeugeotC55: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240500"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeot307: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240600"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeot308: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240700"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeot408: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240800"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeot508LOW: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240900"));
+				break;
+				
+			case Contacts.CANNAMEGROUP.SSPeugeot508HIGH: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240A00"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeot3008ALL: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240B00"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeotDS5HIGH: 
+			case Contacts.CANNAMEGROUP.SSPeugeotDS5LOW:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240C00"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeotDS5LSHIGH: 
+			case Contacts.CANNAMEGROUP.SSPeugeotDS5LSLOW:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240D00"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeot2008: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240E00"));
+				break;
+				
+			case Contacts.CANNAMEGROUP.SSPeugeotDS4HIGH: 
+			case Contacts.CANNAMEGROUP.SSPeugeotDS4LOW:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240F00"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeot308S: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502241000"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeot308LOW: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502241100"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeot301: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502241200"));
+				break;
+			case Contacts.CANNAMEGROUP.SSPeugeotC3XR: 
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502241300"));
 				break;
 			default:
 				break;

@@ -280,5 +280,24 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/text_color</item>
     </style>
+    
+               <!-- PopupWindow左右弹出的效果 -->  
+    <style name="PopupWindowAnimation">  
+    <item name="android:windowEnterAnimation">@anim/left_in</item>  
+    <item name="android:windowExitAnimation">@anim/left_out</item>  
+</style>  
+    
+    <style name="sty_checkbox">
+        <item name="android:textSize">20sp</item> 
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+     <style name="sty_checkbox2">
+        <item name="android:textSize">20sp</item> 
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:clickable">false</item> 
+    </style>
+    <style name="style_408_tv" parent="@style/sty_checkbox">
+        <item name="android:layout_marginTop">6dp</item>
+    </style>
 
 </resources>

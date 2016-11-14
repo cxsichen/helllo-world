@@ -166,6 +166,15 @@
             android:launchMode="singleTask" >
         </activity>
         <!-- 胎压activity -->
+	
+        <!-- 标致空调控制的activity -->
+        <activity
+            android:name="com.console.canreader.fragment.SSPeugeot.AirControlerSSPeugeot408"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 标致空调控制的activity -->
         <service
             android:name="com.console.canreader.service.CanService"
             android:enabled="true"

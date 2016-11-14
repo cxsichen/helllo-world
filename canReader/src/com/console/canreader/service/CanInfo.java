@@ -49,14 +49,16 @@ public class CanInfo implements Parcelable {
 	public int DAUL_LAMP_INDICATOR = 0;
 	public int MAX_FRONT_LAMP_INDICATOR = 0; // 前窗除雾
 	public int REAR_LAMP_INDICATOR = 0; // 后窗除雾
-	public int AC_MAX_STATUS = -1; 			   //AC MAX
+	public int AC_MAX_STATUS = 0; 			   //AC MAX
 	public int AUTO_STATUS = 0;			   //Auto开关
+	public int Mono_STATUS = 0;			   //单一温区 1开 0关 默认关
 	// 风速及风向信息
 	public int UPWARD_AIR_INDICATOR = 0; // 吹前窗
 	public int PARALLEL_AIR_INDICATOR = 0; // 吹身
 	public int DOWNWARD_AIR_INDICATOR = 0; // 吹脚
 	public int AIRCON_SHOW_REQUEST = 0;
 	public int AIR_RATE = 0; // 风速 -1是自动 其他的都是数值
+	public int AIR_STRENGTH = 0; // 风量强度等级  0低 1中 2高
 	public float DRIVING_POSITON_TEMP = 0; // 驾驶位置处温度 low对应0 high对应255 -1 表示不显示
 	public float DEPUTY_DRIVING_POSITON_TEMP = 0; // 副驾驶位置处温度 low对应0 high对应255
 													// -1 表示不显示
@@ -94,7 +96,8 @@ public class CanInfo implements Parcelable {
 	 */
 
 	public int PARKING_ASSIT_STATUS = 0;
-	public int RADAR_ALARM_STATUS = 1; // 雷达1为显示 0为不显示
+	public int RADAR_ALARM_STATUS = 1; // 1为显示 0为不显示
+	public int RADAR_ALARM_STATUS_ENABLE=0;			//倒车雷达开关 1有效 0无效
 	/*
 	 * 方向盘转角
 	 */
@@ -114,7 +117,11 @@ public class CanInfo implements Parcelable {
 	/*
 	 * 车身信息CAR_INFO_DATA
 	 */
-	public int SAFETY_BELT_STATUS = -1; // 安全带状态 -1表示无此功能 0正常 1报警
+	public int SAFETY_BELT_STATUS = -1; // 驾驶员安全带状态 -1表示无此功能 0正常 1报警
+	public int DEPUTY_SAFETY_BELT_STATUS = -1; //副驾驶安全带状态 0正常 1报警
+	public int BACK_LEFT_SAFETY_BELT_STATUS = -1; //后左安全带状态 0正常 1报警
+	public int BACK_MIDDLE_SAFETY_BELT_STATUS = -1; //后中安全带状态 0正常 1报警
+	public int BACK_RIGHT_SAFETY_BELT_STATUS = -1; //后右安全带状态 0正常 1报警
 	public int DISINFECTON_STATUS = -1; // 清洁液状态 -1表示无此功能
 	public int HANDBRAKE_STATUS = -1; // 手刹状态 0正常 1报警
 
@@ -160,9 +167,11 @@ public class CanInfo implements Parcelable {
 
 	public int RANGE = 0; // 续航里程
 	public int RANGE_UNIT = 0; // 续航里程单位
+	public int RANGE_ADD = 0; // 累计里程
 
 	public int DISTANCE_UNIT = 0; // 行驶里程单位
 	public int CONSUMPTION_UNIT = 0; // 平均油耗单位
+	public int AVERAGE_SPEED = 0; // 平均车速
 	public int SPEED_UNIT = 0; // 平均车速单位
 
 	public float DISTANCE_SINCE_START = 0; // 自启动行驶里程
@@ -380,7 +389,14 @@ public class CanInfo implements Parcelable {
 	public int PAUSE_LKAS_SIGN = 0; //暂停LKAS提示音
 	public int DETECT_FRONT_CAR = 0; //ACC前车探知提示音
 	public int FRONT_DANGER_WAIRNG_DISTANCE = 0; //设定前方危险警告距离
-
+	public int DRIVER_ALERT_SYSTEM = 0; //疲劳驾驶识别系统
+	public int LAST_DISTANCE_SELECTED = 0; //上次选择的车距
+	public int FRONT_ASSIST_ACTIVE = 0; //前部辅助系统激活
+	public int FRONT_ASSIST_ADVANCE_WARNING = 0; //前部辅助系统预警
+	public int FRONT_ASSIST_DISPLAY_DISTANCHE_WARNING = 0; //显示距离报警
+	public int ACC_DRIVER_PROGRAM = 0; //ACC-行驶程序
+	public int ACC_DISTANCE = 0; //ACC-车距
+	
 	/*-----显示屏状态--------*/
 	public int RATATIONAL_RATE = 0; //转速提示
 	public int MSG_NOTIFICATION = 0; //新消息提醒
@@ -442,6 +458,11 @@ public class CanInfo implements Parcelable {
 	
 	public float FREQUENCY_VALUE=0;              //频率值
 	public float TEMP_UNIT=0;              //温度单位
+	
+	public int ESC_SYSTEM=0;             //ESC系统
+	public int TYPES_SPEED_WARNING=0;             //TYPES速度预警
+	public int TYPES_SPEED_UNIT=0;             //TYPES速度单位
+	public int TYPES_SPEED=0;             //TYPES速度
 	/*-------------------add by xyw start----------------------------------*/
 	public int CAR_GEAR_STATUS = -1;							//车身档位，-1表示无效 1P 2N 3R 4D 5S
 	public int CAR_BACK_STATUS = -1;							//倒车状态          0非倒档    1倒挡
@@ -452,32 +473,57 @@ public class CanInfo implements Parcelable {
 	public int CAR_SELECTOR_KNOB=0;									//选择旋钮值
 	public int CAR_SELECTOR_KNOB_UP=0;								//选择旋钮 增加的值
 	public int CAR_SELECTOR_KNOB_DOWN=0;							//音量旋钮减少的值
+	
+	public int SOS_STATUS=0;									//SOS状态 0关闭 1呼叫 2已经连接
 	public int LINK_SOS_STATUS=0;								//Link SoS通讯    0退出  1LINK  2SOS
 	public int LANGUAGE_CHANGE=1;								//语言设置1中文 2 英文
+	public int WARNING_ID=0;									//告警信息
+	
 	public int AUTO_COMPRESSOR_STATUS=0;						//AUTO时压缩机状态    1开 0关
 	public int AUTO_CYCLE_STATUS=0;								//AUTO时内外循环控制方式   1自动  0手动
 	public int AIR_COMFORTABLE_STATUS=0;						//空调舒适曲线设置  00缓慢 01正常 02快速
-	public int AIR_ANION_STATUS=0;									//负离子模式  1开启  0关闭
+	public int AIR_ANION_STATUS=0;								//负离子模式  1开启  0关闭
 	public int DRIVING_POSITION_SETTING=0;						//驾驶座椅自动加热设置 1开  0关
 	public int DEPUTY_DRIVING_POSITION_SETTING=0;				//副驾驶座椅自动加热设置 1开  0关
+	
 	public int POSITION_WELCOME_SETTING=0;						//座椅迎宾功能设置  1开启  0关闭
 	public int KEY_INTELLIGENCE=0;								//智能钥匙自动识别座椅  1开启 0关闭
+	
 	public int SPEED_OVER_SETTING=0;							//驾驶辅助超速报警  速度=Data3*10km/h
 	public int WARNING_VOLUME=0;								//驾驶辅助组合仪表报警音量    0低   1中  2高
 	public int REMOTE_POWER_TIME=0;								//驾驶辅助远程上电时间    0-30分钟
 	public int REMOTE_START_TIME=0;								//驾驶辅助远程启动时间 0-30分钟
 	public int DRIVER_CHANGE_MODE=0;							//驾驶辅助转向模式  0运动  1标准  2舒适
+
 	public int REMOTE_UNLOCK=0;									//遥控解锁   1仅左前门  0所有车门
 	public int SPEED_LOCK=0;									//车速上锁  1开 0关 
 	public int AUTO_UNLOCK;										//自动解锁  1开 0关 
+	public int CAR_LOCK_AUTO_STATUS=0;							//车门自动锁定 1启用 0停用	
+	public int CAR_LOCK_STATUS=0;								//车门上锁 1启动 0停用
+	public int CAR_LOCK_AUTO_STATUS_ENABLE;						//车门自动锁定 1有效 0无效
+	public int CAR_LOCK_STATUS_ENABLE;							//车门上锁 1有效 0无效
+	public int CAR_UNLOCK_STATUS_ENABLE;						//车门解锁 1有效 0无效
+	
 	public int REMOTE_FRONT_LEFT=0;								//遥控左前窗和天窗   1开 0关
 	public int FRONT_WIPER_CARE=0;								//前雨刮维护功能  1开  0关
 	public int REAR_WIPER_STATUS=0;								//后雨刮倒挡自动刮刷功能  1开 0关
 	public int OUTSIDE_MIRROR_STATUS=0;							//外后视镜自动折叠  1开 0关
-	public int GO_HOME_LAMP_STATUS=0;							//伴我回家照明  0关闭 1仅近光灯  2近光后雾
+	public int REAR_WIPER_STATUS_ENABLE;						//倒车自动后雨刮 1有效 0无效
+	
 	public int FOG_LAMP_STATUS=0;								//雾灯转向辅助  1开 0关
 	public int DAYTIME_LAMP_STATUS=0;							//日间行车灯  1开 0关
 	public int AUTO_LAMP_STATUS;								//自动灯光灵敏度  0低  1中 2高
+	public int GO_HOME_LAMP_STATUS=0;							//伴我回家照明  0关闭 1仅近光灯  2近光后雾
+	public int WELCOME_PERSION_ILL_STATUS=0;					//迎宾照明 00取消 01b 15s 10b 30s 11b 60s
+	public int ATMOSPHERE_ILL_STATUS=0;							//气氛照明 1启用 0停用
+	public int ATMOSPHERE_ILL_VALUE=0;							//气氛照明值
+	public int CHANGE_ILL_STATUS=0;								//随动转向大灯设置命令 1启动 0停用
+	public int DAYTIME_LAMP_STATUS_ENABLE;						//日间行车灯 1有效 0无效
+	public int GO_HOME_LAMP_STATUS_ENABLE;						//伴我回家照明 1有效 0无效
+	public int WELCOME_PERSION_ILL_STATUS_ENABLE;				//迎宾照明 1有效 0无效
+	public int ATMOSPHERE_ILL_STATUS_ENABLE;					//氛围照明 1有效 0无效
+	public int CHANGE_ILL_STATUS_ENABLE;						//随动转向大灯设置命令 1有效0无效
+	
 	
 	public int ESP_ENABLE=1;                                    //方向盘转角  1有效 0无效
 	public int HOLOGRAM_ENABLE=1;								//全息影像设置 1有效 0无效
@@ -487,6 +533,78 @@ public class CanInfo implements Parcelable {
 	
 	public int CAMERA_DIAPLAY_ENABLE=0;							//摄像头显示开关  0关 1开
 	public int CAMERA_MODE=1;									//全景摄像头模式 1前+全    2前+右侧     3后+全     4 水平停车+全     5垂直停车+全
+	
+	public int KEY_IN=0;										//钥匙插入状态 1插入 0拔出
+	public int CAR_ACC_STATUS=0;								//ACC供电 1上电 0没上电
+	
+	public int AUTO_PARK_CAR_STATUS=0;							//自动驻车 1启动 0停用
+	public int AUTO_PARK_CAR_STATUS_ENABLE=0;					//自动驻车 1有效 0无效
+	public int ENGINE_START_STATUS_ENABLE=0;					//发动机启停停用功能使能 1有效 0无效
+	public int ENGINE_START_STATUS=0;							//发动机启停停用设定
+	
+	public int PARKING_STATUS_ENABLE;							//驻车辅助 1有效 0无效
+	public int TRUNK_UNLOCK_STATUS_ENABLE;						//仅行李箱解锁设置命令 1有效0无效
+	public int CHANGE_LINE_STATUS_ENABLE;						//变道辅助 1有效0无效
+	public int WELCOME_FUNTION_STATUS_ENABLE;					//迎宾功能 1有效 0无效
+	
+	public int PARKING_STATUS=0;								//驻车辅助 1启用 0停用
+	public int TRUNK_UNLOCK_STATUS=0;							//仅行李箱解锁设置命令 1启用 0停用
+	public int CHANGE_LINE_STATUS;								//变道辅助 1启用 0停用
+	public int WELCOME_FUNTION_STATUS;							//迎宾功能 1启用 0停用
+	
+	public int REMEMBER_SPEED_STATUS=0;							//已记忆的速度值启用 1开 0关
+	public int REMEMBER_SPEED_1=0;								//启用速度1  1选中 0未选中
+	public int REMEMBER_SPEED_2=0;								//启用速度2  1选中 0未选中
+	public int REMEMBER_SPEED_3=0;								//启用速度3  1选中 0未选中
+	public int REMEMBER_SPEED_4=0;								//启用速度4  1选中 0未选中
+	public int REMEMBER_SPEED_5=0;								//启用速度5  1选中 0未选中
+	public int REMEMBER_SPEED_6=0;								//启用速度6  1选中 0未选中
+	public int REMEMBER_SPEED_1_VALUE=0;								//启用速度值1  
+	public int REMEMBER_SPEED_2_VALUE=0;								//启用速度值2  
+	public int REMEMBER_SPEED_3_VALUE=0;								//启用速度值3  
+	public int REMEMBER_SPEED_4_VALUE=0;								//启用速度值4  
+	public int REMEMBER_SPEED_5_VALUE=0;								//启用速度值5  
+	public int REMEMBER_SPEED_6_VALUE=0;								//启用速度值6  
+	public int REMEMBER_SPEED_STATUS_ENABLE=0;					//已记忆的速度值使能 1有效 0无效
+	public int REMEMBER_SPEED_1_ENABLE=0;						//使能速度1  1有效 0无效
+	public int REMEMBER_SPEED_2_ENABLE=0;						//使能速度2  1有效 0无效
+	public int REMEMBER_SPEED_3_ENABLE=0;						//使能速度3  1有效 0无效
+	public int REMEMBER_SPEED_4_ENABLE=0;						//使能速度4  1有效 0无效
+	public int REMEMBER_SPEED_5_ENABLE=0;						//使能速度5  1有效 0无效
+	public int REMEMBER_SPEED_6_ENABLE=0;						//使能速度6  1有效 0无效
+	
+	public int CRUISE_SPEED_STATUS=0;							//巡航速度值启用 1开 0关
+	public int CRUISE_SPEED_1=0;								//启用速度1  1选中 0未选中
+	public int CRUISE_SPEED_2=0;								//启用速度2  1选中 0未选中
+	public int CRUISE_SPEED_3=0;								//启用速度3  1选中 0未选中
+	public int CRUISE_SPEED_4=0;								//启用速度4  1选中 0未选中
+	public int CRUISE_SPEED_5=0;								//启用速度5  1选中 0未选中
+	public int CRUISE_SPEED_6=0;								//启用速度6  1选中 0未选中
+	public int CRUISE_SPEED_1_VALUE=0;								//启用速度值1  
+	public int CRUISE_SPEED_2_VALUE=0;								//启用速度值2  
+	public int CRUISE_SPEED_3_VALUE=0;								//启用速度值3  
+	public int CRUISE_SPEED_4_VALUE=0;								//启用速度值4  
+	public int CRUISE_SPEED_5_VALUE=0;								//启用速度值5 
+	public int CRUISE_SPEED_6_VALUE=0;								//启用速度值6 
+	public int CRUISE_SPEED_STATUS_ENABLE=0;					//巡航速度值使能 1有效 0无效
+	public int CRUISE_SPEED_1_ENABLE=0;							//使能速度1  1有效 0无效
+	public int CRUISE_SPEED_2_ENABLE=0;							//使能速度2  1有效 0无效
+	public int CRUISE_SPEED_3_ENABLE=0;							//使能速度3  1有效 0无效
+	public int CRUISE_SPEED_4_ENABLE=0;							//使能速度4  1有效 0无效
+	public int CRUISE_SPEED_5_ENABLE=0;							//使能速度5  1有效 0无效
+	public int CRUISE_SPEED_6_ENABLE=0;							//使能速度6  1有效 0无效
+	
+	public int UNIT_TEMPERATURE_ENABLE=1;						//Unit Step设定信息 Temperature 1有效 0无效
+	public int UNIT_CONSUMPTION_ENABLE=1;						//Unit Step设定信息 Consumption 1有效 0无效
+	public int UNIT_TEMPERATURE=1;								//Unit Step选项信息 Temperature 1:DegC  0:F
+	public int UNIT_CONSUMPTION=1;								//Unit Step选项信息 Consumption  00:l/100km   01bkm/l  10b:mpg(us)
+	
+	public int TIME_YEAR=0;									//时间 年20xx
+	public int TIME_MONTH=0;								//时间 月		
+	public int TIME_DAY=0;									//时间 日
+	public int TIME_HOUR=0;									//时间 时
+	public int TIME_MINUTE;									//时间 分
+	public int TIME_FORMAT;									//时间格式
 	/*-------------------add by xyw end----------------------------------*/
 
 	

@@ -9,6 +9,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin">
 
     <RelativeLayout
+         android:id="@+id/AIR_STRENGTH_LOW_iv"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:paddingTop="8dp"
@@ -19,10 +20,11 @@
             android:layout_height="36dp"
             android:src="@drawable/ic_ac_fan" />
         <TextView
+             android:id="@+id/AIR_STRENGTH_LOW_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="低"
+            android:text="@string/car_info_di"
             android:textColor="#FFFFFF"
             android:gravity="center"
             android:layout_alignParentBottom="true"/>
@@ -34,6 +36,7 @@
         android:layout_weight="1"/>
 
     <RelativeLayout
+         android:id="@+id/AIR_STRENGTH_MIDDLE_iv"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:paddingTop="8dp"
@@ -44,10 +47,11 @@
             android:layout_height="36dp"
             android:src="@drawable/ic_ac_fan" />
         <TextView
+              android:id="@+id/AIR_STRENGTH_MIDDLE_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="中"
+            android:text="@string/car_info_zhong"
             android:textColor="#FFFFFF"
             android:gravity="center"
             android:layout_alignParentBottom="true"/>
@@ -59,6 +63,7 @@
         android:layout_weight="1"/>
 
     <RelativeLayout
+         android:id="@+id/AIR_STRENGTH_HIGH_iv"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:paddingTop="8dp"
@@ -69,10 +74,11 @@
             android:layout_height="36dp"
             android:src="@drawable/ic_ac_fan" />
         <TextView
+              android:id="@+id/AIR_STRENGTH_HIGH_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="高"
+            android:text="@string/car_info_gao"
             android:textColor="#FFFFFF"
             android:gravity="center"
             android:layout_alignParentBottom="true"/>
@@ -84,6 +90,7 @@
         android:layout_weight="1"/>
 
     <TextView
+        android:id="@+id/Mono_STATUS"
         android:layout_width="72dp"
         android:layout_height="72dp"
         style="@style/AcStatusText"

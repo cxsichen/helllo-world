@@ -22,17 +22,20 @@
             android:background="@drawable/ac_outline_cooling">
 
             <ImageView
+                android:id="@+id/left_temp_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_up" />
 
             <!--Left Fan Temperature-->
             <TextView
+                android:id="@+id/left_temp_value"
                 style="@style/TextTemp"
                 android:layout_centerVertical="true"
                 android:text="26°" />
 
             <ImageView
+                android:id="@+id/left_temp_down"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -49,17 +52,20 @@
             android:background="@drawable/ac_outline_cooling">
 
             <ImageView
+                android:id="@+id/right_temp_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_up" />
 
             <!--Left Fan Temperature-->
             <TextView
+                android:id="@+id/right_temp_value"
                 style="@style/TextTemp"
                 android:layout_centerVertical="true"
                 android:text="22°" />
 
             <ImageView
+                android:id="@+id/right_temp_down"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -77,6 +83,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/UPWARD_AIR_INDICATOR"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_marginRight="16dp"
@@ -85,6 +92,7 @@
                 android:src="@drawable/stat_air_outlet_defrost" />
 
             <ImageView
+                android:id="@+id/PARALLEL_AIR_INDICATOR"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:background="@drawable/bg_button_oval"
@@ -92,6 +100,7 @@
                 android:src="@drawable/stat_air_outlet_upper" />
 
             <ImageView
+                android:id="@+id/DOWNWARD_AIR_INDICATOR"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_marginLeft="16dp"
@@ -112,6 +121,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/AUTO_STATUS"
                 style="@style/AcStatusText"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
@@ -120,6 +130,7 @@
                 android:text="AUTO" />
 
             <TextView
+                android:id="@+id/AC_INDICATOR_STATUS"
                 style="@style/AcStatusText"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
@@ -127,6 +138,7 @@
                 android:text="A/C" />
 
             <TextView
+                android:id="@+id/AC_MAX_STATUS"
                 style="@style/AcStatusText"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
@@ -144,6 +156,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/AIR_RATE_DOWN"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center_vertical"
@@ -153,6 +166,7 @@
                 android:src="@drawable/ic_minus" />
 
             <TextView
+                 android:id="@+id/AIR_RATE"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_gravity="center_vertical"
@@ -163,6 +177,7 @@
                 android:textSize="36sp" />
 
             <ImageView
+                 android:id="@+id/AIR_RATE_UP"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center_vertical"

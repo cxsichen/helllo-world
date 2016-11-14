@@ -5,7 +5,7 @@
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical">
 
-    <include layout="@layout/ac_status_bar_peugeot_408" />
+    <include layout="@layout/ac_status_bar_peugeot_ge" />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -61,6 +61,51 @@ public class BeanFactory {
 		case Contacts.CANNAMEGROUP.SSFordFocus:
 			canName=Contacts.CANNAMEGROUP.SSFord;
 			break;
+		case Contacts.CANNAMEGROUP.SSPeugeot:        //±êÖÂ
+		case Contacts.CANNAMEGROUP.SSPeugeotSEGA: 
+		case Contacts.CANNAMEGROUP.SSPeugeotC4: 
+		case Contacts.CANNAMEGROUP.SSPeugeotC5: 
+		case Contacts.CANNAMEGROUP.SSPeugeotC55: 
+		case Contacts.CANNAMEGROUP.SSPeugeot307: 
+		case Contacts.CANNAMEGROUP.SSPeugeot308: 
+		case Contacts.CANNAMEGROUP.SSPeugeot3008ALL: 
+		case Contacts.CANNAMEGROUP.SSPeugeot2008: 
+		case Contacts.CANNAMEGROUP.SSPeugeot308S: 
+		case Contacts.CANNAMEGROUP.SSPeugeot308LOW: 
+		case Contacts.CANNAMEGROUP.SSPeugeot301: 
+		case Contacts.CANNAMEGROUP.SSPeugeotC3XR: 
+			canName=Contacts.CANNAMEGROUP.SSPeugeot;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeot408: 
+			canName=Contacts.CANNAMEGROUP.SSPeugeot408;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeotC4L: 
+			canName=Contacts.CANNAMEGROUP.SSPeugeotC4L;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeot508LOW: 
+			canName=Contacts.CANNAMEGROUP.SSPeugeot508LOW;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeot508HIGH: 
+			canName=Contacts.CANNAMEGROUP.SSPeugeot508HIGH;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeotDS4HIGH: 
+			canName=Contacts.CANNAMEGROUP.SSPeugeotDS4HIGH;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeotDS4LOW: 
+			canName=Contacts.CANNAMEGROUP.SSPeugeotDS4LOW;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeotDS5LSHIGH: 
+			canName=Contacts.CANNAMEGROUP.SSPeugeotDS5LSHIGH;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeotDS5LSLOW: 
+			canName=Contacts.CANNAMEGROUP.SSPeugeotDS5LSLOW;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeotDS5HIGH:
+			canName=Contacts.CANNAMEGROUP.SSPeugeotDS5HIGH;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeotDS5LOW:
+			canName=Contacts.CANNAMEGROUP.SSPeugeotDS5LOW;
+			break;
 		default:
 			break;
 		}

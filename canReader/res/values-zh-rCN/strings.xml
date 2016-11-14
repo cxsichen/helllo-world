@@ -144,6 +144,7 @@
 	<string name="car_info_AIR">空调信息</string>
 	<string name="car_info_enable">有效</string>
 	<string name="car_info_unable">无效</string>
+	<string name="temp_open">打开胎压标定</string>
 	
         <!-- add by xyw end -->
 </resources>

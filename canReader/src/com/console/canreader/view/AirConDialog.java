@@ -56,6 +56,8 @@ public class AirConDialog extends Dialog {
 	private static int airConStatus = 3;
 	private static int largeStatus = 3;
 	private static int smallStatus = 3;
+	
+	
 
 	private int[] leftSeatDraws = { R.drawable.stat_seat_heating_left_1,
 			R.drawable.stat_seat_heating_left_2,
@@ -260,6 +262,9 @@ public class AirConDialog extends Dialog {
 	}
 
 	public void setCanInfo(CanInfo canInfo) {
+		if(leftFan==null){
+			return;
+		}
 		this.canInfo = canInfo;
 		mHandler.removeMessages(Contacts.MSG_DIGLOG_HIDE);
 		showStatus(canInfo);

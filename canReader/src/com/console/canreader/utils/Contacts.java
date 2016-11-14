@@ -51,6 +51,9 @@ public class Contacts {
 		public static final int ENTER = 47; // 确认
 		public static final int DEL = 48; // 删除
 		public static final int BACK = 49; // 返回
+		public static final int Wiper = 50;  //雨刷按键
+		public static final int AIRCONTROLER=51; //打开空调控制界面
+		public static final int CARINFO=52; 	//打开车辆信息
 
 		/*-----------无按键状态--------*/
 		public static final int KNOBVOLUME = 14; // 音量旋钮 无按键状态
@@ -132,6 +135,32 @@ public class Contacts {
 		public static final String SSFordEDGE = "SSFordEDGE"; // 2015款锐界
 		// 东风
 		public static final String SSDFFG = "SSDFFG"; // 风光580
+		
+		
+		//标致雪铁龙
+		public static final String  SSPeugeot = "SSPeugeot";       //标致雪铁龙通用
+		public static final String  SSPeugeotSEGA = "SSPeugeotSEGA";       //标致雪铁龙  世嘉
+		public static final String  SSPeugeotC4 = "SSPeugeotC4";       //标致雪铁龙  C4
+		public static final String  SSPeugeotC4L = "SSPeugeotC4L";       //标致雪铁龙 C4L
+		public static final String  SSPeugeotC5 = "SSPeugeotC5";       //标致雪铁龙 C5
+		public static final String  SSPeugeotC55 = "SSPeugeotC55";       //标致雪铁龙  2013款 C5
+		public static final String  SSPeugeot307 = "SSPeugeot307";       //标致雪铁龙 307
+		public static final String  SSPeugeot308 = "SSPeugeot308";       //标致雪铁龙 308
+		public static final String  SSPeugeot408 = "SSPeugeot408";       //标致雪铁龙 408
+		public static final String  SSPeugeot508LOW = "SSPeugeot508LOW";       //标致雪铁龙 低配508
+		public static final String  SSPeugeot508HIGH = "SSPeugeot508HIGH";       //标致雪铁龙 高配508
+		public static final String  SSPeugeot3008ALL = "SSPeugeot3008ALL";       //标致雪铁龙 3008全拆
+		public static final String  SSPeugeotDS5HIGH = "SSPeugeotDS5HIGH";       //标致雪铁龙 DS5高配
+		public static final String  SSPeugeotDS5LOW = "SSPeugeotDS5LOW";       //标致雪铁龙 DS5低配
+		public static final String  SSPeugeotDS5LSHIGH = "SSPeugeotDS5LSHIGH";       //标致雪铁龙 DS5LS 高配
+		public static final String  SSPeugeotDS5LSLOW = "SSPeugeotDS5LSLOW";       //标致雪铁龙 DS5LS 低配
+		public static final String  SSPeugeot2008 = "SSPeugeot2008";       //标致雪铁龙 2008
+		public static final String  SSPeugeotDS4HIGH = "SSPeugeotDS4HIGH";       //标致雪铁龙 DS4高配
+		public static final String  SSPeugeotDS4LOW = "SSPeugeotDS4LOW";       //标致雪铁龙 DS4低配
+		public static final String  SSPeugeot308S = "SSPeugeot308S";       //标致雪铁龙 2014款408/308S
+		public static final String  SSPeugeot308LOW = "SSPeugeot308LOW";       //标致雪铁龙 308留小屏
+		public static final String  SSPeugeot301 = "SSPeugeot301";       //标致雪铁龙 301、爱丽舍
+		public static final String  SSPeugeotC3XR = "SSPeugeotC3XR";       //标致雪铁龙 C3XR
 		/*--------------尚摄-----------*/
 	}
 
