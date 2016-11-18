@@ -1,0 +1,42 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	
+    <SwitchPreference
+        android:key="UNIT_DISTANCE"
+        android:summaryOff="km"
+        android:summaryOn="mi"
+        android:title="里程  " />
+    <SwitchPreference
+        android:key="UNIT_SPEED"
+        android:summaryOff="km/h"
+        android:summaryOn="mph"
+        android:title="车速  " />
+    <SwitchPreference
+        android:key="UNIT_TEMPERATURE"
+        android:summaryOff="摄氏"
+        android:summaryOn="华氏"
+        android:title="温度  " />
+    
+      <ListPreference
+        android:entries="@array/rzc_golf_volume_uint_entries"
+        android:entryValues="@array/rzc_golf_volume_uint_values"
+        android:key="UNIT_VOLUME"
+        android:persistent="false"
+        android:title="容积" />
+      
+      
+        <ListPreference
+        android:entries="@array/rzc_golf_consumption_uint_entries"
+        android:entryValues="@array/rzc_golf_consumption_uint_values"
+        android:key="UNIT_CONSUMPTION"
+        android:persistent="false"
+        android:title="油耗" />
+        
+          <ListPreference
+        android:entries="@array/rzc_golf_pressure_uint_entries"
+        android:entryValues="@array/rzc_golf_pressure_uint_values"
+        android:key="UNIT_PRESSURE"
+        android:persistent="false"
+        android:title="轮胎压力" />
+   
+</PreferenceScreen>

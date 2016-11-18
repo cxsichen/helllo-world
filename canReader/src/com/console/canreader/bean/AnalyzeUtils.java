@@ -31,6 +31,7 @@ public abstract class AnalyzeUtils {
     * STEERING_TURN_DATA----------------mCanInfo.CHANGE_STATUS = 8         方向盘状态
     * CAR_INFO_DATA---------------------mCanInfo.CHANGE_STATUS = 10        报警状态（车门报警，车身信息报警）
     *                                                                      车身信息
+    * WARING_DIALOG_DATA----------------mCanInfo.CHANGE_STATUS = 12        报警信息                                                                      
     * PANORAMA_DATA---------------------mCanInfo.CHANGE_STATUS = 20        360全景                                                              
     */
 	public void analyze(byte[] msg) {

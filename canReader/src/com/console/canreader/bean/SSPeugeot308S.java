@@ -10,7 +10,7 @@ import com.console.canreader.utils.Contacts;
 import android.provider.Settings;
 import android.util.Log;
 
-public class SSPeugeot extends AnalyzeUtils {
+public class SSPeugeot308S extends AnalyzeUtils {
 	// 数据类型
 	public static final int comID = 3;
 	// 车身基本信息
@@ -254,7 +254,6 @@ public class SSPeugeot extends AnalyzeUtils {
 		
 		mCanInfo.UNIT_TEMPERATURE=(int)((msg[5]>>5)&0x01);
 		mCanInfo.UNIT_CONSUMPTION=(int)((msg[5]>>1)&0x03);
-//		Log.i("xxx", "mCanInfo.UNIT_CONSUMPTION=="+mCanInfo.UNIT_CONSUMPTION);
 	}
 
 	static String WarningInfoData = "";
@@ -265,10 +264,8 @@ public class SSPeugeot extends AnalyzeUtils {
 		} else {
 			WarningInfoData = BytesUtil.bytesToHexString(msg);
 		}
-//		Log.i("xxx", "msg[4]=="+msg[4]);
-//		Log.i("xxx", "(msg[4]<<8)=="+(msg[4]<<8));
 		mCanInfo.WARNING_ID=(int)((msg[4]&0xff)<<8)+(int)(msg[5]&0xff);
-//		Log.i("xxx", "mCanInfo.WARNING_ID=="+mCanInfo.WARNING_ID);
+		Log.i("xxx", "mCanInfo.WARNING_ID=="+mCanInfo.WARNING_ID);
 	}
 
 	static String LanguageSettingData = "";
@@ -607,8 +604,8 @@ public class SSPeugeot extends AnalyzeUtils {
 				mCanInfo.CHANGE_STATUS = 8;
 		}
 		
-		// 按键 CHANGE_STATUS=2
 
+		// 按键 CHANGE_STATUS=2
 		if (buttonTemp != (int) (msg[6] & 0xFF)) {
 			buttonTemp = (int) (msg[6] & 0xFF);
 			switch (buttonTemp) {
@@ -633,7 +630,8 @@ public class SSPeugeot extends AnalyzeUtils {
 			case 0x0A:
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;
 				break;
-			case 0x0B:
+			case 0x0B://打开空调控制界面
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.AIRCONTROLER;
 				break;
 			case 0x0D:
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUUP;
@@ -654,8 +652,8 @@ public class SSPeugeot extends AnalyzeUtils {
 			case 0x13://List
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUSIC;
 				break;
-			case 0x14://Wiper Button
-				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.Wiper;
+			case 0x14://打开车辆信息界面
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.CARINFO;
 				break;
 			case 0x15://Check 自检键
 				break;

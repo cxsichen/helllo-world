@@ -384,6 +384,31 @@ public class CanInfo implements Parcelable {
 	public int MULTI_MEIDA_PLAYING_PROGRESS=0;       //当前播放进度
 	public int MULTI_MEIDA_PLAYING_STATUS=0;       //多媒体状态
 	
+	/*--  车灯-----*/
+	public int LIGHT_SWITCH_ON_TIME=0;       //接通时间
+	public int LIGHT_AUTO_HEADLIGHT_RAIN=0;       //自动行车灯(雨天)
+	public int LIGHT_LANE_CHANGE_FLASH=0;       //变道转向灯
+	public int LIGHT_DAYTIME_RUNNING_LIGHT=0;       //日行灯
+	public int LIGHT_SWITCH_LIGHTING=0;       //仪表/开关照明
+	public int LIGHT_COMING_HOME=0;          //回家模式功能
+	public int LIGHT_LEAVING_HOME=0;         //离家模式功能
+	
+	public int LIGHT_TRAVELING_MODE=0;      //旅行模式
+	public int LIGHT_DOOR_AMBIENT=0;     //车门环境照明灯
+	public int LIGHT_FOORWELL_LIGHT=0;   //脚步空间照明灯调节
+	public int LIGHT_DYNAMIC_LIGHT_ASSIST=0; //动态灯光辅助
+	public int LIGHT_MOTORWAY_LIGHT=0;   //动态大灯随动	
+	public int LIGHT_TOP_LIGHT=0;   //车顶环境照明灯
+	public int LIGHT_FRONT_LIGHT=0;   //前部环境照明灯
+	public int LIGHT_LIGHT_COLOR=0;   //车灯颜色
+	public int LIGHT_ALL_AREA=0;   //所有区域
+	
+	/*--  后视镜和刮水器-----*/
+	public int MIRROR_SYNC_ADJUST=0;    //后视镜同步调节 
+	public int MIRROR_LOWER_WHILE_REVERSING=0;   //倒车档时后视镜降低 
+	public int WIPER_AUTO_IN_RAIN=0;   //雨天自动刮水 
+	public int WIPER_REAR_WIPING_REVERSING=0;   //倒车档时后窗玻璃刮水 
+	public int MIRROR_FOLD_PARKING=0;   //驻车时内折  
 	/*-----驾驶辅助系统设定--------*/
 	public int LANE_DEPARTURE = 0; //车道偏离辅助系统设定
 	public int PAUSE_LKAS_SIGN = 0; //暂停LKAS提示音
@@ -396,7 +421,47 @@ public class CanInfo implements Parcelable {
 	public int FRONT_ASSIST_DISPLAY_DISTANCHE_WARNING = 0; //显示距离报警
 	public int ACC_DRIVER_PROGRAM = 0; //ACC-行驶程序
 	public int ACC_DISTANCE = 0; //ACC-车距
+	/*-----驻车和调车--------*/
+	public int FRONT_VOLUME = 0; //前部音量
+	public int FRONT_FREQUNENCY = 0; //前部频率
+	public int BACK_VOLUME = 0; //后部音量
+	public int BACK_FREQUNENCY = 0; //后部频率
+	public int PARKING_MODE = 0; //倒车模式
+	/*-----打开和关闭-------*/
+	public int CONV_OPENING = 0; //车窗便捷开启 
+	public int DOOR_UNLOCKING = 0; //中央门锁（车门解锁） 
+	public int AUTOMATIC_LOCKING = 0; //自动锁止 
+	public int INDUCTON_REAR_DOOR_COVER = 0; //感应式后尾箱盖
 	
+	/*-----MFD多功能显示-------*/
+	public int MFD_CURRENT_CONSUMPTION = 0; //当前油耗  
+	public int MFD_AVERAGE_CONSUMPTION = 0; //平均油耗
+	public int MFD_CONVENIENCE_CONSUMERS = 0; //舒适性用电器 
+	public int MFD_ECO_TIPS = 0; //经济运行提示
+	public int MFD_TRAVELLING_TIME = 0; //行驶时间 
+	public int MFD_DISTANCE_TRAVELED = 0; //行驶里程
+	public int MFD_AVERAGE_SPEED= 0; //平均速度
+	public int MFD_DIGITAL_SPEED_DISPLAY= 0; //数字式车速显示 
+	public int MFD_SPEED_WARINING= 0; //车速报警
+	public int MFD_OIL_TEMP= 0; //油温 
+	
+	/*-----单位-------*/
+	public int UNIT_DISTANCE= 0; //里程 
+	public int UNIT_SPEED= 0; //车速
+//	public int UNIT_TEMPERATURE= 0; //温度
+	public int UNIT_VOLUME= 0; //容积
+//	public int UNIT_CONSUMPTION= 0; //油耗
+	public int UNIT_PRESSURE= 0; //轮胎压力
+	
+	/*-----个性化设置------*/
+	public int PROFILE_INFORMATION= 0; //个人设置
+	public int INDIVIDUAL_ENGINE= 0; //引擎
+	public int PROFILE_STEERING= 0; //方向盘
+	public int PROFILE_FRONT_LIGHT= 0; //前灯
+	public int PROFILE_CLIMATE= 0; //气候
+	
+	public int REMOTE_KEY= 0; //遥控钥匙记忆匹配 
+	public int KEY_ACTIVE= 0; //汽车钥匙已激活 
 	/*-----显示屏状态--------*/
 	public int RATATIONAL_RATE = 0; //转速提示
 	public int MSG_NOTIFICATION = 0; //新消息提醒
@@ -445,7 +510,20 @@ public class CanInfo implements Parcelable {
 	public int CRASHPROOF_AUTO_READY=0;          //自动防撞准备
 	public int CRASHPROOF_CARSTATUS_NOTIFY=0;          //汽车状态通知
 	public int CRASHPROOF_RAMPWAY_ASSIT=0;          //坡道辅助系统
+	/*----车辆提示信息----*/
+	public int WARNING_MES_NUM=0;        //提示信息的数目   
+	public int WARNING_MES_0=0;
+	public int WARNING_MES_1=0; 
+	public int WARNING_MES_2=0; 
+	public int WARNING_MES_3=0; 
+	public int WARNING_MES_4=0; 
+	public int WARNING_MES_5=0; 
+	public int START_STOP_MES=0;
 	
+	public int CONV_WARNING_MES_NUM=0;     
+	public int CONV_WARNING_MES_0=0;
+	public int CONV_WARNING_MES_1=0; 
+	public int CONV_WARNING_MES_2=0;
 	/*----舒适性/方便性设定----*/
 	public int CONVENIENCE_SEAT_PARK_MOVE=0;     //驾驶员座椅停车移位设定
 	public int CONVENIENCE_RIPE_PARK_MOVE=0;     //转向管柱离车移位设定
@@ -455,7 +533,8 @@ public class CanInfo implements Parcelable {
 	public int CONVENIENCE_REVERSE_BACKWIPE_AUTO=0;     //倒档自动后窗雨刷
 	public int CONVENIENCE_RIPE_PARK_LEAN=0;     //转向管柱离车倾斜设定
 	public int CONVENIENCE_AUTO_WIPE=0;     //自动雨刮
-	
+	public int CONVENIENCE_CONSUMERS = 0; //舒适性用电器 
+	public int CONVENIENCE_CONSUMERS_UNIT = 0; //舒适性用电器单位
 	public float FREQUENCY_VALUE=0;              //频率值
 	public float TEMP_UNIT=0;              //温度单位
 	

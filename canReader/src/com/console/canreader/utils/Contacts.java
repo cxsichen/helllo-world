@@ -158,7 +158,7 @@ public class Contacts {
 		public static final String  SSPeugeotDS4HIGH = "SSPeugeotDS4HIGH";       //标致雪铁龙 DS4高配
 		public static final String  SSPeugeotDS4LOW = "SSPeugeotDS4LOW";       //标致雪铁龙 DS4低配
 		public static final String  SSPeugeot308S = "SSPeugeot308S";       //标致雪铁龙 2014款408/308S
-		public static final String  SSPeugeot308LOW = "SSPeugeot308LOW";       //标致雪铁龙 308留小屏
+		public static final String  SSPeugeot3008LOW = "SSPeugeot3008LOW";       //标致雪铁龙 3008留小屏
 		public static final String  SSPeugeot301 = "SSPeugeot301";       //标致雪铁龙 301、爱丽舍
 		public static final String  SSPeugeotC3XR = "SSPeugeotC3XR";       //标致雪铁龙 C3XR
 		/*--------------尚摄-----------*/

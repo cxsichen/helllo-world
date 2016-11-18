@@ -30,6 +30,24 @@ public class BytesUtil {
 		stringBuilder.append(hv);
 		return stringBuilder.toString();
 	}
+	
+
+	public static String intToHexString_4(int a) {
+		StringBuilder stringBuilder = new StringBuilder("");
+		int v = a & 0xFFFF;
+		String hv = Integer.toHexString(v);
+		Log.i("xxx", "hv=="+hv);
+		Log.i("xxx", "hv.length=="+hv.length());
+		if (hv.length() ==1) {
+			stringBuilder.append("000");
+		}else if(hv.length()==2){
+			stringBuilder.append("00");
+		}else {
+			stringBuilder.append("0");
+		}
+		stringBuilder.append(hv);
+		return stringBuilder.toString();
+	}
 
 	/**
 	 * Convert hex string to byte[] 把为字符串转化为字节数组

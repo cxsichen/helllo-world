@@ -1,0 +1,107 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:entries="@array/rzc_golf_switch_on_time_entries"
+        android:entryValues="@array/rzc_golf_switch_on_time_values"
+        android:key="LIGHT_SWITCH_ON_TIME"
+        android:persistent="false"
+        android:title="接通时间" />
+
+    <SwitchPreference
+        android:key="LIGHT_AUTO_HEADLIGHT_RAIN"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="自动行车灯(雨天)" />
+    <SwitchPreference
+        android:key="LIGHT_LANE_CHANGE_FLASH"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="变道转向灯" />
+    <SwitchPreference
+        android:key="LIGHT_DAYTIME_RUNNING_LIGHT"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="日行灯" />
+
+    <ListPreference
+        android:entries="@array/rzc_golf_switch_entries"
+        android:entryValues="@array/rzc_golf_switch_values"
+        android:key="LIGHT_SWITCH_LIGHTING"
+        android:persistent="false"
+        android:title="仪表/开关照明" />
+    <ListPreference
+        android:entries="@array/rzc_golf_time_mode_entries"
+        android:entryValues="@array/rzc_golf_time_mode_values"
+        android:key="LIGHT_COMING_HOME"
+        android:persistent="false"
+        android:title="回家模式" />
+    <ListPreference
+        android:entries="@array/rzc_golf_time_mode_entries"
+        android:entryValues="@array/rzc_golf_time_mode_values"
+        android:key="LIGHT_LEAVING_HOME"
+        android:persistent="false"
+        android:title="离家模式" />
+    
+    
+    
+    
+    
+
+    <SwitchPreference
+        android:key="LIGHT_TRAVELING_MODE"
+        android:summaryOff="靠右"
+        android:summaryOn="靠左"
+        android:title="旅行模式" />
+
+    <ListPreference
+        android:entries="@array/rzc_golf_switch_entries"
+        android:entryValues="@array/rzc_golf_switch_values"
+        android:key="LIGHT_DOOR_AMBIENT"
+        android:persistent="false"
+        android:title="车门环境照明灯" />
+    <ListPreference
+        android:entries="@array/rzc_golf_switch_entries"
+        android:entryValues="@array/rzc_golf_switch_values"
+        android:key="LIGHT_FOORWELL_LIGHT"
+        android:persistent="false"
+        android:title="脚步空间照明灯调节" />
+
+    <SwitchPreference
+        android:key="LIGHT_DYNAMIC_LIGHT_ASSIST"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="动态灯光辅助" />
+    <SwitchPreference
+        android:key="LIGHT_MOTORWAY_LIGHT"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="动态大灯随动" />
+
+    <ListPreference
+        android:entries="@array/rzc_golf_switch_entries"
+        android:entryValues="@array/rzc_golf_switch_values"
+        android:key="LIGHT_TOP_LIGHT"
+        android:persistent="false"
+        android:title="车顶环境照明灯" />
+    <ListPreference
+        android:entries="@array/rzc_golf_switch_entries"
+        android:entryValues="@array/rzc_golf_switch_values"
+        android:key="LIGHT_FRONT_LIGHT"
+        android:persistent="false"
+        android:title="前部环境照明灯" />
+    
+      <ListPreference
+        android:entries="@array/rzc_golf_color_entries"
+        android:entryValues="@array/rzc_golf_color_values"
+        android:key="LIGHT_LIGHT_COLOR"
+        android:persistent="false"
+        android:title="车灯颜色" />
+      
+    <ListPreference
+        android:entries="@array/rzc_golf_switch_entries"
+        android:entryValues="@array/rzc_golf_switch_values"
+        android:key="LIGHT_ALL_AREA"
+        android:persistent="false"
+        android:title="所有区域" />
+
+</PreferenceScreen>

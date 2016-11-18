@@ -70,11 +70,13 @@ public class BeanFactory {
 		case Contacts.CANNAMEGROUP.SSPeugeot308: 
 		case Contacts.CANNAMEGROUP.SSPeugeot3008ALL: 
 		case Contacts.CANNAMEGROUP.SSPeugeot2008: 
-		case Contacts.CANNAMEGROUP.SSPeugeot308S: 
-		case Contacts.CANNAMEGROUP.SSPeugeot308LOW: 
+		case Contacts.CANNAMEGROUP.SSPeugeot3008LOW: 
 		case Contacts.CANNAMEGROUP.SSPeugeot301: 
 		case Contacts.CANNAMEGROUP.SSPeugeotC3XR: 
 			canName=Contacts.CANNAMEGROUP.SSPeugeot;
+			break;
+		case Contacts.CANNAMEGROUP.SSPeugeot308S: 
+			canName=Contacts.CANNAMEGROUP.SSPeugeot308S;
 			break;
 		case Contacts.CANNAMEGROUP.SSPeugeot408: 
 			canName=Contacts.CANNAMEGROUP.SSPeugeot408;

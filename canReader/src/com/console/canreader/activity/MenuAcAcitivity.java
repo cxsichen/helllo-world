@@ -73,13 +73,16 @@ public class MenuAcAcitivity extends BaseActivity {
 
 	private void chooseAcActivity() {
 		// TODO Auto-generated method stub
+		if(canName.contains(Contacts.CANNAMEGROUP.SSPeugeot)){
+			startActivity(new Intent(this, AirControlerSSPeugeot408.class));
+			finish();
+		}
 		switch (canName) {
 		case Contacts.CANNAMEGROUP.SSGE:
 			startAcAcitivy("com.console.canreader.fragment.SSGE.AirContorlActivity");
 			break;
-		case Contacts.CANNAMEGROUP.SSPeugeot:
-		case Contacts.CANNAMEGROUP.SSPeugeot408:
-			startActivity(new Intent(this, AirControlerSSPeugeot408.class));
+		case Contacts.CANNAMEGROUP.RZCVolkswagenGolf:
+			startAcAcitivy("com.console.canreader.fragment.RZCVolkswagenGolf.AirContorlActivity");
 			break;
 		default:
 			break;

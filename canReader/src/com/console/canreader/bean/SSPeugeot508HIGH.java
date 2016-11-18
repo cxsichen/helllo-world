@@ -152,7 +152,7 @@ public class SSPeugeot508HIGH extends AnalyzeUtils {
 				analyzeLanguageSettingData(msg);
 				break;
 			case WARNING_INFO_DATA:
-				mCanInfo.CHANGE_STATUS = 10;
+				mCanInfo.CHANGE_STATUS = 12;
 				analyzeWarningInfoData(msg);
 				break;
 			case UNIT_SETTING_DATA:
@@ -514,7 +514,7 @@ public class SSPeugeot508HIGH extends AnalyzeUtils {
 		mCanInfo.RIGHT_FORONTDOOR_STATUS = (int) ((msg[6] >> 6) & 0x01);
 		mCanInfo.LEFT_FORONTDOOR_STATUS = (int) ((msg[6] >> 7) & 0x01);
 
-		mCanInfo.SAFETY_BELT_STATUS = (int) ((msg[6] >> 2) & 0x01);
+		mCanInfo.SAFETY_BELT_STATUS = (int) ((msg[6] >> 2) & 0x01)==1?0:1;
 		mCanInfo.DEPUTY_SAFETY_BELT_STATUS = (int) ((msg[11] >> 7) & 0x01);
 		mCanInfo.BACK_LEFT_SAFETY_BELT_STATUS = (int) ((msg[11] >> 6) & 0x01);
 		mCanInfo.BACK_MIDDLE_SAFETY_BELT_STATUS = (int) ((msg[11] >> 5) & 0x01);
@@ -606,74 +606,72 @@ public class SSPeugeot508HIGH extends AnalyzeUtils {
 		mCanInfo.BACK_LIGHT_DATA=(int)((msg[9]>>0)&0xff);
 		
 		// 方向盘转角 CHANGE_STATUS=8
-		int temp = (int) (msg[10] & 0xFF);
-		
-		if (temp != 0) {
+		int temp = (int) (msg[10] & 0xFF)*256+(int) (msg[11] & 0xFF);
+		if (temp > 0xffff/2) {
 				mCanInfo.STERRING_WHELL_STATUS = 65535-temp;
 				mCanInfo.CHANGE_STATUS = 8;
-		} 
-		 temp = (int) (msg[11] & 0xFF);
-		if(temp!=0){
+		} else{
 				mCanInfo.STERRING_WHELL_STATUS =  -temp;
 				mCanInfo.CHANGE_STATUS = 8;
 		}
+		
 
 		// 按键 CHANGE_STATUS=2
 		if (buttonTemp != (int) (msg[6] & 0xFF)) {
 			buttonTemp = (int) (msg[6] & 0xFF);
 			switch (buttonTemp) {
 			case 0x01:
-				mCanInfo.STEERING_BUTTON_MODE = 1;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOLUP;
 				break;
 			case 0x02:
-				mCanInfo.STEERING_BUTTON_MODE = 2;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOLDOW;
 				break;
 			case 0x03:
-				mCanInfo.STEERING_BUTTON_MODE = 6;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUTE;
 				break;
 			case 0x05:
-				mCanInfo.STEERING_BUTTON_MODE = 9;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.ANSWER;
 				break;
 			case 0x08:
-				mCanInfo.STEERING_BUTTON_MODE = 3;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUUP;
 				break;
 			case 0x09:
-				mCanInfo.STEERING_BUTTON_MODE = 4;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUDOWN;
 				break;
 			case 0x0A:
-				mCanInfo.STEERING_BUTTON_MODE = 20;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;
 				break;
 			case 0x0B:
 				break;
 			case 0x0D:
-				mCanInfo.STEERING_BUTTON_MODE = 3;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUUP;
 				break;
 			case 0x0E:
-				mCanInfo.STEERING_BUTTON_MODE = 4;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUDOWN;
 				break;
 			case 0x0F://ok
 				break;
 			case 0x10://ESC
 				break;
 			case 0x11://Memo up
-				mCanInfo.STEERING_BUTTON_MODE = 3;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUUP;
 				break;
 			case 0x12://Memo down
-				mCanInfo.STEERING_BUTTON_MODE = 4;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUDOWN;
 				break;
 			case 0x13://List
-				mCanInfo.STEERING_BUTTON_MODE = 18;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUSIC;
 				break;
 			case 0x14://Wiper Button
-				mCanInfo.STEERING_BUTTON_MODE = 22;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.Wiper;
 				break;
 			case 0x15://Check 自检键
 				break;
 			case 0x16://行车电脑页面切换键
-				mCanInfo.STEERING_BUTTON_MODE = 20;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;
 				break;
 			case 0x40://BT wipper Button 一键蓝牙
-				mCanInfo.STEERING_BUTTON_MODE = 19;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.PHONE_APP;
 				break;
 			default:
 				mCanInfo.STEERING_BUTTON_MODE = 0;

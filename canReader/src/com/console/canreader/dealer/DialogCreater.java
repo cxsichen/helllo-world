@@ -6,6 +6,8 @@ import java.util.List;
 import android.R.string;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
@@ -230,7 +232,7 @@ public class DialogCreater {
 				|| canInfo.AIR_RATE != airConStatus[10]
 				|| (float) canInfo.DRIVING_POSITON_TEMP != airConStatusFloat[0]
 				|| (float) canInfo.DEPUTY_DRIVING_POSITON_TEMP != airConStatusFloat[1]
-				|| (float) canInfo.OUTSIDE_TEMPERATURE != airConStatusFloat[2]
+				/*|| (float) canInfo.OUTSIDE_TEMPERATURE != airConStatusFloat[2]*/
 				|| canInfo.LEFT_SEAT_TEMP != airConStatus[13]
 				|| canInfo.RIGTHT_SEAT_TEMP != airConStatus[14]
 				) {
@@ -251,7 +253,7 @@ public class DialogCreater {
 			airConStatus[10] = canInfo.AIR_RATE;
 			airConStatusFloat[0] = (float) canInfo.DRIVING_POSITON_TEMP;
 			airConStatusFloat[1] = (float) canInfo.DEPUTY_DRIVING_POSITON_TEMP;
-			airConStatusFloat[2] = (float) canInfo.OUTSIDE_TEMPERATURE;
+			/*airConStatusFloat[2] = (float) canInfo.OUTSIDE_TEMPERATURE;*/
 			airConStatus[13] = canInfo.LEFT_SEAT_TEMP;
 			airConStatus[14] = canInfo.RIGTHT_SEAT_TEMP;
 			
@@ -293,5 +295,30 @@ public class DialogCreater {
 
 	public interface CallBack {
 		void sendShowMsg();
+	}
+	
+	private static Dialog CarInfoWaringAlertDialog;
+	public static void showCarInfoWaring(Context mContext, CanInfo canInfo) {
+		
+		try {
+			if(CarInfoWaringAlertDialog!=null){
+				CarInfoWaringAlertDialog.cancel();
+			}
+			String warning_id = BytesUtil.intToHexString_4(canInfo.WARNING_ID);
+			Log.i("xxx", "warning_id==" + warning_id);
+			int i = mContext.getResources().getIdentifier(
+					"warning_" + warning_id, "string",
+					mContext.getPackageName());
+
+			CarInfoWaringAlertDialog = new AlertDialog.Builder(mContext)
+					.setTitle("¾¯¸æ")
+					.setMessage(mContext.getResources().getString(i)).create();
+			CarInfoWaringAlertDialog.getWindow().setType(
+					WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+
+			CarInfoWaringAlertDialog.show();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }

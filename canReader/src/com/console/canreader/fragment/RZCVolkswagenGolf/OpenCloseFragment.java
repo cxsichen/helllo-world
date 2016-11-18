@@ -31,7 +31,7 @@ import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.BytesUtil;
 import com.console.canreader.utils.PreferenceUtil;
 
-public class CarInfoSettingsFragment extends BaseFragment {
+public class OpenCloseFragment extends BaseFragment {
 
 	SettingsFragment settingsFragment;
 
@@ -39,7 +39,7 @@ public class CarInfoSettingsFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.fragment_activity_layout,
+		View view = inflater.inflate(R.layout.fragment_activity_layout_5,
 				container, false);
 		initView(view);
 		initFragment();
@@ -50,7 +50,7 @@ public class CarInfoSettingsFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		settingsFragment = new SettingsFragment(this);
 		getActivity().getFragmentManager().beginTransaction()
-				.replace(R.id.content_layout, settingsFragment).commit();
+				.replace(R.id.content_layout_5, settingsFragment).commit();
 	}
 
 	@Override
@@ -66,6 +66,7 @@ public class CarInfoSettingsFragment extends BaseFragment {
 				}
 			}
 		}
+
 	}
 
 	@Override
@@ -81,45 +82,36 @@ public class CarInfoSettingsFragment extends BaseFragment {
 	public class SettingsFragment extends PreferenceFragment implements
 			OnPreferenceChangeListener {
 
-		CarInfoSettingsFragment settingActivity;
+		OpenCloseFragment settingActivity;
 
 		List<SwitchPreference> mSwitchPreferenceGroup = new ArrayList<SwitchPreference>();
 		List<Integer> mSwitchValueGroup = new ArrayList<Integer>();
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
-		Preference mPreference;
-		/*-----------set data----------------*/
-		String[] swPreKey = { "TYPES_SPEED_WARNING","REMOTE_KEY","KEY_ACTIVE","PROFILE_STEERING" };
-		String[] swPreMsg = { "2EC60220" ,"2EC602CB","2EC602CA","2EC602D1"};
 
-		String[] listPreKey = { "LANGUAGE_CHANGE", "ESC_SYSTEM", "PROFILE_INFORMATION","INDIVIDUAL_ENGINE","PROFILE_FRONT_LIGHT","PROFILE_CLIMATE" };
-		String[] listPreMsg = { "2EC60200", "2EC60210", "2EC602D0", "2EC602D2", "2EC602D5","2EC602D3"};
+		/*-----------set data----------------*/
+		String[] swPreKey = { "AUTOMATIC_LOCKING"};
+		String[] swPreMsg = { "2EC60272"};
+
+		String[] listPreKey = {"CONV_OPENING","DOOR_UNLOCKING"};
+		String[] listPreMsg = { "2EC60270", "2EC60271"};
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
-			// TODO Auto-generated method stub
-			mListValueGroup2.add(mCaninfo.LANGUAGE_CHANGE);
-			mListValueGroup2.add(mCaninfo.ESC_SYSTEM);
-			
-			mListValueGroup2.add(mCaninfo.PROFILE_INFORMATION);
-			mListValueGroup2.add(mCaninfo.INDIVIDUAL_ENGINE);
-			mListValueGroup2.add(mCaninfo.PROFILE_FRONT_LIGHT);
-			mListValueGroup2.add(mCaninfo.PROFILE_CLIMATE);
+			// TODO Auto-generated method stub		
+			  mListValueGroup2.add(mCaninfo.CONV_OPENING);
+			  mListValueGroup2.add(mCaninfo.DOOR_UNLOCKING);
 		}
 
 		private void addSwitchData(List<Integer> mSwitchValueGroup2,
 				CanInfo mCaninfo) {
 			// TODO Auto-generated method stub
-			mSwitchValueGroup2.add(mCaninfo.TYPES_SPEED_WARNING);
-			mSwitchValueGroup2.add(mCaninfo.REMOTE_KEY);
-			mSwitchValueGroup2.add(mCaninfo.KEY_ACTIVE);
-			mSwitchValueGroup2.add(mCaninfo.PROFILE_STEERING);
-			
+			mSwitchValueGroup2.add(mCaninfo.AUTOMATIC_LOCKING);
 		}
 
 		/*-----------set data----------------*/
 
-		public SettingsFragment(CarInfoSettingsFragment settingActivity) {
+		public SettingsFragment(OpenCloseFragment settingActivity) {
 			this.settingActivity = settingActivity;
 		}
 
@@ -127,7 +119,7 @@ public class CarInfoSettingsFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.rzcgolf_setting_prefs);
+			addPreferencesFromResource(R.xml.rzcgolf_setting_prefs_5);
 
 			for (String str : swPreKey) {
 				SwitchPreference p = (SwitchPreference) findPreference(str);
@@ -141,8 +133,6 @@ public class CarInfoSettingsFragment extends BaseFragment {
 				mListPreferenceGroup.add(p);
 			}
 
-			mPreference = findPreference("TYPES_SPEED");
-
 			if (settingActivity != null) {
 				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
@@ -150,8 +140,6 @@ public class CarInfoSettingsFragment extends BaseFragment {
 		}
 
 		public void syncView(CanInfo mCaninfo) {
-			mPreference.setSummary(mCaninfo.TYPES_SPEED
-					+ (mCaninfo.TYPES_SPEED_UNIT == 1 ? "mph" : "km/h"));
 
 			mSwitchValueGroup.clear();
 			addSwitchData(mSwitchValueGroup, mCaninfo);

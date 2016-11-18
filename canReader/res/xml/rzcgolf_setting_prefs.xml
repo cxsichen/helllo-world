@@ -8,7 +8,6 @@
             android:persistent="false"
             android:title="语言设置" />
     </PreferenceCategory>
-    
     <PreferenceCategory android:title="ESC" >
         <ListPreference
             android:entries="@array/rzc_ecs_entries"
@@ -17,17 +16,64 @@
             android:persistent="false"
             android:title="ESC系统" />
     </PreferenceCategory>
-
     <PreferenceCategory android:title="Types" >
-         <SwitchPreference
+        <SwitchPreference
             android:key="TYPES_SPEED_WARNING"
             android:summaryOff="OFF"
             android:summaryOn="ON"
             android:title="Types速度报警" />
-         
-          <Preference
+
+        <Preference
             android:key="TYPES_SPEED"
             android:title="Types车速" />
     </PreferenceCategory>
-    
+
+    <SwitchPreference
+        android:key="REMOTE_KEY"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="遥控钥匙记忆匹配 " />
+    <SwitchPreference
+        android:key="KEY_ACTIVE"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="汽车钥匙已激活" />
+
+    <PreferenceCategory android:title="个性化设置" >
+        <ListPreference
+            android:entries="@array/rzc_golf_profile_entries"
+            android:entryValues="@array/rzc_golf_profile_values"
+            android:key="PROFILE_INFORMATION"
+            android:persistent="false"
+            android:title="个人设置" />
+        
+        <ListPreference
+            android:entries="@array/rzc_golf_profile_1_entries"
+            android:entryValues="@array/rzc_golf_profile_1_values"
+            android:key="INDIVIDUAL_ENGINE"
+            android:persistent="false"
+            android:title="引擎" />
+
+        <SwitchPreference
+            android:key="PROFILE_STEERING"
+            android:summaryOff="普通模式"
+            android:summaryOn="运动模式"
+            android:title="方向盘" />
+
+        <ListPreference
+            android:entries="@array/rzc_golf_profile_1_entries"
+            android:entryValues="@array/rzc_golf_profile_1_values"
+            android:key="PROFILE_FRONT_LIGHT"
+            android:persistent="false"
+            android:title="前灯" />
+        
+        <ListPreference
+            android:entries="@array/rzc_golf_profile_2_entries"
+            android:entryValues="@array/rzc_golf_profile_2_values"
+            android:key="PROFILE_CLIMATE"
+            android:persistent="false"
+            android:title="气候" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

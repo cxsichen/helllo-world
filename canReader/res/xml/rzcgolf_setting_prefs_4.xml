@@ -1,0 +1,29 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="MIRROR_SYNC_ADJUST"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="后视镜同步调节 " />
+    <SwitchPreference
+        android:key="MIRROR_LOWER_WHILE_REVERSING"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="倒车档时后视镜降低 " />
+    <SwitchPreference
+        android:key="WIPER_AUTO_IN_RAIN"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="雨天自动刮水  " />
+    <SwitchPreference
+        android:key="WIPER_REAR_WIPING_REVERSING"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="倒车档时后窗玻璃刮水  " />
+    <SwitchPreference
+        android:key="MIRROR_FOLD_PARKING"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="驻车时内折   " />
+
+</PreferenceScreen>
