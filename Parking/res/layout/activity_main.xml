@@ -1,127 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parking_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    android:orientation="horizontal"
     tools:context="com.example.android.parkingconsole.MainActivity" >
 
-    <RelativeLayout
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/radar_bg" >
+        android:orientation="horizontal" >
 
-        <!-- Car -->
+        <RelativeLayout
+            android:id="@+id/radar_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/radar_bg" >
 
-        <ImageView
-            android:layout_width="128dp"
-            android:layout_height="218dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_car" />
-
-        <!-- Front Radar Signals -->
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true" >
-
-            <!-- Front 1th Signals -->
-            <!-- The final number indicates the signal level, 4 to 1 equals Green to Red -->
+            <!-- Car -->
 
             <ImageView
-                android:id="@+id/f1Rd"
-                style="@style/RadarSignals"
-                 />
+                android:layout_width="128dp"
+                android:layout_height="218dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_car" />
 
-            <!-- Front 2nd Signals -->
+            <!-- Front Radar Signals -->
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true" >
+
+                <!-- Front 1th Signals -->
+                <!-- The final number indicates the signal level, 4 to 1 equals Green to Red -->
+
+                <ImageView
+                    android:id="@+id/f1Rd"
+                    style="@style/RadarSignals" />
+
+                <!-- Front 2nd Signals -->
+
+                <ImageView
+                    android:id="@+id/f2Rd"
+                    style="@style/RadarSignals" />
+
+                <!-- Front 3nd Signals -->
+
+                <ImageView
+                    android:id="@+id/f3Rd"
+                    style="@style/RadarSignals" />
+
+                <!-- Front 4th Signals -->
+
+                <ImageView
+                    android:id="@+id/f4Rd"
+                    style="@style/RadarSignals" />
+            </FrameLayout>
+
+            <!-- Rear Radar Signals -->
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" >
+
+                <!-- Rear 1th Signals -->
+                <!-- The final number indicates the signal level, 4 to 1 equals Green to Red -->
+
+                <ImageView
+                    android:id="@+id/r1Rd"
+                    style="@style/RadarSignals" />
+
+                <!-- Rear 2nd Signals -->
+
+                <ImageView
+                    android:id="@+id/r2Rd"
+                    style="@style/RadarSignals" />
+
+                <!-- Rear 3nd Signals -->
+
+                <ImageView
+                    android:id="@+id/r3Rd"
+                    style="@style/RadarSignals" />
+
+                <!-- Rear 4th Signals -->
+
+                <ImageView
+                    android:id="@+id/r4Rd"
+                    style="@style/RadarSignals" />
+            </FrameLayout>
+        </RelativeLayout>
+
+        <!-- RearCam View -->
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3" >
+
+            <TextureView
+                android:id="@+id/camera_surface"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <ImageView
-                android:id="@+id/f2Rd"
-                style="@style/RadarSignals"
-                />
-
-            <!-- Front 3nd Signals -->
-
-            <ImageView
-                android:id="@+id/f3Rd"
-                style="@style/RadarSignals"
-               />
-
-            <!-- Front 4th Signals -->
-
-            <ImageView
-                android:id="@+id/f4Rd"
-                style="@style/RadarSignals"
-                />
-        </FrameLayout>
-
-        <!-- Rear Radar Signals -->
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" >
-
-            <!-- Rear 1th Signals -->
-            <!-- The final number indicates the signal level, 4 to 1 equals Green to Red -->
-
-            <ImageView
-                android:id="@+id/r1Rd"
-                style="@style/RadarSignals"
-                 />
-
-            <!-- Rear 2nd Signals -->
-
-            <ImageView
-                android:id="@+id/r2Rd"
-                style="@style/RadarSignals"
-                 />
-
-            <!-- Rear 3nd Signals -->
-
-            <ImageView
-                android:id="@+id/r3Rd"
-                style="@style/RadarSignals"
-                />
-
-            <!-- Rear 4th Signals -->
-
-            <ImageView
-                android:id="@+id/r4Rd"
-                style="@style/RadarSignals"
-                 />
-        </FrameLayout>
-    </RelativeLayout>
-
-    <!-- RearCam View -->
-
-    <RelativeLayout
-        android:layout_width="547dp"
-        android:layout_height="match_parent" >
-
-        <TextureView
-            android:id="@+id/camera_surface"
-            android:layout_width="547dp"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:id="@+id/rail_line"
-            android:layout_width="547dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/g18"/>
-
-        <!--
-             <com.console.parking.view.RailLineView
-            android:id="@+id/rail_view"
-            android:layout_width="547dp"
-            android:layout_height="wrap_content"
-            />
-        -->
-
-    </RelativeLayout>
-
-</LinearLayout>
+                android:id="@+id/rail_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/g18" />
+        </RelativeLayout>
+    </LinearLayout>
+    
+    <include layout="@layout/nissan_layout"
+        android:id="@+id/nissan_layout"
+        android:visibility="gone" />
+    
+    <include layout="@layout/sstoyata_layout"
+        android:id="@+id/sstoyata_layout"
+        android:visibility="gone" />
+    
+    <include layout="@layout/sstrumpchigs5_layout"
+        android:id="@+id/sstrumpchigs5_layout"
+        android:visibility="gone" />
+</RelativeLayout>

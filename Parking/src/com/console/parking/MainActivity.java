@@ -5,8 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import com.console.parking.control.SSToyotaRAV4Control;
+import com.console.parking.control.SSTrumpchiGS5Control;
+import com.console.parking.control.SSnissandataControl;
 import com.console.parking.control.dataControl;
 import com.console.parking.util.DisplayUtil;
+import com.console.parking.util.PreferenceUtil;
 
 import android.app.Activity;
 import android.app.Service;
@@ -25,6 +29,7 @@ import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.Preference;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -49,8 +54,11 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private TextureView surface;
 	private SurfaceTexture mSurfaceTexture;
 	private int screenHeight = 0;
-	private LinearLayout parkingLayout;
+	private RelativeLayout parkingLayout;
 	private dataControl mRadarControl;
+	private SSnissandataControl mSSnissandataControl;
+	private SSToyotaRAV4Control mSSToyotaRAV4Control;
+	private SSTrumpchiGS5Control mSSTrumpchiGS5Control;	
 	private static final String BACKCARSTATE = "back_car_state";
 	private static final int BACKCARSTATEMSG = 1;
 	private static final int FINISHMSG = 2;
@@ -61,7 +69,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private static final String SEND_BACK_CAR_OFF = "com.console.SEND_BACK_CAR_OFF";
 	private Button button;
 	IntentFilter filter;
-	private static final String DIS_DIALOG="com.inet.broadcast.no_disturb";
+	private static final String DIS_DIALOG = "com.inet.broadcast.no_disturb";
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -76,7 +84,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			case FINISHMSG:
 				if (android.provider.Settings.System.getInt(
 						getContentResolver(), BACKCARSTATE, 1) == 0) {
-					finish();
+						finish();
 					// moveTaskToBack(true);
 				}
 				break;
@@ -124,26 +132,32 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 						| View.SYSTEM_UI_FLAG_FULLSCREEN
 						| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 		setContentView(R.layout.activity_main);
+
 		init();
 		requestAudioFocus();
-		
+		//registerHomeKeyReceiver(this);
+
 	}
 
 	private void init() {
 		// TODO Auto-generated method stub
 		// 初始化can数据读取控制
-		parkingLayout = (LinearLayout) findViewById(R.id.parking_layout);
-		mRadarControl = new dataControl(this, parkingLayout);
+		parkingLayout = (RelativeLayout) findViewById(R.id.parking_layout);
+
 		// 初始化camera显示界面
 		surface = (TextureView) findViewById(R.id.camera_surface);
 		surface.setSurfaceTextureListener(this);
+		
+		chooseControlLayout();	
 		//
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(BACKCARSTATE), true,
 				mBackCarObserver);
 		mHandler.sendEmptyMessageDelayed(BACKCARSTATEMSG, 1000);
-		doRegisterReceiver();	
+		doRegisterReceiver();
 	}
+
+
 
 	private void doRegisterReceiver() {
 		// TODO Auto-generated method stub
@@ -198,37 +212,13 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		if (readChannelFile() != 1)
 			com.example.cjc7150.MainActivity.setmode((byte) 1);
 		// 设置界面
-		getSetting();
-        dismissSysDialog();		
+		dismissSysDialog();
 	}
 
 	private void dismissSysDialog() {
 		// TODO Auto-generated method stub
-		Intent intent=new Intent(DIS_DIALOG);
+		Intent intent = new Intent(DIS_DIALOG);
 		sendBroadcast(intent);
-	}
-
-	private void getSetting() {
-		// TODO Auto-generated method stub
-		int backTrackState = android.provider.Settings.System.getInt(
-				getContentResolver(), BACKTRACK, 1);
-		if (backTrackState == 1) {
-			findViewById(R.id.rail_line).setVisibility(View.VISIBLE);
-		} else {
-			findViewById(R.id.rail_line).setVisibility(View.GONE);
-		}
-
-		int videoMirrorState = android.provider.Settings.System.getInt(
-				getContentResolver(), VIDEOMIRROR, 1);
-		if (videoMirrorState == 1) {
-			Matrix transform = new Matrix();
-			transform.setScale(1, 1, 0, 0);
-			surface.setTransform(transform);
-		} else {
-			Matrix transform = new Matrix();
-			transform.setScale(-1, 1, 400, 0);
-			surface.setTransform(transform);
-		}
 	}
 
 	/*----------------------------Resume------------------------*/
@@ -237,8 +227,8 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
-		super.onPause();	
-		
+		super.onPause();
+
 	}
 
 	/*----------------------------Pause-------------------------*/
@@ -252,13 +242,14 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		getContentResolver().unregisterContentObserver(mBackCarObserver);
 		mHandler.removeMessages(BACKCARSTATEMSG);
 		unregisterReceiver(myReceiver);
-		if (mRadarControl != null) {
-			mRadarControl.unBindService();
-		}
+		unBindService();
 		surface = null;
+//		unregisterHomeKeyReceiver(this);
 		abandonAudioFocus();
 
 	}
+
+
 
 	private void openCamera() {
 		// TODO Auto-generated method stub
@@ -315,7 +306,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
-		return;
+			return;
 	}
 
 	public final static String CHANNEL_FILE = "/sys/class/gpio/cjc5150/value";
@@ -343,19 +334,57 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		}
 	}
 
+	private HomeWatcherReceiver mHomeKeyReceiver = null;
+
+	private void registerHomeKeyReceiver(Context context) {
+		mHomeKeyReceiver = new HomeWatcherReceiver();
+		final IntentFilter homeFilter = new IntentFilter(
+				Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+		context.registerReceiver(mHomeKeyReceiver, homeFilter);
+	}
+
+	private void unregisterHomeKeyReceiver(Context context) {
+		if (null != mHomeKeyReceiver) {
+			context.unregisterReceiver(mHomeKeyReceiver);
+		}
+	}
+
+	class HomeWatcherReceiver extends BroadcastReceiver {
+		private static final String SYSTEM_DIALOG_REASON_KEY = "reason";
+		private static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
+		private static final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
+		private static final String SYSTEM_DIALOG_REASON_LOCK = "lock";
+		private static final String SYSTEM_DIALOG_REASON_ASSIST = "assist";
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
+				// android.intent.action.CLOSE_SYSTEM_DIALOGS
+				String reason = intent.getStringExtra(SYSTEM_DIALOG_REASON_KEY);
+				if (SYSTEM_DIALOG_REASON_HOME_KEY.equals(reason)) {
+					// content.snapToPage(default_page);
+				} else if (SYSTEM_DIALOG_REASON_RECENT_APPS.equals(reason)) {
+				} else if (SYSTEM_DIALOG_REASON_LOCK.equals(reason)) {
+				} else if (SYSTEM_DIALOG_REASON_ASSIST.equals(reason)) {
+				}
+			}
+		}
+	}
+
 	private AudioManager mAudioManager;
 
 	private int requestAudioFocus() {
 		return getAudioManager().requestAudioFocus(OnAudioFocusChangeListener,
-				AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+				AudioManager.STREAM_MUSIC,
+				AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 	}
 
 	OnAudioFocusChangeListener OnAudioFocusChangeListener = new OnAudioFocusChangeListener() {
 
 		@Override
 		public void onAudioFocusChange(int focusChange) {
-			
-			
+
 		}
 	};
 
@@ -369,5 +398,81 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		}
 		return mAudioManager;
 	}
+	
+	/*-----360界面选择-------*/
+	
+	private void chooseControlLayout() {
+		// TODO Auto-generated method stub
+		switch (PreferenceUtil.getCANName(this)) {
+		case PreferenceUtil.SSNissan:
+			mSSnissandataControl = new SSnissandataControl(this, parkingLayout);
+			break;
+		case PreferenceUtil.SSToyotaRAV4:
+			mSSToyotaRAV4Control = new SSToyotaRAV4Control(this, parkingLayout);
+			break;
+		case PreferenceUtil.SSTrumpchiGS5:
+			mSSTrumpchiGS5Control = new SSTrumpchiGS5Control(this, parkingLayout);
+			break;
+		default:
+			getSetting();
+			mRadarControl = new dataControl(this, parkingLayout);
+			break;
+		}
+	}
+	
+	
+	
+	private void unBindService() {
+		// TODO Auto-generated method stub
+		if (mRadarControl != null) {
+			mRadarControl.unBindService();
+		}
+		if(mSSnissandataControl!=null)
+			mSSnissandataControl.unBindService();
+		
+		if(mSSToyotaRAV4Control!=null)
+			mSSToyotaRAV4Control.unBindService();
+		
+		if(mSSTrumpchiGS5Control!=null)
+			mSSTrumpchiGS5Control.unBindService();
+	}
+	
+	private void getSetting() {
+		// TODO Auto-generated method stub	
+		switch (PreferenceUtil.getCANName(this)) {
+		case PreferenceUtil.SSNissan:
+		case PreferenceUtil.SSToyotaRAV4:
+		case PreferenceUtil.SSTrumpchiGS5:
+             //do nothing		
+			break;
+		default:
+			int backTrackState = android.provider.Settings.System.getInt(
+					getContentResolver(), BACKTRACK, 1);
+			if (backTrackState == 1) {
+				findViewById(R.id.rail_line).setVisibility(View.VISIBLE);
+			} else {
+				findViewById(R.id.rail_line).setVisibility(View.GONE);
+			}
+			break;
+		}
+
+
+		int videoMirrorState = android.provider.Settings.System.getInt(
+				getContentResolver(), VIDEOMIRROR, 1);
+		if (videoMirrorState == 1) {
+			Matrix transform = new Matrix();
+			transform.setScale(1, 1, 0, 0);
+			surface.setTransform(transform);
+		} else {
+			Matrix transform = new Matrix();
+			transform.setScale(-1, 1, 400, 0);
+			surface.setTransform(transform);
+		}
+	}
+	
+	
+
+	
+	
 
 }

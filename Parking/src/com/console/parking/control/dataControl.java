@@ -23,7 +23,7 @@ import android.widget.RelativeLayout;
 public class dataControl {
 
 	private Context context;
-	LinearLayout layout;
+	RelativeLayout layout;
 
 	private ICanService mISpService;
 	CanInfo mCanInfo;
@@ -72,7 +72,7 @@ public class dataControl {
 		}
 	};
 
-	public dataControl(Context context, LinearLayout layout) {
+	public dataControl(Context context, RelativeLayout layout) {
 		// TODO Auto-generated constructor stub
 		this.context = context;
 		this.layout = layout;
@@ -93,73 +93,89 @@ public class dataControl {
 		r4Rd = (ImageView) layout.findViewById(R.id.r4Rd);
 
 		railLine = (ImageView) layout.findViewById(R.id.rail_line);
-		// railLineView = (RailLineView) layout.findViewById(R.id.rail_view);
 	}
 
 	int SterringSave = 0;
+	int radarStatusSave = -1;
 
 	private void updateView(CanInfo canInfo) {
 		// TODO Auto-generated method stub
-		
-		if(canInfo.RADAR_ALARM_STATUS==0){			
-			f1Rd.setVisibility(View.INVISIBLE);
-			f2Rd.setVisibility(View.INVISIBLE);
-			f3Rd.setVisibility(View.INVISIBLE);
-			f4Rd.setVisibility(View.INVISIBLE);
-			r1Rd.setVisibility(View.INVISIBLE);
-			r2Rd.setVisibility(View.INVISIBLE);
-			r3Rd.setVisibility(View.INVISIBLE);
-			r4Rd.setVisibility(View.INVISIBLE);
-		}else{
-			f1Rd.setVisibility(View.VISIBLE);
-			f2Rd.setVisibility(View.VISIBLE);
-			f3Rd.setVisibility(View.VISIBLE);
-			f4Rd.setVisibility(View.VISIBLE);
-			r1Rd.setVisibility(View.VISIBLE);
-			r2Rd.setVisibility(View.VISIBLE);
-			r3Rd.setVisibility(View.VISIBLE);
-			r4Rd.setVisibility(View.VISIBLE);
-			try {
-				switch (canInfo.CHANGE_STATUS) {
-				case 11:
-					f1Rd.setImageResource(f1Draws[canInfo.FRONT_LEFT_DISTANCE]);
-					f2Rd.setImageResource(f2Draws[canInfo.FRONT_MIDDLE_LEFT_DISTANCE]);
-					f3Rd.setImageResource(f3Draws[canInfo.FRONT_MIDDLE_RIGHT_DISTANCE]);
-					f4Rd.setImageResource(f4Draws[canInfo.FRONT_RIGHT_DISTANCE]);
-					r1Rd.setImageResource(r1Draws[canInfo.BACK_LEFT_DISTANCE]);
-					r2Rd.setImageResource(r2Draws[canInfo.BACK_MIDDLE_LEFT_DISTANCE]);
-					r3Rd.setImageResource(r3Draws[canInfo.BACK_MIDDLE_RIGHT_DISTANCE]);
-					r4Rd.setImageResource(r4Draws[canInfo.BACK_RIGHT_DISTANCE]);
-				case 5:
-					f1Rd.setImageResource(f1Draws[canInfo.FRONT_LEFT_DISTANCE]);
-					f2Rd.setImageResource(f2Draws[canInfo.FRONT_MIDDLE_LEFT_DISTANCE]);
-					f3Rd.setImageResource(f3Draws[canInfo.FRONT_MIDDLE_RIGHT_DISTANCE]);
-					f4Rd.setImageResource(f4Draws[canInfo.FRONT_RIGHT_DISTANCE]);
-					break;
-				case 4:
-					r1Rd.setImageResource(r1Draws[canInfo.BACK_LEFT_DISTANCE]);
-					r2Rd.setImageResource(r2Draws[canInfo.BACK_MIDDLE_LEFT_DISTANCE]);
-					r3Rd.setImageResource(r3Draws[canInfo.BACK_MIDDLE_RIGHT_DISTANCE]);
-					r4Rd.setImageResource(r4Draws[canInfo.BACK_RIGHT_DISTANCE]);
-					break;
-				case 8:
-					int index = (((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080) > 38 ? 38:(((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080) < 0 ? 0
-							: (((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080);
-					
-					if (SterringSave != index) {
-						SterringSave = index;
-						railLine.setBackgroundResource((R.drawable.g39 - index));
-					}
-					break;
-				default:
-					break;
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
+		if (canInfo.RADAR_ALARM_STATUS != radarStatusSave) {
+			radarStatusSave = canInfo.RADAR_ALARM_STATUS;
+			if (canInfo.RADAR_ALARM_STATUS == 0) {
+				f1Rd.setVisibility(View.INVISIBLE);
+				f2Rd.setVisibility(View.INVISIBLE);
+				f3Rd.setVisibility(View.INVISIBLE);
+				f4Rd.setVisibility(View.INVISIBLE);
+				r1Rd.setVisibility(View.INVISIBLE);
+				r2Rd.setVisibility(View.INVISIBLE);
+				r3Rd.setVisibility(View.INVISIBLE);
+				r4Rd.setVisibility(View.INVISIBLE);
+			} else {
+				f1Rd.setVisibility(View.VISIBLE);
+				f2Rd.setVisibility(View.VISIBLE);
+				f3Rd.setVisibility(View.VISIBLE);
+				f4Rd.setVisibility(View.VISIBLE);
+				r1Rd.setVisibility(View.VISIBLE);
+				r2Rd.setVisibility(View.VISIBLE);
+				r3Rd.setVisibility(View.VISIBLE);
+				r4Rd.setVisibility(View.VISIBLE);
 			}
 		}
+		try {
+			switch (canInfo.CHANGE_STATUS) {
+			case 11:
+				updateView(f1Rd,f1Draws[canInfo.FRONT_LEFT_DISTANCE]);
+				updateView(f2Rd,f2Draws[canInfo.FRONT_MIDDLE_LEFT_DISTANCE]);
+				updateView(f3Rd,f3Draws[canInfo.FRONT_MIDDLE_RIGHT_DISTANCE]);
+				updateView(f4Rd,f4Draws[canInfo.FRONT_RIGHT_DISTANCE]);
+				
+				updateView(r1Rd,r1Draws[canInfo.BACK_LEFT_DISTANCE]);
+				updateView(r2Rd,r2Draws[canInfo.BACK_MIDDLE_LEFT_DISTANCE]);
+				updateView(r3Rd,r3Draws[canInfo.BACK_MIDDLE_RIGHT_DISTANCE]);
+				updateView(r4Rd,r4Draws[canInfo.BACK_RIGHT_DISTANCE]);
+			case 5:
+				updateView(f1Rd,f1Draws[canInfo.FRONT_LEFT_DISTANCE]);
+				updateView(f2Rd,f2Draws[canInfo.FRONT_MIDDLE_LEFT_DISTANCE]);
+				updateView(f3Rd,f3Draws[canInfo.FRONT_MIDDLE_RIGHT_DISTANCE]);
+				updateView(f4Rd,f4Draws[canInfo.FRONT_RIGHT_DISTANCE]);
+				break;
+			case 4:
+				updateView(r1Rd,r1Draws[canInfo.BACK_LEFT_DISTANCE]);
+				updateView(r2Rd,r2Draws[canInfo.BACK_MIDDLE_LEFT_DISTANCE]);
+				updateView(r3Rd,r3Draws[canInfo.BACK_MIDDLE_RIGHT_DISTANCE]);
+				updateView(r4Rd,r4Draws[canInfo.BACK_RIGHT_DISTANCE]);
+				break;
+			case 8:
+				int index = (((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080) > 38 ? 38
+						: (((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080) < 0 ? 0
+								: (((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080);
 
+				if (SterringSave != index) {
+					SterringSave = index;
+					railLine.setBackgroundResource((R.drawable.g39 - index));
+				}
+				break;
+			default:
+				break;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	private void updateView(ImageView iv, int i) {
+		// TODO Auto-generated method stub
+		if(iv.getTag()==null){
+			iv.setTag(i);
+			iv.setImageResource(i);
+			return;
+		}
+		if((int)iv.getTag()!=i){
+			iv.setTag(i);
+			iv.setImageResource(i);
+		}
 	}
 
 	private void bindService() {

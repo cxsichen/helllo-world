@@ -110,6 +110,7 @@ public class CanInfo implements Parcelable {
 
 	public int FUEL_WARING_SIGN = 0;
 	public int BATTERY_WARING_SIGN = 0;
+	public int CAMERA_MODE=0;
 	
 	public CanInfo(){
 		
@@ -258,6 +259,8 @@ public class CanInfo implements Parcelable {
 
 		dest.writeInt(FUEL_WARING_SIGN);
 		dest.writeInt(BATTERY_WARING_SIGN);
+		dest.writeInt(CAMERA_MODE);
+		
 	}
 
 	public static final Parcelable.Creator<CanInfo> CREATOR = new Parcelable.Creator<CanInfo>() {
@@ -365,6 +368,7 @@ public class CanInfo implements Parcelable {
 
 		FUEL_WARING_SIGN = in.readInt();
 		BATTERY_WARING_SIGN = in.readInt();
+		CAMERA_MODE= in.readInt();
 	}
 
 }
