@@ -1,7 +1,7 @@
 package com.console.launcher_console.receiver;
 
 import com.console.launcher_console.service.SerialPortControlService;
-import com.console.launcher_console.util.Trace;
+import com.console.launcher_console.util.LogXyw;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -17,7 +17,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String action = intent.getAction();
-		Trace.i("BootBroadcastReceiver action : " + action);
+		LogXyw.i("BootBroadcastReceiver action : " + action);
 		if (TextUtils.equals(action, ACTION_BOOT_COMPLETED)) {
 			context.startService(new Intent(context, SerialPortControlService.class));
 		}

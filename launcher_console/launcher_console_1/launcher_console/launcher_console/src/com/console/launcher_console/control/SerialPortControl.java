@@ -26,7 +26,7 @@ import com.console.launcher_console.util.BytesUtil;
 import com.console.launcher_console.util.Constact;
 import com.console.launcher_console.util.Contacts;
 import com.console.launcher_console.util.PreferenceUtil;
-import com.console.launcher_console.util.Trace;
+import com.console.launcher_console.util.LogXyw;
 import com.console.launcher_console.view.FMView.OnValueChangedListener;
 
 public class SerialPortControl {

@@ -29,19 +29,31 @@
                 android:id="@+id/video_parentview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                 android:visibility="gone"
-                />
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/video_offline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"                               
+                android:layout_centerInParent="true"
                 android:src="@drawable/offline_mode" />
+
+            <SurfaceView
+                android:id="@+id/sur_window"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00000000" />
         </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/rec_layout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ripple_bg" />
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/record_time"
         style="@style/CardLabel"
         android:alpha="0.5"
         android:text="@string/label_card_rec" />
@@ -55,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_rec_lock" />
+            android:src="@drawable/ic_rec_unlock" />
 
         <com.console.launcher_console.view.SelectImageView
             android:id="@+id/RecordButton"

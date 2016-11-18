@@ -42,7 +42,13 @@
     <!-- 播放音乐时，该TextView显示歌曲名称 -->
 
     <TextView
+        android:id="@+id/music_name"
         style="@style/CardLabel"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
         android:text="@string/label_card_music" />
 
     <View style="@style/HorizontalDivider" />

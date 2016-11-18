@@ -16,10 +16,12 @@ import com.console.launcher_console.control.MusicCardControl;
 import com.console.launcher_console.control.NaviCardControl;
 import com.console.launcher_console.control.OtherControl;
 import com.console.launcher_console.control.RecCardControl;
+import com.console.launcher_console.control.RecCardControl2;
 import com.console.launcher_console.control.SerialPortControl;
 import com.console.launcher_console.control.SettingCardControl;
 import com.console.launcher_console.control.TpmsContol;
 import com.console.launcher_console.control.WeatherController;
+import com.console.launcher_console.control.XmlyCardControl;
 import com.console.launcher_console.service.BNRService;
 import com.console.launcher_console.service.SerialPortControlService;
 import com.console.launcher_console.util.BytesUtil;
@@ -27,6 +29,14 @@ import com.console.launcher_console.util.Constact;
 import com.console.launcher_console.util.Contacts;
 import com.console.launcher_console.util.DensityUtils;
 import com.console.launcher_console.util.PreferenceUtil;
+import com.console.launcher_console.util.longClickUtil;
+import com.ximalaya.speechcontrol.IMainDataCallback;
+import com.ximalaya.speechcontrol.IServiceBindSuccessCallBack;
+import com.ximalaya.speechcontrol.IServiceDeathListener;
+import com.ximalaya.speechcontrol.SpeechControler;
+import com.ximalaya.ting.android.opensdk.model.PlayableModel;
+import com.ximalaya.ting.android.opensdk.player.service.IXmPlayerStatusListener;
+import com.ximalaya.ting.android.opensdk.player.service.XmPlayerException;
 
 import android.app.Activity;
 import android.app.WallpaperManager;
@@ -40,6 +50,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -96,8 +107,11 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private OtherControl mOtherControl;
 	private TpmsContol mTpmsContol;
 	private SerialPortControl mSerialPortControl;
+	private XmlyCardControl mXmlyCardControl;
+	private SpeechControler controler;
 	// 记录仪卡片
 	private RecCardControl mRecCardControl;
+	private RecCardControl2 mRecCardControl2;
 
 	private int verticalMinDistance = 100;
 	private int horizontalMaxDistance = 250;
@@ -109,8 +123,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private float predeg = 0;
 	int currentIndex = 1;
 
-	private static final String RECAPP_1 = "com.srtc.pingwang";
-	private static final String RECAPP_2 = "com.cam.dod";
+	public static final String RECAPP_1 = "com.cam.dod";
+	public static final String RECAPP_0 = "com.xair.h264demo";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -183,39 +197,48 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		mSettingCardControl = new SettingCardControl(this,
 				(LinearLayout) findViewById(R.id.setting_card_layout),
 				mSerialPortControl);
-		mBTCardControl = new BTCardControl(getApplicationContext(),
-				(LinearLayout) findViewById(R.id.bt_card_layout));
+		// mBTCardControl = new BTCardControl(getApplicationContext(),
+		// (LinearLayout) findViewById(R.id.bt_card_layout));
 		mTpmsContol = new TpmsContol(getApplicationContext(),
 				(RelativeLayout) findViewById(R.id.tpms_layout));
 		mFmCardControl = new FmCardControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.fm_layout), mSerialPortControl);
 
-		if (checkLocale("CN")){
-			mWeatherController = new WeatherController(getApplicationContext(),
-					(LinearLayout) findViewById(R.id.weather_card_layout));
-		}
-		
+		mWeatherController = new WeatherController(getApplicationContext(),
+				(LinearLayout) findViewById(R.id.weather_card_layout));
 		mOtherControl = new OtherControl(getApplicationContext(),
 				(LinearLayout) findViewById(R.id.other_card_layout),
 				mSerialPortControl);
-		
-		if (isAppInstalled(this, RECAPP_1)) {
-			mRecCardControl = new RecCardControl(getApplicationContext(),
+		if (Settings.System.getInt(getContentResolver(),
+				Constact.CAMAPPCHOOSE, 0)==0) {
+			mRecCardControl2 = new RecCardControl2(getApplicationContext(),
 					(LinearLayout) findViewById(R.id.rec_layout));
 		}
 
+		initXmlyControl();
+
+	}
+
+	private void initXmlyControl() {
+		try {
+
+			controler = SpeechControler.getInstance(this);
+			controler.init("bfdb1f2fe2466b91b0f7edae5cc59741",
+					"8a76c8e1a44991298acb4fe69fb26b3c",
+					"com.console.launcher_console");
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		mXmlyCardControl = new XmlyCardControl(getApplicationContext(),
+				(LinearLayout) findViewById(R.id.bg_card_xmly), controler);
 	}
 
 	private void init(PagedView view) {
-		if (checkLocale("CN")) {
-			view.addView(getNewPage(R.layout.activity_page_1));
-			view.addView(getNewPage(R.layout.activity_page_2));
-			view.addView(getNewPage(R.layout.activity_page_3));
-		} else {
-			view.addView(getNewPage(R.layout.activity_page_4));
-			view.addView(getNewPage(R.layout.activity_page_5));
-			view.addView(getNewPage(R.layout.activity_page_6));
-		}
+
+		view.addView(getNewPage(R.layout.activity_page_1));
+		view.addView(getNewPage(R.layout.activity_page_2));
+		view.addView(getNewPage(R.layout.activity_page_3));
 
 		view.invalidate();
 		initIndicator(view);
@@ -283,44 +306,47 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		// rec_card
 		naviCardLayout = (FrameLayout) findViewById(R.id.navi_car_layout);
 		naviCardLayout.setOnClickListener(this);
+		findViewById(R.id.nav_home).setOnClickListener(this);
+		findViewById(R.id.nav_work).setOnClickListener(this);
 
 		ev_nav_compss = (ImageView) findViewById(R.id.ev_nav_compss);
 
-		ev_bt_app = (ImageView) findViewById(R.id.ev_bt_app);
-		ev_bt_app.setOnClickListener(this);
+		// ev_bt_app = (ImageView) findViewById(R.id.ev_bt_app);
+		// ev_bt_app.setOnClickListener(this);
 
 		ev_radio_app = (ImageView) findViewById(R.id.ev_radio_app);
 		ev_radio_app.setOnClickListener(this);
-		if (isAppInstalled(this, RECAPP_1)) {
-			findViewById(R.id.video_layout).setOnClickListener(this);
-		} else if (isAppInstalled(this, RECAPP_2)) {
-			findViewById(R.id.rec_layout).setOnClickListener(this);
-			findViewById(R.id.LockButton).setOnClickListener(this);
-			findViewById(R.id.RecordButton).setOnClickListener(this);
-			findViewById(R.id.CaptureButton).setOnClickListener(this);
-		}
-		findViewById(R.id.navigation_one_button).setOnClickListener(this);
 
+		findViewById(R.id.rec_layout_btn).setOnClickListener(this);
+		findViewById(R.id.LockButton).setOnClickListener(this);
+		findViewById(R.id.RecordButton).setOnClickListener(this);
+		findViewById(R.id.CaptureButton).setOnClickListener(this);
+
+		findViewById(R.id.navigation_one_button).setOnClickListener(this);
+		findViewById(R.id.bt_layout).setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		case R.id.video_layout:
-			Intent recIntent = getPackageManager().getLaunchIntentForPackage(
-					RECAPP_1);
-			recIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivitySafely(v, recIntent, null);
-			break;
-		case R.id.rec_layout:
-			Intent recIntent1 = getPackageManager().getLaunchIntentForPackage(
-					RECAPP_2);
-			recIntent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivitySafely(v, recIntent1, null);
+		case R.id.rec_layout_btn:
+			if (longClickUtil.isDoubleClick()) {
+				Toast.makeText(this,
+						getResources().getString(R.string.double_click),
+						Toast.LENGTH_SHORT).show();
+				return;
+			}
+			startCameraApp(v);
 			break;
 		case R.id.navi_car_layout:
 			startNavi(v);
+			break;
+		case R.id.nav_home:
+			startNaviHome(v);
+			break;
+		case R.id.nav_work:
+			startNaviWork(v);
 			break;
 		case R.id.ev_bt_app:
 			Intent btIntent = getPackageManager().getLaunchIntentForPackage(
@@ -338,8 +364,78 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 					"com.tianan.home.MainActivity");
 			startActivitySafely(v, intentnavi, null);
 			break;
+		case R.id.bt_layout:
+			Intent bt_Intent = getPackageManager().getLaunchIntentForPackage(
+					"com.mtk.bluetooth");
+			startActivitySafely(v, bt_Intent, null);
+			break;
 		default:
 			break;
+		}
+	}
+
+	private void startNaviWork(View v) {
+		int mapType = Settings.System.getInt(getContentResolver(),
+				Constact.MAP_INDEX, 0);
+		if (mapType == 0) {
+			// 百度地图回公司
+			Intent intent = new Intent();
+			intent.setData(Uri.parse("bdnavi://gohome"));
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+					| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			startActivity(intent);
+		} else {
+			Intent intent = new Intent();
+			intent.setAction("AUTONAVI_STANDARD_BROADCAST_RECV");
+			intent.putExtra("KEY_TYPE", 10040);
+			intent.putExtra("DEST", 1); // 0回家 1回公司
+			intent.putExtra("IS_START_NAVI", 0);// 是否直接开始导航 0是 1否
+			sendBroadcast(intent);
+		}
+	}
+
+	private void startNaviHome(View v) {
+		int mapType = Settings.System.getInt(getContentResolver(),
+				Constact.MAP_INDEX, 0);
+		if (mapType == 0) {
+			// 百度地图回公司
+			Intent intent = new Intent();
+			intent.setData(Uri.parse("bdnavi://gocompany"));
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+					| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			startActivity(intent);
+		} else {
+			Intent intent = new Intent();
+			intent.setAction("AUTONAVI_STANDARD_BROADCAST_RECV");
+			intent.putExtra("KEY_TYPE", 10040);
+			intent.putExtra("DEST", 0); // 0回家 1回公司
+			intent.putExtra("IS_START_NAVI", 0);// 是否直接开始导航 0是 1否
+			sendBroadcast(intent);
+		}
+	}
+
+	private void startCameraApp(View v) {
+		int camType = Settings.System.getInt(getContentResolver(),
+				Constact.CAMAPPCHOOSE, 0);
+
+		if (camType == 0) {
+			if (mRecCardControl2 == null) {
+				mRecCardControl2 = new RecCardControl2(getApplicationContext(),
+						(LinearLayout) findViewById(R.id.rec_layout));
+			}
+			Intent recIntent3 = getPackageManager().getLaunchIntentForPackage(
+					RECAPP_0);
+			recIntent3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivitySafely(v, recIntent3, null);
+		} else {
+			if (mRecCardControl2 != null) {
+				mRecCardControl2.unRegisterObserver();
+				mRecCardControl2=null;
+			}
+			Intent recIntent1 = getPackageManager().getLaunchIntentForPackage(
+					RECAPP_1);
+			recIntent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivitySafely(v, recIntent1, null);
 		}
 	}
 
@@ -399,6 +495,9 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			mBTCardControl.unregisterReceiver();
 		}
 
+		if (mRecCardControl2 != null) {
+			mRecCardControl2.unRegisterObserver();
+		}
 		if (mSerialPortControl != null) {
 			mSerialPortControl.unbindSpService();
 		}
@@ -528,7 +627,7 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	}
 
 	@SuppressWarnings("unused")
-	public boolean isAppInstalled(Context context, String packageName) {
+	public static boolean isAppInstalled(Context context, String packageName) {
 		if (packageName == null || "".equals(packageName))
 			return false;
 		try {

@@ -55,7 +55,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
 import com.console.launcher_console.R;
-import com.console.launcher_console.util.Trace;
+import com.console.launcher_console.util.LogXyw;
 import com.zzj.softwareservice.database.DBConstant;
 
 public class WeatherController {
@@ -178,7 +178,7 @@ public class WeatherController {
 
 	public WeatherController(Context context,LinearLayout layout) {
 
-		Trace.i("WeatherController");
+		LogXyw.i("WeatherController");
 		mContext = context;
 		initBigImageNameIdMap(context);
 		weatherLayout=layout;
@@ -226,7 +226,7 @@ public class WeatherController {
 			initLocationClient();
 		}
 		mLocationClient.start();
-		Trace.i("mLocationClient start ");
+		LogXyw.i("mLocationClient start ");
 	}
 	
 	public void stopLoc(){
@@ -234,7 +234,7 @@ public class WeatherController {
 			initLocationClient();
 		}
 		mLocationClient.stop();
-		Trace.i("mLocationClient stopLoc ");
+		LogXyw.i("mLocationClient stopLoc ");
 	}
 	
 	private void initLocationClient(){
@@ -289,13 +289,13 @@ public class WeatherController {
 			@Override
 			public void run() {
 				HttpClient httpClient = new DefaultHttpClient();
-				HttpParams httpParameters = new BasicHttpParams();   
+				HttpParams httpParameters = new BasicHttpParams();
 				HttpConnectionParams.setSoTimeout(httpParameters, 3000);
 				HttpGet httpGet = new HttpGet(url);
 				try {
 					httpClient.execute(httpGet);
 					HttpResponse response = httpClient.execute(httpGet);
-					Trace.i("getStatusCode = " + response.getStatusLine().getStatusCode());
+					LogXyw.i("getStatusCode = " + response.getStatusLine().getStatusCode());
 					if (response.getStatusLine().getStatusCode() == 200) {
 						HttpEntity entity = response.getEntity();
 						String msg = EntityUtils.toString(entity);
@@ -317,22 +317,22 @@ public class WeatherController {
 	int i;
 	private void weatherAnalyze(String weatherUrl){
 		try {
-			Trace.i("i = " +i++);
+			LogXyw.i("i = " +i++);
 			JSONObject weatherJson = new JSONObject(weatherUrl);
 			JSONArray weatherArray = weatherJson.getJSONObject("data").getJSONObject("result").getJSONArray("weatherDays");
 			JSONObject todayJson = (JSONObject) weatherArray.get(0);
 			weather = todayJson.getString("weather");
 			currentTemperature = todayJson.getString("currentTemperature");
 			wind = todayJson.getString("wind");
-			Trace.i("weather = " + weather);
-			Trace.i("currentTemperature = " + currentTemperature);
-			Trace.i("wind = " + wind);
+			LogXyw.i("weather = " + weather);
+			LogXyw.i("currentTemperature = " + currentTemperature);
+			LogXyw.i("wind = " + wind);
 			modfifyStr = modfifyWeatherImage(weather);
-			Trace.i("modfifyStr = " + modfifyStr);
+			LogXyw.i("modfifyStr = " + modfifyStr);
 	//		weatherStr = weatherArray.get(0).toString();
 	//		L.v("weatherStr = " + weatherStr);
 			String imageres = mBigImageNameIdMap.get(modfifyStr);
-			Trace.i("imageres = " + imageres);
+			LogXyw.i("imageres = " + imageres);
 			ContentValues con = new ContentValues();
 			if(!TextUtils.isEmpty(localStr)){
 				con.put(DBConstant.WeatherTable.CITY, localStr);

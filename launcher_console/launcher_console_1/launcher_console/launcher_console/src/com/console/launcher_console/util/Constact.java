@@ -21,6 +21,7 @@ public interface Constact {
     public static final String TOTAL_REMAIN_TIME = "total_remain_time";
     public static final String TOTAL_REMAIN_DISTANCE = "total_remain_distance";
     public static final String MAP_INDEX = "MAP_INDEX";
+    public final static String CAMAPPCHOOSE = "camAppChoose";
     public static final int MODE_RADIO = 0x76;
     public static final String MODE = "Console_mode";
     public static final String CHECKMODE = "Console_checkmode";
@@ -32,11 +33,5 @@ public interface Constact {
     public final static String FACTORY_SOUND="factory_sound";
     public final static int DEFAULT_BRIGHTNESS = 110;
     public final static boolean DEBUG = true;
-    public static final String RADIO_FREQ_ACTION = "action.colink.startFM";
-    public static final String SEND_APP_CHANGE = "com.console.sendAppChange";
-    public static final String SEND_BACK_CAR_OFF = "com.console.SEND_BACK_CAR_OFF";
-	public static final String TEMP_HIGH_KEYEVENT = "android.intent.action.TEMP_HIGH_KEYEVENT";
-	public static final String TEMP_NORMAL_KEYEVENT = "android.intent.action.TEMP_NORMAL_KEYEVENT";
-	public static final String BOOT_COMPLETED_ACTION = "android.intent.action.BOOT_COMPLETED";
-	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
+
 }

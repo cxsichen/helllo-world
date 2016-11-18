@@ -4,8 +4,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-public class Trace {
-	public static final String TAG = "cxs";
+public class LogXyw {
+	public static final String TAG = "xyw";
 	public static boolean DEBUG = true;
 
 	public static void d(String msg) {

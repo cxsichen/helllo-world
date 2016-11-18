@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.console.launcher_console"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="3"
+    android:versionName="2.1.1" >
 
     <uses-sdk
         android:minSdkVersion="22"
@@ -26,8 +26,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/> 
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:name="com.console.launcher_console.ConsoleApplication"
@@ -63,8 +62,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-         <activity
+        <activity
             android:name=".GuideActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
@@ -78,15 +76,13 @@
             android:enabled="true"
             android:exported="true" >
         </service>
-        
-         <service
+        <service
             android:name="com.console.launcher_console.service.SerialPortControlService"
             android:enabled="true"
             android:exported="true" >
-             <intent-filter android:priority="1000" >
+            <intent-filter android:priority="1000" >
             </intent-filter>
         </service>
-        
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -104,7 +100,6 @@
                 <action android:name="com.autonavi.minimap.carmode.send" />
             </intent-filter>
         </receiver>
-        
         <receiver android:name="com.console.launcher_console.receiver.BootBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

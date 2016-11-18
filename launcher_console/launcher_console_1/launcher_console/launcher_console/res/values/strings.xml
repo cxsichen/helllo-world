@@ -9,6 +9,7 @@
     <string name="label_card_bt">Bluetooth</string>
     <string name="label_app_playback">Playback</string>
     <string name="label_app_edog">Edog</string>
+    <string name="label_card_xmly">XMLY</string>
     <string name="label_setting_wlan">WLAN</string>
     <string name="label_setting_fm">Effects</string>
     <string name="label_setting_wifi_tethering">WiFi hotspot</string>
@@ -49,7 +50,7 @@
     <string name="weather_overcast_big">阴</string>
     <string name="weather_cloudy_big">多云</string>
     <string name="weather_sunny_big">晴</string>
-    
+    <string name="double_click">操作太频繁</string>
      <string name="to">到</string>
     <string name="turn">转</string>
     

@@ -28,9 +28,10 @@
     <RelativeLayout style="@style/ShortCutGroup" >
 
         <ImageView
+            android:id="@+id/nav_home"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/onenav_dots_left" />
+            android:src="@drawable/ic_nav_home" />
 
         <ImageView
             android:id="@+id/navigation_one_button"
@@ -42,10 +43,11 @@
             android:src="@drawable/ic_nav_onenav" />
 
         <ImageView
+             android:id="@+id/nav_work"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:src="@drawable/onenav_dots_right" />
+            android:src="@drawable/ic_nav_work" />
     </RelativeLayout>
 
 </LinearLayout>

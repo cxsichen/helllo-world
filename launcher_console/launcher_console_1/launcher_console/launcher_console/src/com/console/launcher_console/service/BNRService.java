@@ -27,7 +27,7 @@ import com.baidu.navisdk.remote.BNRemoteVistor;
 import com.baidu.navisdk.remote.aidl.BNEventListener;
 import com.console.launcher_console.control.WeatherController;
 import com.console.launcher_console.util.Constact;
-import com.console.launcher_console.util.Trace;
+import com.console.launcher_console.util.LogXyw;
 import com.zzj.softwareservice.database.DBConstant;
 
 public class BNRService extends Service implements Constact {

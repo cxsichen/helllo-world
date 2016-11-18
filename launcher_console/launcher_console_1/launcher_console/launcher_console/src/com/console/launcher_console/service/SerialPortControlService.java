@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.console.launcher_console.MainActivity;
 import com.console.launcher_console.util.BytesUtil;
 import com.console.launcher_console.util.CoderUtils;
 import com.console.launcher_console.util.Constact;
 import com.console.launcher_console.util.Contacts;
 import com.console.launcher_console.util.PreferenceUtil;
-import com.console.launcher_console.util.Trace;
+import com.console.launcher_console.util.LogXyw;
 
 import cn.colink.serialport.service.ISerialPortCallback;
 import cn.colink.serialport.service.ISerialPortService;
@@ -19,15 +20,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Service;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -44,14 +41,13 @@ import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 public class SerialPortControlService extends Service {
 
 	private ISerialPortService mISpService;
 	private KWAPI mKwapi;
-	
+	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
 
 	int volumeValue;
 	/**
@@ -71,13 +67,16 @@ public class SerialPortControlService extends Service {
 	private final String[] modeApplist = { "com.console.radio",
 			"cn.kuwo.kwmusiccar", "com.mxtech.videoplayer.pro",
 			"com.mtk.bluetooth", "com.console.auxapp", "com.console.equalizer",
-			"com.autonavi.amapauto", "com.srtc.pingwang" }; // Acc on后打开的应用的列表
+			"com.autonavi.amapauto", "com.srtc.pingwang","com.ximalaya.ting.android.car" }; // Acc on后打开的应用的列表
 
 	Boolean Change2FM = false;
 
 	private final int[] Modes = { 0x06, 0x04, 0x05, 0x0B, 0X09, 0x11, 0x0A,
 			0x0E };
-	
+	private static final String BOOT_COMPLETED_ACTION = "android.intent.action.BOOT_COMPLETED";
+	private static final String RADIO_FREQ_ACTION = "action.colink.startFM";
+	private static final String SEND_APP_CHANGE = "com.console.sendAppChange";
+	private static final String SEND_BACK_CAR_OFF = "com.console.SEND_BACK_CAR_OFF";
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -125,7 +124,10 @@ public class SerialPortControlService extends Service {
 				Message msg2 = new Message();
 				msg2.what = Contacts.MSG_FACTORY_SOUND;
 				mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
-				mHandler.sendMessageDelayed(msg2, 20*1000);
+				mHandler.sendMessageDelayed(msg2, 12*1000);
+				
+			    //检测倒车
+				checkBackCar();
 				break;
 			case Contacts.MSG_CHECK_MODE:
 				if(PreferenceUtil.getMode(SerialPortControlService.this)==8){  //喜马拉雅
@@ -159,6 +161,8 @@ public class SerialPortControlService extends Service {
 			case Contacts.MSG_BACK_CAR: // 处理倒车事件
 				// if (!getTopActivity(SerialPortControlService.this).equals(
 				// "com.console.parking")) {
+				Log.i("cxs", "--------MSG_BACK_CAR_2222222222222------parkingState-------"
+						+ isAcconOver);
 				if (isAcconOver) {
 					Log.i("cxs", "=====start parking ====now =========");
 					Intent intent = new Intent();
@@ -171,7 +175,7 @@ public class SerialPortControlService extends Service {
 				break;
 			case Contacts.MSG_APP_CHANGE:
 				/*
-				 * 处理app切换模式命令 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪
+				 * 处理app切换模式命令 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪8喜马拉雅
 				 */
 				mHandler.removeMessages(Contacts.MSG_CHECK_MODE);
 				switch ((String) msg.obj) {
@@ -181,8 +185,6 @@ public class SerialPortControlService extends Service {
 				case "cn.coogo.hardware.service":
 				case "com.android.stk":
 				case "com.android.settings":
-				case "com.console.nodisturb":
-				case "com.android.systemui":
 					break;
 				case "com.console.radio":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 0) {
@@ -262,11 +264,19 @@ public class SerialPortControlService extends Service {
 
 					break;
 				case "com.srtc.pingwang":
+				case "com.xair.h264demo":
 				case "com.cam.dod":
 					if (PreferenceUtil.getMode(SerialPortControlService.this) != 7) {
 						PreferenceUtil
 								.setMode(SerialPortControlService.this, 7);
 						sendMsg("F5020000" + BytesUtil.intToHexString(7));
+					}
+					break;
+				case "com.ximalaya.ting.android.car":
+					if (PreferenceUtil.getMode(SerialPortControlService.this) != 8) {
+						PreferenceUtil
+								.setMode(SerialPortControlService.this, 8);
+						sendMsg("F5020000" + BytesUtil.intToHexString(1));
 					}
 					break;
 				default:
@@ -305,7 +315,7 @@ public class SerialPortControlService extends Service {
 				Message msg1 = new Message();
 				msg1.what = Contacts.MSG_FACTORY_SOUND;
 				mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
-				mHandler.sendMessageDelayed(msg1, 20*1000);
+				mHandler.sendMessageDelayed(msg1, 12*1000);
 
 				/*
 				 * acc on 后自动返回之前开启的模式对应的app
@@ -317,16 +327,17 @@ public class SerialPortControlService extends Service {
 				mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 				startActivity(mHomeIntent);
-				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_1, 200);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_1, 2000);
 
 				break;
 			case Contacts.MSG_ACCON_MSG_1:
 				int mode = PreferenceUtil
 						.getMode(SerialPortControlService.this);
-				Log.i("cxs", "--------MSG_ACCON_MSG------mode---0----" + mode);
+				Log.i("cxs", "--111111------MSG_ACCON_MSG------mode---0----" + mode);
 				sendMsg("F5020000" + BytesUtil.intToHexString(mode));
 				startModeActivty(mode);
-				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_2, 8000);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_2,
+						6000);
 				break;
 			case Contacts.MSG_ACCON_MSG_2:
 				int parkingState = android.provider.Settings.System.getInt(
@@ -340,11 +351,10 @@ public class SerialPortControlService extends Service {
 					intent.addCategory(Intent.CATEGORY_DEFAULT);
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
-				}
+				}			
 				isAcconOver = true;
-				Log.i("cxs",
-						"--------MSG_ACCON_MSG_2222222222222------parkingState-------"
-								+ parkingState);
+				Log.i("cxs", "--------MSG_ACCON_MSG_2222222222222------parkingState-------"
+						+ parkingState);
 				break;
 			default:
 				break;
@@ -393,6 +403,42 @@ public class SerialPortControlService extends Service {
 		case 6:
 			Log.i("cxs", "--------MSG_ACCON_MSG------startNavi-------");
 			startNavi();
+			break;
+		case 7: // 打开摄像头的app
+			try {
+//				if (MainActivity.isAppInstalled(this, MainActivity.RECAPP_3)) {
+//					Intent recIntent3 = getPackageManager()
+//							.getLaunchIntentForPackage(MainActivity.RECAPP_3);
+//					recIntent3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//					startActivity(recIntent3);
+//				} else if (MainActivity.isAppInstalled(this,
+//						MainActivity.RECAPP_2)) {
+//					Intent recIntent2 = getPackageManager()
+//							.getLaunchIntentForPackage(MainActivity.RECAPP_2);
+//					recIntent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//					startActivity(recIntent2);
+//				} else if (MainActivity.isAppInstalled(this,
+//						MainActivity.RECAPP_1)) {
+//					Intent recIntent = getPackageManager()
+//							.getLaunchIntentForPackage(MainActivity.RECAPP_1);
+//					recIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//					startActivity(recIntent);
+//				}
+				Log.i("cxs", "--------MSG_ACCON_MSG---startModeActivty(7)-----");
+				mKwapi.startAPP(SerialPortControlService.this, true);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			break;
+		case 8://喜马拉雅
+			try {
+				Intent xmlyIntent = getPackageManager()
+						.getLaunchIntentForPackage(
+								"com.ximalaya.ting.android.car");
+				startActivity(xmlyIntent);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			break;
 		default:
 			Log.i("cxs", "--------MSG_ACCON_MSG------default-------"
@@ -470,7 +516,7 @@ public class SerialPortControlService extends Service {
 								getContentResolver(), Constact.BACK_CAR, 0);
 
 						Intent intent = new Intent();
-						intent.setAction(Constact.SEND_BACK_CAR_OFF);
+						intent.setAction(SEND_BACK_CAR_OFF);
 						sendBroadcast(intent);
 					}
 				} else {
@@ -551,6 +597,8 @@ public class SerialPortControlService extends Service {
 			try {
 				int value = Settings.System.getInt(getContentResolver(),
 						Settings.System.SCREEN_BRIGHTNESS, 0);
+				Log.i("cxs", "=========SCREEN_BRIGHTNESS=====value=========="
+						+ value);
 				if (value > Constact.DEFAULT_BRIGHTNESS) {
 					Settings.System.putInt(getContentResolver(),
 							Constact.USER_SAVE_BRIGHTNESS, value);
@@ -567,6 +615,9 @@ public class SerialPortControlService extends Service {
 			try {
 				int value = Settings.System.getInt(getContentResolver(),
 						Constact.USER_SAVE_BRIGHTNESS, 0);
+				Log.i("cxs",
+						"=========USER_SAVE_BRIGHTNESS=====value=========="
+								+ value);
 				if (value > Constact.DEFAULT_BRIGHTNESS) {
 					Settings.System.putInt(getContentResolver(),
 							Settings.System.SCREEN_BRIGHTNESS, value);
@@ -594,7 +645,7 @@ public class SerialPortControlService extends Service {
 		bindSpService();
 		doRegisterReceiver();
 		doRegisterContentObserver();
-		checkBackCar();
+	//	checkBackCar();
 		mKwapi = KWAPI.createKWAPI(this, "auto");
 
 	}
@@ -603,10 +654,10 @@ public class SerialPortControlService extends Service {
 		// TODO Auto-generated method stub
 		/*
 		 * 倒车检测
-		 */
+		 */				
 		int backstate = android.provider.Settings.System.getInt(
 				getContentResolver(), Constact.BACK_CAR, 0);
-		Log.i("cxs", "====MSG_SEND_FIRST_MSG=backstate====" + backstate);
+		Log.i("cxs","====MSG_SEND_FIRST_MSG=backstate===="+backstate);
 		handleBackCar(backstate);
 	}
 
@@ -769,7 +820,7 @@ public class SerialPortControlService extends Service {
 			super.onChange(selfChange);
 			int state = android.provider.Settings.System.getInt(
 					getContentResolver(), Constact.BACK_CAR, 0);
-			Log.i("cxs", "========handleBackCar======" + state);
+			Log.i("cxs","========handleBackCar======"+state);
 			handleBackCar(state);
 		}
 	}
@@ -922,59 +973,43 @@ public class SerialPortControlService extends Service {
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 500);
 		} else {
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG);
+			mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
 			isNaving = (android.provider.Settings.System.getInt(
 					getContentResolver(), Constact.NAVING_STATUS, 0) == 1);
+			Log.i("cxs", "=====acc off   insNaving =============" + isNaving);
 		}
 	}
 
 	private void stopKWMusic() {
-		Intent stopMusicIntent = new Intent(Constact.ACTION_STOP_MUSIC);
+		Intent stopMusicIntent = new Intent(ACTION_STOP_MUSIC);
 		sendBroadcast(stopMusicIntent);
 	}
 
 	private void doRegisterReceiver() {
 		// TODO Auto-generated method stub
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(Constact.BOOT_COMPLETED_ACTION);
-		filter.addAction(Constact.RADIO_FREQ_ACTION);
-		filter.addAction(Constact.TEMP_HIGH_KEYEVENT);
-		filter.addAction(Constact.TEMP_NORMAL_KEYEVENT);
+		filter.addAction(BOOT_COMPLETED_ACTION);
+		filter.addAction(RADIO_FREQ_ACTION);
 		registerReceiver(myReceiver, filter);
 	}
-	Dialog dialog;
+
 	private BroadcastReceiver myReceiver = new BroadcastReceiver() {
-		
+
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			switch (intent.getAction()) {
-			case Constact.BOOT_COMPLETED_ACTION:
+			case BOOT_COMPLETED_ACTION:
 				Message msg = new Message();
 				msg.what = Contacts.MSG_SEND_FIRST_MSG;
-				mHandler.sendMessage(msg);
+				mHandler.sendMessageDelayed(msg, 5*1000);
 				break;
-			case Constact.RADIO_FREQ_ACTION:
+			case RADIO_FREQ_ACTION:
 				float freq = intent.getFloatExtra("fm_fq", 0);
+				Log.i("cxs", "-==--------RADIO_FREQ_ACTION----freq----" + freq);
 				Message freqmsg = new Message();
 				freqmsg.what = Contacts.MSG_RADIO_FREQ_MEG;
 				freqmsg.obj = freq;
 				mHandler.sendMessageDelayed(freqmsg, 1000);
-				break;
-			case Constact.TEMP_HIGH_KEYEVENT:   //处理高温报警
-				stopKWMusic();
-				/*if(dialog==null){
-				dialog = new AlertDialog.Builder(SerialPortControlService.this).setIcon(
-					     android.R.drawable.btn_star).setTitle("提示").setMessage(
-					     "设备温度过高，请暂停影音播放").setNegativeButton("确定", null).create();
-				dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-				}
-				dialog.show();*/
-				break;
-			case Constact.TEMP_NORMAL_KEYEVENT:    //结束高温报警
-				/*if(dialog!=null){
-				   if(dialog.isShowing()){
-					   dialog.dismiss();
-				   }	
-				}*/
 				break;
 			default:
 				break;
@@ -996,7 +1031,7 @@ public class SerialPortControlService extends Service {
 
 		@Override
 		public void readDataFromServer(byte[] bytes) throws RemoteException {
-		//	Trace.i("readDataFromServer" + bytes);
+			LogXyw.i("readDataFromServer" + bytes);
 			Message msg = new Message();
 			msg.what = Contacts.MSG_UPDATA_UI;
 			msg.obj = bytes;
@@ -1007,7 +1042,7 @@ public class SerialPortControlService extends Service {
 	private ServiceConnection mServiceConnection = new ServiceConnection() {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-			Trace.i("onServiceConnected");
+			LogXyw.i("onServiceConnected");
 			mISpService = ISerialPortService.Stub.asInterface(service);
 			try {
 				mISpService.addClient(mICallback);

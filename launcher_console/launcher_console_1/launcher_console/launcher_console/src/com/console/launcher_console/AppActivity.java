@@ -13,7 +13,7 @@ import com.console.launcher_console.util.BytesUtil;
 import com.console.launcher_console.util.Contacts;
 import com.console.launcher_console.util.DensityUtils;
 import com.console.launcher_console.util.PreferenceUtil;
-import com.console.launcher_console.util.Trace;
+import com.console.launcher_console.util.LogXyw;
 import com.console.launcher_console.util.ViewPagerAdapter;
 
 import android.annotation.SuppressLint;
@@ -86,7 +86,7 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 			,"com.baidu.navi","cn.lzl.partycontrol","com.mtk.bluetooth","com.srtc.pingwang",
 			"com.android.settings","com.android.deskclock","com.console.radio",
 			"com.share.android","com.console.equalizer","com.xbkpnotification",
-			"com.console.auxapp","com.inetwp.cardservice","com.mediatek.mco","com.example.txe",
+			"com.inetwp.cardservice","com.mediatek.mco","com.xair.h264demo","aicare.net.cn.itpms","com.ximalaya.ting.android.car",
 			"com.mxtech.videoplayer.pro","com.console.parking","com.android.stk","com.example.mtk10263.whatsTemp"};    //屏蔽显示列表
 
 	@Override
@@ -178,12 +178,14 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 
 			views.add(pageView);
 		}
-
-		vp = (ViewPager) findViewById(R.id.vp);
-		vp.setOffscreenPageLimit(2);
-		vpAdapter = new ViewPagerAdapter(views);
-		vp.setAdapter(vpAdapter);
-
+		try {
+			vp = (ViewPager) findViewById(R.id.vp);
+			vp.setOffscreenPageLimit(2);
+			vpAdapter = new ViewPagerAdapter(views);
+			vp.setAdapter(vpAdapter);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	protected void initIndicator() {
@@ -202,7 +204,9 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 			}
 			indicatorLayout.addView(imageView);
 		}
-		vp.setOnPageChangeListener(mOnPageChangeListener);
+		if (vp != null) {
+			vp.setOnPageChangeListener(mOnPageChangeListener);
+		}
 	}
 
 	OnPageChangeListener mOnPageChangeListener = new OnPageChangeListener() {
@@ -357,7 +361,7 @@ public class AppActivity extends BaseActivity implements OnTouchListener,
 	private ServiceConnection mServiceConnection = new ServiceConnection() {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
-			Trace.i("onServiceConnected");
+			LogXyw.i("onServiceConnected");
 			mISpService = ISerialPortService.Stub.asInterface(service);
 		}
 

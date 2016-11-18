@@ -2,6 +2,7 @@ package com.console.launcher_console.control;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import cn.kuwo.autosdk.api.KWAPI;
@@ -10,10 +11,13 @@ import cn.kuwo.autosdk.api.OnPlayerStatusListener;
 import cn.kuwo.autosdk.api.PlayEndType;
 import cn.kuwo.autosdk.api.PlayState;
 import cn.kuwo.autosdk.api.PlayerStatus;
+import cn.kuwo.autosdk.bean.Music;
+import cn.kuwo.autosdk.bean.NetResource;
 
 import com.console.launcher_console.R;
 import com.console.launcher_console.util.BytesUtil;
 import com.console.launcher_console.util.PreferenceUtil;
+import com.console.launcher_console.view.RunTextView;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
@@ -35,6 +39,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MusicCardControl extends BroadcastReceiver implements
 		OnClickListener {
@@ -46,6 +51,7 @@ public class MusicCardControl extends BroadcastReceiver implements
 	private ImageView musicPrev;
 	private ImageView musicNext;
 	private ImageView musicCover;
+	private TextView musicName;
 	private KWAPI mKwapi;
 	private PlayerStatus mPlayerStatus = PlayerStatus.STOP;
 	private Animation amt;
@@ -56,22 +62,21 @@ public class MusicCardControl extends BroadcastReceiver implements
 	public static final String ACTION_TEL = "com.console.TEL";
 	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
 	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
-	public static final String ACTION_MUSIC_START = "com.console.MUSIC_START";
 
 	public MusicCardControl(Context context, LinearLayout layout) {
 		musicCardLayout = layout;
 		this.context = context;
 		init();
 		mRegisterReceiver();
-
+				
 	}
-
-	private void mRegisterReceiver() {
+	
+	private void mRegisterReceiver(){
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(ACTION_MENU_UP);
 		intentFilter.addAction(ACTION_MENU_DOWN);
 		intentFilter.addAction(ACTION_STOP_MUSIC);
-		intentFilter.addAction(ACTION_MUSIC_START);
+		intentFilter.addAction(ACTION_PLAY_PAUSE);
 		context.registerReceiver(this, intentFilter);
 	}
 
@@ -87,6 +92,8 @@ public class MusicCardControl extends BroadcastReceiver implements
 				.findViewById(R.id.ev_music_next);
 		musicCover = (ImageView) musicCardLayout
 				.findViewById(R.id.ev_music_cover);
+		musicName = (TextView) musicCardLayout
+				.findViewById(R.id.music_name);
 
 		musicApp.setOnClickListener(this);
 		musicPlay.setOnClickListener(this);
@@ -112,15 +119,30 @@ public class MusicCardControl extends BroadcastReceiver implements
 		mKwapi.registerPlayerStatusListener(context,
 				new OnPlayerStatusListener() {
 
+
 					@Override
-					public void onPlayerStatus(PlayerStatus playerStatus) {
-						// TODO Auto-generated method stub
+					public void onPlayerStatus(PlayerStatus playerStatus, Music music) {
 						Log.i("cxs", "====playerStatus======" + playerStatus);
 						mPlayerStatus = playerStatus;
+						initViewInfo(music);
 						controlPlayButton();
 					}
 				});
+		
 
+	}
+
+	protected void initViewInfo(Music music) {
+		if (musicCover != null&&music!=null) {
+		//	Log.i("xxx", "=== music.toDebugString===" + music.toDebugString());
+		}
+		if (musicName != null&&music!=null) {
+			if(mPlayerStatus == PlayerStatus.STOP){
+				musicName.setText(R.string.label_card_music);
+			}else{
+				musicName.setText(music.name+" - "+music.artist);
+			}
+		}
 	}
 
 	@Override
@@ -128,19 +150,19 @@ public class MusicCardControl extends BroadcastReceiver implements
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.ev_music_play:
-			// if (PreferenceUtil.getMode(context) == 1)
-			controlPlay();
+		//	if (PreferenceUtil.getMode(context) == 1)
+				controlPlay();			
 			break;
 		case R.id.ev_music_app:
 			startKWApp();
 			break;
 		case R.id.ev_music_next:
-			// if (PreferenceUtil.getMode(context) == 1)
-			controlNext();
+		//	if (PreferenceUtil.getMode(context) == 1)
+				controlNext();
 			break;
 		case R.id.ev_music_prev:
-			// if (PreferenceUtil.getMode(context) == 1)
-			controlPrevious();
+		//	if (PreferenceUtil.getMode(context) == 1)
+				controlPrevious();
 			break;
 		default:
 			break;
@@ -188,8 +210,8 @@ public class MusicCardControl extends BroadcastReceiver implements
 	private void controlPause() {
 		mKwapi.setPlayState(context, PlayState.STATE_PAUSE);
 	}
-
-	private void stopKWApp() {
+	
+	private void stopKWApp(){
 		mKwapi.setPlayState(context, PlayState.STATE_PAUSE);
 		mKwapi.exitAPP(context);
 	}
@@ -204,7 +226,7 @@ public class MusicCardControl extends BroadcastReceiver implements
 	}
 
 	public void stopPlayStatus() {
-
+		
 		/*
 		 * new Handler().postDelayed(new Runnable() { public void run() {
 		 * Log.i("cxs", "====am.isMusicActive()==========" +
@@ -215,11 +237,12 @@ public class MusicCardControl extends BroadcastReceiver implements
 
 	}
 
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
-		Log.i("cxs", "---------onReceive------------" + intent.getAction());
-		if (intent.getAction().equals(ACTION_STOP_MUSIC)) {
+		Log.i("cxs","---------onReceive------------"+intent.getAction());
+		if(intent.getAction().equals(ACTION_STOP_MUSIC)){
 			stopKWApp();
 		}
 		if (PreferenceUtil.getMode(context) != 0) {
@@ -232,9 +255,6 @@ public class MusicCardControl extends BroadcastReceiver implements
 				break;
 			case ACTION_PLAY_PAUSE:
 				controlPlay();
-				break;
-			case ACTION_MUSIC_START:
-				startKWApp();
 				break;
 			default:
 				break;

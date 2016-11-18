@@ -6,7 +6,7 @@ import java.util.Locale;
 import com.console.launcher_console.R;
 import com.console.launcher_console.R.string;
 import com.console.launcher_console.util.Constact;
-import com.console.launcher_console.util.Trace;
+import com.console.launcher_console.util.LogXyw;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -206,7 +206,7 @@ public class NaviCardControl extends BroadcastReceiver implements Constact {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
-		Trace.i("-----onReceive------" + intent.getAction());
+		LogXyw.i("-----onReceive------" + intent.getAction());
 		switch (intent.getAction()) {
 		case STOPNAVI:		
 			android.provider.Settings.System.putInt(

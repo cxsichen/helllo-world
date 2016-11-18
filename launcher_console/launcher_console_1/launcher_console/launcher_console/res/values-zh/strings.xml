@@ -12,6 +12,7 @@
     <string name="label_setting_fm">音效</string>
     <string name="label_setting_wifi_tethering">WLAN热点</string>
     <string name="label_setting_wlan">WLAN</string>
+    <string name="label_card_xmly">喜马拉雅</string>
     <string name="device_name">未连接</string>
     <string name="activity_not_found">暂无此服务.</string>
     <string name="next_road_unit">米后</string>
