@@ -4,5 +4,11 @@
     <string name="app_name">NoDisturb</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
+    <string name="mi">%1$d米后</string>
+	<string name="gl">%1$.1f公里后</string>
+	<string name="gl_far">%1$d公里后</string>
+	<string name="arrive_mi">%1$d米  %2$s到达</string>
+	<string name="arrive_gl">%1$.1f公里  %2$s到达</string>
+	<string name="arrive_gl_far">%1$d公里  %2$s到达</string>
+	<string name="doubleclick">双击屏幕唤醒</string>
 </resources>

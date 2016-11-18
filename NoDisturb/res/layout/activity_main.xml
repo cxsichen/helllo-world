@@ -6,12 +6,73 @@
     tools:context="com.console.nodisturb.MainActivity" >
 
     <LinearLayout
+        android:id="@+id/toast_layout_root"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
         android:layout_marginRight="50dp"
+        android:background="#00000000"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ar_turn_front" />
+
+        <TextView
+            android:id="@+id/currentRoad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="进入"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#868fb2"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/nextRoad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxEms="8"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/remainDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/time_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="50dp"
+        android:layout_marginRight="50dp"
         android:gravity="center"
         android:orientation="vertical" >
 
@@ -19,19 +80,17 @@
             android:id="@+id/time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="55sp"
-            android:textStyle="normal"
             android:textColor="@android:color/white"
-         />
+            android:textSize="55sp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/date_tv"
-            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:textColor="@android:color/white"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
     </LinearLayout>
 
 </RelativeLayout>
