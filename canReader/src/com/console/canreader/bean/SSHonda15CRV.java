@@ -13,20 +13,20 @@ public class SSHonda15CRV extends AnalyzeUtils {
 	// 数据类型
 	public static final int comID = 3;
 	// 车身信息
-    public static final int CAR_INFO_DATA = 0x11;
-    // 车身信息
- 	public static final int CAR_INFO_DATA_1 = 0x12;	
-    // 雷达信息
- 	public static final int RADAR_DATA = 0x41;
- // 车身信息
-    public static final int CAR_INFO_DATA_4 = 0xE8;
-    // 车身信息
-    public static final int CAR_INFO_DATA_10 = 0xF0;
- // 车身信息
- 	public static final int CAR_INFO_DATA_3 = 0x17;
- // 车身信息
- 	public static final int CAR_INFO_DATA_2 = 0x16;
- 	
+	public static final int CAR_INFO_DATA = 0x11;
+	// 车身信息
+	public static final int CAR_INFO_DATA_1 = 0x12;
+	// 雷达信息
+	public static final int RADAR_DATA = 0x41;
+	// 车身信息
+	public static final int CAR_INFO_DATA_4 = 0xE8;
+	// 车身信息
+	public static final int CAR_INFO_DATA_10 = 0xF0;
+	// 车身信息
+	public static final int CAR_INFO_DATA_3 = 0x17;
+	// 车身信息
+	public static final int CAR_INFO_DATA_2 = 0x16;
+
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
@@ -46,7 +46,7 @@ public class SSHonda15CRV extends AnalyzeUtils {
 			case CAR_INFO_DATA_1:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_1(msg);
-				break;				
+				break;
 			case RADAR_DATA:
 				mCanInfo.CHANGE_STATUS = 11;
 				analyzeRadarData(msg);
@@ -66,7 +66,7 @@ public class SSHonda15CRV extends AnalyzeUtils {
 			case CAR_INFO_DATA_10:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_10(msg);
-				break;	
+				break;
 			default:
 				break;
 			}
@@ -113,7 +113,7 @@ public class SSHonda15CRV extends AnalyzeUtils {
 		mCanInfo.FRONT_RIGHT_DISTANCE = (((int) (msg[11] & 0xFF)) == 0xff) ? 0
 				: (((int) (msg[11] & 0xFF)) == 0) ? 0
 						: (5 - ((int) (msg[11] & 0xFF)));
-		mCanInfo.RADAR_ALARM_STATUS=(int) (msg[14] & 0xFF);
+		mCanInfo.RADAR_ALARM_STATUS = (int) (msg[14] & 0xFF);
 
 	}
 
@@ -173,16 +173,17 @@ public class SSHonda15CRV extends AnalyzeUtils {
 		}
 		mCanInfo.TRIP_A_1 = ((int) (msg[4] & 0xFF) * 256 * 256
 				+ (int) (msg[5] & 0xFF) * 256 + (int) (msg[6] & 0xFF)) * 0.1f;
-		mCanInfo.TRIP_A_1_AVERAGE_CONSUMPTION = ((int) (msg[7] & 0xFF) * 256 + (int) (msg[8] & 0xFF))* 0.1f;
+		mCanInfo.TRIP_A_1_AVERAGE_CONSUMPTION = ((int) (msg[7] & 0xFF) * 256 + (int) (msg[8] & 0xFF)) * 0.1f;
 		mCanInfo.TRIP_A_2 = ((int) (msg[9] & 0xFF) * 256 * 256
 				+ (int) (msg[10] & 0xFF) * 256 + (int) (msg[11] & 0xFF)) * 0.1f;
-		mCanInfo.TRIP_A_2_AVERAGE_CONSUMPTION = ((int) (msg[12] & 0xFF) * 256 + (int) (msg[13] & 0xFF))* 0.1f;
+		mCanInfo.TRIP_A_2_AVERAGE_CONSUMPTION = ((int) (msg[12] & 0xFF) * 256 + (int) (msg[13] & 0xFF)) * 0.1f;
 		mCanInfo.TRIP_A_3 = ((int) (msg[14] & 0xFF) * 256 * 256
 				+ (int) (msg[15] & 0xFF) * 256 + (int) (msg[16] & 0xFF)) * 0.1f;
-		mCanInfo.TRIP_A_3_AVERAGE_CONSUMPTION = ((int) (msg[17] & 0xFF) * 256 + (int) (msg[18] & 0xFF))* 0.1f;
+		mCanInfo.TRIP_A_3_AVERAGE_CONSUMPTION = ((int) (msg[17] & 0xFF) * 256 + (int) (msg[18] & 0xFF)) * 0.1f;
 	}
-	
+
 	static String carInfoSave_4 = "";
+	static int rightCamera_switch = -1;
 
 	void analyzeCarInfoData_4(byte[] msg) {
 		if (carInfoSave_4.equals(BytesUtil.bytesToHexString(msg))) {
@@ -193,10 +194,23 @@ public class SSHonda15CRV extends AnalyzeUtils {
 		}
 		mCanInfo.BACK_CAMERA_MODE = (int) (msg[5] & 0xFF);
 		mCanInfo.LEFT_CAMERA_SWITCH = (int) (msg[6] & 0xFF);
+		if (rightCamera_switch != mCanInfo.LEFT_CAMERA_SWITCH) {
+			Log.i("cxs","========rightCamera_switch========"+rightCamera_switch);
+			if (rightCamera_switch != -1) {
+				if (mCanInfo.LEFT_CAMERA_SWITCH == 1) {
+					mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.OPENAUX;
+				}else{
+					mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.CLOSEAUX;
+				}
+				mCanInfo.STEERING_BUTTON_STATUS=1;
+				mCanInfo.CHANGE_STATUS = 2;
+			}
+			rightCamera_switch = mCanInfo.LEFT_CAMERA_SWITCH;
+		}
 	}
-	
+
 	static String carInfoSave_5 = "";
-	
+
 	void analyzeCarInfoData_5(byte[] msg) {
 		if (carInfoSave_5.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -206,16 +220,14 @@ public class SSHonda15CRV extends AnalyzeUtils {
 		}
 		mCanInfo.WIPER_LINK_LAMP = (int) ((msg[4] >> 3) & 0x01);
 		mCanInfo.AUTO_LIGHT_SENSEITIVITY = (int) ((msg[4] >> 0) & 0x07);
-		
+
 		mCanInfo.AUTO_LIGHTING_SENSEITIVITY = (int) ((msg[5] >> 4) & 0x07);
 		mCanInfo.FRONT_LAMP_OFF_TIME = (int) ((msg[5] >> 2) & 0x03);
 		mCanInfo.LAMP_TURN_DARK_TIME = (int) ((msg[5] >> 0) & 0x03);
 	}
 
-
-	
 	static String carInfoSave_6 = "";
-	
+
 	void analyzeCarInfoData_6(byte[] msg) {
 		if (carInfoSave_6.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -224,12 +236,13 @@ public class SSHonda15CRV extends AnalyzeUtils {
 			carInfoSave_6 = BytesUtil.bytesToHexString(msg);
 		}
 		mCanInfo.REMOTELOCK_BEEP_SIGN = (int) ((msg[5] >> 3) & 0x01);
-		mCanInfo.REMOTELOCK_SIDELAMP_SIGN = (int) ((msg[5] >> 2) & 0x01);		
+		mCanInfo.REMOTELOCK_SIDELAMP_SIGN = (int) ((msg[5] >> 2) & 0x01);
 		mCanInfo.SPEECH_WARING_VOLUME = (int) ((msg[5] >> 1) & 0x01);
 		mCanInfo.REMOTE_START_SYSTEM = (int) ((msg[5] >> 0) & 0x01);
 	}
-	
-	static String carInfoSave_7 = "";	
+
+	static String carInfoSave_7 = "";
+
 	void analyzeCarInfoData_7(byte[] msg) {
 		if (carInfoSave_7.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -241,8 +254,9 @@ public class SSHonda15CRV extends AnalyzeUtils {
 		mCanInfo.AUTO_LOCK_TIME = (int) ((msg[5] >> 1) & 0x03);
 		mCanInfo.REMOTE_LOCK_SIGN = (int) ((msg[5] >> 0) & 0x01);
 	}
-	
-	static String carInfoSave_8 = "";	
+
+	static String carInfoSave_8 = "";
+
 	void analyzeCarInfoData_8(byte[] msg) {
 		if (carInfoSave_8.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -255,8 +269,9 @@ public class SSHonda15CRV extends AnalyzeUtils {
 		mCanInfo.DETECT_FRONT_CAR = (int) ((msg[5] >> 2) & 0x01);
 		mCanInfo.FRONT_DANGER_WAIRNG_DISTANCE = (int) ((msg[5] >> 0) & 0x03);
 	}
-	static String carInfoSave_9 = "";	
-	
+
+	static String carInfoSave_9 = "";
+
 	void analyzeCarInfoData_9(byte[] msg) {
 		if (carInfoSave_9.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -269,14 +284,14 @@ public class SSHonda15CRV extends AnalyzeUtils {
 		mCanInfo.ENGINEE_AUTO_CONTROL = (int) ((msg[4] >> 3) & 0x01);
 		mCanInfo.ENERGY_BACKGROUND_LIGHT = (int) ((msg[4] >> 2) & 0x01);
 		mCanInfo.ADJUST_WARING_VOLUME = (int) ((msg[4] >> 0) & 0x03);
-		
+
 		mCanInfo.SWITCH_TRIPB_SETTING = (int) ((msg[5] >> 5) & 0x03);
 		mCanInfo.SWITCH_TRIPA_SETTING = (int) ((msg[5] >> 3) & 0x03);
 		mCanInfo.ADJUST_OUTSIDE_TEMP = (int) ((msg[5] >> 0) & 0x07);
 	}
-	
-	static String carInfoSave_10 = "";	
-	
+
+	static String carInfoSave_10 = "";
+
 	void analyzeCarInfoData_10(byte[] msg) {
 		if (carInfoSave_10.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -297,8 +312,6 @@ public class SSHonda15CRV extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
-
-
 
 	static String carInfoSave = "";
 	static int buttonTemp = 0;
@@ -341,8 +354,10 @@ public class SSHonda15CRV extends AnalyzeUtils {
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOLDOW;
 				break;
 			case 0x04:
-			case 0x0B:
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.SRC;
+				break;
+			case 0x0B:
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;
 				break;
 			case 0x05:
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.ANSWER;

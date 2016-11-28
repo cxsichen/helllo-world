@@ -19,25 +19,20 @@ public class SSMGGS extends AnalyzeUtils {
 	public static final int CAR_INFO_DATA_1 = 0x12;
 	// 方向盘按键
 	public static final int STEERING_BUTTON_DATA = 0x21;
-	//面板旋钮
-	public static final int KNOB_BUTTON=0x22;
-		
-	
-	
-	
+	// 面板旋钮
+	public static final int KNOB_BUTTON = 0x22;
+	// 空调信息
+	public static final int AIR_CONDITIONER_DATA = 0x0C;
 
 	// 车身信息
 	public static final int CAR_INFO_DATA_2 = 0x34;
-	// 空调信息
-	public static final int AIR_CONDITIONER_DATA = 0x31;
+
 	// 车身基本信息
 	public static final int CAR_BASIC_INFO_DATA = 0x11;
 	// 雷达信息
 	public static final int RADAR_DATA = 0x41;
 	// 车身基本信息
 	public static final int CAR_INFO_DATA_3 = 0xF0;
-
-
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
@@ -50,7 +45,7 @@ public class SSMGGS extends AnalyzeUtils {
 		try {
 			if (msg == null)
 				return;
-			switch ((int) (msg[comID] & 0xFF)) {		
+			switch ((int) (msg[comID] & 0xFF)) {
 			case CAR_INFO_DATA:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData(msg);
@@ -62,32 +57,25 @@ public class SSMGGS extends AnalyzeUtils {
 			case STEERING_BUTTON_DATA:
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeSteeringButtonData(msg);
-				break;	
+				break;
 			case KNOB_BUTTON:
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeKnobButtonData(msg);
 				break;
-				
-				
-		/*	case AIR_CONDITIONER_DATA:
+			case AIR_CONDITIONER_DATA:
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
 				break;
-			case CAR_INFO_DATA:
-				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData(msg);
-				break;
-			case CAR_BASIC_INFO_DATA:
-				analyzeCarBasicInfoData(msg);
-				break;
-			case RADAR_DATA:
-				mCanInfo.CHANGE_STATUS = 4;
-				analyzeRadarData(msg);
-				break;
-			case CAR_INFO_DATA_3:
-				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData_3(msg);
-				break;*/
+
+			/*
+			 * case AIR_CONDITIONER_DATA: mCanInfo.CHANGE_STATUS = 3;
+			 * analyzeAirConditionData(msg); break; case CAR_INFO_DATA:
+			 * mCanInfo.CHANGE_STATUS = 10; analyzeCarInfoData(msg); break; case
+			 * CAR_BASIC_INFO_DATA: analyzeCarBasicInfoData(msg); break; case
+			 * RADAR_DATA: mCanInfo.CHANGE_STATUS = 4; analyzeRadarData(msg);
+			 * break; case CAR_INFO_DATA_3: mCanInfo.CHANGE_STATUS = 10;
+			 * analyzeCarInfoData_3(msg); break;
+			 */
 			default:
 				break;
 			}
@@ -97,10 +85,11 @@ public class SSMGGS extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
-	
-	static String KnobButtonDataSave="";
+
+	static String KnobButtonDataSave = "";
+
 	private void analyzeKnobButtonData(byte[] msg) {
-		
+
 		if (KnobButtonDataSave.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
 			return;
@@ -110,20 +99,20 @@ public class SSMGGS extends AnalyzeUtils {
 		if ((msg[5] & 0xff) == 0) {
 			return;
 		}
-		mCanInfo.CAR_VOLUME_KNOB=msg[5] & 0xff;
+		mCanInfo.CAR_VOLUME_KNOB = msg[5] & 0xff;
 		switch ((msg[4] & 0x03)) {
 		case 0x01:
-			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUME;	
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUME;
 			break;
 		case 0x02:
-			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBSELECTOR;	
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBSELECTOR;
 			break;
 		default:
 			break;
-		}	
+		}
 		mCanInfo.CHANGE_STATUS = 2;
 	}
-	
+
 	static String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
@@ -134,18 +123,17 @@ public class SSMGGS extends AnalyzeUtils {
 		} else {
 			carInfoSave_1 = BytesUtil.bytesToHexString(msg);
 		}
-	
-		mCanInfo.LEFT_FORONTDOOR_STATUS = ((int) (msg[6]>>7) & 0x01);
-		mCanInfo.RIGHT_FORONTDOOR_STATUS = ((int) (msg[6]>>6) & 0x01);
-		mCanInfo.LEFT_BACKDOOR_STATUS = ((int) (msg[6]>>5) & 0x01);
-		mCanInfo.RIGHT_BACKDOOR_STATUS = ((int) (msg[6]>>4) & 0x01);
-		mCanInfo.TRUNK_STATUS = ((int) (msg[6]>>3) & 0x01);
-		mCanInfo.HOOD_STATUS = ((int) (msg[6]>>2) & 0x01);
-		mCanInfo.SAFETY_BELT_STATUS = ((int) (msg[6]>>1) & 0x01)|((int) (msg[6]>>0) & 0x01);
+
+		mCanInfo.LEFT_FORONTDOOR_STATUS = ((int) (msg[6] >> 7) & 0x01);
+		mCanInfo.RIGHT_FORONTDOOR_STATUS = ((int) (msg[6] >> 6) & 0x01);
+		mCanInfo.LEFT_BACKDOOR_STATUS = ((int) (msg[6] >> 5) & 0x01);
+		mCanInfo.RIGHT_BACKDOOR_STATUS = ((int) (msg[6] >> 4) & 0x01);
+		mCanInfo.TRUNK_STATUS = ((int) (msg[6] >> 3) & 0x01);
+		mCanInfo.HOOD_STATUS = ((int) (msg[6] >> 2) & 0x01);
+		mCanInfo.SAFETY_BELT_STATUS = ((int) (msg[6] >> 1) & 0x01)
+				| ((int) (msg[6] >> 0) & 0x01);
 	}
 
-	
-	
 	static String carInfoSave = "";
 	static int buttonTemp = 0;
 
@@ -159,10 +147,10 @@ public class SSMGGS extends AnalyzeUtils {
 		}
 		// 方向盘转角 CHANGE_STATUS=8
 		int temp = ((int) msg[10] & 0xFF) * 256 + ((int) msg[11] & 0xFF);
-		if(temp>32767){
-			temp=0xFFFF-temp;
-		}else{
-			temp=-temp;
+		if (temp > 32767) {
+			temp = 0xFFFF - temp;
+		} else {
+			temp = -temp;
 		}
 
 		if (mCanInfo.STERRING_WHELL_STATUS != temp) {
@@ -217,7 +205,7 @@ public class SSMGGS extends AnalyzeUtils {
 
 		mCanInfo.DRIVING_SPEED = ((int) msg[5] & 0xFF);
 	}
-	
+
 	static String SteeringButtonStatusDataSave = "";
 
 	void analyzeSteeringButtonData(byte[] msg) {
@@ -262,7 +250,7 @@ public class SSMGGS extends AnalyzeUtils {
 
 		mCanInfo.STEERING_BUTTON_STATUS = (int) (msg[5] & 0xFF);
 	}
-	
+
 	static String radarSave = "";
 	int temps[] = { 0, 0, 0, 0 };
 
@@ -293,8 +281,6 @@ public class SSMGGS extends AnalyzeUtils {
 
 	}
 
-
-	
 	static String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
@@ -305,7 +291,7 @@ public class SSMGGS extends AnalyzeUtils {
 		} else {
 			carInfoSave_3 = BytesUtil.bytesToHexString(msg);
 		}
-		
+
 		int len = ((int) msg[2] & 0xFF);
 		byte[] acscii = new byte[len];
 		for (int i = 0; i < len; i++) {
@@ -318,7 +304,6 @@ public class SSMGGS extends AnalyzeUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
 
@@ -334,25 +319,26 @@ public class SSMGGS extends AnalyzeUtils {
 		}
 
 		mCanInfo.AIR_CONDITIONER_STATUS = (int) ((msg[4] >> 6) & 0x01);
-		mCanInfo.AC_INDICATOR_STATUS = (int) ((msg[5] >> 6) & 0x01);
+		mCanInfo.AC_INDICATOR_STATUS = (int) ((msg[4] >> 0) & 0x01);
 		mCanInfo.CYCLE_INDICATOR = (int) ((msg[5] >> 4) & 0x01);
-
+		mCanInfo.LARGE_LANTERN_INDICATOR = (int) ((msg[5] >> 3) & 0x01);
+		mCanInfo.REAR_LAMP_INDICATOR = (int) ((msg[6] >> 5) & 0x01);
 		mCanInfo.MAX_FRONT_LAMP_INDICATOR = (int) ((msg[6] >> 4) & 0x01);
-
+		
 		int temp = (int) (msg[8] & 0xff);
-		if (temp == 0x0C) {
+		if (temp == 0x02||temp == 0x0B||temp == 0x0C||temp == 0x0D||temp == 0x0E) {
 			mCanInfo.UPWARD_AIR_INDICATOR = 1;
 		} else {
 			mCanInfo.UPWARD_AIR_INDICATOR = 0;
 		}
 
-		if (temp == 0x05 || temp == 0x06) {
+		if (temp == 0x05 || temp == 0x06||temp == 0x0D||temp == 0x0E) {
 			mCanInfo.PARALLEL_AIR_INDICATOR = 1;
 		} else {
 			mCanInfo.PARALLEL_AIR_INDICATOR = 0;
 		}
 
-		if (temp == 0x03 || temp == 0x05 || temp == 0x0C) {
+		if (temp == 0x03 || temp == 0x05 || temp == 0x0C||temp == 0x0E) {
 			mCanInfo.DOWNWARD_AIR_INDICATOR = 1;
 		} else {
 			mCanInfo.DOWNWARD_AIR_INDICATOR = 0;
@@ -363,9 +349,8 @@ public class SSMGGS extends AnalyzeUtils {
 		temp = (int) (msg[10] & 0xff);
 		mCanInfo.DRIVING_POSITON_TEMP = temp == 0xFE ? 0 : temp == 0xFF ? 255
 				: (temp * 0.5f);
+		mCanInfo.OUTSIDE_TEMPERATURE = ((msg[15]) & 0xff) * 0.5f - 40;
 
 	}
-
-
 
 }

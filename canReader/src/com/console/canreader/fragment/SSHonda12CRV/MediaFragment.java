@@ -8,6 +8,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +48,8 @@ public class MediaFragment extends BaseFragment implements OnClickListener {
     ImageView iv3;
     ImageView iv4;
     String[] strGroup={"","暂停","播放","上一曲","停止","下一曲","弹出","加载","无效"};
+    public static final String APPLIST = "Console_applist";
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -57,7 +60,12 @@ public class MediaFragment extends BaseFragment implements OnClickListener {
 		
 		return view;
 	}
-
+    @Override
+    public void onResume() {
+    	// TODO Auto-generated method stub
+    	super.onResume();
+    	Settings.System.putString(getActivity().getContentResolver(),APPLIST,"com.console.auxapp");
+    }
 
 
 	@Override

@@ -1,6 +1,7 @@
 package com.console.canreader.fragment.SSHonda;
 
 import android.os.Bundle;
+import android.preference.PreferenceGroup;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -97,6 +98,17 @@ public class ScreenSettingsFragment extends BaseFragment {
 			p2 = (ListPreference) findPreference("BACK_CAMERA_MODE");
 			p2.setOnPreferenceChangeListener(this);
 			
+			
+			if(settingActivity!=null){
+				if(settingActivity.getCanInfo()!=null)
+					syncView(settingActivity.getCanInfo());
+			}
+		}
+		
+		@Override
+		public void onResume() {
+			// TODO Auto-generated method stub
+			super.onResume();
 			if(settingActivity!=null){
 				if(settingActivity.getCanInfo()!=null)
 					syncView(settingActivity.getCanInfo());

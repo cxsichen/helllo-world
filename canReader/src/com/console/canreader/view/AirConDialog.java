@@ -56,8 +56,6 @@ public class AirConDialog extends Dialog {
 	private static int airConStatus = 3;
 	private static int largeStatus = 3;
 	private static int smallStatus = 3;
-	
-	
 
 	private int[] leftSeatDraws = { R.drawable.stat_seat_heating_left_1,
 			R.drawable.stat_seat_heating_left_2,
@@ -153,48 +151,48 @@ public class AirConDialog extends Dialog {
 			leftTemperature.setText("HI");
 		if (canInfo.DEPUTY_DRIVING_POSITON_TEMP == 255)
 			rightTemperature.setText("HI");
-		if(canInfo.DRIVING_POSITON_TEMP == -1){
+		if (canInfo.DRIVING_POSITON_TEMP == -1) {
 			leftTemperature.setAlpha(0.12f);
-		}else{
+		} else {
 			leftTemperature.setAlpha(1f);
 		}
-		if(canInfo.DEPUTY_DRIVING_POSITON_TEMP == -1){
+		if (canInfo.DEPUTY_DRIVING_POSITON_TEMP == -1) {
 			rightTemperature.setAlpha(0.12f);
-		}else{
+		} else {
 			rightTemperature.setAlpha(1f);
 		}
-		
-		//-1表示自动
-        if(canInfo.AIR_RATE==-1){
-        	rightAirVolume.setTextSize(22);
-        	leftAirVolume.setTextSize(22);
-        	rightAirVolume.setText("Auto");
-    		leftAirVolume.setText("Auto");
-        }else{
-        	rightAirVolume.setTextSize(42);
-        	leftAirVolume.setTextSize(42);
-        	rightAirVolume.setText(String.valueOf(canInfo.AIR_RATE));
-    		leftAirVolume.setText(String.valueOf(canInfo.AIR_RATE));	
-        }
-		
-         //前窗除雾
+
+		// -1表示自动
+		if (canInfo.AIR_RATE == -1) {
+			rightAirVolume.setTextSize(22);
+			leftAirVolume.setTextSize(22);
+			rightAirVolume.setText("Auto");
+			leftAirVolume.setText("Auto");
+		} else {
+			rightAirVolume.setTextSize(42);
+			leftAirVolume.setTextSize(42);
+			rightAirVolume.setText(String.valueOf(canInfo.AIR_RATE));
+			leftAirVolume.setText(String.valueOf(canInfo.AIR_RATE));
+		}
+
+		// 前窗除雾
 		if (canInfo.MAX_FRONT_LAMP_INDICATOR == 1) {
 			maxFrontDefrost.setAlpha(1f);
 		} else {
 			maxFrontDefrost.setAlpha(0.12f);
 		}
-		//内外循环
+		// 内外循环
 		if (canInfo.CYCLE_INDICATOR == 0) {
 			recirculation.setAlpha(1f);
 			recirculation
 					.setImageResource(R.drawable.stat_recirculation_outside);
-		} else if (canInfo.CYCLE_INDICATOR == 1){
+		} else if (canInfo.CYCLE_INDICATOR == 1) {
 			recirculation.setAlpha(1f);
 			recirculation.setImageResource(R.drawable.stat_recirculation);
-		}else  if (canInfo.CYCLE_INDICATOR == 2){
+		} else if (canInfo.CYCLE_INDICATOR == 2) {
 			recirculation.setAlpha(0.12f);
 		}
-		//后窗除雾
+		// 后窗除雾
 		if (canInfo.REAR_LAMP_INDICATOR == 1) {
 			rearWindowDefrost.setAlpha(1f);
 		} else {
@@ -223,8 +221,12 @@ public class AirConDialog extends Dialog {
 				}
 			}
 		}
-		outsideTemp.setText(canInfo.OUTSIDE_TEMPERATURE
-				+ context.getString(R.string.temp_unit) + "\n" + "OUT");
+		if (canInfo.OUTSIDE_TEMPERATURE == -10000f) {
+			outsideTemp.setText("--");
+		} else {
+			outsideTemp.setText(canInfo.OUTSIDE_TEMPERATURE
+					+ context.getString(R.string.temp_unit) + "\n" + "OUT");
+		}
 
 		if (canInfo.AC_INDICATOR_STATUS == 1) {
 			acIndicator.setAlpha(1f);
@@ -262,7 +264,7 @@ public class AirConDialog extends Dialog {
 	}
 
 	public void setCanInfo(CanInfo canInfo) {
-		if(leftFan==null){
+		if (leftFan == null) {
 			return;
 		}
 		this.canInfo = canInfo;

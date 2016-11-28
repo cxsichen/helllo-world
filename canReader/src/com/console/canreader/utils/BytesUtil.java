@@ -36,8 +36,6 @@ public class BytesUtil {
 		StringBuilder stringBuilder = new StringBuilder("");
 		int v = a & 0xFFFF;
 		String hv = Integer.toHexString(v);
-		Log.i("xxx", "hv=="+hv);
-		Log.i("xxx", "hv.length=="+hv.length());
 		if (hv.length() ==1) {
 			stringBuilder.append("000");
 		}else if(hv.length()==2){
