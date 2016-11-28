@@ -125,4 +125,8 @@
     <include layout="@layout/sstrumpchigs5_layout"
         android:id="@+id/sstrumpchigs5_layout"
         android:visibility="gone" />
+    
+    <include layout="@layout/honda_15crv_layout"
+        android:id="@+id/honda_15crv_layout"
+        android:visibility="gone" />
 </RelativeLayout>

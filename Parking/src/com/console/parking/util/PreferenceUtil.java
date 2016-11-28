@@ -14,7 +14,7 @@ public class PreferenceUtil {
 	public static final String CAN_CLASS_NAME = "CAN_Class_Name";
 	public static final String  SSNissan = "SSNissan"; 
 	public static final String  SSToyotaRAV4 = "SSToyotaRAV4";         //RAV4
-	
+	public static final String SSHonda15CRV = "SSHonda15CRV"; // 15CRV
 	public static final String  SSTrumpchiGS5 = "SSTrumpchiGS5";     //¹ãÆû´«ì÷GS5
 	
 	static String[] CanTypeGroup={"RZC","SS"};

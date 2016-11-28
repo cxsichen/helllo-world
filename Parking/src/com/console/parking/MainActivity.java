@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import com.console.parking.control.SSHonda15CRVControl;
 import com.console.parking.control.SSToyotaRAV4Control;
 import com.console.parking.control.SSTrumpchiGS5Control;
 import com.console.parking.control.SSnissandataControl;
@@ -57,6 +58,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private RelativeLayout parkingLayout;
 	private dataControl mRadarControl;
 	private SSnissandataControl mSSnissandataControl;
+	private SSHonda15CRVControl mSSHonda15CRVControl;
 	private SSToyotaRAV4Control mSSToyotaRAV4Control;
 	private SSTrumpchiGS5Control mSSTrumpchiGS5Control;	
 	private static final String BACKCARSTATE = "back_car_state";
@@ -404,6 +406,10 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private void chooseControlLayout() {
 		// TODO Auto-generated method stub
 		switch (PreferenceUtil.getCANName(this)) {
+		case PreferenceUtil.SSHonda15CRV:
+			getSetting();
+			mSSHonda15CRVControl = new SSHonda15CRVControl(this, parkingLayout);
+			break;
 		case PreferenceUtil.SSNissan:
 			mSSnissandataControl = new SSnissandataControl(this, parkingLayout);
 			break;
