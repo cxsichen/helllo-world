@@ -100,9 +100,10 @@ public class KeyDealer {
 	}
 
 	protected void handlePlayPause() {
-		Intent intent = new Intent();
-		intent.setAction(ACTION_PLAY_PAUSE);
-		context.sendBroadcast(intent);
+		 Intent intent= new Intent();
+         intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
+         intent.putExtra("keyEvent", ACTION_PLAY_PAUSE);
+         context.startService(intent);
 	}
 
 	protected void handleMainMenu() {
@@ -166,17 +167,19 @@ public class KeyDealer {
 
 	protected void handleMenuUp() {
 		if (getMode(context) != 0) {
-			Intent intent = new Intent();
-			intent.setAction(ACTION_MENU_UP);
-			context.sendBroadcast(intent);
+			Intent intent= new Intent();
+	         intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
+	         intent.putExtra("keyEvent", ACTION_MENU_UP);
+	         context.startService(intent);
 		}
 	}
 
 	protected void handleMenuDown() {
 		if (getMode(context) != 0) {
-			Intent intent = new Intent();
-			intent.setAction(ACTION_MENU_DOWN);
-			context.sendBroadcast(intent);
+			Intent intent= new Intent();
+	         intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
+	         intent.putExtra("keyEvent", ACTION_MENU_DOWN);
+	         context.startService(intent);
 		}
 	}
 

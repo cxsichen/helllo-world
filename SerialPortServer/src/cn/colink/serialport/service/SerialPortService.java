@@ -14,6 +14,7 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 import cn.colink.serialport.buffer.CircleBuffer;
+import cn.colink.serialport.control.SerialPortControl;
 import cn.colink.serialport.utils.BytesUtil;
 import cn.colink.serialport.utils.Contacts;
 import cn.colink.serialport.utils.KeyDealer;
@@ -40,6 +41,8 @@ public class SerialPortService extends Service {
 	private Thread mSendDataToSpThread;
 
 	private KeyDealer mKeyDealer;
+	
+	SerialPortControl mSerialPortControl;
 
 	interface SerialPortWriteTask {
 		public void excute();
@@ -63,6 +66,9 @@ public class SerialPortService extends Service {
 					// the dead object for us.
 				}
 				mCallbacks.finishBroadcast();
+				
+				if(mSerialPortControl!=null)
+				   mSerialPortControl.deal(mPacket);
 				
 				if (mPacket[0] == Contacts.KEY_HEAD) {
 					mKeyDealer = KeyDealer.getInstance(SerialPortService.this);
@@ -90,17 +96,38 @@ public class SerialPortService extends Service {
 			e.printStackTrace();
 		}
 		initReceiver();
+		doStartService();
+		mSerialPortControl=new SerialPortControl(this);
+	}
+	
+	
+	private void doStartService() {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(SerialPortService.this, BNRService.class);
+		startService(intent);
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		Trace.i("SerialPortService onStartCommand");
+		Trace.i("SerialPortService onStartCommand");		
+		if (intent != null) {
+			String command = intent.getStringExtra("keyEvent");
+			if(mSerialPortControl==null)
+				mSerialPortControl=new SerialPortControl(this);
+			Trace.m("SerialPortService onStartCommand=========="+command);
+			if (command != null) {
+				mSerialPortControl.dealCommand(command);
+			}
+		}
 		return super.onStartCommand(intent, flags, startId);
 	}
 
 	@Override
 	public void onDestroy() {
 		Trace.i("SerialPortService onDestroy");
+		//注销
+		if(mSerialPortControl!=null)
+		mSerialPortControl.onDestroy();
 		mInputStream = null;
 		mOutputStream = null;
 		if (mReadDataFromSpThread != null) {
@@ -204,6 +231,16 @@ public class SerialPortService extends Service {
 			e.printStackTrace();
 		}
 	}
+	
+	public void sendMsg(final String hexString) throws RemoteException {
+		try {
+			mBlockingQueue.put(getTask(hexString));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	
 
 	private final RemoteCallbackList<ISerialPortCallback> mCallbacks = new RemoteCallbackList<ISerialPortCallback>();
 

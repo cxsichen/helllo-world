@@ -48,4 +48,58 @@ public class BytesUtil {
      public static int byteToInt(byte b){
          return b & 0xFF;
      }
+     
+ 	public static String intToHexString(int a) {
+		StringBuilder stringBuilder = new StringBuilder("");
+		int v = a & 0xFF;
+		String hv = Integer.toHexString(v);
+		if (hv.length() < 2) {
+			stringBuilder.append(0);
+		}
+		stringBuilder.append(hv);
+		return stringBuilder.toString();
+	}
+ 	
+	public static String makeEfMsg(int bas, int mid,int tre, int ver, int hon) {
+		StringBuilder stringBuilder = new StringBuilder("F8");
+		String hv = Integer.toHexString(bas & 0xFF);
+		if (hv.length() < 2) {
+			stringBuilder.append(0);
+		}
+		stringBuilder.append(hv);
+       
+
+		hv = Integer.toHexString(mid & 0xFF)+Integer.toHexString(tre & 0xFF);	
+		if (hv.length() < 2) {
+			stringBuilder.append(0);
+		}
+		stringBuilder.append(hv);
+
+		hv = Integer.toHexString(ver & 0xFF);
+		if (hv.length() < 2) {
+			stringBuilder.append(0);
+		}
+		stringBuilder.append(hv);
+
+		hv = Integer.toHexString(hon & 0xFF);
+		if (hv.length() < 2) {
+			stringBuilder.append(0);
+		}
+		stringBuilder.append(hv);
+		return stringBuilder.toString();
+	}
+	
+	public static String addCheckBit(String str) {
+		byte[] b = hexStringToBytes(str);
+		int sum = 0;
+		for (int i = 0; i < 5; i++) {
+			sum = sum + b[i];
+		}
+		String tmp = Integer.toHexString(255 - sum).toUpperCase();
+		if (tmp.length() > 2) {
+			tmp = tmp.substring(1);
+		}
+		return str + tmp;
+	}
+
 }

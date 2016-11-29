@@ -32,6 +32,14 @@ public class Trace {
 		}
 	}
 	
+	public static void m(String msg) {
+		if (DEBUG) {
+			Log.e("cxs", msg);
+		}
+	}
+	
+	
+	
 	public static void show(Context context,String msg){
 		Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 	}
