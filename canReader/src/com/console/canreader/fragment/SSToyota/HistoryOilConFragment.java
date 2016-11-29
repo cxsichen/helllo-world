@@ -13,7 +13,8 @@ import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.service.CanInfo;
 
-public class HistoryOilConFragment extends BaseFragment implements View.OnClickListener {
+public class HistoryOilConFragment extends BaseFragment implements
+		View.OnClickListener {
 
 	private TextView his1;
 	private TextView his2;
@@ -87,71 +88,101 @@ public class HistoryOilConFragment extends BaseFragment implements View.OnClickL
 			}
 
 			if (mCaninfo.HISTORY_OIL_CONSUMPTION_UNIT == 0) {
-				changeTvHeight(his1,
+				changeTvHeight(
+						his1,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_1 / 60)));
-				changeTvHeight(his2,
+				changeTvHeight(
+						his2,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_2 / 60)));
-				changeTvHeight(his3,
+				changeTvHeight(
+						his3,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_3 / 60)));
-				changeTvHeight(his4,
+				changeTvHeight(
+						his4,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_4 / 60)));
-				changeTvHeight(his5,
+				changeTvHeight(
+						his5,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_5 / 60)));
-				
-				changeTvHeight(his6,
+
+				changeTvHeight(
+						his6,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_6 / 60)));
-				changeTvHeight(his7,
+				changeTvHeight(
+						his7,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_7 / 60)));
-				changeTvHeight(his8,
+				changeTvHeight(
+						his8,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_8 / 60)));
-				changeTvHeight(his9,
+				changeTvHeight(
+						his9,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_9 / 60)));
-				changeTvHeight(his10,
+				changeTvHeight(
+						his10,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_10 / 60)));
-				
-				changeTvHeight(his11,
+
+				changeTvHeight(
+						his11,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_11 / 60)));
-				changeTvHeight(his12,
+				changeTvHeight(
+						his12,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_12 / 60)));
-				changeTvHeight(his13,
+				changeTvHeight(
+						his13,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_13 / 60)));
-				changeTvHeight(his14,
+				changeTvHeight(
+						his14,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_14 / 60)));
-				changeTvHeight(his15,
+				changeTvHeight(
+						his15,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_15 / 60)));
-				
+
 			} else {
-				changeTvHeight(his1,
+				changeTvHeight(
+						his1,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_1 / 30)));
-				changeTvHeight(his2,
+				changeTvHeight(
+						his2,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_2 / 30)));
-				changeTvHeight(his3,
+				changeTvHeight(
+						his3,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_3 / 30)));
-				changeTvHeight(his4,
+				changeTvHeight(
+						his4,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_4 / 30)));
-				changeTvHeight(his5,
+				changeTvHeight(
+						his5,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_5 / 30)));
-				
-				changeTvHeight(his6,
+
+				changeTvHeight(
+						his6,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_6 / 30)));
-				changeTvHeight(his7,
+				changeTvHeight(
+						his7,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_7 / 30)));
-				changeTvHeight(his8,
+				changeTvHeight(
+						his8,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_8 / 30)));
-				changeTvHeight(his9,
+				changeTvHeight(
+						his9,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_9 / 30)));
-				changeTvHeight(his10,
+				changeTvHeight(
+						his10,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_10 / 30)));
-				
-				changeTvHeight(his11,
+
+				changeTvHeight(
+						his11,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_11 / 30)));
-				changeTvHeight(his12,
+				changeTvHeight(
+						his12,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_12 / 30)));
-				changeTvHeight(his13,
+				changeTvHeight(
+						his13,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_13 / 30)));
-				changeTvHeight(his14,
+				changeTvHeight(
+						his14,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_14 / 30)));
-				changeTvHeight(his15,
+				changeTvHeight(
+						his15,
 						(int) (height * (mCaninfo.HISTORY_OIL_CONSUMPTION_15 / 30)));
 			}
 
@@ -186,7 +217,7 @@ public class HistoryOilConFragment extends BaseFragment implements View.OnClickL
 		unit = (TextView) view.findViewById(R.id.unit);
 		unit0 = (TextView) view.findViewById(R.id.unit_0);
 		unit1 = (TextView) view.findViewById(R.id.unit_1);
-		unit2 = (TextView)view.findViewById(R.id.unit_2);
+		unit2 = (TextView) view.findViewById(R.id.unit_2);
 		unit3 = (TextView) view.findViewById(R.id.unit_3);
 
 		trip_content = (LinearLayout) view.findViewById(R.id.trip_content);
@@ -195,7 +226,7 @@ public class HistoryOilConFragment extends BaseFragment implements View.OnClickL
 
 		his_clear.setOnClickListener(this);
 	}
-	
+
 	private void changeTvHeight(TextView trip0, int height) {
 		if (height > this.height) {
 			height = this.height;
@@ -205,7 +236,6 @@ public class HistoryOilConFragment extends BaseFragment implements View.OnClickL
 		linearParams.height = height;// 控件的高强制设成20
 		trip0.setLayoutParams(linearParams); // 使设置好的布局参数应用到控件</pre>
 	}
-
 
 	@Override
 	public void onClick(View v) {

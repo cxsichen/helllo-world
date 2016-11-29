@@ -79,13 +79,13 @@ public class ScreenShowSettingsFragment extends BaseFragment {
 		private SwitchPreference p3;
 		private SwitchPreference p4;
 		private ListPreference p5;
-		
+
 		private ListPreference p6;
 		private ListPreference p7;
 		private ListPreference p8;
 
 		ScreenShowSettingsFragment settingActivity;
-		
+
 		public SettingsFragment(ScreenShowSettingsFragment settingActivity) {
 			this.settingActivity = settingActivity;
 		}
@@ -107,40 +107,38 @@ public class ScreenShowSettingsFragment extends BaseFragment {
 
 			p5 = (ListPreference) findPreference("ADJUST_WARING_VOLUME");
 			p5.setOnPreferenceChangeListener(this);
-			
+
 			p6 = (ListPreference) findPreference("SWITCH_TRIPB_SETTING");
 			p6.setOnPreferenceChangeListener(this);
-			
+
 			p7 = (ListPreference) findPreference("SWITCH_TRIPA_SETTING");
 			p7.setOnPreferenceChangeListener(this);
-			
+
 			p8 = (ListPreference) findPreference("ADJUST_OUTSIDE_TEMP");
 			p8.setOnPreferenceChangeListener(this);
-			
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
+
+			if (settingActivity != null) {
+				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}
-		
 
 		public void syncView(CanInfo mCaninfo) {
 			p1.setChecked(mCaninfo.RATATIONAL_RATE == 1);
 			p2.setChecked(mCaninfo.MSG_NOTIFICATION == 1);
 			p3.setChecked(mCaninfo.ENGINEE_AUTO_CONTROL == 1);
 			p4.setChecked(mCaninfo.ENERGY_BACKGROUND_LIGHT == 1);
-			updateListPreference(p5,mCaninfo.ADJUST_WARING_VOLUME);
-			
-			updateListPreference(p6,mCaninfo.SWITCH_TRIPB_SETTING);
-			updateListPreference(p7,mCaninfo.SWITCH_TRIPA_SETTING);
-			updateListPreference(p8,mCaninfo.ADJUST_OUTSIDE_TEMP);		
-		}
-		
-		public  void updateListPreference(ListPreference p,int index){
-			p.setValue(String.valueOf(index));
-			updatePreferenceDescription(p,index);
+			updateListPreference(p5, mCaninfo.ADJUST_WARING_VOLUME);
+
+			updateListPreference(p6, mCaninfo.SWITCH_TRIPB_SETTING);
+			updateListPreference(p7, mCaninfo.SWITCH_TRIPA_SETTING);
+			updateListPreference(p8, mCaninfo.ADJUST_OUTSIDE_TEMP);
 		}
 
+		public void updateListPreference(ListPreference p, int index) {
+			p.setValue(String.valueOf(index));
+			updatePreferenceDescription(p, index);
+		}
 
 		private void updatePreferenceDescription(ListPreference preference,
 				int currentTimeout) {
@@ -200,8 +198,9 @@ public class ScreenShowSettingsFragment extends BaseFragment {
 			case "ADJUST_WARING_VOLUME":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026F040"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026F040"
+								+ (String) newValue);
 						updatePreferenceDescription(p5, value);
 					} catch (NumberFormatException e) {
 					}
@@ -210,8 +209,9 @@ public class ScreenShowSettingsFragment extends BaseFragment {
 			case "SWITCH_TRIPB_SETTING":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026F030"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026F030"
+								+ (String) newValue);
 						updatePreferenceDescription(p6, value);
 					} catch (NumberFormatException e) {
 					}
@@ -220,8 +220,9 @@ public class ScreenShowSettingsFragment extends BaseFragment {
 			case "SWITCH_TRIPA_SETTING":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026F020"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026F020"
+								+ (String) newValue);
 						updatePreferenceDescription(p7, value);
 					} catch (NumberFormatException e) {
 					}
@@ -230,8 +231,9 @@ public class ScreenShowSettingsFragment extends BaseFragment {
 			case "ADJUST_OUTSIDE_TEMP":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026F010"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026F010"
+								+ (String) newValue);
 						updatePreferenceDescription(p8, value);
 					} catch (NumberFormatException e) {
 					}

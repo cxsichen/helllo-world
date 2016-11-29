@@ -24,19 +24,19 @@ public class SSHonda extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA_3 = 0x17;
 	// 车身信息
-    public static final int CAR_INFO_DATA_4 = 0xE8;
-     // 车身信息
-    public static final int CAR_INFO_DATA_5 = 0x67;
-    // 车身信息
-    public static final int CAR_INFO_DATA_6 = 0x66;
- // 车身信息
-    public static final int CAR_INFO_DATA_7 = 0x65;
- // 车身信息
-    public static final int CAR_INFO_DATA_8 = 0x68;
-    // 车身信息
-    public static final int CAR_INFO_DATA_9 = 0x69;
-    // 车身信息
-    public static final int CAR_INFO_DATA_10 = 0xF0;
+	public static final int CAR_INFO_DATA_4 = 0xE8;
+	// 车身信息
+	public static final int CAR_INFO_DATA_5 = 0x67;
+	// 车身信息
+	public static final int CAR_INFO_DATA_6 = 0x66;
+	// 车身信息
+	public static final int CAR_INFO_DATA_7 = 0x65;
+	// 车身信息
+	public static final int CAR_INFO_DATA_8 = 0x68;
+	// 车身信息
+	public static final int CAR_INFO_DATA_9 = 0x69;
+	// 车身信息
+	public static final int CAR_INFO_DATA_10 = 0xF0;
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
@@ -207,15 +207,15 @@ public class SSHonda extends AnalyzeUtils {
 		}
 		mCanInfo.TRIP_A_1 = ((int) (msg[4] & 0xFF) * 256 * 256
 				+ (int) (msg[5] & 0xFF) * 256 + (int) (msg[6] & 0xFF)) * 0.1f;
-		mCanInfo.TRIP_A_1_AVERAGE_CONSUMPTION = ((int) (msg[7] & 0xFF) * 256 + (int) (msg[8] & 0xFF))* 0.1f;
+		mCanInfo.TRIP_A_1_AVERAGE_CONSUMPTION = ((int) (msg[7] & 0xFF) * 256 + (int) (msg[8] & 0xFF)) * 0.1f;
 		mCanInfo.TRIP_A_2 = ((int) (msg[9] & 0xFF) * 256 * 256
 				+ (int) (msg[10] & 0xFF) * 256 + (int) (msg[11] & 0xFF)) * 0.1f;
-		mCanInfo.TRIP_A_2_AVERAGE_CONSUMPTION = ((int) (msg[12] & 0xFF) * 256 + (int) (msg[13] & 0xFF))* 0.1f;
+		mCanInfo.TRIP_A_2_AVERAGE_CONSUMPTION = ((int) (msg[12] & 0xFF) * 256 + (int) (msg[13] & 0xFF)) * 0.1f;
 		mCanInfo.TRIP_A_3 = ((int) (msg[14] & 0xFF) * 256 * 256
 				+ (int) (msg[15] & 0xFF) * 256 + (int) (msg[16] & 0xFF)) * 0.1f;
-		mCanInfo.TRIP_A_3_AVERAGE_CONSUMPTION = ((int) (msg[17] & 0xFF) * 256 + (int) (msg[18] & 0xFF))* 0.1f;
+		mCanInfo.TRIP_A_3_AVERAGE_CONSUMPTION = ((int) (msg[17] & 0xFF) * 256 + (int) (msg[18] & 0xFF)) * 0.1f;
 	}
-	
+
 	static String carInfoSave_4 = "";
 
 	void analyzeCarInfoData_4(byte[] msg) {
@@ -228,9 +228,9 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.BACK_CAMERA_MODE = (int) (msg[5] & 0xFF);
 		mCanInfo.LEFT_CAMERA_SWITCH = (int) (msg[6] & 0xFF);
 	}
-	
+
 	static String carInfoSave_5 = "";
-	
+
 	void analyzeCarInfoData_5(byte[] msg) {
 		if (carInfoSave_5.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -240,16 +240,14 @@ public class SSHonda extends AnalyzeUtils {
 		}
 		mCanInfo.WIPER_LINK_LAMP = (int) ((msg[4] >> 3) & 0x01);
 		mCanInfo.AUTO_LIGHT_SENSEITIVITY = (int) ((msg[4] >> 0) & 0x07);
-		
+
 		mCanInfo.AUTO_LIGHTING_SENSEITIVITY = (int) ((msg[5] >> 4) & 0x07);
 		mCanInfo.FRONT_LAMP_OFF_TIME = (int) ((msg[5] >> 2) & 0x03);
 		mCanInfo.LAMP_TURN_DARK_TIME = (int) ((msg[5] >> 0) & 0x03);
 	}
 
-
-	
 	static String carInfoSave_6 = "";
-	
+
 	void analyzeCarInfoData_6(byte[] msg) {
 		if (carInfoSave_6.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -258,12 +256,13 @@ public class SSHonda extends AnalyzeUtils {
 			carInfoSave_6 = BytesUtil.bytesToHexString(msg);
 		}
 		mCanInfo.REMOTELOCK_BEEP_SIGN = (int) ((msg[5] >> 3) & 0x01);
-		mCanInfo.REMOTELOCK_SIDELAMP_SIGN = (int) ((msg[5] >> 2) & 0x01);		
+		mCanInfo.REMOTELOCK_SIDELAMP_SIGN = (int) ((msg[5] >> 2) & 0x01);
 		mCanInfo.SPEECH_WARING_VOLUME = (int) ((msg[5] >> 1) & 0x01);
 		mCanInfo.REMOTE_START_SYSTEM = (int) ((msg[5] >> 0) & 0x01);
 	}
-	
-	static String carInfoSave_7 = "";	
+
+	static String carInfoSave_7 = "";
+
 	void analyzeCarInfoData_7(byte[] msg) {
 		if (carInfoSave_7.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -275,8 +274,9 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.AUTO_LOCK_TIME = (int) ((msg[5] >> 1) & 0x03);
 		mCanInfo.REMOTE_LOCK_SIGN = (int) ((msg[5] >> 0) & 0x01);
 	}
-	
-	static String carInfoSave_8 = "";	
+
+	static String carInfoSave_8 = "";
+
 	void analyzeCarInfoData_8(byte[] msg) {
 		if (carInfoSave_8.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -289,8 +289,9 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.DETECT_FRONT_CAR = (int) ((msg[5] >> 2) & 0x01);
 		mCanInfo.FRONT_DANGER_WAIRNG_DISTANCE = (int) ((msg[5] >> 0) & 0x03);
 	}
-	static String carInfoSave_9 = "";	
-	
+
+	static String carInfoSave_9 = "";
+
 	void analyzeCarInfoData_9(byte[] msg) {
 		if (carInfoSave_9.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -303,14 +304,14 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.ENGINEE_AUTO_CONTROL = (int) ((msg[4] >> 3) & 0x01);
 		mCanInfo.ENERGY_BACKGROUND_LIGHT = (int) ((msg[4] >> 2) & 0x01);
 		mCanInfo.ADJUST_WARING_VOLUME = (int) ((msg[4] >> 0) & 0x03);
-		
+
 		mCanInfo.SWITCH_TRIPB_SETTING = (int) ((msg[5] >> 5) & 0x03);
 		mCanInfo.SWITCH_TRIPA_SETTING = (int) ((msg[5] >> 3) & 0x03);
 		mCanInfo.ADJUST_OUTSIDE_TEMP = (int) ((msg[5] >> 0) & 0x07);
 	}
-	
-	static String carInfoSave_10 = "";	
-	
+
+	static String carInfoSave_10 = "";
+
 	void analyzeCarInfoData_10(byte[] msg) {
 		if (carInfoSave_10.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -331,8 +332,6 @@ public class SSHonda extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
-
-
 
 	static String carInfoSave = "";
 	static int buttonTemp = 0;

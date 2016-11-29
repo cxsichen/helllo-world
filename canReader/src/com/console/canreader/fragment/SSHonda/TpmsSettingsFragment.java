@@ -34,8 +34,7 @@ public class TpmsSettingsFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.tpms_control,
-				container, false);
+		View view = inflater.inflate(R.layout.tpms_control, container, false);
 		initView(view);
 		return view;
 	}

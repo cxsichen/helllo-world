@@ -14,12 +14,12 @@ public class SSHonda12CRV extends AnalyzeUtils {
 	public static final int comID = 3;
 	// 方向盘按键
 	public static final int STEERING_BUTTON_DATA = 0x72;
-	   // 车身信息
-    public static final int CAR_INFO_DATA_10 = 0xF0;
-    // 车身信息
-    public static final int CAR_INFO_DATA = 0xB1;
-    // 车身信息
-    public static final int CAR_INFO_DATA_1 = 0xA4;
+	// 车身信息
+	public static final int CAR_INFO_DATA_10 = 0xF0;
+	// 车身信息
+	public static final int CAR_INFO_DATA = 0xB1;
+	// 车身信息
+	public static final int CAR_INFO_DATA_1 = 0xA4;
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
@@ -48,9 +48,8 @@ public class SSHonda12CRV extends AnalyzeUtils {
 			case CAR_INFO_DATA_1:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_1(msg);
-				break;	
-				
-		
+				break;
+
 			default:
 				break;
 			}
@@ -59,7 +58,7 @@ public class SSHonda12CRV extends AnalyzeUtils {
 			// TODO: handle exception
 		}
 	}
-	
+
 	static String SteeringButtonStatusDataSave = "";
 
 	void analyzeSteeringButtonData(byte[] msg) {
@@ -71,9 +70,9 @@ public class SSHonda12CRV extends AnalyzeUtils {
 		} else {
 			SteeringButtonStatusDataSave = BytesUtil.bytesToHexString(msg);
 		}
-		
-		mCanInfo.STEERING_BUTTON_STATUS=1;
-		
+
+		mCanInfo.STEERING_BUTTON_STATUS = 1;
+
 		switch ((int) (msg[6] & 0xFF)) {
 		case 0x01:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOLUP;
@@ -99,13 +98,13 @@ public class SSHonda12CRV extends AnalyzeUtils {
 			break;
 		default:
 			mCanInfo.STEERING_BUTTON_MODE = 0;
-			mCanInfo.STEERING_BUTTON_STATUS=0;
+			mCanInfo.STEERING_BUTTON_STATUS = 0;
 			break;
 		}
 	}
-	
-	static String carInfoSave_10 = "";	
-	
+
+	static String carInfoSave_10 = "";
+
 	void analyzeCarInfoData_10(byte[] msg) {
 		if (carInfoSave_10.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -126,9 +125,9 @@ public class SSHonda12CRV extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
-	
-	static String carInfoSave = "";	
-	
+
+	static String carInfoSave = "";
+
 	void analyzeCarInfoData(byte[] msg) {
 		if (carInfoSave.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -136,11 +135,11 @@ public class SSHonda12CRV extends AnalyzeUtils {
 		} else {
 			carInfoSave = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.BLUETOOTH_MODE=msg[4]&0xff;
+		mCanInfo.BLUETOOTH_MODE = msg[4] & 0xff;
 	}
 
-	static String carInfoSave_1 = "";	
-	
+	static String carInfoSave_1 = "";
+
 	void analyzeCarInfoData_1(byte[] msg) {
 		if (carInfoSave_1.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -148,16 +147,15 @@ public class SSHonda12CRV extends AnalyzeUtils {
 		} else {
 			carInfoSave_1 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.MULTI_MEIDA_SOURCE=(int)(msg[4]&0x0f);
-		mCanInfo.MULTI_MEIDA_PLAYING_NUM=(int)(msg[7]&0xff)+(int)(msg[8]&0xff)*256;
-		mCanInfo.MULTI_MEIDA_WHOLE_NUM=(int)(msg[9]&0xff)+(int)(msg[10]&0xff)*256;
-		mCanInfo.MULTI_MEIDA_PLAYING_MINUTE=(int)(msg[11]&0xff);
-		mCanInfo.MULTI_MEIDA_PLAYING_SECOND=(int)(msg[12]&0xff);
-		mCanInfo.MULTI_MEIDA_PLAYING_PROGRESS=(int)(msg[13]&0xff);
-		mCanInfo.MULTI_MEIDA_PLAYING_STATUS=(int)(msg[14]&0xff);
+		mCanInfo.MULTI_MEIDA_SOURCE = (int) (msg[4] & 0x0f);
+		mCanInfo.MULTI_MEIDA_PLAYING_NUM = (int) (msg[7] & 0xff)
+				+ (int) (msg[8] & 0xff) * 256;
+		mCanInfo.MULTI_MEIDA_WHOLE_NUM = (int) (msg[9] & 0xff)
+				+ (int) (msg[10] & 0xff) * 256;
+		mCanInfo.MULTI_MEIDA_PLAYING_MINUTE = (int) (msg[11] & 0xff);
+		mCanInfo.MULTI_MEIDA_PLAYING_SECOND = (int) (msg[12] & 0xff);
+		mCanInfo.MULTI_MEIDA_PLAYING_PROGRESS = (int) (msg[13] & 0xff);
+		mCanInfo.MULTI_MEIDA_PLAYING_STATUS = (int) (msg[14] & 0xff);
 	}
-		
-	
-		
-	
+
 }

@@ -85,7 +85,7 @@ public class BluetoothSettingsFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-                 sendMsg("5AA501CA01");
+				sendMsg("5AA501CA01");
 			}
 		});
 		button1.setOnClickListener(new OnClickListener() {
@@ -93,7 +93,7 @@ public class BluetoothSettingsFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				 sendMsg("5AA501CA02");
+				sendMsg("5AA501CA02");
 			}
 		});
 

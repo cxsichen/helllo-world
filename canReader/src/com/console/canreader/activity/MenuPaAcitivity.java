@@ -42,15 +42,15 @@ public class MenuPaAcitivity extends Activity {
 		choosePaActivity();
 		finish();
 	}
-		
-	private void startPaAcitivy(String str){
+
+	private void startPaAcitivy(String str) {
 		try {
-			Intent intent=new Intent();
+			Intent intent = new Intent();
 			intent.setClassName("com.console.canreader", str);
 			startActivity(intent);
 		} catch (Exception e) {
 			// TODO: handle exception
-			Log.i("cxs","====e====="+e);
+			Log.i("cxs", "====e=====" + e);
 		}
 	}
 
@@ -71,7 +71,8 @@ public class MenuPaAcitivity extends Activity {
 		@Override
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
-			if (!canName.equals(PreferenceUtil.getCANName(MenuPaAcitivity.this)))
+			if (!canName
+					.equals(PreferenceUtil.getCANName(MenuPaAcitivity.this)))
 				finish();
 
 		}
@@ -81,18 +82,18 @@ public class MenuPaAcitivity extends Activity {
 		canName = PreferenceUtil.getCANName(this);
 		canFirtName = PreferenceUtil.getFirstTwoString(this, canName);
 	}
-	
+
 	private void choosePaActivity() {
 		// TODO Auto-generated method stub
 		switch (canName) {
-		case Contacts.CANNAMEGROUP.SSToyotaBD: 
+		case Contacts.CANNAMEGROUP.SSToyotaBD:
 			startPaAcitivy("com.console.canreader.fragment.SSToyota.MenuPaAcitivity");
 			break;
-		case Contacts.CANNAMEGROUP.SSHyundai: 
+		case Contacts.CANNAMEGROUP.SSHyundai:
 		case Contacts.CANNAMEGROUP.SSHyundai16MT:
 			startPaAcitivy("com.console.canreader.fragment.SSHyundai.MenuPaAcitivity");
 			break;
-		case Contacts.CANNAMEGROUP.SSNissan: 
+		case Contacts.CANNAMEGROUP.SSNissan:
 		case Contacts.CANNAMEGROUP.SSNissanWithout360:
 			startPaAcitivy("com.console.canreader.fragment.SSNissan.MenuPaAcitivity");
 			break;

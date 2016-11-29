@@ -10,10 +10,9 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCJAC extends AnalyzeUtils {
-	
 
-    //数据类型
-	public static final int comID=1;
+	// 数据类型
+	public static final int comID = 1;
 	// 方向盘按键
 	public static final int STEERING_BUTTON_DATA = 0x21;
 	// 基本信息
@@ -21,8 +20,6 @@ public class RZCJAC extends AnalyzeUtils {
 	public static final int CAR_INFO_DATA_1 = 0x7f;
 	public static final int CAR_INFO_DATA_2 = 0x38;
 	public static final int CAR_INFO_DATA_3 = 0x39;
-
-
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
@@ -115,9 +112,6 @@ public class RZCJAC extends AnalyzeUtils {
 				: 0;
 		mCanInfo.HANDBRAKE_STATUS = ((int) ((msg[4] >> 4) & 0x01));
 	}
-	
-	
-	
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -145,28 +139,30 @@ public class RZCJAC extends AnalyzeUtils {
 		} else {
 			dataSave = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.TPMS_FL_TEMP=(int) (msg[3]  & 0xff)-40;
-		mCanInfo.TPMS_FR_TEMP=(int) (msg[4]  & 0xff)-40;
-		mCanInfo.TPMS_BL_TEMP=(int) (msg[5]  & 0xff)-40;
-		mCanInfo.TPMS_BR_TEMP=(int) (msg[6]  & 0xff)-40;
+		mCanInfo.TPMS_FL_TEMP = (int) (msg[3] & 0xff) - 40;
+		mCanInfo.TPMS_FR_TEMP = (int) (msg[4] & 0xff) - 40;
+		mCanInfo.TPMS_BL_TEMP = (int) (msg[5] & 0xff) - 40;
+		mCanInfo.TPMS_BR_TEMP = (int) (msg[6] & 0xff) - 40;
 
-		mCanInfo.TPMS_FL_PRESSUE=getFloatRound((msg[7]  & 0xff)*0.0274,10);
-		mCanInfo.TPMS_FR_PRESSUE=getFloatRound((msg[8]  & 0xff)*0.0274,10);
-		mCanInfo.TPMS_BL_PRESSUE=getFloatRound((msg[9]  & 0xff)*0.0274,10);
-		mCanInfo.TPMS_BR_PRESSUE=getFloatRound((msg[10]  & 0xff)*0.0274,10);
-			
+		mCanInfo.TPMS_FL_PRESSUE = getFloatRound((msg[7] & 0xff) * 0.0274, 10);
+		mCanInfo.TPMS_FR_PRESSUE = getFloatRound((msg[8] & 0xff) * 0.0274, 10);
+		mCanInfo.TPMS_BL_PRESSUE = getFloatRound((msg[9] & 0xff) * 0.0274, 10);
+		mCanInfo.TPMS_BR_PRESSUE = getFloatRound((msg[10] & 0xff) * 0.0274, 10);
+
 	}
-	
+
 	/**
 	 * 给参数返回指定小数点后 a 位的四舍五入
-	 * @param sourceData 要取舍的原数据
-	 * @param a	小数点 后的 位数（如：10：小数点后1位；100：小数据后2位以此类推）
+	 * 
+	 * @param sourceData
+	 *            要取舍的原数据
+	 * @param a
+	 *            小数点 后的 位数（如：10：小数点后1位；100：小数据后2位以此类推）
 	 * @return 舍取后的 数据
 	 */
-	public static float getFloatRound(double sourceData,int a)
-	{
-		int i = (int) Math.round(sourceData*a);		//小数点后 a 位前移，并四舍五入
-		float f2 = (float) (i/(float)a);		//还原小数点后 a 位
+	public static float getFloatRound(double sourceData, int a) {
+		int i = (int) Math.round(sourceData * a); // 小数点后 a 位前移，并四舍五入
+		float f2 = (float) (i / (float) a); // 还原小数点后 a 位
 		return f2;
 	}
 
@@ -180,12 +176,11 @@ public class RZCJAC extends AnalyzeUtils {
 		} else {
 			dataSave1 = BytesUtil.bytesToHexString(msg);
 		}
-		
-		mCanInfo.TPMS_FL_WARING=(int) (msg[3]  & 0xff);
-		mCanInfo.TPMS_FR_WARING=(int) (msg[4]  & 0xff);
-		mCanInfo.TPMS_BL_WARING=(int) (msg[5]  & 0xff);
-		mCanInfo.TPMS_BR_WARING=(int) (msg[6]  & 0xff);
-		
+
+		mCanInfo.TPMS_FL_WARING = (int) (msg[3] & 0xff);
+		mCanInfo.TPMS_FR_WARING = (int) (msg[4] & 0xff);
+		mCanInfo.TPMS_BL_WARING = (int) (msg[5] & 0xff);
+		mCanInfo.TPMS_BR_WARING = (int) (msg[6] & 0xff);
 
 	}
 

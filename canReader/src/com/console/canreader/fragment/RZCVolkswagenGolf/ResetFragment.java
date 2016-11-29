@@ -45,12 +45,10 @@ public class ResetFragment extends BaseFragment implements OnClickListener {
 	Button button4;
 	Button button5;
 	Button button6;
-	
+
 	public ResetFragment() {
 
 	}
-
-
 
 	@Override
 	public void show(CanInfo mCaninfo) {
@@ -72,14 +70,14 @@ public class ResetFragment extends BaseFragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		inflater = LayoutInflater.from(getActivity());
 		View view = inflater.inflate(R.layout.rzc_golf_layout_3, null);
-		button0=(Button) view.findViewById(R.id.golf_button0);
-		button1=(Button) view.findViewById(R.id.golf_button1);
-		button2=(Button) view.findViewById(R.id.golf_button2);
-		button3=(Button) view.findViewById(R.id.golf_button3);
-		button4=(Button) view.findViewById(R.id.golf_button4);
-		button5=(Button) view.findViewById(R.id.golf_button5);
-		button6=(Button) view.findViewById(R.id.golf_button6);
-		
+		button0 = (Button) view.findViewById(R.id.golf_button0);
+		button1 = (Button) view.findViewById(R.id.golf_button1);
+		button2 = (Button) view.findViewById(R.id.golf_button2);
+		button3 = (Button) view.findViewById(R.id.golf_button3);
+		button4 = (Button) view.findViewById(R.id.golf_button4);
+		button5 = (Button) view.findViewById(R.id.golf_button5);
+		button6 = (Button) view.findViewById(R.id.golf_button6);
+
 		button0.setOnClickListener(this);
 		button1.setOnClickListener(this);
 		button2.setOnClickListener(this);
@@ -97,32 +95,30 @@ public class ResetFragment extends BaseFragment implements OnClickListener {
 
 	}
 
-
-
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.golf_button0:
-			sendMsg("2EC602C101" );
+			sendMsg("2EC602C101");
 			break;
 		case R.id.golf_button1:
-			sendMsg("2EC602C201" );
+			sendMsg("2EC602C201");
 			break;
 		case R.id.golf_button2:
-			sendMsg("2EC602C301" );
+			sendMsg("2EC602C301");
 			break;
 		case R.id.golf_button3:
-			sendMsg("2EC602C401" );
+			sendMsg("2EC602C401");
 			break;
 		case R.id.golf_button4:
-			sendMsg("2EC602C501" );
+			sendMsg("2EC602C501");
 			break;
 		case R.id.golf_button5:
-			sendMsg("2EC602C601" );
+			sendMsg("2EC602C601");
 			break;
 		case R.id.golf_button6:
-			sendMsg("2EC602C701" );
+			sendMsg("2EC602C701");
 			break;
 		default:
 			break;

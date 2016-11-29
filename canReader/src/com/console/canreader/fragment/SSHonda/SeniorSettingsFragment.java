@@ -56,8 +56,8 @@ public class SeniorSettingsFragment extends BaseFragment {
 					settingsFragment.syncView(mCaninfo);
 				} catch (Exception e) {
 					// TODO: handle exception
-					Log.i("cxs","========e===="+e);
-				}			
+					Log.i("cxs", "========e====" + e);
+				}
 			}
 		}
 
@@ -81,16 +81,16 @@ public class SeniorSettingsFragment extends BaseFragment {
 		private ListPreference p3;
 		private ListPreference p4;
 		private ListPreference p5;
-		
+
 		private SwitchPreference p6;
 		private SwitchPreference p7;
 		private SwitchPreference p8;
 		private SwitchPreference p9;
-		
+
 		private SwitchPreference p10;
 		private ListPreference p11;
 		private SwitchPreference p12;
-		
+
 		private ListPreference p13;
 		private SwitchPreference p14;
 		private SwitchPreference p15;
@@ -107,102 +107,102 @@ public class SeniorSettingsFragment extends BaseFragment {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.sshonda_senior_setting_prefs);
-            /*---------lamp ------*/
+			/*---------lamp ------*/
 			p1 = (SwitchPreference) findPreference("WIPER_LINK_LAMP");
 			p1.setOnPreferenceChangeListener(this);
 
 			p2 = (ListPreference) findPreference("AUTO_LIGHT_SENSEITIVITY");
 			p2.setOnPreferenceChangeListener(this);
-			
+
 			p3 = (ListPreference) findPreference("AUTO_LIGHTING_SENSEITIVITY");
 			p3.setOnPreferenceChangeListener(this);
-			
+
 			p4 = (ListPreference) findPreference("FRONT_LAMP_OFF_TIME");
 			p4.setOnPreferenceChangeListener(this);
-			
+
 			p5 = (ListPreference) findPreference("LAMP_TURN_DARK_TIME");
 			p5.setOnPreferenceChangeListener(this);
-			 /*---------lamp ------*/
-			
+			/*---------lamp ------*/
+
 			/*----------remote cotrol------*/
 			p6 = (SwitchPreference) findPreference("REMOTELOCK_BEEP_SIGN");
 			p6.setOnPreferenceChangeListener(this);
-			
+
 			p7 = (SwitchPreference) findPreference("REMOTELOCK_SIDELAMP_SIGN");
 			p7.setOnPreferenceChangeListener(this);
-			
+
 			p8 = (SwitchPreference) findPreference("SPEECH_WARING_VOLUME");
 			p8.setOnPreferenceChangeListener(this);
-			
+
 			p9 = (SwitchPreference) findPreference("REMOTE_START_SYSTEM");
 			p9.setOnPreferenceChangeListener(this);
 			/*----------remote cotrol------*/
-			
+
 			/*----------lock------*/
 			p10 = (SwitchPreference) findPreference("LOCK_PERSONAL_SETTING");
 			p10.setOnPreferenceChangeListener(this);
-			
+
 			p11 = (ListPreference) findPreference("AUTO_LOCK_TIME");
 			p11.setOnPreferenceChangeListener(this);
-					
+
 			p12 = (SwitchPreference) findPreference("REMOTE_LOCK_SIGN");
-			p12.setOnPreferenceChangeListener(this);			
+			p12.setOnPreferenceChangeListener(this);
 			/*----------lock------*/
-			
+
 			/*----------adas------*/
 			p13 = (ListPreference) findPreference("LANE_DEPARTURE");
 			p13.setOnPreferenceChangeListener(this);
-			
+
 			p14 = (SwitchPreference) findPreference("PAUSE_LKAS_SIGN");
 			p14.setOnPreferenceChangeListener(this);
-			
+
 			p15 = (SwitchPreference) findPreference("DETECT_FRONT_CAR");
 			p15.setOnPreferenceChangeListener(this);
-			
+
 			p16 = (ListPreference) findPreference("FRONT_DANGER_WAIRNG_DISTANCE");
-			p16.setOnPreferenceChangeListener(this);			
+			p16.setOnPreferenceChangeListener(this);
 			/*----------adas------*/
-			
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
+
+			if (settingActivity != null) {
+				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}
 
 		public void syncView(CanInfo mCaninfo) {
-			 /*---------lamp ------*/
+			/*---------lamp ------*/
 			p1.setChecked(mCaninfo.WIPER_LINK_LAMP == 1);
 
-			updateListPreference(p2,mCaninfo.AUTO_LIGHT_SENSEITIVITY);
-			updateListPreference(p3,mCaninfo.AUTO_LIGHTING_SENSEITIVITY);
-			updateListPreference(p4,mCaninfo.FRONT_LAMP_OFF_TIME);
-			updateListPreference(p5,mCaninfo.LAMP_TURN_DARK_TIME);
-			 /*---------lamp ------*/
-			
+			updateListPreference(p2, mCaninfo.AUTO_LIGHT_SENSEITIVITY);
+			updateListPreference(p3, mCaninfo.AUTO_LIGHTING_SENSEITIVITY);
+			updateListPreference(p4, mCaninfo.FRONT_LAMP_OFF_TIME);
+			updateListPreference(p5, mCaninfo.LAMP_TURN_DARK_TIME);
+			/*---------lamp ------*/
+
 			/*----------remote cotrol------*/
 			p6.setChecked(mCaninfo.REMOTELOCK_BEEP_SIGN == 1);
 			p7.setChecked(mCaninfo.REMOTELOCK_SIDELAMP_SIGN == 1);
 			p8.setChecked(mCaninfo.SPEECH_WARING_VOLUME == 1);
-			p9.setChecked(mCaninfo.REMOTE_START_SYSTEM == 1);			
+			p9.setChecked(mCaninfo.REMOTE_START_SYSTEM == 1);
 			/*----------remote cotrol------*/
-			
+
 			/*----------lock------*/
 			p10.setChecked(mCaninfo.LOCK_PERSONAL_SETTING == 1);
-			updateListPreference(p11,mCaninfo.AUTO_LOCK_TIME);
-			p12.setChecked(mCaninfo.REMOTE_LOCK_SIGN == 1);		
+			updateListPreference(p11, mCaninfo.AUTO_LOCK_TIME);
+			p12.setChecked(mCaninfo.REMOTE_LOCK_SIGN == 1);
 			/*----------lock------*/
-			
+
 			/*----------adas------*/
-			updateListPreference(p13,mCaninfo.LANE_DEPARTURE);
+			updateListPreference(p13, mCaninfo.LANE_DEPARTURE);
 			p14.setChecked(mCaninfo.PAUSE_LKAS_SIGN == 1);
 			p15.setChecked(mCaninfo.DETECT_FRONT_CAR == 1);
-			updateListPreference(p16,mCaninfo.FRONT_DANGER_WAIRNG_DISTANCE);
+			updateListPreference(p16, mCaninfo.FRONT_DANGER_WAIRNG_DISTANCE);
 			/*----------adas------*/
 		}
-		
-		public  void updateListPreference(ListPreference p,int index){
+
+		public void updateListPreference(ListPreference p, int index) {
 			p.setValue(String.valueOf(index));
-			updatePreferenceDescription(p,index);
+			updatePreferenceDescription(p, index);
 		}
 
 		private void updatePreferenceDescription(ListPreference preference,
@@ -246,8 +246,9 @@ public class SeniorSettingsFragment extends BaseFragment {
 			case "AUTO_LIGHT_SENSEITIVITY":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026C040"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026C040"
+								+ (String) newValue);
 						updatePreferenceDescription(p2, value);
 					} catch (NumberFormatException e) {
 					}
@@ -256,8 +257,9 @@ public class SeniorSettingsFragment extends BaseFragment {
 			case "AUTO_LIGHTING_SENSEITIVITY":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026C030"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026C030"
+								+ (String) newValue);
 						updatePreferenceDescription(p3, value);
 					} catch (NumberFormatException e) {
 					}
@@ -266,8 +268,9 @@ public class SeniorSettingsFragment extends BaseFragment {
 			case "FRONT_LAMP_OFF_TIME":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026C020"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026C020"
+								+ (String) newValue);
 						updatePreferenceDescription(p4, value);
 					} catch (NumberFormatException e) {
 					}
@@ -276,15 +279,16 @@ public class SeniorSettingsFragment extends BaseFragment {
 			case "LAMP_TURN_DARK_TIME":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026C010"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026C010"
+								+ (String) newValue);
 						updatePreferenceDescription(p5, value);
 					} catch (NumberFormatException e) {
 					}
 				}
 				break;
 			/*---------lamp ------*/
-		    /*----------remote cotrol------*/
+			/*----------remote cotrol------*/
 			case "REMOTELOCK_BEEP_SIGN":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("5AA5026B04"
@@ -309,7 +313,7 @@ public class SeniorSettingsFragment extends BaseFragment {
 							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
-		    /*----------remote cotrol------*/
+			/*----------remote cotrol------*/
 			/*----------lock------*/
 			case "LOCK_PERSONAL_SETTING":
 				if (settingActivity != null) {
@@ -320,25 +324,27 @@ public class SeniorSettingsFragment extends BaseFragment {
 			case "AUTO_LOCK_TIME":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026D020"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026D020"
+								+ (String) newValue);
 						updatePreferenceDescription(p11, value);
 					} catch (NumberFormatException e) {
 					}
 				}
-				break;	
+				break;
 			case "REMOTE_LOCK_SIGN":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("5AA5026D01"
 							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
-		    /*----------adas------*/
+			/*----------adas------*/
 			case "LANE_DEPARTURE":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026E040"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026E040"
+								+ (String) newValue);
 						updatePreferenceDescription(p13, value);
 					} catch (NumberFormatException e) {
 					}
@@ -359,14 +365,15 @@ public class SeniorSettingsFragment extends BaseFragment {
 			case "FRONT_DANGER_WAIRNG_DISTANCE":
 				if (settingActivity != null) {
 					try {
-						int value = Integer.parseInt((String) newValue);						
-						settingActivity.sendMsg("5AA5026E010"+(String) newValue);					
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026E010"
+								+ (String) newValue);
 						updatePreferenceDescription(p16, value);
 					} catch (NumberFormatException e) {
 					}
 				}
-				break;			
-		    /*----------adas------*/
+				break;
+			/*----------adas------*/
 			default:
 				break;
 			}

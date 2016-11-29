@@ -90,20 +90,21 @@ public class MFDFragment extends BaseFragment {
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 
 		/*-----------set data----------------*/
-		String[] swPreKey = { "MFD_CURRENT_CONSUMPTION","MFD_AVERAGE_CONSUMPTION","MFD_CONVENIENCE_CONSUMERS",
-				"MFD_ECO_TIPS","MFD_TRAVELLING_TIME","MFD_DISTANCE_TRAVELED",
-				"MFD_AVERAGE_SPEED","MFD_DIGITAL_SPEED_DISPLAY","MFD_SPEED_WARINING","MFD_OIL_TEMP"};
-		String[] swPreMsg = { "2EC60280","2EC60281","2EC60282",
-				"2EC60283","2EC60284","2EC60285",
-				"2EC60286","2EC60287","2EC60288",
-				"2EC60289"};
+		String[] swPreKey = { "MFD_CURRENT_CONSUMPTION",
+				"MFD_AVERAGE_CONSUMPTION", "MFD_CONVENIENCE_CONSUMERS",
+				"MFD_ECO_TIPS", "MFD_TRAVELLING_TIME", "MFD_DISTANCE_TRAVELED",
+				"MFD_AVERAGE_SPEED", "MFD_DIGITAL_SPEED_DISPLAY",
+				"MFD_SPEED_WARINING", "MFD_OIL_TEMP" };
+		String[] swPreMsg = { "2EC60280", "2EC60281", "2EC60282", "2EC60283",
+				"2EC60284", "2EC60285", "2EC60286", "2EC60287", "2EC60288",
+				"2EC60289" };
 
 		String[] listPreKey = {};
 		String[] listPreMsg = {};
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
-			// TODO Auto-generated method stub		
+			// TODO Auto-generated method stub
 		}
 
 		private void addSwitchData(List<Integer> mSwitchValueGroup2,
@@ -112,17 +113,17 @@ public class MFDFragment extends BaseFragment {
 			mSwitchValueGroup2.add(mCaninfo.MFD_CURRENT_CONSUMPTION);
 			mSwitchValueGroup2.add(mCaninfo.MFD_AVERAGE_CONSUMPTION);
 			mSwitchValueGroup2.add(mCaninfo.MFD_CONVENIENCE_CONSUMERS);
-			
+
 			mSwitchValueGroup2.add(mCaninfo.MFD_ECO_TIPS);
 			mSwitchValueGroup2.add(mCaninfo.MFD_TRAVELLING_TIME);
 			mSwitchValueGroup2.add(mCaninfo.MFD_DISTANCE_TRAVELED);
-			
+
 			mSwitchValueGroup2.add(mCaninfo.MFD_AVERAGE_SPEED);
 			mSwitchValueGroup2.add(mCaninfo.MFD_DIGITAL_SPEED_DISPLAY);
 			mSwitchValueGroup2.add(mCaninfo.MFD_SPEED_WARINING);
-			
+
 			mSwitchValueGroup2.add(mCaninfo.MFD_OIL_TEMP);
-			
+
 		}
 
 		/*-----------set data----------------*/

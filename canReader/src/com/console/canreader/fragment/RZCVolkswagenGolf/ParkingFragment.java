@@ -90,20 +90,22 @@ public class ParkingFragment extends BaseFragment {
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 
 		/*-----------set data----------------*/
-		String[] swPreKey = { "AUTO_PARK_CAR_STATUS","PARKING_ASSIT_STATUS"};
-		String[] swPreMsg = { "2EC60240", "2EC60245"};
+		String[] swPreKey = { "AUTO_PARK_CAR_STATUS", "PARKING_ASSIT_STATUS" };
+		String[] swPreMsg = { "2EC60240", "2EC60245" };
 
-		String[] listPreKey = {"FRONT_VOLUME","FRONT_FREQUNENCY","BACK_VOLUME","BACK_FREQUNENCY","PARKING_MODE"};
-		String[] listPreMsg = { "2EC60241", "2EC60242", "2EC60243", "2EC60244", "2EC60246"};
+		String[] listPreKey = { "FRONT_VOLUME", "FRONT_FREQUNENCY",
+				"BACK_VOLUME", "BACK_FREQUNENCY", "PARKING_MODE" };
+		String[] listPreMsg = { "2EC60241", "2EC60242", "2EC60243", "2EC60244",
+				"2EC60246" };
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
-			// TODO Auto-generated method stub		
-			  mListValueGroup2.add(mCaninfo.FRONT_VOLUME);
-			  mListValueGroup2.add(mCaninfo.FRONT_FREQUNENCY);
-			  mListValueGroup2.add(mCaninfo.BACK_VOLUME);
-			  mListValueGroup2.add(mCaninfo.BACK_FREQUNENCY);
-			  mListValueGroup2.add(mCaninfo.PARKING_MODE);
+			// TODO Auto-generated method stub
+			mListValueGroup2.add(mCaninfo.FRONT_VOLUME);
+			mListValueGroup2.add(mCaninfo.FRONT_FREQUNENCY);
+			mListValueGroup2.add(mCaninfo.BACK_VOLUME);
+			mListValueGroup2.add(mCaninfo.BACK_FREQUNENCY);
+			mListValueGroup2.add(mCaninfo.PARKING_MODE);
 		}
 
 		private void addSwitchData(List<Integer> mSwitchValueGroup2,

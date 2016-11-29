@@ -89,31 +89,37 @@ public class LightFragment extends BaseFragment {
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 
-		/*-----------set data----------------*/	
-		String[] swPreKey = { "LIGHT_AUTO_HEADLIGHT_RAIN","LIGHT_LANE_CHANGE_FLASH","LIGHT_DAYTIME_RUNNING_LIGHT"
-				     ,"LIGHT_TRAVELING_MODE","LIGHT_DYNAMIC_LIGHT_ASSIST","LIGHT_MOTORWAY_LIGHT"};
-		String[] swPreMsg = { "2EC60251", "2EC60252", "2EC602C8", "2EC60256", "2EC6025A", "2EC60259"};
+		/*-----------set data----------------*/
+		String[] swPreKey = { "LIGHT_AUTO_HEADLIGHT_RAIN",
+				"LIGHT_LANE_CHANGE_FLASH", "LIGHT_DAYTIME_RUNNING_LIGHT",
+				"LIGHT_TRAVELING_MODE", "LIGHT_DYNAMIC_LIGHT_ASSIST",
+				"LIGHT_MOTORWAY_LIGHT" };
+		String[] swPreMsg = { "2EC60251", "2EC60252", "2EC602C8", "2EC60256",
+				"2EC6025A", "2EC60259" };
 
-		String[] listPreKey = {"LIGHT_SWITCH_ON_TIME","LIGHT_SWITCH_LIGHTING","LIGHT_COMING_HOME","LIGHT_LEAVING_HOME",
-				       "LIGHT_DOOR_AMBIENT","LIGHT_FOORWELL_LIGHT","LIGHT_TOP_LIGHT","LIGHT_FRONT_LIGHT","LIGHT_LIGHT_COLOR",
-				       "LIGHT_ALL_AREA"};
-		String[] listPreMsg = { "2EC60250","2EC60253","2EC60254","2EC60255",
-				"2EC60257","2EC60258","2EC6025B","2EC6025C","2EC6025E","2EC6025D" };
+		String[] listPreKey = { "LIGHT_SWITCH_ON_TIME",
+				"LIGHT_SWITCH_LIGHTING", "LIGHT_COMING_HOME",
+				"LIGHT_LEAVING_HOME", "LIGHT_DOOR_AMBIENT",
+				"LIGHT_FOORWELL_LIGHT", "LIGHT_TOP_LIGHT", "LIGHT_FRONT_LIGHT",
+				"LIGHT_LIGHT_COLOR", "LIGHT_ALL_AREA" };
+		String[] listPreMsg = { "2EC60250", "2EC60253", "2EC60254", "2EC60255",
+				"2EC60257", "2EC60258", "2EC6025B", "2EC6025C", "2EC6025E",
+				"2EC6025D" };
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
-			// TODO Auto-generated method stub		
-			  mListValueGroup2.add(mCaninfo.LIGHT_SWITCH_ON_TIME);	
-			  mListValueGroup2.add(mCaninfo.LIGHT_SWITCH_LIGHTING);
-			  mListValueGroup2.add(mCaninfo.LIGHT_COMING_HOME);
-			  mListValueGroup2.add(mCaninfo.LIGHT_LEAVING_HOME);
-			  			  
-			  mListValueGroup2.add(mCaninfo.LIGHT_DOOR_AMBIENT);	
-			  mListValueGroup2.add(mCaninfo.LIGHT_FOORWELL_LIGHT);
-			  mListValueGroup2.add(mCaninfo.LIGHT_TOP_LIGHT);
-			  mListValueGroup2.add(mCaninfo.LIGHT_FRONT_LIGHT);
-			  mListValueGroup2.add(mCaninfo.LIGHT_LIGHT_COLOR);
-			  mListValueGroup2.add(mCaninfo.LIGHT_ALL_AREA);
+			// TODO Auto-generated method stub
+			mListValueGroup2.add(mCaninfo.LIGHT_SWITCH_ON_TIME);
+			mListValueGroup2.add(mCaninfo.LIGHT_SWITCH_LIGHTING);
+			mListValueGroup2.add(mCaninfo.LIGHT_COMING_HOME);
+			mListValueGroup2.add(mCaninfo.LIGHT_LEAVING_HOME);
+
+			mListValueGroup2.add(mCaninfo.LIGHT_DOOR_AMBIENT);
+			mListValueGroup2.add(mCaninfo.LIGHT_FOORWELL_LIGHT);
+			mListValueGroup2.add(mCaninfo.LIGHT_TOP_LIGHT);
+			mListValueGroup2.add(mCaninfo.LIGHT_FRONT_LIGHT);
+			mListValueGroup2.add(mCaninfo.LIGHT_LIGHT_COLOR);
+			mListValueGroup2.add(mCaninfo.LIGHT_ALL_AREA);
 		}
 
 		private void addSwitchData(List<Integer> mSwitchValueGroup2,
@@ -122,7 +128,7 @@ public class LightFragment extends BaseFragment {
 			mSwitchValueGroup2.add(mCaninfo.LIGHT_AUTO_HEADLIGHT_RAIN);
 			mSwitchValueGroup2.add(mCaninfo.LIGHT_LANE_CHANGE_FLASH);
 			mSwitchValueGroup2.add(mCaninfo.LIGHT_DAYTIME_RUNNING_LIGHT);
-			
+
 			mSwitchValueGroup2.add(mCaninfo.LIGHT_TRAVELING_MODE);
 			mSwitchValueGroup2.add(mCaninfo.LIGHT_DYNAMIC_LIGHT_ASSIST);
 			mSwitchValueGroup2.add(mCaninfo.LIGHT_MOTORWAY_LIGHT);

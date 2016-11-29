@@ -122,7 +122,7 @@ public class MenuPaSelectActivity extends BaseActivity implements
 		super.show(mCaninfo);
 		try {
 			if (mCaninfo != null) {
-				freq_tv.setText(mCaninfo.EQL_VOLUME+"");
+				freq_tv.setText(mCaninfo.EQL_VOLUME + "");
 				if (settingsFragment != null) {
 					settingsFragment.syncView(mCaninfo);
 				}

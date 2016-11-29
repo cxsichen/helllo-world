@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.activity.Toyota.OilEleActivity;
@@ -85,16 +84,16 @@ public class LanguageSettingsFragment extends BaseFragment {
 		LanguageSettingsFragment settingActivity;
 		SwitchPreference mSwitchPreference;
 		SwitchPreference mSwitchPreference1;
-		
+
 		List<SwitchPreference> mSwitchPreferenceGroup = new ArrayList<SwitchPreference>();
 		List<Integer> mSwitchValueGroup = new ArrayList<Integer>();
-		String[] swPreKey = { "LANGUAGE_CHANGE"};
-		String[] swPreMsg = { "5AA5029A01"};
+		String[] swPreKey = { "LANGUAGE_CHANGE" };
+		String[] swPreMsg = { "5AA5029A01" };
 
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
-		String[] listPreKey = { };
-		String[] listPreMsg = { };
+		String[] listPreKey = {};
+		String[] listPreMsg = {};
 
 		public SettingsFragment(LanguageSettingsFragment settingActivity) {
 			this.settingActivity = settingActivity;
@@ -106,12 +105,12 @@ public class LanguageSettingsFragment extends BaseFragment {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.ssford_language_setting_prefs);
 
-			mSwitchPreference= (SwitchPreference) findPreference("TEMP_UNIT");
+			mSwitchPreference = (SwitchPreference) findPreference("TEMP_UNIT");
 			mSwitchPreference.setOnPreferenceChangeListener(this);
-			
-			mSwitchPreference1= (SwitchPreference) findPreference("CAMERA_MODE");
+
+			mSwitchPreference1 = (SwitchPreference) findPreference("CAMERA_MODE");
 			mSwitchPreference1.setOnPreferenceChangeListener(this);
-			
+
 			for (String str : swPreKey) {
 				SwitchPreference p = (SwitchPreference) findPreference(str);
 				p.setOnPreferenceChangeListener(this);
@@ -131,8 +130,8 @@ public class LanguageSettingsFragment extends BaseFragment {
 		}
 
 		public void syncView(CanInfo mCaninfo) {
-			mSwitchPreference.setChecked(mCaninfo.TEMP_UNIT==1);
-			mSwitchPreference1.setChecked(mCaninfo.CAMERA_MODE==1);
+			mSwitchPreference.setChecked(mCaninfo.TEMP_UNIT == 1);
+			mSwitchPreference1.setChecked(mCaninfo.CAMERA_MODE == 1);
 			mSwitchValueGroup.clear();
 			mSwitchValueGroup.add(mCaninfo.LANGUAGE_CHANGE);
 			for (int i = 0; i < mSwitchPreferenceGroup.size(); i++) {
@@ -143,7 +142,7 @@ public class LanguageSettingsFragment extends BaseFragment {
 					getPreferenceScreen().addPreference(
 							mSwitchPreferenceGroup.get(i));
 					mSwitchPreferenceGroup.get(i).setChecked(
-							(mSwitchValueGroup.get(i)-1) == 1);
+							(mSwitchValueGroup.get(i) - 1) == 1);
 				}
 
 			}
@@ -193,12 +192,12 @@ public class LanguageSettingsFragment extends BaseFragment {
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			// TODO Auto-generated method stub
 			final String key = preference.getKey();
-			if(key.equals("TEMP_UNIT")){
+			if (key.equals("TEMP_UNIT")) {
 				if (settingActivity != null)
 					settingActivity.sendMsg("5AA5026D04"
 							+ ((boolean) newValue ? "01" : "00"));
 			}
-			if(key.equals("CAMERA_MODE")){
+			if (key.equals("CAMERA_MODE")) {
 				if (settingActivity != null)
 					settingActivity.sendMsg("5AA502F206"
 							+ ((boolean) newValue ? "01" : "00"));

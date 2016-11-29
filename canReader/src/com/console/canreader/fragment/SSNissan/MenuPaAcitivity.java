@@ -107,22 +107,22 @@ public class MenuPaAcitivity extends BaseActivity {
 
 	}
 
-	public class SettingsFragment extends PreferenceFragment implements OnStepPreferenceClickListener,
-			OnPreferenceChangeListener {
+	public class SettingsFragment extends PreferenceFragment implements
+			OnStepPreferenceClickListener, OnPreferenceChangeListener {
 		// private SwitchPreference mAirConPref;
 		MenuPaAcitivity settingActivity;
-        StepPreference mStepPreference;
-        StepPreference mStepPreference1;
-        StepPreference mStepPreference2;
-        
-        StepPreference mStepPreference3;
-        StepPreference mStepPreference4;
-        StepPreference mStepPreference5;
-        StepPreference mStepPreference6;
-        StepPreference mStepPreference7;
-        
-        SwitchPreference mSwitchPreference1;
-        SwitchPreference mSwitchPreference2;
+		StepPreference mStepPreference;
+		StepPreference mStepPreference1;
+		StepPreference mStepPreference2;
+
+		StepPreference mStepPreference3;
+		StepPreference mStepPreference4;
+		StepPreference mStepPreference5;
+		StepPreference mStepPreference6;
+		StepPreference mStepPreference7;
+
+		SwitchPreference mSwitchPreference1;
+		SwitchPreference mSwitchPreference2;
 
 		public SettingsFragment(MenuPaAcitivity settingActivity) {
 			this.settingActivity = settingActivity;
@@ -133,63 +133,70 @@ public class MenuPaAcitivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.ssnissan_equal_prefs);
-			mStepPreference=(StepPreference) findPreference("EQL_VOLUME");
+			mStepPreference = (StepPreference) findPreference("EQL_VOLUME");
 			mStepPreference.setMax(40);
 			mStepPreference.setMin(0);
 			mStepPreference.setOnStepPreferenceClickListener(this);
-			
-			mStepPreference1=(StepPreference) findPreference("LR_BALANCE");
+
+			mStepPreference1 = (StepPreference) findPreference("LR_BALANCE");
 			mStepPreference1.setMax(5);
 			mStepPreference1.setMin(-5);
 			mStepPreference1.setOnStepPreferenceClickListener(this);
-			
-			mStepPreference2=(StepPreference) findPreference("FB_BALANCE");
+
+			mStepPreference2 = (StepPreference) findPreference("FB_BALANCE");
 			mStepPreference2.setMax(5);
 			mStepPreference2.setMin(-5);
 			mStepPreference2.setOnStepPreferenceClickListener(this);
-			
-			mStepPreference3=(StepPreference) findPreference("BAS_VOLUME");
+
+			mStepPreference3 = (StepPreference) findPreference("BAS_VOLUME");
 			mStepPreference3.setMax(5);
 			mStepPreference3.setMin(-5);
 			mStepPreference3.setOnStepPreferenceClickListener(this);
-			
-			mStepPreference4=(StepPreference) findPreference("MID_VOLUME");
+
+			mStepPreference4 = (StepPreference) findPreference("MID_VOLUME");
 			mStepPreference4.setMax(5);
 			mStepPreference4.setMin(-5);
 			mStepPreference4.setOnStepPreferenceClickListener(this);
-			
-			mStepPreference5=(StepPreference) findPreference("TRE_VOLUME");
+
+			mStepPreference5 = (StepPreference) findPreference("TRE_VOLUME");
 			mStepPreference5.setMax(5);
 			mStepPreference5.setMin(-5);
 			mStepPreference5.setOnStepPreferenceClickListener(this);
-			
-			mStepPreference6=(StepPreference) findPreference("SURROND_VOLUME");
+
+			mStepPreference6 = (StepPreference) findPreference("SURROND_VOLUME");
 			mStepPreference6.setMax(5);
 			mStepPreference6.setMin(-5);
 			mStepPreference6.setOnStepPreferenceClickListener(this);
-			
-			mStepPreference7=(StepPreference) findPreference("VOL_LINK_CARSPEED");
+
+			mStepPreference7 = (StepPreference) findPreference("VOL_LINK_CARSPEED");
 			mStepPreference7.setMax(5);
 			mStepPreference7.setMin(0);
 			mStepPreference7.setOnStepPreferenceClickListener(this);
-							
+
 			mSwitchPreference1 = (SwitchPreference) findPreference("BOSE_CENTERPOINT");
 			mSwitchPreference1.setOnPreferenceChangeListener(this);
 			mSwitchPreference2 = (SwitchPreference) findPreference("SEAT_SOUND");
 			mSwitchPreference2.setOnPreferenceChangeListener(this);
-			
+
 		}
 
 		public void syncView(CanInfo mCaninfo) {
 			mStepPreference.setFreqTv(String.valueOf(mCaninfo.EQL_VOLUME));
-			mStepPreference1.setFreqTv(String.valueOf((byte)mCaninfo.LR_BALANCE));
-			mStepPreference2.setFreqTv(String.valueOf((byte)mCaninfo.FB_BALANCE));
-			mStepPreference3.setFreqTv(String.valueOf((byte)mCaninfo.BAS_VOLUME));
-			mStepPreference4.setFreqTv(String.valueOf((byte)mCaninfo.MID_VOLUME));
-			mStepPreference5.setFreqTv(String.valueOf((byte)mCaninfo.TRE_VOLUME));
-			mStepPreference6.setFreqTv(String.valueOf((byte)mCaninfo.SURROND_VOLUME));
-			mStepPreference7.setFreqTv(String.valueOf((byte)mCaninfo.VOL_LINK_CARSPEED));
-			
+			mStepPreference1.setFreqTv(String
+					.valueOf((byte) mCaninfo.LR_BALANCE));
+			mStepPreference2.setFreqTv(String
+					.valueOf((byte) mCaninfo.FB_BALANCE));
+			mStepPreference3.setFreqTv(String
+					.valueOf((byte) mCaninfo.BAS_VOLUME));
+			mStepPreference4.setFreqTv(String
+					.valueOf((byte) mCaninfo.MID_VOLUME));
+			mStepPreference5.setFreqTv(String
+					.valueOf((byte) mCaninfo.TRE_VOLUME));
+			mStepPreference6.setFreqTv(String
+					.valueOf((byte) mCaninfo.SURROND_VOLUME));
+			mStepPreference7.setFreqTv(String
+					.valueOf((byte) mCaninfo.VOL_LINK_CARSPEED));
+
 			mSwitchPreference1.setChecked(mCaninfo.BOSE_CENTERPOINT == 1);
 			mSwitchPreference2.setChecked(mCaninfo.SEAT_SOUND == 1);
 		}
@@ -252,54 +259,58 @@ public class MenuPaAcitivity extends BaseActivity {
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD01ff");
 				}
-				mStepPreference.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference.getFreqTv())-1)));
+				mStepPreference.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference.getFreqTv()) - 1)));
 				break;
 			case "LR_BALANCE":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD02ff");
 				}
-				mStepPreference1.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference1.getFreqTv())-1)));
+				mStepPreference1.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference1.getFreqTv()) - 1)));
 				break;
 			case "FB_BALANCE":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD03ff");
 				}
-				mStepPreference2.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference2.getFreqTv())-1)));
+				mStepPreference2.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference2.getFreqTv()) - 1)));
 				break;
 			case "BAS_VOLUME":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD04ff");
 				}
-				mStepPreference3.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference3.getFreqTv())-1)));
+				mStepPreference3.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference3.getFreqTv()) - 1)));
 				break;
 			case "MID_VOLUME":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD05ff");
 				}
-				mStepPreference4.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference4.getFreqTv())-1)));
+				mStepPreference4.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference4.getFreqTv()) - 1)));
 				break;
 			case "TRE_VOLUME":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD06ff");
 				}
-				mStepPreference5.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference5.getFreqTv())-1)));
+				mStepPreference5.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference5.getFreqTv()) - 1)));
 				break;
 			case "SURROND_VOLUME":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD08ff");
 				}
-				mStepPreference6.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference6.getFreqTv())-1)));
+				mStepPreference6.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference6.getFreqTv()) - 1)));
 				break;
 			case "VOL_LINK_CARSPEED":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD07ff");
 				}
-				mStepPreference7.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference7.getFreqTv())-1)));
+				mStepPreference7.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference7.getFreqTv()) - 1)));
 				break;
-
-
-
-				
 
 			default:
 				break;
@@ -315,49 +326,57 @@ public class MenuPaAcitivity extends BaseActivity {
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD0101");
 				}
-				mStepPreference.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference.getFreqTv())+1)));
+				mStepPreference.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference.getFreqTv()) + 1)));
 				break;
 			case "LR_BALANCE":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD0201");
 				}
-				mStepPreference1.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference1.getFreqTv())+1)));
+				mStepPreference1.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference1.getFreqTv()) + 1)));
 				break;
 			case "FB_BALANCE":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD0301");
 				}
-				mStepPreference2.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference2.getFreqTv())+1)));
+				mStepPreference2.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference2.getFreqTv()) + 1)));
 				break;
 			case "BAS_VOLUME":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD0401");
 				}
-				mStepPreference3.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference3.getFreqTv())+1)));
+				mStepPreference3.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference3.getFreqTv()) + 1)));
 				break;
 			case "MID_VOLUME":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD0501");
 				}
-				mStepPreference4.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference4.getFreqTv())+1)));
+				mStepPreference4.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference4.getFreqTv()) + 1)));
 				break;
 			case "TRE_VOLUME":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD0601");
 				}
-				mStepPreference5.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference5.getFreqTv())+1)));
+				mStepPreference5.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference5.getFreqTv()) + 1)));
 				break;
 			case "SURROND_VOLUME":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD0801");
 				}
-				mStepPreference6.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference6.getFreqTv())+1)));
+				mStepPreference6.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference6.getFreqTv()) + 1)));
 				break;
 			case "VOL_LINK_CARSPEED":
 				if (settingActivity != null) {
 					settingActivity.sendMsg("AA5502AD0701");
 				}
-				mStepPreference7.setFreqTv(String.valueOf((Integer.parseInt(mStepPreference7.getFreqTv())+1)));
+				mStepPreference7.setFreqTv(String.valueOf((Integer
+						.parseInt(mStepPreference7.getFreqTv()) + 1)));
 				break;
 			default:
 				break;

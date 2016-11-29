@@ -159,13 +159,20 @@
             android:launchMode="singleTask" >
         </activity>
         <!-- 胎压activity -->
-         <!-- 胎压activity -->
+         <!-- 空调控制activity -->
          <activity
             android:name="com.console.canreader.fragment.SSGE.AirContorlActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
-        <!-- 胎压activity -->
+        <!-- 空调控制activity -->
+         <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSMGGS.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
 	
         <!-- 标致空调控制的activity -->
         <activity

@@ -89,18 +89,22 @@ public class CarInfoSettingsFragment extends BaseFragment {
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 		Preference mPreference;
 		/*-----------set data----------------*/
-		String[] swPreKey = { "TYPES_SPEED_WARNING","REMOTE_KEY","KEY_ACTIVE","PROFILE_STEERING" };
-		String[] swPreMsg = { "2EC60220" ,"2EC602CB","2EC602CA","2EC602D1"};
+		String[] swPreKey = { "TYPES_SPEED_WARNING", "REMOTE_KEY",
+				"KEY_ACTIVE", "PROFILE_STEERING" };
+		String[] swPreMsg = { "2EC60220", "2EC602CB", "2EC602CA", "2EC602D1" };
 
-		String[] listPreKey = { "LANGUAGE_CHANGE", "ESC_SYSTEM", "PROFILE_INFORMATION","INDIVIDUAL_ENGINE","PROFILE_FRONT_LIGHT","PROFILE_CLIMATE" };
-		String[] listPreMsg = { "2EC60200", "2EC60210", "2EC602D0", "2EC602D2", "2EC602D5","2EC602D3"};
+		String[] listPreKey = { "LANGUAGE_CHANGE", "ESC_SYSTEM",
+				"PROFILE_INFORMATION", "INDIVIDUAL_ENGINE",
+				"PROFILE_FRONT_LIGHT", "PROFILE_CLIMATE" };
+		String[] listPreMsg = { "2EC60200", "2EC60210", "2EC602D0", "2EC602D2",
+				"2EC602D5", "2EC602D3" };
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
 			// TODO Auto-generated method stub
 			mListValueGroup2.add(mCaninfo.LANGUAGE_CHANGE);
 			mListValueGroup2.add(mCaninfo.ESC_SYSTEM);
-			
+
 			mListValueGroup2.add(mCaninfo.PROFILE_INFORMATION);
 			mListValueGroup2.add(mCaninfo.INDIVIDUAL_ENGINE);
 			mListValueGroup2.add(mCaninfo.PROFILE_FRONT_LIGHT);
@@ -114,7 +118,7 @@ public class CarInfoSettingsFragment extends BaseFragment {
 			mSwitchValueGroup2.add(mCaninfo.REMOTE_KEY);
 			mSwitchValueGroup2.add(mCaninfo.KEY_ACTIVE);
 			mSwitchValueGroup2.add(mCaninfo.PROFILE_STEERING);
-			
+
 		}
 
 		/*-----------set data----------------*/

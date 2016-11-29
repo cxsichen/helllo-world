@@ -97,7 +97,8 @@ public class RemoteControlSettingsFragment extends BaseFragment {
 
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
-		String[] listPreKey = { "REMOTECONTROL_LOCK_FEEDBACK", "REMOTECONTROL_AWAY_AUTOLOCK" };
+		String[] listPreKey = { "REMOTECONTROL_LOCK_FEEDBACK",
+				"REMOTECONTROL_AWAY_AUTOLOCK" };
 		String[] listPreMsg = { "5AA5026B010", "5AA5026B0A0" };
 
 		public SettingsFragment(RemoteControlSettingsFragment settingActivity) {

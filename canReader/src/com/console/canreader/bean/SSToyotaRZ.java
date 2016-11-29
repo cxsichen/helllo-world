@@ -18,7 +18,6 @@ public class SSToyotaRZ extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA_1 = 0x13;
 
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}

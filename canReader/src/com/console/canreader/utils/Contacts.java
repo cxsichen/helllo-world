@@ -61,7 +61,7 @@ public class Contacts {
 		public static final int KNOBSELECTOR = 102; // 选择旋钮 无按键状态
 		public static final int VOICE_FM = 103; // 打开radio app 无按键状态
 		public static final int FM_CHANGE_FREQUENCY = 104; // 打开radio app 无按键状态
-		public static final int VOICE_MENUUP = 105;
+		public static final int VOICE_MENUUP = 105;     // 
 		public static final int VOICE_MENUDOWN = 106;
 		public static final int VOICE_MUSIC_PLAY_PAUSE = 107;
 		public static final int CLOSEAUX = 108; // 关闭AUX
@@ -232,6 +232,7 @@ public class Contacts {
 	public static final int MSG_SERVICE_CONNECTED = 0x0c;
 	public static final int MSG_SERVICE_DISCONNECTED = 0x0d;
 	public static final int MSG_MSG_CYCLE = 0x10;
+	public static final int MSG_ACTIVITY_UPDATA_UI = 0x11;
 
 	public static final int MSG_DIGLOG_HIDE = 0x0F;
 

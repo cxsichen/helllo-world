@@ -43,15 +43,19 @@ public class MenuPaAcitivity extends BaseActivity {
 			switch (msg.what) {
 			case Contacts.MSG_UPDATA_UI:
 				try {
-					seekBarTRE.setNumProgress((getCanInfo().TRE_VOLUME - 6) < 0 ? 0
-							: (mCaninfo.TRE_VOLUME - 6));
-					seekBarMID.setNumProgress((getCanInfo().MID_VOLUME - 6) < 0 ? 0
-							: (mCaninfo.MID_VOLUME - 6));
-					seekBarBAS.setNumProgress((getCanInfo().BAS_VOLUME - 6) < 0 ? 0
-							: (mCaninfo.BAS_VOLUME - 6));
-					mCarSelectedView.setPosition(
-							(int) (((getCanInfo().LR_BALANCE - 6) / 20f * 14f)),
-							(int) (((getCanInfo().FB_BALANCE - 6) / 20f * 14f)));
+					seekBarTRE
+							.setNumProgress((getCanInfo().TRE_VOLUME - 6) < 0 ? 0
+									: (mCaninfo.TRE_VOLUME - 6));
+					seekBarMID
+							.setNumProgress((getCanInfo().MID_VOLUME - 6) < 0 ? 0
+									: (mCaninfo.MID_VOLUME - 6));
+					seekBarBAS
+							.setNumProgress((getCanInfo().BAS_VOLUME - 6) < 0 ? 0
+									: (mCaninfo.BAS_VOLUME - 6));
+					mCarSelectedView
+							.setPosition(
+									(int) (((getCanInfo().LR_BALANCE - 6) / 20f * 14f)),
+									(int) (((getCanInfo().FB_BALANCE - 6) / 20f * 14f)));
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -80,7 +84,7 @@ public class MenuPaAcitivity extends BaseActivity {
 			break;
 		}
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -198,7 +202,7 @@ public class MenuPaAcitivity extends BaseActivity {
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
-	//	mHandler.sendEmptyMessageDelayed(Contacts.MSG_UPDATA_UI, 500);
+		// mHandler.sendEmptyMessageDelayed(Contacts.MSG_UPDATA_UI, 500);
 	}
 
 	@Override

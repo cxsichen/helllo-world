@@ -13,7 +13,8 @@ import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.service.CanInfo;
 
-public class TrilOilConFragment extends BaseFragment implements View.OnClickListener {
+public class TrilOilConFragment extends BaseFragment implements
+		View.OnClickListener {
 
 	private TextView trip0;
 	private TextView trip1;
@@ -38,8 +39,8 @@ public class TrilOilConFragment extends BaseFragment implements View.OnClickList
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.trip_oil_layout, container,
-				false);
+		View view = inflater
+				.inflate(R.layout.trip_oil_layout, container, false);
 		initView(view);
 		return view;
 	}
@@ -136,7 +137,7 @@ public class TrilOilConFragment extends BaseFragment implements View.OnClickList
 		trip_update.setOnClickListener(this);
 		trip_clear.setOnClickListener(this);
 	}
-	
+
 	private void changeTvHeight(TextView trip0, int height) {
 		if (height > this.height) {
 			height = this.height;
@@ -146,7 +147,6 @@ public class TrilOilConFragment extends BaseFragment implements View.OnClickList
 		linearParams.height = height;// 控件的高强制设成20
 		trip0.setLayoutParams(linearParams); // 使设置好的布局参数应用到控件</pre>
 	}
-
 
 	@Override
 	public void onClick(View v) {

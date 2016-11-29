@@ -22,7 +22,6 @@ public class RZCHonda extends AnalyzeUtils {
 	// 前雷达信息
 	public static final int FRONT_RADER_DATA = 0x23;
 
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}

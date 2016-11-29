@@ -14,8 +14,6 @@ public class RZCJingKooM20 extends AnalyzeUtils {
 	// 基本信息
 	public static final int CAR_INFO_DATA = 0xFF;
 
-
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}

@@ -9,20 +9,19 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCBaoJun extends AnalyzeUtils {
-	  //数据类型
-		public static final int comID=1;
+	// 数据类型
+	public static final int comID = 1;
 	// 基本信息
 	public static final int CAR_INFO_DATA = 0x28;
 	public static final int CAR_INFO_DATA_1 = 0x7f;
 	// 方向盘按键
-    public static final int STEERING_BUTTON_DATA = 0x21;
+	public static final int STEERING_BUTTON_DATA = 0x21;
 	// 后雷达信息
 	public static final int BACK_RADER_DATA = 0x26;
 	// 前雷达信息
 	public static final int FRONT_RADER_DATA = 0x27;
 	// 方向盘转角
-    public static final int STEERING_TURN_DATA = 0x30;
-    
+	public static final int STEERING_TURN_DATA = 0x30;
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
@@ -70,20 +69,18 @@ public class RZCBaoJun extends AnalyzeUtils {
 		}
 
 	}
-	
-	
 
 	void analyzeSteeringTurnData(byte[] msg) {
 		// TODO Auto-generated method stub
 		int temp = ((int) msg[4] & 0xFF) << 8 | ((int) msg[3] & 0xFF);
 		if (temp < 32767) {
-			mCanInfo.STERRING_WHELL_STATUS = -(temp/(9232/540));
+			mCanInfo.STERRING_WHELL_STATUS = -(temp / (9232 / 540));
 		} else {
-			mCanInfo.STERRING_WHELL_STATUS = (65536 - temp)/(9232/540);
+			mCanInfo.STERRING_WHELL_STATUS = (65536 - temp) / (9232 / 540);
 		}
 
 	}
-	
+
 	void analyzeFrontRaderData(byte[] msg) {
 		// TODO Auto-generated method stub
 		mCanInfo.FRONT_LEFT_DISTANCE = (int) (msg[3] & 0xff);
@@ -99,7 +96,7 @@ public class RZCBaoJun extends AnalyzeUtils {
 		mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE = (int) (msg[5] & 0xff);
 		mCanInfo.BACK_RIGHT_DISTANCE = (int) (msg[6] & 0xff);
 	}
-	
+
 	void analyzeSteeringButtonData(byte[] msg) {
 		// TODO Auto-generated method stub
 		switch ((int) (msg[3] & 0xFF)) {
@@ -143,41 +140,43 @@ public class RZCBaoJun extends AnalyzeUtils {
 		mCanInfo.LEFT_BACKDOOR_STATUS = (int) ((msg[3] >> 4) & 0x01);
 		mCanInfo.TRUNK_STATUS = (int) ((msg[3] >> 3) & 0x01);
 		mCanInfo.HOOD_STATUS = (int) ((msg[3] >> 2) & 0x01);
-		
-		if((mCanInfo.RIGHT_FORONTDOOR_STATUS==0)&&(mCanInfo.RIGHT_BACKDOOR_STATUS==0)
-				&&(mCanInfo.LEFT_BACKDOOR_STATUS==0)){
-			if(((int) (msg[3] >> 1) & 0x01)==0){
-				mCanInfo.RIGHT_FORONTDOOR_STATUS=0;
-				mCanInfo.RIGHT_BACKDOOR_STATUS=0;
-				mCanInfo.LEFT_BACKDOOR_STATUS=0;
-			}else{
-				mCanInfo.RIGHT_FORONTDOOR_STATUS=1;
-				mCanInfo.RIGHT_BACKDOOR_STATUS=1;
-				mCanInfo.LEFT_BACKDOOR_STATUS=1;
-			}
-		}
-		
-		if(mCanInfo.LEFT_FORONTDOOR_STATUS==0){
-			if(((int) (msg[3] >> 0) & 0x01)==0){
-				mCanInfo.LEFT_FORONTDOOR_STATUS=0;
-			}else{
-				mCanInfo.LEFT_FORONTDOOR_STATUS=1;
+
+		if ((mCanInfo.RIGHT_FORONTDOOR_STATUS == 0)
+				&& (mCanInfo.RIGHT_BACKDOOR_STATUS == 0)
+				&& (mCanInfo.LEFT_BACKDOOR_STATUS == 0)) {
+			if (((int) (msg[3] >> 1) & 0x01) == 0) {
+				mCanInfo.RIGHT_FORONTDOOR_STATUS = 0;
+				mCanInfo.RIGHT_BACKDOOR_STATUS = 0;
+				mCanInfo.LEFT_BACKDOOR_STATUS = 0;
+			} else {
+				mCanInfo.RIGHT_FORONTDOOR_STATUS = 1;
+				mCanInfo.RIGHT_BACKDOOR_STATUS = 1;
+				mCanInfo.LEFT_BACKDOOR_STATUS = 1;
 			}
 		}
 
-		mCanInfo.SAFETY_BELT_STATUS=((int) ((msg[4] >> 3) & 0x01))==0?1:0;
-		mCanInfo.HANDBRAKE_STATUS=((int) ((msg[4] >> 4) & 0x01));
+		if (mCanInfo.LEFT_FORONTDOOR_STATUS == 0) {
+			if (((int) (msg[3] >> 0) & 0x01) == 0) {
+				mCanInfo.LEFT_FORONTDOOR_STATUS = 0;
+			} else {
+				mCanInfo.LEFT_FORONTDOOR_STATUS = 1;
+			}
+		}
+
+		mCanInfo.SAFETY_BELT_STATUS = ((int) ((msg[4] >> 3) & 0x01)) == 0 ? 1
+				: 0;
+		mCanInfo.HANDBRAKE_STATUS = ((int) ((msg[4] >> 4) & 0x01));
 	}
-	
+
 	void analyzeCarInfoData_1(byte[] msg) {
 		// TODO Auto-generated method stub
-		int len=((int) msg[2] & 0xFF);
-		byte[] acscii=new byte[len];
-		for(int i=0;i<len;i++){
-			acscii[i]=msg[i+3];
+		int len = ((int) msg[2] & 0xFF);
+		byte[] acscii = new byte[len];
+		for (int i = 0; i < len; i++) {
+			acscii[i] = msg[i + 3];
 		}
 		try {
-			mCanInfo.VERSION =new String(acscii,"GBK");			
+			mCanInfo.VERSION = new String(acscii, "GBK");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

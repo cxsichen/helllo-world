@@ -36,7 +36,6 @@ public class RZCGE extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x24;
 
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
@@ -102,23 +101,22 @@ public class RZCGE extends AnalyzeUtils {
 		// TODO Auto-generated method stub
 		int temp = ((int) msg[4] & 0xFF) << 8 | ((int) msg[3] & 0xFF);
 		if (temp < (0xffff / 2)) {
-			mCanInfo.STERRING_WHELL_STATUS = (int) (temp /16);
+			mCanInfo.STERRING_WHELL_STATUS = (int) (temp / 16);
 		} else {
-			mCanInfo.STERRING_WHELL_STATUS = (int) ((temp - 0xffff) /16);
+			mCanInfo.STERRING_WHELL_STATUS = (int) ((temp - 0xffff) / 16);
 		}
 	}
 
-	
 	void analyzeRaderData(byte[] msg) {
 		// TODO Auto-generated method stub
 		double a = (msg[3] & 0xff) / 2.0f;
 		mCanInfo.BACK_LEFT_DISTANCE = (int) Math.ceil(a);
 		a = (msg[4] & 0xff) / 2.0f;
 		mCanInfo.BACK_MIDDLE_LEFT_DISTANCE = (int) Math.ceil(a);
-	
+
 		a = (msg[5] & 0xff) / 2.0f;
 		mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE = (int) Math.ceil(a);
-	
+
 		a = (msg[6] & 0xff) / 2.0f;
 		mCanInfo.BACK_RIGHT_DISTANCE = (int) Math.ceil(a);
 
@@ -130,13 +128,13 @@ public class RZCGE extends AnalyzeUtils {
 		mCanInfo.FRONT_LEFT_DISTANCE = (int) Math.ceil(a);
 		a = (msg[4] & 0xff) / 2.0f;
 		mCanInfo.FRONT_MIDDLE_LEFT_DISTANCE = (int) Math.ceil(a);
-	
+
 		a = (msg[5] & 0xff) / 2.0f;
 		mCanInfo.FRONT_MIDDLE_RIGHT_DISTANCE = (int) Math.ceil(a);
-		
+
 		a = (msg[6] & 0xff) / 2.0f;
 		mCanInfo.FRONT_RIGHT_DISTANCE = (int) Math.ceil(a);
-	
+
 	}
 
 	void analyzeAirConditionData_1(byte[] msg) {

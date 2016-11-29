@@ -12,6 +12,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	private Thread.UncaughtExceptionHandler mDefaultHandler;
 	private static CrashHandler INSTANCE;
 	private Context mContext;
+
 	private CrashHandler() {
 
 	}
@@ -27,14 +28,14 @@ public class CrashHandler implements UncaughtExceptionHandler {
 		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 		Thread.setDefaultUncaughtExceptionHandler(this);
 	}
-	
-	@Override   
+
+	@Override
 	public void uncaughtException(Thread thread, Throwable ex) {
-//		if (!handleException(ex) && mDefaultHandler != null) {
-//			mDefaultHandler.uncaughtException(thread, ex);
-//		} else {
-//		}
-		Log.i("cxs","------uncaughtException------------");
+		// if (!handleException(ex) && mDefaultHandler != null) {
+		// mDefaultHandler.uncaughtException(thread, ex);
+		// } else {
+		// }
+		Log.i("cxs", "------uncaughtException------------");
 		try {
 			CrashLogUtils.saveLogToFile(mContext, ex);
 		} catch (UnsupportedEncodingException e) {
@@ -46,7 +47,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	}
 
 	public boolean handleException(final Throwable ex) {
-		Log.i("cxs","------handleException------------");
+		Log.i("cxs", "------handleException------------");
 		if (ex == null || mContext == null)
 			return false;
 		new Thread() {

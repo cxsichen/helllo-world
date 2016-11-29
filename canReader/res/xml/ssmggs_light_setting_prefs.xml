@@ -1,0 +1,53 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="LIGHT_COMING_HOME_BACKUP"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="伴我回家倒车灯" />
+    <SwitchPreference
+        android:key="LIGHT_COMING_HOME_DIPPED"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="伴我回家近光灯" />
+
+    <SwitchPreference
+        android:key="LIGHT_COMING_HOME_REARFOG"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="伴我回家后雾灯" />
+
+    <SwitchPreference
+        android:key="LIGHT_SEEK_CAR_BACKUP"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="寻车灯指示倒车灯" />
+    
+    <SwitchPreference
+        android:key="LIGHT_SEEK_CAR_DIPPED"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="寻车灯指示近光灯" />
+    
+    <SwitchPreference
+        android:key="LIGHT_SEEK_CAR_REARFOG"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="寻车灯指示后雾灯" />
+	
+        <ListPreference
+        android:entries="@array/ssmggs_comming_home_entries"
+        android:entryValues="@array/ssmggs_comming_home_values"
+        android:key="LIGHT_COMING_HOME_TIME"
+        android:persistent="false"
+        android:title="伴我回家持续时间" />
+        
+        
+            <ListPreference
+        android:entries="@array/ssmggs_comming_home_entries"
+        android:entryValues="@array/ssmggs_comming_home_values"
+        android:key="LIGHT_SEEK_CAR_TIME"
+        android:persistent="false"
+        android:title="寻车灯指示灯持续时间" />
+    
+</PreferenceScreen>

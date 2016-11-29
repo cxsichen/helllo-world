@@ -19,8 +19,7 @@ public class SSRoewe360 extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x12;
 	// 车身信息
-	public static final int CAR_INFO_DATA_1 = 0xF0;	
-
+	public static final int CAR_INFO_DATA_1 = 0xF0;
 
 	// DataType
 
@@ -123,8 +122,10 @@ public class SSRoewe360 extends AnalyzeUtils {
 		// 报警 CHANGE_STATUS=10
 
 		mCanInfo.HANDBRAKE_STATUS = (int) ((msg[4] >> 3) & 0x01);
-		Log.i("cxs","===mCanInfo.CHANGE_STATUS ========"+mCanInfo.CHANGE_STATUS );
-		Log.i("cxs","===mCanInfo.HANDBRAKE_STATUS ========"+mCanInfo.HANDBRAKE_STATUS );
+		Log.i("cxs", "===mCanInfo.CHANGE_STATUS ========"
+				+ mCanInfo.CHANGE_STATUS);
+		Log.i("cxs", "===mCanInfo.HANDBRAKE_STATUS ========"
+				+ mCanInfo.HANDBRAKE_STATUS);
 	}
 
 	static String carInfoSave = "";
@@ -136,14 +137,13 @@ public class SSRoewe360 extends AnalyzeUtils {
 		} else {
 			carInfoSave = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.LEFT_FORONTDOOR_STATUS=(int) ((msg[6] >> 7) & 0x01);
-		mCanInfo.RIGHT_FORONTDOOR_STATUS=(int) ((msg[6] >> 6) & 0x01);
-		mCanInfo.LEFT_BACKDOOR_STATUS=(int) ((msg[6] >> 5) & 0x01);
-		mCanInfo.RIGHT_BACKDOOR_STATUS=(int) ((msg[6] >> 4) & 0x01);
-		mCanInfo.TRUNK_STATUS=(int) ((msg[6] >> 3) & 0x01);
+		mCanInfo.LEFT_FORONTDOOR_STATUS = (int) ((msg[6] >> 7) & 0x01);
+		mCanInfo.RIGHT_FORONTDOOR_STATUS = (int) ((msg[6] >> 6) & 0x01);
+		mCanInfo.LEFT_BACKDOOR_STATUS = (int) ((msg[6] >> 5) & 0x01);
+		mCanInfo.RIGHT_BACKDOOR_STATUS = (int) ((msg[6] >> 4) & 0x01);
+		mCanInfo.TRUNK_STATUS = (int) ((msg[6] >> 3) & 0x01);
 	}
-	
-	
+
 	static String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
@@ -153,7 +153,7 @@ public class SSRoewe360 extends AnalyzeUtils {
 		} else {
 			carInfoSave_1 = BytesUtil.bytesToHexString(msg);
 		}
-		
+
 		int len = ((int) msg[2] & 0xFF);
 		byte[] acscii = new byte[len];
 		for (int i = 0; i < len; i++) {
@@ -166,5 +166,5 @@ public class SSRoewe360 extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

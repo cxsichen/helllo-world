@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.activity.Toyota.OilEleActivity;
@@ -75,7 +74,6 @@ public class DisplaySettingsFragment extends BaseFragment {
 		super.serviceConnected();
 	}
 
-	
 	private void initView(View view) {
 
 	}
@@ -85,16 +83,16 @@ public class DisplaySettingsFragment extends BaseFragment {
 
 		DisplaySettingsFragment settingActivity;
 
-
 		List<SwitchPreference> mSwitchPreferenceGroup = new ArrayList<SwitchPreference>();
 		List<Integer> mSwitchValueGroup = new ArrayList<Integer>();
-		String[] swPreKey = { "DISPLAY_ECO_MIXPOWER","DISPLAY_NAVI_MSG","DISPLAY_SPEED_RANG"};
-		String[] swPreMsg = { "5AA5027A01","5AA5027A02","5AA5027A03"};
+		String[] swPreKey = { "DISPLAY_ECO_MIXPOWER", "DISPLAY_NAVI_MSG",
+				"DISPLAY_SPEED_RANG" };
+		String[] swPreMsg = { "5AA5027A01", "5AA5027A02", "5AA5027A03" };
 
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
-		String[] listPreKey = { };
-		String[] listPreMsg = { };
+		String[] listPreKey = {};
+		String[] listPreMsg = {};
 
 		public SettingsFragment(DisplaySettingsFragment settingActivity) {
 			this.settingActivity = settingActivity;
@@ -117,7 +115,7 @@ public class DisplaySettingsFragment extends BaseFragment {
 				p.setOnPreferenceChangeListener(this);
 				mListPreferenceGroup.add(p);
 			}
-			
+
 			if (settingActivity != null) {
 				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
@@ -125,7 +123,7 @@ public class DisplaySettingsFragment extends BaseFragment {
 		}
 
 		public void syncView(CanInfo mCaninfo) {
-		
+
 			mSwitchValueGroup.clear();
 			mSwitchValueGroup.add(mCaninfo.DISPLAY_ECO_MIXPOWER);
 			mSwitchValueGroup.add(mCaninfo.DISPLAY_NAVI_MSG);

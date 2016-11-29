@@ -43,26 +43,16 @@ public class CarInfoFragment7 extends BaseFragment {
 
 	}
 
-	String[] str = {
-			"Air conditioning 空调",
-			"Auxiliary heater 辅助加热器",
-			"Rear window heating 后窗加热 ",
-			"Left seat heating 左边座椅加热 ",
-			"Right seat heating 右边座椅加热 ",
-			"Left seat ventilation 左座椅通风",
+	String[] str = { "Air conditioning 空调", "Auxiliary heater 辅助加热器",
+			"Rear window heating 后窗加热 ", "Left seat heating 左边座椅加热 ",
+			"Right seat heating 右边座椅加热 ", "Left seat ventilation 左座椅通风",
 			"Right head area heating 右前区域加热 ",
 			"Left head area heating 左前区域加热 ",
-			"Right head area heating 右前区域加热 ",
-			"Front fog light 前雾灯",
-			"Rear fog light 后雾灯",
-			"Windscreen heating 前窗加热 ",
-			"Steering wheel heating 方向盘加热 ",
-			"Mirror heating 后视镜加热",
-			"Rear seat heating 后座椅加热 ",
-			"Rear seat ventilation 后座椅通风 ",
-			"Socket 插座 ",
-			"Drink holder 饮料架 ",
-		};
+			"Right head area heating 右前区域加热 ", "Front fog light 前雾灯",
+			"Rear fog light 后雾灯", "Windscreen heating 前窗加热 ",
+			"Steering wheel heating 方向盘加热 ", "Mirror heating 后视镜加热",
+			"Rear seat heating 后座椅加热 ", "Rear seat ventilation 后座椅通风 ",
+			"Socket 插座 ", "Drink holder 饮料架 ", };
 
 	@Override
 	public void show(CanInfo mCaninfo) {
@@ -78,9 +68,9 @@ public class CarInfoFragment7 extends BaseFragment {
 					if (intTemp[i] >= str.length) {
 						break;
 					}
-					
-					temp = temp + str[intTemp[i]-1] + "\n";
-					Log.i("cxs","====temp======="+temp);
+
+					temp = temp + str[intTemp[i] - 1] + "\n";
+					Log.i("cxs", "====temp=======" + temp);
 				}
 				tv.setText(temp);
 			}

@@ -8,8 +8,8 @@ import com.console.canreader.utils.Contacts;
 import android.util.Log;
 
 public class RZCFHCm3 extends AnalyzeUtils {
-	  //数据类型
-		public static final int comID=2;
+	// 数据类型
+	public static final int comID = 2;
 	// Head Code
 	public static final int HEAD_CODE = 0x2e;
 	// DataType
@@ -23,7 +23,6 @@ public class RZCFHCm3 extends AnalyzeUtils {
 	public static final int STEERING_TURN_DATA = 0x29;
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x24;
-
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
@@ -57,7 +56,7 @@ public class RZCFHCm3 extends AnalyzeUtils {
 				break;
 			case (byte) Contacts.VOLK_HEAD_CODE_1:
 				mCanInfo.CHANGE_STATUS = 3;
-			    analyzeAirConditionData(msg);
+				analyzeAirConditionData(msg);
 				break;
 			default:
 				break;
@@ -99,7 +98,7 @@ public class RZCFHCm3 extends AnalyzeUtils {
 
 		if (((int) (msg[3] & 0xff)) == 0) {
 			int N = (int) (msg[4] & 0xff);
-           
+
 			mCanInfo.BACK_LEFT_DISTANCE = (((int) (msg[5] & 0xff)) == N ? 0
 					: (((((float) (msg[5] & 0xff)) / (N / 4f)) + 1) > 4 ? 4
 							: (int) ((((float) (msg[5] & 0xff)) / (N / 4f)) + 1)));
@@ -144,29 +143,28 @@ public class RZCFHCm3 extends AnalyzeUtils {
 			airConSave = BytesUtil.bytesToHexString(msg);
 		}
 
-		if((int) ((msg[3] >> 7) & 0x01)==0){
+		if ((int) ((msg[3] >> 7) & 0x01) == 0) {
 			switch ((int) (msg[1] & 0xff)) {
 			case 0:
-				mCanInfo.DRIVING_POSITON_TEMP =0;
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP =0;				
+				mCanInfo.DRIVING_POSITON_TEMP = 0;
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = 0;
 				break;
 			case 0xff:
-				mCanInfo.DRIVING_POSITON_TEMP=255;
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP =255;
+				mCanInfo.DRIVING_POSITON_TEMP = 255;
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = 255;
 				break;
 			case 0xfe:
-				mCanInfo.DRIVING_POSITON_TEMP=-1;
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP =-1;
+				mCanInfo.DRIVING_POSITON_TEMP = -1;
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = -1;
 				break;
 			default:
-				mCanInfo.DRIVING_POSITON_TEMP=((int) (msg[1] & 0xff)+((int) ((msg[4] >> 0) & 0x0f))/10f);
-				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP =((int) (msg[1] & 0xff)+((int) ((msg[4] >> 0) & 0x0f))/10f);
+				mCanInfo.DRIVING_POSITON_TEMP = ((int) (msg[1] & 0xff) + ((int) ((msg[4] >> 0) & 0x0f)) / 10f);
+				mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = ((int) (msg[1] & 0xff) + ((int) ((msg[4] >> 0) & 0x0f)) / 10f);
 				break;
 			}
-		}else if((int) ((msg[3] >> 7) & 0x01)==1){
-			mCanInfo.OUTSIDE_TEMPERATURE = ((int) (msg[1] & 0xff)+((int) ((msg[4] >> 0) & 0x0f))/10f)-100;
-		} 
-		
+		} else if ((int) ((msg[3] >> 7) & 0x01) == 1) {
+			mCanInfo.OUTSIDE_TEMPERATURE = ((int) (msg[1] & 0xff) + ((int) ((msg[4] >> 0) & 0x0f)) / 10f) - 100;
+		}
 
 		mCanInfo.CYCLE_INDICATOR = (int) ((msg[2] >> 7) & 0x01) == 0 ? 1 : 0;
 		mCanInfo.MAX_FRONT_LAMP_INDICATOR = (int) ((msg[2] >> 6) & 0x01);

@@ -41,7 +41,7 @@ public class MenuPaSelectActivity extends BaseActivity {
 	private ActionBar actionBar;
 	SeekBar seekbar;
 	int car = 0;
-	int progress=0;
+	int progress = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +74,8 @@ public class MenuPaSelectActivity extends BaseActivity {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
 				// TODO Auto-generated method stub
-				Log.i("cxs","======onStopTrackingTouch=="+progress);
-				sendMsg("5AA502AD01"+adjustNum(progress));
+				Log.i("cxs", "======onStopTrackingTouch==" + progress);
+				sendMsg("5AA502AD01" + adjustNum(progress));
 			}
 
 			@Override
@@ -88,11 +88,11 @@ public class MenuPaSelectActivity extends BaseActivity {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				// TODO Auto-generated method stub
-				MenuPaSelectActivity.this.progress=progress;
+				MenuPaSelectActivity.this.progress = progress;
 			}
 		});
 	}
-	
+
 	private String adjustNum(int num) {
 		String tmp = Integer.toHexString(num).toUpperCase();
 		if (tmp.length() > 2) {
@@ -150,7 +150,7 @@ public class MenuPaSelectActivity extends BaseActivity {
 		super.show(mCaninfo);
 		try {
 			if (mCaninfo != null) {
-				seekbar.setProgress(mCaninfo.EQL_VOLUME);	
+				seekbar.setProgress(mCaninfo.EQL_VOLUME);
 				if (settingsFragment != null) {
 					settingsFragment.syncView(mCaninfo);
 				}
@@ -158,7 +158,6 @@ public class MenuPaSelectActivity extends BaseActivity {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
 
 	}
 

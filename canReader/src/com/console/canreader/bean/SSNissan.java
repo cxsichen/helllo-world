@@ -21,10 +21,10 @@ public class SSNissan extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA_2 = 0xA6;
 	// 雷达信息
-    public static final int RADAR_DATA = 0x41;
- // 车身信息
- 	public static final int CAR_INFO_DATA_3 = 0xF2;
-    
+	public static final int RADAR_DATA = 0x41;
+	// 车身信息
+	public static final int CAR_INFO_DATA_3 = 0xF2;
+
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
@@ -54,7 +54,7 @@ public class SSNissan extends AnalyzeUtils {
 			case RADAR_DATA:
 				mCanInfo.CHANGE_STATUS = 11;
 				analyzeRadarData(msg);
-				break;		
+				break;
 			default:
 				mCanInfo.CHANGE_STATUS = 8888;
 				break;
@@ -64,9 +64,8 @@ public class SSNissan extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
-	
-	static String radarSave = "";
 
+	static String radarSave = "";
 
 	void analyzeRadarData(byte[] msg) {
 		if (radarSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -77,29 +76,28 @@ public class SSNissan extends AnalyzeUtils {
 		}
 
 		mCanInfo.BACK_LEFT_DISTANCE = (((int) (msg[4] & 0xFF)) == 0xff) ? 4
-				: 4-((int) (msg[4] & 0xFF));
+				: 4 - ((int) (msg[4] & 0xFF));
 		mCanInfo.BACK_MIDDLE_LEFT_DISTANCE = (((int) (msg[5] & 0xFF)) == 0xff) ? 4
-				: 4-((int) (msg[5] & 0xFF));
+				: 4 - ((int) (msg[5] & 0xFF));
 		mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE = (((int) (msg[6] & 0xFF)) == 0xff) ? 4
-				: 4-((int) (msg[6] & 0xFF));
+				: 4 - ((int) (msg[6] & 0xFF));
 		mCanInfo.BACK_RIGHT_DISTANCE = (((int) (msg[7] & 0xFF)) == 0xff) ? 4
-				: 4-((int) (msg[7] & 0xFF));
+				: 4 - ((int) (msg[7] & 0xFF));
 
 		mCanInfo.FRONT_LEFT_DISTANCE = (((int) (msg[8] & 0xFF)) == 0xff) ? 4
-				: 4-((int) (msg[8] & 0xFF));
+				: 4 - ((int) (msg[8] & 0xFF));
 		mCanInfo.FRONT_MIDDLE_LEFT_DISTANCE = (((int) (msg[9] & 0xFF)) == 0xff) ? 4
-				: 4-((int) (msg[9] & 0xFF));
+				: 4 - ((int) (msg[9] & 0xFF));
 		mCanInfo.FRONT_MIDDLE_RIGHT_DISTANCE = (((int) (msg[10] & 0xFF)) == 0xff) ? 4
-				: 4-((int) (msg[10] & 0xFF));
+				: 4 - ((int) (msg[10] & 0xFF));
 		mCanInfo.FRONT_RIGHT_DISTANCE = (((int) (msg[11] & 0xFF)) == 0xff) ? 4
-				:4- ((int) (msg[11] & 0xFF));
-		
+				: 4 - ((int) (msg[11] & 0xFF));
 
 	}
-	
 
 	static String SteeringButtonStatusDataSave = "";
-    static int steelWheel=0;
+	static int steelWheel = 0;
+
 	void analyzeSteeringButtonData(byte[] msg) {
 		// TODO Auto-generated method stub
 		if (SteeringButtonStatusDataSave
@@ -109,7 +107,7 @@ public class SSNissan extends AnalyzeUtils {
 		} else {
 			SteeringButtonStatusDataSave = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.STEERING_BUTTON_STATUS=1;
+		mCanInfo.STEERING_BUTTON_STATUS = 1;
 		switch ((int) (msg[6] & 0xFF)) {
 		case 0x01:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOLUP;
@@ -133,22 +131,22 @@ public class SSNissan extends AnalyzeUtils {
 			break;
 		default:
 			mCanInfo.STEERING_BUTTON_MODE = 0;
-			mCanInfo.STEERING_BUTTON_STATUS=0;
+			mCanInfo.STEERING_BUTTON_STATUS = 0;
 			break;
 		}
-		
+
 		int temp = ((int) msg[8] & 0xFF) << 8 | ((int) msg[9] & 0xFF);
 		if (temp < 32767) {
 			mCanInfo.STERRING_WHELL_STATUS = -temp;
 		} else {
-			mCanInfo.STERRING_WHELL_STATUS = 65536-temp;
+			mCanInfo.STERRING_WHELL_STATUS = 65536 - temp;
 		}
-		if(steelWheel!=temp){
-			steelWheel=temp;
+		if (steelWheel != temp) {
+			steelWheel = temp;
 			mCanInfo.CHANGE_STATUS = 8;
-		}			
+		}
 	}
-	
+
 	static String carInfoSave_2 = "";
 
 	void analyzeCarInfoData_2(byte[] msg) {
@@ -158,19 +156,19 @@ public class SSNissan extends AnalyzeUtils {
 		} else {
 			carInfoSave_2 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.EQL_VOLUME=(int) (msg[4] & 0xff);
-		mCanInfo.LR_BALANCE=(int) (msg[5] & 0xff);
-		mCanInfo.FB_BALANCE=(int) (msg[6] & 0xff);
-		mCanInfo.BAS_VOLUME=(int) (msg[7] & 0xff);
-		mCanInfo.MID_VOLUME=(int) (msg[8] & 0xff);
-		mCanInfo.TRE_VOLUME=(int) (msg[9] & 0xff);
-		
-		mCanInfo.SEAT_SOUND=(int) ((msg[10]>>4)& 0xff);
-		mCanInfo.BOSE_CENTERPOINT=(int) ((msg[10]>>3)& 0xff);
-		mCanInfo.VOL_LINK_CARSPEED=(int) ((msg[10]>>0)& 0x07);
-		mCanInfo.SURROND_VOLUME=(int) ((msg[11]>>0)& 0xff);	
+		mCanInfo.EQL_VOLUME = (int) (msg[4] & 0xff);
+		mCanInfo.LR_BALANCE = (int) (msg[5] & 0xff);
+		mCanInfo.FB_BALANCE = (int) (msg[6] & 0xff);
+		mCanInfo.BAS_VOLUME = (int) (msg[7] & 0xff);
+		mCanInfo.MID_VOLUME = (int) (msg[8] & 0xff);
+		mCanInfo.TRE_VOLUME = (int) (msg[9] & 0xff);
+
+		mCanInfo.SEAT_SOUND = (int) ((msg[10] >> 4) & 0xff);
+		mCanInfo.BOSE_CENTERPOINT = (int) ((msg[10] >> 3) & 0xff);
+		mCanInfo.VOL_LINK_CARSPEED = (int) ((msg[10] >> 0) & 0x07);
+		mCanInfo.SURROND_VOLUME = (int) ((msg[11] >> 0) & 0xff);
 	}
-	
+
 	static String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
@@ -180,8 +178,9 @@ public class SSNissan extends AnalyzeUtils {
 		} else {
 			carInfoSave_3 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.PANORAMA_STATUS=(int) (msg[4] & 0xff);
+		mCanInfo.PANORAMA_STATUS = (int) (msg[4] & 0xff);
 	}
+
 	static String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
@@ -255,7 +254,7 @@ public class SSNissan extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
-	
+
 	static String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
@@ -265,13 +264,11 @@ public class SSNissan extends AnalyzeUtils {
 		} else {
 			carInfoSave_1 = BytesUtil.bytesToHexString(msg);
 		}
-        if((int) (msg[4] & 0xff)==0x09){
-        	mCanInfo.CAR_TYPE=(int) (msg[5] & 0xff);
-        }
+		if ((int) (msg[4] & 0xff) == 0x09) {
+			mCanInfo.CAR_TYPE = (int) (msg[5] & 0xff);
+		}
 	}
-	
 
-	
 	static String VirtualDataSave = "";
 
 	private void analyzeVirtualData(byte[] msg) {

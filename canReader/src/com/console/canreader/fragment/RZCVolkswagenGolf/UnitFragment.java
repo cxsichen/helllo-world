@@ -90,15 +90,16 @@ public class UnitFragment extends BaseFragment {
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 
 		/*-----------set data----------------*/
-		String[] swPreKey = { "UNIT_DISTANCE","UNIT_SPEED","UNIT_TEMPERATURE"};
-		String[] swPreMsg = { "2EC60290","2EC60291","2EC60292"};
+		String[] swPreKey = { "UNIT_DISTANCE", "UNIT_SPEED", "UNIT_TEMPERATURE" };
+		String[] swPreMsg = { "2EC60290", "2EC60291", "2EC60292" };
 
-		String[] listPreKey = {"UNIT_VOLUME","UNIT_CONSUMPTION","UNIT_PRESSURE"};
-		String[] listPreMsg = {"2EC60293","2EC60294","2EC60295"};
+		String[] listPreKey = { "UNIT_VOLUME", "UNIT_CONSUMPTION",
+				"UNIT_PRESSURE" };
+		String[] listPreMsg = { "2EC60293", "2EC60294", "2EC60295" };
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
-			// TODO Auto-generated method stub	
+			// TODO Auto-generated method stub
 			mListValueGroup2.add(mCaninfo.UNIT_VOLUME);
 			mListValueGroup2.add(mCaninfo.UNIT_CONSUMPTION);
 			mListValueGroup2.add(mCaninfo.UNIT_PRESSURE);
@@ -110,7 +111,7 @@ public class UnitFragment extends BaseFragment {
 			mSwitchValueGroup2.add(mCaninfo.UNIT_DISTANCE);
 			mSwitchValueGroup2.add(mCaninfo.UNIT_SPEED);
 			mSwitchValueGroup2.add(mCaninfo.UNIT_TEMPERATURE);
-			
+
 		}
 
 		/*-----------set data----------------*/

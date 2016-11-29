@@ -45,7 +45,7 @@ public class TpmsActivity extends BaseActivity {
 	public int TPMS_BR_WARING = 0; // 后右车轮报警
 
 	private AlphaAnimation alphaAnimation = null;
-	
+
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -64,7 +64,7 @@ public class TpmsActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tryepressure_home);
 		initView();
-		
+
 		alphaAnimation = new AlphaAnimation(0.1f, 1.0f);
 		alphaAnimation.setDuration(500);
 		alphaAnimation.setRepeatCount(Animation.INFINITE);
@@ -114,20 +114,20 @@ public class TpmsActivity extends BaseActivity {
 
 			if (TPMS_FL_WARING != mCaninfo.TPMS_FL_WARING) {
 				TPMS_FL_WARING = mCaninfo.TPMS_FL_WARING;
-				syncWaringStatus(TPMS_FL_WARING,pressure_fl,temperature_fl);
+				syncWaringStatus(TPMS_FL_WARING, pressure_fl, temperature_fl);
 			}
-			
+
 			if (TPMS_FR_WARING != mCaninfo.TPMS_FR_WARING) {
 				TPMS_FR_WARING = mCaninfo.TPMS_FR_WARING;
-				syncWaringStatus(TPMS_FR_WARING,pressure_fr,temperature_fr);
+				syncWaringStatus(TPMS_FR_WARING, pressure_fr, temperature_fr);
 			}
 			if (TPMS_BL_WARING != mCaninfo.TPMS_BL_WARING) {
 				TPMS_BL_WARING = mCaninfo.TPMS_BL_WARING;
-				syncWaringStatus(TPMS_BL_WARING,pressure_bl,temperature_bl);
+				syncWaringStatus(TPMS_BL_WARING, pressure_bl, temperature_bl);
 			}
 			if (TPMS_BR_WARING != mCaninfo.TPMS_BR_WARING) {
 				TPMS_BR_WARING = mCaninfo.TPMS_BR_WARING;
-				syncWaringStatus(TPMS_BR_WARING,pressure_br,temperature_br);
+				syncWaringStatus(TPMS_BR_WARING, pressure_br, temperature_br);
 			}
 		}
 	}
@@ -157,7 +157,7 @@ public class TpmsActivity extends BaseActivity {
 			textView.setText(str);
 		}
 	}
-	
+
 	// 闪烁动画
 	private void startAnim(View view) {
 		if (alphaAnimation != null) {
@@ -169,8 +169,9 @@ public class TpmsActivity extends BaseActivity {
 	private void stopAnim(View view) {
 		view.clearAnimation();
 	}
-	
-	private void syncWaringStatus(int waringStatus,TextView pressure,TextView temp){
+
+	private void syncWaringStatus(int waringStatus, TextView pressure,
+			TextView temp) {
 		stopAnim(pressure);
 		switch (waringStatus) {
 		case 0:
@@ -179,7 +180,7 @@ public class TpmsActivity extends BaseActivity {
 			break;
 		case 1:
 			pressure.setTextColor(Color.RED);
-			temp.setTextColor(Color.RED);					
+			temp.setTextColor(Color.RED);
 			break;
 		case 2:
 			pressure.setTextColor(Color.RED);
@@ -188,7 +189,7 @@ public class TpmsActivity extends BaseActivity {
 			break;
 		case 3:
 			pressure.setTextColor(Color.YELLOW);
-			temp.setTextColor(Color.YELLOW);	
+			temp.setTextColor(Color.YELLOW);
 			break;
 		default:
 			break;

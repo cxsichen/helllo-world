@@ -26,9 +26,9 @@ import android.view.Window;
 public class BaseActivity extends FragmentActivity {
 	public CanInfo mCaninfo;
 
-	 Boolean IsResume=false;
-	 public static String canName="";
-	 public static String canFirtName="";
+	Boolean IsResume = false;
+	public static String canName = "";
+	public static String canFirtName = "";
 
 	/**
 	 * 数据变化 需要改变界面的时候调用 界面获取焦点和有数据反馈的时候会调用
@@ -52,10 +52,10 @@ public class BaseActivity extends FragmentActivity {
 		// TODO Auto-generated method stub
 		firstShow();
 	}
-	
-	public CanInfo getCanInfo() throws RemoteException{
-		CanInfo tempInfo=null;
-		if(mISpService!=null)
+
+	public CanInfo getCanInfo() throws RemoteException {
+		CanInfo tempInfo = null;
+		if (mISpService != null)
 			tempInfo = mISpService.getCanInfo();
 		return tempInfo;
 	}
@@ -85,8 +85,9 @@ public class BaseActivity extends FragmentActivity {
 			case Contacts.MSG_UPDATA_UI:
 				mCaninfo = (CanInfo) msg.obj;
 				if (mCaninfo != null) {
-					if (mCaninfo.CHANGE_STATUS == 10&&IsResume)
+					if (IsResume)
 						show(mCaninfo);
+
 				}
 				break;
 			case Contacts.MSG_SERVICE_CONNECTED:
@@ -109,9 +110,11 @@ public class BaseActivity extends FragmentActivity {
 
 		// 监控车型和协议选择
 		syncCanName();
-		getContentResolver().registerContentObserver(
-				android.provider.Settings.System.getUriFor(Contacts.CAN_CLASS_NAME),
-				true, mCanNameObserver);
+		getContentResolver()
+				.registerContentObserver(
+						android.provider.Settings.System
+								.getUriFor(Contacts.CAN_CLASS_NAME),
+						true, mCanNameObserver);
 
 	}
 
@@ -125,19 +128,17 @@ public class BaseActivity extends FragmentActivity {
 		@Override
 		public void onChange(boolean selfChange) {
 			super.onChange(selfChange);
-			if (!canName.equals( PreferenceUtil.getCANName(BaseActivity.this)))
+			if (!canName.equals(PreferenceUtil.getCANName(BaseActivity.this)))
 				finish();
 
 		}
 	}
 
-
-
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		IsResume=true;
+		IsResume = true;
 		firstShow();
 		try {
 			if (mISpService != null)
@@ -154,7 +155,7 @@ public class BaseActivity extends FragmentActivity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		IsResume=false;
+		IsResume = false;
 		try {
 			if (mISpService != null)
 				mISpService.removeCliend(mICallback);
@@ -182,7 +183,8 @@ public class BaseActivity extends FragmentActivity {
 			Message msg = new Message();
 			msg.what = Contacts.MSG_UPDATA_UI;
 			msg.obj = canInfo;
-			mHandler.sendMessage(msg);
+			if (canInfo.CHANGE_STATUS == 10)
+				mHandler.sendMessage(msg);
 
 		}
 	};
@@ -231,7 +233,7 @@ public class BaseActivity extends FragmentActivity {
 				case Contacts.CANFISRTNAMEGROUP.RAISE:
 					mISpService.sendDataToSp(BytesUtil.addRZCCheckBit(msg));
 					break;
-				case Contacts.CANFISRTNAMEGROUP.HIWORLD:					
+				case Contacts.CANFISRTNAMEGROUP.HIWORLD:
 					mISpService.sendDataToSp(BytesUtil.addSSCheckBit(msg));
 					break;
 				default:
@@ -243,10 +245,10 @@ public class BaseActivity extends FragmentActivity {
 			e.printStackTrace();
 		}
 	}
-	
-	private void syncCanName(){
+
+	private void syncCanName() {
 		canName = PreferenceUtil.getCANName(this);
-		canFirtName=PreferenceUtil.getFirstTwoString(this, canName);
+		canFirtName = PreferenceUtil.getFirstTwoString(this, canName);
 	}
 
 }

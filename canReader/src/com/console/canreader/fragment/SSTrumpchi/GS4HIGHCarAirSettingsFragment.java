@@ -93,9 +93,9 @@ public class GS4HIGHCarAirSettingsFragment extends BaseFragment {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.trumpchigs4_air_prefs);
 			initView();
-			
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
+
+			if (settingActivity != null) {
+				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}
@@ -110,8 +110,8 @@ public class GS4HIGHCarAirSettingsFragment extends BaseFragment {
 		public void syncView(CanInfo mCaninfo) {
 			try {
 				CharSequence[] a = position_heat_left.getEntries();
-				position_heat_left
-						.setSummary(a[mCaninfo.LEFT_SEAT_TEMP].toString());
+				position_heat_left.setSummary(a[mCaninfo.LEFT_SEAT_TEMP]
+						.toString());
 				a = position_heat_right.getEntries();
 				position_heat_right.setSummary(a[mCaninfo.RIGTHT_SEAT_TEMP]
 						.toString());

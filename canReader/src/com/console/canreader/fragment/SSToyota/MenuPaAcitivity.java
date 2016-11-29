@@ -32,24 +32,25 @@ public class MenuPaAcitivity extends BaseActivity {
 	private TextView basTv;
 	private TextView volTv;
 	private CarSelectedView mCarSelectedView;
-	
+
 	private ImageView imageView;
-	
+
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Contacts.MSG_UPDATA_UI:
 				try {
-					CanInfo caninfo=getCanInfo();
+					CanInfo caninfo = getCanInfo();
 					seekBarTRE.setNumProgress(caninfo.TRE_VOLUME);
 					seekBarMID.setNumProgress(caninfo.MID_VOLUME);
 					seekBarBAS.setNumProgress(caninfo.BAS_VOLUME);
 					seekBarVOL.setNumProgress(caninfo.EQL_VOLUME);
-					mCarSelectedView.setPosition(caninfo.LR_BALANCE, caninfo.FB_BALANCE);
+					mCarSelectedView.setPosition(caninfo.LR_BALANCE,
+							caninfo.FB_BALANCE);
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
-			
+
 				break;
 			default:
 				break;
@@ -84,8 +85,8 @@ public class MenuPaAcitivity extends BaseActivity {
 		midTv = (TextView) findViewById(R.id.mid_tv);
 		basTv = (TextView) findViewById(R.id.bas_tv);
 		volTv = (TextView) findViewById(R.id.vol_tv);
-		
-		imageView=(ImageView) findViewById(R.id.menu);
+
+		imageView = (ImageView) findViewById(R.id.menu);
 
 		seekBarMID
 				.setOnProgressChangedListener(new OnProgressChangedListener() {
@@ -113,6 +114,7 @@ public class MenuPaAcitivity extends BaseActivity {
 						treTv.setText(progress + "");
 
 					}
+
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
@@ -149,7 +151,7 @@ public class MenuPaAcitivity extends BaseActivity {
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
-						sendMsg("5AA502AD0105" );
+						sendMsg("5AA502AD0105");
 
 					}
 				});
@@ -165,12 +167,13 @@ public class MenuPaAcitivity extends BaseActivity {
 					}
 				});
 		imageView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent=new Intent();
-				intent.setClass(MenuPaAcitivity.this, MenuPaSelectActivity.class);
+				Intent intent = new Intent();
+				intent.setClass(MenuPaAcitivity.this,
+						MenuPaSelectActivity.class);
 				startActivity(intent);
 				overridePendingTransition(R.anim.left_in, R.anim.stay);
 			}
@@ -191,8 +194,8 @@ public class MenuPaAcitivity extends BaseActivity {
 	@Override
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
-		super.show(mCaninfo);   
-		//mHandler.sendEmptyMessageDelayed(Contacts.MSG_UPDATA_UI, 500);
+		super.show(mCaninfo);
+		// mHandler.sendEmptyMessageDelayed(Contacts.MSG_UPDATA_UI, 500);
 	}
 
 	@Override

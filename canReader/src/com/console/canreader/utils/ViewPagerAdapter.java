@@ -46,7 +46,8 @@ public class ViewPagerAdapter extends PagerAdapter {
 	public Object instantiateItem(View arg0, int arg1) {
 		try {
 			// ((ViewPager) arg0).addView(list.get(arg1),0);
-			((ViewPager) arg0).addView((View) list.get(arg1 % list.size()).getView(), 0);
+			((ViewPager) arg0).addView((View) list.get(arg1 % list.size())
+					.getView(), 0);
 		} catch (Exception e) {
 		}
 		return list.get(arg1 % list.size()).getView();

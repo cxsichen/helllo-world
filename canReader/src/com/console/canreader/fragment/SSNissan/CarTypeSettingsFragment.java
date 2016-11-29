@@ -77,7 +77,7 @@ public class CarTypeSettingsFragment extends BaseFragment implements
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.button1:
-            sendMsg("AA55029A0101");
+			sendMsg("AA55029A0101");
 			break;
 		case R.id.button2:
 			sendMsg("AA55029A0102");

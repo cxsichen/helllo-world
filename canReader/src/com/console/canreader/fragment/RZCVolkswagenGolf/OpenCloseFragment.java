@@ -90,17 +90,17 @@ public class OpenCloseFragment extends BaseFragment {
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 
 		/*-----------set data----------------*/
-		String[] swPreKey = { "AUTOMATIC_LOCKING"};
-		String[] swPreMsg = { "2EC60272"};
+		String[] swPreKey = { "AUTOMATIC_LOCKING" };
+		String[] swPreMsg = { "2EC60272" };
 
-		String[] listPreKey = {"CONV_OPENING","DOOR_UNLOCKING"};
-		String[] listPreMsg = { "2EC60270", "2EC60271"};
+		String[] listPreKey = { "CONV_OPENING", "DOOR_UNLOCKING" };
+		String[] listPreMsg = { "2EC60270", "2EC60271" };
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
-			// TODO Auto-generated method stub		
-			  mListValueGroup2.add(mCaninfo.CONV_OPENING);
-			  mListValueGroup2.add(mCaninfo.DOOR_UNLOCKING);
+			// TODO Auto-generated method stub
+			mListValueGroup2.add(mCaninfo.CONV_OPENING);
+			mListValueGroup2.add(mCaninfo.DOOR_UNLOCKING);
 		}
 
 		private void addSwitchData(List<Integer> mSwitchValueGroup2,

@@ -31,8 +31,8 @@ import com.console.canreader.utils.PreferenceUtil;
 
 public class OilDisFragment extends BaseFragment {
 
-    TextView tv;
-    TextView tv1;
+	TextView tv;
+	TextView tv1;
 	SettingsFragment settingsFragment;
 	private DecimalFormat df;
 
@@ -40,22 +40,20 @@ public class OilDisFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.ssford_layout_1, container,
-				false);
-		df = new DecimalFormat("###.00");  
+		View view = inflater
+				.inflate(R.layout.ssford_layout_1, container, false);
+		df = new DecimalFormat("###.00");
 		initView(view);
-		
+
 		return view;
 	}
-
-
 
 	@Override
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
-			tv.setText(df.format(mCaninfo.DRIVING_DISTANCE*0.1f)+"km");
+			tv.setText(df.format(mCaninfo.DRIVING_DISTANCE * 0.1f) + "km");
 			tv1.setText(mCaninfo.VEHICLE_NO);
 		}
 	}
@@ -67,7 +65,7 @@ public class OilDisFragment extends BaseFragment {
 	}
 
 	private void initView(View view) {
-		tv=(TextView) view.findViewById(R.id.tv0);
-		tv1=(TextView) view.findViewById(R.id.tv1);
+		tv = (TextView) view.findViewById(R.id.tv0);
+		tv1 = (TextView) view.findViewById(R.id.tv1);
 	}
 }

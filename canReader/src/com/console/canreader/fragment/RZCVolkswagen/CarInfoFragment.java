@@ -94,7 +94,7 @@ public class CarInfoFragment extends BaseFragment {
 		initView(view);
 		return view;
 	}
-	
+
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
@@ -123,8 +123,7 @@ public class CarInfoFragment extends BaseFragment {
 	 */
 	protected void initIndicator(View view) {
 		if (indicatorLayout == null)
-			indicatorLayout = (LinearLayout) view.findViewById(
-					R.id.indicator);
+			indicatorLayout = (LinearLayout) view.findViewById(R.id.indicator);
 
 		indicatorLayout.removeAllViews();
 

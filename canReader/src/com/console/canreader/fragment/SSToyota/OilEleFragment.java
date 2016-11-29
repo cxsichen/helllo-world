@@ -51,7 +51,7 @@ public class OilEleFragment extends BaseFragment {
 					settingsFragment.syncView(mCaninfo);
 				} catch (Exception e) {
 					// TODO: handle exception
-				}			
+				}
 			}
 		}
 
@@ -97,9 +97,9 @@ public class OilEleFragment extends BaseFragment {
 			p6 = (Preference) findPreference("ENGINE_DRIVE_WHEEL");
 			p7 = (Preference) findPreference("BATTERY_DRIVE_MOTOR");
 			p8 = (Preference) findPreference("WHEEL_DRIVE_MOTOR");
-			
-			if(oilEleActivity!=null){
-				if(oilEleActivity.getCanInfo()!=null)
+
+			if (oilEleActivity != null) {
+				if (oilEleActivity.getCanInfo() != null)
 					syncView(oilEleActivity.getCanInfo());
 			}
 

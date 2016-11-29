@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.activity.Toyota.OilEleActivity;
@@ -87,13 +86,13 @@ public class LockSettingsFragment extends BaseFragment {
 		List<SwitchPreference> mSwitchPreferenceGroup = new ArrayList<SwitchPreference>();
 		List<Integer> mSwitchValueGroup = new ArrayList<Integer>();
 		String[] swPreKey = { "LOCK_OPENDOOR_WITHOUTLOCK", "AUTO_LOCK_SETTING",
-				"LOCK_DELAY_LOCK"};
-		String[] swPreMsg = { "5AA5026A01", "5AA5026A02", "5AA5026A04"};
+				"LOCK_DELAY_LOCK" };
+		String[] swPreMsg = { "5AA5026A01", "5AA5026A02", "5AA5026A04" };
 
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
-		String[] listPreKey = { "AUTO_OPEN_LOCK_Z", "AUTO_OPEN_LOCK_S"};
-		String[] listPreMsg = { "5AA5026A030", "5AA5026A050"};
+		String[] listPreKey = { "AUTO_OPEN_LOCK_Z", "AUTO_OPEN_LOCK_S" };
+		String[] listPreMsg = { "5AA5026A030", "5AA5026A050" };
 
 		public SettingsFragment(LockSettingsFragment settingActivity) {
 			this.settingActivity = settingActivity;

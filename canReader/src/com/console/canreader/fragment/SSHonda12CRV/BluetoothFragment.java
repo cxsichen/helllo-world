@@ -31,8 +31,9 @@ import com.console.canreader.utils.PreferenceUtil;
 
 public class BluetoothFragment extends BaseFragment {
 
-    TextView tv;
-    String[] strGroup={"空闲","来电","去电","连接","配对"};
+	TextView tv;
+	String[] strGroup = { "空闲", "来电", "去电", "连接", "配对" };
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -40,11 +41,9 @@ public class BluetoothFragment extends BaseFragment {
 		View view = inflater.inflate(R.layout.sshonda12crv_layout, container,
 				false);
 		initView(view);
-		
+
 		return view;
 	}
-
-
 
 	@Override
 	public void show(CanInfo mCaninfo) {
@@ -62,6 +61,6 @@ public class BluetoothFragment extends BaseFragment {
 	}
 
 	private void initView(View view) {
-		tv=(TextView) view.findViewById(R.id.tv0);
+		tv = (TextView) view.findViewById(R.id.tv0);
 	}
 }

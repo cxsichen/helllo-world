@@ -22,8 +22,8 @@ public class StepPreference extends Preference implements OnClickListener {
 	ImageView nextButton;
 	int Max = 100;
 	int Min = 0;
-	
-	String strSave="0";
+
+	String strSave = "0";
 
 	public StepPreference(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -55,8 +55,8 @@ public class StepPreference extends Preference implements OnClickListener {
 			str = String.valueOf(Min);
 		if (Integer.parseInt(str) > Max)
 			str = String.valueOf(Max);
-		strSave=str;
-		if (tv != null) {		
+		strSave = str;
+		if (tv != null) {
 			tv.setText(str);
 		}
 	}
@@ -103,11 +103,11 @@ public class StepPreference extends Preference implements OnClickListener {
 			super.onRestoreInstanceState(state);
 			return;
 		}
-		   
+
 		// Restore the instance state
 		SavedState myState = (SavedState) state;
 		super.onRestoreInstanceState(myState.getSuperState());
-		
+
 		String str = myState.str;
 		setFreqTv(str);
 	}

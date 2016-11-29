@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.activity.Toyota.OilEleActivity;
@@ -83,18 +82,18 @@ public class LightSettingsFragment extends BaseFragment {
 			OnPreferenceChangeListener {
 
 		LightSettingsFragment settingActivity;
-		Preference  p1;
-		Preference  p2;
-		
+		Preference p1;
+		Preference p2;
+
 		List<SwitchPreference> mSwitchPreferenceGroup = new ArrayList<SwitchPreference>();
 		List<Integer> mSwitchValueGroup = new ArrayList<Integer>();
-		String[] swPreKey = { "LIGHT_CARLAMP_SETTING"};
-		String[] swPreMsg = { "5AA5026C01"};
+		String[] swPreKey = { "LIGHT_CARLAMP_SETTING" };
+		String[] swPreMsg = { "5AA5026C01" };
 
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
-		String[] listPreKey = { "LIGHT_LOCKLAMP_SETTING"};
-		String[] listPreMsg = { "5AA5026C020"};
+		String[] listPreKey = { "LIGHT_LOCKLAMP_SETTING" };
+		String[] listPreMsg = { "5AA5026C020" };
 
 		public SettingsFragment(LightSettingsFragment settingActivity) {
 			this.settingActivity = settingActivity;
@@ -117,9 +116,9 @@ public class LightSettingsFragment extends BaseFragment {
 				p.setOnPreferenceChangeListener(this);
 				mListPreferenceGroup.add(p);
 			}
-			p1= (Preference) findPreference("LIGHT_RIHGTTURN_LAMP_SETTING");
-			p2= (Preference) findPreference("LIGHT_LEFTTURN_LAMP_SETTING");
-			
+			p1 = (Preference) findPreference("LIGHT_RIHGTTURN_LAMP_SETTING");
+			p2 = (Preference) findPreference("LIGHT_LEFTTURN_LAMP_SETTING");
+
 			if (settingActivity != null) {
 				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
@@ -127,18 +126,20 @@ public class LightSettingsFragment extends BaseFragment {
 		}
 
 		public void syncView(CanInfo mCaninfo) {
-			if(mCaninfo.LIGHT_RIHGTTURN_LAMP_SETTING==-1){
-				getPreferenceScreen().removePreference(p1);	
-			}else{
-				p1.setSummary(mCaninfo.LIGHT_RIHGTTURN_LAMP_SETTING==1?"开":"关");	
+			if (mCaninfo.LIGHT_RIHGTTURN_LAMP_SETTING == -1) {
+				getPreferenceScreen().removePreference(p1);
+			} else {
+				p1.setSummary(mCaninfo.LIGHT_RIHGTTURN_LAMP_SETTING == 1 ? "开"
+						: "关");
 			}
-			
-			if(mCaninfo.LIGHT_LEFTTURN_LAMP_SETTING==-1){
-				getPreferenceScreen().removePreference(p2);	
-			}else{
-				p2.setSummary(mCaninfo.LIGHT_LEFTTURN_LAMP_SETTING==1?"开":"关");	
+
+			if (mCaninfo.LIGHT_LEFTTURN_LAMP_SETTING == -1) {
+				getPreferenceScreen().removePreference(p2);
+			} else {
+				p2.setSummary(mCaninfo.LIGHT_LEFTTURN_LAMP_SETTING == 1 ? "开"
+						: "关");
 			}
-						
+
 			mSwitchValueGroup.clear();
 			mSwitchValueGroup.add(mCaninfo.LIGHT_CARLAMP_SETTING);
 			for (int i = 0; i < mSwitchPreferenceGroup.size(); i++) {

@@ -23,44 +23,43 @@ import com.console.canreader.view.ObdView;
 import com.console.canreader.view.ViewPageFactory;
 
 public class DrivingDataActivity extends BaseActivity {
-	
+
 	private ViewPager vp;
 	private ViewPagerAdapter vpAdapter;
 	private List<ViewPageFactory> viewsFactory;
 	private LinearLayout indicatorLayout;
-	
+
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Contacts.MSG_GET_MSG:
 				// 大众主动获取数据
-					sendMsg("2e90026300");
-					sendMsg("2e90026310");
-					sendMsg("2e90026311");
-					sendMsg("2e90026320");
-					sendMsg("2e90026321");
-					sendMsg("2e90025010");
-					sendMsg("2e90025020");
-					sendMsg("2e90025021");
-					sendMsg("2e90025022");
-					sendMsg("2e90025030");
-					sendMsg("2e90025031");
-					sendMsg("2e90025032");
-					sendMsg("2e90025040");
-					sendMsg("2e90025041");
-					sendMsg("2e90025042");
-					sendMsg("2e90025050");
-					sendMsg("2e90025051");
-					sendMsg("2e90025052");
-					mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG,
-							40000);
+				sendMsg("2e90026300");
+				sendMsg("2e90026310");
+				sendMsg("2e90026311");
+				sendMsg("2e90026320");
+				sendMsg("2e90026321");
+				sendMsg("2e90025010");
+				sendMsg("2e90025020");
+				sendMsg("2e90025021");
+				sendMsg("2e90025022");
+				sendMsg("2e90025030");
+				sendMsg("2e90025031");
+				sendMsg("2e90025032");
+				sendMsg("2e90025040");
+				sendMsg("2e90025041");
+				sendMsg("2e90025042");
+				sendMsg("2e90025050");
+				sendMsg("2e90025051");
+				sendMsg("2e90025052");
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 40000);
 				break;
 			default:
 				break;
 			}
 		}
 	};
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -68,21 +67,21 @@ public class DrivingDataActivity extends BaseActivity {
 		setContentView(R.layout.main);
 		initView();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 2000);
 	}
-	
+
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
 		mHandler.removeMessages(Contacts.MSG_GET_MSG);
 	}
-	
+
 	@Override
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
@@ -95,14 +94,14 @@ public class DrivingDataActivity extends BaseActivity {
 			}
 		}
 	}
-	
+
 	@Override
 	public void serviceConnected() {
 		// TODO Auto-generated method stub
 		super.serviceConnected();
 		mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 1000);
 	}
-	
+
 	private void initView() {
 		// TODO Auto-generated method stub
 		if (viewsFactory == null)
@@ -187,6 +186,5 @@ public class DrivingDataActivity extends BaseActivity {
 			// indicatorLayout.setVisibility(View.INVISIBLE);
 		}
 	};
-
 
 }

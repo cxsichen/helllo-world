@@ -246,7 +246,7 @@ public class SSGE extends AnalyzeUtils {
 		} else {
 			carInfoSave_20 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.ONSTAR_WARING_STATUS = ((int) (msg[4]>>7) & 0x01);
+		mCanInfo.ONSTAR_WARING_STATUS = ((int) (msg[4] >> 7) & 0x01);
 		mCanInfo.ONSTAR_WARING_TYPE = ((int) (msg[4]) & 0x7F);
 	}
 
@@ -285,7 +285,7 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.ONSTAR_PHONE_TYPE = ((int) (msg[5]) & 0xFF);
 		mCanInfo.ONSTAR_PHONE_SIGN = ((int) (msg[6]) & 0x01);
 	}
-	
+
 	static String carInfoSave_21 = "";
 
 	void analyzeCarInfoData_21(byte[] msg) {
@@ -1090,10 +1090,10 @@ public class SSGE extends AnalyzeUtils {
 		}
 
 		mCanInfo.OUTSIDE_TEMPERATURE = ((int) (msg[15] & 0xff)) * 0.5f - 40f;
-		
-		mCanInfo.LARGE_LANTERN_INDICATOR =(int) ((msg[5] >> 3) & 0x01);
-		
-		mCanInfo.SMALL_LANTERN_INDICATOR =(int) ((msg[4] >> 2) & 0x03);
+
+		mCanInfo.LARGE_LANTERN_INDICATOR = (int) ((msg[5] >> 3) & 0x01);
+
+		mCanInfo.SMALL_LANTERN_INDICATOR = (int) ((msg[4] >> 2) & 0x03);
 
 	}
 

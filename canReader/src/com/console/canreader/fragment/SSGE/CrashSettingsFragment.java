@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.activity.Toyota.OilEleActivity;
@@ -86,15 +85,18 @@ public class CrashSettingsFragment extends BaseFragment {
 
 		List<SwitchPreference> mSwitchPreferenceGroup = new ArrayList<SwitchPreference>();
 		List<Integer> mSwitchValueGroup = new ArrayList<Integer>();
-		String[] swPreKey = { "PARKING_ASSIT_STATUS", "CRASHPROOF_SIDE_BLIND_AREA",
-				"CRASHPROOF_WARING", "CRASHPROOF_24GHZ_RADAR","CRASHPROOF_CARSTATUS_NOTIFY","CRASHPROOF_RAMPWAY_ASSIT"};
+		String[] swPreKey = { "PARKING_ASSIT_STATUS",
+				"CRASHPROOF_SIDE_BLIND_AREA", "CRASHPROOF_WARING",
+				"CRASHPROOF_24GHZ_RADAR", "CRASHPROOF_CARSTATUS_NOTIFY",
+				"CRASHPROOF_RAMPWAY_ASSIT" };
 		String[] swPreMsg = { "5AA5024A01", "5AA5024A02", "5AA5024A04",
-				"5AA5024A05", "5AA5024A07", "5AA5024A08"};
+				"5AA5024A05", "5AA5024A07", "5AA5024A08" };
 
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
-		String[] listPreKey = { "CRASHPROOF_PART_ASSIT", "CRASHPROOF_AUTO_READY"};
-		String[] listPreMsg = { "5AA5024A030", "5AA5024A060"};
+		String[] listPreKey = { "CRASHPROOF_PART_ASSIT",
+				"CRASHPROOF_AUTO_READY" };
+		String[] listPreMsg = { "5AA5024A030", "5AA5024A060" };
 
 		public SettingsFragment(CrashSettingsFragment settingActivity) {
 			this.settingActivity = settingActivity;

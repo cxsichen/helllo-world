@@ -25,8 +25,6 @@ public class RZCPeugeot extends AnalyzeUtils {
 	public static final int CAR_INFO_DATA = 0x38;
 	public static final int CAR_INFO_DATA_1 = 0x36;
 
-
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}

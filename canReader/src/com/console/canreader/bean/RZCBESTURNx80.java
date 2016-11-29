@@ -24,7 +24,6 @@ public class RZCBESTURNx80 extends AnalyzeUtils {
 	// 车身信息
 	public static final int CAR_INFO_DATA = 0x24;
 
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}

@@ -21,9 +21,9 @@ import com.console.canreader.utils.BytesUtil;
 
 public class SSPeugeot408CarSettingFragment extends BaseFragment implements
 		OnClickListener, OnItemSelectedListener {
-	
+
 	private CanInfo mCanInfo;
-	private boolean IsSync=true;
+	private boolean IsSync = true;
 	private Switch AUTO_PARK_CAR_STATUS;
 	private Switch RADAR_ALARM_STATUS;
 	private Switch REAR_WIPER_STATUS;
@@ -154,14 +154,14 @@ public class SSPeugeot408CarSettingFragment extends BaseFragment implements
 				.findViewById(R.id.WELCOME_FUNTION_STATUS);
 		ATMOSPHERE_ILL_VALUE
 				.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-					
+
 					@Override
 					public void onStopTrackingTouch(SeekBar seekBar) {
 						// TODO Auto-generated method stub
-						if(IsSync){
+						if (IsSync) {
 							return;
 						}
-						
+
 						if (ATMOSPHERE_ILL_STATUS.isChecked()) {
 							sendMsg("5AA5027B0A8" + seekBar.getProgress());
 						}
@@ -198,14 +198,14 @@ public class SSPeugeot408CarSettingFragment extends BaseFragment implements
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 		try {
-			mCanInfo=mCaninfo;
-			IsSync=true;
+			mCanInfo = mCaninfo;
+			IsSync = true;
 			syncView(mCaninfo);
-			IsSync=false;
+			IsSync = false;
 		} catch (Exception e) {
 		}
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		try {
@@ -276,7 +276,7 @@ public class SSPeugeot408CarSettingFragment extends BaseFragment implements
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		try {
-			if(IsSync){
+			if (IsSync) {
 				return;
 			}
 			switch (parent.getId()) {
@@ -293,7 +293,7 @@ public class SSPeugeot408CarSettingFragment extends BaseFragment implements
 				break;
 			}
 		} catch (Exception e) {
-			
+
 		}
 	}
 

@@ -172,7 +172,9 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		}
 
 	}
+
 	static String KnobButtonData = "";
+
 	private void analyzeKnobButtonData(byte[] msg) {
 		if (KnobButtonData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -180,23 +182,25 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			KnobButtonData = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.CAR_VOLUME_KNOB=msg[5] & 0xff;
+		mCanInfo.CAR_VOLUME_KNOB = msg[5] & 0xff;
 		switch ((msg[4] & 0x03)) {
 		case 0x01:
-			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUME;	
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUME;
 			break;
 		case 0x02:
-			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBSELECTOR;	
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBSELECTOR;
 			break;
 		case 0x03:
 		case 0x04:
 		case 0x05:
 		default:
 			break;
-		}	
+		}
 		mCanInfo.CHANGE_STATUS = 2;
 	}
+
 	static String VirtualButtonData = "";
+
 	private void analyzeVirtualButtonData(byte[] msg) {
 		if (VirtualButtonData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -204,13 +208,13 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			VirtualButtonData = BytesUtil.bytesToHexString(msg);
 		}
-		int temp=msg[4]&0xff;
+		int temp = msg[4] & 0xff;
 		switch (temp) {
-		case 0x01://power
+		case 0x01:// power
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.POWER;
 			break;
 		case 0x07:
-			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;	
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;
 			break;
 		case 0x17:
 		case 0x19:
@@ -224,7 +228,7 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUSIC;
 			break;
 		case 0x40:
-			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;	
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;
 
 		default:
 			break;
@@ -237,6 +241,7 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 	}
 
 	static String TimeSettingData = "";
+
 	private void analyzeTimeSettingData(byte[] msg) {
 		if (TimeSettingData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -244,15 +249,16 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			TimeSettingData = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.TIME_YEAR=(int)(msg[4]&0xff);
-		mCanInfo.TIME_MONTH=(int)(msg[5]&0xff);
-		mCanInfo.TIME_DAY=(int)(msg[6]&0xff);
-		mCanInfo.TIME_HOUR=(int)(msg[7]&0xff);
-		mCanInfo.TIME_MINUTE=(int)(msg[8]&0xff);
-		mCanInfo.TIME_FORMAT=(int)(msg[9]&0xff);
+		mCanInfo.TIME_YEAR = (int) (msg[4] & 0xff);
+		mCanInfo.TIME_MONTH = (int) (msg[5] & 0xff);
+		mCanInfo.TIME_DAY = (int) (msg[6] & 0xff);
+		mCanInfo.TIME_HOUR = (int) (msg[7] & 0xff);
+		mCanInfo.TIME_MINUTE = (int) (msg[8] & 0xff);
+		mCanInfo.TIME_FORMAT = (int) (msg[9] & 0xff);
 	}
 
 	static String UnitSettingData = "";
+
 	private void analyzeUnitSettingData(byte[] msg) {
 		if (UnitSettingData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -260,14 +266,15 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			UnitSettingData = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.UNIT_TEMPERATURE_ENABLE=(int)((msg[4]>>5)&0x01);
-		mCanInfo.UNIT_CONSUMPTION_ENABLE=(int)((msg[4]>>3)&0x01);
-		
-		mCanInfo.UNIT_TEMPERATURE=(int)((msg[5]>>5)&0x01);
-		mCanInfo.UNIT_CONSUMPTION=(int)((msg[5]>>1)&0x03);
+		mCanInfo.UNIT_TEMPERATURE_ENABLE = (int) ((msg[4] >> 5) & 0x01);
+		mCanInfo.UNIT_CONSUMPTION_ENABLE = (int) ((msg[4] >> 3) & 0x01);
+
+		mCanInfo.UNIT_TEMPERATURE = (int) ((msg[5] >> 5) & 0x01);
+		mCanInfo.UNIT_CONSUMPTION = (int) ((msg[5] >> 1) & 0x03);
 	}
 
 	static String WarningInfoData = "";
+
 	private void analyzeWarningInfoData(byte[] msg) {
 		if (WarningInfoData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -275,10 +282,12 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			WarningInfoData = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.WARNING_ID=(int)((msg[4]&0xff)<<8)+(int)(msg[5]&0xff);
+		mCanInfo.WARNING_ID = (int) ((msg[4] & 0xff) << 8)
+				+ (int) (msg[5] & 0xff);
 	}
 
 	static String LanguageSettingData = "";
+
 	private void analyzeLanguageSettingData(byte[] msg) {
 		if (LanguageSettingData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -286,10 +295,11 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			LanguageSettingData = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.LANGUAGE_CHANGE=(int)(msg[4]&0xff);
+		mCanInfo.LANGUAGE_CHANGE = (int) (msg[4] & 0xff);
 	}
 
 	static String SportModeData = "";
+
 	private void analyzeSportModeData(byte[] msg) {
 		if (SportModeData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -297,11 +307,12 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			SportModeData = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.ENGINE_START_STATUS_ENABLE=(int)((msg[4]>>7)&0x01);
-		mCanInfo.ENGINE_START_STATUS=(int)((msg[5]>>7)&0x01);
+		mCanInfo.ENGINE_START_STATUS_ENABLE = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.ENGINE_START_STATUS = (int) ((msg[5] >> 7) & 0x01);
 	}
-	
+
 	static String SOSInfoData = "";
+
 	private void analyzeSOSInfoData(byte[] msg) {
 		if (SOSInfoData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -309,11 +320,12 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			SOSInfoData = BytesUtil.bytesToHexString(msg);
 		}
-		
-		mCanInfo.SOS_STATUS=(int)(msg[4]&0x0f);
+
+		mCanInfo.SOS_STATUS = (int) (msg[4] & 0x0f);
 	}
 
 	static String CruiseSpeedData = "";
+
 	private void analyzeCruiseSpeedData(byte[] msg) {
 		if (CruiseSpeedData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -321,30 +333,32 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			CruiseSpeedData = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.CRUISE_SPEED_STATUS=(int)((msg[4]>>7)&0x01);
-		mCanInfo.CRUISE_SPEED_1=(int)((msg[4]>>6)&0x01);
-		mCanInfo.CRUISE_SPEED_2=(int)((msg[4]>>5)&0x01);
-		mCanInfo.CRUISE_SPEED_3=(int)((msg[4]>>4)&0x01);
-		mCanInfo.CRUISE_SPEED_4=(int)((msg[4]>>3)&0x01);
-		mCanInfo.CRUISE_SPEED_5=(int)((msg[4]>>2)&0x01);
-		mCanInfo.CRUISE_SPEED_6=(int)((msg[4]>>1)&0x01);
-		
-		mCanInfo.CRUISE_SPEED_1_VALUE=(int)(msg[5]&0xff);
-		mCanInfo.CRUISE_SPEED_2_VALUE=(int)(msg[6]&0xff);
-		mCanInfo.CRUISE_SPEED_3_VALUE=(int)(msg[7]&0xff);
-		mCanInfo.CRUISE_SPEED_4_VALUE=(int)(msg[8]&0xff);
-		mCanInfo.CRUISE_SPEED_5_VALUE=(int)(msg[9]&0xff);
-		mCanInfo.CRUISE_SPEED_6_VALUE=(int)(msg[10]&0xff);
-		
-		mCanInfo.CRUISE_SPEED_STATUS_ENABLE=(int)((msg[13]>>7)&0x01);
-		mCanInfo.CRUISE_SPEED_1_ENABLE=(int)((msg[13]>>6)&0x01);
-		mCanInfo.CRUISE_SPEED_2_ENABLE=(int)((msg[13]>>5)&0x01);
-		mCanInfo.CRUISE_SPEED_3_ENABLE=(int)((msg[13]>>4)&0x01);
-		mCanInfo.CRUISE_SPEED_4_ENABLE=(int)((msg[13]>>3)&0x01);
-		mCanInfo.CRUISE_SPEED_5_ENABLE=(int)((msg[13]>>2)&0x01);
-		mCanInfo.CRUISE_SPEED_6_ENABLE=(int)((msg[13]>>1)&0x01);
+		mCanInfo.CRUISE_SPEED_STATUS = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.CRUISE_SPEED_1 = (int) ((msg[4] >> 6) & 0x01);
+		mCanInfo.CRUISE_SPEED_2 = (int) ((msg[4] >> 5) & 0x01);
+		mCanInfo.CRUISE_SPEED_3 = (int) ((msg[4] >> 4) & 0x01);
+		mCanInfo.CRUISE_SPEED_4 = (int) ((msg[4] >> 3) & 0x01);
+		mCanInfo.CRUISE_SPEED_5 = (int) ((msg[4] >> 2) & 0x01);
+		mCanInfo.CRUISE_SPEED_6 = (int) ((msg[4] >> 1) & 0x01);
+
+		mCanInfo.CRUISE_SPEED_1_VALUE = (int) (msg[5] & 0xff);
+		mCanInfo.CRUISE_SPEED_2_VALUE = (int) (msg[6] & 0xff);
+		mCanInfo.CRUISE_SPEED_3_VALUE = (int) (msg[7] & 0xff);
+		mCanInfo.CRUISE_SPEED_4_VALUE = (int) (msg[8] & 0xff);
+		mCanInfo.CRUISE_SPEED_5_VALUE = (int) (msg[9] & 0xff);
+		mCanInfo.CRUISE_SPEED_6_VALUE = (int) (msg[10] & 0xff);
+
+		mCanInfo.CRUISE_SPEED_STATUS_ENABLE = (int) ((msg[13] >> 7) & 0x01);
+		mCanInfo.CRUISE_SPEED_1_ENABLE = (int) ((msg[13] >> 6) & 0x01);
+		mCanInfo.CRUISE_SPEED_2_ENABLE = (int) ((msg[13] >> 5) & 0x01);
+		mCanInfo.CRUISE_SPEED_3_ENABLE = (int) ((msg[13] >> 4) & 0x01);
+		mCanInfo.CRUISE_SPEED_4_ENABLE = (int) ((msg[13] >> 3) & 0x01);
+		mCanInfo.CRUISE_SPEED_5_ENABLE = (int) ((msg[13] >> 2) & 0x01);
+		mCanInfo.CRUISE_SPEED_6_ENABLE = (int) ((msg[13] >> 1) & 0x01);
 	}
+
 	static String RememberSpeedData = "";
+
 	private void analyzeRememberSpeedData(byte[] msg) {
 		if (RememberSpeedData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -352,33 +366,34 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			RememberSpeedData = BytesUtil.bytesToHexString(msg);
 		}
-		
-		mCanInfo.REMEMBER_SPEED_STATUS=(int)((msg[4]>>7)&0x01);
-		mCanInfo.REMEMBER_SPEED_1=(int)((msg[4]>>6)&0x01);
-		mCanInfo.REMEMBER_SPEED_2=(int)((msg[4]>>5)&0x01);
-		mCanInfo.REMEMBER_SPEED_3=(int)((msg[4]>>4)&0x01);
-		mCanInfo.REMEMBER_SPEED_4=(int)((msg[4]>>3)&0x01);
-		mCanInfo.REMEMBER_SPEED_5=(int)((msg[4]>>2)&0x01);
-		mCanInfo.REMEMBER_SPEED_6=(int)((msg[4]>>1)&0x01);
-		
-		mCanInfo.REMEMBER_SPEED_1_VALUE=(int)(msg[5]&0xff);
-		mCanInfo.REMEMBER_SPEED_2_VALUE=(int)(msg[6]&0xff);
-		mCanInfo.REMEMBER_SPEED_3_VALUE=(int)(msg[7]&0xff);
-		mCanInfo.REMEMBER_SPEED_4_VALUE=(int)(msg[8]&0xff);
-		mCanInfo.REMEMBER_SPEED_5_VALUE=(int)(msg[9]&0xff);
-		mCanInfo.REMEMBER_SPEED_6_VALUE=(int)(msg[10]&0xff);
-		
-		mCanInfo.REMEMBER_SPEED_STATUS_ENABLE=(int)((msg[13]>>7)&0x01);
-		mCanInfo.REMEMBER_SPEED_1_ENABLE=(int)((msg[13]>>6)&0x01);
-		mCanInfo.REMEMBER_SPEED_2_ENABLE=(int)((msg[13]>>5)&0x01);
-		mCanInfo.REMEMBER_SPEED_3_ENABLE=(int)((msg[13]>>4)&0x01);
-		mCanInfo.REMEMBER_SPEED_4_ENABLE=(int)((msg[13]>>3)&0x01);
-		mCanInfo.REMEMBER_SPEED_5_ENABLE=(int)((msg[13]>>2)&0x01);
-		mCanInfo.REMEMBER_SPEED_6_ENABLE=(int)((msg[13]>>1)&0x01);
-		
+
+		mCanInfo.REMEMBER_SPEED_STATUS = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.REMEMBER_SPEED_1 = (int) ((msg[4] >> 6) & 0x01);
+		mCanInfo.REMEMBER_SPEED_2 = (int) ((msg[4] >> 5) & 0x01);
+		mCanInfo.REMEMBER_SPEED_3 = (int) ((msg[4] >> 4) & 0x01);
+		mCanInfo.REMEMBER_SPEED_4 = (int) ((msg[4] >> 3) & 0x01);
+		mCanInfo.REMEMBER_SPEED_5 = (int) ((msg[4] >> 2) & 0x01);
+		mCanInfo.REMEMBER_SPEED_6 = (int) ((msg[4] >> 1) & 0x01);
+
+		mCanInfo.REMEMBER_SPEED_1_VALUE = (int) (msg[5] & 0xff);
+		mCanInfo.REMEMBER_SPEED_2_VALUE = (int) (msg[6] & 0xff);
+		mCanInfo.REMEMBER_SPEED_3_VALUE = (int) (msg[7] & 0xff);
+		mCanInfo.REMEMBER_SPEED_4_VALUE = (int) (msg[8] & 0xff);
+		mCanInfo.REMEMBER_SPEED_5_VALUE = (int) (msg[9] & 0xff);
+		mCanInfo.REMEMBER_SPEED_6_VALUE = (int) (msg[10] & 0xff);
+
+		mCanInfo.REMEMBER_SPEED_STATUS_ENABLE = (int) ((msg[13] >> 7) & 0x01);
+		mCanInfo.REMEMBER_SPEED_1_ENABLE = (int) ((msg[13] >> 6) & 0x01);
+		mCanInfo.REMEMBER_SPEED_2_ENABLE = (int) ((msg[13] >> 5) & 0x01);
+		mCanInfo.REMEMBER_SPEED_3_ENABLE = (int) ((msg[13] >> 4) & 0x01);
+		mCanInfo.REMEMBER_SPEED_4_ENABLE = (int) ((msg[13] >> 3) & 0x01);
+		mCanInfo.REMEMBER_SPEED_5_ENABLE = (int) ((msg[13] >> 2) & 0x01);
+		mCanInfo.REMEMBER_SPEED_6_ENABLE = (int) ((msg[13] >> 1) & 0x01);
+
 	}
 
 	static String CarSettingData2 = "";
+
 	private void analyzeCarSettingData2(byte[] msg) {
 		if (CarSettingData2.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -386,13 +401,15 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			CarSettingData2 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.TRUNK_UNLOCK_STATUS=(int)((msg[4]>>7)&0x01);
-		mCanInfo.CHANGE_ILL_STATUS=(int)((msg[4]>>6)&0x01);
-		mCanInfo.CHANGE_LINE_STATUS=(int)((msg[4]>>5)&0x01);
-		mCanInfo.WELCOME_FUNTION_STATUS=(int)((msg[4]>>4)&0x01);
-		
+		mCanInfo.TRUNK_UNLOCK_STATUS = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.CHANGE_ILL_STATUS = (int) ((msg[4] >> 6) & 0x01);
+		mCanInfo.CHANGE_LINE_STATUS = (int) ((msg[4] >> 5) & 0x01);
+		mCanInfo.WELCOME_FUNTION_STATUS = (int) ((msg[4] >> 4) & 0x01);
+
 	}
+
 	static String CarSettingData1 = "";
+
 	private void analyzeCarSettingData1(byte[] msg) {
 		if (CarSettingData1.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -400,21 +417,23 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			CarSettingData1 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.AUTO_PARK_CAR_STATUS=(int)((msg[4]>>7)&0x01);
-		mCanInfo.RADAR_ALARM_STATUS=(int)((msg[4]>>6)&0x01);
-		mCanInfo.WELCOME_PERSION_ILL_STATUS=(int)((msg[4]>>4)&0x03);
-		mCanInfo.ATMOSPHERE_ILL_STATUS=(int)((msg[4]>>3)&0x01);
-		mCanInfo.ATMOSPHERE_ILL_VALUE=(int)((msg[4]>>0)&0x07);
-		
-		mCanInfo.REAR_WIPER_STATUS=(int)((msg[5]>>7)&0x01);
-		mCanInfo.PARKING_STATUS=(int)((msg[5]>>6)&0x01);
-		mCanInfo.CAR_LOCK_AUTO_STATUS=(int)((msg[5]>>5)&0x01);
-		mCanInfo.CAR_LOCK_STATUS=(int)((msg[5]>>4)&0x01);
-		mCanInfo.REMOTE_UNLOCK=(int)((msg[5]>>3)&0x01);
-		mCanInfo.DAYTIME_LAMP_STATUS=(int)((msg[5]>>2)&0x01);
-		mCanInfo.GO_HOME_LAMP_STATUS=(int)((msg[5]>>0)&0x03);
+		mCanInfo.AUTO_PARK_CAR_STATUS = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.RADAR_ALARM_STATUS = (int) ((msg[4] >> 6) & 0x01);
+		mCanInfo.WELCOME_PERSION_ILL_STATUS = (int) ((msg[4] >> 4) & 0x03);
+		mCanInfo.ATMOSPHERE_ILL_STATUS = (int) ((msg[4] >> 3) & 0x01);
+		mCanInfo.ATMOSPHERE_ILL_VALUE = (int) ((msg[4] >> 0) & 0x07);
+
+		mCanInfo.REAR_WIPER_STATUS = (int) ((msg[5] >> 7) & 0x01);
+		mCanInfo.PARKING_STATUS = (int) ((msg[5] >> 6) & 0x01);
+		mCanInfo.CAR_LOCK_AUTO_STATUS = (int) ((msg[5] >> 5) & 0x01);
+		mCanInfo.CAR_LOCK_STATUS = (int) ((msg[5] >> 4) & 0x01);
+		mCanInfo.REMOTE_UNLOCK = (int) ((msg[5] >> 3) & 0x01);
+		mCanInfo.DAYTIME_LAMP_STATUS = (int) ((msg[5] >> 2) & 0x01);
+		mCanInfo.GO_HOME_LAMP_STATUS = (int) ((msg[5] >> 0) & 0x03);
 	}
+
 	static String CarEnableData2 = "";
+
 	private void analyzeCarEnableData2(byte[] msg) {
 		if (CarEnableData2.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -422,13 +441,15 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			CarEnableData2 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.TRUNK_UNLOCK_STATUS_ENABLE=(int)((msg[4]>>7)&0x01);
-		mCanInfo.CHANGE_ILL_STATUS_ENABLE=(int)((msg[4]>>6)&0x01);
-		mCanInfo.CHANGE_LINE_STATUS_ENABLE=(int)((msg[4]>>5)&0x01);
-		mCanInfo.WELCOME_FUNTION_STATUS_ENABLE=(int)((msg[4]>>4)&0x01);
-		
+		mCanInfo.TRUNK_UNLOCK_STATUS_ENABLE = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.CHANGE_ILL_STATUS_ENABLE = (int) ((msg[4] >> 6) & 0x01);
+		mCanInfo.CHANGE_LINE_STATUS_ENABLE = (int) ((msg[4] >> 5) & 0x01);
+		mCanInfo.WELCOME_FUNTION_STATUS_ENABLE = (int) ((msg[4] >> 4) & 0x01);
+
 	}
+
 	static String CarEnableData1 = "";
+
 	private void analyzeCarEnableData1(byte[] msg) {
 		if (CarEnableData1.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -436,19 +457,19 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			CarEnableData1 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.AUTO_PARK_CAR_STATUS_ENABLE=(int)((msg[4]>>7)&0x01);
-		mCanInfo.RADAR_ALARM_STATUS_ENABLE=(int)((msg[4]>>6)&0x01);
-		mCanInfo.WELCOME_PERSION_ILL_STATUS_ENABLE=(int)((msg[4]>>5)&0x01);
-		mCanInfo.ATMOSPHERE_ILL_STATUS_ENABLE=(int)((msg[4]>>3)&0x01);
-		
-		mCanInfo.REAR_WIPER_STATUS_ENABLE=(int)((msg[5]>>7)&0x01);
-		mCanInfo.PARKING_STATUS_ENABLE=(int)((msg[5]>>6)&0x01);
-		mCanInfo.CAR_LOCK_AUTO_STATUS_ENABLE=(int)((msg[5]>>5)&0x01);
-		mCanInfo.CAR_LOCK_STATUS_ENABLE=(int)((msg[5]>>4)&0x01);
-		mCanInfo.CAR_UNLOCK_STATUS_ENABLE=(int)((msg[5]>>3)&0x01);
-		mCanInfo.DAYTIME_LAMP_STATUS_ENABLE=(int)((msg[5]>>2)&0x01);
-		mCanInfo.GO_HOME_LAMP_STATUS_ENABLE=(int)((msg[5]>>1)&0x01);
-		
+		mCanInfo.AUTO_PARK_CAR_STATUS_ENABLE = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.RADAR_ALARM_STATUS_ENABLE = (int) ((msg[4] >> 6) & 0x01);
+		mCanInfo.WELCOME_PERSION_ILL_STATUS_ENABLE = (int) ((msg[4] >> 5) & 0x01);
+		mCanInfo.ATMOSPHERE_ILL_STATUS_ENABLE = (int) ((msg[4] >> 3) & 0x01);
+
+		mCanInfo.REAR_WIPER_STATUS_ENABLE = (int) ((msg[5] >> 7) & 0x01);
+		mCanInfo.PARKING_STATUS_ENABLE = (int) ((msg[5] >> 6) & 0x01);
+		mCanInfo.CAR_LOCK_AUTO_STATUS_ENABLE = (int) ((msg[5] >> 5) & 0x01);
+		mCanInfo.CAR_LOCK_STATUS_ENABLE = (int) ((msg[5] >> 4) & 0x01);
+		mCanInfo.CAR_UNLOCK_STATUS_ENABLE = (int) ((msg[5] >> 3) & 0x01);
+		mCanInfo.DAYTIME_LAMP_STATUS_ENABLE = (int) ((msg[5] >> 2) & 0x01);
+		mCanInfo.GO_HOME_LAMP_STATUS_ENABLE = (int) ((msg[5] >> 1) & 0x01);
+
 	}
 
 	static String radarSave = "";
@@ -462,36 +483,49 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 			radarSave = BytesUtil.bytesToHexString(msg);
 		}
 		mCanInfo.BACK_LEFT_DISTANCE = (((int) (msg[4] & 0xFF)) == 0xff) ? 0
-				:(((int) (msg[4] & 0xFF)) == 0x00)?1:(int)(Math.ceil((double)(msg[4] & 0xFF)/2));
-		
-		mCanInfo.BACK_MIDDLE_LEFT_DISTANCE = (((int) (msg[5] & 0xFF)) == 0xff) ? 0
-				:(((int) (msg[5] & 0xFF)) == 0x00)?1:(int)(Math.ceil((double)(msg[5] & 0xFF)/2));
-		
-		mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE = (((int) (msg[6] & 0xFF)) == 0xff) ? 0
-				:(((int) (msg[6] & 0xFF)) == 0x00)?1:(int)(Math.ceil((double)(msg[6] & 0xFF)/2));
-		
-		mCanInfo.BACK_RIGHT_DISTANCE = (((int) (msg[7] & 0xFF)) == 0xff) ? 0
-				:(((int) (msg[7] & 0xFF)) == 0x00)?1:(int)(Math.ceil((double)(msg[7] & 0xFF)/2));
-		
-		
-		mCanInfo.FRONT_LEFT_DISTANCE = (((int) (msg[8] & 0xFF)) == 0xff) ? 0
-				:(((int) (msg[8] & 0xFF)) == 0x00)?1:(int)(Math.ceil((double)(msg[8] & 0xFF)/2));
-		mCanInfo.FRONT_MIDDLE_LEFT_DISTANCE = (((int) (msg[9] & 0xFF)) == 0xff) ? 0
-				:(((int) (msg[9] & 0xFF)) == 0x00)?1:(int)(Math.ceil((double)(msg[9] & 0xFF)/2));
-		mCanInfo.FRONT_MIDDLE_RIGHT_DISTANCE = (((int) (msg[10] & 0xFF)) == 0xff) ? 0
-				:(((int) (msg[10] & 0xFF)) == 0x00)?1:(int)(Math.ceil((double)(msg[10] & 0xFF)/2));
-		mCanInfo.FRONT_RIGHT_DISTANCE = (((int) (msg[11] & 0xFF)) == 0xff) ? 0
-				:(((int) (msg[11] & 0xFF)) == 0x00)?1:(int)(Math.ceil((double)(msg[11] & 0xFF)/2));
-//		Log.i("xxx", "mCanInfo.BACK_LEFT_DISTANCE=="+mCanInfo.BACK_LEFT_DISTANCE);
-//		Log.i("xxx", "mCanInfo.BACK_MIDDLE_LEFT_DISTANCE=="+mCanInfo.BACK_MIDDLE_LEFT_DISTANCE);
-//		Log.i("xxx", "mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE=="+mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE);
-//		Log.i("xxx", "mCanInfo.BACK_RIGHT_DISTANCE=="+mCanInfo.BACK_RIGHT_DISTANCE);
-//		Log.i("xxx", "mCanInfo.DISTANCE=="+mCanInfo.FRONT_LEFT_DISTANCE);
-//		Log.i("xxx", "mCanInfo.DISTANCE=="+mCanInfo.FRONT_MIDDLE_LEFT_DISTANCE);
-//		Log.i("xxx", "mCanInfo.DISTANCE=="+mCanInfo.FRONT_MIDDLE_RIGHT_DISTANCE);
-//		Log.i("xxx", "mCanInfo.DISTANCE=="+mCanInfo.FRONT_RIGHT_DISTANCE);
+				: (((int) (msg[4] & 0xFF)) == 0x00) ? 1 : (int) (Math
+						.ceil((double) (msg[4] & 0xFF) / 2));
 
-		//mCanInfo.RADAR_ALARM_STATUS = (int) (msg[14] & 0xFF);
+		mCanInfo.BACK_MIDDLE_LEFT_DISTANCE = (((int) (msg[5] & 0xFF)) == 0xff) ? 0
+				: (((int) (msg[5] & 0xFF)) == 0x00) ? 1 : (int) (Math
+						.ceil((double) (msg[5] & 0xFF) / 2));
+
+		mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE = (((int) (msg[6] & 0xFF)) == 0xff) ? 0
+				: (((int) (msg[6] & 0xFF)) == 0x00) ? 1 : (int) (Math
+						.ceil((double) (msg[6] & 0xFF) / 2));
+
+		mCanInfo.BACK_RIGHT_DISTANCE = (((int) (msg[7] & 0xFF)) == 0xff) ? 0
+				: (((int) (msg[7] & 0xFF)) == 0x00) ? 1 : (int) (Math
+						.ceil((double) (msg[7] & 0xFF) / 2));
+
+		mCanInfo.FRONT_LEFT_DISTANCE = (((int) (msg[8] & 0xFF)) == 0xff) ? 0
+				: (((int) (msg[8] & 0xFF)) == 0x00) ? 1 : (int) (Math
+						.ceil((double) (msg[8] & 0xFF) / 2));
+		mCanInfo.FRONT_MIDDLE_LEFT_DISTANCE = (((int) (msg[9] & 0xFF)) == 0xff) ? 0
+				: (((int) (msg[9] & 0xFF)) == 0x00) ? 1 : (int) (Math
+						.ceil((double) (msg[9] & 0xFF) / 2));
+		mCanInfo.FRONT_MIDDLE_RIGHT_DISTANCE = (((int) (msg[10] & 0xFF)) == 0xff) ? 0
+				: (((int) (msg[10] & 0xFF)) == 0x00) ? 1 : (int) (Math
+						.ceil((double) (msg[10] & 0xFF) / 2));
+		mCanInfo.FRONT_RIGHT_DISTANCE = (((int) (msg[11] & 0xFF)) == 0xff) ? 0
+				: (((int) (msg[11] & 0xFF)) == 0x00) ? 1 : (int) (Math
+						.ceil((double) (msg[11] & 0xFF) / 2));
+		// Log.i("xxx",
+		// "mCanInfo.BACK_LEFT_DISTANCE=="+mCanInfo.BACK_LEFT_DISTANCE);
+		// Log.i("xxx",
+		// "mCanInfo.BACK_MIDDLE_LEFT_DISTANCE=="+mCanInfo.BACK_MIDDLE_LEFT_DISTANCE);
+		// Log.i("xxx",
+		// "mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE=="+mCanInfo.BACK_MIDDLE_RIGHT_DISTANCE);
+		// Log.i("xxx",
+		// "mCanInfo.BACK_RIGHT_DISTANCE=="+mCanInfo.BACK_RIGHT_DISTANCE);
+		// Log.i("xxx", "mCanInfo.DISTANCE=="+mCanInfo.FRONT_LEFT_DISTANCE);
+		// Log.i("xxx",
+		// "mCanInfo.DISTANCE=="+mCanInfo.FRONT_MIDDLE_LEFT_DISTANCE);
+		// Log.i("xxx",
+		// "mCanInfo.DISTANCE=="+mCanInfo.FRONT_MIDDLE_RIGHT_DISTANCE);
+		// Log.i("xxx", "mCanInfo.DISTANCE=="+mCanInfo.FRONT_RIGHT_DISTANCE);
+
+		// mCanInfo.RADAR_ALARM_STATUS = (int) (msg[14] & 0xFF);
 
 	}
 
@@ -513,7 +547,7 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		mCanInfo.RIGHT_FORONTDOOR_STATUS = (int) ((msg[6] >> 6) & 0x01);
 		mCanInfo.LEFT_FORONTDOOR_STATUS = (int) ((msg[6] >> 7) & 0x01);
 
-		mCanInfo.SAFETY_BELT_STATUS = (int) ((msg[6] >> 2) & 0x01)==1?0:1;
+		mCanInfo.SAFETY_BELT_STATUS = (int) ((msg[6] >> 2) & 0x01) == 1 ? 0 : 1;
 		mCanInfo.DEPUTY_SAFETY_BELT_STATUS = (int) ((msg[11] >> 7) & 0x01);
 		mCanInfo.BACK_LEFT_SAFETY_BELT_STATUS = (int) ((msg[11] >> 6) & 0x01);
 		mCanInfo.BACK_MIDDLE_SAFETY_BELT_STATUS = (int) ((msg[11] >> 5) & 0x01);
@@ -529,10 +563,8 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			carInfoSave_2 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.INSTANT_CONSUMPTION =  (float) (0.1*(((int) msg[4] & 0xFF) * 256
-				+ ((int) msg[5] & 0xFF)));
-		mCanInfo.RANGE = ((int) msg[6] & 0xFF) * 256
-				+ ((int) msg[7] & 0xFF);
+		mCanInfo.INSTANT_CONSUMPTION = (float) (0.1 * (((int) msg[4] & 0xFF) * 256 + ((int) msg[5] & 0xFF)));
+		mCanInfo.RANGE = ((int) msg[6] & 0xFF) * 256 + ((int) msg[7] & 0xFF);
 	}
 
 	static String carInfoSave_3 = "";
@@ -544,9 +576,8 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			carInfoSave_3 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.AVERAGE_CONSUMPTION =  (float) (0.1*(((int) msg[4] & 0xFF) * 256
-				+ ((int) msg[5] & 0xFF)));
-		mCanInfo.AVERAGE_SPEED=(int) msg[7] & 0xFF;
+		mCanInfo.AVERAGE_CONSUMPTION = (float) (0.1 * (((int) msg[4] & 0xFF) * 256 + ((int) msg[5] & 0xFF)));
+		mCanInfo.AVERAGE_SPEED = (int) msg[7] & 0xFF;
 		mCanInfo.RANGE_ADD = ((int) msg[8] & 0xFF) * 256
 				+ ((int) msg[9] & 0xFF);
 
@@ -561,23 +592,22 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			carInfoSave_4 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.AVERAGE_CONSUMPTION =  (float) (0.1*(((int) msg[4] & 0xFF) * 256
-				+ ((int) msg[5] & 0xFF)));
-		mCanInfo.AVERAGE_SPEED=(int) msg[7] & 0xFF;
+		mCanInfo.AVERAGE_CONSUMPTION = (float) (0.1 * (((int) msg[4] & 0xFF) * 256 + ((int) msg[5] & 0xFF)));
+		mCanInfo.AVERAGE_SPEED = (int) msg[7] & 0xFF;
 		mCanInfo.RANGE_ADD = ((int) msg[8] & 0xFF) * 256
 				+ ((int) msg[9] & 0xFF);
-//		int len = ((int) msg[2] & 0xFF);
-//		byte[] acscii = new byte[len];
-//		for (int i = 0; i < len; i++) {
-//			acscii[i] = msg[i + 4];
-//
-//		}
-//		try {
-//			mCanInfo.VERSION = new String(acscii, "GBK");
-//		} catch (UnsupportedEncodingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// int len = ((int) msg[2] & 0xFF);
+		// byte[] acscii = new byte[len];
+		// for (int i = 0; i < len; i++) {
+		// acscii[i] = msg[i + 4];
+		//
+		// }
+		// try {
+		// mCanInfo.VERSION = new String(acscii, "GBK");
+		// } catch (UnsupportedEncodingException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 	}
 
 	static String carInfoSave = "";
@@ -596,24 +626,24 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		} else {
 			carInfoSave = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.RADAR_ALARM_STATUS =(int)((msg[4]>>5)&0x01);
-		mCanInfo.KEY_IN= (int)((msg[4]>>4)&0x01);
-		mCanInfo.HANDBRAKE_STATUS= (int)((msg[4]>>3)&0x01);
-		mCanInfo.CAR_BACK_STATUS=(int)((msg[4]>>2)&0x01);
-		mCanInfo.CAR_ILL_STATUS=(int)((msg[4]>>1)&0x01);
-		mCanInfo.CAR_ACC_STATUS=(int)((msg[4]>>0)&0x01);
-		mCanInfo.BACK_LIGHT_DATA=(int)((msg[9]>>0)&0xff);
-		
+		mCanInfo.RADAR_ALARM_STATUS = (int) ((msg[4] >> 5) & 0x01);
+		mCanInfo.KEY_IN = (int) ((msg[4] >> 4) & 0x01);
+		mCanInfo.HANDBRAKE_STATUS = (int) ((msg[4] >> 3) & 0x01);
+		mCanInfo.CAR_BACK_STATUS = (int) ((msg[4] >> 2) & 0x01);
+		mCanInfo.CAR_ILL_STATUS = (int) ((msg[4] >> 1) & 0x01);
+		mCanInfo.CAR_ACC_STATUS = (int) ((msg[4] >> 0) & 0x01);
+		mCanInfo.BACK_LIGHT_DATA = (int) ((msg[9] >> 0) & 0xff);
+
 		// 方向盘转角 CHANGE_STATUS=8
-		int temp = (int) (msg[10] & 0xFF)*256+(int) (msg[11] & 0xFF);
-		if (temp > 0xffff/2) {
-				mCanInfo.STERRING_WHELL_STATUS = 65535-temp;
-				mCanInfo.CHANGE_STATUS = 8;
-		} else{
-				mCanInfo.STERRING_WHELL_STATUS =  -temp;
-				mCanInfo.CHANGE_STATUS = 8;
+		int temp = (int) (msg[10] & 0xFF) * 256 + (int) (msg[11] & 0xFF);
+		if (temp > 0xffff / 2) {
+			mCanInfo.STERRING_WHELL_STATUS = 65535 - temp;
+			mCanInfo.CHANGE_STATUS = 8;
+		} else {
+			mCanInfo.STERRING_WHELL_STATUS = -temp;
+			mCanInfo.CHANGE_STATUS = 8;
 		}
-		
+
 		// 按键 CHANGE_STATUS=2
 
 		if (buttonTemp != (int) (msg[6] & 0xFF)) {
@@ -648,28 +678,28 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 			case 0x0E:
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUDOWN;
 				break;
-			case 0x0F://ok
+			case 0x0F:// ok
 				break;
-			case 0x10://ESC
+			case 0x10:// ESC
 				break;
-			case 0x11://Memo up
+			case 0x11:// Memo up
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUUP;
 				break;
-			case 0x12://Memo down
+			case 0x12:// Memo down
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUDOWN;
 				break;
-			case 0x13://List
+			case 0x13:// List
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUSIC;
 				break;
-			case 0x14://Wiper Button
+			case 0x14:// Wiper Button
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.Wiper;
 				break;
-			case 0x15://Check 自检键
+			case 0x15:// Check 自检键
 				break;
-			case 0x16://行车电脑页面切换键
+			case 0x16:// 行车电脑页面切换键
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;
 				break;
-			case 0x40://BT wipper Button 一键蓝牙
+			case 0x40:// BT wipper Button 一键蓝牙
 				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.PHONE_APP;
 				break;
 			default:
@@ -678,9 +708,9 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 			}
 			mCanInfo.CHANGE_STATUS = 2;
 		}
-//		if ((int) ((msg[12] >> 7) & 0x01) == 0) {
-//			mCanInfo.STEERING_BUTTON_MODE = 16;
-//		}
+		// if ((int) ((msg[12] >> 7) & 0x01) == 0) {
+		// mCanInfo.STEERING_BUTTON_MODE = 16;
+		// }
 		temp = (int) (msg[7] & 0xFF);
 		if (mCanInfo.STEERING_BUTTON_STATUS != temp) {
 			mCanInfo.STEERING_BUTTON_STATUS = temp;
@@ -704,48 +734,47 @@ public class SSPeugeotDS4LOW extends AnalyzeUtils {
 		mCanInfo.AC_MAX_STATUS = ((int) (msg[4] >> 5) & 0x01);
 		mCanInfo.AUTO_STATUS = (int) ((msg[4] >> 3) & 0x01);
 		mCanInfo.AC_INDICATOR_STATUS = (int) ((msg[4] >> 0) & 0x01);
-		mCanInfo.Mono_STATUS=(int) ((msg[4] >> 2) & 0x01);
-		mCanInfo.CYCLE_INDICATOR = (int) ((msg[5] >> 4) & 0x01);;
+		mCanInfo.Mono_STATUS = (int) ((msg[4] >> 2) & 0x01);
+		mCanInfo.CYCLE_INDICATOR = (int) ((msg[5] >> 4) & 0x01);
+		;
 		mCanInfo.REAR_LAMP_INDICATOR = (int) ((msg[6] >> 5) & 0x01);
 		mCanInfo.MAX_FRONT_LAMP_INDICATOR = (int) ((msg[6] >> 4) & 0x01);
 
-		mCanInfo.AIR_STRENGTH=(int) ((msg[7] >> 0) & 0x0f);
+		mCanInfo.AIR_STRENGTH = (int) ((msg[7] >> 0) & 0x0f);
 		int temp = (int) (msg[8] & 0x0f);
-		if(temp==0x0b||temp==0x0c||temp==0x0d||temp==0x0e){
-			mCanInfo.UPWARD_AIR_INDICATOR=1;
-		}else{
-			mCanInfo.UPWARD_AIR_INDICATOR=0;
+		if (temp == 0x0b || temp == 0x0c || temp == 0x0d || temp == 0x0e) {
+			mCanInfo.UPWARD_AIR_INDICATOR = 1;
+		} else {
+			mCanInfo.UPWARD_AIR_INDICATOR = 0;
 		}
-		if(temp==0x05||temp==0x06||temp==0x0d||temp==0x0e){
-			mCanInfo.PARALLEL_AIR_INDICATOR=1;
-		}else{
-			mCanInfo.PARALLEL_AIR_INDICATOR=0;
+		if (temp == 0x05 || temp == 0x06 || temp == 0x0d || temp == 0x0e) {
+			mCanInfo.PARALLEL_AIR_INDICATOR = 1;
+		} else {
+			mCanInfo.PARALLEL_AIR_INDICATOR = 0;
 		}
-		if(temp==0x03||temp==0x05||temp==0x0c||temp==0x0e){
-			mCanInfo.DOWNWARD_AIR_INDICATOR=1;
-		}else{
-			mCanInfo.DOWNWARD_AIR_INDICATOR=0;
+		if (temp == 0x03 || temp == 0x05 || temp == 0x0c || temp == 0x0e) {
+			mCanInfo.DOWNWARD_AIR_INDICATOR = 1;
+		} else {
+			mCanInfo.DOWNWARD_AIR_INDICATOR = 0;
 		}
-		mCanInfo.AIR_RATE=(int) (msg[9] & 0x0f);
-		
-		temp=(int) (msg[10] & 0xff);
-		float temp2= temp == 0xFE ? 0 : temp == 0xFF ? 255
-				: (temp * 0.5f );
-		if(temp2>20&&temp2<26){
-			mCanInfo.DRIVING_POSITON_TEMP=temp2;
-		}else{
-			mCanInfo.DRIVING_POSITON_TEMP=(float) Math.floor(temp2);
+		mCanInfo.AIR_RATE = (int) (msg[9] & 0x0f);
+
+		temp = (int) (msg[10] & 0xff);
+		float temp2 = temp == 0xFE ? 0 : temp == 0xFF ? 255 : (temp * 0.5f);
+		if (temp2 > 20 && temp2 < 26) {
+			mCanInfo.DRIVING_POSITON_TEMP = temp2;
+		} else {
+			mCanInfo.DRIVING_POSITON_TEMP = (float) Math.floor(temp2);
 		}
-		temp=(int) (msg[11] & 0xff);
-		 temp2= temp == 0xFE ? 0 : temp == 0xFF ? 255
-				: (temp * 0.5f );
-		if(temp2>20&&temp2<26){
-			mCanInfo.DEPUTY_DRIVING_POSITON_TEMP=temp2;
-		}else{
-			mCanInfo.DEPUTY_DRIVING_POSITON_TEMP=(float) Math.floor(temp2);
+		temp = (int) (msg[11] & 0xff);
+		temp2 = temp == 0xFE ? 0 : temp == 0xFF ? 255 : (temp * 0.5f);
+		if (temp2 > 20 && temp2 < 26) {
+			mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = temp2;
+		} else {
+			mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = (float) Math.floor(temp2);
 		}
-		temp=(int) (msg[15] & 0xff);
-		mCanInfo.OUTSIDE_TEMPERATURE=(float) (temp*0.5-40);
+		temp = (int) (msg[15] & 0xff);
+		mCanInfo.OUTSIDE_TEMPERATURE = (float) (temp * 0.5 - 40);
 
 	}
 

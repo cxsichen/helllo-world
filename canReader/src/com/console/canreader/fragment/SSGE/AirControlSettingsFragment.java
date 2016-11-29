@@ -35,17 +35,17 @@ import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.BytesUtil;
 import com.console.canreader.utils.PreferenceUtil;
 
-public class AirControlSettingsFragment extends BaseFragment implements OnClickListener{
+public class AirControlSettingsFragment extends BaseFragment implements
+		OnClickListener {
 
 	TextView tv1;
-
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.ac_controler_peugeot_408, container,
-				false);
+		View view = inflater.inflate(R.layout.ac_controler_peugeot_408,
+				container, false);
 		initView(view);
 		initFragment();
 		return view;
@@ -72,7 +72,7 @@ public class AirControlSettingsFragment extends BaseFragment implements OnClickL
 	}
 
 	private void initView(View view) {
-		tv1=(TextView) view.findViewById(R.id.ac_tv);
+		tv1 = (TextView) view.findViewById(R.id.ac_tv);
 		tv1.setOnClickListener(this);
 
 	}
@@ -82,7 +82,7 @@ public class AirControlSettingsFragment extends BaseFragment implements OnClickL
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.ac_tv:
-			
+
 			break;
 
 		default:

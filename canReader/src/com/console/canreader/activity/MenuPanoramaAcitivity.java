@@ -29,7 +29,9 @@ public class MenuPanoramaAcitivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
 	}
-    long lastTime=0;
+
+	long lastTime = 0;
+
 	@Override
 	public void serviceConnected() {
 		// TODO Auto-generated method stub
@@ -37,15 +39,15 @@ public class MenuPanoramaAcitivity extends BaseActivity {
 		syncCanName();
 		switch (canName) {
 		case Contacts.CANNAMEGROUP.SSNissan:
-			if(System.currentTimeMillis()-lastTime>1000){
-				lastTime=System.currentTimeMillis();
-			    sendMsg("AA5502FD0100");
+			if (System.currentTimeMillis() - lastTime > 1000) {
+				lastTime = System.currentTimeMillis();
+				sendMsg("AA5502FD0100");
 			}
 			break;
 		case Contacts.CANNAMEGROUP.SSTrumpchiGS5:
-			if(System.currentTimeMillis()-lastTime>1000){
-				lastTime=System.currentTimeMillis();
-			    sendMsg("AA5502FD0100");
+			if (System.currentTimeMillis() - lastTime > 1000) {
+				lastTime = System.currentTimeMillis();
+				sendMsg("AA5502FD0100");
 			}
 			break;
 		default:
@@ -53,6 +55,7 @@ public class MenuPanoramaAcitivity extends BaseActivity {
 		}
 		finish();
 	}
+
 	private void syncCanName() {
 		canName = PreferenceUtil.getCANName(this);
 		canFirtName = PreferenceUtil.getFirstTwoString(this, canName);

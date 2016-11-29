@@ -36,7 +36,6 @@ public class SSToyota extends AnalyzeUtils {
 	// 车身功放信息
 	public static final int CAR_INFO_DATA_9 = 0xE8;
 
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
@@ -135,8 +134,8 @@ public class SSToyota extends AnalyzeUtils {
 				: ((int) (msg[9] & 0xFF));
 		mCanInfo.FRONT_RIGHT_DISTANCE = (((int) (msg[11] & 0xFF)) == 0xff) ? 0
 				: ((int) (msg[11] & 0xFF));
-		
-		mCanInfo.RADAR_ALARM_STATUS= (int) (msg[14] & 0xFF);
+
+		mCanInfo.RADAR_ALARM_STATUS = (int) (msg[14] & 0xFF);
 
 	}
 
@@ -169,36 +168,35 @@ public class SSToyota extends AnalyzeUtils {
 		mCanInfo.DRIVING_SPEED = ((int) msg[6] & 0xFF) * 256
 				+ ((int) msg[7] & 0xFF);
 	}
-	
+
 	static String carInfoSave_3 = "";
-	
+
 	void analyzeCarInfoData_3(byte[] msg) {
 		if (carInfoSave_3.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
 			return;
 		} else {
 			carInfoSave_3 = BytesUtil.bytesToHexString(msg);
-		}		
-		mCanInfo.AUTO_LOCK_SETTING= (int) ((msg[5] >> 6) & 0x01);
-		mCanInfo.AUTO_OPEN_LOCK= (int) ((msg[5] >> 5) & 0x01);
-		mCanInfo.DRIVER_LINK_LOCK= (int) ((msg[5] >> 4) & 0x01);
-		mCanInfo.AUTO_OPEN_LOCK_P= (int) ((msg[5] >> 3) & 0x01);
-		mCanInfo.AUTO_LOCK_P= (int) ((msg[5] >> 2) & 0x01);
+		}
+		mCanInfo.AUTO_LOCK_SETTING = (int) ((msg[5] >> 6) & 0x01);
+		mCanInfo.AUTO_OPEN_LOCK = (int) ((msg[5] >> 5) & 0x01);
+		mCanInfo.DRIVER_LINK_LOCK = (int) ((msg[5] >> 4) & 0x01);
+		mCanInfo.AUTO_OPEN_LOCK_P = (int) ((msg[5] >> 3) & 0x01);
+		mCanInfo.AUTO_LOCK_P = (int) ((msg[5] >> 2) & 0x01);
 		mCanInfo.AIRCON_WITH_AUTO = (int) ((msg[5] >> 1) & 0x01);
 		mCanInfo.CYCLE_WITH_AUTO = (int) ((msg[5] >> 0) & 0x01);
-		
+
 		mCanInfo.LAMP_WHEN_LOCK = (int) ((msg[6] >> 7) & 0x01);
 		mCanInfo.TWICE_BUTTON_OPEN_LOCK = (int) ((msg[6] >> 6) & 0x01);
 		mCanInfo.INTELLIGENT_LOCK = (int) ((msg[6] >> 5) & 0x01);
 		mCanInfo.TWICE_KEY_OPEN_LOCK = (int) ((msg[6] >> 4) & 0x01);
-		
+
 		mCanInfo.AUTOMATIC_CAP_SENSEITIVITY = (int) ((msg[7] >> 0) & 0x07);
-		mCanInfo.AUTOMATIC_LAMP_CLOSE= (int) ((msg[7] >> 3) & 0x07);
-		mCanInfo.IS_RADAR_SHOW= (int) ((msg[4] >> 7) & 0x01);
-		mCanInfo.RADAR_WARING_VOLUME= (int) ((msg[4] >> 4) & 0x07);
-		mCanInfo.FRONT_RADAR_DISTANCE= (int) ((msg[4] >> 2) & 0x03);
-		mCanInfo.BACK_RADAR_DISTANCE= (int) ((msg[4] >> 0) & 0x03);
-		
+		mCanInfo.AUTOMATIC_LAMP_CLOSE = (int) ((msg[7] >> 3) & 0x07);
+		mCanInfo.IS_RADAR_SHOW = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.RADAR_WARING_VOLUME = (int) ((msg[4] >> 4) & 0x07);
+		mCanInfo.FRONT_RADAR_DISTANCE = (int) ((msg[4] >> 2) & 0x03);
+		mCanInfo.BACK_RADAR_DISTANCE = (int) ((msg[4] >> 0) & 0x03);
 
 	}
 
@@ -296,7 +294,7 @@ public class SSToyota extends AnalyzeUtils {
 
 		mCanInfo.HISTORY_OIL_CONSUMPTION_UNIT = (int) ((msg[64] >> 0) & 0xFF);
 	}
-	
+
 	static String carInfoSave_9 = "";
 
 	void analyzeCarInfoData_9(byte[] msg) {
@@ -309,7 +307,7 @@ public class SSToyota extends AnalyzeUtils {
 		mCanInfo.PANORAMA_STATUS = (int) ((msg[7] >> 0) & 0xFF);
 
 	}
-	
+
 	static String carInfoSave_8 = "";
 
 	void analyzeCarInfoData_8(byte[] msg) {

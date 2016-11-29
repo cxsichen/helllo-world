@@ -13,7 +13,7 @@ import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.service.CanInfo;
 
-public class ConDisInfoFragment extends BaseFragment  {
+public class ConDisInfoFragment extends BaseFragment {
 
 	private TextView tv1;
 	private TextView tv2;
@@ -26,9 +26,10 @@ public class ConDisInfoFragment extends BaseFragment  {
 	private TextView tv8;
 	private TextView tv9;
 	private TextView tv10;
-    String conUnit="";
-    String disUnit="";
-    String[] disGroup={"mpg","km/L","L/100km","L/H"};
+	String conUnit = "";
+	String disUnit = "";
+	String[] disGroup = { "mpg", "km/L", "L/100km", "L/H" };
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -43,22 +44,21 @@ public class ConDisInfoFragment extends BaseFragment  {
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
-		if(mCaninfo!=null){
-			conUnit=mCaninfo.INSTANT_CONSUMPTION_UNIT==0?"km":"mile";
-			disUnit=disGroup[mCaninfo.TRIP_A_UNIT];
-			
-			tv1.setText(mCaninfo.INSTANT_CONSUMPTION+conUnit);
-			tv2.setText(mCaninfo.RANGE+disUnit);
-			tv3.setText(mCaninfo.DRIVING_DISTANCE+disUnit);
-			
-			tv5.setText(mCaninfo.TRIP_A_1_AVERAGE_CONSUMPTION+conUnit);
-			tv6.setText(mCaninfo.TRIP_A_1+disUnit);
-			tv7.setText(mCaninfo.TRIP_A_2_AVERAGE_CONSUMPTION+conUnit);
-			tv8.setText(mCaninfo.TRIP_A_2+disUnit);
-			tv9.setText(mCaninfo.TRIP_A_3_AVERAGE_CONSUMPTION+conUnit);
-			tv10.setText(mCaninfo.TRIP_A_3+disUnit);
+		if (mCaninfo != null) {
+			conUnit = mCaninfo.INSTANT_CONSUMPTION_UNIT == 0 ? "km" : "mile";
+			disUnit = disGroup[mCaninfo.TRIP_A_UNIT];
+
+			tv1.setText(mCaninfo.INSTANT_CONSUMPTION + conUnit);
+			tv2.setText(mCaninfo.RANGE + disUnit);
+			tv3.setText(mCaninfo.DRIVING_DISTANCE + disUnit);
+
+			tv5.setText(mCaninfo.TRIP_A_1_AVERAGE_CONSUMPTION + conUnit);
+			tv6.setText(mCaninfo.TRIP_A_1 + disUnit);
+			tv7.setText(mCaninfo.TRIP_A_2_AVERAGE_CONSUMPTION + conUnit);
+			tv8.setText(mCaninfo.TRIP_A_2 + disUnit);
+			tv9.setText(mCaninfo.TRIP_A_3_AVERAGE_CONSUMPTION + conUnit);
+			tv10.setText(mCaninfo.TRIP_A_3 + disUnit);
 		}
-		
 
 	}
 
@@ -81,7 +81,5 @@ public class ConDisInfoFragment extends BaseFragment  {
 		tv10 = (TextView) view.findViewById(R.id.tv10);
 
 	}
-	
-
 
 }

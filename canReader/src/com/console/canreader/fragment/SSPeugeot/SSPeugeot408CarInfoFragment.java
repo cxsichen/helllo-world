@@ -28,14 +28,14 @@ public class SSPeugeot408CarInfoFragment extends BaseFragment {
 	private Button ENGINE_START_STATUS;
 	private int QiTing;
 	private Context mContext;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.ss_peugeot408_car_info,
 				container, false);
-		mContext=view.getContext();
+		mContext = view.getContext();
 		initView(view);
 		syncView(getCanInfo());
 		return view;
@@ -56,25 +56,21 @@ public class SSPeugeot408CarInfoFragment extends BaseFragment {
 			} else {
 				ENGINE_START_STATUS.getBackground().setAlpha(255);
 			}
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 
 	private void showWarningDialog(String warningStr) {
-		Dialog alertDialog=new AlertDialog.Builder(mContext).
-				setTitle("少御").
-				setMessage(warningStr).
-				create();
+		Dialog alertDialog = new AlertDialog.Builder(mContext).setTitle("少御")
+				.setMessage(warningStr).create();
 		alertDialog.getWindow().setType(
 				WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 
 		alertDialog.show();
 	}
-	
-	
-	
+
 	private void initView(View view) {
 		try {
 

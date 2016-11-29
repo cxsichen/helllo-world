@@ -168,9 +168,9 @@ public class AirConSettingsFragment extends BaseFragment implements
 
 			p2 = (ListPreference) findPreference("AIR_RATE");
 			p2.setOnPreferenceChangeListener(this);
-			
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
+
+			if (settingActivity != null) {
+				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}
@@ -224,8 +224,9 @@ public class AirConSettingsFragment extends BaseFragment implements
 				if (settingActivity != null) {
 					try {
 						int value = Integer.parseInt((String) newValue);
-		                settingActivity.sendMsg("5AA5023D190"+String.valueOf(value));
-		                updatePreferenceDescription(p2,value);
+						settingActivity.sendMsg("5AA5023D190"
+								+ String.valueOf(value));
+						updatePreferenceDescription(p2, value);
 					} catch (NumberFormatException e) {
 					}
 				}

@@ -26,12 +26,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-
-
-
-
-
-
 import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.activity.Toyota.OilEleActivity;
@@ -45,12 +39,13 @@ public class LanguageSettingsFragment extends BaseFragment {
 
 	private Spinner mySpinner;
 	Button button1;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.ssge_language_layout,
-				container, false);
+		View view = inflater.inflate(R.layout.ssge_language_layout, container,
+				false);
 		initView(view);
 		initFragment();
 		return view;
@@ -66,7 +61,7 @@ public class LanguageSettingsFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
-	
+
 		}
 	}
 
@@ -75,16 +70,18 @@ public class LanguageSettingsFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		super.serviceConnected();
 	}
-    static int position=0;
+
+	static int position = 0;
+
 	private void initView(View view) {
-		mySpinner=(Spinner) view.findViewById(R.id.spinner2);
-		button1=(Button) view.findViewById(R.id.button);
+		mySpinner = (Spinner) view.findViewById(R.id.spinner2);
+		button1 = (Button) view.findViewById(R.id.button);
 		button1.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				sendMsg("5AA5029A01"+BytesUtil.intToHexString(position+1));	
+				sendMsg("5AA5029A01" + BytesUtil.intToHexString(position + 1));
 			}
 		});
 		mySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -93,16 +90,16 @@ public class LanguageSettingsFragment extends BaseFragment {
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				LanguageSettingsFragment.this.position=position;;
+				LanguageSettingsFragment.this.position = position;
+				;
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 	}
 
-	
 }

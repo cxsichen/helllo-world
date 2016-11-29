@@ -49,7 +49,7 @@ public class GS4HIGHLinkSOSFragment extends BaseFragment {
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 		try {
-		super.show(mCaninfo);
+			super.show(mCaninfo);
 
 			if (mCaninfo != null) {
 				switch (mCaninfo.LINK_SOS_STATUS) {

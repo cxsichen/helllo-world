@@ -31,8 +31,8 @@ import com.console.canreader.utils.PreferenceUtil;
 
 public class CarTypeSettingsFragment extends BaseFragment {
 
-    TextView tv;
-    TextView tv1;
+	TextView tv;
+	TextView tv1;
 	SettingsFragment settingsFragment;
 	private DecimalFormat df;
 
@@ -40,22 +40,19 @@ public class CarTypeSettingsFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.ssford_layout, container,
-				false);
+		View view = inflater.inflate(R.layout.ssford_layout, container, false);
 		initView(view);
-		df = new DecimalFormat("###.00");  
+		df = new DecimalFormat("###.00");
 		return view;
 	}
-
-
 
 	@Override
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
-			tv.setText(mCaninfo.ENGINE_SPEED+"ת");
-			tv1.setText(df.format(mCaninfo.DRIVING_SPEED)+"KM/H");
+			tv.setText(mCaninfo.ENGINE_SPEED + "ת");
+			tv1.setText(df.format(mCaninfo.DRIVING_SPEED) + "KM/H");
 		}
 	}
 
@@ -66,10 +63,8 @@ public class CarTypeSettingsFragment extends BaseFragment {
 	}
 
 	private void initView(View view) {
-		tv=(TextView) view.findViewById(R.id.tv0);
-		tv1=(TextView) view.findViewById(R.id.tv1);
+		tv = (TextView) view.findViewById(R.id.tv0);
+		tv1 = (TextView) view.findViewById(R.id.tv1);
 	}
-
-
 
 }

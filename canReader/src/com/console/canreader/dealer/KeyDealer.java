@@ -38,7 +38,7 @@ public class KeyDealer {
 	public static final String ACTION_MENU_LONG_UP = "com.console.MENU_LONG_UP";
 	public static final String ACTION_MENU_LONG_DOWN = "com.console.MENU_LONG_DOWN";
 	public static final String ACTION_MUSIC_START = "com.console.MUSIC_START";
-	public static final String ACTION_CLOSE_AUX= "com.console.CLOSE_AUX";
+	public static final String ACTION_CLOSE_AUX = "com.console.CLOSE_AUX";
 	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
 	public static final String RADIO_FREQ_ACTION = "action.colink.startFM";
 
@@ -365,11 +365,10 @@ public class KeyDealer {
 		}
 		PreferenceUtil.setKnobSelValue(context, knobValue);
 	}
-	
-	
+
 	private void startAcForCarInfo() {
 		try {
-			Intent i=new Intent(context, CarInfoActivity.class);
+			Intent i = new Intent(context, CarInfoActivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(i);
 		} catch (Exception e) {
@@ -379,7 +378,7 @@ public class KeyDealer {
 
 	private void startAcForAir() {
 		try {
-			Intent i=new Intent(context, MenuAcAcitivity.class);
+			Intent i = new Intent(context, MenuAcAcitivity.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(i);
 		} catch (Exception e) {
@@ -526,24 +525,24 @@ public class KeyDealer {
 
 	private void handleMUSIC_PLAY_PAUSE() {
 		// TODO Auto-generated method stub
-		 Intent intent= new Intent();
-         intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
-         intent.putExtra("keyEvent", ACTION_PLAY_PAUSE);
-         context.startService(intent);
+		Intent intent = new Intent();
+		intent.setClassName("cn.colink.serialport",
+				"cn.colink.serialport.service.SerialPortService");
+		intent.putExtra("keyEvent", ACTION_PLAY_PAUSE);
+		context.startService(intent);
 	}
 
 	private void handleAUX() {
 		// TODO Auto-generated method stub
 		openApplication(context, "com.console.auxapp");
 	}
-	
+
 	private void handleCLOSEAUX() {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent();
 		intent.setAction(ACTION_CLOSE_AUX);
 		context.sendBroadcast(intent);
 	}
-
 
 	private void handleMAP() {
 		// TODO Auto-generated method stub
@@ -595,17 +594,19 @@ public class KeyDealer {
 	}
 
 	protected void handleMenuLongDown() {
-		Intent intent= new Intent();
-        intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
-        intent.putExtra("keyEvent", ACTION_MENU_LONG_DOWN);
-        context.startService(intent);
+		Intent intent = new Intent();
+		intent.setClassName("cn.colink.serialport",
+				"cn.colink.serialport.service.SerialPortService");
+		intent.putExtra("keyEvent", ACTION_MENU_LONG_DOWN);
+		context.startService(intent);
 	}
 
 	protected void handleMenuLongUp() {
-		 Intent intent= new Intent();
-         intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
-         intent.putExtra("keyEvent", ACTION_MENU_LONG_UP);
-         context.startService(intent);
+		Intent intent = new Intent();
+		intent.setClassName("cn.colink.serialport",
+				"cn.colink.serialport.service.SerialPortService");
+		intent.putExtra("keyEvent", ACTION_MENU_LONG_UP);
+		context.startService(intent);
 	}
 
 	protected void handleTelAnswer() {
@@ -621,17 +622,19 @@ public class KeyDealer {
 	}
 
 	protected void handleMenuUp() {
-		 Intent intent= new Intent();
-         intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
-         intent.putExtra("keyEvent", ACTION_MENU_UP);
-         context.startService(intent);
+		Intent intent = new Intent();
+		intent.setClassName("cn.colink.serialport",
+				"cn.colink.serialport.service.SerialPortService");
+		intent.putExtra("keyEvent", ACTION_MENU_UP);
+		context.startService(intent);
 	}
 
 	protected void handleMenuDown() {
-		 Intent intent= new Intent();
-         intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
-         intent.putExtra("keyEvent", ACTION_MENU_DOWN);
-         context.startService(intent);
+		Intent intent = new Intent();
+		intent.setClassName("cn.colink.serialport",
+				"cn.colink.serialport.service.SerialPortService");
+		intent.putExtra("keyEvent", ACTION_MENU_DOWN);
+		context.startService(intent);
 	}
 
 	protected void handleTel() {
@@ -960,7 +963,8 @@ public class KeyDealer {
 				break;
 			case Contacts.KEYEVENT.AIRCONTROLER:
 				mHandler.removeMessages(Contacts.KEYEVENT.AIRCONTROLER);
-				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.AIRCONTROLER, 200);
+				mHandler.sendEmptyMessageDelayed(
+						Contacts.KEYEVENT.AIRCONTROLER, 200);
 				break;
 			case Contacts.KEYEVENT.CARINFO:
 				mHandler.removeMessages(Contacts.KEYEVENT.CARINFO);

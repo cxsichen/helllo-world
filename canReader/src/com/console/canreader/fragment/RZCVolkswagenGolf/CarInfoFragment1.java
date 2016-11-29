@@ -32,7 +32,6 @@ import android.widget.FrameLayout.LayoutParams;
 
 public class CarInfoFragment1 extends BaseFragment {
 
-
 	private String canName = "";
 	private String canFirtName = "";
 
@@ -47,11 +46,12 @@ public class CarInfoFragment1 extends BaseFragment {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
-			if (mCaninfo.CHANGE_STATUS == 10) {	
-				golfView1.showView(mCaninfo);			
+			if (mCaninfo.CHANGE_STATUS == 10) {
+				golfView1.showView(mCaninfo);
 			}
 		}
 	}
+
 	@Override
 	public void serviceConnected() {
 		// TODO Auto-generated method stub
@@ -61,20 +61,15 @@ public class CarInfoFragment1 extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		golfView1 = new GolfView1(getActivity(),
-				R.layout.carinfo_layout_1);
+		golfView1 = new GolfView1(getActivity(), R.layout.carinfo_layout_1);
 		return golfView1.getView();
 	}
-	
+
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
 
 	}
-
-
-
-	
 
 }

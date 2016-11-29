@@ -28,6 +28,7 @@ public class SSHyundai extends AnalyzeUtils {
 	public static final int CAR_INFO_DATA_1 = 0x26;
 	// 车身信息
 	public static final int CAR_INFO_DATA_2 = 0xA6;
+
 	// DataType
 
 	public CanInfo getCanInfo() {
@@ -198,7 +199,7 @@ public class SSHyundai extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
-	
+
 	static String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
@@ -208,11 +209,11 @@ public class SSHyundai extends AnalyzeUtils {
 		} else {
 			carInfoSave_1 = BytesUtil.bytesToHexString(msg);
 		}
-        if((int) (msg[4] & 0xff)==0x09){
-        	mCanInfo.CAR_TYPE=(int) (msg[5] & 0xff);
-        }
+		if ((int) (msg[4] & 0xff) == 0x09) {
+			mCanInfo.CAR_TYPE = (int) (msg[5] & 0xff);
+		}
 	}
-	
+
 	static String carInfoSave_2 = "";
 
 	void analyzeCarInfoData_2(byte[] msg) {
@@ -222,15 +223,15 @@ public class SSHyundai extends AnalyzeUtils {
 		} else {
 			carInfoSave_2 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.EQL_VOLUME=(int) (msg[4] & 0xff);
-		mCanInfo.LR_BALANCE=(int) (msg[5] & 0xff);
-		mCanInfo.FB_BALANCE=(int) (msg[6] & 0xff);
-		mCanInfo.BAS_VOLUME=(int) (msg[7] & 0xff);
-		mCanInfo.MID_VOLUME=(int) (msg[8] & 0xff);
-		mCanInfo.TRE_VOLUME=(int) (msg[9] & 0xff);
-		mCanInfo.EQL_MUTE=(int) (msg[10] & 0xff);
+		mCanInfo.EQL_VOLUME = (int) (msg[4] & 0xff);
+		mCanInfo.LR_BALANCE = (int) (msg[5] & 0xff);
+		mCanInfo.FB_BALANCE = (int) (msg[6] & 0xff);
+		mCanInfo.BAS_VOLUME = (int) (msg[7] & 0xff);
+		mCanInfo.MID_VOLUME = (int) (msg[8] & 0xff);
+		mCanInfo.TRE_VOLUME = (int) (msg[9] & 0xff);
+		mCanInfo.EQL_MUTE = (int) (msg[10] & 0xff);
 	}
-	
+
 	static String VirtualDataSave = "";
 
 	private void analyzeVirtualData(byte[] msg) {

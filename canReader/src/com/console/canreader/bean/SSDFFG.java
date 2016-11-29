@@ -27,8 +27,6 @@ public class SSDFFG extends AnalyzeUtils {
 	// 车身基本信息
 	public static final int CAR_INFO_DATA_3 = 0xF0;
 
-
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
@@ -129,9 +127,9 @@ public class SSDFFG extends AnalyzeUtils {
 			}
 		}
 		if (mCanInfo.STEERING_BUTTON_MODE != temp) {
-			if(temp==8){
-				temp=21;
-			}		
+			if (temp == 8) {
+				temp = 21;
+			}
 			mCanInfo.STEERING_BUTTON_MODE = temp;
 			mCanInfo.CHANGE_STATUS = 2;
 		}
@@ -142,7 +140,7 @@ public class SSDFFG extends AnalyzeUtils {
 			mCanInfo.CHANGE_STATUS = 2;
 		}
 	}
-	
+
 	static String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
@@ -153,7 +151,7 @@ public class SSDFFG extends AnalyzeUtils {
 		} else {
 			carInfoSave_3 = BytesUtil.bytesToHexString(msg);
 		}
-		
+
 		int len = ((int) msg[2] & 0xFF);
 		byte[] acscii = new byte[len];
 		for (int i = 0; i < len; i++) {
@@ -166,7 +164,6 @@ public class SSDFFG extends AnalyzeUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
 

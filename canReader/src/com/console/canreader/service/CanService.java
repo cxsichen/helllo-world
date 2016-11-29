@@ -88,7 +88,7 @@ public class CanService extends Service {
 				if (info != null)
 					if (info.getCanInfo() != null)
 						if (info.getCanInfo().CHANGE_STATUS != 8888)
-							dealCanInfo();
+							dealCanInfo(info);
 				break;
 			case Contacts.MSG_MSG_CYCLE:
 				sendCycleMsg();
@@ -100,14 +100,14 @@ public class CanService extends Service {
 	};
 
 	// 处理接收到的Can信息
-	private void dealCanInfo() {
+	private void dealCanInfo(AnalyzeUtils info2) {
 		// TODO Auto-generated method stub
 		// 发送can信息到客户端
 		final int N = mCallbacks.beginBroadcast();
 		try {
 			for (int i = 0; i < N; i++)
 				mCallbacks.getBroadcastItem(i).readDataFromServer(
-						info.getCanInfo());
+						info2.getCanInfo());
 		} catch (RemoteException e) {
 			// The RemoteCallbackList will take care of removing
 			// the dead object for us.
@@ -116,12 +116,12 @@ public class CanService extends Service {
 
 		// 发送can信息到客户端2
 		if (mReaderCallback != null) {
-			mReaderCallback.Callback(info.getCanInfo());
+			mReaderCallback.Callback(info2.getCanInfo());
 		}
 
 		if (info.getCanInfo().CHANGE_STATUS == 20) {
 			DialogCreater.dealPanoramaEvent(CanService.this, // 360全景处理
-					info.getCanInfo());
+					info2.getCanInfo());
 		}
 
 		// 根据can信息处理事件
@@ -131,17 +131,17 @@ public class CanService extends Service {
 			DialogCreater.showUnlockWaringDialog(CanService.this, // 车门报警事件处理
 																	// 比较重要
 																	// 故都处理一下
-					info.getCanInfo());
-			switch (info.getCanInfo().CHANGE_STATUS) {
+					info2.getCanInfo());
+			switch (info2.getCanInfo().CHANGE_STATUS) {
 			case 2:
 				mKeyDealer = KeyDealer.getInstance(CanService.this); // 按键事件处理
-				mKeyDealer.dealCanKeyEvent(CanService.this, info.getCanInfo());
+				mKeyDealer.dealCanKeyEvent(CanService.this, info2.getCanInfo());
 				break;
 			case 3:
 				if (info.getCanInfo().AIR_CONDITIONER_CONTROL == 0) { // 像标致的空调有单独的控制界面
 																		// 则AIR_CONDITIONER_CONTROL置1，不弹界面
 					DialogCreater.showAirConDialog(CanService.this,
-							info.getCanInfo(), // 空调事件处理
+							info2.getCanInfo(), // 空调事件处理
 							new CallBack() {
 
 								@Override
@@ -155,11 +155,15 @@ public class CanService extends Service {
 				break;
 			case 10:
 				DialogCreater.showUnlockWaringInfo(CanService.this, // 车身信息报警处理
-						info.getCanInfo());
+						info2.getCanInfo());
 				break;
 			case 12:
 				DialogCreater.showCarInfoWaring(CanService.this, // 标致408显示报警信息
-						info.getCanInfo());
+						info2.getCanInfo());
+				break;
+			case 13:
+				DialogCreater.showFloatCarInfoWaring(CanService.this, // 显示浮窗报警信息
+						info2.getCanInfo());
 				break;
 			default:
 				break;
@@ -954,10 +958,26 @@ public class CanService extends Service {
 		int hour = c.get(Calendar.HOUR_OF_DAY);
 		int minute = c.get(Calendar.MINUTE);
 		int second = c.get(Calendar.SECOND);
-		writeCanPort(BytesUtil.addRZCCheckBit(str + BytesUtil.changIntHex(year%2000)
-				+ BytesUtil.changIntHex(mouth) + BytesUtil.changIntHex(date)
+		writeCanPort(BytesUtil.addRZCCheckBit(str
+				+ BytesUtil.changIntHex(year % 2000)
+				+ BytesUtil.changIntHex(mouth+1) + BytesUtil.changIntHex(date)
 				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
-				+ BytesUtil.changIntHex(second)+"01"));
+				+ BytesUtil.changIntHex(second) + "01"));
+	}
+	
+	private void syncTimeWithMsgMGGS() {
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int mouth = c.get(Calendar.MONTH);
+		int date = c.get(Calendar.DATE);
+
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int minute = c.get(Calendar.MINUTE);
+		writeCanPort(BytesUtil.addSSCheckBit("5AA50ACB"
+				+ BytesUtil.changIntHex(year% 2000)
+				+ BytesUtil.changIntHex(mouth+1) + BytesUtil.changIntHex(date)
+				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
+				+ "0100000000"));	
 	}
 
 	/**
@@ -1005,6 +1025,12 @@ public class CanService extends Service {
 				break;
 			case Contacts.CANNAMEGROUP.SSHonda12CRV:
 				syncTimeWithMsg("AA5503B5"); // 本田同步时间
+				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
+						1000 * 60);
+				break;
+			case Contacts.CANNAMEGROUP.SSMGGS:
+				syncTimeWithMsgMGGS(); // 名爵锐腾同步时间
 				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
 						1000 * 60);

@@ -15,9 +15,12 @@ public class CanInfo implements Parcelable {
 	 * BACK_RADER_DATA-------------------mCanInfo.CHANGE_STATUS = 4 后雷达状态
 	 * FRONT_RADER_DATA------------------mCanInfo.CHANGE_STATUS = 5 前雷达状态
 	 * RADAR_DATA------------------------mCanInfo.CHANGE_STATUS = 11 雷达状态（前后都有）
-	 * STEERING_TURN_DA+TA----------------mCanInfo.CHANGE_STATUS = 8 方向盘状态
+	 * STEERING_TURN_DATA----------------mCanInfo.CHANGE_STATUS = 8 方向盘状态
 	 * CAR_INFO_DATA---------------------mCanInfo.CHANGE_STATUS = 10
 	 * 报警状态（车门报警，车身信息报警） 车身信息
+	 * WARING_DIALOG_DATA----------------mCanInfo.CHANGE_STATUS = 12 408报警信息
+	 * WARING_DIALOG_DATA----------------mCanInfo.CHANGE_STATUS = 13 报警信息
+	 * PANORAMA_DATA---------------------mCanInfo.CHANGE_STATUS = 20 360全景
 	 */
 
 	public int CHANGE_STATUS = 8888;
@@ -96,8 +99,8 @@ public class CanInfo implements Parcelable {
 	 */
 
 	public int PARKING_ASSIT_STATUS = 0;
-	public int RADAR_ALARM_STATUS = 1; // 1为显示 0为不显示
-	public int RADAR_ALARM_STATUS_ENABLE=0;			//倒车雷达开关 1有效 0无效
+	public int RADAR_ALARM_STATUS = 1; // 雷达报警 1为显示 0为不显示
+	public int RADAR_ALARM_STATUS_ENABLE=0;			
 	/*
 	 * 方向盘转角
 	 */
@@ -124,7 +127,7 @@ public class CanInfo implements Parcelable {
 	public int BACK_RIGHT_SAFETY_BELT_STATUS = -1; //后右安全带状态 0正常 1报警
 	public int DISINFECTON_STATUS = -1; // 清洁液状态 -1表示无此功能
 	public int HANDBRAKE_STATUS = -1; // 手刹状态 0正常 1报警
-
+ 
 	public int HOOD_STATUS = 0; // 引擎盖 0关 1开
 	public int TRUNK_STATUS = 0; // 后盖报警
 	public int RIGHT_BACKDOOR_STATUS = 0; // 右后门
@@ -224,7 +227,10 @@ public class CanInfo implements Parcelable {
 	public int TPMS_FR_WARING = 0; // 前右车轮报警
 	public int TPMS_BL_WARING = 0; // 后左车轮报警
 	public int TPMS_BR_WARING = 0; // 后右车轮报警
-
+	
+	public String WARING_MSG = ""; // 报警字符串
+	public int WARING_MSG_STATUS = 0; // 报警类型
+	
 	public String VERSION = ""; // 软件版本
 
 	public int IS_POWER_MIXING = 0; // 汽车动力类型 1为油电混合
@@ -235,7 +241,13 @@ public class CanInfo implements Parcelable {
 	public int ENGINE_DRIVE_WHEEL = 0; // 发动机驱动车轮
 	public int BATTERY_DRIVE_MOTOR = 0; // 电池驱动马达
 	public int WHEEL_DRIVE_MOTOR = 0; // 车轮驱动马达
-
+	
+	/*----门锁 状态-----*/
+	public int FRONT_LEFT_DOORLOCK = 0; // 左前门锁
+	public int FRONT_RIGHT_DOORLOCK = 0; // 右前门锁
+	public int BACK_LEFT_DOORLOCK = 0; // 左后门锁
+	public int BACK_RIGHT_DOORLOCK = 0; // 右后门锁
+	
 	/*-----行程  油耗-----*/
 	public float TRIP_OIL_CONSUMPTION_0 = 0;
 	public float TRIP_OIL_CONSUMPTION_1 = 0;
@@ -375,6 +387,17 @@ public class CanInfo implements Parcelable {
 	public int FRONT_LAMP_OFF_TIME = 0; //前大灯自动熄灭时间
 	public int LAMP_TURN_DARK_TIME = 0; //车内灯光减光时间
 	
+	public int LOW_BEAM=0;//近光灯
+	public int HIGH_BEAM=0;//远光灯
+	public int CLEARANCE_LAMP=0;//示宽灯 
+	public int FRONT_FOG_LAMP=0;//前雾灯 
+	public int REAR_FOG_LAMP=0;//后雾灯 
+	public int STOP_LAMP=0;//刹车灯
+	public int PARKING_LAMP=0;//倒车灯
+	public int DAYTIME_RUNNING_LAMP=0;//日间行车灯
+	public int RIGHT_TURNING_SIGNAL_LAMP=0;//右转向灯
+	public int LEFT_TURNING_SIGNAL_LAMP=0;//左转向灯
+	public int DOUBLE_FLASH_LAMP=0;//双闪灯
 	/*--  多媒体信息-----*/
 	public int MULTI_MEIDA_SOURCE=0;           //当前源
 	public int MULTI_MEIDA_PLAYING_NUM=0;       //当前播放曲目
@@ -403,6 +426,15 @@ public class CanInfo implements Parcelable {
 	public int LIGHT_LIGHT_COLOR=0;   //车灯颜色
 	public int LIGHT_ALL_AREA=0;   //所有区域
 	
+	public int LIGHT_COMING_HOME_BACKUP=0;         //伴我回家倒车灯
+	public int LIGHT_COMING_HOME_DIPPED=0;         //伴我回家近光灯
+	public int LIGHT_COMING_HOME_REARFOG=0;         //伴我回家后雾灯
+	public int LIGHT_SEEK_CAR_BACKUP=0;         //寻车灯指示倒车灯
+	public int LIGHT_SEEK_CAR_DIPPED=0;         //寻车灯指示近光灯
+	public int LIGHT_SEEK_CAR_REARFOG=0;         //寻车灯指示后雾灯
+	
+	public int LIGHT_COMING_HOME_TIME=0;         //伴我回家持续时间
+	public int LIGHT_SEEK_CAR_TIME=0;         //寻车灯指示灯持续时间
 	/*--  后视镜和刮水器-----*/
 	public int MIRROR_SYNC_ADJUST=0;    //后视镜同步调节 
 	public int MIRROR_LOWER_WHILE_REVERSING=0;   //倒车档时后视镜降低 
@@ -542,6 +574,8 @@ public class CanInfo implements Parcelable {
 	public int TYPES_SPEED_WARNING=0;             //TYPES速度预警
 	public int TYPES_SPEED_UNIT=0;             //TYPES速度单位
 	public int TYPES_SPEED=0;             //TYPES速度
+	
+	public int THROTTLE_CONTROL=0;        //节气门位置 
 	/*-------------------add by xyw start----------------------------------*/
 	public int CAR_GEAR_STATUS = -1;							//车身档位，-1表示无效 1P 2N 3R 4D 5S
 	public int CAR_BACK_STATUS = -1;							//倒车状态          0非倒档    1倒挡

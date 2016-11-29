@@ -46,8 +46,6 @@ public class RZCRoewe360 extends AnalyzeUtils {
 	// 环境温度信息
 	public static int AMBIENT_TEMP_INFO = 0x51;
 
-
-
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}

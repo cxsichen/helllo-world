@@ -92,7 +92,6 @@ public class BaseFragment extends Fragment {
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 	}
-	
 
 	/**
 	 * 服务链接时调用

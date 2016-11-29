@@ -36,23 +36,29 @@ import android.widget.FrameLayout.LayoutParams;
 public class CarInfoFragment5 extends BaseFragment {
 
 	private LayoutInflater inflater;
-    TextView tv;
-    TextView tv1;
-    ProgressBar mSeekBar;
+	TextView tv;
+	TextView tv1;
+	ProgressBar mSeekBar;
+
 	public CarInfoFragment5() {
 
 	}
-    String[] str={"L/100km","km/L","mpg(UK)","mpg(US)"};
+
+	String[] str = { "L/100km", "km/L", "mpg(UK)", "mpg(US)" };
+
 	@Override
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
 			if (mCaninfo.CHANGE_STATUS == 10) {
-				tv.setText(mCaninfo.CONVENIENCE_CONSUMERS_UNIT==1?"l/h":"gal/h");
-				mSeekBar.setMax(mCaninfo.CONVENIENCE_CONSUMERS_UNIT==1?1000:250);
+				tv.setText(mCaninfo.CONVENIENCE_CONSUMERS_UNIT == 1 ? "l/h"
+						: "gal/h");
+				mSeekBar.setMax(mCaninfo.CONVENIENCE_CONSUMERS_UNIT == 1 ? 1000
+						: 250);
 				mSeekBar.setProgress(mCaninfo.CONVENIENCE_CONSUMERS);
-				tv1.setText(mCaninfo.INSTANT_CONSUMPTION+str[mCaninfo.INSTANT_CONSUMPTION_UNIT]);
+				tv1.setText(mCaninfo.INSTANT_CONSUMPTION
+						+ str[mCaninfo.INSTANT_CONSUMPTION_UNIT]);
 			}
 		}
 	}
@@ -68,9 +74,9 @@ public class CarInfoFragment5 extends BaseFragment {
 			Bundle savedInstanceState) {
 		inflater = LayoutInflater.from(getActivity());
 		View view = inflater.inflate(R.layout.rzc_golf_layout, null);
-		mSeekBar=(ProgressBar) view.findViewById(R.id.golf_seekbar);
-		tv=(TextView) view.findViewById(R.id.golf_tv);
-		tv1=(TextView) view.findViewById(R.id.golf_tv1);
+		mSeekBar = (ProgressBar) view.findViewById(R.id.golf_seekbar);
+		tv = (TextView) view.findViewById(R.id.golf_tv);
+		tv1 = (TextView) view.findViewById(R.id.golf_tv1);
 		return view;
 	}
 

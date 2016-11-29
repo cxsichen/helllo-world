@@ -32,9 +32,10 @@ public class CrashLogUtils {
 	 * @param ex
 	 * @throws JSONException
 	 * @throws UnsupportedEncodingException
-	 * 上传log到服务器.
+	 *             上传log到服务器.
 	 */
-	public static void postCrashLog(Context context, Throwable ex) throws JSONException, UnsupportedEncodingException {
+	public static void postCrashLog(Context context, Throwable ex)
+			throws JSONException, UnsupportedEncodingException {
 		String crashReportStr = getCrashReport(context, ex);
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String date = df.format(new Date());
@@ -46,7 +47,8 @@ public class CrashLogUtils {
 		datanode.put("crashReportStr", crashReportStr);
 		datanode.put("date", date);
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpPost httpPost = new HttpPost("http://alunchering/AndroidCrashCollector/crashlog");
+		HttpPost httpPost = new HttpPost(
+				"http://alunchering/AndroidCrashCollector/crashlog");
 		httpPost.setHeader("Content-Type", "application/json");
 		httpPost.setEntity(new StringEntity(datanode.toString(), "UTF-8"));
 		try {
@@ -66,8 +68,11 @@ public class CrashLogUtils {
 	 * @param ex
 	 * @return
 	 */
-	private static final String LOG_DIR_PATH = Environment.getExternalStorageDirectory().toString() + "/cxs_log/";
-	public static void saveLogToFile(Context context, Throwable ex) throws JSONException, UnsupportedEncodingException {
+	private static final String LOG_DIR_PATH = Environment
+			.getExternalStorageDirectory().toString() + "/cxs_log/";
+
+	public static void saveLogToFile(Context context, Throwable ex)
+			throws JSONException, UnsupportedEncodingException {
 		String status = Environment.getExternalStorageState();
 		if (!status.equals(Environment.MEDIA_MOUNTED))
 			return;
@@ -77,8 +82,9 @@ public class CrashLogUtils {
 		}
 		String crashReportStr = getCrashReport(context, ex);
 		try {
-			//保存名字�? 包名 + 时间.
-			String path = LOG_DIR_PATH + getAppInfo(context) + timeStr() + ".txt";
+			// 保存名字�? 包名 + 时间.
+			String path = LOG_DIR_PATH + getAppInfo(context) + timeStr()
+					+ ".txt";
 			FileWriter fw = new FileWriter(path);
 			fw.write(crashReportStr);
 			fw.flush();
@@ -99,7 +105,8 @@ public class CrashLogUtils {
 	public static String getVersion(Context context) {
 		try {
 			PackageManager manager = context.getPackageManager();
-			PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+			PackageInfo info = manager.getPackageInfo(context.getPackageName(),
+					0);
 			String version = info.versionName;
 			return version;
 		} catch (Exception e) {
@@ -111,16 +118,19 @@ public class CrashLogUtils {
 	private static String getAppInfo(Context context) {
 		try {
 			String pkName = context.getPackageName();
-			String versionName = context.getPackageManager().getPackageInfo(pkName, 0).versionName;
-	//		int versionCode = context.getPackageManager().getPackageInfo(pkName, 0).versionCode;
-			return pkName + "_"+versionName;
+			String versionName = context.getPackageManager().getPackageInfo(
+					pkName, 0).versionName;
+			// int versionCode =
+			// context.getPackageManager().getPackageInfo(pkName,
+			// 0).versionCode;
+			return pkName + "_" + versionName;
 		} catch (Exception e) {
 		}
 		return null;
 	}
 
 	public static String timeStr() {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH-MM-SS");//设置日期格式
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH-MM-SS");// 设置日期格式
 		return df.format(new Date());
 	}
 }

@@ -56,27 +56,27 @@ public class OnstarSettingsFragment extends BaseFragment implements
 	Button button1;
 	Button button2;
 	Button button3;
-	
+
 	List<View> list = new ArrayList<View>();
 	private SoundPool soundPool;
 	private TextView phone_view;
 	Context mcontext;
-	
-	public static final String NUMBER_0="0";
-	public static final String NUMBER_1="1";
-	public static final String NUMBER_2="2";
-	public static final String NUMBER_3="3";
-	public static final String NUMBER_4="4";
-	public static final String NUMBER_5="5";
-	public static final String NUMBER_6="6";
-	public static final String NUMBER_7="7";
-	public static final String NUMBER_8="8";
-	public static final String NUMBER_9="9";
+
+	public static final String NUMBER_0 = "0";
+	public static final String NUMBER_1 = "1";
+	public static final String NUMBER_2 = "2";
+	public static final String NUMBER_3 = "3";
+	public static final String NUMBER_4 = "4";
+	public static final String NUMBER_5 = "5";
+	public static final String NUMBER_6 = "6";
+	public static final String NUMBER_7 = "7";
+	public static final String NUMBER_8 = "8";
+	public static final String NUMBER_9 = "9";
 
 	String[] strGp1 = { "关闭", "来电中", "去电中", "已经连接", "空闲" };
 	String[] strGp2 = { "普通通话", "碰撞通话", "紧急通话", "路旁协助" };
-	String[] strGp3 = { "Disaster", "Amber", "Traffic", "Weather",
-			     "Generic","Campaign","Reminder"};
+	String[] strGp3 = { "Disaster", "Amber", "Traffic", "Weather", "Generic",
+			"Campaign", "Reminder" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,7 +84,7 @@ public class OnstarSettingsFragment extends BaseFragment implements
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.ssge_onstar_layout, container,
 				false);
-		mcontext=getActivity();
+		mcontext = getActivity();
 		if (soundPool == null) {
 			initSound();
 		}
@@ -92,7 +92,7 @@ public class OnstarSettingsFragment extends BaseFragment implements
 		initFragment();
 		return view;
 	}
-	
+
 	public void initSound() {
 		soundPool = new SoundPool(12, AudioManager.STREAM_DTMF, 2);
 		soundPool.load(mcontext, R.raw.dtmf_0, 1);
@@ -136,8 +136,10 @@ public class OnstarSettingsFragment extends BaseFragment implements
 						+ "年" + mCaninfo.ONSTAR_EFFECTTIME_MOUTH + "月"
 						+ mCaninfo.ONSTAR_EFFECTTIME_DAY + "日");
 
-				tv6.setText("信息状态："+((mCaninfo.ONSTAR_WARING_STATUS==1)?"Active":"Off"));
-				tv7.setText("信息类型："+strGp3[mCaninfo.ONSTAR_WARING_TYPE]);
+				tv6.setText("信息状态："
+						+ ((mCaninfo.ONSTAR_WARING_STATUS == 1) ? "Active"
+								: "Off"));
+				tv7.setText("信息类型：" + strGp3[mCaninfo.ONSTAR_WARING_TYPE]);
 				tv8.setText(mCaninfo.ONSTAR_RECEIVE_PHONE);
 			}
 		} catch (Exception e) {
@@ -145,7 +147,7 @@ public class OnstarSettingsFragment extends BaseFragment implements
 		}
 
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
@@ -170,7 +172,7 @@ public class OnstarSettingsFragment extends BaseFragment implements
 		tv5 = (TextView) view.findViewById(R.id.tv5);
 		tv6 = (TextView) view.findViewById(R.id.tv6);
 		tv7 = (TextView) view.findViewById(R.id.tv7);
-		tv8= (TextView) view.findViewById(R.id.tv8);
+		tv8 = (TextView) view.findViewById(R.id.tv8);
 
 		button = (Button) view.findViewById(R.id.button);
 		button1 = (Button) view.findViewById(R.id.button1);
@@ -180,8 +182,7 @@ public class OnstarSettingsFragment extends BaseFragment implements
 		button1.setOnClickListener(this);
 		button2.setOnClickListener(this);
 		button3.setOnClickListener(this);
-		
-		
+
 		phone_view = (TextView) view.findViewById(R.id.dial_num);
 
 		list.add(view.findViewById(R.id.a0));
@@ -293,14 +294,13 @@ public class OnstarSettingsFragment extends BaseFragment implements
 			break;
 		}
 	}
-	
+
 	private void input(String str) {
 		String p = phone_view.getText().toString();
 		phone_view.setText(p + str);
-		sendMsg("5AA502BA04"+BytesUtil.parseAscii(str));
+		sendMsg("5AA502BA04" + BytesUtil.parseAscii(str));
 
 	}
-	
 
 	private void delete() {
 		String p = phone_view.getText().toString();
@@ -313,14 +313,14 @@ public class OnstarSettingsFragment extends BaseFragment implements
 		if (phone.trim().length() == 13) {
 			phone = "+" + phone;
 		}
-		int temp=phone.length();
-		StringBuffer buffer=new StringBuffer();
-		if(temp<32){
-			for(int i=temp;i<32;i++){
+		int temp = phone.length();
+		StringBuffer buffer = new StringBuffer();
+		if (temp < 32) {
+			for (int i = temp; i < 32; i++) {
 				buffer.append("00");
 			}
 		}
-		sendMsg("5AA520BB"+BytesUtil.parseAscii(phone)+buffer.toString());
+		sendMsg("5AA520BB" + BytesUtil.parseAscii(phone) + buffer.toString());
 
 	}
 

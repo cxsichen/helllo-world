@@ -89,8 +89,8 @@ public class GS5CarEnableInfoFragment extends BaseFragment {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.trumpchigs5_enable_prefs);
 			initView();
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
+			if (settingActivity != null) {
+				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}

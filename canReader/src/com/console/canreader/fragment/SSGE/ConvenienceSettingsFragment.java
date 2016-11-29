@@ -90,9 +90,9 @@ public class ConvenienceSettingsFragment extends BaseFragment {
 				"CONVENIENCE_OUTERMIRROR_PARK_FOLD",
 				"CONVENIENCE_DRIVER_PRIVATE_SETTING",
 				"CONVENIENCE_REVERSE_BACKWIPE_AUTO",
-				"CONVENIENCE_RIPE_PARK_LEAN","CONVENIENCE_AUTO_WIPE" };
+				"CONVENIENCE_RIPE_PARK_LEAN", "CONVENIENCE_AUTO_WIPE" };
 		String[] swPreMsg = { "5AA5025A01", "5AA5025A02", "5AA5025A04",
-				"5AA5025A05", "5AA5025A06", "5AA5025A07","5AA5025A08" };
+				"5AA5025A05", "5AA5025A06", "5AA5025A07", "5AA5025A08" };
 
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();

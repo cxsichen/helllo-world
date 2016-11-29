@@ -42,6 +42,7 @@ public class SSFord extends AnalyzeUtils {
 	public static final int STEERING_BUTTON_DATA_2 = 0x21;
 	// ·½ÏòÅÌ°´¼ü
 	public static final int STEERING_BUTTON_DATA_3 = 0x22;
+
 	// DataType
 
 	public CanInfo getCanInfo() {
@@ -119,13 +120,13 @@ public class SSFord extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
-	
+
 	static String SteeringButtonStatusDataSave_2 = "";
 
 	void analyzeSteeringButtonData_2(byte[] msg) {
 		// TODO Auto-generated method stub
-		if (SteeringButtonStatusDataSave_2
-				.equals(BytesUtil.bytesToHexString(msg))) {
+		if (SteeringButtonStatusDataSave_2.equals(BytesUtil
+				.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
 			return;
 		} else {
@@ -215,25 +216,24 @@ public class SSFord extends AnalyzeUtils {
 			mCanInfo.STEERING_BUTTON_MODE = 0;
 			break;
 		}
-     
+
 		mCanInfo.STEERING_BUTTON_STATUS = (int) (msg[5] & 0xFF);
 	}
-	
+
 	static String SteeringButtonStatusDataSave_3 = "";
 
 	void analyzeSteeringButtonData_3(byte[] msg) {
 		// TODO Auto-generated method stub
-		if (SteeringButtonStatusDataSave_3
-				.equals(BytesUtil.bytesToHexString(msg))) {
+		if (SteeringButtonStatusDataSave_3.equals(BytesUtil
+				.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
 			return;
 		} else {
 			SteeringButtonStatusDataSave_3 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.CAR_VOLUME_KNOB=msg[5] & 0xff;
-		mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUME;	
+		mCanInfo.CAR_VOLUME_KNOB = msg[5] & 0xff;
+		mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUME;
 	}
-
 
 	static String SteeringButtonStatusDataSave = "";
 
@@ -513,7 +513,7 @@ public class SSFord extends AnalyzeUtils {
 					+ (int) ((msg[9]) & 0xff) * 256 + (int) ((msg[10]) & 0xff);
 		}
 	}
-	
+
 	static String carInfoSave_7 = "";
 
 	void analyzeCarInfoData_7(byte[] msg) {
@@ -536,7 +536,6 @@ public class SSFord extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
-	
 
 	static String carInfoSave_1 = "";
 

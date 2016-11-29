@@ -92,9 +92,9 @@ public class GS4CarEnableInfoFragment extends BaseFragment {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.trumpchigs4_enable_prefs);
 			initView();
-			
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
+
+			if (settingActivity != null) {
+				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}

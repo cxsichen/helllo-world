@@ -83,8 +83,8 @@ public class UnlockWaringDialog extends Dialog {
 		rlDoor = (ImageView) mRootlayout.findViewById(R.id.rlDoor);
 		rrDoor = (ImageView) mRootlayout.findViewById(R.id.rrDoor);
 		doorInfo = (TextView) mRootlayout.findViewById(R.id.door_info);
-		trunk= (ImageView) mRootlayout.findViewById(R.id.trunk_status);
-		hood= (ImageView) mRootlayout.findViewById(R.id.hood_status);
+		trunk = (ImageView) mRootlayout.findViewById(R.id.trunk_status);
+		hood = (ImageView) mRootlayout.findViewById(R.id.hood_status);
 		closeButton.setOnClickListener(onClickListener);
 	}
 
@@ -101,7 +101,7 @@ public class UnlockWaringDialog extends Dialog {
 		rrDoor.setVisibility(View.INVISIBLE);
 		trunk.setVisibility(View.INVISIBLE);
 		hood.setVisibility(View.INVISIBLE);
-		
+
 		if (canInfo.RIGHT_BACKDOOR_STATUS == 1)
 			rrDoor.setVisibility(View.VISIBLE);
 		if (canInfo.LEFT_BACKDOOR_STATUS == 1)
@@ -118,12 +118,13 @@ public class UnlockWaringDialog extends Dialog {
 		if (canInfo.RIGHT_BACKDOOR_STATUS == 0
 				&& canInfo.LEFT_BACKDOOR_STATUS == 0
 				&& canInfo.RIGHT_FORONTDOOR_STATUS == 0
-				&& canInfo.LEFT_FORONTDOOR_STATUS == 0&&canInfo.TRUNK_STATUS == 0&&canInfo.HOOD_STATUS == 0) {
-			mHandler.sendEmptyMessageDelayed(Contacts.MSG_DIGLOG_HIDE,100 );
-		}else{
+				&& canInfo.LEFT_FORONTDOOR_STATUS == 0
+				&& canInfo.TRUNK_STATUS == 0 && canInfo.HOOD_STATUS == 0) {
+			mHandler.sendEmptyMessageDelayed(Contacts.MSG_DIGLOG_HIDE, 100);
+		} else {
 			mHandler.removeMessages(Contacts.MSG_DIGLOG_HIDE);
 		}
-		
+
 	}
 
 }

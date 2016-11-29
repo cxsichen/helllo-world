@@ -15,9 +15,9 @@ public class SSTrumpchiGS5PanoramaAcitivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-			TextView tv = new TextView(this);
-			tv.setText("gs55PanoramaAcitivity");
-			setContentView(tv);
+		TextView tv = new TextView(this);
+		tv.setText("gs55PanoramaAcitivity");
+		setContentView(tv);
 	}
 
 	@Override

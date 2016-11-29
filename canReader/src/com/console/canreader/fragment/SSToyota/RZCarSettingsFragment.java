@@ -55,7 +55,7 @@ public class RZCarSettingsFragment extends BaseFragment {
 					settingsFragment.syncView(mCaninfo);
 				} catch (Exception e) {
 					// TODO: handle exception
-				}				
+				}
 			}
 		}
 
@@ -72,7 +72,7 @@ public class RZCarSettingsFragment extends BaseFragment {
 	}
 
 	public class SettingsFragment extends PreferenceFragment implements
-	OnPreferenceChangeListener {
+			OnPreferenceChangeListener {
 
 		SwitchPreference p1;
 		RZCarSettingsFragment oilEleActivity;
@@ -88,41 +88,42 @@ public class RZCarSettingsFragment extends BaseFragment {
 			addPreferencesFromResource(R.xml.sstoyotarz_setting_prefs);
 			p1 = (SwitchPreference) findPreference("AUTO_OPEN_LOCK");
 			p1.setOnPreferenceChangeListener(this);
-			
-			if(oilEleActivity!=null){
-				if(oilEleActivity.getCanInfo()!=null)
+
+			if (oilEleActivity != null) {
+				if (oilEleActivity.getCanInfo() != null)
 					syncView(oilEleActivity.getCanInfo());
 			}
 		}
 
 		public void syncView(CanInfo mCaninfo) {
-			p1.setChecked(mCaninfo.AUTO_OPEN_LOCK==0);
+			p1.setChecked(mCaninfo.AUTO_OPEN_LOCK == 0);
 		}
-		
-		private void updatePreferenceDescription(ListPreference preference,int currentTimeout) {
-	        String summary;
-	            final CharSequence[] entries = preference.getEntries();
-	            final CharSequence[] values = preference.getEntryValues();
-	            if (entries == null || entries.length == 0) {
-	                summary = "";
-	            } else {
-	                int best = 0;
-	                for (int i = 0; i < values.length; i++) {
-	                    int timeout = Integer.parseInt(values[i].toString());
-	                    if (currentTimeout == timeout) {
-	                        best = i;
-	                        break;
-	                    }
-	                }
-		            if (entries.length != 0) {
-		                summary =  entries[best].toString();
-		            } else {
-		                summary = "";
-		            }
 
-	            }
-	        preference.setSummary(summary);
-	    }
+		private void updatePreferenceDescription(ListPreference preference,
+				int currentTimeout) {
+			String summary;
+			final CharSequence[] entries = preference.getEntries();
+			final CharSequence[] values = preference.getEntryValues();
+			if (entries == null || entries.length == 0) {
+				summary = "";
+			} else {
+				int best = 0;
+				for (int i = 0; i < values.length; i++) {
+					int timeout = Integer.parseInt(values[i].toString());
+					if (currentTimeout == timeout) {
+						best = i;
+						break;
+					}
+				}
+				if (entries.length != 0) {
+					summary = entries[best].toString();
+				} else {
+					summary = "";
+				}
+
+			}
+			preference.setSummary(summary);
+		}
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -131,8 +132,9 @@ public class RZCarSettingsFragment extends BaseFragment {
 			switch (key) {
 			case "AUTO_OPEN_LOCK":
 				if (oilEleActivity != null) {
-					Log.i("cxs1","====onPreferenceChange=========="+key);
-					oilEleActivity.sendMsg("5AA5036A0102"+((boolean) newValue ?"00":"01"));
+					Log.i("cxs1", "====onPreferenceChange==========" + key);
+					oilEleActivity.sendMsg("5AA5036A0102"
+							+ ((boolean) newValue ? "00" : "01"));
 				}
 				break;
 			default:

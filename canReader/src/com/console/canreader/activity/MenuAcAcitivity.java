@@ -78,6 +78,9 @@ public class MenuAcAcitivity extends BaseActivity {
 			finish();
 		}
 		switch (canName) {
+		case Contacts.CANNAMEGROUP.SSMGGS:
+			startAcAcitivy("com.console.canreader.fragment.SSMGGS.AirContorlActivity");
+			break;
 		case Contacts.CANNAMEGROUP.SSGE:
 			startAcAcitivy("com.console.canreader.fragment.SSGE.AirContorlActivity");
 			break;

@@ -24,9 +24,9 @@ import com.console.canreader.view.ObdView;
 import com.console.canreader.view.ViewPageFactory;
 
 public class DrivingDataActivity extends BaseActivity {
-		
+
 	private TextView version;
-	
+
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -38,8 +38,7 @@ public class DrivingDataActivity extends BaseActivity {
 			}
 		}
 	};
-	
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -47,46 +46,41 @@ public class DrivingDataActivity extends BaseActivity {
 		setContentView(R.layout.only_version_layout);
 		initView();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 2000);
 	}
-	
+
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
 	}
-	
+
 	@Override
 	public void show(CanInfo mCaninfo) {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
-		if(mCaninfo!=null){
-			if(!mCaninfo.VERSION.equals(version.getText())){
+		if (mCaninfo != null) {
+			if (!mCaninfo.VERSION.equals(version.getText())) {
 				version.setText(mCaninfo.VERSION);
 			}
 		}
 
-
 	}
-	
+
 	@Override
 	public void serviceConnected() {
 		// TODO Auto-generated method stub
 		super.serviceConnected();
 		mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 1000);
 	}
-	
+
 	private void initView() {
 		version = (TextView) findViewById(R.id.Jingkoo_version);
 	}
-
-
-
-
 
 }

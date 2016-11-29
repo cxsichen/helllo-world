@@ -13,7 +13,6 @@ import com.console.canreader.view.ViewPageFactory;
 
 public class PeuAirConView extends ViewPageFactory {
 
-
 	Context mContext;
 	DecimalFormat fnum = new DecimalFormat("##0.00");
 
@@ -31,7 +30,6 @@ public class PeuAirConView extends ViewPageFactory {
 	@Override
 	public void showView(CanInfo caninfo) {
 		// TODO Auto-generated method stub
-
 
 	}
 

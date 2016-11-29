@@ -1,7 +1,5 @@
 package com.console.canreader.view;
 
-
-
 import com.console.canreader.R;
 import com.console.canreader.utils.DensityUtils;
 
@@ -168,7 +166,7 @@ public class CarSelectedView extends View {
 					rowLineGroup.startY + rowLineGroup.intervals * mRowIndex
 							- thumbHeight / 2, null);
 		} else {
-			//根据触碰点画�? 被放�?
+			// 根据触碰点画�? 被放�?
 			canvas.drawLine(rowLineGroup.startX, touchY
 					- rowLineGroup.lineWidth, rowLineGroup.stopX, touchY
 					- rowLineGroup.lineWidth, mBoldLinePaint);
@@ -200,9 +198,11 @@ public class CarSelectedView extends View {
 		mRowIndex = Math.round((event.getY() - rowLineGroup.startX)
 				/ rowLineGroup.intervals);
 		checkPosition(mColumnIndex, mRowIndex);
-		if(event.getAction()==MotionEvent.ACTION_UP&&mOnPositionChangedListener != null){
-			//初始行被空出来了
-			mOnPositionChangedListener.OnChange(mColumnIndex-1, mRowIndex-1);
+		if (event.getAction() == MotionEvent.ACTION_UP
+				&& mOnPositionChangedListener != null) {
+			// 初始行被空出来了
+			mOnPositionChangedListener
+					.OnChange(mColumnIndex - 1, mRowIndex - 1);
 		}
 		invalidate();
 		return true;
@@ -215,8 +215,8 @@ public class CarSelectedView extends View {
 	}
 
 	public void setPosition(int mColumnIndex, int mRowIndex) {
-		this.mColumnIndex = mColumnIndex+1;
-		this.mRowIndex = mRowIndex+1;
+		this.mColumnIndex = mColumnIndex + 1;
+		this.mRowIndex = mRowIndex + 1;
 		checkPosition(this.mColumnIndex, this.mRowIndex);
 		invalidate();
 	}

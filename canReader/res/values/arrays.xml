@@ -1505,11 +1505,9 @@
         <item>com.console.canreader.fragment.SSFord.CarTypeSettingsFragment</item> 
         <item>com.console.canreader.fragment.SSFord.OilDisFragment</item> 
     </string-array>
-    <!-- 尚摄  2015款福克斯  -->   
-     
-     
+    <!-- 尚摄  2015款福克斯  -->       
     <!-- 福特   -->
-     
+    
     <!-- 上汽  -->
     <!-- 尚摄  风光580  --> 
     <string-array name="SSDFFG_main">
@@ -1521,9 +1519,41 @@
         <item>0</item> <!-- 全景  -->
         <item>0</item><!-- 胎压 -->
         <item>1</item> <!-- 关于  -->
-    </string-array>
+    </string-array>  
+    <!-- 尚摄  风光580  -->  
     
-    <!-- 尚摄  风光580  -->    
+    <!-- 尚摄  名爵锐腾  --> 
+    <string-array name="SSMGGS_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item> <!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <string-array name="SSMGGS_items">
+        <item>车身信息</item>
+        <item>门锁状态</item>
+        <item>油耗、里程信息</item>
+        <item>灯光信息</item>
+    </string-array>
+    <string-array name="SSMGGS_fragment">
+        <item>com.console.canreader.fragment.SSMGGS.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.SSMGGS.DoorLockFragment</item>
+        <item>com.console.canreader.fragment.SSMGGS.OilDisFragment</item>
+        <item>com.console.canreader.fragment.SSMGGS.LightFragment</item>
+    </string-array>    
+    <string-array name="SSMGGS_setting_items">
+        <item>门锁设定</item>
+        <item>照明设定</item>
+    </string-array>
+      <string-array name="SSMGGS_setting_fragment">
+         <item>com.console.canreader.fragment.SSMGGS.LockSettingsFragment</item>
+         <item>com.console.canreader.fragment.SSMGGS.LightSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄  名爵锐腾  -->      
     
          
     <!-- 上汽   -->
@@ -2443,6 +2473,31 @@
     <string-array name="rzc_golf_profile_2_values">
         <item>0</item>
         <item>2</item>  
+    </string-array>
+    
+     <string-array name="ssmggs_comming_home_entries">
+        <item>30秒</item>
+        <item>1分钟</item> 
+        <item>1分钟30秒</item> 
+        <item>2分钟</item> 
+        <item>2分钟30秒</item> 
+        <item>3分钟</item> 
+        <item>3分钟30秒</item> 
+        <item>4分钟</item> 
+        <item>4分钟30秒</item> 
+        <item>5分钟</item> 
+    </string-array>
+    <string-array name="ssmggs_comming_home_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+        <item>4</item> 
+        <item>5</item> 
+        <item>6</item> 
+        <item>7</item> 
+        <item>8</item> 
+        <item>9</item> 
     </string-array>
     
     

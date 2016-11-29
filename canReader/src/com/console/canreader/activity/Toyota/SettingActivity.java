@@ -77,9 +77,9 @@ public class SettingActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
-           if(settingsFragment!=null){
-        	   settingsFragment.syncView(mCaninfo);
-           }
+			if (settingsFragment != null) {
+				settingsFragment.syncView(mCaninfo);
+			}
 		}
 
 	}
@@ -98,11 +98,11 @@ public class SettingActivity extends BaseActivity {
 		private SwitchPreference mIntelligentPref;
 		private ListPreference mAutoCapPref;
 		SettingActivity settingActivity;
-		
-		public SettingsFragment(SettingActivity settingActivity){
-			this.settingActivity=settingActivity;
+
+		public SettingsFragment(SettingActivity settingActivity) {
+			this.settingActivity = settingActivity;
 		}
-		
+
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
@@ -112,48 +112,50 @@ public class SettingActivity extends BaseActivity {
 			mCyclePref = (SwitchPreference) findPreference("CYCLE_WITH_AUTO");
 			mLampLockPref = (SwitchPreference) findPreference("LAMP_WHEN_LOCK");
 			mIntelligentPref = (SwitchPreference) findPreference("INTELLIGENT_LOCK");
-			mAutoCapPref= (ListPreference) findPreference("AUTOMATIC_CAP_SENSEITIVITY");
+			mAutoCapPref = (ListPreference) findPreference("AUTOMATIC_CAP_SENSEITIVITY");
 			mAirConPref.setOnPreferenceChangeListener(this);
 			mCyclePref.setOnPreferenceChangeListener(this);
 			mLampLockPref.setOnPreferenceChangeListener(this);
 			mIntelligentPref.setOnPreferenceChangeListener(this);
 			mAutoCapPref.setOnPreferenceChangeListener(this);
 		}
-	
-		
-		public void syncView(CanInfo mCaninfo){
-			mAirConPref.setChecked(mCaninfo.AIRCON_WITH_AUTO==1);
-			mCyclePref.setChecked(mCaninfo.CYCLE_WITH_AUTO==1);
-			mLampLockPref.setChecked(mCaninfo.LAMP_WHEN_LOCK==1);
-			mIntelligentPref.setChecked(mCaninfo.INTELLIGENT_LOCK==1);
-			mAutoCapPref.setValue(String.valueOf(mCaninfo.AUTOMATIC_CAP_SENSEITIVITY));
-			updatePreferenceDescription(mAutoCapPref,mCaninfo.AUTOMATIC_CAP_SENSEITIVITY);
-		}
-		
-		private void updatePreferenceDescription(ListPreference preference,int currentTimeout) {
-	        String summary;
-	            final CharSequence[] entries = preference.getEntries();
-	            final CharSequence[] values = preference.getEntryValues();
-	            if (entries == null || entries.length == 0) {
-	                summary = "";
-	            } else {
-	                int best = 0;
-	                for (int i = 0; i < values.length; i++) {
-	                    int timeout = Integer.parseInt(values[i].toString());
-	                    if (currentTimeout == timeout) {
-	                        best = i;
-	                        break;
-	                    }
-	                }
-		            if (entries.length != 0) {
-		                summary =  entries[best].toString();
-		            } else {
-		                summary = "";
-		            }
 
-	            }
-	        preference.setSummary(summary);
-	    }
+		public void syncView(CanInfo mCaninfo) {
+			mAirConPref.setChecked(mCaninfo.AIRCON_WITH_AUTO == 1);
+			mCyclePref.setChecked(mCaninfo.CYCLE_WITH_AUTO == 1);
+			mLampLockPref.setChecked(mCaninfo.LAMP_WHEN_LOCK == 1);
+			mIntelligentPref.setChecked(mCaninfo.INTELLIGENT_LOCK == 1);
+			mAutoCapPref.setValue(String
+					.valueOf(mCaninfo.AUTOMATIC_CAP_SENSEITIVITY));
+			updatePreferenceDescription(mAutoCapPref,
+					mCaninfo.AUTOMATIC_CAP_SENSEITIVITY);
+		}
+
+		private void updatePreferenceDescription(ListPreference preference,
+				int currentTimeout) {
+			String summary;
+			final CharSequence[] entries = preference.getEntries();
+			final CharSequence[] values = preference.getEntryValues();
+			if (entries == null || entries.length == 0) {
+				summary = "";
+			} else {
+				int best = 0;
+				for (int i = 0; i < values.length; i++) {
+					int timeout = Integer.parseInt(values[i].toString());
+					if (currentTimeout == timeout) {
+						best = i;
+						break;
+					}
+				}
+				if (entries.length != 0) {
+					summary = entries[best].toString();
+				} else {
+					summary = "";
+				}
+
+			}
+			preference.setSummary(summary);
+		}
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -162,33 +164,38 @@ public class SettingActivity extends BaseActivity {
 			switch (key) {
 			case "AIRCON_WITH_AUTO":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0106"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0106"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "CYCLE_WITH_AUTO":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0107"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0107"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "LAMP_WHEN_LOCK":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0201"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0201"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 
 				break;
 			case "INTELLIGENT_LOCK":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0202"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0202"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "AUTOMATIC_CAP_SENSEITIVITY":
 				if (settingActivity != null) {
 					try {
-		                int value = Integer.parseInt((String) newValue);
-		                settingActivity.sendMsg("5AA5036A03010"+String.valueOf(value));
-		                updatePreferenceDescription(mAutoCapPref,value);
-		            } catch (NumberFormatException e) {
-		            }
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5036A03010"
+								+ String.valueOf(value));
+						updatePreferenceDescription(mAutoCapPref, value);
+					} catch (NumberFormatException e) {
+					}
 				}
 				break;
 			default:

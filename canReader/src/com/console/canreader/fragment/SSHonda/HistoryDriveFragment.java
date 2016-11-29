@@ -31,15 +31,15 @@ public class HistoryDriveFragment extends BaseFragment implements
 	private TextView tv6;
 	private TextView tv7;
 	private TextView tv8;
-	
+
 	private Button button1;
-	DecimalFormat df; 
+	DecimalFormat df;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		df= new DecimalFormat(".00");
+		df = new DecimalFormat(".00");
 		View view = inflater.inflate(R.layout.sshonda_history_drive_layout,
 				container, false);
 		initView(view);
@@ -61,14 +61,12 @@ public class HistoryDriveFragment extends BaseFragment implements
 		if (mCaninfo.AVERAGE_CONSUMPTION == 6553.5) {
 			updateTextView(tv2, "--");
 		} else {
-			updateTextView(
-					tv2,
-					df.format(mCaninfo.AVERAGE_CONSUMPTION)
-							+ (mCaninfo.AVERAGE_CONSUMPTION_UNIT == 0 ? "mpg"
-									: mCaninfo.AVERAGE_CONSUMPTION_UNIT == 1 ? "km/L"
-											: "L/100km") + "");
+			updateTextView(tv2, df.format(mCaninfo.AVERAGE_CONSUMPTION)
+					+ (mCaninfo.AVERAGE_CONSUMPTION_UNIT == 0 ? "mpg"
+							: mCaninfo.AVERAGE_CONSUMPTION_UNIT == 1 ? "km/L"
+									: "L/100km") + "");
 		}
-		
+
 		if (mCaninfo.TRIP_A_1 == 1677721.5) {
 			updateTextView(tv3, "--");
 		} else {
@@ -86,12 +84,11 @@ public class HistoryDriveFragment extends BaseFragment implements
 									: mCaninfo.AVERAGE_CONSUMPTION_UNIT == 1 ? "km/L"
 											: "L/100km") + "");
 		}
-		
-		
+
 		if (mCaninfo.TRIP_A_2 == 1677721.5) {
 			updateTextView(tv5, "--");
 		} else {
-			updateTextView(tv5,df.format(mCaninfo.TRIP_A_2)
+			updateTextView(tv5, df.format(mCaninfo.TRIP_A_2)
 					+ (mCaninfo.TRIP_A_UNIT == 0 ? "km" : "mile") + "");
 		}
 
@@ -105,7 +102,7 @@ public class HistoryDriveFragment extends BaseFragment implements
 									: mCaninfo.AVERAGE_CONSUMPTION_UNIT == 1 ? "km/L"
 											: "L/100km") + "");
 		}
-		
+
 		if (mCaninfo.TRIP_A_3 == 1677721.5) {
 			updateTextView(tv7, "--");
 		} else {
@@ -148,8 +145,8 @@ public class HistoryDriveFragment extends BaseFragment implements
 		tv6 = (TextView) view.findViewById(R.id.tv6);
 		tv7 = (TextView) view.findViewById(R.id.tv7);
 		tv8 = (TextView) view.findViewById(R.id.tv8);
-		
-		button1= (Button) view.findViewById(R.id.button1);
+
+		button1 = (Button) view.findViewById(R.id.button1);
 		button1.setOnClickListener(this);
 	}
 

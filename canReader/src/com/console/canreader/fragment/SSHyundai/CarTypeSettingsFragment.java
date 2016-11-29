@@ -29,15 +29,14 @@ import com.console.canreader.utils.PreferenceUtil;
 
 public class CarTypeSettingsFragment extends BaseFragment {
 
-
 	SettingsFragment settingsFragment;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.fragment_activity_layout_1, container,
-				false);
+		View view = inflater.inflate(R.layout.fragment_activity_layout_1,
+				container, false);
 		initView(view);
 		initFragment();
 		return view;
@@ -73,9 +72,8 @@ public class CarTypeSettingsFragment extends BaseFragment {
 	}
 
 	private void initView(View view) {
-	
-	}
 
+	}
 
 	public class SettingsFragment extends PreferenceFragment implements
 			OnPreferenceChangeListener {
@@ -96,14 +94,15 @@ public class CarTypeSettingsFragment extends BaseFragment {
 
 			p2 = (ListPreference) findPreference("CAR_TYPE");
 			p2.setOnPreferenceChangeListener(this);
-			
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
+
+			if (settingActivity != null) {
+				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}
-		
-		String[] titles={"","ix35¡¢Ë÷ÄÉËþ8","ix45(ÐÂÊ¤´ï)¡¢K5","ÃûÍ¼¡¢Ë÷ÄÉËþ9","Í¾Ê¤¡¢KX5¡¢Áì¶¯"};
+
+		String[] titles = { "", "ix35¡¢Ë÷ÄÉËþ8", "ix45(ÐÂÊ¤´ï)¡¢K5", "ÃûÍ¼¡¢Ë÷ÄÉËþ9",
+				"Í¾Ê¤¡¢KX5¡¢Áì¶¯" };
 
 		public void syncView(CanInfo mCaninfo) {
 			PreferenceUtil.setHyundaiCarType(getActivity(), mCaninfo.CAR_TYPE);
@@ -145,8 +144,9 @@ public class CarTypeSettingsFragment extends BaseFragment {
 				if (settingActivity != null) {
 					try {
 						int value = Integer.parseInt((String) newValue);
-		                settingActivity.sendMsg("5AA502242"+String.valueOf(value)+"00");
-		                updatePreferenceDescription(p2,value);
+						settingActivity.sendMsg("5AA502242"
+								+ String.valueOf(value) + "00");
+						updatePreferenceDescription(p2, value);
 					} catch (NumberFormatException e) {
 					}
 				}

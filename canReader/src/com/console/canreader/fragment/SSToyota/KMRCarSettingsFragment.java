@@ -56,7 +56,7 @@ public class KMRCarSettingsFragment extends BaseFragment {
 					settingsFragment.syncView(mCaninfo);
 				} catch (Exception e) {
 					// TODO: handle exception
-				}			
+				}
 			}
 		}
 
@@ -73,7 +73,7 @@ public class KMRCarSettingsFragment extends BaseFragment {
 	}
 
 	public class SettingsFragment extends PreferenceFragment implements
-	OnPreferenceChangeListener {
+			OnPreferenceChangeListener {
 		private SwitchPreference p1;
 		private SwitchPreference p2;
 		private SwitchPreference p3;
@@ -81,16 +81,15 @@ public class KMRCarSettingsFragment extends BaseFragment {
 		private SwitchPreference p5;
 		private SwitchPreference p6;
 		private SwitchPreference p7;
-		
-		
+
 		private SwitchPreference p8;
 		private SwitchPreference p9;
 		private SwitchPreference p10;
 		private SwitchPreference p11;
-		
+
 		private ListPreference mAutoCapPref;
 		private ListPreference p12;
-		
+
 		KMRCarSettingsFragment settingActivity;
 
 		public SettingsFragment(KMRCarSettingsFragment settingActivity) {
@@ -109,7 +108,7 @@ public class KMRCarSettingsFragment extends BaseFragment {
 			p5 = (SwitchPreference) findPreference("AUTO_LOCK_P");
 			p6 = (SwitchPreference) findPreference("AIRCON_WITH_AUTO");
 			p7 = (SwitchPreference) findPreference("CYCLE_WITH_AUTO");
-			
+
 			p1.setOnPreferenceChangeListener(this);
 			p2.setOnPreferenceChangeListener(this);
 			p3.setOnPreferenceChangeListener(this);
@@ -117,7 +116,7 @@ public class KMRCarSettingsFragment extends BaseFragment {
 			p5.setOnPreferenceChangeListener(this);
 			p6.setOnPreferenceChangeListener(this);
 			p7.setOnPreferenceChangeListener(this);
-			
+
 			p8 = (SwitchPreference) findPreference("LAMP_WHEN_LOCK");
 			p9 = (SwitchPreference) findPreference("INTELLIGENT_LOCK");
 			p10 = (SwitchPreference) findPreference("TWICE_KEY_OPEN_LOCK");
@@ -127,63 +126,66 @@ public class KMRCarSettingsFragment extends BaseFragment {
 			p9.setOnPreferenceChangeListener(this);
 			p10.setOnPreferenceChangeListener(this);
 			p11.setOnPreferenceChangeListener(this);
-			
-			mAutoCapPref= (ListPreference) findPreference("AUTOMATIC_CAP_SENSEITIVITY");
+
+			mAutoCapPref = (ListPreference) findPreference("AUTOMATIC_CAP_SENSEITIVITY");
 			mAutoCapPref.setOnPreferenceChangeListener(this);
-			p12= (ListPreference) findPreference("AUTOMATIC_LAMP_CLOSE");
+			p12 = (ListPreference) findPreference("AUTOMATIC_LAMP_CLOSE");
 			p12.setOnPreferenceChangeListener(this);
-			
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
+
+			if (settingActivity != null) {
+				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}
 
 		public void syncView(CanInfo mCaninfo) {
-			p1.setChecked(mCaninfo.AUTO_LOCK_SETTING==1);
-			p2.setChecked(mCaninfo.AUTO_OPEN_LOCK==0);
-			p3.setChecked(mCaninfo.DRIVER_LINK_LOCK==1);
-			p4.setChecked(mCaninfo.AUTO_OPEN_LOCK_P==1);
-			p5.setChecked(mCaninfo.AUTO_LOCK_P==1);
-			p6.setChecked(mCaninfo.AIRCON_WITH_AUTO==1);
-			p7.setChecked(mCaninfo.CYCLE_WITH_AUTO==1);
-						
-			p8.setChecked(mCaninfo.LAMP_WHEN_LOCK==1);
-			p9.setChecked(mCaninfo.INTELLIGENT_LOCK==1);
-			p10.setChecked(mCaninfo.TWICE_KEY_OPEN_LOCK==1);
-			p11.setChecked(mCaninfo.TWICE_BUTTON_OPEN_LOCK==1);
-			
-			mAutoCapPref.setValue(String.valueOf(mCaninfo.AUTOMATIC_CAP_SENSEITIVITY));
-			updatePreferenceDescription(mAutoCapPref,mCaninfo.AUTOMATIC_CAP_SENSEITIVITY);
-			
-			p12.setValue(String.valueOf(mCaninfo.AUTOMATIC_LAMP_CLOSE));
-			updatePreferenceDescription(p12,mCaninfo.AUTOMATIC_LAMP_CLOSE);
-		}
-		
-		private void updatePreferenceDescription(ListPreference preference,int currentTimeout) {
-	        String summary;
-	            final CharSequence[] entries = preference.getEntries();
-	            final CharSequence[] values = preference.getEntryValues();
-	            if (entries == null || entries.length == 0) {
-	                summary = "";
-	            } else {
-	                int best = 0;
-	                for (int i = 0; i < values.length; i++) {
-	                    int timeout = Integer.parseInt(values[i].toString());
-	                    if (currentTimeout == timeout) {
-	                        best = i;
-	                        break;
-	                    }
-	                }
-		            if (entries.length != 0) {
-		                summary =  entries[best].toString();
-		            } else {
-		                summary = "";
-		            }
+			p1.setChecked(mCaninfo.AUTO_LOCK_SETTING == 1);
+			p2.setChecked(mCaninfo.AUTO_OPEN_LOCK == 0);
+			p3.setChecked(mCaninfo.DRIVER_LINK_LOCK == 1);
+			p4.setChecked(mCaninfo.AUTO_OPEN_LOCK_P == 1);
+			p5.setChecked(mCaninfo.AUTO_LOCK_P == 1);
+			p6.setChecked(mCaninfo.AIRCON_WITH_AUTO == 1);
+			p7.setChecked(mCaninfo.CYCLE_WITH_AUTO == 1);
 
-	            }
-	        preference.setSummary(summary);
-	    }
+			p8.setChecked(mCaninfo.LAMP_WHEN_LOCK == 1);
+			p9.setChecked(mCaninfo.INTELLIGENT_LOCK == 1);
+			p10.setChecked(mCaninfo.TWICE_KEY_OPEN_LOCK == 1);
+			p11.setChecked(mCaninfo.TWICE_BUTTON_OPEN_LOCK == 1);
+
+			mAutoCapPref.setValue(String
+					.valueOf(mCaninfo.AUTOMATIC_CAP_SENSEITIVITY));
+			updatePreferenceDescription(mAutoCapPref,
+					mCaninfo.AUTOMATIC_CAP_SENSEITIVITY);
+
+			p12.setValue(String.valueOf(mCaninfo.AUTOMATIC_LAMP_CLOSE));
+			updatePreferenceDescription(p12, mCaninfo.AUTOMATIC_LAMP_CLOSE);
+		}
+
+		private void updatePreferenceDescription(ListPreference preference,
+				int currentTimeout) {
+			String summary;
+			final CharSequence[] entries = preference.getEntries();
+			final CharSequence[] values = preference.getEntryValues();
+			if (entries == null || entries.length == 0) {
+				summary = "";
+			} else {
+				int best = 0;
+				for (int i = 0; i < values.length; i++) {
+					int timeout = Integer.parseInt(values[i].toString());
+					if (currentTimeout == timeout) {
+						best = i;
+						break;
+					}
+				}
+				if (entries.length != 0) {
+					summary = entries[best].toString();
+				} else {
+					summary = "";
+				}
+
+			}
+			preference.setSummary(summary);
+		}
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -192,79 +194,92 @@ public class KMRCarSettingsFragment extends BaseFragment {
 			switch (key) {
 			case "AUTO_LOCK_SETTING":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0101"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0101"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "AUTO_OPEN_LOCK":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0102"+((boolean) newValue ?"00":"01"));
+					settingActivity.sendMsg("5AA5036A0102"
+							+ ((boolean) newValue ? "00" : "01"));
 				}
 				break;
 			case "DRIVER_LINK_LOCK":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0103"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0103"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "AUTO_OPEN_LOCK_P":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0104"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0104"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "AUTO_LOCK_P":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0105"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0105"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "AIRCON_WITH_AUTO":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0106"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0106"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "CYCLE_WITH_AUTO":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0107"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0107"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "LAMP_WHEN_LOCK":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0201"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0201"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 
 				break;
 			case "INTELLIGENT_LOCK":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0202"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0202"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "TWICE_KEY_OPEN_LOCK":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0203"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0203"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 
 				break;
 			case "TWICE_BUTTON_OPEN_LOCK":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA5036A0204"+((boolean) newValue ?"01":"00"));
+					settingActivity.sendMsg("5AA5036A0204"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			case "AUTOMATIC_CAP_SENSEITIVITY":
 				if (settingActivity != null) {
 					try {
-		                int value = Integer.parseInt((String) newValue);
-		                settingActivity.sendMsg("5AA5036A03010"+String.valueOf(value));
-		                updatePreferenceDescription(mAutoCapPref,value);
-		            } catch (NumberFormatException e) {
-		            }
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5036A03010"
+								+ String.valueOf(value));
+						updatePreferenceDescription(mAutoCapPref, value);
+					} catch (NumberFormatException e) {
+					}
 				}
 				break;
 			case "AUTOMATIC_LAMP_CLOSE":
 				if (settingActivity != null) {
 					try {
-		                int value = Integer.parseInt((String) newValue);
-		                settingActivity.sendMsg("5AA5036A03020"+String.valueOf(value));
-		                updatePreferenceDescription(mAutoCapPref,value);
-		            } catch (NumberFormatException e) {
-		            }
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5036A03020"
+								+ String.valueOf(value));
+						updatePreferenceDescription(mAutoCapPref, value);
+					} catch (NumberFormatException e) {
+					}
 				}
 				break;
 			default:

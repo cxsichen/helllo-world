@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 public class SelectImageView extends ImageView {
-	
+
 	public SelectImageView(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub

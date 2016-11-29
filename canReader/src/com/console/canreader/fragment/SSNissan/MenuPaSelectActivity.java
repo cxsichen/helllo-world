@@ -41,9 +41,10 @@ public class MenuPaSelectActivity extends BaseActivity {
 
 	SettingsFragment settingsFragment;
 	private ActionBar actionBar;
-/*	SeekBar seekbar;
-	int car = 0;
-	int progress=0;*/
+
+	/*
+	 * SeekBar seekbar; int car = 0; int progress=0;
+	 */
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,32 +59,26 @@ public class MenuPaSelectActivity extends BaseActivity {
 
 	private void initView() {
 		// TODO Auto-generated method stub
-/*		seekbar = (SeekBar) findViewById(R.id.seek);
-		seekbar.setMax(10);
-		seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				Log.i("cxs","======onStopTrackingTouch=="+progress);
-				sendMsg("AA5502AD08"+adjustNum(progress-5));
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-				// TODO Auto-generated method stub
-				MenuPaSelectActivity.this.progress=progress;
-			}
-		});*/
+		/*
+		 * seekbar = (SeekBar) findViewById(R.id.seek); seekbar.setMax(10);
+		 * seekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+		 * 
+		 * @Override public void onStopTrackingTouch(SeekBar seekBar) { // TODO
+		 * Auto-generated method stub
+		 * Log.i("cxs","======onStopTrackingTouch=="+progress);
+		 * sendMsg("AA5502AD08"+adjustNum(progress-5)); }
+		 * 
+		 * @Override public void onStartTrackingTouch(SeekBar seekBar) { // TODO
+		 * Auto-generated method stub
+		 * 
+		 * }
+		 * 
+		 * @Override public void onProgressChanged(SeekBar seekBar, int
+		 * progress, boolean fromUser) { // TODO Auto-generated method stub
+		 * MenuPaSelectActivity.this.progress=progress; } });
+		 */
 	}
-	
+
 	private String adjustNum(int num) {
 		String tmp = Integer.toHexString(num).toUpperCase();
 		if (tmp.length() > 2) {
@@ -141,7 +136,7 @@ public class MenuPaSelectActivity extends BaseActivity {
 		super.show(mCaninfo);
 		try {
 			if (mCaninfo != null) {
-			//	seekbar.setProgress(((byte)mCaninfo.SURROND_VOLUME)+5);	
+				// seekbar.setProgress(((byte)mCaninfo.SURROND_VOLUME)+5);
 				if (settingsFragment != null) {
 					settingsFragment.syncView(mCaninfo);
 				}
@@ -149,7 +144,6 @@ public class MenuPaSelectActivity extends BaseActivity {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
 
 	}
 
@@ -161,10 +155,11 @@ public class MenuPaSelectActivity extends BaseActivity {
 
 	public class SettingsFragment extends PreferenceFragment implements
 			OnPreferenceChangeListener {
-// 	private SwitchPreference mAirConPref;
+		// private SwitchPreference mAirConPref;
 		MenuPaSelectActivity settingActivity;
 		private SeekBarPreference mSeekBarPreference1;
-        int eqlValue=0;
+		int eqlValue = 0;
+
 		public SettingsFragment(MenuPaSelectActivity settingActivity) {
 			this.settingActivity = settingActivity;
 		}
@@ -174,38 +169,46 @@ public class MenuPaSelectActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.ssnissan_equal_prefs);
-			mSeekBarPreference1=(SeekBarPreference) findPreference("EQL_VOLUME");
+			mSeekBarPreference1 = (SeekBarPreference) findPreference("EQL_VOLUME");
 			mSeekBarPreference1.setMax(40);
-			mSeekBarPreference1.setOnSeekBarPrefsChangeListener(new OnSeekBarPrefsChangeListener() {
-				
-				@Override
-				public void onStopTrackingTouch(String key, SeekBar seekBar) {
-					// TODO Auto-generated method stub
-					Log.i("cxs","=====onStopTrackingTouch=====eqlValue=="+eqlValue);
-					settingActivity.sendMsg("AA5502AD01"+adjustNum(0x01));
-				}
-				
-				@Override
-				public void onStartTrackingTouch(String key, SeekBar seekBar) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void onProgressChanged(String key, SeekBar seekBar, int progress,
-						boolean fromUser) {
-					// TODO Auto-generated method stub
-					eqlValue=progress;
-					
-				}
-			});
-		/*	mAirConPref = (SwitchPreference) findPreference("EQL_MUTE");
+			mSeekBarPreference1
+					.setOnSeekBarPrefsChangeListener(new OnSeekBarPrefsChangeListener() {
 
-			mAirConPref.setOnPreferenceChangeListener(this);*/
+						@Override
+						public void onStopTrackingTouch(String key,
+								SeekBar seekBar) {
+							// TODO Auto-generated method stub
+							Log.i("cxs",
+									"=====onStopTrackingTouch=====eqlValue=="
+											+ eqlValue);
+							settingActivity.sendMsg("AA5502AD01"
+									+ adjustNum(0x01));
+						}
+
+						@Override
+						public void onStartTrackingTouch(String key,
+								SeekBar seekBar) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onProgressChanged(String key,
+								SeekBar seekBar, int progress, boolean fromUser) {
+							// TODO Auto-generated method stub
+							eqlValue = progress;
+
+						}
+					});
+			/*
+			 * mAirConPref = (SwitchPreference) findPreference("EQL_MUTE");
+			 * 
+			 * mAirConPref.setOnPreferenceChangeListener(this);
+			 */
 		}
 
 		public void syncView(CanInfo mCaninfo) {
-		//	mAirConPref.setChecked(mCaninfo.EQL_MUTE == 1);
+			// mAirConPref.setChecked(mCaninfo.EQL_MUTE == 1);
 			mSeekBarPreference1.setProgress(mCaninfo.EQL_VOLUME);
 		}
 

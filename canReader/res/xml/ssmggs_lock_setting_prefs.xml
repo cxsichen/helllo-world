@@ -1,0 +1,26 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="AUTO_LOCK_SETTING"
+        android:summaryOff="关（车锁感应车门自动锁定）"
+        android:summaryOn="开"
+        android:title="自动落锁设定" />
+    <SwitchPreference
+        android:key="AUTO_OPEN_LOCK_Z"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="自动解锁设定" />
+
+    <SwitchPreference
+        android:key="AUTO_OPEN_LOCK"
+        android:summaryOff="所有车门解锁"
+        android:summaryOn="仅驾驶员车门解锁"
+        android:title="解锁模式" />
+
+    <SwitchPreference
+        android:key="AUTO_OPEN_LOCK_S"
+        android:summaryOff="仅驾驶员门"
+        android:summaryOn="所有门"
+        android:title="智能近车解锁设定" />
+    
+</PreferenceScreen>

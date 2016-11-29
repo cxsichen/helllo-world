@@ -89,17 +89,19 @@ public class MirrorWiperFragment extends BaseFragment {
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 
-		/*-----------set data----------------*/	
-		String[] swPreKey = { "MIRROR_SYNC_ADJUST","MIRROR_LOWER_WHILE_REVERSING","WIPER_AUTO_IN_RAIN"
-				     ,"WIPER_REAR_WIPING_REVERSING","MIRROR_FOLD_PARKING"};
-		String[] swPreMsg = { "2EC60260", "2EC60261", "2EC60262", "2EC60263", "2EC60264"};
+		/*-----------set data----------------*/
+		String[] swPreKey = { "MIRROR_SYNC_ADJUST",
+				"MIRROR_LOWER_WHILE_REVERSING", "WIPER_AUTO_IN_RAIN",
+				"WIPER_REAR_WIPING_REVERSING", "MIRROR_FOLD_PARKING" };
+		String[] swPreMsg = { "2EC60260", "2EC60261", "2EC60262", "2EC60263",
+				"2EC60264" };
 
 		String[] listPreKey = {};
 		String[] listPreMsg = {};
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
-			// TODO Auto-generated method stub		
+			// TODO Auto-generated method stub
 		}
 
 		private void addSwitchData(List<Integer> mSwitchValueGroup2,
@@ -108,7 +110,7 @@ public class MirrorWiperFragment extends BaseFragment {
 			mSwitchValueGroup2.add(mCaninfo.MIRROR_SYNC_ADJUST);
 			mSwitchValueGroup2.add(mCaninfo.MIRROR_LOWER_WHILE_REVERSING);
 			mSwitchValueGroup2.add(mCaninfo.WIPER_AUTO_IN_RAIN);
-			
+
 			mSwitchValueGroup2.add(mCaninfo.WIPER_REAR_WIPING_REVERSING);
 			mSwitchValueGroup2.add(mCaninfo.MIRROR_FOLD_PARKING);
 		}

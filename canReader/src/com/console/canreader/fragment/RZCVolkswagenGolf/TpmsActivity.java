@@ -35,9 +35,6 @@ public class TpmsActivity extends BaseActivity {
 	private TextView pressure_bl;
 	private TextView pressure_br;
 
-
-
-
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -81,47 +78,46 @@ public class TpmsActivity extends BaseActivity {
 			if (mCaninfo.TPMS_FL_WARING == 0) {
 				pressure_fl.setText("左前胎压\n正常 ");
 				pressure_fl.setTextColor(Color.WHITE);
-			}else if(mCaninfo.TPMS_FL_WARING == 1){
+			} else if (mCaninfo.TPMS_FL_WARING == 1) {
 				pressure_fl.setText("左前胎压\n欠压 ");
 				pressure_fl.setTextColor(Color.RED);
-			}else if(mCaninfo.TPMS_FL_WARING == 2){
+			} else if (mCaninfo.TPMS_FL_WARING == 2) {
 				pressure_fl.setText("左前胎压\n过高 ");
 				pressure_fl.setTextColor(Color.RED);
 			}
-			
+
 			if (mCaninfo.TPMS_FR_WARING == 0) {
 				pressure_fr.setText("右前胎压\n正常 ");
 				pressure_fr.setTextColor(Color.WHITE);
-			}else if(mCaninfo.TPMS_FR_WARING == 1){
+			} else if (mCaninfo.TPMS_FR_WARING == 1) {
 				pressure_fr.setText("右前胎压\n欠压 ");
 				pressure_fr.setTextColor(Color.RED);
-			}else if(mCaninfo.TPMS_FR_WARING == 2){
+			} else if (mCaninfo.TPMS_FR_WARING == 2) {
 				pressure_fr.setText("右前胎压\n过高 ");
 				pressure_fr.setTextColor(Color.RED);
 			}
-			
+
 			if (mCaninfo.TPMS_BL_WARING == 0) {
 				pressure_bl.setText("左后胎压\n正常 ");
 				pressure_bl.setTextColor(Color.WHITE);
-			}else if(mCaninfo.TPMS_BL_WARING == 1){
+			} else if (mCaninfo.TPMS_BL_WARING == 1) {
 				pressure_bl.setText("左后胎压\n欠压 ");
 				pressure_bl.setTextColor(Color.RED);
-			}else if(mCaninfo.TPMS_BL_WARING == 2){
+			} else if (mCaninfo.TPMS_BL_WARING == 2) {
 				pressure_bl.setText("左后胎压\n过高 ");
 				pressure_bl.setTextColor(Color.RED);
 			}
-		
-			
+
 			if (mCaninfo.TPMS_BR_WARING == 0) {
 				pressure_br.setText("右后胎压\n正常 ");
 				pressure_br.setTextColor(Color.WHITE);
-			}else if(mCaninfo.TPMS_BR_WARING == 1){
+			} else if (mCaninfo.TPMS_BR_WARING == 1) {
 				pressure_br.setText("右后胎压\n欠压 ");
 				pressure_br.setTextColor(Color.RED);
-			}else if(mCaninfo.TPMS_BR_WARING == 2){
+			} else if (mCaninfo.TPMS_BR_WARING == 2) {
 				pressure_br.setText("右后胎压\n过高 ");
 				pressure_br.setTextColor(Color.RED);
-			}			
+			}
 		}
 	}
 
@@ -138,11 +134,6 @@ public class TpmsActivity extends BaseActivity {
 		pressure_bl = (TextView) findViewById(R.id.pressure_bl);
 		pressure_br = (TextView) findViewById(R.id.pressure_br);
 
-
-
 	}
-
-
-
 
 }

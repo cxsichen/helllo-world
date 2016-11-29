@@ -70,8 +70,7 @@ public class CarInfoFragment extends BaseFragment {
 				sendMsg("2e90025050");
 				sendMsg("2e90025051");
 				sendMsg("2e90025052");
-				mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG,
-						40000);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_GET_MSG, 40000);
 				break;
 			default:
 				break;
@@ -111,7 +110,7 @@ public class CarInfoFragment extends BaseFragment {
 		initView(view);
 		return view;
 	}
-	
+
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
@@ -140,8 +139,7 @@ public class CarInfoFragment extends BaseFragment {
 	 */
 	protected void initIndicator(View view) {
 		if (indicatorLayout == null)
-			indicatorLayout = (LinearLayout) view.findViewById(
-					R.id.indicator);
+			indicatorLayout = (LinearLayout) view.findViewById(R.id.indicator);
 
 		indicatorLayout.removeAllViews();
 

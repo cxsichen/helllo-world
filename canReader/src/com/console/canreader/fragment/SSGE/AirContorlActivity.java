@@ -39,7 +39,7 @@ public class AirContorlActivity extends BaseActivity implements OnClickListener 
 	TextView tv11;
 	TextView tv12;
 	TextView tv13;
-	
+
 	ImageView iv1;
 	ImageView iv2;
 	ImageView iv3;
@@ -105,19 +105,18 @@ public class AirContorlActivity extends BaseActivity implements OnClickListener 
 			} else {
 				tv1.setBackgroundResource(R.drawable.bg_button_oval);
 			}
-			
+
 			if (mCaninfo.SMALL_LANTERN_INDICATOR == 1) {
 				tv2.setBackgroundResource(R.drawable.bg_button_oval_on);
 			} else {
 				tv2.setBackgroundResource(R.drawable.bg_button_oval);
 			}
-			
-			tv10.setText(String.valueOf(mCanInfo.DRIVING_POSITON_TEMP)
-					+ "°");
-			
+
+			tv10.setText(String.valueOf(mCanInfo.DRIVING_POSITON_TEMP) + "°");
+
 			tv11.setText(String.valueOf(mCanInfo.DEPUTY_DRIVING_POSITON_TEMP)
 					+ "°");
-			
+
 			if (mCanInfo.DRIVING_POSITON_TEMP == 0)
 				tv10.setText("L0");
 			if (mCanInfo.DEPUTY_DRIVING_POSITON_TEMP == 0)
@@ -126,48 +125,47 @@ public class AirContorlActivity extends BaseActivity implements OnClickListener 
 				tv10.setText("HI");
 			if (mCanInfo.DEPUTY_DRIVING_POSITON_TEMP == 255)
 				tv11.setText("HI");
-			
-			if(mCanInfo.AIR_RATE==-1){
-				//tv12.setTextSize(22);
+
+			if (mCanInfo.AIR_RATE == -1) {
+				// tv12.setTextSize(22);
 				tv12.setText("Auto");
-	        }else{
-	        	//tv12.setTextSize(42);
-	        	tv12.setText(String.valueOf(mCanInfo.AIR_RATE));	
-	        }	
-			
+			} else {
+				// tv12.setTextSize(42);
+				tv12.setText(String.valueOf(mCanInfo.AIR_RATE));
+			}
+
 			tv13.setText(mCanInfo.OUTSIDE_TEMPERATURE
 					+ getString(R.string.temp_unit) + "\n" + "OUT");
-			
-			//内外循环
+
+			// 内外循环
 			if (mCanInfo.CYCLE_INDICATOR == 0) {
 				iv8.setAlpha(1f);
-				iv8
-						.setImageResource(R.drawable.stat_recirculation_outside);
-			} else if (mCanInfo.CYCLE_INDICATOR == 1){
+				iv8.setImageResource(R.drawable.stat_recirculation_outside);
+			} else if (mCanInfo.CYCLE_INDICATOR == 1) {
 				iv8.setAlpha(1f);
 				iv8.setImageResource(R.drawable.stat_recirculation);
-			}else  if (mCanInfo.CYCLE_INDICATOR == 2){
+			} else if (mCanInfo.CYCLE_INDICATOR == 2) {
 				iv8.setAlpha(0.12f);
 			}
-			
+
 			if (mCaninfo.UPWARD_AIR_INDICATOR == 1) {
 				iv9.setBackgroundResource(R.drawable.bg_button_oval_on);
 			} else {
 				iv9.setBackgroundResource(R.drawable.bg_button_oval);
 			}
-			
+
 			if (mCaninfo.PARALLEL_AIR_INDICATOR == 1) {
 				iv10.setBackgroundResource(R.drawable.bg_button_oval_on);
 			} else {
 				iv10.setBackgroundResource(R.drawable.bg_button_oval);
 			}
-			
+
 			if (mCaninfo.DOWNWARD_AIR_INDICATOR == 1) {
 				iv11.setBackgroundResource(R.drawable.bg_button_oval_on);
 			} else {
 				iv11.setBackgroundResource(R.drawable.bg_button_oval);
 			}
-			
+
 		}
 
 	}
@@ -186,44 +184,43 @@ public class AirContorlActivity extends BaseActivity implements OnClickListener 
 		tv1.setOnClickListener(this);
 		tv2 = (TextView) findViewById(R.id.sync_tv);
 		tv2.setOnClickListener(this);
-		
-		iv1=(ImageView) findViewById(R.id.iv1);
-		iv1.setOnClickListener(this);
-		
-		iv2=(ImageView) findViewById(R.id.iv2);
-		iv2.setOnClickListener(this);
-		
-		tv10= (TextView) findViewById(R.id.tv10);
-		
 
-		iv3=(ImageView) findViewById(R.id.iv3);
+		iv1 = (ImageView) findViewById(R.id.iv1);
+		iv1.setOnClickListener(this);
+
+		iv2 = (ImageView) findViewById(R.id.iv2);
+		iv2.setOnClickListener(this);
+
+		tv10 = (TextView) findViewById(R.id.tv10);
+
+		iv3 = (ImageView) findViewById(R.id.iv3);
 		iv3.setOnClickListener(this);
-		
-		iv4=(ImageView) findViewById(R.id.iv4);
+
+		iv4 = (ImageView) findViewById(R.id.iv4);
 		iv4.setOnClickListener(this);
-		
-		tv11= (TextView) findViewById(R.id.tv11);
-		
-		iv5=(ImageView) findViewById(R.id.iv5);
+
+		tv11 = (TextView) findViewById(R.id.tv11);
+
+		iv5 = (ImageView) findViewById(R.id.iv5);
 		iv5.setOnClickListener(this);
-		
-		iv6=(ImageView) findViewById(R.id.iv6);
+
+		iv6 = (ImageView) findViewById(R.id.iv6);
 		iv6.setOnClickListener(this);
-		
-		tv12= (TextView) findViewById(R.id.tv12);
-		tv13= (TextView) findViewById(R.id.tv13);
-		
-		iv7=(ImageView) findViewById(R.id.iv7);
+
+		tv12 = (TextView) findViewById(R.id.tv12);
+		tv13 = (TextView) findViewById(R.id.tv13);
+
+		iv7 = (ImageView) findViewById(R.id.iv7);
 		iv7.setOnClickListener(this);
-		
-		iv8=(ImageView) findViewById(R.id.iv8);
+
+		iv8 = (ImageView) findViewById(R.id.iv8);
 		iv8.setOnClickListener(this);
-		
-		iv9=(ImageView) findViewById(R.id.iv9);
+
+		iv9 = (ImageView) findViewById(R.id.iv9);
 		iv9.setOnClickListener(this);
-		iv10=(ImageView) findViewById(R.id.iv10);
+		iv10 = (ImageView) findViewById(R.id.iv10);
 		iv10.setOnClickListener(this);
-		iv11=(ImageView) findViewById(R.id.iv11);
+		iv11 = (ImageView) findViewById(R.id.iv11);
 		iv11.setOnClickListener(this);
 	}
 
@@ -269,26 +266,24 @@ public class AirContorlActivity extends BaseActivity implements OnClickListener 
 				break;
 			case R.id.iv8:
 				sendMsg("5AA5023B07"
-						+ ((mCaninfo.CYCLE_INDICATOR == 0) ? "00"
-								: "01"));
+						+ ((mCaninfo.CYCLE_INDICATOR == 0) ? "00" : "01"));
 				break;
 			case R.id.iv9:
 				sendMsg("5AA5023B22FF");
 				break;
 			case R.id.iv10:
-				if(mCaninfo.DOWNWARD_AIR_INDICATOR==1){
+				if (mCaninfo.DOWNWARD_AIR_INDICATOR == 1) {
 					sendMsg("5AA5023B21FF");
-				}else{
+				} else {
 					sendMsg("5AA5023B09FF");
 				}
 				break;
 			case R.id.iv11:
-				if(mCaninfo.UPWARD_AIR_INDICATOR==1){
+				if (mCaninfo.UPWARD_AIR_INDICATOR == 1) {
 					sendMsg("5AA5023B22FF");
-				}else if(mCaninfo.PARALLEL_AIR_INDICATOR==1){
+				} else if (mCaninfo.PARALLEL_AIR_INDICATOR == 1) {
 					sendMsg("5AA5023B21FF");
-				}
-				else {
+				} else {
 					sendMsg("5AA5023B0AFF");
 				}
 				break;
