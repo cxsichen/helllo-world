@@ -203,6 +203,7 @@ public class Contacts {
 	public static final String KEY_VOLUME_VALUE = "volume_value"; // 收音机音量
 	public static final String BACK_CAR = "back_car_state";
 	public static final String ACC_STATE = "acc_state";
+	public final static String TAILDOORSTATUS = "tail_door_status";
 
 	public static final int VOL_UP = 1;
 	public static final int VOL_DOWN = 2;

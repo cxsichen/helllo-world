@@ -54,12 +54,12 @@ public class DialogCreater {
 	/*-------------------显示车门报警  start--------------------*/
 	public static void showUnlockWaringDialog(Context context, CanInfo canInfo) {
 		// TODO Auto-generated method stub
+		
 		if (canInfo.RIGHT_BACKDOOR_STATUS == 1
 				|| canInfo.LEFT_BACKDOOR_STATUS == 1
 				|| canInfo.RIGHT_FORONTDOOR_STATUS == 1
 				|| canInfo.LEFT_FORONTDOOR_STATUS == 1
 				|| canInfo.TRUNK_STATUS == 1 || canInfo.HOOD_STATUS == 1) {
-
 			if (unlockWaringDialog == null) {
 				unlockWaringDialog = new UnlockWaringDialog(context,
 						R.style.MyDialog);
@@ -70,7 +70,7 @@ public class DialogCreater {
 				dialogWindow.setGravity(Gravity.CENTER);
 				// unlockWaringDialog.setCancelable(false);
 			}
-
+	
 			if (!unlockWaringDialog.isShowing()) {
 				unlockWaringDialog.show();
 			}

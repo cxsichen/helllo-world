@@ -127,6 +127,7 @@ public class CanService extends Service {
 		// 根据can信息处理事件
 		int parkingState = android.provider.Settings.System.getInt(
 				getContentResolver(), Contacts.BACK_CAR, 0); // 倒车的时候不处理任何弹框事件
+	
 		if (parkingState != 1) {
 			DialogCreater.showUnlockWaringDialog(CanService.this, // 车门报警事件处理
 																	// 比较重要
@@ -298,6 +299,42 @@ public class CanService extends Service {
 		DialogCreater.clearUnlockWaringData(this);
 	}
 
+	private TailDoorObserver mTailDoorObserver = new TailDoorObserver();
+
+	public class TailDoorObserver extends ContentObserver {
+		public TailDoorObserver() {
+			super(null);
+		}
+
+		@Override
+		public void onChange(boolean selfChange) {
+			super.onChange(selfChange);
+			int state = android.provider.Settings.System.getInt(
+					getContentResolver(), Contacts.TAILDOORSTATUS, 0);
+		
+			handleTailDoorState(state);
+		}
+	}
+
+	private void handleTailDoorState(int state) {
+		// TODO Auto-generated method stub
+		info = BeanFactory.getCanInfo(CanService.this, null, canName);
+		
+		if(info==null){
+			return;
+		}
+		if (state == 1) {
+			info.getCanInfo().TRUNK_STATUS = 1;
+		}else{		
+			info.getCanInfo().TRUNK_STATUS = 0;
+		}	
+		info.getCanInfo().CHANGE_STATUS=10;
+		Message dataMsg = new Message();
+		dataMsg.what = Contacts.MSG_DATA;
+		dataMsg.obj = null;
+		mHandler.sendMessage(dataMsg);	
+	}
+
 	private AccStateObserver mAccStateObserver = new AccStateObserver();
 
 	public class AccStateObserver extends ContentObserver {
@@ -368,6 +405,12 @@ public class CanService extends Service {
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Contacts.ACC_STATE),
 				true, mAccStateObserver);
+		
+		getContentResolver()
+				.registerContentObserver(
+						android.provider.Settings.System
+								.getUriFor(Contacts.TAILDOORSTATUS),
+						true, mTailDoorObserver); // 尾门状态
 	}
 
 	private CanNameObserver mCanNameObserver = new CanNameObserver();
@@ -400,6 +443,8 @@ public class CanService extends Service {
 		}
 		getContentResolver().unregisterContentObserver(mBackCarObserver);
 		getContentResolver().unregisterContentObserver(mCanNameObserver);
+		getContentResolver().unregisterContentObserver(mTailDoorObserver);
+		
 		mInputStream = null;
 		mOutputStream = null;
 		super.onDestroy();
@@ -960,11 +1005,12 @@ public class CanService extends Service {
 		int second = c.get(Calendar.SECOND);
 		writeCanPort(BytesUtil.addRZCCheckBit(str
 				+ BytesUtil.changIntHex(year % 2000)
-				+ BytesUtil.changIntHex(mouth+1) + BytesUtil.changIntHex(date)
-				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
-				+ BytesUtil.changIntHex(second) + "01"));
+				+ BytesUtil.changIntHex(mouth + 1)
+				+ BytesUtil.changIntHex(date) + BytesUtil.changIntHex(hour)
+				+ BytesUtil.changIntHex(minute) + BytesUtil.changIntHex(second)
+				+ "01"));
 	}
-	
+
 	private void syncTimeWithMsgMGGS() {
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
@@ -974,10 +1020,10 @@ public class CanService extends Service {
 		int hour = c.get(Calendar.HOUR_OF_DAY);
 		int minute = c.get(Calendar.MINUTE);
 		writeCanPort(BytesUtil.addSSCheckBit("5AA50ACB"
-				+ BytesUtil.changIntHex(year% 2000)
-				+ BytesUtil.changIntHex(mouth+1) + BytesUtil.changIntHex(date)
-				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
-				+ "0100000000"));	
+				+ BytesUtil.changIntHex(year % 2000)
+				+ BytesUtil.changIntHex(mouth + 1)
+				+ BytesUtil.changIntHex(date) + BytesUtil.changIntHex(hour)
+				+ BytesUtil.changIntHex(minute) + "0100000000"));
 	}
 
 	/**
