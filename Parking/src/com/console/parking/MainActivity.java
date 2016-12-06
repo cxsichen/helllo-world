@@ -68,6 +68,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private static final int CLOSECAMERA = 6;
 	private final static String BACKTRACK = "backingTrack";
 	private final static String VIDEOMIRROR = "videoMirroring";
+	public static final String PARKING_RADAR = "parkingRadar";
 	private static final String SEND_BACK_CAR_OFF = "com.console.SEND_BACK_CAR_OFF";
 	private Button button;
 	IntentFilter filter;
@@ -459,6 +460,13 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			} else {
 				findViewById(R.id.rail_line).setVisibility(View.GONE);
 			}
+			int parkingRadarState = android.provider.Settings.System.getInt(
+					getContentResolver(), PARKING_RADAR, 1);
+			if (parkingRadarState == 1) {
+				findViewById(R.id.radar_layout).setVisibility(View.VISIBLE);
+			}else{
+				findViewById(R.id.radar_layout).setVisibility(View.GONE);
+			}		
 			break;
 		}
 
