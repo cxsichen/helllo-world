@@ -7,16 +7,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.console.canreader.R;
 import com.console.canreader.activity.BaseFragment;
 import com.console.canreader.service.CanInfo;
-import com.console.canreader.utils.BytesUtil;
 
 public class SSPeugeot408CarInfoFragment extends BaseFragment {
 
@@ -28,14 +28,14 @@ public class SSPeugeot408CarInfoFragment extends BaseFragment {
 	private Button ENGINE_START_STATUS;
 	private int QiTing;
 	private Context mContext;
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.ss_peugeot408_car_info,
 				container, false);
-		mContext = view.getContext();
+		mContext=view.getContext();
 		initView(view);
 		syncView(getCanInfo());
 		return view;
@@ -43,20 +43,45 @@ public class SSPeugeot408CarInfoFragment extends BaseFragment {
 
 	private void syncView(CanInfo canInfo) {
 		try {
+			if (canInfo != null) {
 
-			INSTANT_CONSUMPTION.setText("" + canInfo.INSTANT_CONSUMPTION);
-			RANGE.setText("" + canInfo.RANGE);
-			AVERAGE_CONSUMPTION.setText("" + canInfo.AVERAGE_CONSUMPTION);
-			AVERAGE_SPEED.setText("" + canInfo.AVERAGE_SPEED);
-			RANGE_ADD.setText("" + canInfo.RANGE_ADD);
-			QiTing = canInfo.ENGINE_START_STATUS;
-			Log.i("xxx", "qt==" + QiTing);
-			if (canInfo.ENGINE_START_STATUS == 1) {
-				ENGINE_START_STATUS.getBackground().setAlpha(0);
-			} else {
-				ENGINE_START_STATUS.getBackground().setAlpha(255);
+				if (canInfo.INSTANT_CONSUMPTION == 0xffff) {
+					INSTANT_CONSUMPTION.setText("---");
+				} else {
+					INSTANT_CONSUMPTION.setText(""
+							+ canInfo.INSTANT_CONSUMPTION);
+				}
+				if (canInfo.RANGE == 0xffff) {
+					RANGE.setText("---");
+				} else {
+					RANGE.setText("" + canInfo.RANGE);
+				}
+
+				if (canInfo.AVERAGE_CONSUMPTION == 0xffff) {
+					AVERAGE_CONSUMPTION.setText("---");
+				} else {
+					AVERAGE_CONSUMPTION.setText(""
+							+ canInfo.AVERAGE_CONSUMPTION);
+				}
+
+				if (canInfo.AVERAGE_SPEED == 0xff) {
+					AVERAGE_SPEED.setText("---");
+				} else {
+					AVERAGE_SPEED.setText("" + canInfo.AVERAGE_SPEED);
+				}
+				if (canInfo.RANGE_ADD > 9999) {
+					RANGE_ADD.setText("---");
+				} else {
+					RANGE_ADD.setText("" + canInfo.RANGE_ADD);
+				}
+				QiTing = canInfo.ENGINE_START_STATUS;
+				if (canInfo.ENGINE_START_STATUS == 1) {
+					ENGINE_START_STATUS.getBackground().setAlpha(0);
+				} else {
+					ENGINE_START_STATUS.getBackground().setAlpha(255);
+				}
+
 			}
-
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -64,13 +89,17 @@ public class SSPeugeot408CarInfoFragment extends BaseFragment {
 
 	private void showWarningDialog(String warningStr) {
 		Dialog alertDialog = new AlertDialog.Builder(mContext).setTitle("¾¯¸æ")
-				.setMessage(warningStr).create();
+				.
+				setMessage(warningStr).
+				create();
 		alertDialog.getWindow().setType(
 				WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 
 		alertDialog.show();
 	}
-
+	
+	
+	
 	private void initView(View view) {
 		try {
 
@@ -88,6 +117,15 @@ public class SSPeugeot408CarInfoFragment extends BaseFragment {
 				@Override
 				public void onClick(View v) {
 					sendMsg("5AA5028C01FF");
+				}
+			});
+			view.findViewById(R.id.peugeot_clean).setOnLongClickListener(new OnLongClickListener() {
+				
+				@Override
+				public boolean onLongClick(View v) {
+					sendMsg("5AA5041B020201FF");
+					sendMsg("5AA5041B030301FF");
+					return true;
 				}
 			});
 		} catch (Exception e) {

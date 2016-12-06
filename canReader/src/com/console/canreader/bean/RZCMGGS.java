@@ -1,5 +1,7 @@
 package com.console.canreader.bean;
 
+import java.io.UnsupportedEncodingException;
+
 import com.console.canreader.bean.AnalyzeUtils.AnalyzeUtilsCallback;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.Contacts;
@@ -13,38 +15,45 @@ public class RZCMGGS extends AnalyzeUtils {
 	// Head Code
 	public static int HEAD_CODE = 0x2e;
 	// DataType
+	// 方向盘按键
+	public static final int STEERING_BUTTON_DATA = 0x20;
+	// 空调信息
+	public static final int AIR_CONDITIONER_DATA = 0x21;
+	// 后雷达信息
+	public static final int BACK_RADER_DATA = 0x22;
+	// 车身信息
+	public static final int CAR_INFO_DATA = 0x24;
+	// 环境温度信息
+	public static final int AMBIENT_TEMP_INFO = 0x27;
+	// 方向盘转角
+	public static final int STEERING_TURN_DATA = 0x29;
+	// 版本信息
+	public static final int  VERSION_DATA = 0x7F;
+	// 车身信息
+	public static final int CAR_INFO_DATA_1 = 0x40;
+
 	// 背光
 	public static int BACK_LIGHT_DATA = 0x14;
 	// 车速
 	public static int CAR_SPEED_DATA = 0x16;
-	// 方向盘按键
-	public static int STEERING_BUTTON_DATA = 0x20;
-	// 空调信息
-	public static int AIR_CONDITIONER_DATA = 0x21;
-	// 后雷达信息
-	public static int BACK_RADER_DATA = 0x22;
+
 	// 前雷达信息
 	public static int FRONT_RADER_DATA = 0x23;
-	// 基本信息
-	public static int BASIC_INFO_DATA = 0x24;
-	// 车身信息
-	public static int CAR_INFO_DATA = 0x24;
+	
+	
 	// 泊车辅助状态
 	public static int PARK_ASSIT_DATA = 0x25;
-	// 方向盘转角
-	public static int STEERING_TURN_DATA = 0x29;
+	
 	// 功放状态
 	public static int POWER_AMPLIFIER_DATA = 0x38;
-	// 版本信息
-	public static int VERSION_DATA = 0x30;
+	
 	// 车身警告信息
 	public static int CAR_INFO_WARNING = 0x65;
 	// 方向盘命令
 	public static int STEERING_ORDER_DATA = 0x2F;
 	// 车身时间信息
 	public static int CAR_TIME_INFO = 0x50;
-	// 环境温度信息
-	public static int AMBIENT_TEMP_INFO = 0x27;
+	
 
 	public CanInfo getCanInfo() {
 		return mCanInfo;
@@ -56,48 +65,81 @@ public class RZCMGGS extends AnalyzeUtils {
 		try {
 			if (msg == null)
 				return;
-			if ((int) (msg[comID] & 0xFF) == BACK_LIGHT_DATA) {
-				mCanInfo.CHANGE_STATUS = 0;
-				analyzeBackLightData(msg);
-			} else if ((int) (msg[comID] & 0xFF) == CAR_SPEED_DATA) {
-				mCanInfo.CHANGE_STATUS = 1;
-				analyzeCarSpeedData(msg);
-			} else if ((int) (msg[comID] & 0xFF) == STEERING_BUTTON_DATA) {
+			switch ((int) (msg[comID] & 0xFF)) {
+			case STEERING_BUTTON_DATA:
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeSteeringButtonData(msg);
-			} else if ((int) (msg[comID] & 0xFF) == AIR_CONDITIONER_DATA) {
-				mCanInfo.CHANGE_STATUS = 3;
+				break;
+			case AIR_CONDITIONER_DATA:
+				mCanInfo.CHANGE_STATUS = 10;
 				analyzeAirConditionData(msg);
-			} else if ((int) (msg[comID] & 0xFF) == BACK_RADER_DATA) {
+				break;
+			case BACK_RADER_DATA:
 				mCanInfo.CHANGE_STATUS = 4;
 				analyzeBackRaderData(msg);
-			} else if ((int) (msg[comID] & 0xFF) == FRONT_RADER_DATA) {
-				mCanInfo.CHANGE_STATUS = 5;
-				analyzeFrontRaderData(msg);
-			}
-			// else if ((int) (msg[i] & 0xFF) == BASIC_INFO_DATA) {
-			// mCanInfo.CHANGE_STATUS = 6;
-			// analyzeBasicInfoData(msg);
-			// }
-			else if ((int) (msg[comID] & 0xFF) == PARK_ASSIT_DATA) {
-				mCanInfo.CHANGE_STATUS = 7;
-				analyzeParkAssitData(msg);
-			} else if ((int) (msg[comID] & 0xFF) == STEERING_TURN_DATA) {
-				mCanInfo.CHANGE_STATUS = 8;
-				analyzeSteeringTurnData(msg);
-			}
-			// else if ((int) (msg[i] & 0xFF) == POWER_AMPLIFIER_DATA) {
-			// mCanInfo.CHANGE_STATUS = 9;
-			// analyzePowerAmplifierData(msg);
-			// }
-			else if ((int) (msg[comID] & 0xFF) == CAR_INFO_DATA) {
+				break;
+			case CAR_INFO_DATA:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData(msg);
-			} else if ((int) (msg[comID] & 0xFF) == AMBIENT_TEMP_INFO) {
+				break;
+			case CAR_INFO_DATA_1:
+				mCanInfo.CHANGE_STATUS = 10;
+				analyzeCarInfoData_1(msg);
+				break;
+			case AMBIENT_TEMP_INFO:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeOutSideTemputerature(msg);
-			} else {
-				mCanInfo.CHANGE_STATUS = 8888;
+				break;
+			case STEERING_TURN_DATA:
+				mCanInfo.CHANGE_STATUS = 8;
+				analyzeSteeringTurnData(msg);
+				break;
+			case VERSION_DATA:
+				mCanInfo.CHANGE_STATUS = 10;
+				analyzeVersionData(msg);
+				break;
+			default:
+				break;
+			}
+
+			if (false) {
+				if ((int) (msg[comID] & 0xFF) == BACK_LIGHT_DATA) {
+					mCanInfo.CHANGE_STATUS = 0;
+					analyzeBackLightData(msg);
+				} else if ((int) (msg[comID] & 0xFF) == CAR_SPEED_DATA) {
+					mCanInfo.CHANGE_STATUS = 1;
+					analyzeCarSpeedData(msg);
+				} else if ((int) (msg[comID] & 0xFF) == STEERING_BUTTON_DATA) {
+
+				} else if ((int) (msg[comID] & 0xFF) == AIR_CONDITIONER_DATA) {
+
+				} else if ((int) (msg[comID] & 0xFF) == BACK_RADER_DATA) {
+
+				} else if ((int) (msg[comID] & 0xFF) == FRONT_RADER_DATA) {
+					mCanInfo.CHANGE_STATUS = 5;
+					analyzeFrontRaderData(msg);
+				}
+				// else if ((int) (msg[i] & 0xFF) == BASIC_INFO_DATA) {
+				// mCanInfo.CHANGE_STATUS = 6;
+				// analyzeBasicInfoData(msg);
+				// }
+				else if ((int) (msg[comID] & 0xFF) == PARK_ASSIT_DATA) {
+					mCanInfo.CHANGE_STATUS = 7;
+					analyzeParkAssitData(msg);
+				} else if ((int) (msg[comID] & 0xFF) == STEERING_TURN_DATA) {
+					
+				}
+				// else if ((int) (msg[i] & 0xFF) == POWER_AMPLIFIER_DATA) {
+				// mCanInfo.CHANGE_STATUS = 9;
+				// analyzePowerAmplifierData(msg);
+				// }
+				else if ((int) (msg[comID] & 0xFF) == CAR_INFO_DATA) {
+					
+				} else if ((int) (msg[comID] & 0xFF) == AMBIENT_TEMP_INFO) {
+					
+				} else {
+					mCanInfo.CHANGE_STATUS = 8888;
+				}
 			}
 
 		} catch (Exception e) {
@@ -115,6 +157,24 @@ public class RZCMGGS extends AnalyzeUtils {
 		}
 	}
 
+	void analyzeCarInfoData_1(byte[] msg) {
+		// TODO Auto-generated method stub
+		mCanInfo.AUTO_LOCK_SETTING = (int) ((msg[3] >> 7) & 0x01);
+		mCanInfo.AUTO_OPEN_LOCK_Z = (int) ((msg[3] >> 6) & 0x01);
+		mCanInfo.AUTO_OPEN_LOCK = (int) ((msg[3] >> 5) & 0x01);
+		mCanInfo.AUTO_OPEN_LOCK_S = (int) ((msg[3] >> 4) & 0x01);
+		
+		mCanInfo.LIGHT_COMING_HOME_BACKUP = (int) ((msg[4] >> 7) & 0x01);
+		mCanInfo.LIGHT_COMING_HOME_DIPPED = (int) ((msg[4] >> 6) & 0x01);
+		mCanInfo.LIGHT_COMING_HOME_REARFOG = (int) ((msg[4] >> 5) & 0x01);
+		mCanInfo.LIGHT_COMING_HOME_TIME = (int) ((msg[4] >> 0) & 0x0F);
+		
+		mCanInfo.LIGHT_SEEK_CAR_BACKUP = (int) ((msg[5] >> 7) & 0x01);
+		mCanInfo.LIGHT_SEEK_CAR_DIPPED = (int) ((msg[5] >> 6) & 0x01);
+		mCanInfo.LIGHT_SEEK_CAR_REARFOG = (int) ((msg[5] >> 5) & 0x01);
+		mCanInfo.LIGHT_SEEK_CAR_TIME = (int) ((msg[5] >> 0) & 0x0F);
+	}
+
 	void analyzeCarInfoData(byte[] msg) {
 		// TODO Auto-generated method stub
 		mCanInfo.RIGHT_FORONTDOOR_STATUS = (int) ((msg[3] >> 7) & 0x01);
@@ -126,7 +186,23 @@ public class RZCMGGS extends AnalyzeUtils {
 		mCanInfo.HANDBRAKE_STATUS = (int) ((msg[4] >> 1) & 0x01);
 		mCanInfo.SAFETY_BELT_STATUS = (int) ((msg[4] >> 4) & 0x01);
 	}
+	
+	void analyzeVersionData(byte[] msg) {
+		// TODO Auto-generated method stub
+		int len = ((int) msg[2] & 0xFF);
+		byte[] acscii = new byte[len];
+		for (int i = 0; i < len; i++) {
+			acscii[i] = msg[i + 3];
 
+		}
+		try {
+			mCanInfo.VERSION = new String(acscii, "GBK");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	void analyzePowerAmplifierData(byte[] msg) {
 		// TODO Auto-generated method stub
 		mCanInfo.POWER_AMPLIFIER_TYPE = (int) (msg[3] & 0xFF);
@@ -143,7 +219,7 @@ public class RZCMGGS extends AnalyzeUtils {
 	void analyzeSteeringTurnData(byte[] msg) {
 		// TODO Auto-generated method stub
 		int turnTemp = ((int) msg[3] & 0xFF) << 8 | ((int) msg[4] & 0xFF);
-		int turnTemp2 = (32701 - turnTemp) * 540 / 0x1e97;
+		int turnTemp2 = -((32701 - turnTemp) * 540 / 0x1e97);
 		Trace.i("turnTemp2=====" + turnTemp2);
 		if (turnTemp2 >= 540) {
 			mCanInfo.STERRING_WHELL_STATUS = 540;
@@ -232,6 +308,7 @@ public class RZCMGGS extends AnalyzeUtils {
 		int temp = (int) (msg[5] & 0xff);
 		mCanInfo.DRIVING_POSITON_TEMP = temp == 0 ? 0 : temp == 15 ? 255
 				: (18f + (temp - 2));
+		mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = mCanInfo.DRIVING_POSITON_TEMP;
 
 		mCanInfo.MAX_FRONT_LAMP_INDICATOR = (int) ((msg[6] >> 7) & 0x01);
 		mCanInfo.REAR_LAMP_INDICATOR = (int) ((msg[6] >> 6) & 0x01);
@@ -253,20 +330,46 @@ public class RZCMGGS extends AnalyzeUtils {
 		case 0x04:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUUP;
 			break;
-		// case 0x05:
-		// mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.SRC;
-		// break;
 		case 0x06:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.ANSWER;
 			break;
 		case 0x07:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.SRC;
 			break;
+		case 0x08:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.PHONE_APP;
+			break;
 		case 0x09:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.PHONE;
 			break;
+		case 0x10:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.SRC;
+			break;
+		case 0x11:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.SRC;
+			break;
+		case 0x12:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.BACK;
+			break;
+		case 0x13:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;
+			break;
+		case 0x32:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MAP;
+			break;
+		case 0x80:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.POWER;
+			break;
 		case 0x16:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUTE;
+			break;
+		case 0x81:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUMEUP;
+			mCanInfo.CAR_VOLUME_KNOB = (int) (msg[4] & 0xFF);
+			break;
+		case 0x82:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUMEDOWN;
+			mCanInfo.CAR_VOLUME_KNOB = (int) (msg[4] & 0xFF);
 			break;
 		default:
 			mCanInfo.STEERING_BUTTON_MODE = 0;

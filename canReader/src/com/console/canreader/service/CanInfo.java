@@ -718,6 +718,20 @@ public class CanInfo implements Parcelable {
 	public int TIME_HOUR=0;									//时间 时
 	public int TIME_MINUTE;									//时间 分
 	public int TIME_FORMAT;									//时间格式
+	public int CRITICAL_PARK_ENABLE;						//紧急制动报使能
+	public int AUTO_LOCK_SETTING_ENABLE;					//自动落锁使能
+	public int FRONT_LAMP_DELAY_ENABLE;						//前照灯延迟使能
+	public int TURN_START_AVM_ENABLE;						//转向启动AVM使能
+	public int TURN_START_ANIMATION_ENABLE;						//转向启动动画使能
+	public int SELECTOR_CAR_ASSIST_ENABLE; 						//选择车辆辅助线使能
+	public int SPEED_OVER_SETTING_ENABLE; 						//超速报警使能
+	
+	public int CRITICAL_PARK_STATUS;						//紧急制动报警开关
+	public int CRITICAL_PARK_MODE;							//紧急制动报警方式
+	public int FRONT_LAMP_DELAY_STATUS;						//前照灯延迟
+	public int TURN_START_AVM_STATUS;						//转向启动AVM
+	public int TURN_START_ANIMATION_STATUS;						//转向启动动画
+	public int SELECTOR_CAR_ASSIST_STATUS; 						//选择车辆辅助线
 	/*-------------------add by xyw end----------------------------------*/
 
 	

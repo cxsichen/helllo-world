@@ -25,7 +25,7 @@ import com.console.canreader.utils.Contacts;
 import com.console.canreader.utils.PreferenceUtil;
 
 public class KeyDealer {
-
+   public static final String APPLISTNAME = "Console_applist_name";
 	public static final String TXZ_PKG = "com.colink.zzj.txzassistant";
 	public static final String TXZ_SERVICE_CLASS = "com.colink.zzj.txzassistant.AssistantService";
 	public static final String ACTION_START_TALK = "cn.yunzhisheng.intent.action.START_TALK";
@@ -153,6 +153,14 @@ public class KeyDealer {
 			case Contacts.KEYEVENT.MUSIC_PLAY_PAUSE:
 				Log.i("cxs", "-------Contacts.KEYEVENT.MUSIC_PLAY_PAUSE-------");
 				handleMUSIC_PLAY_PAUSE();
+				break;
+			case Contacts.KEYEVENT.KNOBVOLUMEUP:
+				Log.i("cxs", "-------Contacts.KEYEVENT.KNOBVOLUMEUP-------");
+				handleKnobVolumeUp(msg.arg1);
+				break;
+			case Contacts.KEYEVENT.KNOBVOLUMEDOWN:
+				Log.i("cxs", "-------Contacts.KEYEVENT.KNOBVOLUMEDOWN-------");
+				handleKnobVolumeDown(msg.arg1);
 				break;
 			case Contacts.KEYEVENT.KNOBVOLUME:
 				Log.i("cxs", "-------Contacts.KEYEVENT.KNOBVOLUME-------");
@@ -385,6 +393,23 @@ public class KeyDealer {
 			Log.i("xxx", "start startAcForAir error");
 		}
 	}
+	
+	public void handleKnobVolumeUp(int knobValue) {
+		if (mAudioManager == null)
+			mAudioManager = (AudioManager) context
+					.getSystemService(Context.AUDIO_SERVICE);
+		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+		handleVolume(context, cur_music + knobValue);
+	}
+	
+	public void handleKnobVolumeDown(int knobValue) {
+		if (mAudioManager == null)
+			mAudioManager = (AudioManager) context
+					.getSystemService(Context.AUDIO_SERVICE);
+		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+		handleVolume(context, cur_music - knobValue);
+	}
+
 
 	public void handleKnobVolume(int knobValue) {
 		if (mAudioManager == null)
@@ -499,13 +524,13 @@ public class KeyDealer {
 
 	private void handleANSWER_WITH_MENUUP() {
 		// TODO Auto-generated method stub
-		if (PreferenceUtil.getMode(context) == 3) {
+		if (isPhoneCommig()) {
 			handleTelAnswer();
 		} else {
 			handleMenuUp();
 		}
 	}
-
+	
 	private void handleFM_CHANGE_FREQUENCY(float value) {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent();
@@ -516,7 +541,7 @@ public class KeyDealer {
 
 	private void handleHANGUP_WITH_MENUDOWN() {
 		// TODO Auto-generated method stub
-		if (PreferenceUtil.getMode(context) == 3) {
+		if (isPhoneCommig()) {
 			handleTelHandUp();
 		} else {
 			handleMenuDown();
@@ -700,6 +725,24 @@ public class KeyDealer {
 
 		// ÒôÁ¿ÐýÅ¥ Ñ¡ÔñÐýÅ¥ ÓïÒôÃüÁî
 		switch (canInfo.STEERING_BUTTON_MODE) {
+		case Contacts.KEYEVENT.KNOBVOLUMEUP:
+			if (System.currentTimeMillis() - lastSendTime > 500) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.KNOBVOLUMEUP;
+				msg.arg1 = canInfo.CAR_VOLUME_KNOB;
+				mHandler.sendMessage(msg);
+			}
+			break;			
+		case Contacts.KEYEVENT.KNOBVOLUMEDOWN:
+			if (System.currentTimeMillis() - lastSendTime > 500) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.KNOBVOLUMEDOWN;
+				msg.arg1 = canInfo.CAR_VOLUME_KNOB;
+				mHandler.sendMessage(msg);
+			}
+			break;
 		case Contacts.KEYEVENT.KNOBVOLUME:
 			if (System.currentTimeMillis() - lastSendTime > 500) {
 				lastSendTime = System.currentTimeMillis();
@@ -1035,7 +1078,17 @@ public class KeyDealer {
 			Log.e("wrc", "------actionKey--" + e.getMessage());
 			e.printStackTrace();
 		}
-
+	}
+	
+	public Boolean isPhoneCommig(){
+		Boolean IsPhoneComming=false;
+		String appName =Settings.System.getString(context.getContentResolver(),APPLISTNAME); 
+		if(appName==null)
+			return IsPhoneComming;
+		if(appName.contains("com.mtk.bluetooth.PhoneCallActivity")){
+			IsPhoneComming=true;
+		}
+		return IsPhoneComming;		
 	}
 
 }

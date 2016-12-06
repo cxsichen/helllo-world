@@ -1522,6 +1522,8 @@
     </string-array>  
     <!-- 尚摄  风光580  -->  
     
+    
+    <!-- 上汽 名爵锐腾  --> 
     <!-- 尚摄  名爵锐腾  --> 
     <string-array name="SSMGGS_main">
         <item>1</item> <!-- 车辆信息  -->
@@ -1553,7 +1555,30 @@
          <item>com.console.canreader.fragment.SSMGGS.LockSettingsFragment</item>
          <item>com.console.canreader.fragment.SSMGGS.LightSettingsFragment</item> 
     </string-array>
-    <!-- 尚摄  名爵锐腾  -->      
+    <!-- 尚摄  名爵锐腾  --> 
+    
+    <!-- 睿志诚  名爵锐腾  --> 
+    <string-array name="RZCMGGS_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item> <!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="RZCMGGS_setting_items">
+        <item>车锁控制</item>
+        <item>照明设定</item>
+    </string-array>
+      <string-array name="RZCMGGS_setting_fragment">
+         <item>com.console.canreader.fragment.RZCMGGS.LockSettingsFragment</item>
+         <item>com.console.canreader.fragment.RZCMGGS.LightSettingsFragment</item> 
+    </string-array>
+    <!-- 睿志诚  名爵锐腾  --> 
+    
+    <!-- 上汽 名爵锐腾  -->      
     
          
     <!-- 上汽   -->

@@ -127,7 +127,7 @@ public class CanService extends Service {
 		// 根据can信息处理事件
 		int parkingState = android.provider.Settings.System.getInt(
 				getContentResolver(), Contacts.BACK_CAR, 0); // 倒车的时候不处理任何弹框事件
-	
+
 		if (parkingState != 1) {
 			DialogCreater.showUnlockWaringDialog(CanService.this, // 车门报警事件处理
 																	// 比较重要
@@ -311,7 +311,7 @@ public class CanService extends Service {
 			super.onChange(selfChange);
 			int state = android.provider.Settings.System.getInt(
 					getContentResolver(), Contacts.TAILDOORSTATUS, 0);
-		
+
 			handleTailDoorState(state);
 		}
 	}
@@ -319,20 +319,20 @@ public class CanService extends Service {
 	private void handleTailDoorState(int state) {
 		// TODO Auto-generated method stub
 		info = BeanFactory.getCanInfo(CanService.this, null, canName);
-		
-		if(info==null){
+
+		if (info == null) {
 			return;
 		}
 		if (state == 1) {
 			info.getCanInfo().TRUNK_STATUS = 1;
-		}else{		
+		} else {
 			info.getCanInfo().TRUNK_STATUS = 0;
-		}	
-		info.getCanInfo().CHANGE_STATUS=10;
+		}
+		info.getCanInfo().CHANGE_STATUS = 10;
 		Message dataMsg = new Message();
 		dataMsg.what = Contacts.MSG_DATA;
 		dataMsg.obj = null;
-		mHandler.sendMessage(dataMsg);	
+		mHandler.sendMessage(dataMsg);
 	}
 
 	private AccStateObserver mAccStateObserver = new AccStateObserver();
@@ -405,12 +405,12 @@ public class CanService extends Service {
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Contacts.ACC_STATE),
 				true, mAccStateObserver);
-		
-		getContentResolver()
-				.registerContentObserver(
-						android.provider.Settings.System
-								.getUriFor(Contacts.TAILDOORSTATUS),
-						true, mTailDoorObserver); // 尾门状态
+
+		/*
+		 * getContentResolver() .registerContentObserver(
+		 * android.provider.Settings.System .getUriFor(Contacts.TAILDOORSTATUS),
+		 * true, mTailDoorObserver); // 尾门状态
+		 */
 	}
 
 	private CanNameObserver mCanNameObserver = new CanNameObserver();
@@ -443,8 +443,8 @@ public class CanService extends Service {
 		}
 		getContentResolver().unregisterContentObserver(mBackCarObserver);
 		getContentResolver().unregisterContentObserver(mCanNameObserver);
-		getContentResolver().unregisterContentObserver(mTailDoorObserver);
-		
+		// getContentResolver().unregisterContentObserver(mTailDoorObserver);
+
 		mInputStream = null;
 		mOutputStream = null;
 		super.onDestroy();
@@ -1011,6 +1011,22 @@ public class CanService extends Service {
 				+ "01"));
 	}
 
+	
+	private void rzcSyncTimeWithMsg_1(String str) {
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int mouth = c.get(Calendar.MONTH);
+		int date = c.get(Calendar.DATE);
+
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int minute = c.get(Calendar.MINUTE);
+		writeCanPort(BytesUtil.addRZCCheckBit(str
+				+ BytesUtil.changIntHex(year % 2000)
+				+ BytesUtil.changIntHex(mouth + 1)
+				+ BytesUtil.changIntHex(date) + BytesUtil.changIntHex(hour)
+				+ BytesUtil.changIntHex(minute) ));
+	}
+
 	private void syncTimeWithMsgMGGS() {
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
@@ -1037,6 +1053,12 @@ public class CanService extends Service {
 			switch (canName) {
 			case Contacts.CANNAMEGROUP.RZCVolkswagenGolf:
 				rzcSyncTimeWithMsg("2EA607");
+				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
+						1000 * 60);
+				break;
+			case Contacts.CANNAMEGROUP.RZCMGGS:
+				rzcSyncTimeWithMsg_1("2EA605");
 				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
 						1000 * 60);

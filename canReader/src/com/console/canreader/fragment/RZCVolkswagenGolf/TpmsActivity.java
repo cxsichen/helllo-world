@@ -54,7 +54,6 @@ public class TpmsActivity extends BaseActivity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.tryepressure_home_1);
 		initView();
-
 	}
 
 	@Override
