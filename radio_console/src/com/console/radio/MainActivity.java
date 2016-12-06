@@ -184,13 +184,23 @@ public class MainActivity extends Activity implements OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_main);
+	    if(checkLocale("CN")){
+			setContentView(R.layout.activity_main);
+		}else{
+			setContentView(R.layout.activity_main_eng);
+		}	
 		initView();
 		getAudioManager();
 		// requestAudioFocus();
 		setFqDataWhenOnCreate();
 
 	}
+	
+	Boolean checkLocale(String str) {
+		return getResources().getConfiguration().locale.getCountry()
+				.equals(str);
+	}
+
 
 	private void initView() {
 		// TODO Auto-generated method stub
@@ -220,8 +230,6 @@ public class MainActivity extends Activity implements OnClickListener,
 
 		initAmLayout();
 		initFmLayout();
-		Settings.System.putInt(getContentResolver(),
-				Contacts.FMSTATUS, 0);
 		changePlayButton();
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Contacts.FMSTATUS),
@@ -682,15 +690,14 @@ public class MainActivity extends Activity implements OnClickListener,
 
 		band = mRadioData.curBand;
 		item = mRadioData.curFavDown - 1;
-
 		if ((mRadioData.curBand < 3 && mRadioData.FF[0] > 5000)
 				|| (mRadioData.curBand >= 3 && mRadioData.FF[0] < 5000)) {
 
 			for (int i = 0; i < mRadioData.FF.length; i++) {
-				allFqs.set(mRadioData.curBand * 6 + i, mRadioData.FF[i]);
+				if(mRadioData.FF[i]!=-1)
+				 allFqs.set(mRadioData.curBand * 6 + i, mRadioData.FF[i]);
 			}
 		}
-		
 		updatePageItem(allFqs, band, item);
 	}
 

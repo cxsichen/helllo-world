@@ -77,11 +77,25 @@ public class PreferenceUtil {
 	}
 
 	public static int getBand(Context context) {
-		return getPreferences(context).getInt(KEY_CURRENT_BAND, 0);
+		try {
+			int band = Settings.System.getInt(context.getContentResolver(),
+					KEY_CURRENT_BAND, 0);
+			return band;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	public static void setBand(Context context, int band) {
-		getPreferencesEditor(context).putInt(KEY_CURRENT_BAND, band).apply();
+		try {
+			Settings.System.putInt(context.getContentResolver(),
+					KEY_CURRENT_BAND,band);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	public static int getFavoriteFq(Context context) {

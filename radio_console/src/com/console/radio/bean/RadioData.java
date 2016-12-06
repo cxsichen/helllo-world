@@ -8,11 +8,14 @@ public class RadioData {
 	public int curBand;
 	public int curFavDown;
 	public int[] FF = new int[PACKET_SIZE];
-
+	public RadioData() {
+		// TODO Auto-generated constructor stub
+		clearData();
+	}
 	public void clearData() {
 		curFreq = 0;
 		curBand = 0;
 		curFavDown = 0;
-		Arrays.fill(FF, 0);
+		Arrays.fill(FF, -1);
 	}
 }

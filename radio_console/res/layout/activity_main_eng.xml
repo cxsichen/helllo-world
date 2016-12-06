@@ -2,21 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_bg" >
-
+    android:background="@color/app_bg"
+    android:orientation="horizontal" >
+    
     <LinearLayout
-        android:id="@+id/a"
-        android:layout_width="@dimen/left_panel_width"
-        android:layout_height="match_parent"
-        android:elevation="4dp"
-        android:orientation="vertical" >
-
-        <include layout="@layout/left_panel" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/b"
-        android:layout_width="match_parent"
+        android:layout_width="620dp"
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
@@ -33,5 +23,17 @@
             layout="@layout/channel_layout"
             android:elevation="4dp" />
     </LinearLayout>
+    
+    
+       <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="4dp"
+        android:orientation="vertical" >
+
+        <include layout="@layout/left_panel" />
+    </LinearLayout>
+
+
 
 </LinearLayout>
