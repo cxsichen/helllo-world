@@ -115,7 +115,7 @@ public interface Contacts {
     public static final String HEX_NEXT_SHORT_MOVE = "F506000000";
 	public static final String HEX_PRE_SHORT_MOVE = "F506000007";
 
-    
+	public static final String HEX_TAILGATE_CHANGE = "F50200000B";
    
     public static final String RADIO_MODE = "F502000000";
     public static final String MUSIC_MODE = "F502000001";
@@ -201,7 +201,7 @@ public interface Contacts {
 	public static final int BACK_CAR = 0x0F;
 	public static final int BACK_CAR_OFF = 0x10;
 	public static final int BACKLIGHT= 0x78;
-	
+	public static final int STATUS= 0x79;
 	public static final int VERSION_0= 0x60;
 	public static final int VERSION_1= 0x61;
 	public static final int VERSION_2= 0x62;

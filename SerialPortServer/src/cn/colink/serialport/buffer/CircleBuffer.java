@@ -132,6 +132,7 @@ public class CircleBuffer{
              (intHead == Contacts.VERSION_2)     ||
              (intHead == Contacts.VERSION_3)     ||
              (intHead == Contacts.VERSION_4)     ||
+             (intHead == Contacts.STATUS)     ||
              (intHead == Contacts.BACKLIGHT)     ||
              (intHead == Contacts.VOLBAR))){
             return false;

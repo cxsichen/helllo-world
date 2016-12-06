@@ -12,6 +12,8 @@ public interface Constact  {
 	public static final String ACTION_MUSIC_START = "com.console.MUSIC_START";
 	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
 	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
+	public static final String ACTION_TAILGATE_CHANGE = "com.console.TAILGATE_CHANGE";
+	public final static String TAILDOORSTATUS = "tail_door_status";
 	
 	public final static String STOPNAVI="com.inet.broadcast.stoptnavi";
 	public final static String STARTNAVI="com.inet.broadcast.startnavi";

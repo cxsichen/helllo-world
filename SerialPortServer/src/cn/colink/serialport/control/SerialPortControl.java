@@ -3,6 +3,7 @@ package cn.colink.serialport.control;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import cn.colink.serialport.TailGateActivity;
 import cn.colink.serialport.service.ISerialPortService;
 import cn.colink.serialport.service.SerialPortService;
 import cn.colink.serialport.utils.BytesUtil;
@@ -71,6 +72,7 @@ public class SerialPortControl {
 	private static final String SEND_BACK_CAR_OFF = "com.console.SEND_BACK_CAR_OFF";
 
 	private PlayerStatus mPlayerStatus = PlayerStatus.STOP;
+	private static long tailGateTimeSave=0;
 
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
@@ -529,6 +531,21 @@ public class SerialPortControl {
 	private void dealWithPacket(byte[] packet) {
 		// TODO Auto-generated method stub
 		switch (packet[0]) {
+		case Contacts.STATUS: // 常发命令
+			int tail_door_status = (int) ((packet[1] >> 1) & 0x01);  //尾门状态
+			if (tail_door_status != Settings.System.getInt(
+					mSerialPortService.getContentResolver(),
+					Constact.TAILDOORSTATUS, 0)) {
+				Settings.System.putInt(mSerialPortService.getContentResolver(),
+						Constact.TAILDOORSTATUS, tail_door_status);
+				if(tail_door_status==1){
+				    Intent doorIntent=new Intent();
+				    doorIntent.setClass(mSerialPortService, TailGateActivity.class);
+				    doorIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				    mSerialPortService.startActivity(doorIntent);
+				}
+			}		
+			break;
 		case Contacts.RADIO_MSG: // Fm模式开关状态
 			if (packet[2] == (int) 0x01) {
 				Settings.System.putInt(mSerialPortService.getContentResolver(),
@@ -1048,11 +1065,11 @@ public class SerialPortControl {
 				mValumeObserver);
 		mSerialPortService.getContentResolver().unregisterContentObserver(
 				mFactorySoundObserver);
-		if(mKwapi!=null)
-		mKwapi.unRegisterPlayerStatusListener(mSerialPortService);
-		if(mIMediaPlaybackService!=null){
+		if (mKwapi != null)
+			mKwapi.unRegisterPlayerStatusListener(mSerialPortService);
+		if (mIMediaPlaybackService != null) {
 			mSerialPortService.unbindService(mServiceConnection);
-			mSerialPortService=null;
+			mSerialPortService = null;
 		}
 
 	}
@@ -1065,11 +1082,18 @@ public class SerialPortControl {
 		msg.obj = mPacket;
 		mHandler.sendMessage(msg);
 	}
-
+    
 	public void dealCommand(String command) {
 		// TODO Auto-generated method stub
 		int mode = PreferenceUtil.getMode(mSerialPortService);
 		switch (command) {
+		// 打开和关闭尾门的命令
+		case Constact.ACTION_TAILGATE_CHANGE:
+			if(System.currentTimeMillis()-tailGateTimeSave>2*1000){
+				tailGateTimeSave=System.currentTimeMillis();
+				sendMsg(Contacts.HEX_TAILGATE_CHANGE);
+			}			
+			break;
 		case Constact.ACTION_MENU_UP:
 			if (mode == 0) { // FM模式
 				sendMsg(Contacts.HEX_PRE_SHORT_MOVE);
@@ -1119,7 +1143,7 @@ public class SerialPortControl {
 			mSerialPortService.bindService(intent, mServiceConnection,
 					mSerialPortService.BIND_AUTO_CREATE);
 		} catch (Exception e) {
-			Log.i("cxs","==========e======="+e);
+			Log.i("cxs", "==========e=======" + e);
 			e.printStackTrace();
 		}
 	}
@@ -1188,9 +1212,10 @@ public class SerialPortControl {
 			} else {
 				mKwapi.setPlayState(mSerialPortService, PlayState.STATE_PLAY);
 			}
-		} else {		
+		} else {
 			try {
-				Log.i("cxs", "--------controlPlay---isPlaying-" + mIMediaPlaybackService.isPlaying());
+				Log.i("cxs", "--------controlPlay---isPlaying-"
+						+ mIMediaPlaybackService.isPlaying());
 				if (mIMediaPlaybackService.isPlaying()) {
 					mIMediaPlaybackService.pause();
 				} else {

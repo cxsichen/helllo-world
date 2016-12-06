@@ -26,6 +26,7 @@ public class KeyDealer {
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
 	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
+	public static final String APPLISTNAME = "Console_applist_name";
 
 	static Context context;
 	static KeyDealer mKeyDealer;
@@ -100,10 +101,11 @@ public class KeyDealer {
 	}
 
 	protected void handlePlayPause() {
-		 Intent intent= new Intent();
-         intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
-         intent.putExtra("keyEvent", ACTION_PLAY_PAUSE);
-         context.startService(intent);
+		Intent intent = new Intent();
+		intent.setClassName("cn.colink.serialport",
+				"cn.colink.serialport.service.SerialPortService");
+		intent.putExtra("keyEvent", ACTION_PLAY_PAUSE);
+		context.startService(intent);
 	}
 
 	protected void handleMainMenu() {
@@ -126,6 +128,7 @@ public class KeyDealer {
 					"com.console.nodisturb.MainActivity");
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(intent);
+			context.startActivity(intent);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -133,24 +136,27 @@ public class KeyDealer {
 	}
 
 	protected void handleMute() {
-		 Intent intent= new Intent();
-         intent.setClassName("com.console.canreader", "com.console.canreader.service.CanService");
-         intent.putExtra("keyEvent", KEYCODE_VOLUME_MUTE);
-         context.startService(intent);
+		Intent intent = new Intent();
+		intent.setClassName("com.console.canreader",
+				"com.console.canreader.service.CanService");
+		intent.putExtra("keyEvent", KEYCODE_VOLUME_MUTE);
+		context.startService(intent);
 	}
 
 	protected void handleVolumeUp() {
-		Intent intent= new Intent();
-        intent.setClassName("com.console.canreader", "com.console.canreader.service.CanService");
-        intent.putExtra("keyEvent", KEYCODE_VOLUME_UP);
-        context.startService(intent);
+		Intent intent = new Intent();
+		intent.setClassName("com.console.canreader",
+				"com.console.canreader.service.CanService");
+		intent.putExtra("keyEvent", KEYCODE_VOLUME_UP);
+		context.startService(intent);
 	}
 
 	protected void handleVolumeDown() {
-		 Intent intent= new Intent();
-         intent.setClassName("com.console.canreader", "com.console.canreader.service.CanService");
-         intent.putExtra("keyEvent", KEYCODE_VOLUME_DOWN);
-         context.startService(intent);
+		Intent intent = new Intent();
+		intent.setClassName("com.console.canreader",
+				"com.console.canreader.service.CanService");
+		intent.putExtra("keyEvent", KEYCODE_VOLUME_DOWN);
+		context.startService(intent);
 	}
 
 	protected void handleTelAnswer() {
@@ -165,21 +171,44 @@ public class KeyDealer {
 		context.sendBroadcast(intent);
 	}
 
+	public Boolean isPhoneCommig() {
+		Boolean IsPhoneComming = false;
+		String appName = Settings.System.getString(
+				context.getContentResolver(), APPLISTNAME);
+		Log.i("cxs","===isPhoneCommig=======appName="+appName);
+		if (appName == null)
+			return IsPhoneComming;
+		if (appName.contains("com.mtk.bluetooth.PhoneCallActivity")) {
+			IsPhoneComming = true;
+		}
+		return IsPhoneComming;
+	}
+
 	protected void handleMenuUp() {
-		if (getMode(context) != 0) {
-			Intent intent= new Intent();
-	         intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
-	         intent.putExtra("keyEvent", ACTION_MENU_UP);
-	         context.startService(intent);
+		if (isPhoneCommig()) {
+			handleTelAnswer();
+		} else {
+			if (getMode(context) != 0) {
+				Intent intent = new Intent();
+				intent.setClassName("cn.colink.serialport",
+						"cn.colink.serialport.service.SerialPortService");
+				intent.putExtra("keyEvent", ACTION_MENU_UP);
+				context.startService(intent);
+			}
 		}
 	}
 
 	protected void handleMenuDown() {
-		if (getMode(context) != 0) {
-			Intent intent= new Intent();
-	         intent.setClassName("cn.colink.serialport", "cn.colink.serialport.service.SerialPortService");
-	         intent.putExtra("keyEvent", ACTION_MENU_DOWN);
-	         context.startService(intent);
+		if (isPhoneCommig()) {
+			handleTelHandUp();
+		} else {
+			if (getMode(context) != 0) {
+				Intent intent = new Intent();
+				intent.setClassName("cn.colink.serialport",
+						"cn.colink.serialport.service.SerialPortService");
+				intent.putExtra("keyEvent", ACTION_MENU_DOWN);
+				context.startService(intent);
+			}
 		}
 	}
 

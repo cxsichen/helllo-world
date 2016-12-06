@@ -4,8 +4,8 @@
     <string name="app_name">SerialPortServer</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="close_gate">close gate</string>
-    <string name="open_gate">open gate</string>
-    <string name="finish">finish</string>
+    <string name="close_gate">关闭尾门</string>
+    <string name="open_gate">打开尾门</string>
+    <string name="finish">退出</string>
 
 </resources>
