@@ -52,34 +52,49 @@ public class DialogCreater {
 	public static final String WASHER_WARNING = "com.console.wahser.canWaring";
 
 	/*-------------------显示车门报警  start--------------------*/
+	static int[] carDoorwaringStatus = { 0, 0, 0, 0, 0, 0 };
+
 	public static void showUnlockWaringDialog(Context context, CanInfo canInfo) {
 		// TODO Auto-generated method stub
-		
-		if (canInfo.RIGHT_BACKDOOR_STATUS == 1
-				|| canInfo.LEFT_BACKDOOR_STATUS == 1
-				|| canInfo.RIGHT_FORONTDOOR_STATUS == 1
-				|| canInfo.LEFT_FORONTDOOR_STATUS == 1
-				|| canInfo.TRUNK_STATUS == 1 || canInfo.HOOD_STATUS == 1) {
-			if (unlockWaringDialog == null) {
-				unlockWaringDialog = new UnlockWaringDialog(context,
-						R.style.MyDialog);
-				unlockWaringDialog.getWindow().setType(
-						WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+		if (carDoorwaringStatus[0] != canInfo.RIGHT_BACKDOOR_STATUS
+				|| carDoorwaringStatus[1] != canInfo.LEFT_BACKDOOR_STATUS
+				|| carDoorwaringStatus[2] != canInfo.RIGHT_FORONTDOOR_STATUS
+				|| carDoorwaringStatus[3] != canInfo.LEFT_FORONTDOOR_STATUS
+				|| carDoorwaringStatus[4] != canInfo.TRUNK_STATUS
+				|| carDoorwaringStatus[5] != canInfo.HOOD_STATUS) {
+			carDoorwaringStatus[0] = canInfo.RIGHT_BACKDOOR_STATUS;
+			carDoorwaringStatus[1] = canInfo.LEFT_BACKDOOR_STATUS;
+			carDoorwaringStatus[2] = canInfo.RIGHT_FORONTDOOR_STATUS;
+			carDoorwaringStatus[3] = canInfo.LEFT_FORONTDOOR_STATUS;
+			carDoorwaringStatus[4] = canInfo.TRUNK_STATUS;
+			carDoorwaringStatus[5] = canInfo.HOOD_STATUS;
 
-				Window dialogWindow = unlockWaringDialog.getWindow();
-				dialogWindow.setGravity(Gravity.CENTER);
-				// unlockWaringDialog.setCancelable(false);
-			}
-	
-			if (!unlockWaringDialog.isShowing()) {
-				unlockWaringDialog.show();
-			}
+			if (canInfo.RIGHT_BACKDOOR_STATUS == 1
+					|| canInfo.LEFT_BACKDOOR_STATUS == 1
+					|| canInfo.RIGHT_FORONTDOOR_STATUS == 1
+					|| canInfo.LEFT_FORONTDOOR_STATUS == 1
+					|| canInfo.TRUNK_STATUS == 1 || canInfo.HOOD_STATUS == 1) {
+				if (unlockWaringDialog == null) {
+					unlockWaringDialog = new UnlockWaringDialog(context,
+							R.style.MyDialog);
+					unlockWaringDialog.getWindow().setType(
+							WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 
-			unlockWaringDialog.setCanInfo(canInfo);
-		}
-		if (unlockWaringDialog != null) {
-			if (unlockWaringDialog.isShowing()) {
+					Window dialogWindow = unlockWaringDialog.getWindow();
+					dialogWindow.setGravity(Gravity.CENTER);
+					// unlockWaringDialog.setCancelable(false);
+				}
+
+				if (!unlockWaringDialog.isShowing()) {
+					unlockWaringDialog.show();
+				}
+
 				unlockWaringDialog.setCanInfo(canInfo);
+			}
+			if (unlockWaringDialog != null) {
+				if (unlockWaringDialog.isShowing()) {
+					unlockWaringDialog.setCanInfo(canInfo);
+				}
 			}
 		}
 	}
@@ -176,11 +191,11 @@ public class DialogCreater {
 		for (int i = 0; i < waringStatus.length; i++) {
 			waringStatus[i] = 0;
 		}
-		
-		//浮动窗
-		if(mFloatLayout!=null){
+
+		// 浮动窗
+		if (mFloatLayout != null) {
 			mWindowManager.removeView(mFloatLayout);
-			mFloatLayout=null;
+			mFloatLayout = null;
 		}
 	}
 
@@ -250,6 +265,10 @@ public class DialogCreater {
 	public static void showAirConDialog(Context context, CanInfo canInfo,
 			CallBack mCallBack) {
 		// TODO Auto-generated method stub
+		if (Settings.System
+				.getInt(context.getContentResolver(), "no_aircon", 0) == 1) {
+			return;
+		}
 		if (canInfo.AIR_CONDITIONER_STATUS != airConStatus[0]
 				|| canInfo.AC_INDICATOR_STATUS != airConStatus[1]
 				|| canInfo.CYCLE_INDICATOR != airConStatus[2]
@@ -364,17 +383,18 @@ public class DialogCreater {
 	private static WindowManager mWindowManager;
 	private static TextView mWmTextView;
 	private static ImageView mWmImageView;
-	private static String floatWaringStr="";
+	private static String floatWaringStr = "";
 
 	@SuppressWarnings("static-access")
 	public static void showFloatCarInfoWaring(Context mContext, CanInfo canInfo) {
-		if(!floatWaringStr.equals(canInfo.WARING_MSG)){
-			floatWaringStr=canInfo.WARING_MSG;
-		}else{
+		if (!floatWaringStr.equals(canInfo.WARING_MSG)) {
+			floatWaringStr = canInfo.WARING_MSG;
+		} else {
 			return;
 		}
-		
-		if (mFloatLayout == null||mWindowManager==null||mWmTextView==null||mWmImageView==null) {
+
+		if (mFloatLayout == null || mWindowManager == null
+				|| mWmTextView == null || mWmImageView == null) {
 			wmParams = new WindowManager.LayoutParams();
 			// 通过getApplication获取的是WindowManagerImpl.CompatModeWrapper
 			mWindowManager = (WindowManager) mContext
@@ -409,15 +429,15 @@ public class DialogCreater {
 			wmParams.y = (int) 550 - mFloatLayout.getMeasuredHeight() / 2;
 			// 添加mFloatLayout
 			mWindowManager.addView(mFloatLayout, wmParams);
-			
+
 			mWmImageView.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					if(mFloatLayout!=null){
+					if (mFloatLayout != null) {
 						mWindowManager.removeView(mFloatLayout);
-						mFloatLayout=null;
+						mFloatLayout = null;
 					}
 				}
 			});
@@ -426,7 +446,6 @@ public class DialogCreater {
 		mWmTextView.setText(canInfo.WARING_MSG);
 		mWmTextView.setTextColor(canInfo.WARING_MSG_STATUS == 1 ? Color.RED
 				: Color.YELLOW);
-
 
 	}
 

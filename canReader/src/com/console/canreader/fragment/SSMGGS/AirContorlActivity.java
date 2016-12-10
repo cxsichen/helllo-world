@@ -20,11 +20,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.console.canreader.R;
+import com.console.canreader.activity.AirConBaseActivity;
 import com.console.canreader.activity.BaseActivity;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.BytesUtil;
 
-public class AirContorlActivity extends BaseActivity implements OnClickListener {
+public class AirContorlActivity extends AirConBaseActivity implements OnClickListener {
 
 	private PopupWindow popupWindow;
 	private View popupWindowView;

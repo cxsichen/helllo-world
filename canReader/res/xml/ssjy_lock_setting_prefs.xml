@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="DOOR_UNLOCKING"
+        android:summaryOff="关闭"
+        android:summaryOn="打开"
+        android:title="车速上锁" />
+    <SwitchPreference
+        android:key="AUTOMATIC_LOCKING"
+        android:summaryOff="关闭"
+        android:summaryOn="打开"
+        android:title="自动重上锁" />
+
+</PreferenceScreen>

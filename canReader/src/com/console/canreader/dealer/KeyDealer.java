@@ -170,6 +170,10 @@ public class KeyDealer {
 				Log.i("cxs", "-------Contacts.KEYEVENT.KNOBSELECTOR-------");
 				handleKnobSelector(msg.arg1);
 				break;
+			case Contacts.KEYEVENT.KNOBSELECT:
+				Log.i("cxs", "-------Contacts.KEYEVENT.KNOBSELECT-------");
+				handleKnobSelect(msg.arg1);
+				break;
 			case Contacts.KEYEVENT.ANSWER_WITH_MENUUP:
 				Log.i("cxs",
 						"-------Contacts.KEYEVENT.ANSWER_WITH_MENUUP-------");
@@ -269,6 +273,18 @@ public class KeyDealer {
 				Log.i("cxs", "-------Contacts.KEYEVENT.CARINFO-------");
 				startAcForCarInfo();
 				break;
+			case Contacts.KEYEVENT.EQ:
+				Log.i("cxs", "-------Contacts.KEYEVENT.EQ-------");
+				handleEQ();
+				break;
+			case Contacts.KEYEVENT.VIDEO:
+				Log.i("cxs", "-------Contacts.KEYEVENT.VIDEO-------");
+				handleVIDEO();
+				break;
+			case Contacts.KEYEVENT.SETTING:
+				Log.i("cxs", "-------Contacts.KEYEVENT.SETTING-------");
+				handleSETTING();
+				break;
 			default:
 				break;
 			}
@@ -356,6 +372,16 @@ public class KeyDealer {
 		PreferenceUtil.setKnobVolValue(context, 0);
 		PreferenceUtil.setKnobSelValue(context, 0);
 	}
+	
+	public void handleKnobSelect(int knobValue) {
+		if (knobValue > 0) {
+			handleMenuDown();
+		}
+		if (knobValue <0) {
+			handleMenuUp();
+		}
+	}
+
 
 	public void handleKnobSelector(int knobValue) {
 		int temp = knobValue - PreferenceUtil.getKnobSelValue(context);
@@ -597,6 +623,18 @@ public class KeyDealer {
 			// TODO: handle exception
 		}
 	}
+	private void handleSETTING(){
+		openApplication(context, "com.android.settings");
+	}
+	private void handleVIDEO() {
+		// TODO Auto-generated method stub
+		openApplication(context, "com.mxtech.videoplayer.pro");
+	}
+	
+	private void handleEQ() {
+		// TODO Auto-generated method stub
+		openApplication(context, "com.console.equalizer");
+	}
 
 	private void handlePHONE_APP() {
 		// TODO Auto-generated method stub
@@ -726,7 +764,7 @@ public class KeyDealer {
 		// ÒôÁ¿ÐýÅ¥ Ñ¡ÔñÐýÅ¥ ÓïÒôÃüÁî
 		switch (canInfo.STEERING_BUTTON_MODE) {
 		case Contacts.KEYEVENT.KNOBVOLUMEUP:
-			if (System.currentTimeMillis() - lastSendTime > 500) {
+			if (System.currentTimeMillis() - lastSendTime > 200) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
 				msg.what = Contacts.KEYEVENT.KNOBVOLUMEUP;
@@ -735,7 +773,7 @@ public class KeyDealer {
 			}
 			break;			
 		case Contacts.KEYEVENT.KNOBVOLUMEDOWN:
-			if (System.currentTimeMillis() - lastSendTime > 500) {
+			if (System.currentTimeMillis() - lastSendTime > 200) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
 				msg.what = Contacts.KEYEVENT.KNOBVOLUMEDOWN;
@@ -744,7 +782,7 @@ public class KeyDealer {
 			}
 			break;
 		case Contacts.KEYEVENT.KNOBVOLUME:
-			if (System.currentTimeMillis() - lastSendTime > 500) {
+			if (System.currentTimeMillis() - lastSendTime > 200) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
 				msg.what = Contacts.KEYEVENT.KNOBVOLUME;
@@ -753,7 +791,7 @@ public class KeyDealer {
 			}
 			break;
 		case Contacts.KEYEVENT.KNOBSELECTOR:
-			if (System.currentTimeMillis() - lastSendTime > 500) {
+			if (System.currentTimeMillis() - lastSendTime > 200) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
 				msg.what = Contacts.KEYEVENT.KNOBSELECTOR;
@@ -761,8 +799,17 @@ public class KeyDealer {
 				mHandler.sendMessage(msg);
 			}
 			break;
+		case Contacts.KEYEVENT.KNOBSELECT:
+			if (System.currentTimeMillis() - lastSendTime > 200) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.KNOBSELECT;
+				msg.arg1 = canInfo.CAR_VOLUME_KNOB;
+				mHandler.sendMessage(msg);
+			}
+			break;
 		case Contacts.KEYEVENT.VOICE_FM:
-			if (System.currentTimeMillis() - lastSendTime > 500) {
+			if (System.currentTimeMillis() - lastSendTime > 200) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
 				msg.what = Contacts.KEYEVENT.FM_AM;
@@ -770,7 +817,7 @@ public class KeyDealer {
 			}
 			break;
 		case Contacts.KEYEVENT.VOICE_MENUUP:
-			if (System.currentTimeMillis() - lastSendTime > 500) {
+			if (System.currentTimeMillis() - lastSendTime > 200) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
 				msg.what = Contacts.KEYEVENT.MENUUP;
@@ -778,7 +825,7 @@ public class KeyDealer {
 			}
 			break;
 		case Contacts.KEYEVENT.VOICE_MENUDOWN:
-			if (System.currentTimeMillis() - lastSendTime > 500) {
+			if (System.currentTimeMillis() - lastSendTime > 200) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
 				msg.what = Contacts.KEYEVENT.MENUDOWN;
@@ -786,7 +833,7 @@ public class KeyDealer {
 			}
 			break;
 		case Contacts.KEYEVENT.VOICE_MUSIC_PLAY_PAUSE:
-			if (System.currentTimeMillis() - lastSendTime > 500) {
+			if (System.currentTimeMillis() - lastSendTime > 200) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
 				msg.what = Contacts.KEYEVENT.MUSIC_PLAY_PAUSE;
@@ -818,6 +865,30 @@ public class KeyDealer {
 				mHandler.sendMessage(msg);
 			}
 			break;
+		case Contacts.KEYEVENT.VOICE_ANSWER:
+			if (System.currentTimeMillis() - lastSendTime > 500) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.ANSWER;
+				mHandler.sendMessage(msg);
+			}
+			break;
+		case Contacts.KEYEVENT.VOICE_HANGUP:
+			if (System.currentTimeMillis() - lastSendTime > 500) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.HANGUP;
+				mHandler.sendMessage(msg);
+			}
+			break;
+		case Contacts.KEYEVENT.VOICE_SRC:
+			if (System.currentTimeMillis() - lastSendTime > 500) {
+				lastSendTime = System.currentTimeMillis();
+				Message msg = new Message();
+				msg.what = Contacts.KEYEVENT.SRC;
+				mHandler.sendMessage(msg);
+			}
+			break;
 		default:
 			break;
 		}
@@ -831,16 +902,18 @@ public class KeyDealer {
 			PRESSFREE = false;
 			switch (canInfo.STEERING_BUTTON_MODE) {
 			case Contacts.VOL_UP:
-				if (System.currentTimeMillis() - lastSendTime > 200) {
+				mHandler.sendEmptyMessage(Contacts.VOL_UP);
+				/*if (System.currentTimeMillis() - lastSendTime > 200) {
 					lastSendTime = System.currentTimeMillis();
 					mHandler.sendEmptyMessage(Contacts.VOL_UP);
-				}
+				}*/
 				break;
 			case Contacts.VOL_DOWN:
-				if (System.currentTimeMillis() - lastSendTime > 200) {
+				mHandler.sendEmptyMessage(Contacts.VOL_DOWN);
+			/*	if (System.currentTimeMillis() - lastSendTime > 200) {
 					lastSendTime = System.currentTimeMillis();
 					mHandler.sendEmptyMessage(Contacts.VOL_DOWN);
-				}
+				}*/
 				break;
 			case Contacts.MUTE:
 				if (System.currentTimeMillis() - lastSendTime > 200) {
@@ -1012,6 +1085,18 @@ public class KeyDealer {
 			case Contacts.KEYEVENT.CARINFO:
 				mHandler.removeMessages(Contacts.KEYEVENT.CARINFO);
 				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.CARINFO, 200);
+				break;
+			case Contacts.KEYEVENT.VIDEO:
+				mHandler.removeMessages(Contacts.KEYEVENT.VIDEO);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.VIDEO, 200);
+				break;
+			case Contacts.KEYEVENT.EQ:
+				mHandler.removeMessages(Contacts.KEYEVENT.EQ);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.EQ, 200);
+				break;
+			case Contacts.KEYEVENT.SETTING:
+				mHandler.removeMessages(Contacts.KEYEVENT.SETTING);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.SETTING, 200);
 				break;
 			default:
 				break;

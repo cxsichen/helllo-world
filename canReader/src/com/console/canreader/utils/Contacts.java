@@ -54,20 +54,25 @@ public class Contacts {
 		public static final int Wiper = 43;  //雨刷按键
 		public static final int AIRCONTROLER=44; //打开空调控制界面
 		public static final int CARINFO=45; 	//打开车辆信息
-		
-
+		public static final int VIDEO = 46; // 打开视频界面
+		public static final int EQ = 47; // 打开音效设置界面
+		public static final int SETTING = 48; // 打开系统设置界面
 		/*-----------无按键状态--------*/
 		public static final int KNOBVOLUME = 101; // 音量旋钮 无按键状态       带值记忆
 		public static final int KNOBSELECTOR = 102; // 选择旋钮 无按键状态    带值记忆              
 		public static final int VOICE_FM = 103; // 打开radio app 无按键状态
 		public static final int FM_CHANGE_FREQUENCY = 104; // 打开radio app 无按键状态
-		public static final int VOICE_MENUUP = 105;     // 
-		public static final int VOICE_MENUDOWN = 106;
+		public static final int VOICE_MENUUP = 105;     // 上一曲 无按键状态
+		public static final int VOICE_MENUDOWN = 106;    // 下一曲 无按键状态
 		public static final int VOICE_MUSIC_PLAY_PAUSE = 107;
 		public static final int CLOSEAUX = 108; // 关闭AUX
 		public static final int OPENAUX = 109; // 打开AUX
 		public static final int KNOBVOLUMEUP = 110; // 音量旋钮 无按键状态       不带值记忆    只带数值改变
 		public static final int KNOBVOLUMEDOWN = 111; // 音量旋钮 无按键状态    不带值记忆  只带数值改变
+		public static final int KNOBSELECT = 112; // 选择旋钮  无按键状态    不带值记忆  只带数值改变
+		public static final int VOICE_ANSWER = 113;    // 接听电话 无按键状态
+		public static final int VOICE_HANGUP = 114;    // 挂断电话 无按键状态
+		public static final int VOICE_SRC = 115;    // 语音 无按键状态
 	}
 
 	/**
@@ -102,7 +107,8 @@ public class Contacts {
 		/*--------------睿志诚-----------*/
 
 		/*--------------尚摄-----------*/
-
+        // 大众
+		public static final String SSVolkswagenGolf="SSVolkswagenGolf";     //大众高尔夫7
 		// 丰田
 		public static final String SSToyota = "SSToyota";
 		public static final String SSToyotaBD = "SSToyotaBD"; // 霸道
@@ -140,8 +146,10 @@ public class Contacts {
 		public static final String SSFordEDGE = "SSFordEDGE"; // 2015款锐界
 		// 东风
 		public static final String SSDFFG = "SSDFFG"; // 风光580
-		
-		
+		public static final String SSFS = "SSFS";  // 风神AX7AX5
+		public static final String SSFSAX5 = "SSFSAX5";  // 风神AX5
+		public static final String SSFSAX7 = "SSFSAX7";  // 风神AX7
+		public static final String SSJY = "SSJY";  // 景逸X5
 		//标致雪铁龙
 		public static final String  SSPeugeot = "SSPeugeot";       //标致雪铁龙通用
 		public static final String  SSPeugeotSEGA = "SSPeugeotSEGA";       //标致雪铁龙  世嘉

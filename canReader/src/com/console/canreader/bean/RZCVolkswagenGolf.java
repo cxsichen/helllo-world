@@ -53,8 +53,12 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeSteeringButtonData(msg);
 				break;
+			case STEERING_BUTTON_DATA_1:
+				mCanInfo.CHANGE_STATUS = 2;
+				analyzeSteeringButtonData_1(msg);
+				break;
 			case AIR_CONDITIONER_DATA:
-				mCanInfo.CHANGE_STATUS = 10;
+				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
 				break;
 			case BACK_RADER_DATA:
@@ -438,6 +442,7 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 		} else {
 			mCanInfo.STERRING_WHELL_STATUS = 65536 - temp;
 		}
+		Log.i("cxs","====mCanInfo.STERRING_WHELL_STATUS======"+mCanInfo.STERRING_WHELL_STATUS);
 
 	}
 
@@ -549,6 +554,35 @@ public class RZCVolkswagenGolf extends AnalyzeUtils {
 		}
 
 		mCanInfo.STEERING_BUTTON_STATUS = (int) (msg[4] & 0xFF);
+	}
+	
+	void analyzeSteeringButtonData_1(byte[] msg) {
+		// TODO Auto-generated method stub
+		mCanInfo.STEERING_BUTTON_STATUS = 1;
+		switch ((int) (msg[3] & 0xFF)) {
+		case 0x01:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOICE_MENUUP;
+			break;
+		case 0x02:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOICE_MENUDOWN;
+			break;
+		case 0x11:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOICE_ANSWER;
+			break;
+		case 0x12:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOICE_HANGUP;
+			break;
+		case 0x16:
+		case 0x17:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VOICE_SRC;
+			break;
+		default:
+			mCanInfo.STEERING_BUTTON_MODE = 0;
+			mCanInfo.STEERING_BUTTON_STATUS = 0;
+			break;
+		}
+
+		
 	}
 
 }

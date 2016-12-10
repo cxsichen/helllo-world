@@ -231,8 +231,18 @@ public class SSFord extends AnalyzeUtils {
 		} else {
 			SteeringButtonStatusDataSave_3 = BytesUtil.bytesToHexString(msg);
 		}
-		mCanInfo.CAR_VOLUME_KNOB = msg[5] & 0xff;
-		mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUME;
+
+		if ((msg[4] & 0xff) == 1) {
+			mCanInfo.CAR_VOLUME_KNOB =(int) msg[5];
+			if (mCanInfo.CAR_VOLUME_KNOB > 0) {
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUMEUP;
+			} else if (mCanInfo.CAR_VOLUME_KNOB < 0) {
+				mCanInfo.CAR_VOLUME_KNOB=-mCanInfo.CAR_VOLUME_KNOB;
+				mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUMEDOWN;
+			}
+		} else {
+			mCanInfo.STEERING_BUTTON_MODE = 0;
+		}
 	}
 
 	static String SteeringButtonStatusDataSave = "";

@@ -183,7 +183,7 @@ public class BaseActivity extends FragmentActivity {
 			Message msg = new Message();
 			msg.what = Contacts.MSG_UPDATA_UI;
 			msg.obj = canInfo;
-			if (canInfo.CHANGE_STATUS == 10)
+			if (canInfo.CHANGE_STATUS == 10||canInfo.CHANGE_STATUS == 3)
 				mHandler.sendMessage(msg);
 
 		}

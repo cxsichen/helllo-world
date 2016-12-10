@@ -10,6 +10,7 @@ import com.console.canreader.utils.PreferenceUtil;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -43,6 +44,19 @@ public class MenuAcAcitivity extends BaseActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		
+	}
+
+	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
@@ -73,7 +87,7 @@ public class MenuAcAcitivity extends BaseActivity {
 
 	private void chooseAcActivity() {
 		// TODO Auto-generated method stub
-		if(canName.contains(Contacts.CANNAMEGROUP.SSPeugeot)){
+		if (canName.contains(Contacts.CANNAMEGROUP.SSPeugeot)) {
 			startActivity(new Intent(this, AirControlerSSPeugeot408.class));
 			finish();
 		}

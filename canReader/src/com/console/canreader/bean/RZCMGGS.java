@@ -71,7 +71,7 @@ public class RZCMGGS extends AnalyzeUtils {
 				analyzeSteeringButtonData(msg);
 				break;
 			case AIR_CONDITIONER_DATA:
-				mCanInfo.CHANGE_STATUS = 10;
+				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
 				break;
 			case BACK_RADER_DATA:

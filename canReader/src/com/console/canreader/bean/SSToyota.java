@@ -324,7 +324,7 @@ public class SSToyota extends AnalyzeUtils {
 		mCanInfo.MID_VOLUME = (int) ((msg[8] >> 0) & 0xFF);
 		mCanInfo.TRE_VOLUME = (int) ((msg[9] >> 0) & 0xFF);
 		mCanInfo.VOL_LINK_CARSPEED = (int) ((msg[10] >> 1) & 0x01);
-		mCanInfo.DSP_SURROUND = (int) ((msg[11] >> 0) & 0x01);
+		mCanInfo.DSP_SURROUND = (int) ((msg[10] >> 0) & 0x01);
 	}
 
 	static String carInfoSave = "";
@@ -444,7 +444,7 @@ public class SSToyota extends AnalyzeUtils {
 		}
 
 		mCanInfo.AIR_CONDITIONER_STATUS = 1;
-		mCanInfo.CYCLE_INDICATOR = 0;
+		mCanInfo.CYCLE_INDICATOR = 2;
 		mCanInfo.AC_INDICATOR_STATUS = ((int) (msg[5] >> 6) & 0x01);
 		mCanInfo.LARGE_LANTERN_INDICATOR = 0;
 		mCanInfo.SMALL_LANTERN_INDICATOR = (int) ((msg[4] >> 3) & 0x01);
@@ -466,6 +466,9 @@ public class SSToyota extends AnalyzeUtils {
 		mCanInfo.DOWNWARD_AIR_INDICATOR = (int) ((msg[8] >> 6) & 0x01);
 		mCanInfo.PARALLEL_AIR_INDICATOR = (int) ((msg[8] >> 5) & 0x01);
 		mCanInfo.UPWARD_AIR_INDICATOR = (int) ((msg[8] >> 4) & 0x01);
+		
+		mCanInfo.LEFT_SEAT_TEMP =0; // вСвЫрннб╤х
+		mCanInfo.RIGTHT_SEAT_TEMP = 0; // срвЫрннб╤х
 
 	}
 

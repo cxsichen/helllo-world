@@ -27,6 +27,8 @@ public class SSGE extends AnalyzeUtils {
 	public static final int RADAR_DATA = 0x41;
 	// 面板按键
 	public static final int MENU_BUTTON = 0x21;
+	// 面板按键
+	public static final int MENU_BUTTON_1 = 0x22;
 	// 车身信息
 	public static final int CAR_INFO_DATA_3 = 0x23;
 	// 车身信息
@@ -79,7 +81,7 @@ public class SSGE extends AnalyzeUtils {
 				return;
 			switch ((int) (msg[comID] & 0xFF)) {
 			case AIR_CONDITIONER_DATA:
-				mCanInfo.CHANGE_STATUS = 10;
+				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
 				break;
 			case CAR_INFO_DATA:
@@ -104,6 +106,10 @@ public class SSGE extends AnalyzeUtils {
 			case MENU_BUTTON:
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeMenuButton(msg);
+				break;
+			case MENU_BUTTON_1:
+				mCanInfo.CHANGE_STATUS = 2;
+				analyzeMenuButton_1(msg);
 				break;
 			case CAR_INFO_DATA_3:
 				mCanInfo.CHANGE_STATUS = 10;
@@ -189,6 +195,30 @@ public class SSGE extends AnalyzeUtils {
 			e.printStackTrace();
 		}
 	}
+	
+	static String menuButtonSave_1 = "";
+
+	void analyzeMenuButton_1(byte[] msg) {
+		if (menuButtonSave.equals(BytesUtil.bytesToHexString(msg))) {
+			mCanInfo.CHANGE_STATUS = 8888;
+			return;
+		} else {
+			menuButtonSave = BytesUtil.bytesToHexString(msg);
+		}
+       if((int) (msg[4] & 0xFF)==1){
+    	   mCanInfo.CAR_VOLUME_KNOB=(int) msg[5];
+    	   if(mCanInfo.CAR_VOLUME_KNOB>0)
+    		   mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUMEUP;
+    	   if(mCanInfo.CAR_VOLUME_KNOB<0)
+    		   mCanInfo.CAR_VOLUME_KNOB=-mCanInfo.CAR_VOLUME_KNOB;
+    		   mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBVOLUMEDOWN;
+       }
+       if(((int) (msg[4] & 0xFF)==2)||((int) (msg[4] & 0xFF)==3)){
+    	   mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.KNOBSELECT;
+    	   mCanInfo.CAR_VOLUME_KNOB=(int) msg[5];
+       }
+	
+	}
 
 	static String menuButtonSave = "";
 
@@ -210,6 +240,18 @@ public class SSGE extends AnalyzeUtils {
 		case 0x03:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUDOWN;
 			break;
+		case 0x04:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.SETTING;
+			break;
+		case 0x05:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUSIC;
+			break;
+		case 0x06:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.BACK;
+			break;
+		case 0x07:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.FM_AM;
+			break;
 		case 0x08:
 		case 0x1F:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.AUX;
@@ -217,11 +259,54 @@ public class SSGE extends AnalyzeUtils {
 		case 0x09:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUTE;
 			break;
+		case 0x0A:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM1;
+			break;
+		case 0x0B:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM2;
+			break;
+		case 0x0C:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM3;
+			break;
+		case 0x0D:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM4;
+			break;
+		case 0x0E:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM5;
+			break;
+		case 0x0F:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM6;
+			break;		
 		case 0x10:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUSIC_PLAY_PAUSE;
 			break;
+		case 0x12:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;
+			break;
+		case 0x16:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.ENTER;
+			break;
+		case 0x17:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.DPAD_UP;
+			break;
+		case 0x18:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.DPAD_DOWN;
+			break;
+		case 0x19:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.DPAD_LEFT;
+			break;
+		case 0x1A:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.DPAD_RIHGT;
+			break;
+		case 0x20:
+		case 0x25:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MAP;
+			break;
+		case 0x22:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.DEL;
+			break;
 		case 0x24:
-			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUSIC;
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.VIDEO;
 			break;
 		case 0x29:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.PHONE_APP;
@@ -229,6 +314,9 @@ public class SSGE extends AnalyzeUtils {
 		case 0x2C:
 		case 0x2D:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.SRC;
+			break;
+		case 0x2A:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.ENTER;
 			break;
 		default:
 			mCanInfo.STEERING_BUTTON_MODE = 0;
@@ -1042,10 +1130,21 @@ public class SSGE extends AnalyzeUtils {
 		}
 		mCanInfo.AIRCON_SHOW_REQUEST = (int) ((msg[4] >> 7) & 0x01);
 		mCanInfo.AIR_CONDITIONER_STATUS = (int) ((msg[4] >> 6) & 0x01);
+		mCanInfo.MIRROR_SYNC_ADJUST = (int) ((msg[4] >> 2) & 0x03);  //sync
 		mCanInfo.AC_INDICATOR_STATUS = (((int) ((msg[4] >> 0) & 0x03)) == 0 ? 0
 				: 1);
+		
+		int temp = (int) ((msg[5] >> 4) & 0x01);
+		mCanInfo.CYCLE_INDICATOR = temp;
+		mCanInfo.SMALL_LANTERN_INDICATOR = (int) ((msg[5] >> 3) & 0x01);
 
-		int temp = (int) (msg[10] & 0xff);
+		mCanInfo.MAX_FRONT_LAMP_INDICATOR = (int) ((msg[6] >> 4) & 0x01);
+		mCanInfo.REAR_LAMP_INDICATOR = (int) ((msg[6] >> 5) & 0x01);
+		mCanInfo.LEFT_SEAT_TEMP = (int) ((msg[6] >> 0) & 0x03);
+		mCanInfo.RIGTHT_SEAT_TEMP = (int) ((msg[6] >> 2) & 0x03);
+		
+
+		 temp = (int) (msg[10] & 0xff);
 		mCanInfo.DRIVING_POSITON_TEMP = temp == 0xFE ? 0 : temp == 0xFF ? 255
 				: (temp * 0.5f);
 
@@ -1056,34 +1155,20 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.AIR_RATE = ((int) (msg[9] & 0x0f) == 0x13) ? -1
 				: ((int) (msg[9] & 0x0f));
 
-		mCanInfo.MAX_FRONT_LAMP_INDICATOR = (int) ((msg[6] >> 4) & 0x01);
-
-		mCanInfo.REAR_LAMP_INDICATOR = (int) ((msg[6] >> 5) & 0x01);
-
-		temp = (int) ((msg[5] >> 3) & 0x01);
-		if (temp == 1) {
-			mCanInfo.CYCLE_INDICATOR = 2;
-		} else {
-			mCanInfo.CYCLE_INDICATOR = (int) ((msg[5] >> 4) & 0x01);
-		}
-
-		mCanInfo.LEFT_SEAT_TEMP = (int) ((msg[6] >> 2) & 0x03);
-		mCanInfo.RIGTHT_SEAT_TEMP = (int) ((msg[6] >> 0) & 0x03);
-
 		temp = (int) (msg[8] & 0xff);
-		if (temp == 0x0B || temp == 0x0C || temp == 0x0D || temp == 0x0E) {
+		if (temp == 0x01||temp == 0x02||temp == 0x0B || temp == 0x0C || temp == 0x0D || temp == 0x0E) {
 			mCanInfo.UPWARD_AIR_INDICATOR = 1;
 		} else {
 			mCanInfo.UPWARD_AIR_INDICATOR = 0;
 		}
 
-		if (temp == 0x05 || temp == 0x06 || temp == 0x0D || temp == 0x0E) {
+		if (temp == 0x01||temp == 0x05 || temp == 0x06 || temp == 0x0D || temp == 0x0E) {
 			mCanInfo.PARALLEL_AIR_INDICATOR = 1;
 		} else {
 			mCanInfo.PARALLEL_AIR_INDICATOR = 0;
 		}
 
-		if (temp == 0x03 || temp == 0x05 || temp == 0x0C || temp == 0x0E) {
+		if (temp == 0x01||temp == 0x03 || temp == 0x05 || temp == 0x0C || temp == 0x0E) {
 			mCanInfo.DOWNWARD_AIR_INDICATOR = 1;
 		} else {
 			mCanInfo.DOWNWARD_AIR_INDICATOR = 0;
@@ -1091,9 +1176,9 @@ public class SSGE extends AnalyzeUtils {
 
 		mCanInfo.OUTSIDE_TEMPERATURE = ((int) (msg[15] & 0xff)) * 0.5f - 40f;
 
-		mCanInfo.LARGE_LANTERN_INDICATOR = (int) ((msg[5] >> 3) & 0x01);
+		
 
-		mCanInfo.SMALL_LANTERN_INDICATOR = (int) ((msg[4] >> 2) & 0x03);
+		
 
 	}
 

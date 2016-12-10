@@ -36,7 +36,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="LSVAC25E5EN023566" />
+                 />
 
             <View style="@style/honDivide" />
 
@@ -50,7 +50,7 @@
             <TextView
                 android:id="@+id/carCheckDays"
                 style="@style/PageViewTextView"
-                android:text="--" />
+                />
 
             <View style="@style/honDivide" />
         </LinearLayout>
@@ -71,7 +71,7 @@
             <TextView
                 android:id="@+id/oilCheckDistance"
                 style="@style/PageViewTextView"
-                android:text="4400Km" />
+                />
 
             <View style="@style/honDivide" />
 
@@ -85,7 +85,7 @@
             <TextView
                 android:id="@+id/oilchangeDays"
                 style="@style/PageViewTextView"
-                android:text="--" />
+                 />
 
             <View style="@style/honDivide" />
         </LinearLayout>
@@ -106,7 +106,7 @@
             <TextView
                 android:id="@+id/oilchangeDistance"
                 style="@style/PageViewTextView"
-                android:text="4400Km" />
+                 />
 
             <View style="@style/honDivide" />
 

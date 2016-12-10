@@ -77,7 +77,7 @@ public class SSMGGS extends AnalyzeUtils {
 				analyzeKnobButtonData(msg);
 				break;
 			case AIR_CONDITIONER_DATA:
-				mCanInfo.CHANGE_STATUS = 10;
+				mCanInfo.CHANGE_STATUS = 3;
 				analyzeAirConditionData(msg);
 				break;
 			case RADAR_DATA:

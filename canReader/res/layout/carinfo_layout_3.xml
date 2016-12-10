@@ -30,7 +30,7 @@
             <TextView
                 android:id="@+id/consumption"
                 style="@style/PageViewTextView"
-                android:text="12.6L/100km" />
+                />
 
             <View style="@style/honDivide" />
 
@@ -43,7 +43,7 @@
             <TextView
                 android:id="@+id/travelling_time"
                 style="@style/PageViewTextView"
-                android:text="@string/time_17" />
+                />
             
             <View style="@style/honDivide" />
             
@@ -64,7 +64,7 @@
             <TextView
                 android:id="@+id/range"
                 style="@style/PageViewTextView"
-                android:text="370km" />
+               />
 
             <View style="@style/honDivide" />
 
@@ -77,7 +77,7 @@
             <TextView
                 android:id="@+id/speed"
                 style="@style/PageViewTextView"
-                android:text="11km/h" />
+                 />
             
             <View style="@style/honDivide" />
             
@@ -98,7 +98,7 @@
             <TextView
                 android:id="@+id/distance"
                 style="@style/PageViewTextView"
-                android:text="190.2km" />
+                 />
 
             <View style="@style/honDivide" />
 

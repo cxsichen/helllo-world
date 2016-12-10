@@ -69,8 +69,8 @@ public class CanInfo implements Parcelable {
 
 	public int AQS_CIRCLE = -1;
 
-	public int LEFT_SEAT_TEMP = -1; // 左座椅温度
-	public int RIGTHT_SEAT_TEMP = -1; // 右座椅温度
+	public int LEFT_SEAT_TEMP = 0; // 左座椅温度
+	public int RIGTHT_SEAT_TEMP = 0; // 右座椅温度
 
 	/*
 	 * 后雷达信息 0不显示 1最近（报警） 4最远
@@ -181,16 +181,19 @@ public class CanInfo implements Parcelable {
 	public float CONSUMPTION_SINCE_START = 0; // 自启动平均油耗
 	public float SPEED_SINCE_START = 0; // 自启动平均车速
 	public int TRAVELLINGTIME_SINCE_START = 0; // 自启动行驶时间
+	public int RANGE_SINCE_START = 0; // 自启动续航里程
 
 	public float DISTANCE_SINCE_REFUELING = 0; // 自加油行驶里程
 	public float CONSUMPTION_SINCE_REFUELING = 0; // 自加油平均油耗
 	public float SPEED_SINCE_REFUELINGT = 0; // 自加油平均车速
 	public int TRAVELLINGTIME_SINCE_REFUELINGT = 0; // 自加油行驶时间
+	public int RANGE_SINCE_REFUELINGT = 0; // 自加油续航里程
 
 	public float DISTANCE_LONG_TERM = 0; // 长时间行驶里程
 	public float CONSUMPTION_LONG_TERM = 0; // 长时间平均油耗
 	public float SPEED_LONG_TERM = 0; // 长时间平均车速
 	public int TRAVELLINGTIME_LONG_TERM = 0; // 长时间行驶时间
+	public int RANGE_LONG_TERM = 0; // 长时间续航里程
 
 	public String VEHICLE_NO = ""; // 汽车编号
 

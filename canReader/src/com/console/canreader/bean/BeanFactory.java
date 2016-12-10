@@ -36,6 +36,10 @@ public class BeanFactory {
 	private static String adjustcanName(String canName) {
 		// TODO Auto-generated method stub
 		switch (canName) {
+		case Contacts.CANNAMEGROUP.SSFSAX5: // 东风风神
+		case Contacts.CANNAMEGROUP.SSFSAX7:
+			canName = Contacts.CANNAMEGROUP.SSFS;
+			break;
 		case Contacts.CANNAMEGROUP.SSToyotaBD: // 尚摄丰田系列
 		case Contacts.CANNAMEGROUP.SSToyotaRZ:
 		case Contacts.CANNAMEGROUP.SSToyotaRAV4:

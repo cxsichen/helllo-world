@@ -129,10 +129,7 @@ public class CanService extends Service {
 				getContentResolver(), Contacts.BACK_CAR, 0); // 倒车的时候不处理任何弹框事件
 
 		if (parkingState != 1) {
-			DialogCreater.showUnlockWaringDialog(CanService.this, // 车门报警事件处理
-																	// 比较重要
-																	// 故都处理一下
-					info2.getCanInfo());
+
 			switch (info2.getCanInfo().CHANGE_STATUS) {
 			case 2:
 				mKeyDealer = KeyDealer.getInstance(CanService.this); // 按键事件处理
@@ -156,6 +153,8 @@ public class CanService extends Service {
 				break;
 			case 10:
 				DialogCreater.showUnlockWaringInfo(CanService.this, // 车身信息报警处理
+						info2.getCanInfo());
+				DialogCreater.showUnlockWaringDialog(CanService.this, // 车门报警事件处理
 						info2.getCanInfo());
 				break;
 			case 12:
@@ -1011,7 +1010,6 @@ public class CanService extends Service {
 				+ "01"));
 	}
 
-	
 	private void rzcSyncTimeWithMsg_1(String str) {
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
@@ -1024,7 +1022,7 @@ public class CanService extends Service {
 				+ BytesUtil.changIntHex(year % 2000)
 				+ BytesUtil.changIntHex(mouth + 1)
 				+ BytesUtil.changIntHex(date) + BytesUtil.changIntHex(hour)
-				+ BytesUtil.changIntHex(minute) ));
+				+ BytesUtil.changIntHex(minute)));
 	}
 
 	private void syncTimeWithMsgMGGS() {
@@ -1133,6 +1131,12 @@ public class CanService extends Service {
 			break;
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			switch (canName) {
+			case Contacts.CANNAMEGROUP.SSFSAX5:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240426")); // 风神AX5
+				break;
+			case Contacts.CANNAMEGROUP.SSFSAX7:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240326")); // 风神AX7
+				break;
 			case Contacts.CANNAMEGROUP.SSDFFG:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240226")); // 风光580
 				break;
@@ -1180,7 +1184,6 @@ public class CanService extends Service {
 			case Contacts.CANNAMEGROUP.SSPeugeotC5:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240400"));
 				break;
-
 			case Contacts.CANNAMEGROUP.SSPeugeotC55:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240500"));
 				break;

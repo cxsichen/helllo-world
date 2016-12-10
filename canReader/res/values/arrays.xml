@@ -87,6 +87,42 @@
         <item>com.console.canreader.fragment.RZCVolkswagenGolf.ResetFragment</item>
     </string-array>
     <!-- 睿志诚 高尔夫7 -->
+    
+     <!-- 尚摄 高尔夫7 -->
+    <string-array name="SSVolkswagenGolf_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>1</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSVolkswagenGolf_items">
+        <item>车辆信息</item>
+        <item>舒适性用电器</item>
+        <item>自启动起信息</item>
+        <item>自加油起信息</item>
+        <item>长时间信息</item>
+        <item>保养信息</item>
+    </string-array>
+    <string-array name="SSVolkswagenGolf_fragment">
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment5</item>
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment1</item>
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment2</item>
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment3</item>
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment4</item>
+    </string-array>
+    
+    <string-array name="SSVolkswagenGolf_setting_items">
+       <item>恢复出厂设置</item>
+    </string-array>
+    <string-array name="SSVolkswagenGolf_setting_fragment">
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.ResetFragment</item>
+    </string-array>
+    <!-- 尚摄 高尔夫7 -->
     <!-- 大众 -->
 
 
@@ -1508,7 +1544,7 @@
     <!-- 尚摄  2015款福克斯  -->       
     <!-- 福特   -->
     
-    <!-- 上汽  -->
+    <!-- 东风  -->
     <!-- 尚摄  风光580  --> 
     <string-array name="SSDFFG_main">
         <item>0</item> <!-- 车辆信息  -->
@@ -1522,7 +1558,73 @@
     </string-array>  
     <!-- 尚摄  风光580  -->  
     
+    <!-- 尚摄  风神AX7  --> 
+    <string-array name="SSFSAX7_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array> 
+     <string-array name="SSFSAX7_items">
+        <item>车身信息</item>
+    </string-array>
+    <string-array name="SSFSAX7_fragment">
+        <item>com.console.canreader.fragment.SSFS.CarTypeSettingsFragment</item> 
+    </string-array> 
+    <!-- 尚摄  风神AX7  -->  
     
+    <!-- 尚摄 风神AX5  --> 
+    <string-array name="SSFSAX5_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSFSAX5_items">
+        <item>车身信息</item>
+    </string-array>
+    <string-array name="SSFSAX5_fragment">
+        <item>com.console.canreader.fragment.SSFS.CarTypeSettingsFragment</item> 
+    </string-array> 
+    <!-- 尚摄  风神AX5 -->  
+    
+    <!-- 尚摄 景逸X5  --> 
+    <string-array name="SSJY_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSJY_items">
+        <item>车身信息</item>
+    </string-array>
+    <string-array name="SSJY_fragment">
+        <item>com.console.canreader.fragment.SSJY.CarTypeSettingsFragment</item> 
+    </string-array> 
+    <string-array name="SSJY_setting_items">
+        <item>门锁设置</item>
+        <item>车灯设置</item>
+    </string-array>
+    <string-array name="SSJY_setting_fragment">
+        <item>com.console.canreader.fragment.SSJY.LockSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSJY.LightSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄  景逸X5 -->  
+    <!-- 东风  -->
+    
+    <!-- 上汽  --> 
     <!-- 上汽 名爵锐腾  --> 
     <!-- 尚摄  名爵锐腾  --> 
     <string-array name="SSMGGS_main">
@@ -2525,8 +2627,30 @@
         <item>9</item> 
     </string-array>
     
+       
+   <string-array name="ssjy_1_entries">
+        <item>无</item>
+        <item>10S</item>
+        <item>20S</item>
+        <item>30S</item>  
+    </string-array>
+    <string-array name="ssjy_1_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item>
+    </string-array>
     
-    
+       <string-array name="ssjy_2_entries">
+        <item>10Min</item>
+        <item>20Min</item>
+        <item>30Min</item>
+    </string-array>
+    <string-array name="ssjy_2_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
     
     
 </resources>

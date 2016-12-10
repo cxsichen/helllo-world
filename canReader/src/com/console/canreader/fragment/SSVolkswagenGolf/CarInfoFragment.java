@@ -1,4 +1,4 @@
-package com.console.canreader.fragment.RZCVolkswagenGolf;
+package com.console.canreader.fragment.SSVolkswagenGolf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,10 @@ public class CarInfoFragment extends BaseFragment {
 	private String canName = "";
 	private String canFirtName = "";
 
+	private ViewPager vp;
+	private ViewPagerAdapter vpAdapter;
+	private List<ViewPageFactory> viewsFactory;
+	private LinearLayout indicatorLayout;
 	/*
 	 * TextView fuel_warn; TextView battery_warn;
 	 */
@@ -74,8 +78,6 @@ public class CarInfoFragment extends BaseFragment {
 		}
 	};
 
-	private ViewPageFactory pageViewDefalut;
-
 	public CarInfoFragment() {
 
 	}
@@ -86,7 +88,9 @@ public class CarInfoFragment extends BaseFragment {
 		super.show(mCaninfo);
 		if (mCaninfo != null) {
 			if (mCaninfo.CHANGE_STATUS == 10) {
-				pageViewDefalut.showView(mCaninfo);
+				for (ViewPageFactory mViewPageFactory : viewsFactory) {
+					mViewPageFactory.showView(mCaninfo);
+				}
 			}
 		}
 	}
@@ -101,8 +105,10 @@ public class CarInfoFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		pageViewDefalut = new ObdView(getActivity(), R.layout.dashboard_main);
-		return pageViewDefalut.getView();
+		// TODO Auto-generated method stub
+		View view = inflater.inflate(R.layout.main, container, false);
+		initView(view);
+		return view;
 	}
 
 	@Override
@@ -111,5 +117,78 @@ public class CarInfoFragment extends BaseFragment {
 		super.onDestroyView();
 		mHandler.removeMessages(Contacts.MSG_GET_MSG);
 	}
+
+	private void initView(View view) {
+		// TODO Auto-generated method stub
+		if (viewsFactory == null)
+			viewsFactory = new ArrayList<ViewPageFactory>();
+		if (vp == null)
+			vp = (ViewPager) view.findViewById(R.id.vp);
+		vp.setOffscreenPageLimit(2);
+		if (vpAdapter == null)
+			vpAdapter = new ViewPagerAdapter(viewsFactory);
+		ViewPageFactory pageViewDefalut = new ObdView(getActivity(),
+				R.layout.dashboard_main);
+		viewsFactory.add(pageViewDefalut);
+		vp.setAdapter(vpAdapter);
+		initIndicator(view);
+	}
+
+	/**
+	 * init Indicator
+	 */
+	protected void initIndicator(View view) {
+		if (indicatorLayout == null)
+			indicatorLayout = (LinearLayout) view.findViewById(R.id.indicator);
+
+		indicatorLayout.removeAllViews();
+
+		if (viewsFactory.size() < 2) {
+			return;
+		}
+
+		for (int i = 0; i < viewsFactory.size(); i++) {
+			ImageView imageView = new ImageView(getActivity());
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			lp.setMargins(DensityUtils.dip2px(getActivity(), 4), 0,
+					DensityUtils.dip2px(getActivity(), 4), 0);
+			imageView.setLayoutParams(lp);
+			if (i == 0) {
+				imageView.setImageResource(R.drawable.white_oval);
+			} else {
+				imageView.setImageResource(R.drawable.gray_oval);
+			}
+			indicatorLayout.addView(imageView);
+		}
+		vp.setOnPageChangeListener(mOnPageChangeListener);
+	}
+
+	OnPageChangeListener mOnPageChangeListener = new OnPageChangeListener() {
+
+		@Override
+		public void onPageSelected(int arg0) {
+			// TODO Auto-generated method stub
+			for (int i = 0; i < viewsFactory.size(); i++) {
+				((ImageView) indicatorLayout.getChildAt(i))
+						.setImageResource(R.drawable.gray_oval);
+			}
+			((ImageView) indicatorLayout.getChildAt(arg0))
+					.setImageResource(R.drawable.white_oval);
+
+		}
+
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
+			// TODO Auto-generated method stub
+			indicatorLayout.setVisibility(View.VISIBLE);
+		}
+
+		@Override
+		public void onPageScrollStateChanged(int arg0) {
+			// TODO Auto-generated method stub
+			// indicatorLayout.setVisibility(View.INVISIBLE);
+		}
+	};
 
 }

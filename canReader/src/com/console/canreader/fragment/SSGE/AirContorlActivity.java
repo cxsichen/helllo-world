@@ -21,6 +21,7 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.console.canreader.R;
+import com.console.canreader.activity.AirConBaseActivity;
 import com.console.canreader.activity.BaseActivity;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.Contacts;
@@ -30,7 +31,7 @@ import com.console.canreader.utils.ViewPagerAdapter;
 import com.console.canreader.view.ObdView;
 import com.console.canreader.view.ViewPageFactory;
 
-public class AirContorlActivity extends BaseActivity implements OnClickListener {
+public class AirContorlActivity extends AirConBaseActivity implements OnClickListener {
 
 	TextView tv;
 	TextView tv1;
@@ -100,13 +101,13 @@ public class AirContorlActivity extends BaseActivity implements OnClickListener 
 				tv.setBackgroundResource(R.drawable.bg_button_oval);
 			}
 
-			if (mCaninfo.LARGE_LANTERN_INDICATOR == 1) {
+			if (mCaninfo.SMALL_LANTERN_INDICATOR == 1) {
 				tv1.setBackgroundResource(R.drawable.bg_button_oval_on);
 			} else {
 				tv1.setBackgroundResource(R.drawable.bg_button_oval);
 			}
 
-			if (mCaninfo.SMALL_LANTERN_INDICATOR == 1) {
+			if (mCaninfo.MIRROR_SYNC_ADJUST == 1) {
 				tv2.setBackgroundResource(R.drawable.bg_button_oval_on);
 			} else {
 				tv2.setBackgroundResource(R.drawable.bg_button_oval);
@@ -235,12 +236,12 @@ public class AirContorlActivity extends BaseActivity implements OnClickListener 
 				break;
 			case R.id.auto_tv:
 				sendMsg("5AA5023B04"
-						+ ((mCaninfo.LARGE_LANTERN_INDICATOR == 1) ? "00"
+						+ ((mCaninfo.SMALL_LANTERN_INDICATOR == 1) ? "00"
 								: "01"));
 				break;
 			case R.id.sync_tv:
 				sendMsg("5AA5023B0F"
-						+ ((mCaninfo.SMALL_LANTERN_INDICATOR == 1) ? "00"
+						+ ((mCaninfo.MIRROR_SYNC_ADJUST == 1) ? "00"
 								: "01"));
 				break;
 			case R.id.iv1:
