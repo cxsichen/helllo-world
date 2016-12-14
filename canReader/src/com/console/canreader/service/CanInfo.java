@@ -73,7 +73,7 @@ public class CanInfo implements Parcelable {
 	public int RIGTHT_SEAT_TEMP = 0; // 右座椅温度
 
 	/*
-	 * 后雷达信息 0不显示 1最近（报警） 4最远
+	 * 后雷达信息 0不显示 1最近（报警） 4最远  记得不要超过0~4 会报错不显示
 	 */
 	public int BACK_LEFT_DISTANCE = 0; // 左后雷达
 	public int BACK_MIDDLE_LEFT_DISTANCE = 0; // 左后中雷达
@@ -355,6 +355,10 @@ public class CanInfo implements Parcelable {
 	public int LOCK_DELAY_LOCK=0;   //延迟落锁设定
 	public int AUTO_OPEN_LOCK_S = 0; // 自动解锁设定（手动档）
 	
+	/*--  原车屏显示-----*/
+	public int CAR_SHWO_LIGHT=0; //原车屏亮度
+	public int CAR_SHWO_CONTARST = 0; // 原车屏对比度
+	public int CAR_SHWO_SATURATION = 0; // 原车屏饱和度
 	/*--  蓝牙模式-----*/
 	public String BLUETOOTH_PASSWARD="";      //蓝牙配对密码
 	public String BLUETOOTH_NAME="";      //蓝牙电话名称

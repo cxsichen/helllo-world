@@ -32,10 +32,20 @@ public class BeanFactory {
 		}
 		return mAnalyzeUtils;
 	}
-
+	
 	private static String adjustcanName(String canName) {
 		// TODO Auto-generated method stub
 		switch (canName) {
+		case Contacts.CANNAMEGROUP.SSHavalH1:
+			canName = Contacts.CANNAMEGROUP.SSHaval; // 长城哈弗
+			break;
+		case Contacts.CANNAMEGROUP.SSCheryAR5: // 奇瑞
+		case Contacts.CANNAMEGROUP.SSCheryR5:
+		case Contacts.CANNAMEGROUP.SSCheryR3:
+		case Contacts.CANNAMEGROUP.SSCheryR3X:
+		case Contacts.CANNAMEGROUP.SSCheryR7:
+			canName = Contacts.CANNAMEGROUP.SSChery;
+			break;
 		case Contacts.CANNAMEGROUP.SSFSAX5: // 东风风神
 		case Contacts.CANNAMEGROUP.SSFSAX7:
 			canName = Contacts.CANNAMEGROUP.SSFS;

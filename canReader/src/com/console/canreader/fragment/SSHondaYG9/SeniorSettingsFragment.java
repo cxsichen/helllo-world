@@ -1,7 +1,6 @@
-package com.console.canreader.fragment.SSHonda;
+package com.console.canreader.fragment.SSHondaYG9;
 
 import android.os.Bundle;
-import android.preference.PreferenceGroup;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -24,7 +23,7 @@ import com.console.canreader.activity.Toyota.SettingActivity;
 import com.console.canreader.activity.Toyota.OilEleActivity.SettingsFragment;
 import com.console.canreader.service.CanInfo;
 
-public class ScreenSettingsFragment extends BaseFragment {
+public class SeniorSettingsFragment extends BaseFragment {
 
 	private TextView version;
 	SettingsFragment settingsFragment;
@@ -33,7 +32,7 @@ public class ScreenSettingsFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.fragment_activity_layout_1,
+		View view = inflater.inflate(R.layout.fragment_activity_layout,
 				container, false);
 		initView(view);
 		initFragment();
@@ -44,7 +43,7 @@ public class ScreenSettingsFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		settingsFragment = new SettingsFragment(this);
 		getActivity().getFragmentManager().beginTransaction()
-				.replace(R.id.content_layout_1, settingsFragment).commit();
+				.replace(R.id.content_layout, settingsFragment).commit();
 	}
 
 	@Override
@@ -57,9 +56,11 @@ public class ScreenSettingsFragment extends BaseFragment {
 					settingsFragment.syncView(mCaninfo);
 				} catch (Exception e) {
 					// TODO: handle exception
+					Log.i("cxs", "========e====" + e);
 				}
 			}
 		}
+
 	}
 
 	@Override
@@ -75,14 +76,16 @@ public class ScreenSettingsFragment extends BaseFragment {
 	public class SettingsFragment extends PreferenceFragment implements
 			OnPreferenceChangeListener {
 
-	/*	private SwitchPreference p1;*/
-		private ListPreference p2;
+		private ListPreference p4;
+		private ListPreference p5;
 
-		ScreenSettingsFragment settingActivity;
-		
-		private Boolean ISRESUME=false;
 
-		public SettingsFragment(ScreenSettingsFragment settingActivity) {
+		private ListPreference p11;
+		private SwitchPreference p12;
+
+		SeniorSettingsFragment settingActivity;
+
+		public SettingsFragment(SeniorSettingsFragment settingActivity) {
 			this.settingActivity = settingActivity;
 		}
 
@@ -90,37 +93,49 @@ public class ScreenSettingsFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.sshonda_screen_setting_prefs);
+			addPreferencesFromResource(R.xml.sshondayg9_senior_setting_prefs);
+			/*---------lamp ------*/
 
-/*			p1 = (SwitchPreference) findPreference("LEFT_CAMERA_SWITCH");
-			p1.setOnPreferenceChangeListener(this);*/
+			p4 = (ListPreference) findPreference("FRONT_LAMP_OFF_TIME");
+			p4.setOnPreferenceChangeListener(this);
+
+			p5 = (ListPreference) findPreference("LAMP_TURN_DARK_TIME");
+			p5.setOnPreferenceChangeListener(this);
+			/*---------lamp ------*/
 
 
-			p2 = (ListPreference) findPreference("BACK_CAMERA_MODE");
-			p2.setOnPreferenceChangeListener(this);
-			
-			
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
+			/*----------lock------*/
+			p11 = (ListPreference) findPreference("AUTO_LOCK_TIME");
+			p11.setOnPreferenceChangeListener(this);
+
+			p12 = (SwitchPreference) findPreference("REMOTE_LOCK_SIGN");
+			p12.setOnPreferenceChangeListener(this);
+			/*----------lock------*/
+
+
+			if (settingActivity != null) {
+				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}
-		
-		@Override
-		public void onResume() {
-			// TODO Auto-generated method stub
-			super.onResume();
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
-					syncView(settingActivity.getCanInfo());
-			}
-		}
-		
 
 		public void syncView(CanInfo mCaninfo) {
-	/*		p1.setChecked(mCaninfo.LEFT_CAMERA_SWITCH == 1);*/
-			p2.setValue(String.valueOf(mCaninfo.BACK_CAMERA_MODE - 1));
-			updatePreferenceDescription(p2, mCaninfo.BACK_CAMERA_MODE - 1);
+			/*---------lamp ------*/
+			updateListPreference(p4, mCaninfo.FRONT_LAMP_OFF_TIME);
+			updateListPreference(p5, mCaninfo.LAMP_TURN_DARK_TIME);
+			/*---------lamp ------*/
+
+			/*----------lock------*/
+			updateListPreference(p11, mCaninfo.AUTO_LOCK_TIME);
+			p12.setChecked(mCaninfo.REMOTE_LOCK_SIGN == 1);
+			/*----------lock------*/
+
+
+		}
+
+		public void updateListPreference(ListPreference p, int index) {
+			p.setValue(String.valueOf(index));
+			updatePreferenceDescription(p, index);
 		}
 
 		private void updatePreferenceDescription(ListPreference preference,
@@ -154,32 +169,46 @@ public class ScreenSettingsFragment extends BaseFragment {
 			// TODO Auto-generated method stub
 			final String key = preference.getKey();
 			switch (key) {
-			case "LEFT_CAMERA_SWITCH":
-				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA502F207"
-							+ ((boolean) newValue ? "01" : "00"));
-				}
-				break;
-			case "BACK_CAMERA_MODE":
+			/*---------lamp ------*/
+			case "FRONT_LAMP_OFF_TIME":
 				if (settingActivity != null) {
 					try {
 						int value = Integer.parseInt((String) newValue);
-						switch (value) {
-						case 0:
-							settingActivity.sendMsg("5AA502F201FF");
-							break;
-						case 1:
-							settingActivity.sendMsg("5AA502F202FF");
-							break;
-						case 2:
-							settingActivity.sendMsg("5AA502F203FF");
-							break;
-						default:
-							break;
-						}
-						updatePreferenceDescription(p2, value);
+						settingActivity.sendMsg("5AA5026C020"
+								+ (String) newValue);
+						updatePreferenceDescription(p4, value);
 					} catch (NumberFormatException e) {
 					}
+				}
+				break;
+			case "LAMP_TURN_DARK_TIME":
+				if (settingActivity != null) {
+					try {
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026C010"
+								+ (String) newValue);
+						updatePreferenceDescription(p5, value);
+					} catch (NumberFormatException e) {
+					}
+				}
+				break;
+			/*---------lamp ------*/
+			/*----------lock------*/
+			case "AUTO_LOCK_TIME":
+				if (settingActivity != null) {
+					try {
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026A030"
+								+ (String) newValue);
+						updatePreferenceDescription(p11, value);
+					} catch (NumberFormatException e) {
+					}
+				}
+				break;
+			case "REMOTE_LOCK_SIGN":
+				if (settingActivity != null) {
+					settingActivity.sendMsg("5AA5026A04"
+							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
 			default:

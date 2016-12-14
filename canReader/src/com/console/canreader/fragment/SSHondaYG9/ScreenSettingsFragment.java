@@ -1,4 +1,4 @@
-package com.console.canreader.fragment.SSHonda;
+package com.console.canreader.fragment.SSHondaYG9;
 
 import android.os.Bundle;
 import android.preference.PreferenceGroup;
@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.console.canreader.R;
@@ -23,6 +24,9 @@ import com.console.canreader.activity.Toyota.OilEleActivity;
 import com.console.canreader.activity.Toyota.SettingActivity;
 import com.console.canreader.activity.Toyota.OilEleActivity.SettingsFragment;
 import com.console.canreader.service.CanInfo;
+import com.console.canreader.utils.BytesUtil;
+import com.console.canreader.view.SeekBarPreference;
+import com.console.canreader.view.SeekBarPreference.OnSeekBarPrefsChangeListener;
 
 public class ScreenSettingsFragment extends BaseFragment {
 
@@ -75,10 +79,14 @@ public class ScreenSettingsFragment extends BaseFragment {
 	public class SettingsFragment extends PreferenceFragment implements
 			OnPreferenceChangeListener {
 
-	/*	private SwitchPreference p1;*/
+		private SwitchPreference p1;
 		private ListPreference p2;
 
+		private ListPreference p3;
+		private ListPreference p4;
 		ScreenSettingsFragment settingActivity;
+		private SeekBarPreference mSeekBarPreference1;
+		int eqlValue = 0;
 		
 		private Boolean ISRESUME=false;
 
@@ -90,14 +98,48 @@ public class ScreenSettingsFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.sshonda_screen_setting_prefs);
+			addPreferencesFromResource(R.xml.sshondayg9_screen_setting_prefs);
 
-/*			p1 = (SwitchPreference) findPreference("LEFT_CAMERA_SWITCH");
-			p1.setOnPreferenceChangeListener(this);*/
-
+			p1 = (SwitchPreference) findPreference("LEFT_CAMERA_SWITCH");
+			p1.setOnPreferenceChangeListener(this);
 
 			p2 = (ListPreference) findPreference("BACK_CAMERA_MODE");
 			p2.setOnPreferenceChangeListener(this);
+			
+			p3 = (ListPreference) findPreference("CAR_SHWO_CONTARST");
+			p3.setOnPreferenceChangeListener(this);
+						
+			p4 = (ListPreference) findPreference("CAR_SHWO_SATURATION");
+			p4.setOnPreferenceChangeListener(this);
+			
+			mSeekBarPreference1 = (SeekBarPreference) findPreference("CAR_SHWO_LIGHT");
+			mSeekBarPreference1.setMax(255);
+			
+			mSeekBarPreference1
+			.setOnSeekBarPrefsChangeListener(new OnSeekBarPrefsChangeListener() {
+
+				@Override
+				public void onStopTrackingTouch(String key,
+						SeekBar seekBar) {
+					// TODO Auto-generated method stub				
+					settingActivity.sendMsg("5AA502F201"+ BytesUtil.intToHexString(eqlValue));
+				}
+
+				@Override
+				public void onStartTrackingTouch(String key,
+						SeekBar seekBar) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onProgressChanged(String key,
+						SeekBar seekBar, int progress, boolean fromUser) {
+					// TODO Auto-generated method stub
+					eqlValue = progress;
+
+				}
+			});
 			
 			
 			if(settingActivity!=null){
@@ -118,9 +160,17 @@ public class ScreenSettingsFragment extends BaseFragment {
 		
 
 		public void syncView(CanInfo mCaninfo) {
-	/*		p1.setChecked(mCaninfo.LEFT_CAMERA_SWITCH == 1);*/
+			p1.setChecked(mCaninfo.LEFT_CAMERA_SWITCH == 1);
 			p2.setValue(String.valueOf(mCaninfo.BACK_CAMERA_MODE - 1));
 			updatePreferenceDescription(p2, mCaninfo.BACK_CAMERA_MODE - 1);
+			
+			p3.setValue(String.valueOf(mCaninfo.CAR_SHWO_CONTARST ));
+			updatePreferenceDescription(p3, mCaninfo.CAR_SHWO_CONTARST );
+			
+			p4.setValue(String.valueOf(mCaninfo.CAR_SHWO_SATURATION));
+			updatePreferenceDescription(p4, mCaninfo.CAR_SHWO_SATURATION );
+			
+			mSeekBarPreference1.setProgress(mCaninfo.CAR_SHWO_LIGHT);
 		}
 
 		private void updatePreferenceDescription(ListPreference preference,
@@ -166,13 +216,13 @@ public class ScreenSettingsFragment extends BaseFragment {
 						int value = Integer.parseInt((String) newValue);
 						switch (value) {
 						case 0:
-							settingActivity.sendMsg("5AA502F201FF");
+							settingActivity.sendMsg("5AA502F204FF");
 							break;
 						case 1:
-							settingActivity.sendMsg("5AA502F202FF");
+							settingActivity.sendMsg("5AA502F205FF");
 							break;
 						case 2:
-							settingActivity.sendMsg("5AA502F203FF");
+							settingActivity.sendMsg("5AA502F206FF");
 							break;
 						default:
 							break;
@@ -182,10 +232,42 @@ public class ScreenSettingsFragment extends BaseFragment {
 					}
 				}
 				break;
+			case "CAR_SHWO_CONTARST":
+				if (settingActivity != null) {
+					try {
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA502F202"
+								+  BytesUtil.intToHexString(value));
+						updatePreferenceDescription(p3, value);
+					} catch (NumberFormatException e) {
+					}
+				}
+				break;
+			case "CAR_SHWO_SATURATION":
+				if (settingActivity != null) {
+					try {
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA502F203"
+								+ BytesUtil.intToHexString(value));
+						updatePreferenceDescription(p4, value);
+					} catch (NumberFormatException e) {
+					}
+				}
+				break;
 			default:
 				break;
 			}
 			return true;
 		}
+	}
+	
+	private String adjustNum(int num) {
+		String tmp = Integer.toHexString(num).toUpperCase();
+		if (tmp.length() > 2) {
+			tmp = tmp.substring(tmp.length() - 2, tmp.length());
+		} else if (tmp.length() == 1) {
+			tmp = "0" + tmp;
+		}
+		return tmp;
 	}
 }

@@ -57,6 +57,7 @@ public class Contacts {
 		public static final int VIDEO = 46; // 打开视频界面
 		public static final int EQ = 47; // 打开音效设置界面
 		public static final int SETTING = 48; // 打开系统设置界面
+		public static final int AUXCHANGE = 49; // 打开关闭AUX二合一
 		/*-----------无按键状态--------*/
 		public static final int KNOBVOLUME = 101; // 音量旋钮 无按键状态       带值记忆
 		public static final int KNOBSELECTOR = 102; // 选择旋钮 无按键状态    带值记忆              
@@ -122,13 +123,23 @@ public class Contacts {
 		public static final String SSHondaLP = "SSHondaLP"; // 本田凌派
 		public static final String SSHonda12CRV = "SSHonda12CRV"; // 12CRV
 		public static final String SSHonda15CRV = "SSHonda15CRV"; // 15CRV
+		public static final String SSHondaYG9 = "SSHondaYG9"; // 雅阁9代
 		// 广汽传祺
 		public static final String SSTrumpchi = "SSTrumpchi"; // 广汽传祺
 		public static final String SSTrumpchiGA6 = "SSTrumpchiGA6"; // 广汽传祺GA6
 		public static final String SSTrumpchiGS4 = "SSTrumpchiGS4"; // 广汽传祺GS4
 		public static final String SSTrumpchiGS4HIGH = "SSTrumpchiGS4HIGH"; // 广汽传祺GS4高配
 		public static final String SSTrumpchiGS5 = "SSTrumpchiGS5"; // 广汽传祺GS5
-
+		//长城汽车
+		public static final String SSHaval = "SSHaval"; // 长城哈弗
+		public static final String SSHavalH1 = "SSHavalH1"; // 长城哈弗h1
+        //奇瑞
+		public static final String SSChery = "SSChery"; //奇瑞
+		public static final String SSCheryAR5 = "SSCheryAR5"; //奇瑞艾瑞泽5
+		public static final String SSCheryR5 = "SSCheryR5"; //奇瑞瑞虎5
+		public static final String SSCheryR3 = "SSCheryR3"; //奇瑞瑞虎3
+		public static final String SSCheryR3X = "SSCheryR3X"; //奇瑞瑞虎3X
+		public static final String SSCheryR7 = "SSCheryR7"; //奇瑞瑞虎7
 		// 现代起亚
 		public static final String SSHyundai = "SSHyundai"; // 现代起亚
 		public static final String SSHyundai16MT = "SSHyundai16MT"; // 16款名图

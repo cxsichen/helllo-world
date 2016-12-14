@@ -424,6 +424,7 @@ public class CanService extends Service {
 			super.onChange(selfChange);
 			syncCanName();
 			resetSerialPort();
+			connectCanDevice();    //重新初始化
 		}
 	}
 
@@ -982,7 +983,6 @@ public class CanService extends Service {
 				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
 				+ "0000" + "01" + "00000000"));
 	}
-
 	private void syncTimeWithMsgRC() {
 		Calendar c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -1066,7 +1066,19 @@ public class CanService extends Service {
 			}
 			break;
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
-			switch (canName) {
+			switch (canName) {		
+			case Contacts.CANNAMEGROUP.SSChery:
+			case Contacts.CANNAMEGROUP.SSCheryAR5:
+			case Contacts.CANNAMEGROUP.SSCheryR5:
+			case Contacts.CANNAMEGROUP.SSCheryR3:
+			case Contacts.CANNAMEGROUP.SSCheryR3X:
+			case Contacts.CANNAMEGROUP.SSCheryR7:
+			case Contacts.CANNAMEGROUP.SSHondaYG9:
+				syncTimeWithMsgMT(); // 奇瑞
+				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
+						1000 * 60);
+				break;
 			case Contacts.CANNAMEGROUP.SSHonda:
 			case Contacts.CANNAMEGROUP.SSHonda15CRV:
 			case Contacts.CANNAMEGROUP.SSHondaSY:
@@ -1114,6 +1126,7 @@ public class CanService extends Service {
 	/**
 	 * 连接Can设备需要发送的初始化命令
 	 */
+	
 
 	private void connectCanDevice() {
 		// TODO Auto-generated method stub
@@ -1128,9 +1141,27 @@ public class CanService extends Service {
 				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.DISCONNECTMSG));
 			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
-			break;
+			break;				
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			switch (canName) {
+			case Contacts.CANNAMEGROUP.SSHavalH1:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240411")); // 长城哈弗h1
+				break;
+			case Contacts.CANNAMEGROUP.SSCheryAR5:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240E35")); // 奇瑞艾瑞泽5
+				break;
+			case Contacts.CANNAMEGROUP.SSCheryR5:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502241335")); // 奇瑞瑞虎5
+				break;
+			case Contacts.CANNAMEGROUP.SSCheryR3:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502241235")); // 奇瑞瑞虎3
+				break;
+			case Contacts.CANNAMEGROUP.SSCheryR3X:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240B35")); // 奇瑞瑞虎3X
+				break;
+			case Contacts.CANNAMEGROUP.SSCheryR7:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502241435")); // 奇瑞瑞虎7
+				break;
 			case Contacts.CANNAMEGROUP.SSFSAX5:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240426")); // 风神AX5
 				break;

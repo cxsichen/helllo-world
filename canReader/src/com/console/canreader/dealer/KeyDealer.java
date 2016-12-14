@@ -146,6 +146,10 @@ public class KeyDealer {
 				Log.i("cxs", "-------Contacts.KEYEVENT.AUX-------");
 				handleAUX();
 				break;
+			case Contacts.KEYEVENT.AUXCHANGE:
+				Log.i("cxs", "-------Contacts.KEYEVENT.AUXCHANGE-------");
+				handleAUXCHANGE();
+				break;
 			case Contacts.KEYEVENT.CLOSEAUX:
 				Log.i("cxs", "-------Contacts.KEYEVENT.CLOSEAUX-------");
 				handleCLOSEAUX();
@@ -587,6 +591,21 @@ public class KeyDealer {
 		// TODO Auto-generated method stub
 		openApplication(context, "com.console.auxapp");
 	}
+	
+	private void handleAUXCHANGE() {
+		// TODO Auto-generated method stub	
+		try {
+			Intent intent = new Intent();
+			intent.setClassName("com.console.auxapp", "com.console.auxapp.MainActivity");
+			intent.putExtra("aux", 1);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(intent);
+		} catch (Exception e) {
+			// TODO: handle exception
+			Toast.makeText(context, R.string.activity_not_found,
+					Toast.LENGTH_SHORT).show();
+		}
+	}
 
 	private void handleCLOSEAUX() {
 		// TODO Auto-generated method stub
@@ -982,6 +1001,10 @@ public class KeyDealer {
 			case Contacts.KEYEVENT.AUX:
 				mHandler.removeMessages(Contacts.KEYEVENT.AUX);
 				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.AUX, 200);
+				break;
+			case Contacts.KEYEVENT.AUXCHANGE:
+				mHandler.removeMessages(Contacts.KEYEVENT.AUXCHANGE);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.AUXCHANGE, 200);
 				break;
 			case Contacts.KEYEVENT.MUSIC_PLAY_PAUSE:
 				mHandler.removeMessages(Contacts.KEYEVENT.MUSIC_PLAY_PAUSE);

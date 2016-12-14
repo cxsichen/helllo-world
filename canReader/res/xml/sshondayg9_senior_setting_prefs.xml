@@ -1,0 +1,35 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <PreferenceCategory android:title="门锁设定" >
+        <ListPreference
+            android:entries="@array/auto_lock_time_entries"
+            android:entryValues="@array/auto_lock_time_values"
+            android:key="AUTO_LOCK_TIME"
+            android:persistent="false"
+            android:title="自动重锁时间" />
+
+        <SwitchPreference
+            android:key="REMOTE_LOCK_SIGN"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="遥控落锁提示" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="灯光设定" >
+        <ListPreference
+            android:entries="@array/lamp_off_time_entries"
+            android:entryValues="@array/lamp_off_time_values"
+            android:key="FRONT_LAMP_OFF_TIME"
+            android:persistent="false"
+            android:title="前大灯自动熄灭时间" />
+        <ListPreference
+            android:entries="@array/lamp_dark_time_entries"
+            android:entryValues="@array/lamp_dark_time_values"
+            android:key="LAMP_TURN_DARK_TIME"
+            android:persistent="false"
+            android:title="车内灯光减光时间" />
+    </PreferenceCategory>
+    
+
+
+</PreferenceScreen>

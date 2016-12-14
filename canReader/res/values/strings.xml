@@ -55,5 +55,6 @@
     <string name="mid">MID</string>
     <string name="bas">BAS</string>
     <string name="volume">音量</string>
+    <string name="sa">语音设置：</string>
 
 </resources>

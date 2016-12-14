@@ -180,6 +180,13 @@
             android:launchMode="singleTask" >
         </activity>
         <!-- 空调控制activity -->
+          <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSChery.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
         <!-- 空调控制activity -->
          <activity
             android:name="com.console.canreader.fragment.RZCMGGS.AirContorlActivity"

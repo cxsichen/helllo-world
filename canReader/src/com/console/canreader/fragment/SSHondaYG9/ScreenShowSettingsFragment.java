@@ -1,7 +1,6 @@
-package com.console.canreader.fragment.SSHonda;
+package com.console.canreader.fragment.SSHondaYG9;
 
 import android.os.Bundle;
-import android.preference.PreferenceGroup;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -24,7 +23,7 @@ import com.console.canreader.activity.Toyota.SettingActivity;
 import com.console.canreader.activity.Toyota.OilEleActivity.SettingsFragment;
 import com.console.canreader.service.CanInfo;
 
-public class ScreenSettingsFragment extends BaseFragment {
+public class ScreenShowSettingsFragment extends BaseFragment {
 
 	private TextView version;
 	SettingsFragment settingsFragment;
@@ -33,7 +32,7 @@ public class ScreenSettingsFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.fragment_activity_layout_1,
+		View view = inflater.inflate(R.layout.fragment_activity_layout_2,
 				container, false);
 		initView(view);
 		initFragment();
@@ -44,7 +43,7 @@ public class ScreenSettingsFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		settingsFragment = new SettingsFragment(this);
 		getActivity().getFragmentManager().beginTransaction()
-				.replace(R.id.content_layout_1, settingsFragment).commit();
+				.replace(R.id.content_layout_2, settingsFragment).commit();
 	}
 
 	@Override
@@ -75,14 +74,17 @@ public class ScreenSettingsFragment extends BaseFragment {
 	public class SettingsFragment extends PreferenceFragment implements
 			OnPreferenceChangeListener {
 
-	/*	private SwitchPreference p1;*/
-		private ListPreference p2;
 
-		ScreenSettingsFragment settingActivity;
-		
-		private Boolean ISRESUME=false;
+		private SwitchPreference p4;
 
-		public SettingsFragment(ScreenSettingsFragment settingActivity) {
+
+		private ListPreference p6;
+		private ListPreference p7;
+		private ListPreference p8;
+
+		ScreenShowSettingsFragment settingActivity;
+
+		public SettingsFragment(ScreenShowSettingsFragment settingActivity) {
 			this.settingActivity = settingActivity;
 		}
 
@@ -90,37 +92,46 @@ public class ScreenSettingsFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.sshonda_screen_setting_prefs);
-
-/*			p1 = (SwitchPreference) findPreference("LEFT_CAMERA_SWITCH");
-			p1.setOnPreferenceChangeListener(this);*/
-
-
-			p2 = (ListPreference) findPreference("BACK_CAMERA_MODE");
-			p2.setOnPreferenceChangeListener(this);
+			addPreferencesFromResource(R.xml.sshondayg9_screen_show_setting_prefs);
+			
+			p8 = (ListPreference) findPreference("ADJUST_OUTSIDE_TEMP");
+			p8.setOnPreferenceChangeListener(this);
+			
+			p4 = (SwitchPreference) findPreference("ENERGY_BACKGROUND_LIGHT");
+			p4.setOnPreferenceChangeListener(this);
 			
 			
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
+			p6 = (ListPreference) findPreference("SWITCH_TRIPB_SETTING");
+			p6.setOnPreferenceChangeListener(this);
+
+			p7 = (ListPreference) findPreference("SWITCH_TRIPA_SETTING");
+			p7.setOnPreferenceChangeListener(this);
+			
+			
+
+
+
+
+
+			if (settingActivity != null) {
+				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
 			}
 		}
-		
-		@Override
-		public void onResume() {
-			// TODO Auto-generated method stub
-			super.onResume();
-			if(settingActivity!=null){
-				if(settingActivity.getCanInfo()!=null)
-					syncView(settingActivity.getCanInfo());
-			}
-		}
-		
 
 		public void syncView(CanInfo mCaninfo) {
-	/*		p1.setChecked(mCaninfo.LEFT_CAMERA_SWITCH == 1);*/
-			p2.setValue(String.valueOf(mCaninfo.BACK_CAMERA_MODE - 1));
-			updatePreferenceDescription(p2, mCaninfo.BACK_CAMERA_MODE - 1);
+
+			p4.setChecked(mCaninfo.ENERGY_BACKGROUND_LIGHT == 1);
+	
+
+			updateListPreference(p6, mCaninfo.SWITCH_TRIPB_SETTING);
+			updateListPreference(p7, mCaninfo.SWITCH_TRIPA_SETTING);
+			updateListPreference(p8, mCaninfo.ADJUST_OUTSIDE_TEMP);
+		}
+
+		public void updateListPreference(ListPreference p, int index) {
+			p.setValue(String.valueOf(index));
+			updatePreferenceDescription(p, index);
 		}
 
 		private void updatePreferenceDescription(ListPreference preference,
@@ -154,30 +165,59 @@ public class ScreenSettingsFragment extends BaseFragment {
 			// TODO Auto-generated method stub
 			final String key = preference.getKey();
 			switch (key) {
-			case "LEFT_CAMERA_SWITCH":
+			case "RATATIONAL_RATE":
 				if (settingActivity != null) {
-					settingActivity.sendMsg("5AA502F207"
+					settingActivity.sendMsg("5AA5026F06"
 							+ ((boolean) newValue ? "01" : "00"));
 				}
 				break;
-			case "BACK_CAMERA_MODE":
+			case "MSG_NOTIFICATION":
+				if (settingActivity != null) {
+					settingActivity.sendMsg("5AA5026F07"
+							+ ((boolean) newValue ? "01" : "00"));
+				}
+				break;
+			case "ENGINEE_AUTO_CONTROL":
+				if (settingActivity != null) {
+					settingActivity.sendMsg("5AA5026F08"
+							+ ((boolean) newValue ? "01" : "00"));
+				}
+				break;
+			case "ENERGY_BACKGROUND_LIGHT":
+				if (settingActivity != null) {
+					settingActivity.sendMsg("5AA5027A03"
+							+ ((boolean) newValue ? "01" : "00"));
+				}
+				break;
+			case "SWITCH_TRIPB_SETTING":
 				if (settingActivity != null) {
 					try {
 						int value = Integer.parseInt((String) newValue);
-						switch (value) {
-						case 0:
-							settingActivity.sendMsg("5AA502F201FF");
-							break;
-						case 1:
-							settingActivity.sendMsg("5AA502F202FF");
-							break;
-						case 2:
-							settingActivity.sendMsg("5AA502F203FF");
-							break;
-						default:
-							break;
-						}
-						updatePreferenceDescription(p2, value);
+						settingActivity.sendMsg("5AA5027A020"
+								+ (String) newValue);
+						updatePreferenceDescription(p6, value);
+					} catch (NumberFormatException e) {
+					}
+				}
+				break;
+			case "SWITCH_TRIPA_SETTING":
+				if (settingActivity != null) {
+					try {
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5027A010"
+								+ (String) newValue);
+						updatePreferenceDescription(p7, value);
+					} catch (NumberFormatException e) {
+					}
+				}
+				break;
+			case "ADJUST_OUTSIDE_TEMP":
+				if (settingActivity != null) {
+					try {
+						int value = Integer.parseInt((String) newValue);
+						settingActivity.sendMsg("5AA5026D010"
+								+ (String) newValue);
+						updatePreferenceDescription(p8, value);
 					} catch (NumberFormatException e) {
 					}
 				}

@@ -11,11 +11,11 @@
                 android:entries="@array/back_camera_mode_entries"
                 android:entryValues="@array/back_camera_mode_values" />
         
-        <SwitchPreference
+<!--         <SwitchPreference
             android:key="LEFT_CAMERA_SWITCH"
             android:summaryOff="关闭"
             android:summaryOn="打开"
-            android:title="右摄像头开关" />
+            android:title="右摄像头开关" /> -->
     </PreferenceCategory>
   
 </PreferenceScreen>

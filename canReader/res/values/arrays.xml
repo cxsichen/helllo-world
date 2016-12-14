@@ -316,6 +316,41 @@
     </string-array>
     <!-- 尚摄 本田通用 -->
     
+     <!-- 尚摄 本田雅阁9代 -->
+    <string-array name="SSHondaYG9_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSHondaYG9_items">
+        <item>本次驾驶状况</item>
+        <item>历史驾驶状况</item>
+    </string-array>
+    <string-array name="SSHondaYG9_fragment">
+        <item>com.console.canreader.fragment.SSHonda.CurrentDriveFragment</item>
+        <item>com.console.canreader.fragment.SSHondaYG9.HistoryDriveFragment</item>
+    </string-array>
+    <string-array name="SSHondaYG9_setting_items">
+        <item>车辆高级设定</item>
+        <item>显示屏状态设定</item>
+        <item>恢复原厂设置</item>
+        <item>原车屏设置</item>  
+        <item>胎压检测系统设定</item>           
+    </string-array>
+    <string-array name="SSHondaYG9_setting_fragment">
+        <item>com.console.canreader.fragment.SSHondaYG9.SeniorSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHondaYG9.ScreenShowSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHondaYG9.ResetSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHondaYG9.ScreenSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHondaYG9.TpmsSettingsFragment</item>           
+    </string-array>
+    <!-- 尚摄 本田雅阁9代-->
+    
     <!-- 尚摄 本田凌派 -->
     <string-array name="SSHondaLP_main">
         <item>1</item><!-- 车辆信息 -->
@@ -349,7 +384,7 @@
     </string-array>
     <!-- 尚摄 本田凌派 -->
     
-        <!-- 尚摄 16款思域 -->
+    <!-- 尚摄 16款思域 -->
     <string-array name="SSHondaSY_main">
         <item>1</item><!-- 车辆信息 -->
         <item>1</item><!-- 车辆设置 -->
@@ -406,7 +441,7 @@
     <!-- 尚摄 本田12CRV -->
     
     
-       <!-- 尚摄 本田15CRV -->
+    <!-- 尚摄 本田15CRV -->
     <string-array name="SSHonda15CRV_main">
         <item>1</item><!-- 车辆信息 -->
         <item>1</item><!-- 车辆设置 -->
@@ -431,13 +466,27 @@
     <string-array name="SSHonda15CRV_setting_fragment">
         <item>com.console.canreader.fragment.SSHonda.ScreenSettingsFragment</item>
     </string-array>
-    <!-- 尚摄 本田15CRV -->
-    
+    <!-- 尚摄 本田15CRV -->    
     <!-- 本田 -->
     
+    <!-- 长城 -->
+    <!-- 长城 哈弗H1 -->
+    <string-array name="SSHavalH1_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <!-- 长城 哈弗H1 -->
+    <!-- 长城 -->
+
     <!-- 广汽传祺 -->
     <!-- add by xyw start-->
-         <!-- 尚摄 广汽传祺GA6 -->
+    <!-- 尚摄 广汽传祺GA6 -->
     <string-array name="SSTrumpchiGA6_main">
         <item>1</item> <!-- 车辆信息  -->
         <item>1</item> <!-- 车辆设置  -->
@@ -1624,6 +1673,133 @@
     <!-- 尚摄  景逸X5 -->  
     <!-- 东风  -->
     
+    <!-- 奇瑞 --> 
+    <!-- 尚摄 奇瑞 艾瑞泽5 --> 
+    <string-array name="SSCheryAR5_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSCheryAR5_items">
+        
+    </string-array>
+    <string-array name="SSCheryAR5_fragment">
+      
+    </string-array> 
+    <string-array name="SSCheryAR5_setting_items">
+        <item>中控设置</item>
+        <item>语言设置</item>
+    </string-array>
+    <string-array name="SSCheryAR5_setting_fragment">
+        <item>com.console.canreader.fragment.SSChery.LockSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSChery.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 奇瑞 艾瑞泽5 --> 
+    
+    <!-- 尚摄 奇瑞 瑞虎5--> 
+    <string-array name="SSCheryR5_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <string-array name="SSCheryR5_setting_items">
+        <item>语言设置</item>
+    </string-array>
+    <string-array name="SSCheryR5_setting_fragment">
+        <item>com.console.canreader.fragment.SSChery.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 奇瑞 瑞虎5 --> 
+    
+    <!-- 尚摄 奇瑞瑞虎3--> 
+    <string-array name="SSCheryR3_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSCheryR3_items">
+        
+    </string-array>
+    <string-array name="SSCheryR3_fragment">
+      
+    </string-array> 
+    <string-array name="SSCheryR3_setting_items">
+        <item>语言设置</item>
+    </string-array>
+    <string-array name="SSCheryR3_setting_fragment">
+        <item>com.console.canreader.fragment.SSChery.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 奇瑞瑞虎3 --> 
+    
+     <!-- 尚摄 奇瑞瑞虎3X--> 
+    <string-array name="SSCheryR3X_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSCheryR3X_items">
+        
+    </string-array>
+    <string-array name="SSCheryR3X_fragment">
+      
+    </string-array> 
+    <string-array name="SSCheryR3X_setting_items">
+        <item>语言设置</item>
+    </string-array>
+    <string-array name="SSCheryR3X_setting_fragment">
+        <item>com.console.canreader.fragment.SSChery.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 奇瑞瑞虎3X -->
+    
+    
+    <!-- 尚摄 奇瑞 瑞虎7 --> 
+    <string-array name="SSCheryR7_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSCheryR7_items">
+        
+    </string-array>
+    <string-array name="SSCheryR7_fragment">
+      
+    </string-array> 
+    <string-array name="SSCheryR7_setting_items">
+        <item>中控设置</item>
+        <item>语言设置</item>
+    </string-array>
+    <string-array name="SSCheryR7_setting_fragment">
+        <item>com.console.canreader.fragment.SSChery.LockSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSChery.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 奇瑞 瑞虎7 -->  
+    
+    <!-- 奇瑞 --> 
+    
     <!-- 上汽  --> 
     <!-- 上汽 名爵锐腾  --> 
     <!-- 尚摄  名爵锐腾  --> 
@@ -1947,6 +2123,18 @@
         <item>3</item>
     </string-array>
     
+     <string-array name="trip_setting_entries_1">
+        <item>与加油联动</item>
+        <item>关闭点火开关时联动</item>
+        <item>手动</item>
+    </string-array>
+    
+    <string-array name="trip_setting_values_1">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
      <string-array name="outside_temp_entries">
         <item>无效</item>
         <item>-3</item>
@@ -1969,6 +2157,62 @@
         <item>7</item>
     </string-array>
     
+   <string-array name="outside_temp_entries_1">
+        <item>-5</item>
+        <item>-4</item>
+        <item>-3</item>
+        <item>-2</item>
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    
+    <string-array name="outside_temp_values_1">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    
+    
+     <string-array name="outside_temp_entries_2">
+        <item>-5</item>
+        <item>-4</item>
+        <item>-3</item>
+        <item>-2</item>
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    
+    <string-array name="outside_temp_values_2">
+        <item>-5</item>
+        <item>-4</item>
+        <item>-3</item>
+        <item>-2</item>
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
         <!-- add by xyw start -->
         <string-array name="language_entries">
         <item>中文</item>
@@ -2652,5 +2896,113 @@
         <item>2</item> 
     </string-array>
     
+    <string-array name="sscherry_0_entries">
+        <item>灯光</item>
+        <item>喇叭</item>
+        <item>灯光+喇叭</item>
+    </string-array>
+    <string-array name="sscherry_0_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="sscherry_1_entries">
+        <item>关闭</item>
+        <item>静态</item>
+        <item>静态+动态</item>
+    </string-array>
+    <string-array name="sscherry_1_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+     <string-array name="sscherry_2_entries">
+        <item>关闭</item>
+        <item>静态</item>
+        <item>静态+动态</item>
+    </string-array>
+    <string-array name="sscherry_2_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    
+    <string-array name="sscherry_3_entries">
+        <item>关闭</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>65</item>
+        <item>70</item>
+        <item>75</item>
+        <item>80</item>
+        <item>85</item>
+        <item>90</item>
+        <item>95</item>
+        <item>100</item>
+        <item>105</item>
+        <item>110</item>
+        <item>115</item>
+        <item>120</item>
+        <item>125</item>
+        <item>130</item>        
+    </string-array>
+    <string-array name="sscherry_3_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>   
+    </string-array>
+    
+    
+    <string-array name="sscherry_4_entries">
+        <item>1级</item>
+        <item>2级</item>
+        <item>3级</item>
+        <item>4级</item>
+        <item>5级</item>
+        <item>6级</item>
+        <item>7级</item>
+        <item>8级</item>
+        <item>9级</item>
+        <item>10级</item>       
+    </string-array>
+    <string-array name="sscherry_4_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
     
 </resources>
