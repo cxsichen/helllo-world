@@ -109,12 +109,10 @@ public class CarInfoActivity extends BaseActivity {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					Log.i("cxs", "=====e==========" + e);
 				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			Log.i("cxs", "=====e==========" + e);
 		}
 	}
 

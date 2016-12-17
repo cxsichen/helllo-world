@@ -124,7 +124,27 @@
     </string-array>
     <!-- 尚摄 高尔夫7 -->
     <!-- 大众 -->
-
+    
+    <!-- 吉普 -->
+    <!-- 尚摄 指南者 -->
+    <string-array name="SSJeepZNZ_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>0</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepZNZ_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepZNZ_fragment">
+        <item>com.console.canreader.fragment.SSJeepZNZ.CarInfoFragment</item>
+    </string-array>
+    <!-- 尚摄  指南者 -->
+    <!-- 吉普-->
 
     <!-- 丰田 -->
 

@@ -405,11 +405,12 @@ public class CanService extends Service {
 				android.provider.Settings.System.getUriFor(Contacts.ACC_STATE),
 				true, mAccStateObserver);
 
-		/*
-		 * getContentResolver() .registerContentObserver(
-		 * android.provider.Settings.System .getUriFor(Contacts.TAILDOORSTATUS),
-		 * true, mTailDoorObserver); // 尾门状态
-		 */
+		getContentResolver()
+				.registerContentObserver(
+						android.provider.Settings.System
+								.getUriFor(Contacts.TAILDOORSTATUS),
+						true, mTailDoorObserver); // 尾门状态
+
 	}
 
 	private CanNameObserver mCanNameObserver = new CanNameObserver();
@@ -424,7 +425,7 @@ public class CanService extends Service {
 			super.onChange(selfChange);
 			syncCanName();
 			resetSerialPort();
-			connectCanDevice();    //重新初始化
+			connectCanDevice(); // 重新初始化
 		}
 	}
 
@@ -443,7 +444,7 @@ public class CanService extends Service {
 		}
 		getContentResolver().unregisterContentObserver(mBackCarObserver);
 		getContentResolver().unregisterContentObserver(mCanNameObserver);
-		// getContentResolver().unregisterContentObserver(mTailDoorObserver);
+		getContentResolver().unregisterContentObserver(mTailDoorObserver);
 
 		mInputStream = null;
 		mOutputStream = null;
@@ -542,6 +543,7 @@ public class CanService extends Service {
 						case Contacts.CANNAMEGROUP.SSNissan:
 						case Contacts.CANNAMEGROUP.SSNissanWithout360:
 						case Contacts.CANNAMEGROUP.SSHonda12CRV:
+						case Contacts.CANNAMEGROUP.SSJeepZNZ:
 							readSSCanPort_1(); // 日产
 							break;
 						default:
@@ -983,6 +985,7 @@ public class CanService extends Service {
 				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
 				+ "0000" + "01" + "00000000"));
 	}
+
 	private void syncTimeWithMsgRC() {
 		Calendar c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -1066,7 +1069,7 @@ public class CanService extends Service {
 			}
 			break;
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
-			switch (canName) {		
+			switch (canName) {
 			case Contacts.CANNAMEGROUP.SSChery:
 			case Contacts.CANNAMEGROUP.SSCheryAR5:
 			case Contacts.CANNAMEGROUP.SSCheryR5:
@@ -1126,7 +1129,6 @@ public class CanService extends Service {
 	/**
 	 * 连接Can设备需要发送的初始化命令
 	 */
-	
 
 	private void connectCanDevice() {
 		// TODO Auto-generated method stub
@@ -1141,7 +1143,7 @@ public class CanService extends Service {
 				writeCanPort(BytesUtil.addRZCCheckBit(Contacts.DISCONNECTMSG));
 			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
-			break;				
+			break;
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			switch (canName) {
 			case Contacts.CANNAMEGROUP.SSHavalH1:
@@ -1230,7 +1232,6 @@ public class CanService extends Service {
 			case Contacts.CANNAMEGROUP.SSPeugeot508LOW:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240900"));
 				break;
-
 			case Contacts.CANNAMEGROUP.SSPeugeot508HIGH:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240A00"));
 				break;

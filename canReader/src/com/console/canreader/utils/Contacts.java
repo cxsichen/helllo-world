@@ -148,6 +148,9 @@ public class Contacts {
 		public static final String SSNissanWithout360 = "SSNissanWithout360"; // 日产
 		// 通用
 		public static final String SSGE = "SSGE"; // 通用
+		//吉普
+		public static final String SSJeep = "SSGE"; // 吉普
+		public static final String SSJeepZNZ = "SSJeepZNZ"; // 吉普指南者
 		// 上汽
 		public static final String SSRoewe360 = "SSRoewe360"; // 荣威360
 		public static final String SSMGGS = "SSMGGS";         // 名爵锐腾
