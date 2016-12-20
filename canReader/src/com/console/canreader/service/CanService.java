@@ -37,6 +37,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
@@ -136,20 +137,18 @@ public class CanService extends Service {
 				mKeyDealer.dealCanKeyEvent(CanService.this, info2.getCanInfo());
 				break;
 			case 3:
-				if (info.getCanInfo().AIR_CONDITIONER_CONTROL == 0) { // 像标致的空调有单独的控制界面
-																		// 则AIR_CONDITIONER_CONTROL置1，不弹界面
-					DialogCreater.showAirConDialog(CanService.this,
-							info2.getCanInfo(), // 空调事件处理
-							new CallBack() {
+				DialogCreater.showAirConDialog(CanService.this,
+						info2.getCanInfo(), // 空调事件处理
+						new CallBack() {
 
-								@Override
-								public void sendShowMsg() {
-									// TODO Auto-generated method stub
-									sendMsgGetTemp();
+							@Override
+							public void sendShowMsg() {
+								// TODO Auto-generated method stub
+								sendMsgGetTemp();
 
-								}
-							});
-				}
+							}
+						});
+
 				break;
 			case 10:
 				DialogCreater.showUnlockWaringInfo(CanService.this, // 车身信息报警处理
@@ -1132,6 +1131,9 @@ public class CanService extends Service {
 
 	private void connectCanDevice() {
 		// TODO Auto-generated method stub
+		//初始化空调状态
+		Settings.System.putInt(getContentResolver(), "no_aircon", 0);
+		
 		mHandler.sendEmptyMessage(Contacts.MSG_MSG_CYCLE);
 		switch (canFirtName) {
 		case Contacts.CANFISRTNAMEGROUP.RAISE: // 睿志诚
@@ -1144,8 +1146,15 @@ public class CanService extends Service {
 			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			break;
+			
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			switch (canName) {
+			case Contacts.CANNAMEGROUP.SSCHANGANYXH:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240513")); //悦翔V7中高配
+				break;
+			case Contacts.CANNAMEGROUP.SSCHANGANYXL:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240613")); // 悦翔V7低配
+				break;
 			case Contacts.CANNAMEGROUP.SSHavalH1:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240411")); // 长城哈弗h1
 				break;
@@ -1274,5 +1283,6 @@ public class CanService extends Service {
 			break;
 		}
 	}
+	
 
 }

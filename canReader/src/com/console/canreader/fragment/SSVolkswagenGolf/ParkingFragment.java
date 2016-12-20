@@ -90,13 +90,13 @@ public class ParkingFragment extends BaseFragment {
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 
 		/*-----------set data----------------*/
-		String[] swPreKey = { "AUTO_PARK_CAR_STATUS", "PARKING_ASSIT_STATUS" };
-		String[] swPreMsg = { "2EC60240", "2EC60245" };
+		String[] swPreKey = { "AUTO_PARK_CAR_STATUS", "RADAR_WARING_VOLUME" };
+		String[] swPreMsg = { "5AA5024A01", "5AA5024A08" };
 
 		String[] listPreKey = { "FRONT_VOLUME", "FRONT_FREQUNENCY",
 				"BACK_VOLUME", "BACK_FREQUNENCY", "PARKING_MODE" };
-		String[] listPreMsg = { "2EC60241", "2EC60242", "2EC60243", "2EC60244",
-				"2EC60246" };
+		String[] listPreMsg = { "5AA5024A02", "5AA5024A03", "5AA5024A04", "5AA5024A05",
+				"5AA5024A07" };
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
@@ -112,7 +112,7 @@ public class ParkingFragment extends BaseFragment {
 				CanInfo mCaninfo) {
 			// TODO Auto-generated method stub
 			mSwitchValueGroup2.add(mCaninfo.AUTO_PARK_CAR_STATUS);
-			mSwitchValueGroup2.add(mCaninfo.PARKING_ASSIT_STATUS);
+			mSwitchValueGroup2.add(mCaninfo.RADAR_WARING_VOLUME);
 		}
 
 		/*-----------set data----------------*/
@@ -125,7 +125,7 @@ public class ParkingFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.rzcgolf_setting_prefs_2);
+			addPreferencesFromResource(R.xml.ssgolf_setting_prefs_2);
 
 			for (String str : swPreKey) {
 				SwitchPreference p = (SwitchPreference) findPreference(str);
@@ -151,18 +151,33 @@ public class ParkingFragment extends BaseFragment {
 			addSwitchData(mSwitchValueGroup, mCaninfo);
 
 			for (int i = 0; i < mSwitchPreferenceGroup.size(); i++) {
-				mSwitchPreferenceGroup.get(i).setChecked(
-						mSwitchValueGroup.get(i) == 1);
+				if (mSwitchValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mSwitchPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mSwitchPreferenceGroup.get(i));
+					mSwitchPreferenceGroup.get(i).setChecked(
+							mSwitchValueGroup.get(i) == 1);
+				}
+
 			}
 
 			mListValueGroup.clear();
 			addListData(mListValueGroup, mCaninfo);
 			for (int i = 0; i < mListPreferenceGroup.size(); i++) {
-				updatePreferenceDescription(mListPreferenceGroup.get(i),
-						mListValueGroup.get(i));
+				if (mListValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mListPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mListPreferenceGroup.get(i));
+					updatePreferenceDescription(mListPreferenceGroup.get(i),
+							mListValueGroup.get(i));
+				}
+
 			}
 		}
-
 		private void updatePreferenceDescription(ListPreference preference,
 				int currentTimeout) {
 			String summary;
@@ -203,8 +218,12 @@ public class ParkingFragment extends BaseFragment {
 			for (int i = 0; i < listPreKey.length; i++) {
 				if (key.equals(listPreKey[i])) {
 					if (settingActivity != null) {
+						
 						try {
 							int value = Integer.parseInt((String) newValue);
+							if(key.equals("PARKING_MODE")){
+								value=value==0?2:value==2?0:value;
+							}
 							settingActivity.sendMsg(listPreMsg[i]
 									+ BytesUtil.changIntHex(value));
 							updatePreferenceDescription(

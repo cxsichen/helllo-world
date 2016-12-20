@@ -33,5 +33,49 @@
         
     </LinearLayout>
     
+     <TextView
+            android:id="@+id/ss_golf_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="570dp"
+            android:text="" />
+     
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+           
+            android:textSize="25sp"
+            android:text="灯光信息" />
+        
+        <TextView
+            android:id="@+id/ssgolf_tv1"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+             android:layout_marginLeft="30dp"
+            android:text="右转向灯:" />
+        
+        
+        <TextView
+            android:id="@+id/ssgolf_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:layout_marginLeft="30dp"
+            android:text="左转向灯:" />
+      
+        
+    </LinearLayout>
+    
 
 </LinearLayout>

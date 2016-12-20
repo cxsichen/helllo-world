@@ -59,7 +59,7 @@ public class SSHonda12CRV extends AnalyzeUtils {
 		}
 	}
 
-	static String SteeringButtonStatusDataSave = "";
+	 String SteeringButtonStatusDataSave = "";
 
 	void analyzeSteeringButtonData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -103,7 +103,7 @@ public class SSHonda12CRV extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_10 = "";
+	 String carInfoSave_10 = "";
 
 	void analyzeCarInfoData_10(byte[] msg) {
 		if (carInfoSave_10.equals(BytesUtil.bytesToHexString(msg))) {
@@ -126,7 +126,7 @@ public class SSHonda12CRV extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave = "";
+	 String carInfoSave = "";
 
 	void analyzeCarInfoData(byte[] msg) {
 		if (carInfoSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -138,7 +138,7 @@ public class SSHonda12CRV extends AnalyzeUtils {
 		mCanInfo.BLUETOOTH_MODE = msg[4] & 0xff;
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		if (carInfoSave_1.equals(BytesUtil.bytesToHexString(msg))) {

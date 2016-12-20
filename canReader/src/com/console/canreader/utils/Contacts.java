@@ -140,6 +140,11 @@ public class Contacts {
 		public static final String SSCheryR3 = "SSCheryR3"; //奇瑞瑞虎3
 		public static final String SSCheryR3X = "SSCheryR3X"; //奇瑞瑞虎3X
 		public static final String SSCheryR7 = "SSCheryR7"; //奇瑞瑞虎7
+		//长安
+		public static final String SSCHANGAN = "SSCHANGAN"; //长安汽车
+		public static final String SSCHANGANYX = "SSCHANGANYX"; //悦翔V7
+		public static final String SSCHANGANYXL = "SSCHANGANYXL"; //悦翔V7低配
+		public static final String SSCHANGANYXH = "SSCHANGANYXH"; //悦翔V7中高配
 		// 现代起亚
 		public static final String SSHyundai = "SSHyundai"; // 现代起亚
 		public static final String SSHyundai16MT = "SSHyundai16MT"; // 16款名图

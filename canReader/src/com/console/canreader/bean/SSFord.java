@@ -121,7 +121,7 @@ public class SSFord extends AnalyzeUtils {
 		}
 	}
 
-	static String SteeringButtonStatusDataSave_2 = "";
+	 String SteeringButtonStatusDataSave_2 = "";
 
 	void analyzeSteeringButtonData_2(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -220,7 +220,7 @@ public class SSFord extends AnalyzeUtils {
 		mCanInfo.STEERING_BUTTON_STATUS = (int) (msg[5] & 0xFF);
 	}
 
-	static String SteeringButtonStatusDataSave_3 = "";
+	 String SteeringButtonStatusDataSave_3 = "";
 
 	void analyzeSteeringButtonData_3(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -245,7 +245,7 @@ public class SSFord extends AnalyzeUtils {
 		}
 	}
 
-	static String SteeringButtonStatusDataSave = "";
+	 String SteeringButtonStatusDataSave = "";
 
 	void analyzeSteeringButtonData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -286,7 +286,7 @@ public class SSFord extends AnalyzeUtils {
 		mCanInfo.STEERING_BUTTON_STATUS = (int) (msg[7] & 0xFF);
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -340,8 +340,8 @@ public class SSFord extends AnalyzeUtils {
 
 	}
 
-	static String radarSave = "";
-	static int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+	 String radarSave = "";
+	 int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 	void analyzeRadarData(byte[] msg) {
 		if (radarSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -371,7 +371,7 @@ public class SSFord extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_10 = "";
+	 String carInfoSave_10 = "";
 
 	void analyzeCarInfoData_10(byte[] msg) {
 		if (carInfoSave_10.equals(BytesUtil.bytesToHexString(msg))) {
@@ -394,7 +394,7 @@ public class SSFord extends AnalyzeUtils {
 		}
 	}
 
-	static String SteeringButtonStatusDataSave_1 = "";
+	 String SteeringButtonStatusDataSave_1 = "";
 
 	void analyzeSteeringButtonData_1(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -430,7 +430,7 @@ public class SSFord extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave = "";
+	 String carInfoSave = "";
 
 	void analyzeCarInfoData(byte[] msg) {
 		if (carInfoSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -454,7 +454,7 @@ public class SSFord extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_2 = "";
+	 String carInfoSave_2 = "";
 
 	void analyzeCarInfoData_2(byte[] msg) {
 		if (carInfoSave_2.equals(BytesUtil.bytesToHexString(msg))) {
@@ -469,7 +469,7 @@ public class SSFord extends AnalyzeUtils {
 				+ (int) (msg[7] & 0xff);
 	}
 
-	static String carInfoSave_3 = "";
+	 String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
 		if (carInfoSave_3.equals(BytesUtil.bytesToHexString(msg))) {
@@ -481,7 +481,7 @@ public class SSFord extends AnalyzeUtils {
 		mCanInfo.LANGUAGE_CHANGE = (int) (msg[4] & 0xff);
 	}
 
-	static String carInfoSave_4 = "";
+	 String carInfoSave_4 = "";
 
 	void analyzeCarInfoData_4(byte[] msg) {
 		if (carInfoSave_4.equals(BytesUtil.bytesToHexString(msg))) {
@@ -493,7 +493,7 @@ public class SSFord extends AnalyzeUtils {
 		mCanInfo.TEMP_UNIT = (int) ((msg[5] >> 4) & 0x01);
 	}
 
-	static String carInfoSave_5 = "";
+	 String carInfoSave_5 = "";
 
 	void analyzeCarInfoData_5(byte[] msg) {
 		if (carInfoSave_5.equals(BytesUtil.bytesToHexString(msg))) {
@@ -505,7 +505,7 @@ public class SSFord extends AnalyzeUtils {
 		mCanInfo.CAMERA_MODE = (int) ((msg[6]) & 0xff);
 	}
 
-	static String carInfoSave_6 = "";
+	 String carInfoSave_6 = "";
 
 	void analyzeCarInfoData_6(byte[] msg) {
 		if (carInfoSave_6.equals(BytesUtil.bytesToHexString(msg))) {
@@ -524,7 +524,7 @@ public class SSFord extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_7 = "";
+	 String carInfoSave_7 = "";
 
 	void analyzeCarInfoData_7(byte[] msg) {
 		if (carInfoSave_7.equals(BytesUtil.bytesToHexString(msg))) {
@@ -547,7 +547,7 @@ public class SSFord extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		if (carInfoSave_1.equals(BytesUtil.bytesToHexString(msg))) {
@@ -561,7 +561,7 @@ public class SSFord extends AnalyzeUtils {
 		}
 	}
 
-	static String VirtualDataSave = "";
+	 String VirtualDataSave = "";
 
 	private void analyzeVirtualData(byte[] msg) {
 		if (VirtualDataSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -606,7 +606,7 @@ public class SSFord extends AnalyzeUtils {
 		mCanInfo.STEERING_BUTTON_STATUS = temp;
 	}
 
-	static String KnobButtonDataSave = "";
+	 String KnobButtonDataSave = "";
 
 	private void analyzeKnobButtonData(byte[] msg) {
 		if (KnobButtonDataSave.equals(BytesUtil.bytesToHexString(msg))) {

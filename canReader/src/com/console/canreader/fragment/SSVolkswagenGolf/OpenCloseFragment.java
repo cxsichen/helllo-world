@@ -90,11 +90,11 @@ public class OpenCloseFragment extends BaseFragment {
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 
 		/*-----------set data----------------*/
-		String[] swPreKey = { "AUTOMATIC_LOCKING" };
-		String[] swPreMsg = { "2EC60272" };
+		String[] swPreKey = { "AUTOMATIC_LOCKING","SEAT_KEY_REMOTE_FIX","INDUCTON_REAR_DOOR_COVER" };
+		String[] swPreMsg = { "5AA5026F03", "5AA5026F04", "5AA5026F05"    };
 
 		String[] listPreKey = { "CONV_OPENING", "DOOR_UNLOCKING" };
-		String[] listPreMsg = { "2EC60270", "2EC60271" };
+		String[] listPreMsg = { "5AA5026F01", "5AA5026F02" };
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
@@ -107,6 +107,8 @@ public class OpenCloseFragment extends BaseFragment {
 				CanInfo mCaninfo) {
 			// TODO Auto-generated method stub
 			mSwitchValueGroup2.add(mCaninfo.AUTOMATIC_LOCKING);
+			mSwitchValueGroup2.add(mCaninfo.SEAT_KEY_REMOTE_FIX);
+			mSwitchValueGroup2.add(mCaninfo.INDUCTON_REAR_DOOR_COVER);
 		}
 
 		/*-----------set data----------------*/
@@ -119,7 +121,7 @@ public class OpenCloseFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.rzcgolf_setting_prefs_5);
+			addPreferencesFromResource(R.xml.ssgolf_setting_prefs_5);
 
 			for (String str : swPreKey) {
 				SwitchPreference p = (SwitchPreference) findPreference(str);
@@ -145,17 +147,34 @@ public class OpenCloseFragment extends BaseFragment {
 			addSwitchData(mSwitchValueGroup, mCaninfo);
 
 			for (int i = 0; i < mSwitchPreferenceGroup.size(); i++) {
-				mSwitchPreferenceGroup.get(i).setChecked(
-						mSwitchValueGroup.get(i) == 1);
+				if (mSwitchValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mSwitchPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mSwitchPreferenceGroup.get(i));
+					mSwitchPreferenceGroup.get(i).setChecked(
+							mSwitchValueGroup.get(i) == 1);
+				}
+
 			}
 
 			mListValueGroup.clear();
 			addListData(mListValueGroup, mCaninfo);
 			for (int i = 0; i < mListPreferenceGroup.size(); i++) {
-				updatePreferenceDescription(mListPreferenceGroup.get(i),
-						mListValueGroup.get(i));
+				if (mListValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mListPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mListPreferenceGroup.get(i));
+					updatePreferenceDescription(mListPreferenceGroup.get(i),
+							mListValueGroup.get(i));
+				}
+
 			}
 		}
+
 
 		private void updatePreferenceDescription(ListPreference preference,
 				int currentTimeout) {

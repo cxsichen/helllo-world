@@ -93,8 +93,8 @@ public class MirrorWiperFragment extends BaseFragment {
 		String[] swPreKey = { "MIRROR_SYNC_ADJUST",
 				"MIRROR_LOWER_WHILE_REVERSING", "WIPER_AUTO_IN_RAIN",
 				"WIPER_REAR_WIPING_REVERSING", "MIRROR_FOLD_PARKING" };
-		String[] swPreMsg = { "2EC60260", "2EC60261", "2EC60262", "2EC60263",
-				"2EC60264" };
+		String[] swPreMsg = { "5AA5026E01", "5AA5026E02", "5AA5026E04", "5AA5026E05",
+				"5AA5026E03" };
 
 		String[] listPreKey = {};
 		String[] listPreMsg = {};
@@ -125,7 +125,7 @@ public class MirrorWiperFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.rzcgolf_setting_prefs_4);
+			addPreferencesFromResource(R.xml.ssgolf_setting_prefs_4);
 
 			for (String str : swPreKey) {
 				SwitchPreference p = (SwitchPreference) findPreference(str);
@@ -151,15 +151,31 @@ public class MirrorWiperFragment extends BaseFragment {
 			addSwitchData(mSwitchValueGroup, mCaninfo);
 
 			for (int i = 0; i < mSwitchPreferenceGroup.size(); i++) {
-				mSwitchPreferenceGroup.get(i).setChecked(
-						mSwitchValueGroup.get(i) == 1);
+				if (mSwitchValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mSwitchPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mSwitchPreferenceGroup.get(i));
+					mSwitchPreferenceGroup.get(i).setChecked(
+							mSwitchValueGroup.get(i) == 1);
+				}
+
 			}
 
 			mListValueGroup.clear();
 			addListData(mListValueGroup, mCaninfo);
 			for (int i = 0; i < mListPreferenceGroup.size(); i++) {
-				updatePreferenceDescription(mListPreferenceGroup.get(i),
-						mListValueGroup.get(i));
+				if (mListValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mListPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mListPreferenceGroup.get(i));
+					updatePreferenceDescription(mListPreferenceGroup.get(i),
+							mListValueGroup.get(i));
+				}
+
 			}
 		}
 

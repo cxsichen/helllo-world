@@ -112,7 +112,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 		}
 	}
 
-	static String CarCameraStatusDataSave = "";
+	 String CarCameraStatusDataSave = "";
 
 	private void analyzeCarCameraStatusData(byte[] msg) {
 		if (CarCameraStatusDataSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -125,7 +125,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 		mCanInfo.CAMERA_MODE = msg[5] & 0x0f;
 	}
 
-	static String CarInfoEnableDataSave = "";
+	 String CarInfoEnableDataSave = "";
 
 	private void analyzeCarInfoEnableData(byte[] msg) {
 		if (CarInfoEnableDataSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -141,7 +141,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 		mCanInfo.AIR_INFO_ENABLE = (msg[4] >> 3) & 0x01;
 	}
 
-	static String CarSettingDataSave = "";
+	 String CarSettingDataSave = "";
 
 	private void analyzeCarSettingData(byte[] msg) {
 
@@ -182,7 +182,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 		mCanInfo.AUTO_LAMP_STATUS = (msg[13] >> 2) & 0x03;
 	}
 
-	static String LINKSOSDataSave = "";
+	 String LINKSOSDataSave = "";
 
 	private void analyzeLINKSOSData(byte[] msg) {
 		if (LINKSOSDataSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -207,7 +207,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 		}
 	}
 
-	static String VersionDataSave = "";
+	 String VersionDataSave = "";
 
 	private void analyzeVersionData(byte[] msg) {
 		if (VersionDataSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -231,7 +231,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 
 	}
 
-	static String KnobButtonDataSave = "";
+	 String KnobButtonDataSave = "";
 
 	private void analyzeKnobButtonData(byte[] msg) {
 
@@ -258,7 +258,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 		mCanInfo.CHANGE_STATUS = 2;
 	}
 
-	static String VirtualDataSave = "";
+	 String VirtualDataSave = "";
 
 	private void analyzeVirtualData(byte[] msg) {
 		if (VirtualDataSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -288,32 +288,46 @@ public class SSTrumpchi extends AnalyzeUtils {
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUTE;
 			break;
 		case 0x0a:// NUM1
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM1;
 			break;
 		case 0x0b:// NUM2
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM2;
 			break;
 		case 0x0c:// NUM3
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM3;
 			break;
 		case 0x0d:// NUM4
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM4;
 			break;
 		case 0x0e:// NUM5
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM5;
 			break;
 		case 0x0f:// NUM6
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.NUM6;
 			break;
 		case 0x11:// Eject
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.DEL;
 			break;
 		case 0x15:// APS
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.POWER;
 			break;
 		case 0x16:// TUNE¡¡SEL
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.EQ;
 			break;
 		case 0x25:// NAVI
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MAP;
 			break;
 		case 0x2d:// MENU
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.HOME;
 			break;
 		case 0x36:// SET
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.ENTER;
 			break;
 		case 0x38:// MODE
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.SRC;
 			break;
 		case 0x39:// SCAN
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.FM_AM;
 			break;
 		default:
 			mCanInfo.STEERING_BUTTON_MODE = 0;
@@ -438,7 +452,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 	 * PHONE 6£ºmute 7£ºSRC 8£ºSPEECH/MIC 9:answer phone 10:hangup phone
 	 */
 	int keyCode[] = { 0, 1, 2, 6, -1, 9, 10, -1, 3, 4, 7 };
-	static String CarInfoDatasave = "";
+	 String CarInfoDatasave = "";
 
 	void analyzeCarInfoData(byte[] msg) {
 		if (CarInfoDatasave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -514,7 +528,7 @@ public class SSTrumpchi extends AnalyzeUtils {
 		// }
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub

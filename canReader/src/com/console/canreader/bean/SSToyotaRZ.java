@@ -57,8 +57,8 @@ public class SSToyotaRZ extends AnalyzeUtils {
 
 	}
 
-	static String radarSave = "";
-	static int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+	 String radarSave = "";
+	 int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 	void analyzeRadarData(byte[] msg) {
 		if (radarSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -88,7 +88,7 @@ public class SSToyotaRZ extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		if (carInfoSave_1.equals(BytesUtil.bytesToHexString(msg))) {
@@ -103,13 +103,13 @@ public class SSToyotaRZ extends AnalyzeUtils {
 		mCanInfo.DRIVING_DISTANCE = time * speed / 60;
 	}
 
-	static String carInfoSave = "";
-	static int buttonTemp = 0;
+	 String carInfoSave = "";
+	 int buttonTemp = 0;
 	/*
 	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
 	 * PHONE 6：mute 7：SRC 8：SPEECH/MIC 9:answer phone 10:hangup phone
 	 */
-	static int keyCode[] = { 0, 1, 2, 8, 9, -1, 3, 4, 4, 5, 6 };
+	 int keyCode[] = { 0, 1, 2, 8, 9, -1, 3, 4, 4, 5, 6 };
 
 	void analyzeCarInfoData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -206,7 +206,7 @@ public class SSToyotaRZ extends AnalyzeUtils {
 		 */
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub

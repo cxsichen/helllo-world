@@ -269,6 +269,7 @@ public class DialogCreater {
 				.getInt(context.getContentResolver(), "no_aircon", 0) == 1) {
 			return;
 		}
+
 		if (canInfo.AIR_CONDITIONER_STATUS != airConStatus[0]
 				|| canInfo.AC_INDICATOR_STATUS != airConStatus[1]
 				|| canInfo.CYCLE_INDICATOR != airConStatus[2]

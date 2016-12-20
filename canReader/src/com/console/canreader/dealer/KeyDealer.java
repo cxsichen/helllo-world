@@ -663,8 +663,10 @@ public class KeyDealer {
 	private void handleMUSIC() {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent();
-		intent.setAction(ACTION_MUSIC_START);
-		context.sendBroadcast(intent);
+		intent.setClassName("cn.colink.serialport",
+				"cn.colink.serialport.service.SerialPortService");
+		intent.putExtra("keyEvent", ACTION_MUSIC_START);
+		context.startService(intent);
 	};
 
 	protected void handleFmAm() {

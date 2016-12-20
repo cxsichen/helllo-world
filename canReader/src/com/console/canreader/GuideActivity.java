@@ -52,10 +52,12 @@ public class GuideActivity extends Activity {
 
 	int[] itemIdGroup = { R.id.mCarInfoLayout, R.id.mCarSettingsLayout,
 			R.id.mMenuAcLayout, R.id.mMenuCdLayout, R.id.mMenuPaLayout,
-			R.id.mMenuPanoramaLayout,R.id.mMenuTpmsLayout, R.id.mMenuAboutLayout };
+			R.id.mMenuPanoramaLayout, R.id.mMenuTpmsLayout,
+			R.id.mMenuAboutLayout };
 	int[] dividerIdGroup = { R.id.mCarInfoDivider, R.id.mCarSettingsDivider,
 			R.id.mMenuAcDivider, R.id.mMenuCdDivider, R.id.mMenuPaDivider,
-			R.id.mMenuPanoramaDivider,R.id.mMenuTpmsDivider, R.id.mMenuAboutDivider };
+			R.id.mMenuPanoramaDivider, R.id.mMenuTpmsDivider,
+			R.id.mMenuAboutDivider };
 
 	private RelativeLayout mCarInfoLayout;
 	private RelativeLayout mCarSettingsLayout;
@@ -99,16 +101,12 @@ public class GuideActivity extends Activity {
 			if (items.length == 0) {
 				return;
 			}
-
-			if (items.length == 1) {
-				Intent intent = new Intent();
-				intent.setClassName("com.console.canreader", activitiyGroup[0]);
-				startActivity(intent);
-				finish();
-				return;
-			}
+			int temp = 0;
+			int temp1 = 0;
 			for (int i = 0; i < items.length; i++) {
 				if (items[i].equals("1")) {
+					temp++;
+					temp1 = i;
 					findViewById(itemIdGroup[i]).setVisibility(View.VISIBLE);
 					if (dividerIdGroup[i] != R.id.mMenuAboutDivider) {
 						findViewById(dividerIdGroup[i]).setVisibility(
@@ -129,6 +127,13 @@ public class GuideActivity extends Activity {
 								}
 							});
 				}
+			}
+			if (temp == 1) {
+				Intent intent = new Intent();
+				intent.setClassName("com.console.canreader",
+						activitiyGroup[temp1]);
+				startActivity(intent);
+				this.finish();
 			}
 
 		} catch (Exception e) {

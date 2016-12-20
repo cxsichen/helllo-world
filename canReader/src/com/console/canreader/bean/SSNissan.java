@@ -65,7 +65,7 @@ public class SSNissan extends AnalyzeUtils {
 		}
 	}
 
-	static String radarSave = "";
+	 String radarSave = "";
 
 	void analyzeRadarData(byte[] msg) {
 		if (radarSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -95,8 +95,8 @@ public class SSNissan extends AnalyzeUtils {
 
 	}
 
-	static String SteeringButtonStatusDataSave = "";
-	static int steelWheel = 0;
+	 String SteeringButtonStatusDataSave = "";
+	 int steelWheel = 0;
 
 	void analyzeSteeringButtonData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -147,7 +147,7 @@ public class SSNissan extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_2 = "";
+	 String carInfoSave_2 = "";
 
 	void analyzeCarInfoData_2(byte[] msg) {
 		if (carInfoSave_2.equals(BytesUtil.bytesToHexString(msg))) {
@@ -169,7 +169,7 @@ public class SSNissan extends AnalyzeUtils {
 		mCanInfo.SURROND_VOLUME = (int) ((msg[11] >> 0) & 0xff);
 	}
 
-	static String carInfoSave_3 = "";
+	 String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
 		if (carInfoSave_3.equals(BytesUtil.bytesToHexString(msg))) {
@@ -181,7 +181,7 @@ public class SSNissan extends AnalyzeUtils {
 		mCanInfo.PANORAMA_STATUS = (int) (msg[4] & 0xff);
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -232,7 +232,7 @@ public class SSNissan extends AnalyzeUtils {
 		mCanInfo.OUTSIDE_TEMPERATURE = temp * 0.5f - 40f;
 	}
 
-	static String carInfoSave = "";
+	 String carInfoSave = "";
 
 	void analyzeCarInfoData(byte[] msg) {
 		if (carInfoSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -255,7 +255,7 @@ public class SSNissan extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		if (carInfoSave_1.equals(BytesUtil.bytesToHexString(msg))) {
@@ -269,7 +269,7 @@ public class SSNissan extends AnalyzeUtils {
 		}
 	}
 
-	static String VirtualDataSave = "";
+	 String VirtualDataSave = "";
 
 	private void analyzeVirtualData(byte[] msg) {
 		if (VirtualDataSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -314,7 +314,7 @@ public class SSNissan extends AnalyzeUtils {
 		mCanInfo.STEERING_BUTTON_STATUS = temp;
 	}
 
-	static String KnobButtonDataSave = "";
+	 String KnobButtonDataSave = "";
 
 	private void analyzeKnobButtonData(byte[] msg) {
 		if (KnobButtonDataSave.equals(BytesUtil.bytesToHexString(msg))) {

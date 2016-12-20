@@ -55,8 +55,8 @@ public class SSRoewe360 extends AnalyzeUtils {
 		}
 	}
 
-	static String SteeringButtonStatusDataSave = "";
-	static int buttonTemp = 0;
+	 String SteeringButtonStatusDataSave = "";
+	 int buttonTemp = 0;
 
 	void analyzeSteeringButtonData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -128,7 +128,7 @@ public class SSRoewe360 extends AnalyzeUtils {
 				+ mCanInfo.HANDBRAKE_STATUS);
 	}
 
-	static String carInfoSave = "";
+	 String carInfoSave = "";
 
 	void analyzeCarInfoData(byte[] msg) {
 		if (carInfoSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -144,7 +144,7 @@ public class SSRoewe360 extends AnalyzeUtils {
 		mCanInfo.TRUNK_STATUS = (int) ((msg[6] >> 3) & 0x01);
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		if (carInfoSave_1.equals(BytesUtil.bytesToHexString(msg))) {

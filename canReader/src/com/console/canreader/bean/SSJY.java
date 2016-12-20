@@ -96,7 +96,7 @@ public class SSJY extends AnalyzeUtils {
 		}
 	}
 	
-	static String carInfoSave_7 = "";
+	 String carInfoSave_7 = "";
 
 	void analyzeCarInfoData_7(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -121,7 +121,7 @@ public class SSJY extends AnalyzeUtils {
 		Log.i("cxs","====mCanInfo.AUTOMATIC_LAMP_CLOSE===="+mCanInfo.AUTOMATIC_LAMP_CLOSE);
 	}
 
-	static String carInfoSave_6 = "";
+	 String carInfoSave_6 = "";
 
 	void analyzeCarInfoData_6(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -145,7 +145,7 @@ public class SSJY extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_5 = "";
+	 String carInfoSave_5 = "";
 
 	void analyzeCarInfoData_5(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -166,7 +166,7 @@ public class SSJY extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_4 = "";
+	 String carInfoSave_4 = "";
 
 	void analyzeCarInfoData_4(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -181,7 +181,7 @@ public class SSJY extends AnalyzeUtils {
 		mCanInfo.CAR_VOLUME_KNOB = (int) (msg[5] & 0xFF);
 	}
 
-	static String carInfoSave_2 = "";
+	 String carInfoSave_2 = "";
 
 	void analyzeCarInfoData_2(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -245,7 +245,7 @@ public class SSJY extends AnalyzeUtils {
 		mCanInfo.STEERING_BUTTON_STATUS = (int) (msg[5] & 0xFF);
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -259,7 +259,7 @@ public class SSJY extends AnalyzeUtils {
 				+ ((int) (msg[9] & 0xff)) * 256 + ((int) (msg[10] & 0xff))) * 0.1f);
 	}
 
-	static String carInfoSave = "";
+	 String carInfoSave = "";
 
 	void analyzeCarInfoData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -283,9 +283,9 @@ public class SSJY extends AnalyzeUtils {
 
 	}
 
-	static String SteeringButtonStatusDataSave = "";
-	static int steelWheel = 0;
-	static int handbrake = 0;
+	 String SteeringButtonStatusDataSave = "";
+	 int steelWheel = 0;
+	 int handbrake = 0;
 
 	void analyzeSteeringButtonData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -341,7 +341,7 @@ public class SSJY extends AnalyzeUtils {
 
 	}
 
-	static String radarSave = "";
+	 String radarSave = "";
 	int temps[] = { 0, 0, 0, 0 };
 
 	void analyzeRadarData(byte[] msg) {
@@ -371,7 +371,7 @@ public class SSJY extends AnalyzeUtils {
 
 	}
 
-	static String carBasicInfo = "";
+	 String carBasicInfo = "";
 
 	/*
 	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
@@ -414,7 +414,7 @@ public class SSJY extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_3 = "";
+	 String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -439,7 +439,7 @@ public class SSJY extends AnalyzeUtils {
 		}
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub

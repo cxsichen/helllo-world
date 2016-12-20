@@ -113,8 +113,8 @@ public class SSHonda extends AnalyzeUtils {
 
 	}
 
-	static String radarSave = "";
-	static int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+	 String radarSave = "";
+	 int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 	void analyzeRadarData(byte[] msg) {
 		if (radarSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -152,7 +152,7 @@ public class SSHonda extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		if (carInfoSave_1.equals(BytesUtil.bytesToHexString(msg))) {
@@ -170,7 +170,7 @@ public class SSHonda extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_2 = "";
+	 String carInfoSave_2 = "";
 	int[] rangs = { 60, 10, 12, 20, 30, 40, 50, 70, 80, 90, 100 };
 
 	void analyzeCarInfoData_2(byte[] msg) {
@@ -197,7 +197,7 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.CONSUMPTION_RANGE = rangs[temp];
 	}
 
-	static String carInfoSave_3 = "";
+	 String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
 		if (carInfoSave_3.equals(BytesUtil.bytesToHexString(msg))) {
@@ -217,8 +217,8 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.TRIP_A_3_AVERAGE_CONSUMPTION = ((int) (msg[17] & 0xFF) * 256 + (int) (msg[18] & 0xFF)) * 0.1f;
 	}
 
-	static String carInfoSave_4 = "";
-	static int rightCamera_switch = -1;
+	 String carInfoSave_4 = "";
+	 int rightCamera_switch = -1;
 
 	void analyzeCarInfoData_4(byte[] msg) {
 		if (carInfoSave_4.equals(BytesUtil.bytesToHexString(msg))) {
@@ -246,7 +246,7 @@ public class SSHonda extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_5 = "";
+	 String carInfoSave_5 = "";
 
 	void analyzeCarInfoData_5(byte[] msg) {
 		if (carInfoSave_5.equals(BytesUtil.bytesToHexString(msg))) {
@@ -263,7 +263,7 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.LAMP_TURN_DARK_TIME = (int) ((msg[5] >> 0) & 0x03);
 	}
 
-	static String carInfoSave_6 = "";
+	 String carInfoSave_6 = "";
 
 	void analyzeCarInfoData_6(byte[] msg) {
 		if (carInfoSave_6.equals(BytesUtil.bytesToHexString(msg))) {
@@ -278,7 +278,7 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.REMOTE_START_SYSTEM = (int) ((msg[5] >> 0) & 0x01);
 	}
 
-	static String carInfoSave_7 = "";
+	 String carInfoSave_7 = "";
 
 	void analyzeCarInfoData_7(byte[] msg) {
 		if (carInfoSave_7.equals(BytesUtil.bytesToHexString(msg))) {
@@ -292,7 +292,7 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.REMOTE_LOCK_SIGN = (int) ((msg[5] >> 0) & 0x01);
 	}
 
-	static String carInfoSave_8 = "";
+	 String carInfoSave_8 = "";
 
 	void analyzeCarInfoData_8(byte[] msg) {
 		if (carInfoSave_8.equals(BytesUtil.bytesToHexString(msg))) {
@@ -307,7 +307,7 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.FRONT_DANGER_WAIRNG_DISTANCE = (int) ((msg[5] >> 0) & 0x03);
 	}
 
-	static String carInfoSave_9 = "";
+	 String carInfoSave_9 = "";
 
 	void analyzeCarInfoData_9(byte[] msg) {
 		if (carInfoSave_9.equals(BytesUtil.bytesToHexString(msg))) {
@@ -327,7 +327,7 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.ADJUST_OUTSIDE_TEMP = (int) ((msg[5] >> 0) & 0x07);
 	}
 
-	static String carInfoSave_10 = "";
+	 String carInfoSave_10 = "";
 
 	void analyzeCarInfoData_10(byte[] msg) {
 		if (carInfoSave_10.equals(BytesUtil.bytesToHexString(msg))) {
@@ -350,13 +350,13 @@ public class SSHonda extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave = "";
-	static int buttonTemp = 0;
+	 String carInfoSave = "";
+	 int buttonTemp = 0;
 	/*
 	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
 	 * PHONE 6：mute 7：SRC 8：SPEECH/MIC 9:answer phone 10:hangup phone
 	 */
-	static int keyCode[] = { 0, 1, 2, 8, 9, -1, 3, 4, 4, 5, 6 };
+	 int keyCode[] = { 0, 1, 2, 8, 9, -1, 3, 4, 4, 5, 6 };
 
 	void analyzeCarInfoData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -449,7 +449,7 @@ public class SSHonda extends AnalyzeUtils {
 		 */
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub

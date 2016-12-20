@@ -173,7 +173,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 
 	}
 	
-	static String KnobButtonData = "";
+	 String KnobButtonData = "";
 	private void analyzeKnobButtonData(byte[] msg) {
 		if (KnobButtonData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -198,7 +198,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.CHANGE_STATUS = 2;
 	}
 	
-	static String VirtualButtonData = "";
+	 String VirtualButtonData = "";
 	private void analyzeVirtualButtonData(byte[] msg) {
 		if (VirtualButtonData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -228,7 +228,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		}
 	}
 
-	static String TimeSettingData = "";
+	 String TimeSettingData = "";
 	private void analyzeTimeSettingData(byte[] msg) {
 		if (TimeSettingData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -244,7 +244,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.TIME_FORMAT=(int)(msg[9]&0xff);
 	}
 
-	static String UnitSettingData = "";
+	 String UnitSettingData = "";
 	private void analyzeUnitSettingData(byte[] msg) {
 		if (UnitSettingData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -259,7 +259,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.UNIT_CONSUMPTION=(int)((msg[5]>>1)&0x03);
 	}
 
-	static String WarningInfoData = "";
+	 String WarningInfoData = "";
 	private void analyzeWarningInfoData(byte[] msg) {
 		if (WarningInfoData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -270,7 +270,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.WARNING_ID=(int)((msg[4]&0xff)<<8)+(int)(msg[5]&0xff);
 	}
 
-	static String LanguageSettingData = "";
+	 String LanguageSettingData = "";
 	private void analyzeLanguageSettingData(byte[] msg) {
 		if (LanguageSettingData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -281,7 +281,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.LANGUAGE_CHANGE=(int)(msg[4]&0xff);
 	}
 
-	static String SportModeData = "";
+	 String SportModeData = "";
 	private void analyzeSportModeData(byte[] msg) {
 		if (SportModeData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -293,7 +293,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.ENGINE_START_STATUS=(int)((msg[5]>>7)&0x01);
 	}
 	
-	static String SOSInfoData = "";
+	 String SOSInfoData = "";
 	private void analyzeSOSInfoData(byte[] msg) {
 		if (SOSInfoData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -305,7 +305,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.SOS_STATUS=(int)(msg[4]&0x0f);
 	}
 
-	static String CruiseSpeedData = "";
+	 String CruiseSpeedData = "";
 	private void analyzeCruiseSpeedData(byte[] msg) {
 		if (CruiseSpeedData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -336,7 +336,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.CRUISE_SPEED_5_ENABLE=(int)((msg[13]>>2)&0x01);
 		mCanInfo.CRUISE_SPEED_6_ENABLE=(int)((msg[13]>>1)&0x01);
 	}
-	static String RememberSpeedData = "";
+	 String RememberSpeedData = "";
 	private void analyzeRememberSpeedData(byte[] msg) {
 		if (RememberSpeedData.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -370,7 +370,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		
 	}
 
-	static String CarSettingData2 = "";
+	 String CarSettingData2 = "";
 	private void analyzeCarSettingData2(byte[] msg) {
 		if (CarSettingData2.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -384,7 +384,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.WELCOME_FUNTION_STATUS=(int)((msg[4]>>4)&0x01);
 		
 	}
-	static String CarSettingData1 = "";
+	 String CarSettingData1 = "";
 	private void analyzeCarSettingData1(byte[] msg) {
 		if (CarSettingData1.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -406,7 +406,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.DAYTIME_LAMP_STATUS=(int)((msg[5]>>2)&0x01);
 		mCanInfo.GO_HOME_LAMP_STATUS=(int)((msg[5]>>0)&0x03);
 	}
-	static String CarEnableData2 = "";
+	 String CarEnableData2 = "";
 	private void analyzeCarEnableData2(byte[] msg) {
 		if (CarEnableData2.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -420,7 +420,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.WELCOME_FUNTION_STATUS_ENABLE=(int)((msg[4]>>4)&0x01);
 		
 	}
-	static String CarEnableData1 = "";
+	 String CarEnableData1 = "";
 	private void analyzeCarEnableData1(byte[] msg) {
 		if (CarEnableData1.equals(BytesUtil.bytesToHexString(msg))) {
 			mCanInfo.CHANGE_STATUS = 8888;
@@ -443,8 +443,8 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		
 	}
 
-	static String radarSave = "";
-	static int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+	 String radarSave = "";
+	 int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 	void analyzeRadarData(byte[] msg) {
 		if (radarSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -487,7 +487,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		if (carInfoSave_1.equals(BytesUtil.bytesToHexString(msg))) {
@@ -512,7 +512,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 		mCanInfo.BACK_RIGHT_SAFETY_BELT_STATUS = (int) ((msg[11] >> 4) & 0x01);
 	}
 
-	static String carInfoSave_2 = "";
+	 String carInfoSave_2 = "";
 
 	void analyzeCarInfoData_2(byte[] msg) {
 		if (carInfoSave_2.equals(BytesUtil.bytesToHexString(msg))) {
@@ -527,7 +527,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 				+ ((int) msg[7] & 0xFF);
 	}
 
-	static String carInfoSave_3 = "";
+	 String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
 		if (carInfoSave_3.equals(BytesUtil.bytesToHexString(msg))) {
@@ -544,7 +544,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_4 = "";
+	 String carInfoSave_4 = "";
 
 	void analyzeCarInfoData_4(byte[] msg) {
 		if (carInfoSave_4.equals(BytesUtil.bytesToHexString(msg))) {
@@ -572,13 +572,13 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 //		}
 	}
 
-	static String carInfoSave = "";
-	static int buttonTemp = 0;
+	 String carInfoSave = "";
+	 int buttonTemp = 0;
 	/*
 	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
 	 * PHONE 6：mute 7：SRC 8：SPEECH/MIC 9:answer phone 10:hangup phone
 	 */
-	static int keyCode[] = { 0, 1, 2, 8, 9, -1, 3, 4, 4, 5, 6 };
+	 int keyCode[] = { 0, 1, 2, 8, 9, -1, 3, 4, 4, 5, 6 };
 
 	void analyzeCarInfoData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -682,7 +682,7 @@ public class SSPeugeot508LOW extends AnalyzeUtils {
 
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub

@@ -37,13 +37,16 @@ public class CarInfoFragment5 extends BaseFragment {
 
 	private LayoutInflater inflater;
 	TextView tv;
+	TextView tv1;
+	TextView tv2;
+	TextView tv3;
 	ProgressBar mSeekBar;
 
 	public CarInfoFragment5() {
 
 	}
 
-
+    String[] strGroup={"1/4","3/8","1/2","1","3/2","2"};
 
 	@Override
 	public void show(CanInfo mCaninfo) {
@@ -53,7 +56,10 @@ public class CarInfoFragment5 extends BaseFragment {
 			if (mCaninfo.CHANGE_STATUS == 10) {
 				tv.setText(mCaninfo.CONVENIENCE_CONSUMERS_UNIT == 0 ? "l/h"
 						: "gal/h");
+				tv2.setText("右转向灯:"+(mCaninfo.LIGHT_RIHGTTURN_LAMP_SETTING==1?"开":"关"));
+				tv3.setText("左转向灯:"+(mCaninfo.LIGHT_LEFTTURN_LAMP_SETTING==1?"开":"关"));
 				mSeekBar.setProgress(mCaninfo.CONVENIENCE_CONSUMERS);
+				tv1.setText(strGroup[mCaninfo.CONVENIENCE_PERCENT]);
 			}
 		}
 	}
@@ -71,6 +77,9 @@ public class CarInfoFragment5 extends BaseFragment {
 		View view = inflater.inflate(R.layout.ss_golf_layout, null);
 		mSeekBar = (ProgressBar) view.findViewById(R.id.ss_golf_seekbar);
 		tv = (TextView) view.findViewById(R.id.ss_golf_tv);
+		tv2=(TextView) view.findViewById(R.id.ssgolf_tv1);
+		tv3=(TextView) view.findViewById(R.id.ssgolf_tv2);
+		tv1 = (TextView) view.findViewById(R.id.ss_golf_percent);
 		return view;
 	}
 

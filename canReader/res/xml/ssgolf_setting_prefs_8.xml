@@ -1,0 +1,21 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <Preference
+        android:key="TPMS_SHOW"
+        android:summary="SET"
+        android:title="轮胎压力监控显示" />
+
+    <SwitchPreference
+        android:key="TPMS_WINTER_SPEED_WARNING"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="冬季轮胎车速报警" />
+    
+      <ListPreference
+        android:entries="@array/ssgolf_4_entries"
+        android:entryValues="@array/ssgolf_4_values"
+        android:key="TPMS_WINTER_SPEED_WARNING_VOL"
+        android:persistent="false"
+        android:title="报警值" />
+
+</PreferenceScreen>

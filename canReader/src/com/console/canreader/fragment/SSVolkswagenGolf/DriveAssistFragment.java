@@ -90,15 +90,15 @@ public class DriveAssistFragment extends BaseFragment {
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 
 		/*-----------set data----------------*/
-		String[] swPreKey = { "LANE_DEPARTURE", "DRIVER_ALERT_SYSTEM",
-				"LAST_DISTANCE_SELECTED", "FRONT_ASSIST_ACTIVE",
-				"FRONT_ASSIST_ADVANCE_WARNING",
-				"FRONT_ASSIST_DISPLAY_DISTANCHE_WARNING" };
-		String[] swPreMsg = { "2EC60230", "2EC60231", "2EC60232", "2EC60233",
-				"2EC60234", "2EC60235" };
+		String[] swPreKey = { "LAST_DISTANCE_SELECTED","FRONT_ASSIST_ACTIVE","FRONT_ASSIST_ADVANCE_WARNING",
+				 "FRONT_ASSIST_DISPLAY_DISTANCHE_WARNING","LANE_DEPARTURE","PAUSE_LKAS_SIGN",
+				 "DETECT_FRONT_CAR","DRIVER_ALERT_SYSTEM"};
+		String[] swPreMsg = { "5AA5024C0B","5AA5024C01","5AA5024C02",
+				 "5AA5024C03","5AA5024C04","5AA5024C05",
+				 "5AA5024C06","5AA5024C07",};
 
 		String[] listPreKey = {"ACC_DRIVER_PROGRAM","ACC_DISTANCE"};
-		String[] listPreMsg = {"2EC60237", "2EC60238"};
+		String[] listPreMsg = {"5AA5024C09","5AA5024C08"};
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
@@ -112,14 +112,15 @@ public class DriveAssistFragment extends BaseFragment {
 		private void addSwitchData(List<Integer> mSwitchValueGroup2,
 				CanInfo mCaninfo) {
 			// TODO Auto-generated method stub
-			mSwitchValueGroup2.add(mCaninfo.LANE_DEPARTURE);
-			mSwitchValueGroup2.add(mCaninfo.DRIVER_ALERT_SYSTEM);
-
 			mSwitchValueGroup2.add(mCaninfo.LAST_DISTANCE_SELECTED);
 			mSwitchValueGroup2.add(mCaninfo.FRONT_ASSIST_ACTIVE);
 			mSwitchValueGroup2.add(mCaninfo.FRONT_ASSIST_ADVANCE_WARNING);
-			mSwitchValueGroup2
-					.add(mCaninfo.FRONT_ASSIST_DISPLAY_DISTANCHE_WARNING);
+			mSwitchValueGroup2.add(mCaninfo.FRONT_ASSIST_DISPLAY_DISTANCHE_WARNING);
+			mSwitchValueGroup2.add(mCaninfo.LANE_DEPARTURE);
+			mSwitchValueGroup2.add(mCaninfo.PAUSE_LKAS_SIGN);
+			mSwitchValueGroup2.add(mCaninfo.DETECT_FRONT_CAR);
+			mSwitchValueGroup2.add(mCaninfo.DRIVER_ALERT_SYSTEM);
+
 		}
 
 		/*-----------set data----------------*/
@@ -132,7 +133,7 @@ public class DriveAssistFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.rzcgolf_setting_prefs_1);
+			addPreferencesFromResource(R.xml.ssgolf_setting_prefs_1);
 
 			for (String str : swPreKey) {
 				SwitchPreference p = (SwitchPreference) findPreference(str);
@@ -158,15 +159,31 @@ public class DriveAssistFragment extends BaseFragment {
 			addSwitchData(mSwitchValueGroup, mCaninfo);
 
 			for (int i = 0; i < mSwitchPreferenceGroup.size(); i++) {
-				mSwitchPreferenceGroup.get(i).setChecked(
-						mSwitchValueGroup.get(i) == 1);
+				if (mSwitchValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mSwitchPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mSwitchPreferenceGroup.get(i));
+					mSwitchPreferenceGroup.get(i).setChecked(
+							mSwitchValueGroup.get(i) == 1);
+				}
+
 			}
 
 			mListValueGroup.clear();
 			addListData(mListValueGroup, mCaninfo);
 			for (int i = 0; i < mListPreferenceGroup.size(); i++) {
-				updatePreferenceDescription(mListPreferenceGroup.get(i),
-						mListValueGroup.get(i));
+				if (mListValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mListPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mListPreferenceGroup.get(i));
+					updatePreferenceDescription(mListPreferenceGroup.get(i),
+							mListValueGroup.get(i));
+				}
+
 			}
 		}
 
@@ -210,10 +227,19 @@ public class DriveAssistFragment extends BaseFragment {
 			for (int i = 0; i < listPreKey.length; i++) {
 				if (key.equals(listPreKey[i])) {
 					if (settingActivity != null) {
-						try {
+						try {							
 							int value = Integer.parseInt((String) newValue);
-							settingActivity.sendMsg(listPreMsg[i]
-									+ BytesUtil.changIntHex(value));
+                            if(key.equals("ACC_DRIVER_PROGRAM")){
+                            	settingActivity.sendMsg(listPreMsg[i]
+										+ BytesUtil.changIntHex(value+1));
+							}else if(key.equals("ACC_DISTANCE")){
+                            	settingActivity.sendMsg(listPreMsg[i]
+										+ BytesUtil.changIntHex(value+1));
+							}else{
+								settingActivity.sendMsg(listPreMsg[i]
+										+ BytesUtil.changIntHex(value));
+							}
+							
 							updatePreferenceDescription(
 									mListPreferenceGroup.get(i), value);
 						} catch (NumberFormatException e) {

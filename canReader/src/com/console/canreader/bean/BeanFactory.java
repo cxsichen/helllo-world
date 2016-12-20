@@ -23,6 +23,7 @@ public class BeanFactory {
 								+ adjustcanName(utilCanName));
 				mAnalyzeUtils = (AnalyzeUtils) classManager.newInstance();
 				mAnalyzeUtils.init(mPacket);
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -36,6 +37,10 @@ public class BeanFactory {
 	private static String adjustcanName(String canName) {
 		// TODO Auto-generated method stub
 		switch (canName) {
+		case Contacts.CANNAMEGROUP.SSCHANGANYXL:
+		case Contacts.CANNAMEGROUP.SSCHANGANYXH:
+			canName = Contacts.CANNAMEGROUP.SSCHANGANYX; // 长安汽车
+			break;
 		case Contacts.CANNAMEGROUP.SSHavalH1:
 			canName = Contacts.CANNAMEGROUP.SSHaval; // 长城哈弗
 			break;
@@ -133,6 +138,7 @@ public class BeanFactory {
 	public static void setInfoEmpty() {
 		mAnalyzeUtils = null;
 		utilCanName = null;
+		System.gc();  
 	}
 
 }

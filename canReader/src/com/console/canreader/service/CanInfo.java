@@ -196,7 +196,7 @@ public class CanInfo implements Parcelable {
 	public int RANGE_LONG_TERM = 0; // 长时间续航里程
 
 	public String VEHICLE_NO = ""; // 汽车编号
-
+		
 	public int INSPECTON_DAYS_STATUS = 0; // 车况检查状态
 	public int INSPECTON_DAYS = 0; // 车况检查天数
 
@@ -431,6 +431,8 @@ public class CanInfo implements Parcelable {
 	public int LIGHT_TOP_LIGHT=0;   //车顶环境照明灯
 	public int LIGHT_FRONT_LIGHT=0;   //前部环境照明灯
 	public int LIGHT_LIGHT_COLOR=0;   //车灯颜色
+	public int LIGHT_CAR_ENV_COLOR=0;   //车内氛围照明
+	public int LIGHT_RIGHT_FRONT_COLOR=0;   //右前室调照明
 	public int LIGHT_ALL_AREA=0;   //所有区域
 	
 	public int LIGHT_COMING_HOME_BACKUP=0;         //伴我回家倒车灯
@@ -470,6 +472,7 @@ public class CanInfo implements Parcelable {
 	public int CONV_OPENING = 0; //车窗便捷开启 
 	public int DOOR_UNLOCKING = 0; //中央门锁（车门解锁） 
 	public int AUTOMATIC_LOCKING = 0; //自动锁止 
+	public int SEAT_KEY_REMOTE_FIX = 0; //座椅遥控钥匙记忆匹配
 	public int INDUCTON_REAR_DOOR_COVER = 0; //感应式后尾箱盖
 	
 	/*-----MFD多功能显示-------*/
@@ -484,6 +487,19 @@ public class CanInfo implements Parcelable {
 	public int MFD_SPEED_WARINING= 0; //车速报警
 	public int MFD_OIL_TEMP= 0; //油温 
 	
+	/*------行车模式----------*/
+	public int DRIVING_MODE_COMFORT= 0; //舒适
+	public int DRIVING_MODE_NORMAL= 0; //标准
+	public int DRIVING_MODE_SPORT= 0; //运动
+	public int DRIVING_MODE_ECO= 0; //经济
+	public int DRIVING_MODE_INDIVDUAL= 0; //个性化
+	public int DRIVING_MODE=0; //模式
+	public int DRIVING_MODE_INDIVDUAL_DCC= 0; //DCC
+	public int DRIVING_MODE_INDIVDUAL_DBL= 0; //动态照明
+	public int DRIVING_MODE_INDIVDUAL_Engine= 0; //发动机
+	public int DRIVING_MODE_INDIVDUAL_ACC= 0; //ACC
+	public int DRIVING_MODE_INDIVDUAL_AirCon= 0; //空调
+	public int DRIVING_MODE_INDIVDUAL_Steering= 0; //方向盘
 	/*-----单位-------*/
 	public int UNIT_DISTANCE= 0; //里程 
 	public int UNIT_SPEED= 0; //车速
@@ -491,7 +507,10 @@ public class CanInfo implements Parcelable {
 	public int UNIT_VOLUME= 0; //容积
 //	public int UNIT_CONSUMPTION= 0; //油耗
 	public int UNIT_PRESSURE= 0; //轮胎压力
-	
+	/*-----胎压设定-------*/
+	public int TPMS_SHOW= 0; //轮胎压力监控显示 
+	public int TPMS_WINTER_SPEED_WARNING= 0; //冬季轮胎车速报警
+	public int TPMS_WINTER_SPEED_WARNING_VOL= 0; //冬季轮胎车速报警值
 	/*-----个性化设置------*/
 	public int PROFILE_INFORMATION= 0; //个人设置
 	public int INDIVIDUAL_ENGINE= 0; //引擎
@@ -574,6 +593,7 @@ public class CanInfo implements Parcelable {
 	public int CONVENIENCE_AUTO_WIPE=0;     //自动雨刮
 	public int CONVENIENCE_CONSUMERS = 0; //舒适性用电器 
 	public int CONVENIENCE_CONSUMERS_UNIT = 0; //舒适性用电器单位
+	public int CONVENIENCE_PERCENT = 0; //负荷油耗刻度最大值
 	public float FREQUENCY_VALUE=0;              //频率值
 	public float TEMP_UNIT=0;              //温度单位
 	

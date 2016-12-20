@@ -147,14 +147,14 @@ public class CarInfoFragment4 extends BaseFragment {
 			oilchangeDistanceTitle.setText(mContext.getResources().getString(
 					R.string.oil_change_service_need_distance));
 			oilchangeDistance.setText(caninfo.OILCHANGE_SERVICE_DISTANCE
-					+ (caninfo.OILCHANGE_SERVICE_DISTANCE_UNIT == 0 ? "km"
+					+ (caninfo.INSPECTON_DISTANCE_UNIT == 0 ? "km"
 							: "mi"));
 			break;
 		case 2:
 			oilchangeDistanceTitle.setText(mContext.getResources().getString(
 					R.string.oil_change_overdue_distance));
 			oilchangeDistance.setText(caninfo.OILCHANGE_SERVICE_DISTANCE
-					+ (caninfo.OILCHANGE_SERVICE_DISTANCE_UNIT == 0 ? "km"
+					+ (caninfo.INSPECTON_DISTANCE_UNIT == 0 ? "km"
 							: "mi"));
 			break;
 		default:

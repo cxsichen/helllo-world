@@ -68,7 +68,7 @@ public class SSDFFG extends AnalyzeUtils {
 		}
 	}
 
-	static String radarSave = "";
+	 String radarSave = "";
 	int temps[] = { 0, 0, 0, 0 };
 
 	void analyzeRadarData(byte[] msg) {
@@ -98,7 +98,7 @@ public class SSDFFG extends AnalyzeUtils {
 
 	}
 
-	static String carBasicInfo = "";
+	 String carBasicInfo = "";
 
 	/*
 	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
@@ -141,7 +141,7 @@ public class SSDFFG extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_3 = "";
+	 String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -167,7 +167,7 @@ public class SSDFFG extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave = "";
+	 String carInfoSave = "";
 
 	void analyzeCarInfoData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -187,7 +187,7 @@ public class SSDFFG extends AnalyzeUtils {
 
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub

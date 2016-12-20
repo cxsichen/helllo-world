@@ -196,7 +196,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 	
-	static String menuButtonSave_1 = "";
+	 String menuButtonSave_1 = "";
 
 	void analyzeMenuButton_1(byte[] msg) {
 		if (menuButtonSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -220,7 +220,7 @@ public class SSGE extends AnalyzeUtils {
 	
 	}
 
-	static String menuButtonSave = "";
+	 String menuButtonSave = "";
 
 	void analyzeMenuButton(byte[] msg) {
 		if (menuButtonSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -325,7 +325,7 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.STEERING_BUTTON_STATUS = (int) (msg[5] & 0xFF);
 	}
 
-	static String carInfoSave_20 = "";
+	 String carInfoSave_20 = "";
 
 	void analyzeCarInfoData_20(byte[] msg) {
 		if (carInfoSave_20.equals(BytesUtil.bytesToHexString(msg))) {
@@ -338,7 +338,7 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.ONSTAR_WARING_TYPE = ((int) (msg[4]) & 0x7F);
 	}
 
-	static String carInfoSave_19 = "";
+	 String carInfoSave_19 = "";
 
 	void analyzeCarInfoData_19(byte[] msg) {
 		if (carInfoSave_19.equals(BytesUtil.bytesToHexString(msg))) {
@@ -360,7 +360,7 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.ONSTAR_EFFECTTIME_DAY = ((int) (msg[12]) & 0xFF);
 	}
 
-	static String carInfoSave_18 = "";
+	 String carInfoSave_18 = "";
 
 	void analyzeCarInfoData_18(byte[] msg) {
 		if (carInfoSave_18.equals(BytesUtil.bytesToHexString(msg))) {
@@ -374,7 +374,7 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.ONSTAR_PHONE_SIGN = ((int) (msg[6]) & 0x01);
 	}
 
-	static String carInfoSave_21 = "";
+	 String carInfoSave_21 = "";
 
 	void analyzeCarInfoData_21(byte[] msg) {
 		if (carInfoSave_21.equals(BytesUtil.bytesToHexString(msg))) {
@@ -397,7 +397,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_17 = "";
+	 String carInfoSave_17 = "";
 
 	void analyzeCarInfoData_17(byte[] msg) {
 		if (carInfoSave_17.equals(BytesUtil.bytesToHexString(msg))) {
@@ -420,7 +420,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_16 = "";
+	 String carInfoSave_16 = "";
 
 	void analyzeCarInfoData_16(byte[] msg) {
 		if (carInfoSave_16.equals(BytesUtil.bytesToHexString(msg))) {
@@ -443,7 +443,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_15 = "";
+	 String carInfoSave_15 = "";
 
 	void analyzeCarInfoData_15(byte[] msg) {
 		if (carInfoSave_15.equals(BytesUtil.bytesToHexString(msg))) {
@@ -466,7 +466,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_14 = "";
+	 String carInfoSave_14 = "";
 
 	void analyzeCarInfoData_14(byte[] msg) {
 		if (carInfoSave_14.equals(BytesUtil.bytesToHexString(msg))) {
@@ -489,7 +489,7 @@ public class SSGE extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_13 = "";
+	 String carInfoSave_13 = "";
 
 	void analyzeCarInfoData_13(byte[] msg) {
 		if (carInfoSave_13.equals(BytesUtil.bytesToHexString(msg))) {
@@ -517,7 +517,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_12 = "";
+	 String carInfoSave_12 = "";
 
 	void analyzeCarInfoData_12(byte[] msg) {
 		if (carInfoSave_12.equals(BytesUtil.bytesToHexString(msg))) {
@@ -571,7 +571,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_11 = "";
+	 String carInfoSave_11 = "";
 
 	void analyzeCarInfoData_11(byte[] msg) {
 		if (carInfoSave_11.equals(BytesUtil.bytesToHexString(msg))) {
@@ -606,7 +606,7 @@ public class SSGE extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_10 = "";
+	 String carInfoSave_10 = "";
 
 	void analyzeCarInfoData_10(byte[] msg) {
 		if (carInfoSave_10.equals(BytesUtil.bytesToHexString(msg))) {
@@ -679,7 +679,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_9 = "";
+	 String carInfoSave_9 = "";
 
 	void analyzeCarInfoData_9(byte[] msg) {
 		if (carInfoSave_9.equals(BytesUtil.bytesToHexString(msg))) {
@@ -719,7 +719,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_8 = "";
+	 String carInfoSave_8 = "";
 
 	void analyzeCarInfoData_8(byte[] msg) {
 		if (carInfoSave_8.equals(BytesUtil.bytesToHexString(msg))) {
@@ -735,7 +735,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_7 = "";
+	 String carInfoSave_7 = "";
 
 	void analyzeCarInfoData_7(byte[] msg) {
 		if (carInfoSave_7.equals(BytesUtil.bytesToHexString(msg))) {
@@ -788,7 +788,7 @@ public class SSGE extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_6 = "";
+	 String carInfoSave_6 = "";
 
 	void analyzeCarInfoData_6(byte[] msg) {
 		if (carInfoSave_6.equals(BytesUtil.bytesToHexString(msg))) {
@@ -810,7 +810,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_5 = "";
+	 String carInfoSave_5 = "";
 
 	void analyzeCarInfoData_5(byte[] msg) {
 		if (carInfoSave_5.equals(BytesUtil.bytesToHexString(msg))) {
@@ -857,7 +857,7 @@ public class SSGE extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_4 = "";
+	 String carInfoSave_4 = "";
 
 	void analyzeCarInfoData_4(byte[] msg) {
 		if (carInfoSave_4.equals(BytesUtil.bytesToHexString(msg))) {
@@ -951,7 +951,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_3 = "";
+	 String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
 		if (carInfoSave_3.equals(BytesUtil.bytesToHexString(msg))) {
@@ -963,8 +963,8 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.CAR_TYPE = ((int) msg[4] & 0xFF);
 	}
 
-	static String radarSave = "";
-	static int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+	 String radarSave = "";
+	 int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 	void analyzeRadarData(byte[] msg) {
 		if (radarSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -999,13 +999,13 @@ public class SSGE extends AnalyzeUtils {
 
 	}
 
-	static String carBasicInfo = "";
+	 String carBasicInfo = "";
 
 	/*
 	 * 方向盘按键 STEERING_BUTTON_MODE 0：无按键或释放 1：vol+ 2：vol- 3：menuup 4：menu down 5：
 	 * PHONE 6：mute 7：SRC 8：SPEECH/MIC 9:answer phone 10:hangup phone
 	 */
-	static int keyCode[] = { 0, 1, 2, 8, 9, -1, 3, 4, 4, 5, 6 };
+	 int keyCode[] = { 0, 1, 2, 8, 9, -1, 3, 4, 4, 5, 6 };
 
 	void analyzeCarBasicInfoData(byte[] msg) {
 		if (carBasicInfo.equals(BytesUtil.bytesToHexString(msg))) {
@@ -1048,7 +1048,7 @@ public class SSGE extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_2 = "";
+	 String carInfoSave_2 = "";
 
 	void analyzeCarInfoData_2(byte[] msg) {
 		if (carInfoSave_2.equals(BytesUtil.bytesToHexString(msg))) {
@@ -1076,7 +1076,7 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.TRIP_A_UNIT = (int) ((msg[26] >> 0) & 0x03);
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 
@@ -1093,7 +1093,7 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.REMAIN_FUEL = (int) (msg[12] & 0xFF);
 	}
 
-	static String carInfoSave = "";
+	 String carInfoSave = "";
 
 	void analyzeCarInfoData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -1118,7 +1118,7 @@ public class SSGE extends AnalyzeUtils {
 		mCanInfo.DISINFECTON_STATUS = -1;
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub

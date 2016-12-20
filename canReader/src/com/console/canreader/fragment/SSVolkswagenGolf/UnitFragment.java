@@ -91,11 +91,11 @@ public class UnitFragment extends BaseFragment {
 
 		/*-----------set data----------------*/
 		String[] swPreKey = { "UNIT_DISTANCE", "UNIT_SPEED", "UNIT_TEMPERATURE" };
-		String[] swPreMsg = { "2EC60290", "2EC60291", "2EC60292" };
+		String[] swPreMsg = { "5AA502CA01", "5AA502CA02", "5AA502CA03" };
 
 		String[] listPreKey = { "UNIT_VOLUME", "UNIT_CONSUMPTION",
 				"UNIT_PRESSURE" };
-		String[] listPreMsg = { "2EC60293", "2EC60294", "2EC60295" };
+		String[] listPreMsg = { "5AA502CA04", "5AA502CA05", "5AA502CA06" };
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
@@ -124,7 +124,7 @@ public class UnitFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.rzcgolf_setting_prefs_7);
+			addPreferencesFromResource(R.xml.ssgolf_setting_prefs_7);
 
 			for (String str : swPreKey) {
 				SwitchPreference p = (SwitchPreference) findPreference(str);
@@ -150,15 +150,31 @@ public class UnitFragment extends BaseFragment {
 			addSwitchData(mSwitchValueGroup, mCaninfo);
 
 			for (int i = 0; i < mSwitchPreferenceGroup.size(); i++) {
-				mSwitchPreferenceGroup.get(i).setChecked(
-						mSwitchValueGroup.get(i) == 1);
+				if (mSwitchValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mSwitchPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mSwitchPreferenceGroup.get(i));
+					mSwitchPreferenceGroup.get(i).setChecked(
+							mSwitchValueGroup.get(i) == 1);
+				}
+
 			}
 
 			mListValueGroup.clear();
 			addListData(mListValueGroup, mCaninfo);
 			for (int i = 0; i < mListPreferenceGroup.size(); i++) {
-				updatePreferenceDescription(mListPreferenceGroup.get(i),
-						mListValueGroup.get(i));
+				if (mListValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mListPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mListPreferenceGroup.get(i));
+					updatePreferenceDescription(mListPreferenceGroup.get(i),
+							mListValueGroup.get(i));
+				}
+
 			}
 		}
 
@@ -196,7 +212,7 @@ public class UnitFragment extends BaseFragment {
 				if (key.equals(swPreKey[i])) {
 					if (settingActivity != null)
 						settingActivity.sendMsg(swPreMsg[i]
-								+ ((boolean) newValue ? "01" : "00"));
+								+ ((boolean) newValue ? "01" : "02"));
 				}
 			}
 			for (int i = 0; i < listPreKey.length; i++) {
@@ -205,7 +221,7 @@ public class UnitFragment extends BaseFragment {
 						try {
 							int value = Integer.parseInt((String) newValue);
 							settingActivity.sendMsg(listPreMsg[i]
-									+ BytesUtil.changIntHex(value));
+									+ BytesUtil.changIntHex(value+1));
 							updatePreferenceDescription(
 									mListPreferenceGroup.get(i), value);
 						} catch (NumberFormatException e) {

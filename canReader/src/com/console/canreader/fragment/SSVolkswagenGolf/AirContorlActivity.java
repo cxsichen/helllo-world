@@ -1,5 +1,7 @@
 package com.console.canreader.fragment.SSVolkswagenGolf;
 
+import java.text.DecimalFormat;
+
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,7 +27,8 @@ import com.console.canreader.activity.BaseActivity;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.BytesUtil;
 
-public class AirContorlActivity extends AirConBaseActivity implements OnClickListener {
+public class AirContorlActivity extends AirConBaseActivity implements
+		OnClickListener {
 
 	private PopupWindow popupWindow;
 	private View popupWindowView;
@@ -69,6 +72,7 @@ public class AirContorlActivity extends AirConBaseActivity implements OnClickLis
 	private Animation amt;
 	private int airConStatus = -1;
 	private ImageView AIR_RATE_iv;
+	DecimalFormat fnum = new DecimalFormat("##0.0");
 
 	private int[] leftSeatDraws = { R.drawable.stat_seat_heating_left_1,
 			R.drawable.stat_seat_heating_left_2,
@@ -80,7 +84,7 @@ public class AirContorlActivity extends AirConBaseActivity implements OnClickLis
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.ac_controler_golf);
+		setContentView(R.layout.ac_controler_ssgolf);
 		amt = AnimationUtils.loadAnimation(this, R.anim.tip);
 		amt.setInterpolator(new LinearInterpolator());
 		initView();
@@ -134,16 +138,16 @@ public class AirContorlActivity extends AirConBaseActivity implements OnClickLis
 		CYCLE_INDICATOR.setOnClickListener(this);
 
 		AUTO_STATUS = (TextView) findViewById(R.id.AUTO_STATUS);
-		AUTO_STATUS.setVisibility(View.INVISIBLE);
+		AUTO_STATUS.setVisibility(View.GONE);
 
 		AC_MAX_STATUS = (TextView) findViewById(R.id.AC_MAX_STATUS);
-		AC_MAX_STATUS.setVisibility(View.INVISIBLE);
+		AC_MAX_STATUS.setOnClickListener(this);
 
 		MAX_FRONT_LAMP_INDICATOR = (ImageView) findViewById(R.id.MAX_FRONT_LAMP_INDICATOR);
-		MAX_FRONT_LAMP_INDICATOR.setOnClickListener(this);
+		MAX_FRONT_LAMP_INDICATOR.setVisibility(View.INVISIBLE);
 
 		REAR_LAMP_INDICATOR = (ImageView) findViewById(R.id.REAR_LAMP_INDICATOR);
-		REAR_LAMP_INDICATOR.setOnClickListener(this);
+		REAR_LAMP_INDICATOR.setVisibility(View.INVISIBLE);
 
 		UPWARD_AIR_INDICATOR = (ImageView) findViewById(R.id.UPWARD_AIR_INDICATOR);
 		PARALLEL_AIR_INDICATOR = (ImageView) findViewById(R.id.PARALLEL_AIR_INDICATOR);
@@ -229,6 +233,10 @@ public class AirContorlActivity extends AirConBaseActivity implements OnClickLis
 					.setBackgroundResource(mCaninfo.AC_INDICATOR_STATUS == 0 ? R.drawable.bg_button_oval
 							: R.drawable.bg_button_oval_on);
 
+			AC_MAX_STATUS
+					.setBackgroundResource(mCaninfo.DAUL_LAMP_INDICATOR == 0 ? R.drawable.bg_button_oval
+							: R.drawable.bg_button_oval_on);
+
 			if (mCaninfo.CYCLE_INDICATOR == 0) {
 				CYCLE_INDICATOR.setImageResource(R.drawable.stat_recirculation);
 			} else {
@@ -267,8 +275,8 @@ public class AirContorlActivity extends AirConBaseActivity implements OnClickLis
 				right_temp_value.setText(mCaninfo.DEPUTY_DRIVING_POSITON_TEMP
 						+ "¡ã");
 			}
-			OUTSIDE_TEMPERATURE
-					.setText(mCaninfo.OUTSIDE_TEMPERATURE + "¡æ\nOUT");
+			OUTSIDE_TEMPERATURE.setText(fnum
+					.format(mCaninfo.OUTSIDE_TEMPERATURE) + "¡ã\nOUT");
 
 			if (mCaninfo.LEFT_SEAT_TEMP == 0) {
 				LEFT_SEAT_TEMP.setAlpha(0.12f);
@@ -313,25 +321,29 @@ public class AirContorlActivity extends AirConBaseActivity implements OnClickLis
 				break;
 			case R.id.AIR_STRENGTH_LOW_iv:
 				Log.i("xyw", "AIR_STRENGTH_LOW_iv-");
-				sendMsg("2EC602B100");
+				sendMsg("5AA5023A0100");
 				break;
 			case R.id.AIR_STRENGTH_MIDDLE_iv:
-				sendMsg("2EC602B101");
+				sendMsg("5AA5023A0101");
 				break;
 			case R.id.AIR_STRENGTH_HIGH_iv:
-				sendMsg("2EC602B102");
+				sendMsg("5AA5023A0102");
 				break;
 			case R.id.Mono_STATUS:
 				int v10 = mCaninfo.AIR_CONDITIONER_STATUS == 0 ? 1 : 0;
-				sendMsg("2EC602B2" + BytesUtil.intToHexString(v10));
+				sendMsg("5AA5023A02" + BytesUtil.intToHexString(v10));
 				break;
 			case R.id.AC_INDICATOR_STATUS:
 				int v1 = mCaninfo.AC_INDICATOR_STATUS == 0 ? 1 : 0;
-				sendMsg("2EC602BD" + BytesUtil.intToHexString(v1));
+				sendMsg("5AA5023A0F" + BytesUtil.intToHexString(v1));
+				break;
+			case R.id.AC_MAX_STATUS:
+				int v20 = mCaninfo.DAUL_LAMP_INDICATOR == 0 ? 1 : 0;
+				sendMsg("5AA5023A11" + BytesUtil.intToHexString(v20));
 				break;
 			case R.id.CYCLE_INDICATOR:
 				int v6 = mCaninfo.CYCLE_INDICATOR == 0 ? 1 : 0;
-				sendMsg("2EC602BE" + BytesUtil.intToHexString(v6));
+				sendMsg("5AA5023A13" + BytesUtil.intToHexString(v6));
 				break;
 			case R.id.MAX_FRONT_LAMP_INDICATOR:
 				sendMsg("2EC602BB" + BytesUtil.intToHexString(3));
@@ -342,41 +354,65 @@ public class AirContorlActivity extends AirConBaseActivity implements OnClickLis
 				break;
 			case R.id.UPWARD_AIR_INDICATOR:
 				int v7 = mCaninfo.UPWARD_AIR_INDICATOR == 0 ? 1 : 0;
-				sendMsg("2EC602B6" + v7);
+				sendMsg("5AA5023A1A" + BytesUtil.intToHexString(v7));
 				break;
 			case R.id.PARALLEL_AIR_INDICATOR:
 				int v8 = mCaninfo.PARALLEL_AIR_INDICATOR == 0 ? 1 : 0;
-				sendMsg("2EC602B4" + BytesUtil.intToHexString(v8));
+				sendMsg("5AA5023A18" + BytesUtil.intToHexString(v8));
 				break;
 			case R.id.DOWNWARD_AIR_INDICATOR:
 				int v9 = mCaninfo.DOWNWARD_AIR_INDICATOR == 0 ? 1 : 0;
-				sendMsg("2EC602B5" + BytesUtil.intToHexString(v9));
+				sendMsg("5AA5023A19" + BytesUtil.intToHexString(v9));
 				break;
 			case R.id.AIR_RATE_UP:
 				int v11 = mCaninfo.AIR_RATE + 1;
 				if (v11 > 7) {
 					v11 = 7;
 				}
-				sendMsg("2EC602B7" + BytesUtil.intToHexString(v11));
+				sendMsg("5AA5023A17" + BytesUtil.intToHexString(v11));
 				break;
 			case R.id.AIR_RATE_DOWN:
 				int v12 = mCaninfo.AIR_RATE - 1;
 				if (v12 < 0) {
 					v12 = 0;
 				}
-				sendMsg("2EC602B7" + BytesUtil.intToHexString(v12));
+				sendMsg("5AA5023A17" + BytesUtil.intToHexString(v12));
 				break;
 			case R.id.left_temp_up:
-				sendMsg("2EC602B801");
+				float v21 = mCaninfo.DRIVING_POSITON_TEMP + 0.5f;
+				if (v21 > 29.5f) {
+					sendMsg("5AA5023A14FF");
+				} else {
+					sendMsg("5AA5023A14"
+							+ BytesUtil.intToHexString((int) (v21 * 2)));
+				}
 				break;
 			case R.id.left_temp_down:
-				sendMsg("2EC602B800");
+				float v22 = mCaninfo.DRIVING_POSITON_TEMP - 0.5f;
+				if (v22 <16) {
+					sendMsg("5AA5023A14FE");
+				} else {
+					sendMsg("5AA5023A14"
+							+ BytesUtil.intToHexString((int) (v22 * 2)));
+				}
 				break;
 			case R.id.right_temp_up:
-				sendMsg("2EC602B901");
+				float v23 = mCaninfo.DEPUTY_DRIVING_POSITON_TEMP + 0.5f;
+				if (v23 > 29.5f) {
+					sendMsg("5AA5023A15FF");
+				} else {
+					sendMsg("5AA5023A15"
+							+ BytesUtil.intToHexString((int) (v23 * 2)));
+				}
 				break;
 			case R.id.right_temp_down:
-				sendMsg("2EC602B900");
+				float v24 = mCaninfo.DEPUTY_DRIVING_POSITON_TEMP - 0.5f;
+				if (v24 <16) {
+					sendMsg("5AA5023A15FE");
+				} else {
+					sendMsg("5AA5023A15"
+							+ BytesUtil.intToHexString((int) (v24 * 2)));
+				}
 				break;
 			default:
 				break;

@@ -96,12 +96,12 @@
         <item>0</item><!-- 光盘控制 -->
         <item>0</item><!-- 原车功放 -->
         <item>0</item><!-- 全景 -->
-        <item>1</item><!-- 胎压 -->
+        <item>0</item><!-- 胎压 -->
         <item>1</item><!-- 关于 -->
     </string-array>
     <string-array name="SSVolkswagenGolf_items">
         <item>车辆信息</item>
-        <item>舒适性用电器</item>
+        <item>舒适性用电器及灯光信息</item>
         <item>自启动起信息</item>
         <item>自加油起信息</item>
         <item>长时间信息</item>
@@ -117,9 +117,31 @@
     </string-array>
     
     <string-array name="SSVolkswagenGolf_setting_items">
+       <item>车身状态设定</item>
+       <item>语言设定</item>
+       <item>行车模式设置</item>
+       <item>多功能显示</item>
+       <item>打开和关闭</item>
+       <item>后视镜和刮水器</item>
+       <item>车灯</item>
+       <item>驾驶员辅助系统</item>
+       <item>驻车和调车</item>
+       <item>Tyres设定信息</item>
+       <item>单位</item>
        <item>恢复出厂设置</item>
     </string-array>
     <string-array name="SSVolkswagenGolf_setting_fragment">
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.SportFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.LanguageSettingsFragment</item> 
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.IndivdualFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.MFDFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.OpenCloseFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.MirrorWiperFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.LightFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.DriveAssistFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.ParkingFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.TyresSettingFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.UnitFragment</item>
        <item>com.console.canreader.fragment.SSVolkswagenGolf.ResetFragment</item>
     </string-array>
     <!-- 尚摄 高尔夫7 -->
@@ -503,6 +525,34 @@
     </string-array>
     <!-- 长城 哈弗H1 -->
     <!-- 长城 -->
+    
+    <!-- 长安 -->
+    <!-- 长安 悦翔V7低配 -->
+    <string-array name="SSCHANGANYXL_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <!-- 长安  悦翔V7低配 -->
+    
+    <!-- 长安 悦翔V7中高配 -->
+    <string-array name="SSCHANGANYXH_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item> <!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <!-- 长安  悦翔V7中高配 -->
+    <!-- 长安  -->
 
     <!-- 广汽传祺 -->
     <!-- add by xyw start-->
@@ -2526,6 +2576,24 @@
      <item>Arabic</item>    
     </string-array>
     
+    <string-array name="spingarr_1">
+     <item>English</item>  
+     <item>Chinese</item>   
+     <item>German</item>  
+     <item>Iitalian</item>   
+     <item>French</item>  
+     <item>Swedish</item>  
+     <item>Spanish</item>  
+     <item>Dutch</item>
+     <item>Japanese</item> 
+     <item>Norweg</item>
+     <item>Finnish</item> 
+     <item>Danish</item> 
+     <item>Greek</item>  
+     <item>Arabic</item>
+     <item>Turkish</item>         
+    </string-array>
+    
    
      <string-array name="car_info_lamp_time_entries">
         <item>取消</item>
@@ -2631,6 +2699,8 @@
         <item>02</item>
     </string-array>
     
+   
+    
      <string-array name="rzc_acc_driver_entries">
         <item>标准</item>
         <item>运动</item>
@@ -2648,14 +2718,44 @@
         <item>中等</item>
         <item>大</item>
         <item>极大</item>
-    </string-array>  
-    <string-array name="rzc_acc_distance_values">
+    </string-array> 
+    
+     <string-array name="rzc_acc_distance_values">
         <item>00</item>
         <item>01</item>
         <item>02</item>
         <item>03</item>
         <item>04</item>
     </string-array>
+    
+    <string-array name="ss_acc_driver_entries">
+        <item>经济</item>
+        <item>标准</item>
+        <item>运动</item>    
+    </string-array> 
+    
+   <string-array name="ss_acc_driver_values">
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+    </string-array>
+    
+   <string-array name="ss_acc_distance_entries">
+        <item>极小</item>
+        <item>小</item>
+        <item>中等</item>
+        <item>大</item>
+        <item>极大</item>
+    </string-array>  
+    
+    <string-array name="ss_acc_distance_values">
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+    </string-array>
+
     
     <string-array name="rzc_golf_volume_entries">
         <item>音量1</item>
@@ -2702,6 +2802,17 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+    </string-array>
+    
+    <string-array name="ss_golf_parking_mode_entries">
+        <item>倒车入库和路边停车都不显示</item>
+        <item>倒车入库有效</item>
+        <item>路边停车有效</item>
+    </string-array>
+    <string-array name="ss_golf_parking_mode_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
       <string-array name="rzc_golf_switch_on_time_entries">
@@ -2785,6 +2896,17 @@
         <item>1</item>
         <item>2</item> 
     </string-array>
+    
+    <string-array name="ss_golf_conv_open_entries">
+        <item>关闭</item>
+        <item>驾驶员侧车窗</item>
+        <item>全部车窗</item>  
+    </string-array>
+    <string-array name="ss_golf_conv_open_values">
+        <item>2</item>
+        <item>1</item>
+        <item>0</item> 
+    </string-array>
      
     <string-array name="rzc_golf_door_unlock_entries">
         <item>车辆侧</item>
@@ -2797,12 +2919,34 @@
         <item>2</item> 
     </string-array>
     
+    <string-array name="ss_golf_door_unlock_entries">
+        <item>车辆侧</item>
+        <item>单个车门</item>
+        <item>全部车门</item>   
+    </string-array>
+    <string-array name="ss_golf_door_unlock_values">
+        <item>2</item>
+        <item>1</item>
+        <item>0</item> 
+    </string-array>
+    
     <string-array name="rzc_golf_volume_uint_entries">
         <item>L</item>
         <item>gal(UK)</item>
         <item>gal(US)</item>   
     </string-array>
     <string-array name="rzc_golf_volume_uint_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+     <string-array name="ss_golf_volume_uint_entries">
+        <item>L</item>
+        <item>gal(US)</item>
+        <item>gal(UK)</item>   
+    </string-array>
+    <string-array name="ss_golf_volume_uint_values">
         <item>0</item>
         <item>1</item>
         <item>2</item> 
@@ -2821,6 +2965,19 @@
         <item>3</item> 
     </string-array>
     
+     <string-array name="ss_golf_consumption_uint_entries">
+        <item>L/100km</item>
+        <item>km/L</item>
+        <item>mpg(US)</item> 
+        <item>mpg(UK)</item>          
+    </string-array>
+    
+    <string-array name="ss_golf_consumption_uint_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
     
     <string-array name="rzc_golf_pressure_uint_entries">
         <item>bar</item>
@@ -2828,6 +2985,17 @@
         <item>kPa</item> 
     </string-array>
     <string-array name="rzc_golf_pressure_uint_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+     <string-array name="ss_golf_pressure_uint_entries">
+        <item>kPa</item> 
+        <item>bar</item>
+        <item>psi</item>       
+    </string-array>
+    <string-array name="ss_golf_pressure_uint_values">
         <item>0</item>
         <item>1</item>
         <item>2</item> 
@@ -3023,6 +3191,93 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
+    </string-array>
+    
+    
+    <string-array name="ssgolf_4_entries">
+        <item>30km/h</item>
+        <item>40km/h</item>
+        <item>50km/h</item>
+        <item>60km/h</item>
+        <item>70km/h</item>
+        <item>80km/h</item>
+        <item>90km/h</item>
+        <item>100km/h</item>
+        <item>110km/h</item>
+        <item>120km/h</item>
+        <item>130km/h</item>
+        <item>140km/h</item>
+        <item>150km/h</item>
+        <item>160km/h</item>
+        <item>170km/h</item>
+        <item>180km/h</item>
+        <item>190km/h</item>
+        <item>200km/h</item>
+        <item>210km/h</item>
+        <item>220km/h</item>
+        <item>230km/h</item>
+        <item>240km/h</item>       
+    </string-array>
+    <string-array name="ssgolf_4_values">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+    </string-array>
+    
+    <string-array name="ssgolf_1_entries">
+        <item>舒适</item>
+        <item>标准</item>
+        <item>运动</item>
+        <item>经济</item>
+        <item>个性化</item>       
+    </string-array>
+    <string-array name="ssgolf_1_values">
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+        <item>4</item> 
+        <item>5</item> 
+    </string-array>
+    
+     <string-array name="ssgolf_2_entries">
+        <item>Comfort</item>
+        <item>Normal</item>
+        <item>Sport</item>  
+    </string-array>
+    <string-array name="ssgolf_2_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+     <string-array name="ssgolf_3_entries">
+        <item>Normal</item>
+        <item>Sport</item>  
+        <item>Eco</item>
+    </string-array>
+    <string-array name="ssgolf_3_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
     </string-array>
     
 </resources>

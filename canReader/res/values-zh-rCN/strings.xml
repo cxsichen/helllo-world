@@ -31,6 +31,7 @@
     <string name="washer_info">清洁液\n</string>
     <string name="hour">小时</string>
     <string name="minute">分钟</string>
+    <string name="day">天</string>
     <string name="inspection_need_days">离车况检查需要天数</string>
     <string name="inspection_overdue_days">车况检查过期天数</string>
     <string name="inspection_overdue_distance">车况检查过期里程</string>

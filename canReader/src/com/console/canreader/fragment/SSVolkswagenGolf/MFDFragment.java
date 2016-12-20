@@ -6,6 +6,7 @@ import java.util.List;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -80,10 +81,12 @@ public class MFDFragment extends BaseFragment {
 	}
 
 	public class SettingsFragment extends PreferenceFragment implements
-			OnPreferenceChangeListener {
+			OnPreferenceChangeListener, OnPreferenceClickListener {
 
 		MFDFragment settingActivity;
 
+		Preference p1;
+		Preference p2;
 		List<SwitchPreference> mSwitchPreferenceGroup = new ArrayList<SwitchPreference>();
 		List<Integer> mSwitchValueGroup = new ArrayList<Integer>();
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
@@ -95,9 +98,9 @@ public class MFDFragment extends BaseFragment {
 				"MFD_ECO_TIPS", "MFD_TRAVELLING_TIME", "MFD_DISTANCE_TRAVELED",
 				"MFD_AVERAGE_SPEED", "MFD_DIGITAL_SPEED_DISPLAY",
 				"MFD_SPEED_WARINING", "MFD_OIL_TEMP" };
-		String[] swPreMsg = { "2EC60280", "2EC60281", "2EC60282", "2EC60283",
-				"2EC60284", "2EC60285", "2EC60286", "2EC60287", "2EC60288",
-				"2EC60289" };
+		String[] swPreMsg = { "5AA5027B01", "5AA5027B02", "5AA5027B03",
+				"5AA5027B04", "5AA5027B05", "5AA5027B06", "5AA5027B07",
+				"5AA5027B08", "5AA5027B09", "5AA5027B0A" };
 
 		String[] listPreKey = {};
 		String[] listPreMsg = {};
@@ -136,7 +139,7 @@ public class MFDFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.rzcgolf_setting_prefs_6);
+			addPreferencesFromResource(R.xml.ssgolf_setting_prefs_6);
 
 			for (String str : swPreKey) {
 				SwitchPreference p = (SwitchPreference) findPreference(str);
@@ -150,6 +153,10 @@ public class MFDFragment extends BaseFragment {
 				mListPreferenceGroup.add(p);
 			}
 
+			p1 = (Preference) findPreference("MFD_RESET1");
+			p2 = (Preference) findPreference("MFD_RESET2");
+			p1.setOnPreferenceClickListener(this);
+			p2.setOnPreferenceClickListener(this);
 			if (settingActivity != null) {
 				if (settingActivity.getCanInfo() != null)
 					syncView(settingActivity.getCanInfo());
@@ -162,15 +169,31 @@ public class MFDFragment extends BaseFragment {
 			addSwitchData(mSwitchValueGroup, mCaninfo);
 
 			for (int i = 0; i < mSwitchPreferenceGroup.size(); i++) {
-				mSwitchPreferenceGroup.get(i).setChecked(
-						mSwitchValueGroup.get(i) == 1);
+				if (mSwitchValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mSwitchPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mSwitchPreferenceGroup.get(i));
+					mSwitchPreferenceGroup.get(i).setChecked(
+							mSwitchValueGroup.get(i) == 1);
+				}
+
 			}
 
 			mListValueGroup.clear();
 			addListData(mListValueGroup, mCaninfo);
 			for (int i = 0; i < mListPreferenceGroup.size(); i++) {
-				updatePreferenceDescription(mListPreferenceGroup.get(i),
-						mListValueGroup.get(i));
+				if (mListValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mListPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mListPreferenceGroup.get(i));
+					updatePreferenceDescription(mListPreferenceGroup.get(i),
+							mListValueGroup.get(i));
+				}
+
 			}
 		}
 
@@ -224,6 +247,21 @@ public class MFDFragment extends BaseFragment {
 						}
 					}
 				}
+			}
+			return true;
+		}
+
+		@Override
+		public boolean onPreferenceClick(Preference preference) {
+			// TODO Auto-generated method stub
+			final String key = preference.getKey();
+			if (key.equals("MFD_RESET1")) {
+				if (settingActivity != null)
+					settingActivity.sendMsg("5AA5027B0B00");
+			}
+
+			if (key.equals("MFD_RESET2")) {
+				settingActivity.sendMsg("5AA5027B0C00");
 			}
 			return true;
 		}

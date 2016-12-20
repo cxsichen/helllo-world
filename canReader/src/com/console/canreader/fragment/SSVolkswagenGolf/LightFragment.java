@@ -90,48 +90,46 @@ public class LightFragment extends BaseFragment {
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
 
 		/*-----------set data----------------*/
-		String[] swPreKey = { "LIGHT_AUTO_HEADLIGHT_RAIN",
-				"LIGHT_LANE_CHANGE_FLASH", "LIGHT_DAYTIME_RUNNING_LIGHT",
-				"LIGHT_TRAVELING_MODE", "LIGHT_DYNAMIC_LIGHT_ASSIST",
-				"LIGHT_MOTORWAY_LIGHT" };
-		String[] swPreMsg = { "2EC60251", "2EC60252", "2EC602C8", "2EC60256",
-				"2EC6025A", "2EC60259" };
+		String[] swPreKey = {"LIGHT_DYNAMIC_LIGHT_ASSIST","LIGHT_MOTORWAY_LIGHT","LIGHT_AUTO_HEADLIGHT_RAIN",
+				"LIGHT_LANE_CHANGE_FLASH","LIGHT_TRAVELING_MODE"};
+		String[] swPreMsg = {"5AA5026D01","5AA5026D02","5AA5026D04",
+				"5AA5026D05","5AA5026D06"};
 
-		String[] listPreKey = { "LIGHT_SWITCH_ON_TIME",
-				"LIGHT_SWITCH_LIGHTING", "LIGHT_COMING_HOME",
-				"LIGHT_LEAVING_HOME", "LIGHT_DOOR_AMBIENT",
-				"LIGHT_FOORWELL_LIGHT", "LIGHT_TOP_LIGHT", "LIGHT_FRONT_LIGHT",
-				"LIGHT_LIGHT_COLOR", "LIGHT_ALL_AREA" };
-		String[] listPreMsg = { "2EC60250", "2EC60253", "2EC60254", "2EC60255",
-				"2EC60257", "2EC60258", "2EC6025B", "2EC6025C", "2EC6025E",
-				"2EC6025D" };
+		String[] listPreKey = { "LIGHT_LIGHT_COLOR","LIGHT_CAR_ENV_COLOR","LIGHT_RIGHT_FRONT_COLOR",
+				"LIGHT_SWITCH_ON_TIME","LIGHT_SWITCH_LIGHTING","LIGHT_DOOR_AMBIENT",
+				"LIGHT_FOORWELL_LIGHT","LIGHT_COMING_HOME","LIGHT_LEAVING_HOME"};
+		String[] listPreMsg = { "5AA5026D0C","5AA5026D0D","5AA5026D0E",
+				"5AA5026D03","5AA5026D07","5AA5026D08",
+				"5AA5026D09","5AA5026D0A","5AA5026D0B"};
 
 		private void addListData(List<Integer> mListValueGroup2,
 				CanInfo mCaninfo) {
 			// TODO Auto-generated method stub
-			mListValueGroup2.add(mCaninfo.LIGHT_SWITCH_ON_TIME);
-			mListValueGroup2.add(mCaninfo.LIGHT_SWITCH_LIGHTING);
-			mListValueGroup2.add(mCaninfo.LIGHT_COMING_HOME);
-			mListValueGroup2.add(mCaninfo.LIGHT_LEAVING_HOME);
+			 mListValueGroup2.add(mCaninfo.LIGHT_LIGHT_COLOR);
+			 mListValueGroup2.add(mCaninfo.LIGHT_CAR_ENV_COLOR==-1?-1:mCaninfo.LIGHT_CAR_ENV_COLOR-mCaninfo.LIGHT_CAR_ENV_COLOR%10);
+			 mListValueGroup2.add(mCaninfo.LIGHT_RIGHT_FRONT_COLOR==-1?-1:mCaninfo.LIGHT_RIGHT_FRONT_COLOR-mCaninfo.LIGHT_RIGHT_FRONT_COLOR%10);	 
+			 mListValueGroup2.add(mCaninfo.LIGHT_SWITCH_ON_TIME);
+			 
+			 mListValueGroup2.add(mCaninfo.LIGHT_SWITCH_LIGHTING==-1?-1:mCaninfo.LIGHT_SWITCH_LIGHTING-mCaninfo.LIGHT_SWITCH_LIGHTING%10);
+			 mListValueGroup2.add(mCaninfo.LIGHT_DOOR_AMBIENT==-1?-1:mCaninfo.LIGHT_DOOR_AMBIENT-mCaninfo.LIGHT_DOOR_AMBIENT%10);
+			 mListValueGroup2.add(mCaninfo.LIGHT_FOORWELL_LIGHT==-1?-1:mCaninfo.LIGHT_FOORWELL_LIGHT-mCaninfo.LIGHT_FOORWELL_LIGHT%10);
 
-			mListValueGroup2.add(mCaninfo.LIGHT_DOOR_AMBIENT);
-			mListValueGroup2.add(mCaninfo.LIGHT_FOORWELL_LIGHT);
-			mListValueGroup2.add(mCaninfo.LIGHT_TOP_LIGHT);
-			mListValueGroup2.add(mCaninfo.LIGHT_FRONT_LIGHT);
-			mListValueGroup2.add(mCaninfo.LIGHT_LIGHT_COLOR);
-			mListValueGroup2.add(mCaninfo.LIGHT_ALL_AREA);
+			 
+			 mListValueGroup2.add(mCaninfo.LIGHT_COMING_HOME==-1?-1:mCaninfo.LIGHT_COMING_HOME-mCaninfo.LIGHT_COMING_HOME%5);
+			 mListValueGroup2.add(mCaninfo.LIGHT_LEAVING_HOME==-1?-1:mCaninfo.LIGHT_LEAVING_HOME-mCaninfo.LIGHT_LEAVING_HOME%5);
+
+
 		}
 
 		private void addSwitchData(List<Integer> mSwitchValueGroup2,
 				CanInfo mCaninfo) {
 			// TODO Auto-generated method stub
-			mSwitchValueGroup2.add(mCaninfo.LIGHT_AUTO_HEADLIGHT_RAIN);
-			mSwitchValueGroup2.add(mCaninfo.LIGHT_LANE_CHANGE_FLASH);
-			mSwitchValueGroup2.add(mCaninfo.LIGHT_DAYTIME_RUNNING_LIGHT);
+			 mSwitchValueGroup2.add(mCaninfo.LIGHT_DYNAMIC_LIGHT_ASSIST);
+			 mSwitchValueGroup2.add(mCaninfo.LIGHT_MOTORWAY_LIGHT);
+			 mSwitchValueGroup2.add(mCaninfo.LIGHT_AUTO_HEADLIGHT_RAIN);
+			 mSwitchValueGroup2.add(mCaninfo.LIGHT_LANE_CHANGE_FLASH);
+			 mSwitchValueGroup2.add(mCaninfo.LIGHT_TRAVELING_MODE);
 
-			mSwitchValueGroup2.add(mCaninfo.LIGHT_TRAVELING_MODE);
-			mSwitchValueGroup2.add(mCaninfo.LIGHT_DYNAMIC_LIGHT_ASSIST);
-			mSwitchValueGroup2.add(mCaninfo.LIGHT_MOTORWAY_LIGHT);
 		}
 
 		/*-----------set data----------------*/
@@ -144,7 +142,7 @@ public class LightFragment extends BaseFragment {
 		public void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.rzcgolf_setting_prefs_3);
+			addPreferencesFromResource(R.xml.ssgolf_setting_prefs_3);
 
 			for (String str : swPreKey) {
 				SwitchPreference p = (SwitchPreference) findPreference(str);
@@ -170,15 +168,31 @@ public class LightFragment extends BaseFragment {
 			addSwitchData(mSwitchValueGroup, mCaninfo);
 
 			for (int i = 0; i < mSwitchPreferenceGroup.size(); i++) {
-				mSwitchPreferenceGroup.get(i).setChecked(
-						mSwitchValueGroup.get(i) == 1);
+				if (mSwitchValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mSwitchPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mSwitchPreferenceGroup.get(i));
+					mSwitchPreferenceGroup.get(i).setChecked(
+							mSwitchValueGroup.get(i) == 1);
+				}
+
 			}
 
 			mListValueGroup.clear();
 			addListData(mListValueGroup, mCaninfo);
 			for (int i = 0; i < mListPreferenceGroup.size(); i++) {
-				updatePreferenceDescription(mListPreferenceGroup.get(i),
-						mListValueGroup.get(i));
+				if (mListValueGroup.get(i) == -1) {
+					getPreferenceScreen().removePreference(
+							mListPreferenceGroup.get(i));
+				} else {
+					getPreferenceScreen().addPreference(
+							mListPreferenceGroup.get(i));
+					updatePreferenceDescription(mListPreferenceGroup.get(i),
+							mListValueGroup.get(i));
+				}
+
 			}
 		}
 

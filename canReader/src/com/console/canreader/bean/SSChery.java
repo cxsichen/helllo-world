@@ -95,7 +95,7 @@ public class SSChery extends AnalyzeUtils {
 
 	}
 	
-	static String CarStatusDatasave = "";
+	 String CarStatusDatasave = "";
 
 	private void analyzeCarStatusData(byte[] msg) {
 		if (CarStatusDatasave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -112,7 +112,7 @@ public class SSChery extends AnalyzeUtils {
 
 	}
 
-	static String CarVersionDatasave = "";
+	 String CarVersionDatasave = "";
 
 	private void analyzeCarVersionData(byte[] msg) {
 		if (CarVersionDatasave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -136,7 +136,7 @@ public class SSChery extends AnalyzeUtils {
 
 	}
 
-	static String CarModeDatasave = "";
+	 String CarModeDatasave = "";
 
 	private void analyzeCarModeData(byte[] msg) {
 		if (CarModeDatasave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -149,7 +149,7 @@ public class SSChery extends AnalyzeUtils {
 
 	}
 
-	static String ControllDatasave = "";
+	 String ControllDatasave = "";
 
 	private void analyzeControllData(byte[] msg) {
 		if (ControllDatasave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -194,7 +194,7 @@ public class SSChery extends AnalyzeUtils {
 		mCanInfo.BACK_LIGHT_DATA=((int) ((msg[5] >> 7) & 0x01)==0)?-1:(int) ((msg[8] >> 4) & 0x0f);
 	}
 
-	static String PanelKnobsave = "";
+	 String PanelKnobsave = "";
 
 	private void analyzePanelKnob(byte[] msg) {
 		if (PanelKnobsave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -208,7 +208,7 @@ public class SSChery extends AnalyzeUtils {
 		mCanInfo.CHANGE_STATUS = 2;
 	}
 
-	static String PanelButtonsave = "";
+	 String PanelButtonsave = "";
 
 	private void analyzePanelButton(byte[] msg) {
 		if (PanelButtonsave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -245,7 +245,7 @@ public class SSChery extends AnalyzeUtils {
 
 	}
 
-	static String carData1Save = "";
+	 String carData1Save = "";
 
 	private void analyzeCarInfoData1(byte[] msg) {
 		if (carData1Save.equals(BytesUtil.bytesToHexString(msg))) {
@@ -268,7 +268,7 @@ public class SSChery extends AnalyzeUtils {
 
 	}
 
-	static String carDataSave = "";
+	 String carDataSave = "";
 
 	private void analyzeCarInfoData(byte[] msg) {
 		if (carDataSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -340,8 +340,8 @@ public class SSChery extends AnalyzeUtils {
 
 	}
 
-	static String radarSave = "";
-	static int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+	 String radarSave = "";
+	 int temps[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 	void analyzeRadarData(byte[] msg) {
 		if (radarSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -390,7 +390,7 @@ public class SSChery extends AnalyzeUtils {
 		// //////////雷达显示方式没做/////////////////////
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub

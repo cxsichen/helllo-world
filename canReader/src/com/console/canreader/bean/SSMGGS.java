@@ -147,10 +147,10 @@ public class SSMGGS extends AnalyzeUtils {
 		}
 	}
 	
-	static String[] strGroup={"发动机故障","发动机排放故障"
+	 String[] strGroup={"发动机故障","发动机排放故障"
 		,"安全气囊警告指示灯","安全带未系警告灯亮","发动机冷却液温度灯  高温"
 		,"发动机冷却液温度灯  高温闪","EPB系统故障警告灯亮"};
-	static String carInfoSave_12 = "";
+	 String carInfoSave_12 = "";
 
 	void analyzeCarInfoData_12(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -169,7 +169,7 @@ public class SSMGGS extends AnalyzeUtils {
 		}
 	}
 	
-	static String carInfoSave_11 = "";
+	 String carInfoSave_11 = "";
 
 	void analyzeCarInfoData_11(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -208,7 +208,7 @@ public class SSMGGS extends AnalyzeUtils {
 	        return str;
 	    }
 	
-	static String carInfoSave_10 = "";
+	 String carInfoSave_10 = "";
 
 	void analyzeCarInfoData_10(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -235,7 +235,7 @@ public class SSMGGS extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_9 = "";
+	 String carInfoSave_9 = "";
 
 	void analyzeCarInfoData_9(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -259,7 +259,7 @@ public class SSMGGS extends AnalyzeUtils {
 
 	}
 	
-	static String carInfoSave_8 = "";
+	 String carInfoSave_8 = "";
 
 	void analyzeCarInfoData_8(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -275,7 +275,7 @@ public class SSMGGS extends AnalyzeUtils {
 		mCanInfo.BACK_RIGHT_DOORLOCK = (int) ((msg[7] >> 4) & 0x01) ;
 	}
 	
-	static String carInfoSave_7 = "";
+	 String carInfoSave_7 = "";
 
 	void analyzeCarInfoData_7(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -295,7 +295,7 @@ public class SSMGGS extends AnalyzeUtils {
 		mCanInfo.THROTTLE_CONTROL= (int) (msg[11] & 0xFF);
 	}
 	
-	static String carInfoSave_6 = "";
+	 String carInfoSave_6 = "";
 
 	void analyzeCarInfoData_6(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -320,7 +320,7 @@ public class SSMGGS extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_5 = "";
+	 String carInfoSave_5 = "";
 
 	void analyzeCarInfoData_5(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -368,7 +368,7 @@ public class SSMGGS extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_4 = "";
+	 String carInfoSave_4 = "";
 
 	void analyzeCarInfoData_4(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -386,7 +386,7 @@ public class SSMGGS extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_2 = "";
+	 String carInfoSave_2 = "";
 
 	void analyzeCarInfoData_2(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -417,7 +417,7 @@ public class SSMGGS extends AnalyzeUtils {
 
 	}
 
-	static String KnobButtonDataSave = "";
+	 String KnobButtonDataSave = "";
 
 	private void analyzeKnobButtonData(byte[] msg) {
 
@@ -444,7 +444,7 @@ public class SSMGGS extends AnalyzeUtils {
 		mCanInfo.CHANGE_STATUS = 2;
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -465,8 +465,8 @@ public class SSMGGS extends AnalyzeUtils {
 				| ((int) (msg[6] >> 0) & 0x01);
 	}
 
-	static String carInfoSave = "";
-	static int buttonTemp = 0;
+	 String carInfoSave = "";
+	 int buttonTemp = 0;
 
 	void analyzeCarInfoData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -539,7 +539,7 @@ public class SSMGGS extends AnalyzeUtils {
 		mCanInfo.DRIVING_SPEED = ((int) msg[5] & 0xFF);
 	}
 
-	static String SteeringButtonStatusDataSave = "";
+	 String SteeringButtonStatusDataSave = "";
 
 	void analyzeSteeringButtonData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -584,7 +584,7 @@ public class SSMGGS extends AnalyzeUtils {
 		mCanInfo.STEERING_BUTTON_STATUS = (int) (msg[5] & 0xFF);
 	}
 
-	static String radarSave = "";
+	 String radarSave = "";
 	int temps[] = { 0, 0, 0, 0 };
 
 	void analyzeRadarData(byte[] msg) {
@@ -614,7 +614,7 @@ public class SSMGGS extends AnalyzeUtils {
 
 	}
 
-	static String carInfoSave_3 = "";
+	 String carInfoSave_3 = "";
 
 	void analyzeCarInfoData_3(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -640,7 +640,7 @@ public class SSMGGS extends AnalyzeUtils {
 
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub

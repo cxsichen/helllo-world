@@ -79,7 +79,7 @@ public class SSHyundai extends AnalyzeUtils {
 		}
 	}
 
-	static String SteeringButtonStatusDataSave = "";
+	 String SteeringButtonStatusDataSave = "";
 
 	void analyzeSteeringButtonData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -126,7 +126,7 @@ public class SSHyundai extends AnalyzeUtils {
 		mCanInfo.STEERING_BUTTON_STATUS = (int) (msg[7] & 0xFF);
 	}
 
-	static String airConSave = "";
+	 String airConSave = "";
 
 	void analyzeAirConditionData(byte[] msg) {
 		// TODO Auto-generated method stub
@@ -177,7 +177,7 @@ public class SSHyundai extends AnalyzeUtils {
 		mCanInfo.OUTSIDE_TEMPERATURE = temp * 0.5f - 40f;
 	}
 
-	static String carInfoSave = "";
+	 String carInfoSave = "";
 
 	void analyzeCarInfoData(byte[] msg) {
 		if (carInfoSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -200,7 +200,7 @@ public class SSHyundai extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_1 = "";
+	 String carInfoSave_1 = "";
 
 	void analyzeCarInfoData_1(byte[] msg) {
 		if (carInfoSave_1.equals(BytesUtil.bytesToHexString(msg))) {
@@ -214,7 +214,7 @@ public class SSHyundai extends AnalyzeUtils {
 		}
 	}
 
-	static String carInfoSave_2 = "";
+	 String carInfoSave_2 = "";
 
 	void analyzeCarInfoData_2(byte[] msg) {
 		if (carInfoSave_2.equals(BytesUtil.bytesToHexString(msg))) {
@@ -232,7 +232,7 @@ public class SSHyundai extends AnalyzeUtils {
 		mCanInfo.EQL_MUTE = (int) (msg[10] & 0xff);
 	}
 
-	static String VirtualDataSave = "";
+	 String VirtualDataSave = "";
 
 	private void analyzeVirtualData(byte[] msg) {
 		if (VirtualDataSave.equals(BytesUtil.bytesToHexString(msg))) {
@@ -277,7 +277,7 @@ public class SSHyundai extends AnalyzeUtils {
 		mCanInfo.STEERING_BUTTON_STATUS = temp;
 	}
 
-	static String KnobButtonDataSave = "";
+	 String KnobButtonDataSave = "";
 
 	private void analyzeKnobButtonData(byte[] msg) {
 		if (KnobButtonDataSave.equals(BytesUtil.bytesToHexString(msg))) {

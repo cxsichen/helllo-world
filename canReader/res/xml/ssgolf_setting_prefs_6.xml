@@ -1,0 +1,63 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="MFD_CURRENT_CONSUMPTION"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="当前油耗  " />
+    <SwitchPreference
+        android:key="MFD_AVERAGE_CONSUMPTION"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="平均油耗  " />
+    <SwitchPreference
+        android:key="MFD_CONVENIENCE_CONSUMERS"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="舒适性用电器  " />
+    <SwitchPreference
+        android:key="MFD_ECO_TIPS"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="经济运行提示  " />
+    <SwitchPreference
+        android:key="MFD_TRAVELLING_TIME"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="行驶时间  " />
+    <SwitchPreference
+        android:key="MFD_DISTANCE_TRAVELED"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="行驶里程  " />
+    <SwitchPreference
+        android:key="MFD_AVERAGE_SPEED"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="平均速度  " />
+    <SwitchPreference
+        android:key="MFD_DIGITAL_SPEED_DISPLAY"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="数字式车速显示   " />
+    <SwitchPreference
+        android:key="MFD_SPEED_WARINING"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="车速报警  " />
+    <SwitchPreference
+        android:key="MFD_OIL_TEMP"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="油温    " />
+    
+    
+    <Preference
+        android:key="MFD_RESET1"
+        android:title="恢复自启动以后的行驶数据 " />
+    
+    <Preference
+        android:key="MFD_RESET2"
+        android:title="恢复长时间的行驶数据    " />
+
+</PreferenceScreen>
