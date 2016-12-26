@@ -1,0 +1,116 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="RADAR_PARK"
+        android:summaryOff="声音"
+        android:summaryOn="声音+显示"
+        android:title="雷达泊车" />
+
+    <ListPreference
+        android:entries="@array/ssfr_0_entries"
+        android:entryValues="@array/ssfr_0_values"
+        android:key="LANE_DEPARTURE"
+        android:persistent="false"
+        android:title="车道偏离校正力度" />
+    <ListPreference
+        android:entries="@array/ssfr_1_entries"
+        android:entryValues="@array/ssfr_1_values"
+        android:key="PAUSE_LKAS_SIGN"
+        android:persistent="false"
+        android:title="车道偏离警告" />
+
+    <SwitchPreference
+        android:key="DETECT_FRONT_CAR"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="前方碰撞报警自动制动" />
+    
+    <SwitchPreference
+        android:key="FRONT_DANGER_WAIRNG_DISTANCE"
+        android:summaryOff="近"
+        android:summaryOn="远"
+        android:title="前方碰撞报警警告" />
+    
+
+    
+    
+    <SwitchPreference
+        android:key="AUTO_PARK_CAR_STATUS"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="自动驻车制动" />
+    
+    
+    
+    <SwitchPreference
+        android:key="PARKING_STATUS"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="坡道起步辅助" />
+    
+    
+      <SwitchPreference
+        android:key="CONVENIENCE_REVERSE_BACKWIPE_AUTO"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="雨量感应式雨刷" />
+      
+      
+        <SwitchPreference
+        android:key="CONVENIENCE_SEAT_PARK_MOVE"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="影像泊车动态引导线" />
+        
+         <SwitchPreference
+        android:key="CONVENIENCE_RIPE_PARK_MOVE"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="影像泊车固定引导线" />
+         
+         
+           <ListPreference
+        android:entries="@array/ssfr_2_entries"
+        android:entryValues="@array/ssfr_2_values"
+        android:key="CRASHPROOF_SIDE_BLIND_AREA"
+        android:persistent="false"
+        android:title="盲点报警" />
+           
+           
+           <ListPreference
+        android:entries="@array/ssfr_3_entries"
+        android:entryValues="@array/ssfr_3_values"
+        android:key="FOG_LAMP_STATUS"
+        android:persistent="false"
+        android:title="自动开启舒适系统" />
+           
+           
+            <SwitchPreference
+        android:key="DAYTIME_LAMP_STATUS"
+        android:summaryOff="否"
+        android:summaryOn="是"
+        android:title="缩回手刹允许制动系统服务" />
+            
+            
+                <SwitchPreference
+        android:key="AUTO_LAMP_STATUS"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="后ParkSense雷达泊车制动辅助" />
+                
+                
+                 <ListPreference
+        android:entries="@array/ssfr_0_entries"
+        android:entryValues="@array/ssfr_0_values"
+        android:key="GO_HOME_LAMP_STATUS"
+        android:persistent="false"
+        android:title="后ParkSense音量" />
+                 
+                  <ListPreference
+        android:entries="@array/ssfr_0_entries"
+        android:entryValues="@array/ssfr_0_values"
+        android:key="WELCOME_PERSION_ILL_STATUS"
+        android:persistent="false"
+        android:title="前ParkSense音量" />
+
+</PreferenceScreen>

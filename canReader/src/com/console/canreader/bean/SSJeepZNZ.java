@@ -76,8 +76,6 @@ public class SSJeepZNZ extends AnalyzeUtils {
 		} else {
 			mCanInfo.AUTOMATIC_LAMP_CLOSE = (int) ((msg[5] >> 0) & 0x03);
 		}
-		Log.i("cxs","====mCanInfo.LIGHT_TOP_LIGHT ===="+mCanInfo.LIGHT_TOP_LIGHT );
-		Log.i("cxs","====mCanInfo.AUTOMATIC_LAMP_CLOSE===="+mCanInfo.AUTOMATIC_LAMP_CLOSE);
 	}
 
 	 String carInfoSave_6 = "";

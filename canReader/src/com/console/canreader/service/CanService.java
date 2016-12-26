@@ -1012,6 +1012,21 @@ public class CanService extends Service {
 				+ "01"));
 	}
 
+	private void syncTimeWithMsgFjeep() {
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int mouth = c.get(Calendar.MONTH);
+		int date = c.get(Calendar.DATE);
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int minute = c.get(Calendar.MINUTE);
+		int second = c.get(Calendar.SECOND);
+		writeCanPort(BytesUtil.addSSCheckBit("5AA50ACB00"
+				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
+				+ "000001" + BytesUtil.changIntHex(year % 2000)
+				+ BytesUtil.changIntHex(mouth + 1)
+				+ BytesUtil.changIntHex(date) + "02"));
+	}
+
 	private void rzcSyncTimeWithMsg_1(String str) {
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
@@ -1069,6 +1084,15 @@ public class CanService extends Service {
 			break;
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			switch (canName) {
+			case Contacts.CANNAMEGROUP.SSJeepFreedomGH:
+			case Contacts.CANNAMEGROUP.SSJeepFreedomGM:
+			case Contacts.CANNAMEGROUP.SSJeepFreedomGL:
+			case Contacts.CANNAMEGROUP.SSJeepFreedomX:
+				syncTimeWithMsgFjeep(); // 吉普
+				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
+						1000 * 60);
+				break;
 			case Contacts.CANNAMEGROUP.SSChery:
 			case Contacts.CANNAMEGROUP.SSCheryAR5:
 			case Contacts.CANNAMEGROUP.SSCheryR5:
@@ -1131,9 +1155,9 @@ public class CanService extends Service {
 
 	private void connectCanDevice() {
 		// TODO Auto-generated method stub
-		//初始化空调状态
+		// 初始化空调状态
 		Settings.System.putInt(getContentResolver(), "no_aircon", 0);
-		
+
 		mHandler.sendEmptyMessage(Contacts.MSG_MSG_CYCLE);
 		switch (canFirtName) {
 		case Contacts.CANFISRTNAMEGROUP.RAISE: // 睿志诚
@@ -1146,11 +1170,23 @@ public class CanService extends Service {
 			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			writeCanPort(BytesUtil.addRZCCheckBit(Contacts.CONNECTMSG));
 			break;
-			
+
 		case Contacts.CANFISRTNAMEGROUP.HIWORLD: // 尚摄
 			switch (canName) {
+			case Contacts.CANNAMEGROUP.SSJeepFreedomGL:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240100")); // 2016款吉普自由光低配
+				break;
+			case Contacts.CANNAMEGROUP.SSJeepFreedomGM:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240200")); // 2016款吉普自由光中配
+				break;
+			case Contacts.CANNAMEGROUP.SSJeepFreedomGH:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240300")); // 2016款吉普自由光高配
+				break;
+			case Contacts.CANNAMEGROUP.SSJeepFreedomX:
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240400")); // 2016款吉普自由侠
+				break;
 			case Contacts.CANNAMEGROUP.SSCHANGANYXH:
-				writeCanPort(BytesUtil.addSSCheckBit("5AA502240513")); //悦翔V7中高配
+				writeCanPort(BytesUtil.addSSCheckBit("5AA502240513")); // 悦翔V7中高配
 				break;
 			case Contacts.CANNAMEGROUP.SSCHANGANYXL:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240613")); // 悦翔V7低配
@@ -1283,6 +1319,5 @@ public class CanService extends Service {
 			break;
 		}
 	}
-	
 
 }

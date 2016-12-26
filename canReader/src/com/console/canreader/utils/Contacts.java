@@ -58,6 +58,7 @@ public class Contacts {
 		public static final int EQ = 47; // 打开音效设置界面
 		public static final int SETTING = 48; // 打开系统设置界面
 		public static final int AUXCHANGE = 49; // 打开关闭AUX二合一
+		public static final int BROSWE =50; // 打开浏览器
 		/*-----------无按键状态--------*/
 		public static final int KNOBVOLUME = 101; // 音量旋钮 无按键状态       带值记忆
 		public static final int KNOBSELECTOR = 102; // 选择旋钮 无按键状态    带值记忆              
@@ -156,6 +157,12 @@ public class Contacts {
 		//吉普
 		public static final String SSJeep = "SSGE"; // 吉普
 		public static final String SSJeepZNZ = "SSJeepZNZ"; // 吉普指南者
+		public static final String SSJeepFreedom = "SSJeepFreedom";   //2016款吉普自由
+		public static final String SSJeepFreedomX = "SSJeepFreedomX"; // 2016款吉普自由侠
+		public static final String SSJeepFreedomG= "SSJeepFreedomG"; // 2016款吉普自由光
+		public static final String SSJeepFreedomGL= "SSJeepFreedomGL"; // 2016款吉普自由光低配
+		public static final String SSJeepFreedomGM= "SSJeepFreedomGM"; // 2016款吉普自由光中配
+		public static final String SSJeepFreedomGH= "SSJeepFreedomGH"; // 2016款吉普自由光高配
 		// 上汽
 		public static final String SSRoewe360 = "SSRoewe360"; // 荣威360
 		public static final String SSMGGS = "SSMGGS";         // 名爵锐腾

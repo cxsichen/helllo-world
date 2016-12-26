@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
@@ -25,7 +26,7 @@ import com.console.canreader.utils.Contacts;
 import com.console.canreader.utils.PreferenceUtil;
 
 public class KeyDealer {
-   public static final String APPLISTNAME = "Console_applist_name";
+	public static final String APPLISTNAME = "Console_applist_name";
 	public static final String TXZ_PKG = "com.colink.zzj.txzassistant";
 	public static final String TXZ_SERVICE_CLASS = "com.colink.zzj.txzassistant.AssistantService";
 	public static final String ACTION_START_TALK = "cn.yunzhisheng.intent.action.START_TALK";
@@ -145,6 +146,10 @@ public class KeyDealer {
 			case Contacts.KEYEVENT.AUX:
 				Log.i("cxs", "-------Contacts.KEYEVENT.AUX-------");
 				handleAUX();
+				break;
+			case Contacts.KEYEVENT.BROSWE:
+				Log.i("cxs", "-------Contacts.KEYEVENT.BROSWE-------");
+				handleBROSWE();
 				break;
 			case Contacts.KEYEVENT.AUXCHANGE:
 				Log.i("cxs", "-------Contacts.KEYEVENT.AUXCHANGE-------");
@@ -376,16 +381,15 @@ public class KeyDealer {
 		PreferenceUtil.setKnobVolValue(context, 0);
 		PreferenceUtil.setKnobSelValue(context, 0);
 	}
-	
+
 	public void handleKnobSelect(int knobValue) {
 		if (knobValue > 0) {
 			handleMenuDown();
 		}
-		if (knobValue <0) {
+		if (knobValue < 0) {
 			handleMenuUp();
 		}
 	}
-
 
 	public void handleKnobSelector(int knobValue) {
 		int temp = knobValue - PreferenceUtil.getKnobSelValue(context);
@@ -423,7 +427,7 @@ public class KeyDealer {
 			Log.i("xxx", "start startAcForAir error");
 		}
 	}
-	
+
 	public void handleKnobVolumeUp(int knobValue) {
 		if (mAudioManager == null)
 			mAudioManager = (AudioManager) context
@@ -431,7 +435,7 @@ public class KeyDealer {
 		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 		handleVolume(context, cur_music + knobValue);
 	}
-	
+
 	public void handleKnobVolumeDown(int knobValue) {
 		if (mAudioManager == null)
 			mAudioManager = (AudioManager) context
@@ -439,7 +443,6 @@ public class KeyDealer {
 		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 		handleVolume(context, cur_music - knobValue);
 	}
-
 
 	public void handleKnobVolume(int knobValue) {
 		if (mAudioManager == null)
@@ -560,7 +563,7 @@ public class KeyDealer {
 			handleMenuUp();
 		}
 	}
-	
+
 	private void handleFM_CHANGE_FREQUENCY(float value) {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent();
@@ -587,16 +590,27 @@ public class KeyDealer {
 		context.startService(intent);
 	}
 
+	private void handleBROSWE() {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		Uri content_url = Uri.parse("http://www.baidu.com");
+		intent.setData(content_url);
+		context.startActivity(intent);
+	}
+
 	private void handleAUX() {
 		// TODO Auto-generated method stub
 		openApplication(context, "com.console.auxapp");
 	}
-	
+
 	private void handleAUXCHANGE() {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
 		try {
 			Intent intent = new Intent();
-			intent.setClassName("com.console.auxapp", "com.console.auxapp.MainActivity");
+			intent.setClassName("com.console.auxapp",
+					"com.console.auxapp.MainActivity");
 			intent.putExtra("aux", 1);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(intent);
@@ -642,14 +656,16 @@ public class KeyDealer {
 			// TODO: handle exception
 		}
 	}
-	private void handleSETTING(){
+
+	private void handleSETTING() {
 		openApplication(context, "com.android.settings");
 	}
+
 	private void handleVIDEO() {
 		// TODO Auto-generated method stub
 		openApplication(context, "com.mxtech.videoplayer.pro");
 	}
-	
+
 	private void handleEQ() {
 		// TODO Auto-generated method stub
 		openApplication(context, "com.console.equalizer");
@@ -792,7 +808,7 @@ public class KeyDealer {
 				msg.arg1 = canInfo.CAR_VOLUME_KNOB;
 				mHandler.sendMessage(msg);
 			}
-			break;			
+			break;
 		case Contacts.KEYEVENT.KNOBVOLUMEDOWN:
 			if (System.currentTimeMillis() - lastSendTime > 200) {
 				lastSendTime = System.currentTimeMillis();
@@ -924,17 +940,19 @@ public class KeyDealer {
 			switch (canInfo.STEERING_BUTTON_MODE) {
 			case Contacts.VOL_UP:
 				mHandler.sendEmptyMessage(Contacts.VOL_UP);
-				/*if (System.currentTimeMillis() - lastSendTime > 200) {
-					lastSendTime = System.currentTimeMillis();
-					mHandler.sendEmptyMessage(Contacts.VOL_UP);
-				}*/
+				/*
+				 * if (System.currentTimeMillis() - lastSendTime > 200) {
+				 * lastSendTime = System.currentTimeMillis();
+				 * mHandler.sendEmptyMessage(Contacts.VOL_UP); }
+				 */
 				break;
 			case Contacts.VOL_DOWN:
 				mHandler.sendEmptyMessage(Contacts.VOL_DOWN);
-			/*	if (System.currentTimeMillis() - lastSendTime > 200) {
-					lastSendTime = System.currentTimeMillis();
-					mHandler.sendEmptyMessage(Contacts.VOL_DOWN);
-				}*/
+				/*
+				 * if (System.currentTimeMillis() - lastSendTime > 200) {
+				 * lastSendTime = System.currentTimeMillis();
+				 * mHandler.sendEmptyMessage(Contacts.VOL_DOWN); }
+				 */
 				break;
 			case Contacts.MUTE:
 				if (System.currentTimeMillis() - lastSendTime > 200) {
@@ -1006,7 +1024,8 @@ public class KeyDealer {
 				break;
 			case Contacts.KEYEVENT.AUXCHANGE:
 				mHandler.removeMessages(Contacts.KEYEVENT.AUXCHANGE);
-				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.AUXCHANGE, 200);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.AUXCHANGE,
+						200);
 				break;
 			case Contacts.KEYEVENT.MUSIC_PLAY_PAUSE:
 				mHandler.removeMessages(Contacts.KEYEVENT.MUSIC_PLAY_PAUSE);
@@ -1119,6 +1138,10 @@ public class KeyDealer {
 				mHandler.removeMessages(Contacts.KEYEVENT.EQ);
 				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.EQ, 200);
 				break;
+			case Contacts.KEYEVENT.BROSWE:
+				mHandler.removeMessages(Contacts.KEYEVENT.BROSWE);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.BROSWE, 200);
+				break;
 			case Contacts.KEYEVENT.SETTING:
 				mHandler.removeMessages(Contacts.KEYEVENT.SETTING);
 				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.SETTING, 200);
@@ -1189,16 +1212,17 @@ public class KeyDealer {
 			e.printStackTrace();
 		}
 	}
-	
-	public Boolean isPhoneCommig(){
-		Boolean IsPhoneComming=false;
-		String appName =Settings.System.getString(context.getContentResolver(),APPLISTNAME); 
-		if(appName==null)
+
+	public Boolean isPhoneCommig() {
+		Boolean IsPhoneComming = false;
+		String appName = Settings.System.getString(
+				context.getContentResolver(), APPLISTNAME);
+		if (appName == null)
 			return IsPhoneComming;
-		if(appName.contains("com.mtk.bluetooth.PhoneCallActivity")){
-			IsPhoneComming=true;
+		if (appName.contains("com.mtk.bluetooth.PhoneCallActivity")) {
+			IsPhoneComming = true;
 		}
-		return IsPhoneComming;		
+		return IsPhoneComming;
 	}
 
 }

@@ -37,6 +37,13 @@ public class BeanFactory {
 	private static String adjustcanName(String canName) {
 		// TODO Auto-generated method stub
 		switch (canName) {
+		case Contacts.CANNAMEGROUP.SSJeepFreedomX:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomG:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGL:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGM:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGH:
+			canName = Contacts.CANNAMEGROUP.SSJeepFreedom; // 2016款吉普自由
+			break;
 		case Contacts.CANNAMEGROUP.SSCHANGANYXL:
 		case Contacts.CANNAMEGROUP.SSCHANGANYXH:
 			canName = Contacts.CANNAMEGROUP.SSCHANGANYX; // 长安汽车

@@ -1,0 +1,18 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="DSP" >
+        <ListPreference
+            android:entries="@array/ssfr_10_entries"
+            android:entryValues="@array/ssfr_10_values"
+            android:key="VOL_LINK_CARSPEED"
+            android:persistent="false"
+            android:title="音量与车速联动调节" />
+
+        <SwitchPreference
+            android:key="DSP_SURROUND"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="环绕" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

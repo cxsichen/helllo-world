@@ -85,7 +85,7 @@ public class VerticalSeekBar extends SeekBar {
 		float temp = 100f / usrProgress;
 		setProgress((int) (i * temp));
 		onSizeChanged(getWidth(), getHeight(), 0, 0);
-		mOnProgressChangedListener.OnChange((int) ((i * temp*usrProgress)/100));
+		mOnProgressChangedListener.OnChange((int) i);
 	}
 
 	public interface OnProgressChangedListener {

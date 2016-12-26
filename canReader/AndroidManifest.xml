@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.console.canreader"
+    android:sharedUserId="android.uid.system" 
     android:versionCode="1"
     android:versionName="1.0" >
     <!--     android:sharedUserId="android.uid.system" -->
@@ -78,6 +79,17 @@
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
+        <activity
+            android:name="com.console.canreader.fragment.SSJeepFreedom.MenuPaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.fragment.SSJeepFreedom.MenuPaSelectActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
         <activity
             android:name="com.console.canreader.activity.MenuPanoramaAcitivity"
             android:label="@string/app_name"
@@ -213,6 +225,13 @@
             android:launchMode="singleTask" >
         </activity>
         <!-- 空调控制activity -->
+         <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSJeepFreedom.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
 	
         <!-- 标致空调控制的activity -->
         <activity
@@ -222,6 +241,13 @@
             android:launchMode="singleTask" >
         </activity>
         <!-- 标致空调控制的activity -->
+        <!-- cd控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSJeepFreedom.CdContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- cd控制activity -->
         <service
             android:name="com.console.canreader.service.CanService"
             android:enabled="true"

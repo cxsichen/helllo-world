@@ -1,0 +1,31 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:entries="@array/ssfr_9_entries"
+        android:entryValues="@array/ssfr_9_values"
+        android:key="UNIT_PRESSURE"
+        android:persistent="false"
+        android:title="胎压" />
+
+    <SwitchPreference
+        android:key="UNIT_TEMPERATURE"
+        android:summaryOff="摄氏"
+        android:summaryOn="华氏"
+        android:title="温度" />
+    
+    <SwitchPreference
+        android:key="UNIT_CONSUMPTION"
+        android:summaryOff="L/100km"
+        android:summaryOn="km/L"
+        android:title="油耗" />
+    
+    
+    <SwitchPreference
+        android:key="UNIT_TYPE"
+        android:summaryOff="公制"
+        android:summaryOn="美制"
+        android:title="单位制" />
+
+
+
+</PreferenceScreen>

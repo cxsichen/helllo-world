@@ -166,6 +166,172 @@
         <item>com.console.canreader.fragment.SSJeepZNZ.CarInfoFragment</item>
     </string-array>
     <!-- 尚摄  指南者 -->
+    
+     <!-- 尚摄 自由光 -->
+    <string-array name="SSJeepFreedomG_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>1</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepFreedomG_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepFreedomG_fragment">
+        <item>com.console.canreader.fragment.SSJeepFreedom.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepFreedomG_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯和发动机</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepFreedomG_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepFreedom.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LightEngineeFragment</item>  
+       <item>com.console.canreader.fragment.SSJeepFreedom.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.UnitFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄  自由光 -->
+    
+    <!-- 尚摄 自由光低配 -->
+    <string-array name="SSJeepFreedomGL_main">
+        <item>0</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>1</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepFreedomGL_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGL_fragment">
+        <item>com.console.canreader.fragment.SSJeepFreedom.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepFreedomGL_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯和发动机</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGL_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepFreedom.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LightEngineeFragment1</item>  
+       <item>com.console.canreader.fragment.SSJeepFreedom.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.UnitFragment1</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄  自由光低配  -->
+    
+    
+    <!-- 尚摄 自由光中配 -->
+    <string-array name="SSJeepFreedomGM_main">
+        <item>0</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>1</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepFreedomGM_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGM_fragment">
+        <item>com.console.canreader.fragment.SSJeepFreedom.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepFreedomGM_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯和发动机</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGM_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepFreedom.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LightEngineeFragment1</item>  
+       <item>com.console.canreader.fragment.SSJeepFreedom.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.UnitFragment1</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄  自由光中配  -->
+    
+      <!-- 尚摄 自由光高配 -->
+    <string-array name="SSJeepFreedomGH_main">
+        <item>0</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>1</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepFreedomGH_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGH_fragment">
+        <item>com.console.canreader.fragment.SSJeepFreedom.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepFreedomGH_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯和发动机</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGH_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepFreedom.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LightEngineeFragment1</item>  
+       <item>com.console.canreader.fragment.SSJeepFreedom.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.UnitFragment1</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄  自由光高配  -->
+    
+    <!-- 尚摄 自由侠 -->
+    <string-array name="SSJeepFreedomX_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepFreedomX_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepFreedomX_fragment">
+        <item>com.console.canreader.fragment.SSJeepFreedom.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepFreedomX_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯和发动机</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepFreedomX_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepFreedom.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LightEngineeFragment</item>  
+       <item>com.console.canreader.fragment.SSJeepFreedom.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.UnitFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄   自由侠  -->
     <!-- 吉普-->
 
     <!-- 丰田 -->
@@ -3280,4 +3446,142 @@
         <item>2</item> 
     </string-array>
     
+    <string-array name="ssfr_0_entries">
+        <item>低</item>
+        <item>中</item>
+        <item>高</item>
+    </string-array>
+    <string-array name="ssfr_0_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="ssfr_1_entries">
+        <item>早</item>
+        <item>中</item>
+        <item>迟</item>
+    </string-array>
+    <string-array name="ssfr_1_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+        <string-array name="ssfr_2_entries">
+        <item>关闭</item>
+        <item>车灯</item>
+        <item>车灯+报警</item>
+    </string-array>
+    <string-array name="ssfr_2_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+      <string-array name="ssfr_3_entries">
+        <item>关闭</item>
+        <item>远程</item>
+        <item>全部</item>
+    </string-array>
+    <string-array name="ssfr_3_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    
+     <string-array name="ssfr_4_entries">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+        <item>4</item> 
+        <item>5</item> 
+        <item>6</item> 
+    </string-array>
+    <string-array name="ssfr_4_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+        <item>4</item> 
+        <item>5</item> 
+        <item>6</item> 
+    </string-array>
+    
+     <string-array name="ssfr_5_entries">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    <string-array name="ssfr_5_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    
+     <string-array name="ssfr_6_entries">
+        <item>0秒</item>
+        <item>45秒</item>
+        <item>5分</item> 
+        <item>10分</item> 
+    </string-array>
+    <string-array name="ssfr_6_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    
+     <string-array name="ssfr_7_entries">
+        <item>0秒</item>
+        <item>30秒</item>
+        <item>60秒</item> 
+        <item>90秒</item> 
+    </string-array>
+    <string-array name="ssfr_7_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    
+    
+     <string-array name="ssfr_8_entries">
+        <item>OFF</item>
+        <item>1st PRESS(ON)</item>
+        <item>2nd PRESS(ON)</item> 
+    </string-array>
+    <string-array name="ssfr_8_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="ssfr_9_entries">
+        <item>psi</item>
+        <item>kpa</item>
+        <item>bar</item> 
+    </string-array>
+    <string-array name="ssfr_9_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="ssfr_10_entries">
+        <item>关</item>
+        <item>1等级</item>
+        <item>2等级</item> 
+        <item>3等级</item>
+    </string-array>
+    <string-array name="ssfr_10_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item>
+    </string-array>
 </resources>

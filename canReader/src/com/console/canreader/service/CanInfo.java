@@ -409,11 +409,13 @@ public class CanInfo implements Parcelable {
 	public int MULTI_MEIDA_SOURCE=0;           //当前源
 	public int MULTI_MEIDA_PLAYING_NUM=0;       //当前播放曲目
 	public int MULTI_MEIDA_WHOLE_NUM=0;       //总曲目
+	public int MULTI_MEIDA_PLAYING_WHOLE_TIME=0;       //当前曲目总时长
+	public int MULTI_MEIDA_PLAYING_TIME=0;       //当前CD曲目播放时间
 	public int MULTI_MEIDA_PLAYING_MINUTE=0;       //当前播放时间 分钟
 	public int MULTI_MEIDA_PLAYING_SECOND=0;       //当前播放时间 秒
 	public int MULTI_MEIDA_PLAYING_PROGRESS=0;       //当前播放进度
 	public int MULTI_MEIDA_PLAYING_STATUS=0;       //多媒体状态
-	
+	public int MULTI_MEIDA_CD_STATUS=0;       //碟状态
 	/*--  车灯-----*/
 	public int LIGHT_SWITCH_ON_TIME=0;       //接通时间
 	public int LIGHT_AUTO_HEADLIGHT_RAIN=0;       //自动行车灯(雨天)
@@ -451,6 +453,7 @@ public class CanInfo implements Parcelable {
 	public int WIPER_REAR_WIPING_REVERSING=0;   //倒车档时后窗玻璃刮水 
 	public int MIRROR_FOLD_PARKING=0;   //驻车时内折  
 	/*-----驾驶辅助系统设定--------*/
+	public int RADAR_PARK = 0;      //雷达泊车
 	public int LANE_DEPARTURE = 0; //车道偏离辅助系统设定
 	public int PAUSE_LKAS_SIGN = 0; //暂停LKAS提示音
 	public int DETECT_FRONT_CAR = 0; //ACC前车探知提示音
@@ -507,6 +510,7 @@ public class CanInfo implements Parcelable {
 	public int UNIT_VOLUME= 0; //容积
 //	public int UNIT_CONSUMPTION= 0; //油耗
 	public int UNIT_PRESSURE= 0; //轮胎压力
+	public int UNIT_TYPE= 0;     //单位制
 	/*-----胎压设定-------*/
 	public int TPMS_SHOW= 0; //轮胎压力监控显示 
 	public int TPMS_WINTER_SPEED_WARNING= 0; //冬季轮胎车速报警
