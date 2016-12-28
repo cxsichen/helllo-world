@@ -8,6 +8,7 @@ import android.util.Log;
 public class PreferenceUtil {
 	
 	public static final String KEY_SSHyundai_CAR_TYPE = "KEY_SSHyundai_CAR_TYPE";
+	public static final String RZCVolkswagenGolf = "RZCVolkswagenGolf"; // 大众高尔夫
 	private final static String CARTYPE = "carType";
 	private final static String CANTYPE = "canType";
 	public static final String CAN_INFORMATON = "CAN_Informaion";
@@ -15,7 +16,13 @@ public class PreferenceUtil {
 	public static final String  SSNissan = "SSNissan"; 
 	public static final String  SSToyotaRAV4 = "SSToyotaRAV4";         //RAV4
 	public static final String SSHonda15CRV = "SSHonda15CRV"; // 15CRV
+	public static final String SSHonda = "SSHonda"; // 本田通用
+	public static final String SSHondaLP = "SSHondaLP"; // 本田凌派
+	public static final String SSHondaSY = "SSHondaSY"; // 16款思域 
+	public static final String SSHondaYG9 = "SSHondaYG9";   //雅阁9代
 	public static final String  SSTrumpchiGS5 = "SSTrumpchiGS5";     //广汽传祺GS5
+	public static final String  SSVolkswagenGolf ="SSVolkswagenGolf";
+	
 	
 	static String[] CanTypeGroup={"RZC","SS"};
 	static String[] CarTypeGroup={"Volkswagen","VolkswagenGolf","Honda","Toyota","ToyotaRZ",

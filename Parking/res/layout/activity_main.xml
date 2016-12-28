@@ -129,4 +129,8 @@
     <include layout="@layout/honda_15crv_layout"
         android:id="@+id/honda_15crv_layout"
         android:visibility="gone" />
+    
+    <include layout="@layout/ssgolf_layout"
+        android:id="@+id/ssgolf_layout"
+        android:visibility="gone" />
 </RelativeLayout>

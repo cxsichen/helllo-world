@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.util.List;
 
 import com.console.parking.control.SSHonda15CRVControl;
+import com.console.parking.control.SSHondaYG9CRVControl;
 import com.console.parking.control.SSToyotaRAV4Control;
 import com.console.parking.control.SSTrumpchiGS5Control;
+import com.console.parking.control.SSVolkswagenGolfControl;
 import com.console.parking.control.SSnissandataControl;
 import com.console.parking.control.dataControl;
 import com.console.parking.util.DisplayUtil;
@@ -59,8 +61,10 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private dataControl mRadarControl;
 	private SSnissandataControl mSSnissandataControl;
 	private SSHonda15CRVControl mSSHonda15CRVControl;
+	private SSHondaYG9CRVControl mSSHondaYG9CRVControl;
 	private SSToyotaRAV4Control mSSToyotaRAV4Control;
 	private SSTrumpchiGS5Control mSSTrumpchiGS5Control;	
+	private SSVolkswagenGolfControl mSSVolkswagenGolfControl;
 	private static final String BACKCARSTATE = "back_car_state";
 	private static final int BACKCARSTATEMSG = 1;
 	private static final int FINISHMSG = 2;
@@ -151,7 +155,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		surface = (TextureView) findViewById(R.id.camera_surface);
 		surface.setSurfaceTextureListener(this);
 		
-		chooseControlLayout();	
+		//chooseControlLayout();	
 		//
 		getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(BACKCARSTATE), true,
@@ -216,6 +220,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			com.example.cjc7150.MainActivity.setmode((byte) 1);
 		// …Ë÷√ΩÁ√Ê
 		dismissSysDialog();
+		chooseControlLayout();	
 	}
 
 	private void dismissSysDialog() {
@@ -407,7 +412,18 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private void chooseControlLayout() {
 		// TODO Auto-generated method stub
 		switch (PreferenceUtil.getCANName(this)) {
+		case PreferenceUtil.SSHondaYG9:
+			getSetting();
+			mSSHondaYG9CRVControl = new SSHondaYG9CRVControl(this, parkingLayout);
+			break;
+		case PreferenceUtil.SSVolkswagenGolf:
+			getSetting();
+			mSSVolkswagenGolfControl = new SSVolkswagenGolfControl(this, parkingLayout);
+			break;
 		case PreferenceUtil.SSHonda15CRV:
+		case PreferenceUtil.SSHonda:
+		case PreferenceUtil.SSHondaLP:
+		case PreferenceUtil.SSHondaSY:
 			getSetting();
 			mSSHonda15CRVControl = new SSHonda15CRVControl(this, parkingLayout);
 			break;
@@ -470,7 +486,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			break;
 		}
 
-
+		
 		int videoMirrorState = android.provider.Settings.System.getInt(
 				getContentResolver(), VIDEOMIRROR, 1);
 		if (videoMirrorState == 1) {
@@ -478,9 +494,12 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			transform.setScale(1, 1, 0, 0);
 			surface.setTransform(transform);
 		} else {
+			int parkingRadarState = android.provider.Settings.System.getInt(
+					getContentResolver(), PARKING_RADAR, 1);
 			Matrix transform = new Matrix();
-			transform.setScale(-1, 1, 400, 0);
+			transform.setScale(-1, 1, parkingRadarState==1?388:512, 0);
 			surface.setTransform(transform);
+		
 		}
 	}
 	

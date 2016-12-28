@@ -4,6 +4,9 @@ import com.console.canreader.service.CanInfo;
 import com.console.canreader.service.ICanCallback;
 import com.console.canreader.service.ICanService;
 import com.console.parking.R;
+import com.console.parking.util.BytesUtil;
+import com.console.parking.util.Contacts;
+import com.console.parking.util.PreferenceUtil;
 import com.console.parking.view.RailLineView;
 
 import android.content.ComponentName;
@@ -66,6 +69,16 @@ public class dataControl {
 				// dealwithPacket(Volkswagen)msg.obj);
 				updateView((CanInfo) msg.obj);
 				break;
+			case 2:
+				switch (PreferenceUtil.getCANName(context)) {
+				case PreferenceUtil.RZCVolkswagenGolf:
+					sendMsg("2e90022900");
+					mHandler.sendEmptyMessageDelayed(2, 1000);
+					break;
+				default:
+					break;
+				}
+				break;
 			default:
 				break;
 			}
@@ -125,26 +138,26 @@ public class dataControl {
 		try {
 			switch (canInfo.CHANGE_STATUS) {
 			case 11:
-				updateView(f1Rd,f1Draws[canInfo.FRONT_LEFT_DISTANCE]);
-				updateView(f2Rd,f2Draws[canInfo.FRONT_MIDDLE_LEFT_DISTANCE]);
-				updateView(f3Rd,f3Draws[canInfo.FRONT_MIDDLE_RIGHT_DISTANCE]);
-				updateView(f4Rd,f4Draws[canInfo.FRONT_RIGHT_DISTANCE]);
-				
-				updateView(r1Rd,r1Draws[canInfo.BACK_LEFT_DISTANCE]);
-				updateView(r2Rd,r2Draws[canInfo.BACK_MIDDLE_LEFT_DISTANCE]);
-				updateView(r3Rd,r3Draws[canInfo.BACK_MIDDLE_RIGHT_DISTANCE]);
-				updateView(r4Rd,r4Draws[canInfo.BACK_RIGHT_DISTANCE]);
+				updateView(f1Rd, f1Draws[canInfo.FRONT_LEFT_DISTANCE]);
+				updateView(f2Rd, f2Draws[canInfo.FRONT_MIDDLE_LEFT_DISTANCE]);
+				updateView(f3Rd, f3Draws[canInfo.FRONT_MIDDLE_RIGHT_DISTANCE]);
+				updateView(f4Rd, f4Draws[canInfo.FRONT_RIGHT_DISTANCE]);
+
+				updateView(r1Rd, r1Draws[canInfo.BACK_LEFT_DISTANCE]);
+				updateView(r2Rd, r2Draws[canInfo.BACK_MIDDLE_LEFT_DISTANCE]);
+				updateView(r3Rd, r3Draws[canInfo.BACK_MIDDLE_RIGHT_DISTANCE]);
+				updateView(r4Rd, r4Draws[canInfo.BACK_RIGHT_DISTANCE]);
 			case 5:
-				updateView(f1Rd,f1Draws[canInfo.FRONT_LEFT_DISTANCE]);
-				updateView(f2Rd,f2Draws[canInfo.FRONT_MIDDLE_LEFT_DISTANCE]);
-				updateView(f3Rd,f3Draws[canInfo.FRONT_MIDDLE_RIGHT_DISTANCE]);
-				updateView(f4Rd,f4Draws[canInfo.FRONT_RIGHT_DISTANCE]);
+				updateView(f1Rd, f1Draws[canInfo.FRONT_LEFT_DISTANCE]);
+				updateView(f2Rd, f2Draws[canInfo.FRONT_MIDDLE_LEFT_DISTANCE]);
+				updateView(f3Rd, f3Draws[canInfo.FRONT_MIDDLE_RIGHT_DISTANCE]);
+				updateView(f4Rd, f4Draws[canInfo.FRONT_RIGHT_DISTANCE]);
 				break;
 			case 4:
-				updateView(r1Rd,r1Draws[canInfo.BACK_LEFT_DISTANCE]);
-				updateView(r2Rd,r2Draws[canInfo.BACK_MIDDLE_LEFT_DISTANCE]);
-				updateView(r3Rd,r3Draws[canInfo.BACK_MIDDLE_RIGHT_DISTANCE]);
-				updateView(r4Rd,r4Draws[canInfo.BACK_RIGHT_DISTANCE]);
+				updateView(r1Rd, r1Draws[canInfo.BACK_LEFT_DISTANCE]);
+				updateView(r2Rd, r2Draws[canInfo.BACK_MIDDLE_LEFT_DISTANCE]);
+				updateView(r3Rd, r3Draws[canInfo.BACK_MIDDLE_RIGHT_DISTANCE]);
+				updateView(r4Rd, r4Draws[canInfo.BACK_RIGHT_DISTANCE]);
 				break;
 			case 8:
 				int index = (((canInfo.STERRING_WHELL_STATUS + 540) * 38) / 1080) > 38 ? 38
@@ -167,12 +180,12 @@ public class dataControl {
 
 	private void updateView(ImageView iv, int i) {
 		// TODO Auto-generated method stub
-		if(iv.getTag()==null){
+		if (iv.getTag() == null) {
 			iv.setTag(i);
 			iv.setImageResource(i);
 			return;
 		}
-		if((int)iv.getTag()!=i){
+		if ((int) iv.getTag() != i) {
 			iv.setTag(i);
 			iv.setImageResource(i);
 		}
@@ -194,6 +207,7 @@ public class dataControl {
 			e.printStackTrace();
 		}
 		context.unbindService(mServiceConnection);
+		mHandler.removeMessages(2);
 	}
 
 	private ICanCallback mICallback = new ICanCallback.Stub() {
@@ -216,12 +230,46 @@ public class dataControl {
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
+			mHandler.sendEmptyMessage(2);
 			// sendMsg(Contacts.HEX_HOME_TO_FM);
+			
+			
+			try {
+				Message msg = new Message();
+				msg.what = 3;
+				msg.obj = mISpService.getCanInfo();
+				mHandler.sendMessage(msg);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
 			mISpService = null;
+			mHandler.removeMessages(2);
 		}
 	};
+	
+	public void sendMsg(String msg) {
+		try {
+			if (mISpService != null) {
+				switch (PreferenceUtil.getFirstTwoString(context,PreferenceUtil.getCANName(context))) {
+				case Contacts.CANFISRTNAMEGROUP.RAISE:
+					mISpService.sendDataToSp(BytesUtil.addRZCCheckBit(msg));
+					break;
+				case Contacts.CANFISRTNAMEGROUP.HIWORLD:					
+					mISpService.sendDataToSp(BytesUtil.addSSCheckBit(msg));
+					break;
+				default:
+					break;
+				}
+
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 }
