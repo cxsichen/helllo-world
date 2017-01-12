@@ -1,0 +1,41 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="RADAR_PARK"
+        android:summaryOff="声音"
+        android:summaryOn="声音+显示"
+        android:title="雷达泊车" />
+    
+    <SwitchPreference
+        android:key="AUTO_PARK_CAR_STATUS"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="自动驻车制动" />
+    
+    <SwitchPreference
+        android:key="CONVENIENCE_RIPE_PARK_MOVE"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="影像泊车延时" />
+    
+    <SwitchPreference
+        android:key="CONVENIENCE_SEAT_PARK_MOVE"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="影像泊车动态引导线" />
+    
+               
+    <SwitchPreference
+        android:key="DAYTIME_LAMP_STATUS"
+        android:summaryOff="否"
+        android:summaryOn="是"
+        android:title="缩回手刹允许制动系统服务" />
+      
+    <ListPreference
+        android:entries="@array/ssfr_0_entries"
+        android:entryValues="@array/ssfr_0_values"
+        android:key="GO_HOME_LAMP_STATUS"
+        android:persistent="false"
+        android:title="后ParkSense音量" />
+    
+</PreferenceScreen>

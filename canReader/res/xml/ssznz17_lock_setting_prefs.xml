@@ -1,0 +1,38 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:entries="@array/ssfr_8_entries"
+        android:entryValues="@array/ssfr_8_values"
+        android:key="REMOTELOCK_BEEP_SIGN"
+        android:persistent="false"
+        android:title="锁车时发出提示音" />
+
+   <SwitchPreference
+        android:key="REMOTELOCK_SIDELAMP_SIGN"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="远程启动提示音" /> 
+        
+    <SwitchPreference
+        android:key="SPEECH_WARING_VOLUME"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="无钥匙进入" />
+    <SwitchPreference
+        android:key="REMOTE_START_SYSTEM"
+        android:summaryOff="驾驶员门"
+        android:summaryOn="所有门"
+        android:title="原车解锁" />
+    <SwitchPreference
+        android:key="REMOTECONTROL_LOCK_FEEDBACK"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="下车时自动解锁" />
+    <SwitchPreference
+        android:key="REMOTECONTROL_UNLOCK_FEEDBACK"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="自动车门锁定" />
+
+
+</PreferenceScreen>

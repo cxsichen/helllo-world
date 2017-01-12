@@ -87,7 +87,13 @@ public class MenuPaAcitivity extends Activity {
 		// TODO Auto-generated method stub
 		switch (canName) {
 		case Contacts.CANNAMEGROUP.SSJeepFreedomG:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGH:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGL:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGM:
 			startPaAcitivy("com.console.canreader.fragment.SSJeepFreedom.MenuPaAcitivity");
+			break;
+		case Contacts.CANNAMEGROUP.SSJeepZNZ17:
+			startPaAcitivy("com.console.canreader.fragment.SSJeepZNZ17.MenuPaAcitivity");
 			break;
 		case Contacts.CANNAMEGROUP.SSJeepZNZ:
 			startPaAcitivy("com.console.canreader.fragment.SSJeepZNZ.MenuPaAcitivity");

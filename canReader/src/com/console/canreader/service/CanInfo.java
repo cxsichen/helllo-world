@@ -22,6 +22,7 @@ public class CanInfo implements Parcelable {
 	 * WARING_DIALOG_DATA----------------mCanInfo.CHANGE_STATUS = 13 报警信息
 	 * PANORAMA_DATA---------------------mCanInfo.CHANGE_STATUS = 20 360全景
 	 */
+	
 
 	public int CHANGE_STATUS = 8888;
 

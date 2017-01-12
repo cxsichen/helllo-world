@@ -106,10 +106,13 @@ public class Contacts {
 		public static final String RZCJAC = "RZCJAC"; // 瑞风S3
 		public static final String RZCBaoJun = "RZCBaoJun"; // 宝骏730 560
 		public static final String RZCJingKooM20 = "RZCJingKooM20"; // 北汽威旺M20
+		//东风
+		public static final String RZCFS = "RZCFS"; // 风神系列
 		/*--------------睿志诚-----------*/
 
 		/*--------------尚摄-----------*/
         // 大众
+		public static final String SSVolkswagen="SSVolkswagen";     //大众全兼容
 		public static final String SSVolkswagenGolf="SSVolkswagenGolf";     //大众高尔夫7
 		// 丰田
 		public static final String SSToyota = "SSToyota";
@@ -157,6 +160,7 @@ public class Contacts {
 		//吉普
 		public static final String SSJeep = "SSGE"; // 吉普
 		public static final String SSJeepZNZ = "SSJeepZNZ"; // 吉普指南者
+		public static final String SSJeepZNZ17 = "SSJeepZNZ17"; // 吉普17款指南者
 		public static final String SSJeepFreedom = "SSJeepFreedom";   //2016款吉普自由
 		public static final String SSJeepFreedomX = "SSJeepFreedomX"; // 2016款吉普自由侠
 		public static final String SSJeepFreedomG= "SSJeepFreedomG"; // 2016款吉普自由光

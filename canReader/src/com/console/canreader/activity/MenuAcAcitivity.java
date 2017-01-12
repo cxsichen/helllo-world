@@ -92,7 +92,13 @@ public class MenuAcAcitivity extends BaseActivity {
 			finish();
 		}
 		switch (canName) {
+		case Contacts.CANNAMEGROUP.SSJeepZNZ17:
+			startAcAcitivy("com.console.canreader.fragment.SSJeepZNZ17.AirContorlActivity");
+			break;
 		case Contacts.CANNAMEGROUP.SSJeepFreedomG:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGH:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGL:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGM:
 			startAcAcitivy("com.console.canreader.fragment.SSJeepFreedom.AirContorlActivity");
 			break;
 		case Contacts.CANNAMEGROUP.SSVolkswagenGolf:

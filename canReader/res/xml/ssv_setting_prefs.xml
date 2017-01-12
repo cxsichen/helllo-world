@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="STOPING_STATUS"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="路边驻车" />
+    <SwitchPreference
+        android:key="REVERSE_GEAR_STATUS"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="入库驻车" />
+    <SwitchPreference
+        android:key="RADAR_ALARM_STATUS_ENABLE"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="雷达静音" />
+
+</PreferenceScreen>

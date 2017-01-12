@@ -478,11 +478,40 @@ public class SSTrumpchi extends AnalyzeUtils {
 		}
 		mCanInfo.CHANGE_STATUS = 10;
 		int temp = (int) (msg[6] & 0xFF);
-		for (int i = 0; i < keyCode.length; i++) {
+		/*for (int i = 0; i < keyCode.length; i++) {
 			if (temp == keyCode[i]) {
 				temp = i;
 				break;
 			}
+		}*/
+		switch (temp) {
+		case 0x01:
+			temp = Contacts.KEYEVENT.VOLUP;
+			break;
+		case 0x02:
+			temp = Contacts.KEYEVENT.VOLDOW;
+			break;
+		case 0x03:
+			temp = Contacts.KEYEVENT.MUTE;
+			break;
+		case 0x05:
+			temp = Contacts.KEYEVENT.ANSWER;
+			break;
+		case 0x06:
+			temp = Contacts.KEYEVENT.HANGUP;
+			break;
+		case 0x08:
+			temp = Contacts.KEYEVENT.MENUUP;
+			break;
+		case 0x09:
+			temp = Contacts.KEYEVENT.MENUDOWN;
+			break;
+		case 0x0A:
+			temp = Contacts.KEYEVENT.SRC;
+			break;		
+		default:
+			temp = 0;
+			break;
 		}
 		if (mCanInfo.STEERING_BUTTON_MODE != temp) {
 			mCanInfo.STEERING_BUTTON_MODE = temp;

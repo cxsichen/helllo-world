@@ -43,9 +43,11 @@ public class MenuCdAcitivity extends BaseActivity {
 
 		switch (canName) {
 		case Contacts.CANNAMEGROUP.SSJeepFreedomG:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGH:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGL:
+		case Contacts.CANNAMEGROUP.SSJeepFreedomGM:
 			startAcAcitivy("com.console.canreader.fragment.SSJeepFreedom.CdContorlActivity");
 			break;
-
 		default:
 			break;
 		}

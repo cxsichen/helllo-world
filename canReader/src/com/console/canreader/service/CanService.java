@@ -66,6 +66,10 @@ public class CanService extends Service {
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
 	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
+	
+	public static final String KEYCODE_BACK = "com.console.KEYCODE_BACK";
+	public static final String KEYCODE_FM = "com.console.KEYCODE_FM";
+	public static final String KEYCODE_NAV = "com.console.KEYCODE_NAV";
 
 	interface SerialPortWriteTask {
 		public void excute();
@@ -217,6 +221,15 @@ public class CanService extends Service {
 		case KEYCODE_VOLUME_MUTE:
 			mKeyDealer.handleMute();
 			break;
+		case KEYCODE_BACK:
+			mKeyDealer.handleBACK();
+			break;
+		case KEYCODE_FM:
+			mKeyDealer.handleFmAm();
+			break;
+		case KEYCODE_NAV:
+			mKeyDealer.startNavi();
+			break;		
 		default:
 			break;
 		}
@@ -543,6 +556,7 @@ public class CanService extends Service {
 						case Contacts.CANNAMEGROUP.SSNissanWithout360:
 						case Contacts.CANNAMEGROUP.SSHonda12CRV:
 						case Contacts.CANNAMEGROUP.SSJeepZNZ:
+						case Contacts.CANNAMEGROUP.SSVolkswagen:
 							readSSCanPort_1(); // ÈÕ²ú
 							break;
 						default:
@@ -1088,6 +1102,7 @@ public class CanService extends Service {
 			case Contacts.CANNAMEGROUP.SSJeepFreedomGM:
 			case Contacts.CANNAMEGROUP.SSJeepFreedomGL:
 			case Contacts.CANNAMEGROUP.SSJeepFreedomX:
+			case Contacts.CANNAMEGROUP.SSJeepZNZ17:
 				syncTimeWithMsgFjeep(); // ¼ªÆÕ
 				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,

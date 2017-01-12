@@ -231,8 +231,6 @@ public class SSHonda extends AnalyzeUtils {
 		mCanInfo.LEFT_CAMERA_SWITCH = (int) (msg[6] & 0xFF);
 		
 		if (rightCamera_switch != mCanInfo.LEFT_CAMERA_SWITCH) {
-			Log.i("cxs", "========rightCamera_switch========"
-					+ rightCamera_switch);
 			if (rightCamera_switch != -1) {
 				if (mCanInfo.LEFT_CAMERA_SWITCH == 1) {
 					mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.OPENAUX;

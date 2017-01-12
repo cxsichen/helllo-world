@@ -539,7 +539,7 @@ public class KeyDealer {
 		actionKey(KeyEvent.KEYCODE_DEL);
 	}
 
-	protected void handleBACK() {
+	public void handleBACK() {
 		actionKey(KeyEvent.KEYCODE_BACK);
 	}
 
@@ -633,7 +633,7 @@ public class KeyDealer {
 		startNavi();
 	}
 
-	private void startNavi() {
+	public void startNavi() {
 		// TODO Auto-generated method stub
 		int mapType = Settings.System.getInt(context.getContentResolver(),
 				"MAP_INDEX", 0);
@@ -685,7 +685,7 @@ public class KeyDealer {
 		context.startService(intent);
 	};
 
-	protected void handleFmAm() {
+	public void handleFmAm() {
 		openApplication(context, "com.console.radio");
 	}
 

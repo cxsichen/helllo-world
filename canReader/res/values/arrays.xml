@@ -88,6 +88,32 @@
     </string-array>
     <!-- 睿志诚 高尔夫7 -->
     
+    <!-- 尚摄 大众 -->
+    <string-array name="SSVolkswagen_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSVolkswagen_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSVolkswagen_fragment">
+        <item>com.console.canreader.fragment.SSVolkswagen.CarInfoFragment</item>
+    </string-array>
+    
+    <string-array name="SSVolkswagen_setting_items">
+       <item>驾驶员辅助系统</item>
+    </string-array>
+    <string-array name="SSVolkswagen_setting_fragment">
+       <item>com.console.canreader.fragment.SSVolkswagen.AssitFragment</item>
+    </string-array>
+    <!--尚摄 大众 -->
+    
      <!-- 尚摄 高尔夫7 -->
     <string-array name="SSVolkswagenGolf_main">
         <item>1</item><!-- 车辆信息 -->
@@ -167,7 +193,40 @@
     </string-array>
     <!-- 尚摄  指南者 -->
     
-     <!-- 尚摄 自由光 -->
+    <!-- 尚摄 17指南者-->
+    <string-array name="SSJeepZNZ17_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepZNZ17_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepZNZ17_fragment">
+        <item>com.console.canreader.fragment.SSJeepZNZ17.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepZNZ17_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯设置</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepZNZ17_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepZNZ17.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepZNZ17.LightEngineeFragment</item>  
+       <item>com.console.canreader.fragment.SSJeepZNZ17.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepZNZ17.UnitFragment</item>
+       <item>com.console.canreader.fragment.SSJeepZNZ17.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄  17指南者 -->
+    
+    <!-- 尚摄 自由光 -->
     <string-array name="SSJeepFreedomG_main">
         <item>1</item><!-- 车辆信息 -->
         <item>1</item><!-- 车辆设置 -->
@@ -1830,6 +1889,19 @@
     <!-- 福特   -->
     
     <!-- 东风  -->
+    <!-- 睿志诚  东风系列  --> 
+    <string-array name="RZCFS_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <!-- 睿志诚  东风系列   --> 
+    
     <!-- 尚摄  风光580  --> 
     <string-array name="SSDFFG_main">
         <item>0</item> <!-- 车辆信息  -->
@@ -3584,4 +3656,49 @@
         <item>2</item> 
         <item>3</item>
     </string-array>
+    
+    
+    <string-array name="ssznz17_0_entries">
+        <item>L/100km</item>
+        <item>km/l</item>
+        <item>mpg(UK)</item> 
+        <item>mpg(US)</item> 
+    </string-array>
+    <string-array name="ssznz17_0_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item> 
+        <item>4</item>
+    </string-array>
+    
+    <string-array name="ssznz17_1_entries">
+        <item>公制</item>
+        <item>美制</item>
+        <item>自定义</item> 
+    </string-array>
+    <string-array name="ssznz17_1_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item> 
+    </string-array>
+    
+    <string-array name="ssznz17_2_entries">
+        <item>0档</item>
+        <item>1档</item>
+        <item>2档</item> 
+        <item>3档</item> 
+        <item>4档</item> 
+        <item>5档</item> 
+        <item>6档</item> 
+    </string-array>
+    <string-array name="ssznz17_2_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+        <item>4</item> 
+        <item>5</item> 
+        <item>6</item> 
+    </string-array>
+    
 </resources>

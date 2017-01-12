@@ -1,4 +1,4 @@
-package com.console.canreader.fragment.SSJeepFreedom;
+package com.console.canreader.fragment.SSJeepZNZ17;
 
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
@@ -75,7 +75,7 @@ public class AirContorlActivity extends AirConBaseActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.ac_controler_sscherry);
+		setContentView(R.layout.ac_controler_ssjeepznz17);
 		amt = AnimationUtils.loadAnimation(this, R.anim.tip);
 		amt.setInterpolator(new LinearInterpolator());
 		initView();
@@ -208,6 +208,7 @@ public class AirContorlActivity extends AirConBaseActivity implements
 			MAX_FRONT_LAMP_INDICATOR
 					.setAlpha((float) (mCaninfo.MAX_FRONT_LAMP_INDICATOR == 0 ? 0.3
 							: 1));
+
 			REAR_LAMP_INDICATOR
 					.setAlpha((float) (mCaninfo.REAR_LAMP_INDICATOR == 0 ? 0.3
 							: 1));
@@ -371,21 +372,21 @@ public class AirContorlActivity extends AirConBaseActivity implements
 			break;
 		case R.id.UPWARD_AIR_INDICATOR:
 			if (event.getAction() == MotionEvent.ACTION_DOWN)
-				sendMsg("5AA5023D1701");
+				sendMsg("5AA5023D1C01");
 			if (event.getAction() == MotionEvent.ACTION_UP)
-				sendMsg("5AA5023D1700");
+				sendMsg("5AA5023D1C00");
 			break;
 		case R.id.PARALLEL_AIR_INDICATOR:
 			if (event.getAction() == MotionEvent.ACTION_DOWN)
-				sendMsg("5AA5023D0901");
+				sendMsg("5AA5023D1A01");
 			if (event.getAction() == MotionEvent.ACTION_UP)
-				sendMsg("5AA5023D0900");
+				sendMsg("5AA5023D1A00");
 			break;
 		case R.id.DOWNWARD_AIR_INDICATOR:
 			if (event.getAction() == MotionEvent.ACTION_DOWN)
-				sendMsg("5AA5023D0A01");
+				sendMsg("5AA5023D1D01");
 			if (event.getAction() == MotionEvent.ACTION_UP)
-				sendMsg("5AA5023D0A00");
+				sendMsg("5AA5023D1D00");
 			break;
 		case R.id.AIR_RATE_UP:
 			if (event.getAction() == MotionEvent.ACTION_DOWN)
