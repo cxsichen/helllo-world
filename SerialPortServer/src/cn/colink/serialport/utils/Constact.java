@@ -18,6 +18,7 @@ public interface Constact  {
 	public final static String STOPNAVI="com.inet.broadcast.stoptnavi";
 	public final static String STARTNAVI="com.inet.broadcast.startnavi";
 	public static final String ACC_STATE = "acc_state";
+	public static final String FM_SWITCH = "fm_switch";
 	public static final String ADAS_STATE = "adas_state";
 	public static final String TTS_SHOW = "tts_show";
 	public static final String BACK_CAR = "back_car_state";        //1 æ˜¯å?’è½¦  0æ˜¯å?’å®Œè½?
@@ -42,6 +43,7 @@ public interface Constact  {
     public final static String FMSTATUS = "fmstatus";
     public final static String USER_SAVE_BRIGHTNESS= "user_brightness";
     public final static String FACTORY_SOUND="factory_sound";
+    public static final String FMPOWER = "fmPowerSwitch";  
     public final static int DEFAULT_BRIGHTNESS = 60;
     public final static boolean DEBUG = true;
     

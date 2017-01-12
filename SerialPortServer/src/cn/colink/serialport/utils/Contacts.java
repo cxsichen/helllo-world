@@ -17,6 +17,14 @@ public interface Contacts {
 	public static final int K_PHONE_DN = 0xAF;
 
 	public static final int K_PALYPAUSE = 0X1B;
+		
+    public static final int K_HAND_UP = 0xAF;
+    public static final int K_MEUNDOWN_HANDUP = 0xB8;
+    public static final int K_MEUNUP_ANSWER = 0xB9;
+    public static final int K_BACK = 0x1F; 
+    public static final int K_FM = 0x74;
+    public static final int K_MUSIC = 0x6D;
+    public static final int K_NAV = 0x70;
 
 	public static final int VOL_UP = 1;
 	public static final int VOL_DOWN = 2;

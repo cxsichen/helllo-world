@@ -42,6 +42,8 @@ public class PreferenceUtil {
 		}		
 		return mode;
 	}
+	
+
 
 	public static void setMode(Context context, int value) {	
 		try {

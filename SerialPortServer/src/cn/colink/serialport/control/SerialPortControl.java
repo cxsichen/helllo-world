@@ -64,6 +64,9 @@ public class SerialPortControl {
 			"com.autonavi.amapauto", "com.srtc.pingwang",
 			"com.ximalaya.ting.android.car" }; // Acc on后打开的应用的列表
 
+	/*
+	 *  0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪8喜马拉雅
+	 */
 	private final int[] Modes = { 0x06, 0x04, 0x05, 0x0B, 0X09, 0x11, 0x0A,
 			0x0E };
 	private static final String BOOT_COMPLETED_ACTION = "android.intent.action.BOOT_COMPLETED";
@@ -72,7 +75,8 @@ public class SerialPortControl {
 	private static final String SEND_BACK_CAR_OFF = "com.console.SEND_BACK_CAR_OFF";
 
 	private PlayerStatus mPlayerStatus = PlayerStatus.STOP;
-	private static long tailGateTimeSave=0;
+	private static long tailGateTimeSave = 0;
+	private static String appNameSave = "";
 
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
@@ -87,8 +91,11 @@ public class SerialPortControl {
 				int factorySoundValue = android.provider.Settings.System
 						.getInt(mSerialPortService.getContentResolver(),
 								Constact.FACTORY_SOUND, 30);
+				int fmPowerValue = android.provider.Settings.System
+						.getInt(mSerialPortService.getContentResolver(),
+								Constact.FMPOWER, 0);
 				sendMsg("F755" + BytesUtil.intToHexString(factorySoundValue)
-						+ "0000");
+						+ "00"+BytesUtil.intToHexString(fmPowerValue));
 				break;
 			case Contacts.MSG_RADIO_VALUME_CHANGE:
 			/*
@@ -176,6 +183,7 @@ public class SerialPortControl {
 				case "cn.coogo.hardware.service":
 				case "com.android.stk":
 				case "com.android.settings":
+				case "com.console.nodisturb":
 					break;
 				case "com.console.radio":
 					if (PreferenceUtil.getMode(mSerialPortService) != 0) {
@@ -388,7 +396,9 @@ public class SerialPortControl {
 		switch (mode) {
 		case 1: // 音乐
 			try {
-				startMusic();
+				if(appNameSave.equals("cn.kuwo.kwmusiccar")){
+					startMusic();
+				}			
 			} catch (Exception e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -532,19 +542,17 @@ public class SerialPortControl {
 		// TODO Auto-generated method stub
 		switch (packet[0]) {
 		case Contacts.STATUS: // 常发命令
-			int tail_door_status = (int) ((packet[1] >> 1) & 0x01);  //尾门状态
+			int tail_door_status = (int) ((packet[1] >> 1) & 0x01); // 尾门状态
 			if (tail_door_status != Settings.System.getInt(
 					mSerialPortService.getContentResolver(),
 					Constact.TAILDOORSTATUS, 0)) {
 				Settings.System.putInt(mSerialPortService.getContentResolver(),
 						Constact.TAILDOORSTATUS, tail_door_status);
-				if(tail_door_status==1){
-				    Intent doorIntent=new Intent();
-				    doorIntent.setClass(mSerialPortService, TailGateActivity.class);
-				    doorIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				    mSerialPortService.startActivity(doorIntent);
-				}
-			}		
+				/*
+				 * if(tail_door_status==1){ openApplication(mSerialPortService,
+				 * "com.console.TailGate"); }
+				 */
+			}
 			break;
 		case Contacts.RADIO_MSG: // Fm模式开关状态
 			if (packet[2] == (int) 0x01) {
@@ -753,6 +761,11 @@ public class SerialPortControl {
 
 	private void doRegisterContentObserver() {
 		// TODO Auto-generated method stub
+		// 监控语音控制fm状态
+		mSerialPortService.getContentResolver().registerContentObserver(
+						android.provider.Settings.System.getUriFor(Constact.FM_SWITCH),
+						true, mVoiceFmControlObserver);
+
 		// 监控acc状态
 		mSerialPortService.getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Constact.ACC_STATE),
@@ -783,6 +796,33 @@ public class SerialPortControl {
 						android.provider.Settings.System
 								.getUriFor(Constact.FACTORY_SOUND),
 						true, mFactorySoundObserver);
+
+		mSerialPortService
+				.getContentResolver()
+				.registerContentObserver(
+						android.provider.Settings.System
+								.getUriFor(Constact.FMPOWER),
+						true, mFmPowerObserver);
+	}
+	
+	/**
+	 * 收音天线电源
+	 */
+	private FmPowerObserver mFmPowerObserver = new FmPowerObserver();
+
+	public class FmPowerObserver extends ContentObserver {
+		public FmPowerObserver() {
+			super(null);
+		}
+
+		@Override
+		public void onChange(boolean selfChange) {
+			super.onChange(selfChange);
+			Message msg = new Message();
+			msg.what = Contacts.MSG_FACTORY_SOUND;
+			mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
+			mHandler.sendMessageDelayed(msg, 100);
+		}
 	}
 
 	/**
@@ -844,6 +884,14 @@ public class SerialPortControl {
 			String appName = android.provider.Settings.System.getString(
 					mSerialPortService.getContentResolver(), Constact.APPLIST);
 			handleAPPChange(appName);
+		
+			if(android.provider.Settings.System.getInt(
+					mSerialPortService.getContentResolver(),
+					Constact.ACC_STATE, 0)==1){
+				if(appName!="cn.coogo.hardware.service"){
+					appNameSave=appName;
+				}			
+			}
 			Trace.m("==========mAPPObserver================" + appName);
 		}
 	}
@@ -1001,6 +1049,38 @@ public class SerialPortControl {
 			sendMsg(Contacts.EQUALIZER_MODE);
 		}
 	}
+	
+	// 监控语音控制fm状态
+	 private VoiceFmControlObserver mVoiceFmControlObserver = new VoiceFmControlObserver();
+
+	 public class VoiceFmControlObserver extends ContentObserver {
+			public VoiceFmControlObserver() {
+				super(null);
+			}
+
+			@Override
+			public void onChange(boolean selfChange) {
+				super.onChange(selfChange);
+				int state = android.provider.Settings.System.getInt(
+						mSerialPortService.getContentResolver(),
+						Constact.FM_SWITCH, 0);
+				handleFmSwitchState(state);
+			}
+		}
+	 private void handleFmSwitchState(int state) {
+			// TODO Auto-generated method stub
+		 int mode = android.provider.Settings.System.getInt(
+					mSerialPortService.getContentResolver(), Constact.MODE, 0);
+		 if(mode != 0){
+			 if(state==0)
+			 openApplication(mSerialPortService, "com.console.radio");
+		 }else{
+			 if(state== Settings.System.getInt(mSerialPortService.getContentResolver(),
+						Constact.FMSTATUS, 0)){
+				 sendMsg(Contacts.FM_PLAY);
+			 }
+		 }
+	}
 
 	// 监控acc状态
 	private AccStateObserver mAccStateObserver = new AccStateObserver();
@@ -1024,9 +1104,13 @@ public class SerialPortControl {
 		// TODO Auto-generated method stub
 		if (state == 1) {
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG);
+			mHandler.removeMessages(Contacts.MSG_ACCON_MSG_1);
+			mHandler.removeMessages(Contacts.MSG_ACCON_MSG_2);
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 500);
 		} else {
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG);
+			mHandler.removeMessages(Contacts.MSG_ACCON_MSG_1);
+			mHandler.removeMessages(Contacts.MSG_ACCON_MSG_2);
 			mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
 			isNaving = (android.provider.Settings.System.getInt(
 					mSerialPortService.getContentResolver(),
@@ -1065,6 +1149,10 @@ public class SerialPortControl {
 				mValumeObserver);
 		mSerialPortService.getContentResolver().unregisterContentObserver(
 				mFactorySoundObserver);
+		mSerialPortService.getContentResolver().unregisterContentObserver(
+				mFmPowerObserver);
+		mSerialPortService.getContentResolver().unregisterContentObserver(
+				mVoiceFmControlObserver);
 		if (mKwapi != null)
 			mKwapi.unRegisterPlayerStatusListener(mSerialPortService);
 		if (mIMediaPlaybackService != null) {
@@ -1082,17 +1170,17 @@ public class SerialPortControl {
 		msg.obj = mPacket;
 		mHandler.sendMessage(msg);
 	}
-    
+
 	public void dealCommand(String command) {
 		// TODO Auto-generated method stub
 		int mode = PreferenceUtil.getMode(mSerialPortService);
 		switch (command) {
 		// 打开和关闭尾门的命令
 		case Constact.ACTION_TAILGATE_CHANGE:
-			if(System.currentTimeMillis()-tailGateTimeSave>2*1000){
-				tailGateTimeSave=System.currentTimeMillis();
+			if (System.currentTimeMillis() - tailGateTimeSave > 2 * 1000) {
+				tailGateTimeSave = System.currentTimeMillis();
 				sendMsg(Contacts.HEX_TAILGATE_CHANGE);
-			}			
+			}
 			break;
 		case Constact.ACTION_MENU_UP:
 			if (mode == 0) { // FM模式
@@ -1127,6 +1215,14 @@ public class SerialPortControl {
 			break;
 		case Constact.ACTION_STOP_MUSIC:
 			stopMusic();
+			break;
+		case Constact.ACTION_MUSIC_START:
+			try {
+				startMusic();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		default:
 			break;
@@ -1172,8 +1268,11 @@ public class SerialPortControl {
 					@Override
 					public void onPlayerStatus(PlayerStatus playerStatus,
 							Music music) {
-						Log.i("cxs", "====playerStatus======" + playerStatus);
+						Log.i("cxs", "====playerStatus=====" + playerStatus);
 						mPlayerStatus = playerStatus;
+						if(playerStatus.equals(PlayerStatus.PLAYING)){
+							mSerialPortService.sendBroadcast(new Intent("console.hardwareService.action.MEDIA_CONSOLE_COMMAND"));
+						}
 					}
 				});
 	}

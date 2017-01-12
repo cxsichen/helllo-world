@@ -27,7 +27,11 @@ public class KeyDealer {
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
 	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
 	public static final String APPLISTNAME = "Console_applist_name";
-
+	
+	public static final String KEYCODE_BACK = "com.console.KEYCODE_BACK";
+	public static final String KEYCODE_FM = "com.console.KEYCODE_FM";
+	public static final String KEYCODE_NAV = "com.console.KEYCODE_NAV";
+	
 	static Context context;
 	static KeyDealer mKeyDealer;
 
@@ -73,8 +77,8 @@ public class KeyDealer {
 				Log.i("cxs", "-------msg.K_PHONE_UP-------");
 				handleTelAnswer();
 				break;
-			case Contacts.K_PHONE_DN:
-				Log.i("cxs", "-------msg.K_PHONE_DN-------");
+			case Contacts.K_HAND_UP:
+				Log.i("cxs", "-------msg.K_HAND_UP-------");
 				handleTelHandUp();
 				break;
 			case Contacts.K_POWER:
@@ -88,6 +92,30 @@ public class KeyDealer {
 			case Contacts.K_PALYPAUSE:
 				Log.i("cxs", "-------msg.K_PALYPAUSE-------");
 				handlePlayPause();
+				break;
+			case Contacts.K_MEUNDOWN_HANDUP:
+				Log.i("cxs", "-------msg.K_MEUNDOWN_HANDUP-------");
+				handleMenuDownHandUp();
+				break;
+			case Contacts.K_MEUNUP_ANSWER:
+				Log.i("cxs", "-------msg.K_MEUNUP_ANSWER-------");
+				handleMenuUpAnswer();
+				break;
+			case Contacts.K_BACK:
+				Log.i("cxs", "-------msg.K_BACK-------");
+				handleBack();
+				break;
+			case Contacts.K_FM:
+				Log.i("cxs", "-------msg.K_FM-------");
+				handleFm();
+				break;
+			case Contacts.K_MUSIC:
+				Log.i("cxs", "-------msg.K_MUSIC-------");
+				handleMusic();
+				break;
+			case Contacts.K_NAV:
+				Log.i("cxs", "-------msg.K_NAV-------");
+				handleNav();
 				break;
 			default:
 				break;
@@ -134,6 +162,45 @@ public class KeyDealer {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	protected void handleFm() {
+		Intent intent = new Intent();
+		intent.setClassName("com.console.canreader",
+				"com.console.canreader.service.CanService");
+		intent.putExtra("keyEvent", KEYCODE_FM);
+		context.startService(intent);
+	}
+
+	
+	
+	protected void handleMusic() {
+		Intent intent = new Intent();
+		intent.setClassName("cn.colink.serialport",
+				"cn.colink.serialport.service.SerialPortService");
+		intent.putExtra("keyEvent", Constact.ACTION_MUSIC_START);
+		context.startService(intent);
+	}
+
+	
+	protected void handleNav() {
+		Intent intent = new Intent();
+		intent.setClassName("com.console.canreader",
+				"com.console.canreader.service.CanService");
+		intent.putExtra("keyEvent", KEYCODE_NAV);
+		context.startService(intent);
+	}
+
+	
+	
+	protected void handleBack() {
+		Intent intent = new Intent();
+		intent.setClassName("com.console.canreader",
+				"com.console.canreader.service.CanService");
+		intent.putExtra("keyEvent", KEYCODE_BACK);
+		context.startService(intent);
+	}
+
 
 	protected void handleMute() {
 		Intent intent = new Intent();
@@ -175,7 +242,7 @@ public class KeyDealer {
 		Boolean IsPhoneComming = false;
 		String appName = Settings.System.getString(
 				context.getContentResolver(), APPLISTNAME);
-		Log.i("cxs","===isPhoneCommig=======appName="+appName);
+		Log.i("cxs", "===isPhoneCommig=======appName=" + appName);
 		if (appName == null)
 			return IsPhoneComming;
 		if (appName.contains("com.mtk.bluetooth.PhoneCallActivity")) {
@@ -185,6 +252,22 @@ public class KeyDealer {
 	}
 
 	protected void handleMenuUp() {
+
+		if (isPhoneCommig()) {
+			handleTelAnswer();
+		} else {
+			if (getMode(context) != 0) {
+				Intent intent = new Intent();
+				intent.setClassName("cn.colink.serialport",
+						"cn.colink.serialport.service.SerialPortService");
+				intent.putExtra("keyEvent", ACTION_MENU_UP);
+				context.startService(intent);
+			}
+		}
+
+	}
+
+	protected void handleMenuUpAnswer() {
 		if (isPhoneCommig()) {
 			handleTelAnswer();
 		} else {
@@ -199,6 +282,21 @@ public class KeyDealer {
 	}
 
 	protected void handleMenuDown() {
+
+		if (isPhoneCommig()) {
+			handleTelHandUp();
+		} else {
+			if (getMode(context) != 0) {
+				Intent intent = new Intent();
+				intent.setClassName("cn.colink.serialport",
+						"cn.colink.serialport.service.SerialPortService");
+				intent.putExtra("keyEvent", ACTION_MENU_DOWN);
+				context.startService(intent);
+			}
+		}
+	}
+
+	protected void handleMenuDownHandUp() {
 		if (isPhoneCommig()) {
 			handleTelHandUp();
 		} else {
@@ -262,7 +360,6 @@ public class KeyDealer {
 				mHandler.sendEmptyMessageDelayed(Contacts.K_NEXT, 200);
 				break;
 			case Contacts.TEL:
-			case (byte) Contacts.K_PHONE_UP: // 改为接听和挂断一起
 				mHandler.removeMessages(Contacts.TEL);
 				mHandler.sendEmptyMessageDelayed(Contacts.TEL, 200);
 				break;
@@ -271,15 +368,13 @@ public class KeyDealer {
 				mHandler.removeMessages(Contacts.MIC);
 				mHandler.sendEmptyMessageDelayed(Contacts.MIC, 200);
 				break;
-			/*
-			 * case (byte) Contacts.K_PHONE_UP:
-			 * mHandler.removeMessages(Contacts.K_PHONE_UP);
-			 * mHandler.sendEmptyMessageDelayed(Contacts.K_PHONE_UP, 200);
-			 * break;
-			 */
-			case (byte) Contacts.K_PHONE_DN:
-				mHandler.removeMessages(Contacts.K_PHONE_DN);
-				mHandler.sendEmptyMessageDelayed(Contacts.K_PHONE_DN, 200);
+			case (byte) Contacts.K_PHONE_UP:
+				mHandler.removeMessages(Contacts.K_PHONE_UP);
+				mHandler.sendEmptyMessageDelayed(Contacts.K_PHONE_UP, 200);
+				break;
+			case (byte) Contacts.K_HAND_UP:
+				mHandler.removeMessages(Contacts.K_HAND_UP);
+				mHandler.sendEmptyMessageDelayed(Contacts.K_HAND_UP, 200);
 				break;
 			case Contacts.K_POWER:
 				mHandler.removeMessages(Contacts.K_POWER);
@@ -292,6 +387,30 @@ public class KeyDealer {
 			case Contacts.K_PALYPAUSE:
 				mHandler.removeMessages(Contacts.K_PALYPAUSE);
 				mHandler.sendEmptyMessageDelayed(Contacts.K_PALYPAUSE, 200);
+				break;
+			case (byte) Contacts.K_MEUNDOWN_HANDUP:
+				mHandler.removeMessages(Contacts.K_MEUNDOWN_HANDUP);
+				mHandler.sendEmptyMessageDelayed(Contacts.K_MEUNDOWN_HANDUP, 200);
+				break;
+			case (byte) Contacts.K_MEUNUP_ANSWER:
+				mHandler.removeMessages(Contacts.K_MEUNUP_ANSWER);
+				mHandler.sendEmptyMessageDelayed(Contacts.K_MEUNUP_ANSWER, 200);
+				break;
+			case (byte) Contacts.K_BACK:
+				mHandler.removeMessages(Contacts.K_BACK);
+				mHandler.sendEmptyMessageDelayed(Contacts.K_BACK, 200);
+				break;
+			case (byte) Contacts.K_FM:
+				mHandler.removeMessages(Contacts.K_FM);
+				mHandler.sendEmptyMessageDelayed(Contacts.K_FM, 200);
+				break;
+			case (byte) Contacts.K_MUSIC:
+				mHandler.removeMessages(Contacts.K_MUSIC);
+				mHandler.sendEmptyMessageDelayed(Contacts.K_MUSIC, 200);
+				break;
+			case (byte) Contacts.K_NAV:
+				mHandler.removeMessages(Contacts.K_NAV);
+				mHandler.sendEmptyMessageDelayed(Contacts.K_NAV, 200);
 				break;
 			default:
 				break;
