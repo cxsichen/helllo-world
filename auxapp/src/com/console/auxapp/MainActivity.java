@@ -13,6 +13,7 @@ import android.database.ContentObserver;
 import android.graphics.Matrix;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.hardware.Camera.PreviewCallback;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,17 +37,23 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	private SurfaceTexture mSurfaceTexture;
 	private static final int OPENCAMERA = 5;
 	private static final int CLOSECAMERA = 6;
+	public static final String ACTION_CLOSE_AUX = "com.console.CLOSE_AUX";
+	public long startTime = 0;
+	Boolean CHANGECHANNEL = true;
+	//SerialPortControl mSerialPortControl;  //Ô¤Áô
 	
-	Handler mHandler=new Handler(){
+	Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 1:
-				com.example.cjc7150.MainActivity.setmode((byte) 0);
+				if (CHANGECHANNEL)
+					com.example.cjc7150.MainActivity.setmode((byte) 0);
 				break;
 			case OPENCAMERA:
 				openCamera();
-				com.example.cjc7150.MainActivity.setmode((byte) 0);
-				if (camera != null&&mSurfaceTexture!=null) {
+				if (CHANGECHANNEL)
+					com.example.cjc7150.MainActivity.setmode((byte) 0);
+				if (camera != null && mSurfaceTexture != null) {
 					Camera.Parameters mParams = camera.getParameters();
 
 					mParams.setPreviewSize(720, 240);
@@ -69,7 +76,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			default:
 				break;
 			}
-			
+
 		};
 	};
 
@@ -79,7 +86,27 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		initView();
+		registerBroastReceiver();
+		//mSerialPortControl=new SerialPortControl(this); 
 	}
+
+	private void registerBroastReceiver() {
+		// TODO Auto-generated method stub
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(ACTION_CLOSE_AUX);
+		registerReceiver(mBroadcastReceiver, intentFilter);
+	}
+
+	BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			if (intent.getAction().equals(ACTION_CLOSE_AUX)) {
+				MainActivity.this.finish();
+			}
+		}
+	};
 
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
@@ -93,7 +120,19 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		// TODO Auto-generated method stub
 		mHandler.sendEmptyMessageDelayed(OPENCAMERA, 1000);
 		super.onResume();
-		
+
+	}
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		super.onNewIntent(intent);
+		if (intent != null) {
+			int a = intent.getIntExtra("aux", 0);
+			if (1 == a) {
+				MainActivity.this.finish();
+			}
+		}
 	}
 
 	@Override
@@ -110,6 +149,10 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		super.onDestroy();
 		closeCamera();
 		surface = null;
+		unregisterReceiver(mBroadcastReceiver);
+		/*if(mSerialPortControl!=null){
+			mSerialPortControl.unbindSpService();
+		}*/
 	}
 
 	private void openCamera() {
@@ -141,6 +184,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		surface = (TextureView) findViewById(R.id.camera_surface);
 		surface.setSurfaceTextureListener(this);
 		Matrix transform = new Matrix();
+		// transform.setScale(1.05f, 0.95f, 200,0 );
 		transform.setScale(1, 1, 0, 0);
 		surface.setTransform(transform);
 	}
@@ -149,7 +193,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	public void onSurfaceTextureAvailable(SurfaceTexture surface, int width,
 			int height) {
 		// TODO Auto-generated method stub
-		mSurfaceTexture=surface;
+		mSurfaceTexture = surface;
 		openCamera();
 		if (camera != null) {
 			Camera.Parameters mParams = camera.getParameters();
@@ -185,32 +229,31 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		// TODO Auto-generated method stub
 		auxHint.setVisibility(View.GONE);
 	}
-	
-	public final static String CHANNEL_FILE = "/sys/class/gpio/cjc5150/value";
-	
-    public static int readChannelFile() {
 
-        FileInputStream fis = null;
-        byte[] rBuf = new byte[10];
-        int channel = -1;
-        try
-        {
-            fis = new FileInputStream(CHANNEL_FILE);
-            fis.read(rBuf);
-            fis.close();
-            Log.i("cxs","===rBuf[0]==========="+rBuf[0]);
-            if (rBuf[0] == 48) {            //ASCII
-            	channel = 0;
-            } else if (rBuf[0] == 49) {
-            	channel = 1;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            return channel;
-        }
-    }
+	public final static String CHANNEL_FILE = "/sys/class/gpio/cjc5150/value";
+
+	public static int readChannelFile() {
+
+		FileInputStream fis = null;
+		byte[] rBuf = new byte[10];
+		int channel = -1;
+		try {
+			fis = new FileInputStream(CHANNEL_FILE);
+			fis.read(rBuf);
+			fis.close();
+			Log.i("cxs", "===rBuf[0]===========" + rBuf[0]);
+			if (rBuf[0] == 48) { // ASCII
+				channel = 0;
+			} else if (rBuf[0] == 49) {
+				channel = 1;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			return channel;
+		}
+	}
 
 }
