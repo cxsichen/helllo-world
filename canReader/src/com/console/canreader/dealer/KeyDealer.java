@@ -18,6 +18,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
+
 import com.console.canreader.R;
 import com.console.canreader.activity.CarInfoActivity;
 import com.console.canreader.activity.MenuAcAcitivity;
@@ -27,6 +28,8 @@ import com.console.canreader.utils.PreferenceUtil;
 
 public class KeyDealer {
 	public static final String APPLISTNAME = "Console_applist_name";
+	public static final String CONSOLEMODE = "Console_mode";
+	public static final String AVOIDCONSOLEMODE = "avoid_console_mode";
 	public static final String TXZ_PKG = "com.colink.zzj.txzassistant";
 	public static final String TXZ_SERVICE_CLASS = "com.colink.zzj.txzassistant.AssistantService";
 	public static final String ACTION_START_TALK = "cn.yunzhisheng.intent.action.START_TALK";
@@ -42,14 +45,16 @@ public class KeyDealer {
 	public static final String ACTION_CLOSE_AUX = "com.console.CLOSE_AUX";
 	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
 	public static final String RADIO_FREQ_ACTION = "action.colink.startFM";
-
-	// 音量加减和mute由这里统一处理，其他发到外面处理
+	
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
 	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
-	// 音量加减和mute由这里统一处理，其他发到外面处理
 	public static final String ACTION_RAIDO_VOL_DOWN = "com.console.RAIDO_VOL_DOWN";
 	public static final String ACTION_RAIDO_VOL_UP = "com.console.RAIDO_VOL_UP";
+	public static final String ACTION_RADIO_MENU_UP = "com.console.ACTION_RADIO_MENU_UP";
+	public static final String ACTION_RADIO_MENU_DOWN = "com.console.ACTION_RADIO_MENU_DOWN";
+	public static final String ACTION_RADIO_PLAY_PAUSE = "com.console.ACTION_RADIO_PLAY_PAUSE";
+	
 
 	private final static int SETP_VOLUME = 1;
 	private static final int MAX_ALARM_VOICE = 15;
@@ -155,9 +160,13 @@ public class KeyDealer {
 				Log.i("cxs", "-------Contacts.KEYEVENT.AUXCHANGE-------");
 				handleAUXCHANGE();
 				break;
-			case Contacts.KEYEVENT.CLOSEAUX:
-				Log.i("cxs", "-------Contacts.KEYEVENT.CLOSEAUX-------");
-				handleCLOSEAUX();
+			case Contacts.KEYEVENT.CLOSERIGHTSIGHT:
+				Log.i("cxs", "-------Contacts.KEYEVENT.CLOSERIGHTSIGHT-------");
+				handleCloseRightSight();
+				break;
+			case Contacts.KEYEVENT.OPENRIGHTSIGHT:
+				Log.i("cxs", "-------Contacts.KEYEVENT.OPENRIGHTSIGHT-------");
+				handleOpenRightSight();
 				break;
 			case Contacts.KEYEVENT.MUSIC_PLAY_PAUSE:
 				Log.i("cxs", "-------Contacts.KEYEVENT.MUSIC_PLAY_PAUSE-------");
@@ -399,7 +408,6 @@ public class KeyDealer {
 		if (temp < -125) {
 			temp = 256 + temp;
 		}
-		Log.i("cxs", "==handleKnobSelector=temp==" + temp);
 		if (temp > 0) {
 			handleMenuDown();
 		} else {
@@ -581,13 +589,17 @@ public class KeyDealer {
 		}
 	}
 
-	private void handleMUSIC_PLAY_PAUSE() {
+	public void handleMUSIC_PLAY_PAUSE() {
 		// TODO Auto-generated method stub
-		Intent intent = new Intent();
-		intent.setClassName("cn.colink.serialport",
-				"cn.colink.serialport.service.SerialPortService");
-		intent.putExtra("keyEvent", ACTION_PLAY_PAUSE);
-		context.startService(intent);
+		if(getMode(context)==0){//收音模式
+			Intent intent = new Intent();
+			intent.setClassName("cn.colink.serialport",
+					"cn.colink.serialport.service.SerialPortService");
+			intent.putExtra("keyEvent", ACTION_RADIO_PLAY_PAUSE);
+			context.startService(intent);
+		}else{
+			actionKey(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+		}
 	}
 
 	private void handleBROSWE() {
@@ -606,7 +618,9 @@ public class KeyDealer {
 	}
 
 	private void handleAUXCHANGE() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
+		Settings.System.putInt(context.getContentResolver(),
+				AVOIDCONSOLEMODE,1);
 		try {
 			Intent intent = new Intent();
 			intent.setClassName("com.console.auxapp",
@@ -621,11 +635,20 @@ public class KeyDealer {
 		}
 	}
 
-	private void handleCLOSEAUX() {
+	private void handleCloseRightSight() {
 		// TODO Auto-generated method stub
+		Settings.System.putInt(context.getContentResolver(),
+				AVOIDCONSOLEMODE,0);
 		Intent intent = new Intent();
 		intent.setAction(ACTION_CLOSE_AUX);
 		context.sendBroadcast(intent);
+	}
+	
+	private void handleOpenRightSight() {
+		// TODO Auto-generated method stub
+		Settings.System.putInt(context.getContentResolver(),
+				AVOIDCONSOLEMODE,1);
+		handleAUX();
 	}
 
 	private void handleMAP() {
@@ -721,20 +744,29 @@ public class KeyDealer {
 		context.sendBroadcast(intent);
 	}
 
-	protected void handleMenuUp() {
-		Intent intent = new Intent();
-		intent.setClassName("cn.colink.serialport",
-				"cn.colink.serialport.service.SerialPortService");
-		intent.putExtra("keyEvent", ACTION_MENU_UP);
-		context.startService(intent);
+	public void handleMenuUp() {
+		if(getMode(context)==0){//收音模式
+			Intent intent = new Intent();
+			intent.setClassName("cn.colink.serialport",
+					"cn.colink.serialport.service.SerialPortService");
+			intent.putExtra("keyEvent", ACTION_RADIO_MENU_UP);
+			context.startService(intent);
+		}else{
+			actionKey(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+		}
+		
 	}
 
-	protected void handleMenuDown() {
-		Intent intent = new Intent();
-		intent.setClassName("cn.colink.serialport",
-				"cn.colink.serialport.service.SerialPortService");
-		intent.putExtra("keyEvent", ACTION_MENU_DOWN);
-		context.startService(intent);
+	public void handleMenuDown() {		
+		if(getMode(context)==0){//收音模式
+			Intent intent = new Intent();
+			intent.setClassName("cn.colink.serialport",
+					"cn.colink.serialport.service.SerialPortService");
+			intent.putExtra("keyEvent", ACTION_RADIO_MENU_DOWN);
+			context.startService(intent);
+		}else{
+			actionKey(KeyEvent.KEYCODE_MEDIA_NEXT);
+		}
 	}
 
 	protected void handleTel() {
@@ -886,19 +918,19 @@ public class KeyDealer {
 				mHandler.sendMessage(msg);
 			}
 			break;
-		case Contacts.KEYEVENT.CLOSEAUX:
+		case Contacts.KEYEVENT.CLOSERIGHTSIGHT:
 			if (System.currentTimeMillis() - lastSendTime > 500) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
-				msg.what = Contacts.KEYEVENT.CLOSEAUX;
+				msg.what = Contacts.KEYEVENT.CLOSERIGHTSIGHT;
 				mHandler.sendMessage(msg);
 			}
 			break;
-		case Contacts.KEYEVENT.OPENAUX:
+		case Contacts.KEYEVENT.OPENRIGHTSIGHT:
 			if (System.currentTimeMillis() - lastSendTime > 500) {
 				lastSendTime = System.currentTimeMillis();
 				Message msg = new Message();
-				msg.what = Contacts.KEYEVENT.AUX;
+				msg.what = Contacts.KEYEVENT.OPENRIGHTSIGHT;
 				mHandler.sendMessage(msg);
 			}
 			break;
@@ -1224,5 +1256,18 @@ public class KeyDealer {
 		}
 		return IsPhoneComming;
 	}
-
+	
+	
+	public int getMode(Context context) {
+		int mode=0;
+		try {
+			mode = Settings.System.getInt(context.getContentResolver(),
+					CONSOLEMODE,0);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}		
+		return mode;
+	}
+	
 }

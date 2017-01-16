@@ -3701,4 +3701,24 @@
         <item>6</item> 
     </string-array>
     
+     <string-array name="ssznz17_3_entries">
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    <string-array name="ssznz17_3_values">
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    
+    <string-array name="ssznz17_4_entries">
+        <item>KM</item>
+        <item>Mile</item> 
+    </string-array>
+    <string-array name="ssznz17_4_values">
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
 </resources>

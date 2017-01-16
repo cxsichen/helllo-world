@@ -82,11 +82,10 @@ public class LightEngineeFragment extends BaseFragment {
 	}
 
 	public class SettingsFragment extends PreferenceFragment implements
-	OnStepPreferenceClickListener,OnPreferenceChangeListener {
+        OnPreferenceChangeListener {
 
 		LightEngineeFragment settingActivity;
-		StepPreference mStepPreference;
-		PreferenceGroup mPreferenceGroup;
+
 		List<SwitchPreference> mSwitchPreferenceGroup = new ArrayList<SwitchPreference>();
 		List<Integer> mSwitchValueGroup = new ArrayList<Integer>();
 		String[] swPreKey = { "CHANGE_ILL_STATUS","DAYTIME_LAMP_STATUS_ENABLE","CHANGE_ILL_STATUS_ENABLE",
@@ -96,8 +95,8 @@ public class LightEngineeFragment extends BaseFragment {
 
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
-		String[] listPreKey = {"ATMOSPHERE_ILL_STATUS","ATMOSPHERE_ILL_STATUS_ENABLE"};
-		String[] listPreMsg = {"5AA502630B","5AA5026301"};
+		String[] listPreKey = {"ATMOSPHERE_ILL_STATUS","ATMOSPHERE_ILL_STATUS_ENABLE","ATMOSPHERE_ILL_VALUE"};
+		String[] listPreMsg = {"5AA502630B","5AA5026301","5AA5026308"};
 
 		public SettingsFragment(LightEngineeFragment settingActivity) {
 			this.settingActivity = settingActivity;
@@ -120,11 +119,6 @@ public class LightEngineeFragment extends BaseFragment {
 				p.setOnPreferenceChangeListener(this);
 				mListPreferenceGroup.add(p);
 			}
-			mPreferenceGroup=(PreferenceGroup) findPreference("ATMOSPHERE_ILL_VALUE_P");
-			mStepPreference = (StepPreference) findPreference("ATMOSPHERE_ILL_VALUE");
-			mStepPreference.setMax(3);
-			mStepPreference.setMin(1);
-			mStepPreference.setOnStepPreferenceClickListener(this);
 
 			if (settingActivity != null) {
 				if (settingActivity.getCanInfo() != null)
@@ -134,14 +128,6 @@ public class LightEngineeFragment extends BaseFragment {
 	
 
 		public void syncView(CanInfo mCaninfo) {
-			if(mCaninfo.ATMOSPHERE_ILL_VALUE==-1){
-				getPreferenceScreen().removePreference(mPreferenceGroup);
-				//((PreferenceGroup) findPreference("ATMOSPHERE_ILL_VALUE_P")).removePreference(mStepPreference);
-			}else{
-				getPreferenceScreen().addPreference(mPreferenceGroup);
-				//((PreferenceGroup) findPreference("ATMOSPHERE_ILL_VALUE_P")).addPreference(mStepPreference);
-				mStepPreference.setFreqTv(String.valueOf(mCaninfo.ATMOSPHERE_ILL_VALUE));
-			}
 			
 			mSwitchValueGroup.clear();
 			mSwitchValueGroup.add(mCaninfo.CHANGE_ILL_STATUS);
@@ -166,6 +152,7 @@ public class LightEngineeFragment extends BaseFragment {
 			mListValueGroup.clear();
 			mListValueGroup.add(mCaninfo.ATMOSPHERE_ILL_STATUS);
 			mListValueGroup.add(mCaninfo.ATMOSPHERE_ILL_STATUS_ENABLE);
+			mListValueGroup.add(mCaninfo.ATMOSPHERE_ILL_VALUE);
 			for (int i = 0; i < mListPreferenceGroup.size(); i++) {
 				if (mListValueGroup.get(i) == -1) {
 					getPreferenceScreen().removePreference(
@@ -234,26 +221,7 @@ public class LightEngineeFragment extends BaseFragment {
 			return true;
 		}
 
-		@Override
-		public void onPreButtonClick(Preference preference) {
-			// TODO Auto-generated method stub
-			if (settingActivity != null) {
-				settingActivity.sendMsg("5AA5026308FF");
-			}
-			mStepPreference.setFreqTv(String.valueOf((Integer
-					.parseInt(mStepPreference.getFreqTv()) - 1)));
-		}
 
-		@Override
-		public void onNextButtonClick(Preference preference) {
-			// TODO Auto-generated method stub
-			if (settingActivity != null) {
-				settingActivity.sendMsg("5AA502630801");
-			}
-			mStepPreference.setFreqTv(String.valueOf((Integer
-					.parseInt(mStepPreference.getFreqTv())+ 1)));
-			
-		}
 	}
 
 }

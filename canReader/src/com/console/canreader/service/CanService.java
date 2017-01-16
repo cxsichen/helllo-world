@@ -70,6 +70,10 @@ public class CanService extends Service {
 	public static final String KEYCODE_BACK = "com.console.KEYCODE_BACK";
 	public static final String KEYCODE_FM = "com.console.KEYCODE_FM";
 	public static final String KEYCODE_NAV = "com.console.KEYCODE_NAV";
+	
+	public static final String ACTION_MENU_UP = "com.console.MENU_UP";
+	public static final String ACTION_MENU_DOWN = "com.console.MENU_DOWN";
+	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
 
 	interface SerialPortWriteTask {
 		public void excute();
@@ -229,7 +233,16 @@ public class CanService extends Service {
 			break;
 		case KEYCODE_NAV:
 			mKeyDealer.startNavi();
-			break;		
+			break;	
+		case ACTION_PLAY_PAUSE:
+			mKeyDealer.handleMUSIC_PLAY_PAUSE();
+			break;
+		case ACTION_MENU_UP:
+			mKeyDealer.handleMenuUp();
+			break;
+		case ACTION_MENU_DOWN:
+			mKeyDealer.handleMenuDown();
+			break;
 		default:
 			break;
 		}

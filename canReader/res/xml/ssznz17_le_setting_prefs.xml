@@ -1,10 +1,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory
-        android:key="ATMOSPHERE_ILL_VALUE_P"
-        android:title="前照灯敏感度" >
-        <com.console.canreader.view.StepPreference android:key="ATMOSPHERE_ILL_VALUE" />
-    </PreferenceCategory>
+    
+    <ListPreference
+        android:entries="@array/ssznz17_3_entries"
+        android:entryValues="@array/ssznz17_3_values"
+        android:key="ATMOSPHERE_ILL_VALUE"
+        android:persistent="false"
+        android:title="前照灯敏感度" />
 
     <ListPreference
         android:entries="@array/ssznz17_2_entries"

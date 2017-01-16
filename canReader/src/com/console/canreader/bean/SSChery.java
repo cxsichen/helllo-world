@@ -105,9 +105,9 @@ public class SSChery extends AnalyzeUtils {
 			CarStatusDatasave = BytesUtil.bytesToHexString(msg);
 		}
 		if(((int) (msg[6] & 0xff)==1)||((int) (msg[7] & 0xff)==1)||((int) (msg[8] & 0xff)==1)){
-			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.OPENAUX;
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.OPENRIGHTSIGHT;
 		}else{
-			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.CLOSEAUX;
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.CLOSERIGHTSIGHT;
 		}
 
 	}

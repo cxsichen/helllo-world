@@ -90,8 +90,8 @@ public class UnitFragment extends BaseFragment {
 
 		List<ListPreference> mListPreferenceGroup = new ArrayList<ListPreference>();
 		List<Integer> mListValueGroup = new ArrayList<Integer>();
-		String[] listPreKey = {"UNIT_PRESSURE","UNIT_CONSUMPTION","UNIT_TYPE"};
-		String[] listPreMsg = {"5AA502CA06","5AA502CA05","5AA502CA07"};
+		String[] listPreKey = {"UNIT_PRESSURE","UNIT_CONSUMPTION","UNIT_TYPE","UNIT_DISTANCE"};
+		String[] listPreMsg = {"5AA502CA06","5AA502CA05","5AA502CA07","5AA502CA01"};
 
 		public SettingsFragment(UnitFragment settingActivity) {
 			this.settingActivity = settingActivity;
@@ -144,7 +144,7 @@ public class UnitFragment extends BaseFragment {
 			mListValueGroup.add(mCaninfo.UNIT_PRESSURE);
 			mListValueGroup.add(mCaninfo.UNIT_CONSUMPTION);
 			mListValueGroup.add(mCaninfo.UNIT_TYPE);
-
+			mListValueGroup.add(mCaninfo.UNIT_DISTANCE);
 			for (int i = 0; i < mListPreferenceGroup.size(); i++) {
 				if (mListValueGroup.get(i) == -1) {
 					getPreferenceScreen().removePreference(

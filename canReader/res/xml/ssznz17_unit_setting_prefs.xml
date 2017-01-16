@@ -1,5 +1,14 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    
+     
+     <ListPreference
+        android:entries="@array/ssznz17_4_entries"
+        android:entryValues="@array/ssznz17_4_values"
+        android:key="UNIT_DISTANCE"
+        android:persistent="false"
+        android:title="距离" />
+     
     <ListPreference
         android:entries="@array/ssfr_9_entries"
         android:entryValues="@array/ssfr_9_values"

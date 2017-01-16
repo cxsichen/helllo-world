@@ -235,9 +235,9 @@ public class SSHondaYG9 extends AnalyzeUtils {
 					+ rightCamera_switch);
 			if (rightCamera_switch != -1) {
 				if (mCanInfo.LEFT_CAMERA_SWITCH == 1) {
-					mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.OPENAUX;
+					mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.OPENRIGHTSIGHT;
 				} else {
-					mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.CLOSEAUX;
+					mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.CLOSERIGHTSIGHT;
 				}
 				mCanInfo.STEERING_BUTTON_STATUS = 1;
 				mCanInfo.CHANGE_STATUS = 2;

@@ -32,18 +32,13 @@ public class SSJeepZNZ17 extends AnalyzeUtils {
     // 车身基本信息
  	public static final int CAR_INFO_DATA_11 = 0xC1; 
  // 车身基本信息
- 	public static final int CAR_INFO_DATA_7 = 0x43;
-    
-    
-	
+ 	public static final int CAR_INFO_DATA_7 = 0x43;  
 	// 车身基本信息
 	public static final int CAR_INFO_DATA_8 = 0x62;
 	// 车身基本信息
 	public static final int CAR_INFO_DATA_9 = 0x60;
 	// 车身基本信息
-	public static final int CAR_INFO_DATA_10 = 0xAE;
-	
-	
+	public static final int CAR_INFO_DATA_10 = 0xAE;	
 	// 车身基本信息
 	public static final int CAR_INFO_DATA_3 = 0xF0;
 		
@@ -159,8 +154,10 @@ public class SSJeepZNZ17 extends AnalyzeUtils {
 		} else {
 			carInfoSave_11 = BytesUtil.bytesToHexString(msg);
 		}
+		//距离单位
+		mCanInfo.UNIT_DISTANCE= (int) (msg[4] >> 4) & 0x0F;
 		//胎压单位
-		mCanInfo.UNIT_PRESSURE= (int) (msg[4] >> 0) & 0xFF;
+		mCanInfo.UNIT_PRESSURE= (int) (msg[4] >> 0) & 0x0F;
 		//温度单位
 		mCanInfo.UNIT_TEMPERATURE= (int) (msg[5] >> 0) & 0xFF;
 		//油耗单位
@@ -712,7 +709,7 @@ public class SSJeepZNZ17 extends AnalyzeUtils {
 		temp = (int) (msg[11] & 0xff);
 		mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = temp == 0xFE ? 0
 				: temp == 0xFF ? 255 : (temp * 0.5f);
-		mCanInfo.OUTSIDE_TEMPERATURE = ((int) (msg[15] & 0xff)) * 0.5f - 40;
+	//	mCanInfo.OUTSIDE_TEMPERATURE = ((int) (msg[15] & 0xff)) * 0.5f - 40;
 	}
 
 }

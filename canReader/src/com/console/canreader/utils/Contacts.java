@@ -67,8 +67,8 @@ public class Contacts {
 		public static final int VOICE_MENUUP = 105;     // 上一曲 无按键状态
 		public static final int VOICE_MENUDOWN = 106;    // 下一曲 无按键状态
 		public static final int VOICE_MUSIC_PLAY_PAUSE = 107;
-		public static final int CLOSEAUX = 108; // 关闭AUX
-		public static final int OPENAUX = 109; // 打开AUX
+		public static final int CLOSERIGHTSIGHT = 108; // 关闭右视
+		public static final int OPENRIGHTSIGHT= 109; // 打开右视
 		public static final int KNOBVOLUMEUP = 110; // 音量旋钮 无按键状态       不带值记忆    只带数值改变
 		public static final int KNOBVOLUMEDOWN = 111; // 音量旋钮 无按键状态    不带值记忆  只带数值改变
 		public static final int KNOBSELECT = 112; // 选择旋钮  无按键状态    不带值记忆  只带数值改变
