@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 public class ChooseActivity extends Activity {
 
@@ -269,10 +270,14 @@ public class ChooseActivity extends Activity {
 		// 打开数据库输出流
 		SQLdm s = new SQLdm();
 		try {
-			db = s.openDatabase(getApplicationContext());
+			db = s.openDatabase(getApplicationContext());		
+			if(db==null){
+				Toast.makeText(this, "数据库打开失败", Toast.LENGTH_LONG).show();
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Toast.makeText(this, "数据库打开失败", Toast.LENGTH_LONG).show();
 		}
 	}
 

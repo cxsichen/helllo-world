@@ -66,7 +66,6 @@ public class MainActivity extends Activity {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
 	}
 
 	@Override

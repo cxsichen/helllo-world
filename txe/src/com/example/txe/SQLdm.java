@@ -50,15 +50,16 @@ public class SQLdm {
 	public SQLiteDatabase openDatabase(Context context) throws Exception {
 		System.out.println("filePath:" + filePath);
 		File jhPath = new File(filePath);
-		String version = getVersionName(context);
+	/*	String version = getVersionName(context);
 		Boolean n =false;
 		if (!version.equals(getPreferences(context).getString(KEY_VERSION, ""))) {
 			getPreferencesEditor(context).putString(KEY_VERSION, version)
 					.commit();
 			n=true;
-		}
+		}*/
 		// 查看数据库文件是否存在
-		if (jhPath.exists()&&!n) {
+	//	if (jhPath.exists()&&!n) {
+		if(false){
 			Log.i("test", "存在数据库");
 			// 存在则直接返回打开的数据库
 			return SQLiteDatabase.openOrCreateDatabase(jhPath, null);
@@ -86,22 +87,21 @@ public class SQLdm {
 				byte[] buffer = new byte[1024];
 				int count = 0;
 				while ((count = is.read(buffer)) > 0) {
-					Log.i("test", "得到");
+					//Log.i("test", "得到");
 					fos.write(buffer, 0, count);
 				}
 				// 最后关闭就可以了
-				Log.i("cxs", "======hh===");
 				fos.flush();
 				fos.close();
 				is.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				Log.i("cxs", "==========" + e);
 				return null;
 			}
 			// 如果没有这个数据库 我们已经把他写到SD卡上了，然后在执行一次这个方法 就可以返回数据库了
-			return openDatabase(context);
+			//return openDatabase(context);
+			return SQLiteDatabase.openOrCreateDatabase(jhPath, null);
 		}
 	}
 }
