@@ -62,10 +62,10 @@ public class SerialPortControl {
 			"cn.kuwo.kwmusiccar", "com.mxtech.videoplayer.pro",
 			"com.mtk.bluetooth", "com.console.auxapp", "com.console.equalizer",
 			"com.autonavi.amapauto", "com.srtc.pingwang",
-			"com.ximalaya.ting.android.car" }; // Acc on后打开的应用的列表
+			"com.console.dtv" }; // Acc on后打开的应用的列表
 
 	/*
-	 *  0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪8喜马拉雅
+	 *  0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪8数字电视100喜马拉雅
 	 */
 	private final int[] Modes = { 0x06, 0x04, 0x05, 0x0B, 0X09, 0x11, 0x0A,
 			0x0E };
@@ -130,7 +130,7 @@ public class SerialPortControl {
 				checkBackCar();
 				break;
 			case Contacts.MSG_CHECK_MODE:
-				if (PreferenceUtil.getMode(mSerialPortService) == 8) { // 喜马拉雅
+				if (PreferenceUtil.getMode(mSerialPortService) == 100) { // 喜马拉雅
 					if (PreferenceUtil.getCheckMode(mSerialPortService) == 1) { // 喜马拉雅对应音乐
 						return;
 					} else {
@@ -159,10 +159,9 @@ public class SerialPortControl {
 			case Contacts.MSG_BACK_CAR: // 处理倒车事件
 				// if (!getTopActivity(SerialPortControlService.this).equals(
 				// "com.console.parking")) {
-				Trace.m("--------MSG_BACK_CAR_2222222222222------parkingState-------"
+				Trace.m("--------MSG_BACK_CAR-----parkingState-------"
 						+ isAcconOver);
 				if (isAcconOver) {
-					Trace.m("=====start parking ====now =========");
 					Intent intent = new Intent();
 					intent.setClassName("com.console.parking",
 							"com.console.parking.MainActivity");
@@ -171,10 +170,10 @@ public class SerialPortControl {
 					mSerialPortService.startActivity(intent);
 				}
 				break;
+			/**
+			 * 处理app切换模式命令 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪8数字电视100喜马拉雅
+			 */
 			case Contacts.MSG_APP_CHANGE:
-				/*
-				 * 处理app切换模式命令 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪8喜马拉雅
-				 */
 				mHandler.removeMessages(Contacts.MSG_CHECK_MODE);
 				switch ((String) msg.obj) {
 				case "com.console.parking": // 主界面 倒车和obd报警不处理模式切换
@@ -270,9 +269,15 @@ public class SerialPortControl {
 						sendMsg("F5020000" + BytesUtil.intToHexString(7));
 					}
 					break;
-				case "com.ximalaya.ting.android.car":
+				case "com.console.dtv":
 					if (PreferenceUtil.getMode(mSerialPortService) != 8) {
 						PreferenceUtil.setMode(mSerialPortService, 8);
+						sendMsg("F5020000" + BytesUtil.intToHexString(8));
+					}
+					break;
+				case "com.ximalaya.ting.android.car":                     //喜马拉雅对应音乐
+					if (PreferenceUtil.getMode(mSerialPortService) != 100) {
+						PreferenceUtil.setMode(mSerialPortService, 100);
 						sendMsg("F5020000" + BytesUtil.intToHexString(1));
 					}
 					break;
@@ -283,6 +288,7 @@ public class SerialPortControl {
 					}
 					break;
 				}
+				//校验模式状态
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_CHECK_MODE,
 						2 * 1000);
 
@@ -294,15 +300,25 @@ public class SerialPortControl {
 				}
 
 				break;
+		    /**
+		     * ACC ON一共三个阶段状态
+		     * 1 初始化值后进入主界面
+		     * 2 进入模式界面
+		     * 3 检测倒车
+		     */
 			case Contacts.MSG_ACCON_MSG:
 				isAcconOver = false;
 				/*
 				 * 启动can协议服务
 				 */
-				Intent canIntent = new Intent(
-						"com.console.canreader.service.CanService");
-				canIntent.setPackage("com.console.canreader");
-				mSerialPortService.startService(canIntent);
+				try {
+					Intent canIntent = new Intent(
+							"com.console.canreader.service.CanService");
+					canIntent.setPackage("com.console.canreader");
+					mSerialPortService.startService(canIntent);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 				/*
 				 * 发送音效的高低音值
 				 */
@@ -331,7 +347,7 @@ public class SerialPortControl {
 				break;
 			case Contacts.MSG_ACCON_MSG_1:
 				int mode = PreferenceUtil.getMode(mSerialPortService);
-				Trace.m("--------MSG_ACCON_MSG------mode---0----" + mode);
+				Trace.m("--------MSG_ACCON_MSG_1------mode-------" + mode);
 				sendMsg("F5020000" + BytesUtil.intToHexString(mode));
 				startModeActivty(mode);
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_2, 6000);
@@ -351,8 +367,6 @@ public class SerialPortControl {
 					mSerialPortService.startActivity(intent);
 				}
 				isAcconOver = true;
-				Trace.m("--------MSG_ACCON_MSG_2222222222222------parkingState-------"
-						+ parkingState);
 				break;
 			default:
 				break;
@@ -413,7 +427,6 @@ public class SerialPortControl {
 			}
 			break;
 		case 6:
-			Trace.m("--------MSG_ACCON_MSG------startNavi-------");
 			try {
 				startNavi();
 			} catch (Exception e1) {
@@ -448,7 +461,7 @@ public class SerialPortControl {
 				// TODO: handle exception
 			}
 			break;
-		case 8:// 喜马拉雅
+		case 100:// 喜马拉雅
 			try {
 				Intent xmlyIntent = mSerialPortService.getPackageManager()
 						.getLaunchIntentForPackage(
@@ -469,7 +482,7 @@ public class SerialPortControl {
 
 	private void startVideo() throws Exception {
 		if (checkLocale("CN")) {
-			Trace.m("--------MSG_ACCON_MSG------startVideo-------");
+			Trace.m("--------SerialPortServer------startVideo-------");
 			openApplication(mSerialPortService, "com.mxtech.videoplayer.pro");
 		} else {
 			openApplication(mSerialPortService, "com.android.video");
@@ -478,7 +491,7 @@ public class SerialPortControl {
 
 	private void startMusic() throws Exception {
 		if (checkLocale("CN")) {
-			Trace.m("--------MSG_ACCON_MSG------startMusic-------");
+			Trace.m("--------SerialPortServer------startMusic-------");
 			mKwapi.startAPP(mSerialPortService, true);
 		} else {
 			openApplication(mSerialPortService, "com.android.music");
@@ -530,7 +543,7 @@ public class SerialPortControl {
 		if (intent == null) {
 			return false;
 		}
-		Trace.m("=======openApplication==========" + pkgName);
+		Trace.m("====SerialPortService===openApplication==========" + pkgName);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
 		return true;
@@ -747,7 +760,7 @@ public class SerialPortControl {
 				break;
 			case RADIO_FREQ_ACTION:
 				float freq = intent.getFloatExtra("fm_fq", 0);
-				Trace.m("-==--------RADIO_FREQ_ACTION----freq----" + freq);
+				Trace.m("--------RADIO_FREQ_ACTION----freq----" + freq);
 				Message freqmsg = new Message();
 				freqmsg.what = Contacts.MSG_RADIO_FREQ_MEG;
 				freqmsg.obj = freq;
@@ -901,10 +914,17 @@ public class SerialPortControl {
 		RADIOWAKE = false;
 		AUXWAKE = false;
 		EQUWAKE = false;
-		Message msg = new Message();
-		msg.what = Contacts.MSG_APP_CHANGE;
-		msg.obj = appName;
-		mHandler.sendMessage(msg);
+		//为了适应如切换右视图，但是不需要切换模式的情况，预先设置标志位，可以跳过一次模式切换。
+		if(Settings.System.getInt(mSerialPortService.getContentResolver(),
+				Constact.AVOIDCONSOLEMODE,0)==1){
+			Settings.System.putInt(mSerialPortService.getContentResolver(),
+					Constact.AVOIDCONSOLEMODE,0);
+		}else{
+			Message msg = new Message();
+			msg.what = Contacts.MSG_APP_CHANGE;
+			msg.obj = appName;
+			mHandler.sendMessage(msg);
+		}		
 	}
 
 	private BackCarObserver mBackCarObserver = new BackCarObserver();
@@ -1112,6 +1132,9 @@ public class SerialPortControl {
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG_1);
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG_2);
 			mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
+			/*
+			 * 是否在导航状态
+			 * */
 			isNaving = (android.provider.Settings.System.getInt(
 					mSerialPortService.getContentResolver(),
 					Constact.NAVING_STATUS, 0) == 1);
@@ -1170,6 +1193,8 @@ public class SerialPortControl {
 		msg.obj = mPacket;
 		mHandler.sendMessage(msg);
 	}
+	
+	
 
 	public void dealCommand(String command) {
 		// TODO Auto-generated method stub
@@ -1182,26 +1207,20 @@ public class SerialPortControl {
 				sendMsg(Contacts.HEX_TAILGATE_CHANGE);
 			}
 			break;
-		case Constact.ACTION_MENU_UP:
+		case Constact.ACTION_RADIO_MENU_UP:
 			if (mode == 0) { // FM模式
 				sendMsg(Contacts.HEX_PRE_SHORT_MOVE);
-			} else { // 音乐模式
-				controlMusicPrevious();
 			}
 			break;
-		case Constact.ACTION_MENU_DOWN:
+		case Constact.ACTION_RADIO_MENU_DOWN:
 			if (mode == 0) { // FM模式
 				sendMsg(Contacts.HEX_NEXT_SHORT_MOVE);
-			} else {// 音乐模式
-				controlMusicNext();
-			}
+			} 
 			break;
-		case Constact.ACTION_PLAY_PAUSE:
+		case Constact.ACTION_RADIO_PLAY_PAUSE:
 			if (mode == 0) { // FM模式
 				sendMsg(Contacts.FM_PLAY);
-			} else {// 音乐模式
-				controlMusicPlay();
-			}
+			} 
 			break;
 		case Constact.ACTION_MENU_LONG_UP:
 			if (mode == 0) { // FM模式
@@ -1277,7 +1296,7 @@ public class SerialPortControl {
 				});
 	}
 
-	private void controlMusicNext() {
+/*	private void controlMusicNext() {
 		if (checkLocale("CN")) {
 			mKwapi.setPlayState(mSerialPortService, PlayState.STATE_NEXT);
 		} else {
@@ -1326,7 +1345,7 @@ public class SerialPortControl {
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 
 	private void stopMusic() {
 		mKwapi.setPlayState(mSerialPortService, PlayState.STATE_PAUSE);

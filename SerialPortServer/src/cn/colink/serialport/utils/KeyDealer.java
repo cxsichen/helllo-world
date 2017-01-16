@@ -27,11 +27,11 @@ public class KeyDealer {
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
 	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
 	public static final String APPLISTNAME = "Console_applist_name";
-	
+
 	public static final String KEYCODE_BACK = "com.console.KEYCODE_BACK";
 	public static final String KEYCODE_FM = "com.console.KEYCODE_FM";
 	public static final String KEYCODE_NAV = "com.console.KEYCODE_NAV";
-	
+
 	static Context context;
 	static KeyDealer mKeyDealer;
 
@@ -130,8 +130,8 @@ public class KeyDealer {
 
 	protected void handlePlayPause() {
 		Intent intent = new Intent();
-		intent.setClassName("cn.colink.serialport",
-				"cn.colink.serialport.service.SerialPortService");
+		intent.setClassName("com.console.canreader",
+				"com.console.canreader.service.CanService");
 		intent.putExtra("keyEvent", ACTION_PLAY_PAUSE);
 		context.startService(intent);
 	}
@@ -162,8 +162,7 @@ public class KeyDealer {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	protected void handleFm() {
 		Intent intent = new Intent();
 		intent.setClassName("com.console.canreader",
@@ -172,8 +171,6 @@ public class KeyDealer {
 		context.startService(intent);
 	}
 
-	
-	
 	protected void handleMusic() {
 		Intent intent = new Intent();
 		intent.setClassName("cn.colink.serialport",
@@ -182,7 +179,6 @@ public class KeyDealer {
 		context.startService(intent);
 	}
 
-	
 	protected void handleNav() {
 		Intent intent = new Intent();
 		intent.setClassName("com.console.canreader",
@@ -191,8 +187,6 @@ public class KeyDealer {
 		context.startService(intent);
 	}
 
-	
-	
 	protected void handleBack() {
 		Intent intent = new Intent();
 		intent.setClassName("com.console.canreader",
@@ -200,7 +194,6 @@ public class KeyDealer {
 		intent.putExtra("keyEvent", KEYCODE_BACK);
 		context.startService(intent);
 	}
-
 
 	protected void handleMute() {
 		Intent intent = new Intent();
@@ -258,8 +251,8 @@ public class KeyDealer {
 		} else {
 			if (getMode(context) != 0) {
 				Intent intent = new Intent();
-				intent.setClassName("cn.colink.serialport",
-						"cn.colink.serialport.service.SerialPortService");
+				intent.setClassName("com.console.canreader",
+						"com.console.canreader.service.CanService");
 				intent.putExtra("keyEvent", ACTION_MENU_UP);
 				context.startService(intent);
 			}
@@ -271,13 +264,11 @@ public class KeyDealer {
 		if (isPhoneCommig()) {
 			handleTelAnswer();
 		} else {
-			if (getMode(context) != 0) {
-				Intent intent = new Intent();
-				intent.setClassName("cn.colink.serialport",
-						"cn.colink.serialport.service.SerialPortService");
-				intent.putExtra("keyEvent", ACTION_MENU_UP);
-				context.startService(intent);
-			}
+			Intent intent = new Intent();
+			intent.setClassName("com.console.canreader",
+					"com.console.canreader.service.CanService");
+			intent.putExtra("keyEvent", ACTION_MENU_UP);
+			context.startService(intent);
 		}
 	}
 
@@ -288,8 +279,8 @@ public class KeyDealer {
 		} else {
 			if (getMode(context) != 0) {
 				Intent intent = new Intent();
-				intent.setClassName("cn.colink.serialport",
-						"cn.colink.serialport.service.SerialPortService");
+				intent.setClassName("com.console.canreader",
+						"com.console.canreader.service.CanService");
 				intent.putExtra("keyEvent", ACTION_MENU_DOWN);
 				context.startService(intent);
 			}
@@ -300,13 +291,11 @@ public class KeyDealer {
 		if (isPhoneCommig()) {
 			handleTelHandUp();
 		} else {
-			if (getMode(context) != 0) {
-				Intent intent = new Intent();
-				intent.setClassName("cn.colink.serialport",
-						"cn.colink.serialport.service.SerialPortService");
-				intent.putExtra("keyEvent", ACTION_MENU_DOWN);
-				context.startService(intent);
-			}
+			Intent intent = new Intent();
+			intent.setClassName("com.console.canreader",
+					"com.console.canreader.service.CanService");
+			intent.putExtra("keyEvent", ACTION_MENU_DOWN);
+			context.startService(intent);
 		}
 	}
 
@@ -390,7 +379,8 @@ public class KeyDealer {
 				break;
 			case (byte) Contacts.K_MEUNDOWN_HANDUP:
 				mHandler.removeMessages(Contacts.K_MEUNDOWN_HANDUP);
-				mHandler.sendEmptyMessageDelayed(Contacts.K_MEUNDOWN_HANDUP, 200);
+				mHandler.sendEmptyMessageDelayed(Contacts.K_MEUNDOWN_HANDUP,
+						200);
 				break;
 			case (byte) Contacts.K_MEUNUP_ANSWER:
 				mHandler.removeMessages(Contacts.K_MEUNUP_ANSWER);

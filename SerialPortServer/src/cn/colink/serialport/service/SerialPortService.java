@@ -330,4 +330,6 @@ public class SerialPortService extends Service {
 		}
 	}
 	// ---------------------receive msg end--------------------------------
+	
+	
 }

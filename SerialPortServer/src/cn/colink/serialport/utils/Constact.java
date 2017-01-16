@@ -14,6 +14,9 @@ public interface Constact  {
 	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
 	public static final String ACTION_TAILGATE_CHANGE = "com.console.TAILGATE_CHANGE";
 	public final static String TAILDOORSTATUS = "tail_door_status";
+	public static final String ACTION_RADIO_MENU_UP = "com.console.ACTION_RADIO_MENU_UP";
+	public static final String ACTION_RADIO_MENU_DOWN = "com.console.ACTION_RADIO_MENU_DOWN";
+	public static final String ACTION_RADIO_PLAY_PAUSE = "com.console.ACTION_RADIO_PLAY_PAUSE";
 	
 	public final static String STOPNAVI="com.inet.broadcast.stoptnavi";
 	public final static String STARTNAVI="com.inet.broadcast.startnavi";
@@ -22,7 +25,8 @@ public interface Constact  {
 	public static final String ADAS_STATE = "adas_state";
 	public static final String TTS_SHOW = "tts_show";
 	public static final String BACK_CAR = "back_car_state";        //1 æ˜¯å?’è½¦  0æ˜¯å?’å®Œè½?
-	public static final String NAVING_STATUS = "naving_status";        
+	public static final String NAVING_STATUS = "naving_status";    
+	public static final String AVOIDCONSOLEMODE = "avoid_console_mode";
 	
 	public static final String NAVI_AUTHORITY = "com.zzj.softwareservice.NaviProvider";
     public static final Uri NAVI_CONTENT_URI = Uri.parse("content://" + NAVI_AUTHORITY + "/navi");
