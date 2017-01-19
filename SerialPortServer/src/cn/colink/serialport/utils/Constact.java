@@ -17,6 +17,8 @@ public interface Constact  {
 	public static final String ACTION_RADIO_MENU_UP = "com.console.ACTION_RADIO_MENU_UP";
 	public static final String ACTION_RADIO_MENU_DOWN = "com.console.ACTION_RADIO_MENU_DOWN";
 	public static final String ACTION_RADIO_PLAY_PAUSE = "com.console.ACTION_RADIO_PLAY_PAUSE";
+	public static final String ACTION_CONCOSOLE_FORCESTOP_PACKAGE = "com.console.ACTION_CONCOSOLE_FORCESTOP_PACKAGE";
+	public static final String DETECTCHANGE= "detectChange"; 
 	
 	public final static String STOPNAVI="com.inet.broadcast.stoptnavi";
 	public final static String STARTNAVI="com.inet.broadcast.startnavi";

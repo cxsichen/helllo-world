@@ -22,6 +22,8 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningTaskInfo;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -37,6 +39,7 @@ import android.os.RemoteException;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.android.music.IMediaPlaybackService;
 
@@ -61,14 +64,14 @@ public class SerialPortControl {
 	private final String[] modeApplist = { "com.console.radio",
 			"cn.kuwo.kwmusiccar", "com.mxtech.videoplayer.pro",
 			"com.mtk.bluetooth", "com.console.auxapp", "com.console.equalizer",
-			"com.autonavi.amapauto", "com.srtc.pingwang",
-			"com.console.dtv" }; // Acc on后打开的应用的列表
+			"com.autonavi.amapauto", "com.srtc.pingwang", "com.console.dtv" }; // Acc
+																				// on后打开的应用的列表
 
 	/*
-	 *  0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪8数字电视100喜马拉雅
+	 * 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪8数字电视100喜马拉雅
 	 */
 	private final int[] Modes = { 0x06, 0x04, 0x05, 0x0B, 0X09, 0x11, 0x0A,
-			0x0E };
+			0x0E, 0x08 };
 	private static final String BOOT_COMPLETED_ACTION = "android.intent.action.BOOT_COMPLETED";
 	private static final String RADIO_FREQ_ACTION = "action.colink.startFM";
 	private static final String SEND_APP_CHANGE = "com.console.sendAppChange";
@@ -77,6 +80,8 @@ public class SerialPortControl {
 	private PlayerStatus mPlayerStatus = PlayerStatus.STOP;
 	private static long tailGateTimeSave = 0;
 	private static String appNameSave = "";
+
+	public static Dialog mDrivingWaringDialog = null;
 
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
@@ -91,11 +96,11 @@ public class SerialPortControl {
 				int factorySoundValue = android.provider.Settings.System
 						.getInt(mSerialPortService.getContentResolver(),
 								Constact.FACTORY_SOUND, 30);
-				int fmPowerValue = android.provider.Settings.System
-						.getInt(mSerialPortService.getContentResolver(),
-								Constact.FMPOWER, 0);
+				int fmPowerValue = android.provider.Settings.System.getInt(
+						mSerialPortService.getContentResolver(),
+						Constact.FMPOWER, 0);
 				sendMsg("F755" + BytesUtil.intToHexString(factorySoundValue)
-						+ "00"+BytesUtil.intToHexString(fmPowerValue));
+						+ "00" + BytesUtil.intToHexString(fmPowerValue));
 				break;
 			case Contacts.MSG_RADIO_VALUME_CHANGE:
 			/*
@@ -171,7 +176,8 @@ public class SerialPortControl {
 				}
 				break;
 			/**
-			 * 处理app切换模式命令 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7 行车记录仪8数字电视100喜马拉雅
+			 * 处理app切换模式命令 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7
+			 * 行车记录仪8数字电视100喜马拉雅
 			 */
 			case Contacts.MSG_APP_CHANGE:
 				mHandler.removeMessages(Contacts.MSG_CHECK_MODE);
@@ -275,7 +281,7 @@ public class SerialPortControl {
 						sendMsg("F5020000" + BytesUtil.intToHexString(8));
 					}
 					break;
-				case "com.ximalaya.ting.android.car":                     //喜马拉雅对应音乐
+				case "com.ximalaya.ting.android.car": // 喜马拉雅对应音乐
 					if (PreferenceUtil.getMode(mSerialPortService) != 100) {
 						PreferenceUtil.setMode(mSerialPortService, 100);
 						sendMsg("F5020000" + BytesUtil.intToHexString(1));
@@ -288,7 +294,7 @@ public class SerialPortControl {
 					}
 					break;
 				}
-				//校验模式状态
+				// 校验模式状态
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_CHECK_MODE,
 						2 * 1000);
 
@@ -300,12 +306,9 @@ public class SerialPortControl {
 				}
 
 				break;
-		    /**
-		     * ACC ON一共三个阶段状态
-		     * 1 初始化值后进入主界面
-		     * 2 进入模式界面
-		     * 3 检测倒车
-		     */
+			/**
+			 * ACC ON一共三个阶段状态 1 初始化值后进入主界面 2 进入模式界面 3 检测倒车
+			 */
 			case Contacts.MSG_ACCON_MSG:
 				isAcconOver = false;
 				/*
@@ -410,9 +413,9 @@ public class SerialPortControl {
 		switch (mode) {
 		case 1: // 音乐
 			try {
-				if(appNameSave.equals("cn.kuwo.kwmusiccar")){
+				if (appNameSave.equals("cn.kuwo.kwmusiccar")) {
 					startMusic();
-				}			
+				}
 			} catch (Exception e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -555,17 +558,44 @@ public class SerialPortControl {
 		// TODO Auto-generated method stub
 		switch (packet[0]) {
 		case Contacts.STATUS: // 常发命令
-			int tail_door_status = (int) ((packet[1] >> 1) & 0x01); // 尾门状态
-			if (tail_door_status != Settings.System.getInt(
-					mSerialPortService.getContentResolver(),
-					Constact.TAILDOORSTATUS, 0)) {
-				Settings.System.putInt(mSerialPortService.getContentResolver(),
-						Constact.TAILDOORSTATUS, tail_door_status);
-				/*
-				 * if(tail_door_status==1){ openApplication(mSerialPortService,
-				 * "com.console.TailGate"); }
-				 */
+			if (Settings.System.getInt(mSerialPortService.getContentResolver(),
+					Constact.DETECTCHANGE, 0) == 0) { // 尾门和手刹状态的选择 0是手刹 1是尾门
+				if (android.provider.Settings.System.getString(
+						mSerialPortService.getContentResolver(),
+						Constact.APPLIST).equals("com.mxtech.videoplayer.pro")) {
+					int hand_brake_status = (int) ((packet[1] >> 1) & 0x01); // 手刹状态
+					if(hand_brake_status==1){
+						if(mDrivingWaringDialog==null)
+							mDrivingWaringDialog=initDialog("驾驶过程中请关闭视频");
+                        if(!mDrivingWaringDialog.isShowing()){
+                        	mDrivingWaringDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT); 
+                        	mDrivingWaringDialog.show();
+                        }
+					}
+				}else{
+					if(mDrivingWaringDialog!=null){
+						if(mDrivingWaringDialog.isShowing()){
+							mDrivingWaringDialog.dismiss();
+							mDrivingWaringDialog=null;
+						}
+					}
+				}
+			} else {
+				int tail_door_status = (int) ((packet[1] >> 1) & 0x01); // 尾门状态
+				if (tail_door_status != Settings.System.getInt(
+						mSerialPortService.getContentResolver(),
+						Constact.TAILDOORSTATUS, 0)) {
+					Settings.System.putInt(
+							mSerialPortService.getContentResolver(),
+							Constact.TAILDOORSTATUS, tail_door_status);
+					/*
+					 * if(tail_door_status==1){
+					 * openApplication(mSerialPortService,
+					 * "com.console.TailGate"); }
+					 */
+				}
 			}
+
 			break;
 		case Contacts.RADIO_MSG: // Fm模式开关状态
 			if (packet[2] == (int) 0x01) {
@@ -776,8 +806,8 @@ public class SerialPortControl {
 		// TODO Auto-generated method stub
 		// 监控语音控制fm状态
 		mSerialPortService.getContentResolver().registerContentObserver(
-						android.provider.Settings.System.getUriFor(Constact.FM_SWITCH),
-						true, mVoiceFmControlObserver);
+				android.provider.Settings.System.getUriFor(Constact.FM_SWITCH),
+				true, mVoiceFmControlObserver);
 
 		// 监控acc状态
 		mSerialPortService.getContentResolver().registerContentObserver(
@@ -810,14 +840,11 @@ public class SerialPortControl {
 								.getUriFor(Constact.FACTORY_SOUND),
 						true, mFactorySoundObserver);
 
-		mSerialPortService
-				.getContentResolver()
-				.registerContentObserver(
-						android.provider.Settings.System
-								.getUriFor(Constact.FMPOWER),
-						true, mFmPowerObserver);
+		mSerialPortService.getContentResolver().registerContentObserver(
+				android.provider.Settings.System.getUriFor(Constact.FMPOWER),
+				true, mFmPowerObserver);
 	}
-	
+
 	/**
 	 * 收音天线电源
 	 */
@@ -897,13 +924,13 @@ public class SerialPortControl {
 			String appName = android.provider.Settings.System.getString(
 					mSerialPortService.getContentResolver(), Constact.APPLIST);
 			handleAPPChange(appName);
-		
-			if(android.provider.Settings.System.getInt(
+
+			if (android.provider.Settings.System.getInt(
 					mSerialPortService.getContentResolver(),
-					Constact.ACC_STATE, 0)==1){
-				if(appName!="cn.coogo.hardware.service"){
-					appNameSave=appName;
-				}			
+					Constact.ACC_STATE, 0) == 1) {
+				if (appName != "cn.coogo.hardware.service") {
+					appNameSave = appName;
+				}
 			}
 			Trace.m("==========mAPPObserver================" + appName);
 		}
@@ -914,17 +941,17 @@ public class SerialPortControl {
 		RADIOWAKE = false;
 		AUXWAKE = false;
 		EQUWAKE = false;
-		//为了适应如切换右视图，但是不需要切换模式的情况，预先设置标志位，可以跳过一次模式切换。
-		if(Settings.System.getInt(mSerialPortService.getContentResolver(),
-				Constact.AVOIDCONSOLEMODE,0)==1){
+		// 为了适应如切换右视图，但是不需要切换模式的情况，预先设置标志位，可以跳过一次模式切换。
+		if (Settings.System.getInt(mSerialPortService.getContentResolver(),
+				Constact.AVOIDCONSOLEMODE, 0) == 1) {
 			Settings.System.putInt(mSerialPortService.getContentResolver(),
-					Constact.AVOIDCONSOLEMODE,0);
-		}else{
+					Constact.AVOIDCONSOLEMODE, 0);
+		} else {
 			Message msg = new Message();
 			msg.what = Contacts.MSG_APP_CHANGE;
 			msg.obj = appName;
 			mHandler.sendMessage(msg);
-		}		
+		}
 	}
 
 	private BackCarObserver mBackCarObserver = new BackCarObserver();
@@ -1069,37 +1096,39 @@ public class SerialPortControl {
 			sendMsg(Contacts.EQUALIZER_MODE);
 		}
 	}
-	
+
 	// 监控语音控制fm状态
-	 private VoiceFmControlObserver mVoiceFmControlObserver = new VoiceFmControlObserver();
+	private VoiceFmControlObserver mVoiceFmControlObserver = new VoiceFmControlObserver();
 
-	 public class VoiceFmControlObserver extends ContentObserver {
-			public VoiceFmControlObserver() {
-				super(null);
-			}
+	public class VoiceFmControlObserver extends ContentObserver {
+		public VoiceFmControlObserver() {
+			super(null);
+		}
 
-			@Override
-			public void onChange(boolean selfChange) {
-				super.onChange(selfChange);
-				int state = android.provider.Settings.System.getInt(
-						mSerialPortService.getContentResolver(),
-						Constact.FM_SWITCH, 0);
-				handleFmSwitchState(state);
+		@Override
+		public void onChange(boolean selfChange) {
+			super.onChange(selfChange);
+			int state = android.provider.Settings.System.getInt(
+					mSerialPortService.getContentResolver(),
+					Constact.FM_SWITCH, 0);
+			handleFmSwitchState(state);
+		}
+	}
+
+	private void handleFmSwitchState(int state) {
+		// TODO Auto-generated method stub
+		int mode = android.provider.Settings.System.getInt(
+				mSerialPortService.getContentResolver(), Constact.MODE, 0);
+		if (mode != 0) {
+			if (state == 0)
+				openApplication(mSerialPortService, "com.console.radio");
+		} else {
+			if (state == Settings.System.getInt(
+					mSerialPortService.getContentResolver(), Constact.FMSTATUS,
+					0)) {
+				sendMsg(Contacts.FM_PLAY);
 			}
 		}
-	 private void handleFmSwitchState(int state) {
-			// TODO Auto-generated method stub
-		 int mode = android.provider.Settings.System.getInt(
-					mSerialPortService.getContentResolver(), Constact.MODE, 0);
-		 if(mode != 0){
-			 if(state==0)
-			 openApplication(mSerialPortService, "com.console.radio");
-		 }else{
-			 if(state== Settings.System.getInt(mSerialPortService.getContentResolver(),
-						Constact.FMSTATUS, 0)){
-				 sendMsg(Contacts.FM_PLAY);
-			 }
-		 }
 	}
 
 	// 监控acc状态
@@ -1134,7 +1163,7 @@ public class SerialPortControl {
 			mHandler.removeMessages(Contacts.MSG_FACTORY_SOUND);
 			/*
 			 * 是否在导航状态
-			 * */
+			 */
 			isNaving = (android.provider.Settings.System.getInt(
 					mSerialPortService.getContentResolver(),
 					Constact.NAVING_STATUS, 0) == 1);
@@ -1193,8 +1222,6 @@ public class SerialPortControl {
 		msg.obj = mPacket;
 		mHandler.sendMessage(msg);
 	}
-	
-	
 
 	public void dealCommand(String command) {
 		// TODO Auto-generated method stub
@@ -1215,12 +1242,12 @@ public class SerialPortControl {
 		case Constact.ACTION_RADIO_MENU_DOWN:
 			if (mode == 0) { // FM模式
 				sendMsg(Contacts.HEX_NEXT_SHORT_MOVE);
-			} 
+			}
 			break;
 		case Constact.ACTION_RADIO_PLAY_PAUSE:
 			if (mode == 0) { // FM模式
 				sendMsg(Contacts.FM_PLAY);
-			} 
+			}
 			break;
 		case Constact.ACTION_MENU_LONG_UP:
 			if (mode == 0) { // FM模式
@@ -1289,63 +1316,38 @@ public class SerialPortControl {
 							Music music) {
 						Log.i("cxs", "====playerStatus=====" + playerStatus);
 						mPlayerStatus = playerStatus;
-						if(playerStatus.equals(PlayerStatus.PLAYING)){
-							mSerialPortService.sendBroadcast(new Intent("console.hardwareService.action.MEDIA_CONSOLE_COMMAND"));
+						if (playerStatus.equals(PlayerStatus.PLAYING)) {
+							mSerialPortService
+									.sendBroadcast(new Intent(
+											"console.hardwareService.action.MEDIA_CONSOLE_COMMAND"));
 						}
 					}
 				});
 	}
 
-/*	private void controlMusicNext() {
-		if (checkLocale("CN")) {
-			mKwapi.setPlayState(mSerialPortService, PlayState.STATE_NEXT);
-		} else {
-			try {
-				mIMediaPlaybackService.next();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-
-	private void controlMusicPrevious() {
-		if (checkLocale("CN")) {
-			mKwapi.setPlayState(mSerialPortService, PlayState.STATE_PRE);
-		} else {
-			try {
-				mIMediaPlaybackService.prev();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-
-	private void controlMusicPlay() {
-		Log.i("cxs", "--------controlPlay----" + checkLocale("CN"));
-		if (checkLocale("CN")) {
-			if (mPlayerStatus.equals(PlayerStatus.PLAYING)) {
-				mKwapi.setPlayState(mSerialPortService, PlayState.STATE_PAUSE);
-			} else {
-				mKwapi.setPlayState(mSerialPortService, PlayState.STATE_PLAY);
-			}
-		} else {
-			try {
-				Log.i("cxs", "--------controlPlay---isPlaying-"
-						+ mIMediaPlaybackService.isPlaying());
-				if (mIMediaPlaybackService.isPlaying()) {
-					mIMediaPlaybackService.pause();
-				} else {
-					mIMediaPlaybackService.play();
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				Log.i("cxs", "--------controlPlay--e--" + e);
-				e.printStackTrace();
-			}
-		}
-	}*/
+	/*
+	 * private void controlMusicNext() { if (checkLocale("CN")) {
+	 * mKwapi.setPlayState(mSerialPortService, PlayState.STATE_NEXT); } else {
+	 * try { mIMediaPlaybackService.next(); } catch (Exception e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); } } }
+	 * 
+	 * private void controlMusicPrevious() { if (checkLocale("CN")) {
+	 * mKwapi.setPlayState(mSerialPortService, PlayState.STATE_PRE); } else {
+	 * try { mIMediaPlaybackService.prev(); } catch (Exception e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); } } }
+	 * 
+	 * private void controlMusicPlay() { Log.i("cxs", "--------controlPlay----"
+	 * + checkLocale("CN")); if (checkLocale("CN")) { if
+	 * (mPlayerStatus.equals(PlayerStatus.PLAYING)) {
+	 * mKwapi.setPlayState(mSerialPortService, PlayState.STATE_PAUSE); } else {
+	 * mKwapi.setPlayState(mSerialPortService, PlayState.STATE_PLAY); } } else {
+	 * try { Log.i("cxs", "--------controlPlay---isPlaying-" +
+	 * mIMediaPlaybackService.isPlaying()); if
+	 * (mIMediaPlaybackService.isPlaying()) { mIMediaPlaybackService.pause(); }
+	 * else { mIMediaPlaybackService.play(); } } catch (Exception e) { // TODO
+	 * Auto-generated catch block Log.i("cxs", "--------controlPlay--e--" + e);
+	 * e.printStackTrace(); } } }
+	 */
 
 	private void stopMusic() {
 		mKwapi.setPlayState(mSerialPortService, PlayState.STATE_PAUSE);
@@ -1363,6 +1365,30 @@ public class SerialPortControl {
 	Boolean checkLocale(String str) {
 		return mSerialPortService.getResources().getConfiguration().locale
 				.getCountry().equals(str);
+	}
+
+	/**
+	 * 发给canReader强制停止应用
+	 */
+	protected void forceStopPackage(String str) {
+		Intent intent = new Intent();
+		intent.setClassName("com.console.canreader",
+				"com.console.canreader.service.CanService");
+		intent.putExtra("keyEvent", Constact.ACTION_CONCOSOLE_FORCESTOP_PACKAGE);
+		intent.putExtra("keyEventArg", str);
+		mSerialPortService.startService(intent);
+	}
+
+	/**
+	 * 打开对话框
+	 */
+
+	private Dialog initDialog(String str) {
+		// TODO Auto-generated method stub
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mSerialPortService);
+		alertDialog.setMessage(str);
+		alertDialog.setTitle("警告：");
+		return alertDialog.create();	
 	}
 
 }
