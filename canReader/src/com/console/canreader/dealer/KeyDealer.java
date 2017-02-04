@@ -1,7 +1,11 @@
 package com.console.canreader.dealer;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -17,7 +21,11 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
-
+import cn.kuwo.autosdk.api.KWAPI;
+import cn.kuwo.autosdk.api.OnPlayerStatusListener;
+import cn.kuwo.autosdk.api.PlayState;
+import cn.kuwo.autosdk.api.PlayerStatus;
+import cn.kuwo.autosdk.bean.Music;
 
 import com.console.canreader.R;
 import com.console.canreader.activity.CarInfoActivity;
@@ -45,7 +53,7 @@ public class KeyDealer {
 	public static final String ACTION_CLOSE_AUX = "com.console.CLOSE_AUX";
 	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
 	public static final String RADIO_FREQ_ACTION = "action.colink.startFM";
-	
+
 	public static final String KEYCODE_VOLUME_UP = "com.console.KEYCODE_VOLUME_UP";
 	public static final String KEYCODE_VOLUME_DOWN = "com.console.KEYCODE_VOLUME_DOWN";
 	public static final String KEYCODE_VOLUME_MUTE = "com.console.KEYCODE_VOLUME_MUTE";
@@ -54,7 +62,9 @@ public class KeyDealer {
 	public static final String ACTION_RADIO_MENU_UP = "com.console.ACTION_RADIO_MENU_UP";
 	public static final String ACTION_RADIO_MENU_DOWN = "com.console.ACTION_RADIO_MENU_DOWN";
 	public static final String ACTION_RADIO_PLAY_PAUSE = "com.console.ACTION_RADIO_PLAY_PAUSE";
+	private PlayerStatus mPlayerStatus = PlayerStatus.STOP;
 	
+	private KWAPI mKwapi;
 
 	private final static int SETP_VOLUME = 1;
 	private static final int MAX_ALARM_VOICE = 15;
@@ -318,9 +328,10 @@ public class KeyDealer {
 		context.registerReceiver(mValumeObserver, new IntentFilter(
 				ACTION_VOLUMN_CHANGE));
 		doRegisterReceiver();
+		
 	}
 
-	// 监听物理加减音量键
+	// 监听物理加减音量键和酷我
 	private void doRegisterReceiver() {
 		// TODO Auto-generated method stub
 		IntentFilter filter = new IntentFilter();
@@ -328,7 +339,29 @@ public class KeyDealer {
 		filter.addAction(KEYCODE_VOLUME_DOWN);
 		filter.addAction(KEYCODE_VOLUME_MUTE);
 		context.registerReceiver(myReceiver, filter);
+		
+		mKwapi = KWAPI.createKWAPI(context, "auto");
+		
+		
+		mKwapi.registerPlayerStatusListener(context,
+				new OnPlayerStatusListener() {
+					@Override
+					public void onPlayerStatus(PlayerStatus playerStatus,
+							Music music) {
+						mPlayerStatus = playerStatus;
+					}
+				});
 	}
+	
+	
+	public void unRegisterReceiver() {
+		if(myReceiver!=null){
+			context.unregisterReceiver(myReceiver);
+		}
+		if (mKwapi != null)
+			mKwapi.unRegisterPlayerStatusListener(context);
+	}
+	
 
 	private BroadcastReceiver myReceiver = new BroadcastReceiver() {
 
@@ -591,14 +624,22 @@ public class KeyDealer {
 
 	public void handleMUSIC_PLAY_PAUSE() {
 		// TODO Auto-generated method stub
-		if(getMode(context)==0){//收音模式
+		if (getMode(context) == 0) {// 收音模式
 			Intent intent = new Intent();
 			intent.setClassName("cn.colink.serialport",
 					"cn.colink.serialport.service.SerialPortService");
 			intent.putExtra("keyEvent", ACTION_RADIO_PLAY_PAUSE);
 			context.startService(intent);
-		}else{
-			actionKey(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+		} else {
+			if(mKwapi.isKuwoRunning(context)){
+				if (mPlayerStatus.equals(PlayerStatus.PLAYING)) {
+					mKwapi.setPlayState(context, PlayState.STATE_PAUSE);
+				} else {
+					mKwapi.setPlayState(context, PlayState.STATE_PLAY);
+				}
+			}else{
+			   actionKey(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+			}		
 		}
 	}
 
@@ -618,9 +659,9 @@ public class KeyDealer {
 	}
 
 	private void handleAUXCHANGE() {
-		// TODO Auto-generated method stub	
-		Settings.System.putInt(context.getContentResolver(),
-				AVOIDCONSOLEMODE,1);
+		// TODO Auto-generated method stub
+		Settings.System.putInt(context.getContentResolver(), AVOIDCONSOLEMODE,
+				1);
 		try {
 			Intent intent = new Intent();
 			intent.setClassName("com.console.auxapp",
@@ -637,17 +678,17 @@ public class KeyDealer {
 
 	private void handleCloseRightSight() {
 		// TODO Auto-generated method stub
-		Settings.System.putInt(context.getContentResolver(),
-				AVOIDCONSOLEMODE,0);
+		Settings.System.putInt(context.getContentResolver(), AVOIDCONSOLEMODE,
+				0);
 		Intent intent = new Intent();
 		intent.setAction(ACTION_CLOSE_AUX);
 		context.sendBroadcast(intent);
 	}
-	
+
 	private void handleOpenRightSight() {
 		// TODO Auto-generated method stub
-		Settings.System.putInt(context.getContentResolver(),
-				AVOIDCONSOLEMODE,1);
+		Settings.System.putInt(context.getContentResolver(), AVOIDCONSOLEMODE,
+				1);
 		handleAUX();
 	}
 
@@ -745,27 +786,35 @@ public class KeyDealer {
 	}
 
 	public void handleMenuUp() {
-		if(getMode(context)==0){//收音模式
+		if (getMode(context) == 0) {// 收音模式
 			Intent intent = new Intent();
 			intent.setClassName("cn.colink.serialport",
 					"cn.colink.serialport.service.SerialPortService");
 			intent.putExtra("keyEvent", ACTION_RADIO_MENU_UP);
 			context.startService(intent);
-		}else{
-			actionKey(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+		} else {
+			if(mKwapi.isKuwoRunning(context)){
+				mKwapi.setPlayState(context, PlayState.STATE_PRE);
+			}else{
+				actionKey(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+			}			
 		}
-		
+
 	}
 
-	public void handleMenuDown() {		
-		if(getMode(context)==0){//收音模式
+	public void handleMenuDown() {
+		if (getMode(context) == 0) {// 收音模式
 			Intent intent = new Intent();
 			intent.setClassName("cn.colink.serialport",
 					"cn.colink.serialport.service.SerialPortService");
 			intent.putExtra("keyEvent", ACTION_RADIO_MENU_DOWN);
 			context.startService(intent);
-		}else{
-			actionKey(KeyEvent.KEYCODE_MEDIA_NEXT);
+		} else {
+			if(mKwapi.isKuwoRunning(context)){
+				mKwapi.setPlayState(context, PlayState.STATE_NEXT);
+			}else{
+				actionKey(KeyEvent.KEYCODE_MEDIA_NEXT);
+			}
 		}
 	}
 
@@ -803,6 +852,21 @@ public class KeyDealer {
 					.getSystemService(Context.AUDIO_SERVICE);
 		cur_music = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 		handleVolume(context, cur_music - SETP_VOLUME);
+	}
+
+	public void handleForceStopPackage(String pkgName) {
+		if (pkgName == null)
+			return;
+		try {
+			ActivityManager am = (ActivityManager) context
+					.getSystemService(Context.ACTIVITY_SERVICE);
+			// am.killBackgroundProcesses(pkgName);
+			Method method = Class.forName("android.app.ActivityManager")
+					.getMethod("forceStopPackage", String.class);
+			method.invoke(am, pkgName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static KeyDealer getInstance(Context context) {
@@ -1256,18 +1320,17 @@ public class KeyDealer {
 		}
 		return IsPhoneComming;
 	}
-	
-	
+
 	public int getMode(Context context) {
-		int mode=0;
+		int mode = 0;
 		try {
 			mode = Settings.System.getInt(context.getContentResolver(),
-					CONSOLEMODE,0);
+					CONSOLEMODE, 0);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}		
+		}
 		return mode;
 	}
-	
+
 }

@@ -1,10 +1,15 @@
 package com.console.canreader.service;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.security.InvalidParameterException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
@@ -74,6 +79,7 @@ public class CanService extends Service {
 	public static final String ACTION_MENU_UP = "com.console.MENU_UP";
 	public static final String ACTION_MENU_DOWN = "com.console.MENU_DOWN";
 	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
+	public static final String ACTION_CONCOSOLE_FORCESTOP_PACKAGE = "com.console.ACTION_CONCOSOLE_FORCESTOP_PACKAGE";
 
 	interface SerialPortWriteTask {
 		public void excute();
@@ -92,6 +98,8 @@ public class CanService extends Service {
 				byte[] mPacket = (byte[]) msg.obj;
 				// Broadcast to all clients the new value.
 				Trace.i("packet : " + BytesUtil.bytesToHexString(mPacket));
+				//打印数据到txt文件保存
+				//put("packet : "+ BytesUtil.bytesToHexString(mPacket));
 				info = BeanFactory
 						.getCanInfo(CanService.this, mPacket, canName);
 				if (info != null)
@@ -107,6 +115,29 @@ public class CanService extends Service {
 			}
 		}
 	};
+	
+	  public void put(String info){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      String time = sdf.format(new Date());  
+      String fileName = info + "-" + time;
+      Log.i("cxs", "cxs fileName===="+fileName);
+			BufferedWriter out = null;  
+      try {  
+          out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("/sdcard/"+"canReader_log.txt", true)));  
+          out.write(fileName);  
+          out.write("\n");
+      } catch (Exception e) {  
+          e.printStackTrace();  
+          Log.i("cxs", "cxs e===="+e);
+      } finally {  
+          try {  
+              out.close();  
+          } catch (IOException e) {  
+              e.printStackTrace();  
+              Log.i("cxs", "cxs e===="+e);
+          }  
+      } 
+		}	
 
 	// 处理接收到的Can信息
 	private void dealCanInfo(AnalyzeUtils info2) {
@@ -199,8 +230,9 @@ public class CanService extends Service {
 		// TODO Auto-generated method stub
 		if (intent != null) {
 			String command = intent.getStringExtra("keyEvent");
+			String commandArg = intent.getStringExtra("keyEventArg");
 			if (command != null) {
-				dealCommand(command);
+				dealCommand(command,commandArg);
 			}
 		}
 		return super.onStartCommand(intent, flags, startId);
@@ -211,7 +243,7 @@ public class CanService extends Service {
 	 * 
 	 * @param command
 	 */
-	private void dealCommand(String command) {
+	private void dealCommand(String command,String commandArg ) {
 
 		if (mKeyDealer == null)
 			mKeyDealer = KeyDealer.getInstance(this);
@@ -242,6 +274,9 @@ public class CanService extends Service {
 			break;
 		case ACTION_MENU_DOWN:
 			mKeyDealer.handleMenuDown();
+			break;
+		case ACTION_CONCOSOLE_FORCESTOP_PACKAGE:
+			mKeyDealer.handleForceStopPackage(commandArg);
 			break;
 		default:
 			break;
@@ -466,6 +501,10 @@ public class CanService extends Service {
 			Trace.i("SerialPortService mSendDataToSpThread interrupt");
 			if (!mSendDataToSpThread.isInterrupted())
 				mSendDataToSpThread.interrupt();
+		}
+		
+		if(mKeyDealer!=null){
+			mKeyDealer.unRegisterReceiver();
 		}
 		getContentResolver().unregisterContentObserver(mBackCarObserver);
 		getContentResolver().unregisterContentObserver(mCanNameObserver);
