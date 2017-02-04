@@ -73,12 +73,12 @@ public class MainActivity extends Activity {
 				finish();
 				break;
 			case SHOWNAVI:
-				time_layout.setVisibility(View.GONE);
+				//time_layout.setVisibility(View.GONE);
 				navi_layout.setVisibility(View.VISIBLE);
 				mHandler.removeMessages(1);
 				break;
 			case HIDENAVI:
-				time_layout.setVisibility(View.VISIBLE);
+			//	time_layout.setVisibility(View.VISIBLE);
 				navi_layout.setVisibility(View.GONE);
 				mHandler.sendEmptyMessage(1);
 				break;
@@ -205,7 +205,6 @@ public class MainActivity extends Activity {
 		public void onChange(boolean selfChange, Uri uri) {
 			// TODO Auto-generated method stub
 			super.onChange(selfChange, uri);
-			Log.i("cxs", "========observernew========");
 			getNaviInfo(uri);
 		}
 
@@ -216,10 +215,7 @@ public class MainActivity extends Activity {
 			query = getContentResolver().query(uri, null, null, null, null);
 			if (query.moveToNext()) {
 				isNaviing = query.getInt(query.getColumnIndex(ISNAVING)) == 1;
-				Log.i("cxs", "========isNaviing========" + isNaviing);
 				if (isNaviing) {
-					Log.i("cxs", "========isNaviing====111222=111==="
-							+ isNaviing);
 					mHandler.removeMessages(HIDENAVI);
 					mHandler.sendEmptyMessageDelayed(SHOWNAVI, 0);
 					String maneuver_Image = query.getString(query
@@ -238,13 +234,11 @@ public class MainActivity extends Activity {
 					remainDistanceText.setText(getRemainDidistance(
 							total_distance, System.currentTimeMillis()
 									+ remainTime * 1000));
-
 					int resID = getResources().getIdentifier(maneuver_Image,
 							"drawable", getApplicationInfo().packageName);
 					maneuverImage.setBackgroundResource(resID);
 					distanceText.setText(getDidistance(next_road_distance));
 				} else {
-					Log.i("cxs", "========isNaviing=====111===" + isNaviing);
 					mHandler.sendEmptyMessageDelayed(HIDENAVI, 3000);
 				}
 			}

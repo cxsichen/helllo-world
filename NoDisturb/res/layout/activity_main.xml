@@ -9,10 +9,7 @@
         android:id="@+id/toast_layout_root"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="50dp"
+        android:layout_centerInParent="true"
         android:background="#00000000"
         android:gravity="center"
         android:orientation="vertical"
@@ -24,12 +21,13 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+             android:text="进入"
+            android:textSize="26sp" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/ar_turn_front" />
 
@@ -41,7 +39,7 @@
             android:text="进入"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#868fb2"
-            android:textSize="18sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/nextRoad"
@@ -50,19 +48,21 @@
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxEms="8"
+            android:text="进入"
             android:singleLine="true"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="26sp" />
 
         <TextView
             android:id="@+id/remainDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="进入"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/white"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
