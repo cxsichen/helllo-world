@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DTV</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="aux_signal">Digital Television</string>
+    <string name="aux_no_signal">Digital television have no signal</string>
+
+</resources>

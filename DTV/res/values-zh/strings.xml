@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">数字电视</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="aux_signal">数字电视</string>
+    <string name="aux_no_signal">数字电视无信号输入</string>
+
+</resources>

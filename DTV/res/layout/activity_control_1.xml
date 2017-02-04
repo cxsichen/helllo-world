@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <RelativeLayout
+            android:id="@+id/navBtn"
+            android:layout_width="192dp"
+            android:layout_height="192dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_nav_btn"
+            android:padding="8dp" >
+
+             <TextView
+                    android:id="@+id/bt_enter"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/bg_ok_btn"
+                    android:gravity="center"
+                    android:text="OK"
+                    android:textColor="#ffffff"
+                    android:textSize="24sp" />
+             
+            <ImageView
+                android:id="@+id/bt_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow" />
+
+            <ImageView
+                android:id="@+id/bt_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:rotation="180"
+                android:src="@drawable/ic_arrow" />
+
+            <ImageView
+                android:id="@+id/bt_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:rotation="90"
+                android:src="@drawable/ic_arrow" />
+
+            <ImageView
+                android:id="@+id/bt_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:rotation="270"
+                android:src="@drawable/ic_arrow" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/navBtn"
+            android:background="@drawable/bg_fuction_btn"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" >
+
+            <TextView
+                android:id="@+id/bt_back"
+                style="@style/FunctionBtnText"
+                android:text="退出" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/bt_menu_up"
+                style="@style/FunctionBtnText"
+                android:text="上一曲" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/bt_menu_down"
+                style="@style/FunctionBtnText"
+                android:text="下一曲" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/bt_band"
+                style="@style/FunctionBtnText"
+                android:text="波段" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/bt_mute"
+                style="@style/FunctionBtnText"
+                android:text="静音" />
+
+            <View              
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/bt_title"
+                style="@style/FunctionBtnText"
+                android:text="标题" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
