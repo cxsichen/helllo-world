@@ -44,6 +44,7 @@ public interface Constact  {
     public static final String MODE = "Console_mode";
     public static final String CHECKMODE = "Console_checkmode";
     public static final String APPLIST = "Console_applist";
+    public static final String ACCLOGO = "Console_acc_logo";
     public static final String KEY_VOLUME_VALUE = "volume_value";
     public static final String MCU_VERSION = "mcu_version";
     public final static String FMSTATUS = "fmstatus";

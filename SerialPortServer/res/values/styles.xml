@@ -16,5 +16,10 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+       <!-- 对话框样式 -->
+    <style name="dlg_priority" parent="@android:Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
 </resources>

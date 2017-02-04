@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.colink.serialport"
-    android:versionCode="3"
-    android:versionName="2.1" >
+    android:versionCode="4"
+    android:versionName="2.2" >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />  
-    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" /> 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -29,7 +29,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+        <activity
+            android:name=".AccLogoSelectActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+
+            </intent-filter>
+        </activity>
         <activity
             android:name=".TailGateActivity"
             android:label="@string/app_name"
@@ -44,7 +52,6 @@
                 <action android:name="cn.colink.serialport.service.SerialPortService" />
             </intent-filter>
         </service>
-        
         <service
             android:name="cn.colink.serialport.service.BNRService"
             android:enabled="true"
@@ -56,7 +63,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        
         <receiver android:name="cn.colink.serialport.receiver.GaoDeBroadCast" >
             <intent-filter android:priority="1000" >
                 <action android:name="com.amap.navi" />

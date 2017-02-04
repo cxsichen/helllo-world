@@ -3,6 +3,7 @@ package cn.colink.serialport.control;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import cn.colink.serialport.R;
 import cn.colink.serialport.TailGateActivity;
 import cn.colink.serialport.service.ISerialPortService;
 import cn.colink.serialport.service.SerialPortService;
@@ -31,6 +32,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.ContentObserver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -39,7 +43,13 @@ import android.os.RemoteException;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.android.music.IMediaPlaybackService;
 
@@ -91,6 +101,20 @@ public class SerialPortControl {
 				byte[] packet = (byte[]) msg.obj;
 				// 处理串口发送过来的一部分命令
 				dealWithPacket(packet);
+				break;
+			case Contacts.MSG_SHOW_LOGO_WINDOW:  //显示logo界面
+				String str=android.provider.Settings.System.getString(
+						mSerialPortService.getContentResolver(), Constact.ACCLOGO);
+				if(str!=null){
+					Bitmap bm = BitmapFactory.decodeFile(str);
+					if(bm!=null){
+						showFloatWindow(mSerialPortService,bm);
+					}
+				}
+				
+				break;
+			case Contacts.MSG_REMOVE_LOGO_WINDOW:  //隐藏logo界面
+				removeFloatWindow(mSerialPortService);
 				break;
 			case Contacts.MSG_FACTORY_SOUND:
 				int factorySoundValue = android.provider.Settings.System
@@ -312,6 +336,19 @@ public class SerialPortControl {
 			case Contacts.MSG_ACCON_MSG:
 				isAcconOver = false;
 				/*
+				 * 进入主界面
+				 */
+				Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
+
+				mHomeIntent.addCategory(Intent.CATEGORY_HOME);
+				mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+				mSerialPortService.startActivity(mHomeIntent);
+				/**
+				 * 显示logo界面
+				 */
+				mHandler.sendEmptyMessage(Contacts.MSG_SHOW_LOGO_WINDOW);
+				/*
 				 * 启动can协议服务
 				 */
 				try {
@@ -338,13 +375,6 @@ public class SerialPortControl {
 				/*
 				 * acc on 后自动返回之前开启的模式对应的app
 				 */
-
-				Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
-
-				mHomeIntent.addCategory(Intent.CATEGORY_HOME);
-				mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-				mSerialPortService.startActivity(mHomeIntent);
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_1, 2000);
 
 				break;
@@ -564,19 +594,22 @@ public class SerialPortControl {
 						mSerialPortService.getContentResolver(),
 						Constact.APPLIST).equals("com.mxtech.videoplayer.pro")) {
 					int hand_brake_status = (int) ((packet[1] >> 1) & 0x01); // 手刹状态
-					if(hand_brake_status==1){
-						if(mDrivingWaringDialog==null)
-							mDrivingWaringDialog=initDialog("驾驶过程中请关闭视频");
-                        if(!mDrivingWaringDialog.isShowing()){
-                        	mDrivingWaringDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT); 
-                        	mDrivingWaringDialog.show();
-                        }
+					if (hand_brake_status == 1) {
+						if (mDrivingWaringDialog == null)
+							mDrivingWaringDialog = initDialog("驾驶过程中请关闭视频");
+						if (!mDrivingWaringDialog.isShowing()) {
+							mDrivingWaringDialog
+									.getWindow()
+									.setType(
+											WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+							mDrivingWaringDialog.show();
+						}
 					}
-				}else{
-					if(mDrivingWaringDialog!=null){
-						if(mDrivingWaringDialog.isShowing()){
+				} else {
+					if (mDrivingWaringDialog != null) {
+						if (mDrivingWaringDialog.isShowing()) {
 							mDrivingWaringDialog.dismiss();
-							mDrivingWaringDialog=null;
+							mDrivingWaringDialog = null;
 						}
 					}
 				}
@@ -1157,6 +1190,7 @@ public class SerialPortControl {
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG_2);
 			mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG, 500);
 		} else {
+			mHandler.sendEmptyMessage(Contacts.MSG_REMOVE_LOGO_WINDOW);
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG);
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG_1);
 			mHandler.removeMessages(Contacts.MSG_ACCON_MSG_2);
@@ -1385,10 +1419,71 @@ public class SerialPortControl {
 
 	private Dialog initDialog(String str) {
 		// TODO Auto-generated method stub
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mSerialPortService);
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+				mSerialPortService);
 		alertDialog.setMessage(str);
 		alertDialog.setTitle("警告：");
-		return alertDialog.create();	
+		return alertDialog.create();
 	}
+
+	/*-------------------显示浮窗报警  start--------------------*/
+	// 定义浮动窗口布局
+	private static RelativeLayout mFloatLayout;
+	private static WindowManager.LayoutParams wmParams;
+	// 创建浮动窗口设置布局参数的对象
+	private static WindowManager mWindowManager;
+	private static String floatWaringStr = "";
+    private static ImageView mIv;
+	@SuppressWarnings("static-access")
+	public  void showFloatWindow(Context mContext,Bitmap bm) {
+		mHandler.removeMessages(Contacts.MSG_REMOVE_LOGO_WINDOW);
+		if (mFloatLayout == null || mWindowManager == null||mIv==null) {
+			wmParams = new WindowManager.LayoutParams();
+			// 通过getApplication获取的是WindowManagerImpl.CompatModeWrapper
+			if (mWindowManager == null)
+				mWindowManager = (WindowManager) mContext
+						.getSystemService(mContext.WINDOW_SERVICE);
+			// 设置window type
+			wmParams.type = LayoutParams.TYPE_PHONE;
+			// 设置图片格式，效果为背景透明
+			wmParams.format = PixelFormat.RGBA_8888;
+			// 设置浮动窗口不可聚焦（实现操作除浮动窗口外的其他可见窗口的操作）
+			wmParams.flags = LayoutParams.FLAG_NOT_FOCUSABLE;
+			// 调整悬浮窗显示的停靠位置为左侧置顶
+			wmParams.gravity = Gravity.CENTER;
+
+			// 设置悬浮窗口长宽数据
+			wmParams.width = 1050;
+			wmParams.height = 550;
+
+			LayoutInflater inflater = LayoutInflater.from(mContext);
+			mFloatLayout = (RelativeLayout) inflater.inflate(
+					R.layout.alert_window_menu, null);
+
+			mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0,
+					View.MeasureSpec.UNSPECIFIED), View.MeasureSpec
+					.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+			// 以屏幕左上角为原点，设置x、y初始值，相对于gravity
+			wmParams.x = 0;
+			wmParams.y = 0;
+			
+			mIv=(ImageView) mFloatLayout.findViewById(R.id.acc_logo);
+			// 添加mFloatLayout
+			mWindowManager.addView(mFloatLayout, wmParams);
+		}
+		mIv.setImageBitmap(bm);
+		mHandler.sendEmptyMessageDelayed(Contacts.MSG_REMOVE_LOGO_WINDOW, 3*1000);
+	}
+
+	public  void removeFloatWindow(Context mContext) {
+		if (mWindowManager != null) {
+			if (mFloatLayout != null) {
+				mWindowManager.removeView(mFloatLayout);
+			}
+			mFloatLayout = null;
+		}
+	}
+
+	/*-------------------显示浮窗报警  end--------------------*/
 
 }

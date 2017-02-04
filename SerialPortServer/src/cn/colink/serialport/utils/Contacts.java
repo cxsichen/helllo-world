@@ -68,6 +68,8 @@ public interface Contacts {
 	public static final int MSG_FACTORY_SOUND = 0x15;
 	public static final int MSG_ACCON_MSG_1 = 0x16;
 	public static final int MSG_ACCON_MSG_2 = 0x17;
+	public static final int MSG_SHOW_LOGO_WINDOW = 0x18;
+	public static final int MSG_REMOVE_LOGO_WINDOW = 0x19;
 	
 	public static final String HEX_AUTO_SCAN = "F506000019";
 	public static final String HEX_START = "F000000001";
