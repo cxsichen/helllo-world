@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="spingarr">
+        <item>未选择</item>
+        <item>音量+</item>
+        <item>音量-</item>
+        <item>静音</item>
+        <item>播放暂停</item>
+        <item>上一曲</item>
+        <item>下一曲</item>
+        <item>电话接听</item>
+        <item>电话挂断</item>
+        <item>锁屏</item>
+        <item>返回键</item>
+        <item>主菜单</item>
+        <item>语音键</item>
+    </string-array>
+    <string-array name="spingarr1">
+        <item>未选择</item>
+        <item>音量旋钮</item>
+        <item>菜单旋钮</item>    
+    </string-array>
+
+</resources>
