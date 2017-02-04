@@ -2,10 +2,9 @@ package com.console.launcher_console.view;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-
 import com.console.launcher_console.util.DensityUtils;
-
 import android.R.integer;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,6 +14,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+@SuppressLint("WrongCall")
 public class FMView extends View {
 	float level = 98.5f;
 	private Paint paintLine;
@@ -26,7 +26,8 @@ public class FMView extends View {
 	private float fisrtValue = 85;
 	private float midValue = 85;
 	private int lineWidth = 0;
-	private float userValue=0;
+	private float userValue = 0;
+	boolean isFm = true;
 
 	private void intalPaint() {
 		paintLine = new Paint();
@@ -39,13 +40,11 @@ public class FMView extends View {
 		paint.setAntiAlias(true);
 	}
 
-	private void initdate() {
+	private void initdata() {
 		// TODO Auto-generated method stub
 		layoutWidth = this.getWidth();
 		layoutHeight = this.getHeight();
 		lineWidth = DensityUtils.dip2px(context, 8);
-		midValue = (float) (fisrtValue - 0.8f) + layoutWidth / lineWidth / 2f
-				* 0.2f;
 	}
 
 	public FMView(Context context) {
@@ -74,49 +73,101 @@ public class FMView extends View {
 	protected void onDraw(Canvas canvas) {
 		// TODO Auto-generated method stub
 		super.onDraw(canvas);
-
-		initdate();
-		int startPosition = 0;
-		int tem = (int) fisrtValue;
-		for (int i = 0; i < 32; i++) {
-			for (int j = 0; j < 4; j++) {
+		Log.i("cxs","====onDraw=====");
+		initdata();
+		if (isFm) {	
+			fisrtValue = 85;
+			midValue = (float) (fisrtValue - 0.8f) + layoutWidth / lineWidth / 2f
+					* 0.2f;
+			int startPosition = 0;
+			int tem = (int) fisrtValue;
+			for (int i = 0; i < 32; i++) {
+				for (int j = 0; j < 4; j++) {
+					canvas.drawLine(startPosition,
+							layoutHeight - DensityUtils.dip2px(context, 24),
+							startPosition, layoutHeight, paintLine);
+					startPosition += lineWidth;
+				}
 				canvas.drawLine(startPosition,
-						layoutHeight - DensityUtils.dip2px(context, 24),
+						layoutHeight - DensityUtils.dip2px(context, 48),
 						startPosition, layoutHeight, paintLine);
+				if (tem < 100) {
+					canvas.drawText(tem + "", startPosition - 8, layoutHeight
+							- DensityUtils.dip2px(context, 56), paint);
+				} else {
+					canvas.drawText(tem + "", startPosition - 12, layoutHeight
+							- DensityUtils.dip2px(context, 56), paint);
+				}
 				startPosition += lineWidth;
+				tem++;
 			}
-			canvas.drawLine(startPosition,
-					layoutHeight - DensityUtils.dip2px(context, 48),
-					startPosition, layoutHeight, paintLine);
-			if (tem < 100) {
-				canvas.drawText(tem + "", startPosition - 8, layoutHeight
-						- DensityUtils.dip2px(context, 56), paint);
-			} else {
-				canvas.drawText(tem + "", startPosition - 12, layoutHeight
-						- DensityUtils.dip2px(context, 56), paint);
+			if (userValue != 0) {
+				scrollTo(
+						Math.round((userValue - midValue) * (float) lineWidth
+								* 5f - (float) lineWidth / 2), 0);
 			}
-			startPosition += lineWidth;
-			tem++;
-		}
-		if(userValue!=0){
-			scrollTo(
-					Math.round((userValue - midValue) * (float) lineWidth * 5f
-							- (float) lineWidth / 2), 0);
+		} else {
+			fisrtValue = 450;
+			midValue = (float) (fisrtValue - 8f) + layoutWidth / lineWidth / 2f
+					* 2f;
+			int startPosition = 0;
+			int tem = (int) fisrtValue;
+			for (int i = 0; i < 125; i++) {
+				for (int j = 0; j < 4; j++) {
+					canvas.drawLine(startPosition,
+							layoutHeight - DensityUtils.dip2px(context, 24),
+							startPosition, layoutHeight, paintLine);
+					startPosition += lineWidth;
+				}
+				canvas.drawLine(startPosition,
+						layoutHeight - DensityUtils.dip2px(context, 48),
+						startPosition, layoutHeight, paintLine);
+				if (tem < 1000) {
+					canvas.drawText(tem + "", startPosition - 12, layoutHeight
+							- DensityUtils.dip2px(context, 56), paint);
+				} else {
+					canvas.drawText(tem + "", startPosition - 16, layoutHeight
+							- DensityUtils.dip2px(context, 56), paint);
+				}
+				startPosition += lineWidth;
+				tem=tem+10;
+			}
+			if (userValue != 0) {
+				scrollTo(
+						Math.round((userValue - midValue) * (float) lineWidth
+								* 0.5f - (float) lineWidth / 2), 0);
+			}
 		}
 
 	}
 
-	public void setValue(float value) {
-		userValue=value;
-		if (value >= 85f && value <= 109) {
-			if (onValueChangedListener != null) {
-				onValueChangedListener.OnChange((new BigDecimal(Float
-						.toString(value)))
-						.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue());
+	public void setValue(float value, boolean isFm) {		
+		if (this.isFm != isFm) {
+			Log.i("cxs","====setValue====="+isFm);
+			this.isFm = isFm;
+			invalidate();
+		}
+		userValue = value;
+		if (isFm) {
+			if (value >= 85f && value <= 109) {
+				if (onValueChangedListener != null) {
+					onValueChangedListener.OnChange((new BigDecimal(Float
+							.toString(value))).setScale(2,
+							BigDecimal.ROUND_HALF_UP).floatValue());
+				}
+				scrollTo(
+						Math.round((value - midValue) * (float) lineWidth * 5f
+								- (float) lineWidth / 2), 0);
 			}
-			scrollTo(
-					Math.round((value - midValue) * (float) lineWidth * 5f
-							- (float) lineWidth / 2), 0);
+		}else{
+			if (value >= 500 && value <= 1650) {
+				if (onValueChangedListener != null) {
+					onValueChangedListener.OnChange(value);
+				}
+				scrollTo(
+						Math.round((userValue - midValue) * (float) lineWidth
+								* 0.5f - (float) lineWidth / 2), 0);
+			}
 		}
 
 	}

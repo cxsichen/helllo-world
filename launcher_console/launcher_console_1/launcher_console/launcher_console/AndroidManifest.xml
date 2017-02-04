@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.console.launcher_console"
-    android:versionCode="3"
-    android:versionName="2.1.1" >
+    android:sharedUserId="android.uid.system"
+    android:versionCode="5"
+    android:versionName="2.1.3" >
 
+<!--   android:sharedUserId="android.uid.system" -->
     <uses-sdk
         android:minSdkVersion="22"
         android:targetSdkVersion="22" />
@@ -62,27 +64,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".GuideActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape" >
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
-        <service
-            android:name="com.console.launcher_console.service.BNRService"
-            android:enabled="true"
-            android:exported="true" >
-        </service>
-        <service
-            android:name="com.console.launcher_console.service.SerialPortControlService"
-            android:enabled="true"
-            android:exported="true" >
-            <intent-filter android:priority="1000" >
-            </intent-filter>
-        </service>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -92,28 +74,6 @@
                 </action>
             </intent-filter>
         </service>
-
-        <receiver android:name="com.console.launcher_console.receiver.GaoDeBroadCast" >
-            <intent-filter android:priority="1000" >
-                <action android:name="com.amap.navi" />
-                <action android:name="AUTONAVI_STANDARD_BROADCAST_SEND" />
-                <action android:name="com.autonavi.minimap.carmode.send" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.console.launcher_console.receiver.BootBroadcastReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <provider
-            android:name="com.zzj.softwareservice.database.NaviContentProvider"
-            android:authorities="com.zzj.softwareservice.NaviProvider"
-            android:exported="true" />
-        <provider
-            android:name="com.zzj.softwareservice.database.WeatherProvider"
-            android:authorities="com.zzj.softwareservice.WeatherProvider"
-            android:exported="true" />
     </application>
 
     <supports-screens

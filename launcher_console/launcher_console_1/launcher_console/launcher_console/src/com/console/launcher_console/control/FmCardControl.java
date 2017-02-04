@@ -20,7 +20,7 @@ import android.database.ContentObserver;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.MotionEvent; 
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -39,14 +39,15 @@ public class FmCardControl implements OnClickListener {
 	float fmMaxValue = 109;
 	float fmMinValue = 85;
 	float fmInterval = 0.1f;
+	float amMaxValue = 1650;
+	float amMinValue = 500;
 	FMView mFMView;
 	TextView channelTv;
 	SerialPortControl mSerialPortControl;
-	public static final String ACTION_MENU_UP = "com.console.MENU_UP";
-	public static final String ACTION_MENU_DOWN = "com.console.MENU_DOWN";
-	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
-	public static final String ACTION_MENU_LONG_UP = "com.console.MENU_LONG_UP";
-	public static final String ACTION_MENU_LONG_DOWN = "com.console.MENU_LONG_DOWN";
+	int curBand;
+	private DecimalFormat df2 = new DecimalFormat("###.00");
+	int curFreq = 0;
+	private int band = 0;
 
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -74,14 +75,11 @@ public class FmCardControl implements OnClickListener {
 		});
 		init();
 		initView();
-		registerBroastReceiver();
-		
 		context.getContentResolver().registerContentObserver(
 				android.provider.Settings.System.getUriFor(Constact.FMSTATUS),
 				true, mFmStatusObserver);
 	}
-	
-	
+
 	private FmStatusObserver mFmStatusObserver = new FmStatusObserver();
 
 	public class FmStatusObserver extends ContentObserver {
@@ -95,65 +93,23 @@ public class FmCardControl implements OnClickListener {
 			changePlayButton();
 		}
 	}
-	
-	private void  changePlayButton(){
-		Log.i("cxs","---------changePlayButton---------------");
+
+	private void changePlayButton() {
 		try {
 			int mode = Settings.System.getInt(context.getContentResolver(),
-					Constact.FMSTATUS,0);
-			if(mode==1){
+					Constact.FMSTATUS, 0);
+			if (mode == 1) {
 				((ImageView) fmCardLayout.findViewById(R.id.fm_play))
-				.setImageResource(R.drawable.ic_music_play);
-			}else{
+						.setImageResource(R.drawable.ic_music_play);
+			} else {
 				((ImageView) fmCardLayout.findViewById(R.id.fm_play))
-				.setImageResource(R.drawable.ic_music_pause);
+						.setImageResource(R.drawable.ic_music_pause);
+
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
-	
-	private void registerBroastReceiver() {
-		IntentFilter intentFilter = new IntentFilter();
-		intentFilter.addAction(ACTION_MENU_UP);
-		intentFilter.addAction(ACTION_MENU_DOWN);
-		intentFilter.addAction(ACTION_PLAY_PAUSE);
-		intentFilter.addAction(ACTION_MENU_LONG_DOWN);
-		intentFilter.addAction(ACTION_MENU_LONG_UP);
-		context.registerReceiver(mBroadcastReceiver, intentFilter);
-	}
-	
-	
-	
-
-	BroadcastReceiver mBroadcastReceiver=new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			// TODO Auto-generated method stub
-			if (PreferenceUtil.getMode(context) == 0) {
-				switch (intent.getAction()) {
-				case ACTION_MENU_UP:
-					mSerialPortControl.sendMsg(Contacts.HEX_PRE_SHORT_MOVE);
-					break;
-				case ACTION_MENU_DOWN:
-					mSerialPortControl.sendMsg(Contacts.HEX_NEXT_SHORT_MOVE);
-					break;
-				case ACTION_PLAY_PAUSE:
-					mSerialPortControl.sendMsg(Contacts.FM_PLAY);
-					break;
-				case ACTION_MENU_LONG_UP:
-					mSerialPortControl.sendMsg(Contacts.FM_PRE);
-					break;
-				case ACTION_MENU_LONG_DOWN:
-					mSerialPortControl.sendMsg(Contacts.FM_NEXT);
-					break;
-				default:
-					break;
-				}
-			}
-
-		}
-	};
 
 	private void init() {
 		// TODO Auto-generated method stub
@@ -170,7 +126,7 @@ public class FmCardControl implements OnClickListener {
 		channelTv = (TextView) fmCardLayout.findViewById(R.id.channel_tx);
 
 		mFMView.setOnValueChangedListener(onValueChangedListener);
-		mFMView.setValue(fmValue);
+		mFMView.setValue(fmValue, band < 3);
 	}
 
 	OnValueChangedListener onValueChangedListener = new OnValueChangedListener() {
@@ -178,42 +134,44 @@ public class FmCardControl implements OnClickListener {
 		@Override
 		public void OnChange(float value) {
 			// TODO Auto-generated method stub
-			channelTv.setText(value + "Mhz");
+			if (curBand < 3)
+				channelTv.setText(value + "MHZ");
+			else
+				channelTv.setText(((int) value)+ "KHZ");
 		}
 	};
 
-	private DecimalFormat df2 = new DecimalFormat("###.00");
-	int curFreq = 0;
-
 	public void setFmValue(byte[] value) {
-		if (value[0] == Contacts.RADIO_MSG) {
-			if (value[2] == (int) 0x01) {				
-			//	((ImageView) fmCardLayout.findViewById(R.id.fm_play))
-			//			.setImageResource(R.drawable.ic_music_play);
-				Settings.System.putInt(context.getContentResolver(),
-						Constact.FMSTATUS,1);
-			} else {
-				//((ImageView) fmCardLayout.findViewById(R.id.fm_play))
-				//		.setImageResource(R.drawable.ic_music_pause);
-				Settings.System.putInt(context.getContentResolver(),
-						Constact.FMSTATUS,0);
-			}
-		}
 		if (value[0] != Contacts.MODE_RADIO)
 			return;
 		switch (value[2]) {
 		case Contacts.FM1_FREQ:
 		case Contacts.FM2_FREQ:
 		case Contacts.FM3_FREQ:
+		case Contacts.AM1_FREQ:
+		case Contacts.AM2_FREQ:
 			// 棰戠巼
 			curFreq = ((int) value[3] & 0xFF) << 8 | ((int) value[4] & 0xFF);
+			break;
+		case Contacts.FM1_SELECT:
+		case Contacts.FM2_SELECT:
+		case Contacts.FM3_SELECT:
+		case Contacts.AM1_SELECT:
+		case Contacts.AM2_SELECT:
+			curBand = ((int) value[3] & 0xFF);
 			break;
 		default:
 			break;
 		}
-		float fmvalue = checkFmValue(Float.parseFloat(df2
-				.format((float) curFreq / 100.0f)));
-		mFMView.setValue(fmvalue);
+		if (curBand < 3) {
+			float fmvalue = checkFmValue(Float.parseFloat(df2
+					.format((float) curFreq / 100.0f)));
+			mFMView.setValue(fmvalue, curBand < 3);
+		} else {
+			float fmvalue = checkAmValue(curFreq);
+			mFMView.setValue(fmvalue, curBand < 3);
+		}
+
 	}
 
 	@Override
@@ -240,12 +198,27 @@ public class FmCardControl implements OnClickListener {
 			break;
 		}
 	}
+
 	private float checkFmValue(float value) {
 		if (value > fmMaxValue)
 			value = fmMaxValue;
 		if (value < fmMinValue)
 			value = fmMinValue;
 		return value;
+	}
+
+	private float checkAmValue(float value) {
+		if (value > amMaxValue)
+			value = amMaxValue;
+		if (value < amMinValue)
+			value = amMinValue;
+		return value;
+	}
+
+	public void onResume() {
+		mFMView.scrollTo(0, 0);
+		band = Settings.System.getInt(context.getContentResolver(),
+				Constact.KEY_CURRENT_BAND, 0);
 	}
 
 }

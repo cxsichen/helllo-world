@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -43,8 +42,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,8 +54,8 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
 import com.console.launcher_console.R;
+import com.console.launcher_console.util.Constact;
 import com.console.launcher_console.util.LogXyw;
-import com.zzj.softwareservice.database.DBConstant;
 
 public class WeatherController {
 
@@ -201,6 +200,13 @@ public class WeatherController {
 		weatherPlaceTv=(TextView) weatherLayout.findViewById(R.id.weather_place);
 		dateTv=(TextView) weatherLayout.findViewById(R.id.date_tv);
 		mHandler.sendEmptyMessageDelayed(3, 1000);
+		weatherLayout.findViewById(R.id.update_time).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mHandler.sendEmptyMessage(0);
+			}
+		});
 	}
 	
 
@@ -309,15 +315,16 @@ public class WeatherController {
 				} catch (IOException e) {
 					mHandler.sendEmptyMessageDelayed(0, 60000);
 					e.printStackTrace();
+					
 				}
 			}
 		}).start();
 	}
 
-	int i;
+	//int i;
 	private void weatherAnalyze(String weatherUrl){
 		try {
-			LogXyw.i("i = " +i++);
+		//	LogXyw.i("i = " +i++);
 			JSONObject weatherJson = new JSONObject(weatherUrl);
 			JSONArray weatherArray = weatherJson.getJSONObject("data").getJSONObject("result").getJSONArray("weatherDays");
 			JSONObject todayJson = (JSONObject) weatherArray.get(0);
@@ -335,23 +342,23 @@ public class WeatherController {
 			LogXyw.i("imageres = " + imageres);
 			ContentValues con = new ContentValues();
 			if(!TextUtils.isEmpty(localStr)){
-				con.put(DBConstant.WeatherTable.CITY, localStr);
+				con.put(Constact.CITY, localStr);
 			}
 			if(!TextUtils.isEmpty(weather)){
-				con.put(DBConstant.WeatherTable.WEATHER, weather);
+				con.put(Constact.WEATHER, weather);
 			}
 			if(!TextUtils.isEmpty(wind)){
-				con.put(DBConstant.WeatherTable.WIND, wind);
+				con.put(Constact.WIND, wind);
 			}
 			if(!TextUtils.isEmpty(currentTemperature)){
-				con.put(DBConstant.WeatherTable.TEMPERATURE, currentTemperature);
+				con.put(Constact.TEMPERATURE, currentTemperature);
 			}
 			if(!TextUtils.isEmpty(imageres)){
-				con.put(DBConstant.WeatherTable.IMAGERES, imageres);
+				con.put(Constact.IMAGERES, imageres);
 			}
-			int update = mContext.getContentResolver().update(DBConstant.WeatherTable.CONTENT_URI, con,null, null);
+			int update = mContext.getContentResolver().update(Constact.CONTENT_URI, con,null, null);
 			if(update == 0){
-				mContext.getContentResolver().update(DBConstant.WeatherTable.CONTENT_URI, con,null, null);
+				mContext.getContentResolver().update(Constact.CONTENT_URI, con,null, null);
 			}
 	    	mHandler.removeMessages(0);
 			mHandler.sendEmptyMessageDelayed(0, 5400000);

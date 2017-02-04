@@ -22,8 +22,6 @@ import com.console.launcher_console.control.SettingCardControl;
 import com.console.launcher_console.control.TpmsContol;
 import com.console.launcher_console.control.WeatherController;
 import com.console.launcher_console.control.XmlyCardControl;
-import com.console.launcher_console.service.BNRService;
-import com.console.launcher_console.service.SerialPortControlService;
 import com.console.launcher_console.util.BytesUtil;
 import com.console.launcher_console.util.Constact;
 import com.console.launcher_console.util.Contacts;
@@ -117,71 +115,49 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	private int horizontalMaxDistance = 250;
 	private int minVelocity = 0;
 	private GestureDetector mGestureDetector;
-	private RelativeLayout mainLayout;
-
-	float deg;
-	private float predeg = 0;
 	int currentIndex = 1;
+	Boolean isResume = false;
 
 	public static final String RECAPP_1 = "com.cam.dod";
 	public static final String RECAPP_0 = "com.xair.h264demo";
-
+	public static final int NAV_HOME=201;
+	public static final int NAV_WORK=202;
+	
+	private Handler mHandler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case NAV_HOME:
+				startNaviHome();
+				break;
+			case NAV_WORK:
+				startNaviWork();
+				break;
+			default:
+				break;
+			}
+		};
+	};
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// Debug.startMethodTracing();//关键语句
-		/*
-		 * if(VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) { Window window =
-		 * getWindow();
-		 * window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-		 * | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-		 * window.getDecorView
-		 * ().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
-		 * View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-		 * View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-		 * window.addFlags(WindowManager.LayoutParams
-		 * .FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-		 * window.setStatusBarColor(Color.TRANSPARENT);
-		 * window.setNavigationBarColor(Color.TRANSPARENT); }
-		 */
 
 		LayoutInflater inflater = (LayoutInflater) this
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View group = inflater.inflate(R.layout.activity_main, null);
-		mainLayout = (RelativeLayout) group
-				.findViewById(R.id.launcher_main_layout);
 		content = (PagedView) group.findViewById(R.id.pane_content);
 		indicatorLayout = (LinearLayout) group.findViewById(R.id.indicator);
 		mGestureDetector = new GestureDetector(this, (OnGestureListener) this);
 		init(content);
-
 		setContentView(group);
-		doStartService();
 		init_event();
-
 		initControl();
 		registerHomeKeyReceiver(this);
 
 	}
 
-	private void doStartService() {
-		// TODO Auto-generated method stub
-		Intent intent = new Intent(MainActivity.this, BNRService.class);
-		startService(intent);
-
-		Intent serialIntent = new Intent(MainActivity.this,
-				SerialPortControlService.class);
-		startService(serialIntent);
-		Log.i("cxs", "======doStartService=======");
-	}
-
-	private void setWallPaper() {
-		WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-		// 获取当前壁纸
-		Drawable wallpaperDrawable = wallpaperManager.getDrawable();
-		mainLayout.setBackground(wallpaperDrawable);
-	}
 
 	private void initControl() {
 		// TODO Auto-generated method stub
@@ -245,10 +221,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 
 	}
 
-	Boolean checkLocale(String str) {
-		return getResources().getConfiguration().locale.getCountry()
-				.equals(str);
-	}
 
 	private View getNewPage(int resid) {
 		View view = LayoutInflater.from(this).inflate(resid, null);
@@ -343,10 +315,12 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 			startNavi(v);
 			break;
 		case R.id.nav_home:
-			startNaviHome(v);
+			startNavi(v);
+			mHandler.sendEmptyMessageDelayed(NAV_HOME, 1000);
 			break;
 		case R.id.nav_work:
-			startNaviWork(v);
+			startNavi(v);
+			mHandler.sendEmptyMessageDelayed(NAV_WORK, 1000);
 			break;
 		case R.id.ev_bt_app:
 			Intent btIntent = getPackageManager().getLaunchIntentForPackage(
@@ -374,43 +348,51 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		}
 	}
 
-	private void startNaviWork(View v) {
-		int mapType = Settings.System.getInt(getContentResolver(),
-				Constact.MAP_INDEX, 0);
-		if (mapType == 0) {
-			// 百度地图回公司
-			Intent intent = new Intent();
-			intent.setData(Uri.parse("bdnavi://gohome"));
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-					| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-			startActivity(intent);
-		} else {
-			Intent intent = new Intent();
-			intent.setAction("AUTONAVI_STANDARD_BROADCAST_RECV");
-			intent.putExtra("KEY_TYPE", 10040);
-			intent.putExtra("DEST", 1); // 0回家 1回公司
-			intent.putExtra("IS_START_NAVI", 0);// 是否直接开始导航 0是 1否
-			sendBroadcast(intent);
+	private void startNaviWork() {
+		try {
+			int mapType = Settings.System.getInt(getContentResolver(),
+					Constact.MAP_INDEX, 0);
+			if (mapType == 0) {
+				// 百度地图回公司
+				Intent intent = new Intent();
+				intent.setData(Uri.parse("bdnavi://gohome"));
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+						| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				startActivity(intent);
+			} else {
+				Intent intent = new Intent();
+				intent.setAction("AUTONAVI_STANDARD_BROADCAST_RECV");
+				intent.putExtra("KEY_TYPE", 10040);
+				intent.putExtra("DEST", 1); // 0回家 1回公司
+				intent.putExtra("IS_START_NAVI", 0);// 是否直接开始导航 0是 1否
+				sendBroadcast(intent);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 
-	private void startNaviHome(View v) {
-		int mapType = Settings.System.getInt(getContentResolver(),
-				Constact.MAP_INDEX, 0);
-		if (mapType == 0) {
-			// 百度地图回公司
-			Intent intent = new Intent();
-			intent.setData(Uri.parse("bdnavi://gocompany"));
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-					| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-			startActivity(intent);
-		} else {
-			Intent intent = new Intent();
-			intent.setAction("AUTONAVI_STANDARD_BROADCAST_RECV");
-			intent.putExtra("KEY_TYPE", 10040);
-			intent.putExtra("DEST", 0); // 0回家 1回公司
-			intent.putExtra("IS_START_NAVI", 0);// 是否直接开始导航 0是 1否
-			sendBroadcast(intent);
+	private void startNaviHome() {
+		try {
+			int mapType = Settings.System.getInt(getContentResolver(),
+					Constact.MAP_INDEX, 0);
+			if (mapType == 0) {
+				// 百度地图回公司
+				Intent intent = new Intent();
+				intent.setData(Uri.parse("bdnavi://gocompany"));
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+						| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+				startActivity(intent);
+			} else {
+				Intent intent = new Intent();
+				intent.setAction("AUTONAVI_STANDARD_BROADCAST_RECV");
+				intent.putExtra("KEY_TYPE", 10040);
+				intent.putExtra("DEST", 0); // 0回家 1回公司
+				intent.putExtra("IS_START_NAVI", 0);// 是否直接开始导航 0是 1否
+				sendBroadcast(intent);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 
@@ -454,14 +436,13 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		}
 	}
 
-	Boolean isResume = false;
+
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-g';';enerated method stub
-		if (mMusicCardControl != null) {
-			mMusicCardControl.stopPlayStatus();
-		}
+		if (mFmCardControl != null)
+			mFmCardControl.onResume();
 		if (mSerialPortControl != null)
 			mSerialPortControl.bindSpService();
 		if (mRecCardControl != null)
@@ -553,10 +534,8 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 		if (e2.getY() - e1.getY() > verticalMinDistance
 				&& Math.abs(velocityY) > minVelocity
 				&& Math.abs(e1.getX() - e2.getX()) < horizontalMaxDistance) {
-			// �л�Activity
 			Intent intent = new Intent(MainActivity.this, AppActivity.class);
 			startActivity(intent);
-			// Toast.makeText(this, "��������", Toast.LENGTH_SHORT).show();
 			overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
 
 		}
@@ -624,20 +603,6 @@ public class MainActivity extends BaseActivity implements OnClickListener,
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		return;
-	}
-
-	@SuppressWarnings("unused")
-	public static boolean isAppInstalled(Context context, String packageName) {
-		if (packageName == null || "".equals(packageName))
-			return false;
-		try {
-			ApplicationInfo info = context.getPackageManager()
-					.getApplicationInfo(packageName,
-							PackageManager.GET_UNINSTALLED_PACKAGES);
-			return true;
-		} catch (NameNotFoundException e) {
-			return false;
-		}
 	}
 
 }

@@ -27,13 +27,13 @@
 
     <RelativeLayout style="@style/ShortCutGroup" >
 
-        <ImageView
+        <com.console.launcher_console.view.SelectImageView
             android:id="@+id/nav_home"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/ic_nav_home" />
 
-        <ImageView
+        <com.console.launcher_console.view.SelectImageView
             android:id="@+id/navigation_one_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -42,7 +42,7 @@
             android:layout_centerVertical="true"
             android:src="@drawable/ic_nav_onenav" />
 
-        <ImageView
+        <com.console.launcher_console.view.SelectImageView
              android:id="@+id/nav_work"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

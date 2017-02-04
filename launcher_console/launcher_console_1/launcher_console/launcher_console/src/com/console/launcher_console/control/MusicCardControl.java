@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import cn.kuwo.autosdk.api.KWAPI;
+import cn.kuwo.autosdk.api.OnExitListener;
 import cn.kuwo.autosdk.api.OnPlayEndListener;
 import cn.kuwo.autosdk.api.OnPlayerStatusListener;
 import cn.kuwo.autosdk.api.PlayEndType;
@@ -41,7 +42,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MusicCardControl extends BroadcastReceiver implements
+public class MusicCardControl implements
 		OnClickListener {
 
 	private LinearLayout musicCardLayout;
@@ -59,7 +60,6 @@ public class MusicCardControl extends BroadcastReceiver implements
 	private static int i = 0;
 	public static final String ACTION_MENU_UP = "com.console.MENU_UP";
 	public static final String ACTION_MENU_DOWN = "com.console.MENU_DOWN";
-	public static final String ACTION_TEL = "com.console.TEL";
 	public static final String ACTION_STOP_MUSIC = "com.console.STOP_MUSIC";
 	public static final String ACTION_PLAY_PAUSE = "com.console.PLAY_PAUSE";
 
@@ -68,22 +68,25 @@ public class MusicCardControl extends BroadcastReceiver implements
 		this.context = context;
 		init();
 		mRegisterReceiver();
-				
 	}
-	
+
 	private void mRegisterReceiver(){
-		IntentFilter intentFilter = new IntentFilter();
-		intentFilter.addAction(ACTION_MENU_UP);
-		intentFilter.addAction(ACTION_MENU_DOWN);
-		intentFilter.addAction(ACTION_STOP_MUSIC);
-		intentFilter.addAction(ACTION_PLAY_PAUSE);
-		context.registerReceiver(this, intentFilter);
+		
+		mKwapi.registerExitListener(context, new OnExitListener() {
+			
+			@Override
+			public void onExit() {
+				Log.i("cxs","========onExit=====");
+				stopView();
+			}
+		});
 	}
 
 	private void init() {
 		// TODO Auto-generated method stub
 
-		musicApp = (ImageView) musicCardLayout.findViewById(R.id.ev_music_app);
+		musicApp = (ImageView) musicCardLayout
+				.findViewById(R.id.ev_music_app);
 		musicPlay = (ImageView) musicCardLayout
 				.findViewById(R.id.ev_music_play);
 		musicPrev = (ImageView) musicCardLayout
@@ -109,13 +112,12 @@ public class MusicCardControl extends BroadcastReceiver implements
 		 * amt.setInterpolator(new LinearInterpolator());
 		 * amt.setRepeatCount(11111); amt.setDuration(100000);
 		 */
-
 		mKwapi = KWAPI.createKWAPI(context, "auto");
 		// mPlayerStatus = PlayerStatus.STOP;
 		// controlPause();
 
 		// am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-
+   
 		mKwapi.registerPlayerStatusListener(context,
 				new OnPlayerStatusListener() {
 
@@ -144,7 +146,12 @@ public class MusicCardControl extends BroadcastReceiver implements
 			}
 		}
 	}
-
+	
+	private void stopView(){
+		musicName.setText(R.string.label_card_music);
+		musicPlay.setImageResource(R.drawable.ic_music_play);
+	}
+	
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -222,7 +229,7 @@ public class MusicCardControl extends BroadcastReceiver implements
 
 	public void unregister() {
 		// mKwapi.unRegisterPlayerStatusListener(context);
-		context.unregisterReceiver(this);
+		mKwapi.unRegisterExitListener(context);
 	}
 
 	public void stopPlayStatus() {
@@ -237,29 +244,5 @@ public class MusicCardControl extends BroadcastReceiver implements
 
 	}
 
-
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		// TODO Auto-generated method stub
-		Log.i("cxs","---------onReceive------------"+intent.getAction());
-		if(intent.getAction().equals(ACTION_STOP_MUSIC)){
-			stopKWApp();
-		}
-		if (PreferenceUtil.getMode(context) != 0) {
-			switch (intent.getAction()) {
-			case ACTION_MENU_UP:
-				controlPrevious();
-				break;
-			case ACTION_MENU_DOWN:
-				controlNext();
-				break;
-			case ACTION_PLAY_PAUSE:
-				controlPlay();
-				break;
-			default:
-				break;
-			}
-		}
-	}
 
 }

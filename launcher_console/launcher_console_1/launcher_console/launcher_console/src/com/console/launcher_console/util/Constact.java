@@ -1,8 +1,9 @@
 package com.console.launcher_console.util;
 
 import android.net.Uri;
+import android.provider.BaseColumns;
 
-public interface Constact {
+public interface Constact  {
 
 	public final static String STOPNAVI="com.inet.broadcast.stoptnavi";
 	public final static String STARTNAVI="com.inet.broadcast.startnavi";
@@ -10,7 +11,8 @@ public interface Constact {
 	public static final String ADAS_STATE = "adas_state";
 	public static final String TTS_SHOW = "tts_show";
 	public static final String BACK_CAR = "back_car_state";        //1 是倒车  0是倒完车
-	public static final String NAVING_STATUS = "naving_status";        
+	public static final String NAVING_STATUS = "naving_status";  
+	public static final String KEY_CURRENT_BAND = "current_band";
 	
 	public static final String NAVI_AUTHORITY = "com.zzj.softwareservice.NaviProvider";
     public static final Uri NAVI_CONTENT_URI = Uri.parse("content://" + NAVI_AUTHORITY + "/navi");
@@ -31,7 +33,28 @@ public interface Constact {
     public final static String FMSTATUS = "fmstatus";
     public final static String USER_SAVE_BRIGHTNESS= "user_brightness";
     public final static String FACTORY_SOUND="factory_sound";
-    public final static int DEFAULT_BRIGHTNESS = 110;
+    public final static int DEFAULT_BRIGHTNESS = 60;
     public final static boolean DEBUG = true;
+    
+    // weather db
+    public static final String AUTHORITY = "com.zzj.softwareservice.NaviProvider";
+    public static final String WEATHER_AUTHORITY = "com.zzj.softwareservice.WeatherProvider";
+	public static final Uri CONTENT_URI = Uri.parse("content://" + WEATHER_AUTHORITY + "/weather");
+	
+	public static final String TABLE_NAME = "weather";
+    public static final String CITY = "city";
+    public static final String WEATHER = "weather";
+    public static final String TEMPERATURE = "temperature";
+    public static final String WIND = "wind";
+    public static final String IMAGERES = "imageres";
+    public static final String _ID = "_id";
+    public static final String _COUNT = "_count";
+    
+    public static final String SQL_CMD_CREATE_TABLE = "create table "
+            + TABLE_NAME + " (" + _ID + " integer primary key autoincrement, " + CITY + " text, "
+            + WEATHER + " text, " + WIND + " text, " + TEMPERATURE + " text, " + IMAGERES
+            + " text )";
+
+    public static final String SQL_CMD_DROP_TABLE = "drop table if exists " + TABLE_NAME;
 
 }
