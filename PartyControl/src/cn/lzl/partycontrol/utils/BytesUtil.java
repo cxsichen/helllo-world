@@ -1,5 +1,6 @@
 package cn.lzl.partycontrol.utils;
 
+
 public class BytesUtil {
     
     public static String bytesToHexString(byte[] src){
@@ -13,12 +14,12 @@ public class BytesUtil {
             if (hv.length() < 2) {
                 stringBuilder.append(0);
             }
-            stringBuilder.append(hv);
+            stringBuilder.append(hv+" ");
         }
         return stringBuilder.toString();
     }
     /**
-     * Convert hex string to byte[]   把为字符串转化为字节数组
+     * Convert hex string to byte[]  
      * @param hexString the hex string
      * @return byte[]
      */
@@ -43,9 +44,53 @@ public class BytesUtil {
      */
      private static byte charToByte(char c) {
         return (byte) "0123456789ABCDEF".indexOf(c);
-    }
+     }
      
- 	public static String addCheckBit(String str) {
+     public static int byteToInt(byte b){
+         return b & 0xFF;
+     }
+     
+ 	public static String intToHexString(int a) {
+		StringBuilder stringBuilder = new StringBuilder("");
+		int v = a & 0xFF;
+		String hv = Integer.toHexString(v);
+		if (hv.length() < 2) {
+			stringBuilder.append(0);
+		}
+		stringBuilder.append(hv);
+		return stringBuilder.toString();
+	}
+ 	
+	public static String makeEfMsg(int bas, int mid,int tre, int ver, int hon) {
+		StringBuilder stringBuilder = new StringBuilder("F8");
+		String hv = Integer.toHexString(bas & 0xFF);
+		if (hv.length() < 2) {
+			stringBuilder.append(0);
+		}
+		stringBuilder.append(hv);
+       
+
+		hv = Integer.toHexString(mid & 0xFF)+Integer.toHexString(tre & 0xFF);	
+		if (hv.length() < 2) {
+			stringBuilder.append(0);
+		}
+		stringBuilder.append(hv);
+
+		hv = Integer.toHexString(ver & 0xFF);
+		if (hv.length() < 2) {
+			stringBuilder.append(0);
+		}
+		stringBuilder.append(hv);
+
+		hv = Integer.toHexString(hon & 0xFF);
+		if (hv.length() < 2) {
+			stringBuilder.append(0);
+		}
+		stringBuilder.append(hv);
+		return stringBuilder.toString();
+	}
+	
+	public static String addCheckBit(String str) {
 		byte[] b = hexStringToBytes(str);
 		int sum = 0;
 		for (int i = 0; i < 5; i++) {
@@ -57,4 +102,5 @@ public class BytesUtil {
 		}
 		return str + tmp;
 	}
+
 }

@@ -5,23 +5,40 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <RelativeLayout
+        <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/icVolAdd"
+            android:id="@+id/icFtbw"
             style="@style/keyIconStyle"
-            android:src="@drawable/ic_volume_add" />
+            android:src="@drawable/ic_skip_next" />
 
         <Button
-            android:id="@+id/mMainVolumeAddBtn"
+            android:id="@+id/mMainNextBtn"
             style="@style/keyValueStyle"
-            android:layout_toRightOf="@id/icVolAdd"
+            android:layout_toRightOf="@id/icFtbw"
             android:text="@string/default_value" />
-
     </RelativeLayout>
 
+    <View
+        style="@style/spaceVertical"/>
+
+     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icSkipNext"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_skip_previous" />
+
+        <Button
+            android:id="@+id/mMainPreBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@+id/icSkipNext"
+            android:text="@string/default_value" />
+    </RelativeLayout>
     <View
         style="@style/spaceVertical"/>
 
@@ -30,16 +47,15 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/icVolSub"
+            android:id="@+id/icPlay"
             style="@style/keyIconStyle"
-            android:src="@drawable/ic_volume_sub" />
+            android:src="@drawable/ic_play_pause" />
 
         <Button
-            android:id="@+id/mMainVolumeSubBtn"
+            android:id="@+id/mMainPauseBtn"
             style="@style/keyValueStyle"
-            android:layout_toRightOf="@id/icVolSub"
+            android:layout_toRightOf="@id/icPlay"
             android:text="@string/default_value" />
-
     </RelativeLayout>
 
     <View
@@ -61,7 +77,8 @@
             android:text="@string/default_value" />
 
     </RelativeLayout>
-
+    
+    
     <View
         style="@style/spaceVertical"/>
 
@@ -72,10 +89,10 @@
         <ImageView
             android:id="@+id/icPhoneDown"
             style="@style/keyIconStyle"
-            android:src="@drawable/ic_sysbar_voice" />
+            android:src="@drawable/ic_call_end" />
 
         <Button
-            android:id="@+id/mMainPhoneDropedBtn"
+            android:id="@+id/mMainPhoneHandupBtn"
             style="@style/keyValueStyle"
             android:layout_toRightOf="@id/icPhoneDown"
             android:text="@string/default_value" />
@@ -90,14 +107,17 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/icPlay"
+            android:id="@+id/icPhoneDown1"
             style="@style/keyIconStyle"
-            android:src="@drawable/ic_play_pause" />
+            android:src="@drawable/ic_sysbar_voice" />
 
         <Button
-            android:id="@+id/mMainPauseBtn"
+            android:id="@+id/mMainPhoneDropedBtn"
             style="@style/keyValueStyle"
-            android:layout_toRightOf="@id/icPlay"
+            android:layout_toRightOf="@id/icPhoneDown1"
             android:text="@string/default_value" />
+
     </RelativeLayout>
+
+    
 </LinearLayout>

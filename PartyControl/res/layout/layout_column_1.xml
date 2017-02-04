@@ -3,11 +3,11 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/icPower"
@@ -25,7 +25,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/icMode"
@@ -47,7 +47,61 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/icBack"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_back" />
+
+        <Button
+            android:id="@+id/mMainBackBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icBack"
+            android:text="@string/default_value" />
+    </RelativeLayout>
+
+    <View style="@style/spaceVertical" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/icVolAdd"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_volume_add" />
+
+        <Button
+            android:id="@+id/mMainVolumeAddBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icVolAdd"
+            android:text="@string/default_value" />
+    </RelativeLayout>
+
+    <View style="@style/spaceVertical" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/icVolSub"
+            style="@style/keyIconStyle"
+            android:src="@drawable/ic_volume_sub" />
+
+        <Button
+            android:id="@+id/mMainVolumeSubBtn"
+            style="@style/keyValueStyle"
+            android:layout_toRightOf="@id/icVolSub"
+            android:text="@string/default_value" />
+    </RelativeLayout>
+
+    <View style="@style/spaceVertical" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/icMute"
@@ -61,39 +115,4 @@
             android:text="@string/default_value" />
     </RelativeLayout>
 
-    <View style="@style/spaceVertical" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/icFtbw"
-            style="@style/keyIconStyle"
-            android:src="@drawable/ic_skip_next" />
-
-        <Button
-            android:id="@+id/mMainNextBtn"
-            style="@style/keyValueStyle"
-            android:layout_toRightOf="@id/icFtbw"
-            android:text="@string/default_value" />
-    </RelativeLayout>
-
-    <View style="@style/spaceVertical" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/icSkipNext"
-            style="@style/keyIconStyle"
-            android:src="@drawable/ic_skip_previous" />
-
-        <Button
-            android:id="@+id/mMainPreBtn"
-            style="@style/keyValueStyle"
-            android:layout_toRightOf="@+id/icSkipNext"
-            android:text="@string/default_value" />
-    </RelativeLayout>
 </LinearLayout>

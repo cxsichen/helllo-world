@@ -72,6 +72,15 @@ public class Contacts {
     public static final String HEX_MODEL_SAVE = "EF0000000010";
     public static final String HEX_MODEL_CONTROL = "EF00000002";
     public static final String HEX_RESET = "EF10000000";
+    
+    public static final String HEX_HAND_UP = "EF1F00001B";
+    public static final String HEX_MEUNDOWN_HANDUP = "EF1F00001C";
+    public static final String HEX_MEUNUP_ANSWER = "EF1F00001D";
+    public static final String HEX_BACK = "EF1F00001E"; 
+    public static final String HEX_FM = "EF1F00001F";
+    public static final String HEX_MUSIC = "EF1F000020";
+    public static final String HEX_NAV = "EF1F000021";
+    
     /**party controll end***/
     
     
