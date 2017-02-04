@@ -46,7 +46,6 @@ public class VerticalSeekBar extends SeekBar {
 		if (!isEnabled()) {
 			return false;
 		}
-
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 		case MotionEvent.ACTION_MOVE:
@@ -62,7 +61,6 @@ public class VerticalSeekBar extends SeekBar {
 					&& event.getAction() == MotionEvent.ACTION_UP)
 				mOnProgressChangedListener.OnStop(getProgress());
 			break;
-
 		case MotionEvent.ACTION_CANCEL:
 			break;
 		}
@@ -72,14 +70,16 @@ public class VerticalSeekBar extends SeekBar {
 	public void setMProgress(int i) {
 		setProgress(i);
 		onSizeChanged(getWidth(), getHeight(), 0, 0);
-		mOnProgressChangedListener.OnChange(i);
+		if (mOnProgressChangedListener != null)
+			mOnProgressChangedListener.OnChange(i);
 	}
 
 	public void setNumProgress(int i) {
 		int temp = 100 / 14;
 		setProgress(i * temp);
 		onSizeChanged(getWidth(), getHeight(), 0, 0);
-		mOnProgressChangedListener.OnChange(i * temp);
+		if (mOnProgressChangedListener != null)
+			mOnProgressChangedListener.OnChange(i * temp);
 	}
 
 	public interface OnProgressChangedListener {
