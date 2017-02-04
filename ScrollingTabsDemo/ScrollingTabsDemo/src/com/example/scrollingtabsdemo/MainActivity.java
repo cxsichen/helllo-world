@@ -32,7 +32,7 @@ public class MainActivity extends FragmentActivity {
 		// 设置缓存fragment的数量
 		viewPager.setOffscreenPageLimit(2);
 		viewPager.setCurrentItem(0);
-		viewPager.setPageMargin(4);
+		viewPager.setPageMargin(6);
 
 		// 设置适配器
 		pagerAdapter = new FragsAdapter(getSupportFragmentManager());
