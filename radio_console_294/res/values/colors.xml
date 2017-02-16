@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_bg">#F5F5F5</color>
+    <color name="dark_bg">#263238</color>
+    <color name="text_selected">#0093fd</color>
+    <color name="text_normal">#8AFFFFFF</color>
+    <color name="colorPrimaryDark">#263238</color>
+</resources>

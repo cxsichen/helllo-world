@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:textSize="16sp"
+        android:layout_centerVertical="true"/>
+
+    <SeekBar
+        android:id="@+id/seek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:paddingLeft="72dp"
+		android:paddingRight="16dp"
+		android:layout_marginRight="16dp"
+        android:max="48"
+        android:progress="24"
+        android:thumb="@drawable/ic_audio_vol" 
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

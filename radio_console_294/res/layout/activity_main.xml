@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/backgroud"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/freq_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <include         
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            layout="@layout/freq_layout" />
+    </LinearLayout>
+
+    <include
+        layout="@layout/left_panel"
+         />
+
+    <LinearLayout
+        android:id="@+id/channel_layout"
+        android:layout_width="match_parent"
+       
+        android:layout_height="match_parent">
+
+        <include        
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="400dp"
+            layout="@layout/channel_layout"
+            android:elevation="4dp" />
+
+    </LinearLayout>
+    
+</FrameLayout>

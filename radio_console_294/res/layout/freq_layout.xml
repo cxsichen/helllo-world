@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/pre_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/ripple_bg"
+        android:scaleType="center"
+        android:src="@drawable/ic_previous" />
+
+    <LinearLayout
+        android:id="@+id/freq_tv_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="95dp"
+        android:gravity="bottom" >
+
+        <TextView
+            android:id="@+id/freq_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="103.5"
+            android:textColor="@android:color/white"
+            android:textSize="47sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/ripple_bg"
+        android:scaleType="center"
+        android:src="@drawable/ic_next" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/freq_tv_layout"
+        android:layout_marginBottom="10dp"
+        android:layout_toLeftOf="@id/next_button"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/band_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FM"
+            android:textColor="@android:color/white"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/unit_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MHZ"
+            android:textColor="@android:color/white"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/freq_tv_layout"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="40dp" >
+
+        <com.console.radio.utils.FMView
+            android:id="@+id/fMView"
+            android:layout_width="wrap_content"
+            android:layout_height="96dp"
+            android:layout_gravity="center_vertical" >
+        </com.console.radio.utils.FMView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="82dp"
+            android:layout_marginLeft="77dp"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/fm_indicator" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/mask" />
+    </RelativeLayout> 
+
+</RelativeLayout>

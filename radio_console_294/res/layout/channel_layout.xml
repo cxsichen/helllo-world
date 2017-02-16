@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:layout_width="175dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="110dp"
+            android:src="@drawable/white_line" />
+
+        <com.console.radio.utils.MyScrollView
+            android:id="@+id/channel_scrollView"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="80dp"
+            android:scrollbars="none" >
+
+            <include 
+                android:id="@+id/channel_linelayout"
+                layout="@layout/channel_linelayout" />
+        </com.console.radio.utils.MyScrollView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/freq_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+
+        <com.console.radio.utils.DecoratorViewPager
+            android:id="@+id/freq_vp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="80dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
