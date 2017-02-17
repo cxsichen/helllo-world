@@ -587,16 +587,17 @@ public class SerialPortControl {
 	private void dealWithPacket(byte[] packet) {
 		// TODO Auto-generated method stub
 		switch (packet[0]) {
-		case Contacts.STATUS: // 常发命令
-			if (Settings.System.getInt(mSerialPortService.getContentResolver(),
-					Constact.DETECTCHANGE, 0) == 0) { // 尾门和手刹状态的选择 0是手刹 1是尾门
-				if (android.provider.Settings.System.getString(
+		case Contacts.STATUS: // 常发命令	
+			int SerialPort2DetecteStatus=Settings.System.getInt(mSerialPortService.getContentResolver(),
+					Constact.DETECTCHANGE, 0);
+			if (SerialPort2DetecteStatus == 1) { // 尾门和手刹状态的选择 0是不检测 1是手刹 2是尾门
+				if (("com.mxtech.videoplayer.pro").equals(android.provider.Settings.System.getString(
 						mSerialPortService.getContentResolver(),
-						Constact.APPLIST).equals("com.mxtech.videoplayer.pro")) {
+						Constact.APPLIST))) {
 					int hand_brake_status = (int) ((packet[1] >> 1) & 0x01); // 手刹状态
 					if (hand_brake_status == 1) {
 						if (mDrivingWaringDialog == null)
-							mDrivingWaringDialog = initDialog("驾驶过程中请关闭视频");
+							mDrivingWaringDialog = initDialog("驾驶过程中不要观看视频");
 						if (!mDrivingWaringDialog.isShowing()) {
 							mDrivingWaringDialog
 									.getWindow()
@@ -613,7 +614,7 @@ public class SerialPortControl {
 						}
 					}
 				}
-			} else {
+			} else if (SerialPort2DetecteStatus == 2){
 				int tail_door_status = (int) ((packet[1] >> 1) & 0x01); // 尾门状态
 				if (tail_door_status != Settings.System.getInt(
 						mSerialPortService.getContentResolver(),
@@ -1319,7 +1320,6 @@ public class SerialPortControl {
 			mSerialPortService.bindService(intent, mServiceConnection,
 					mSerialPortService.BIND_AUTO_CREATE);
 		} catch (Exception e) {
-			Log.i("cxs", "==========e=======" + e);
 			e.printStackTrace();
 		}
 	}
@@ -1348,7 +1348,6 @@ public class SerialPortControl {
 					@Override
 					public void onPlayerStatus(PlayerStatus playerStatus,
 							Music music) {
-						Log.i("cxs", "====playerStatus=====" + playerStatus);
 						mPlayerStatus = playerStatus;
 						if (playerStatus.equals(PlayerStatus.PLAYING)) {
 							mSerialPortService

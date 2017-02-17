@@ -18,7 +18,8 @@ public class WeatherProvider extends ContentProvider {
 	private static final int ALARMS_ID = 2;
 	static {
 		sURLMatcher.addURI(DBConstant.WEATHER_AUTHORITY, "weather", ALARMS);
-		sURLMatcher.addURI(DBConstant.WEATHER_AUTHORITY, "weather/#", ALARMS_ID);
+		sURLMatcher
+				.addURI(DBConstant.WEATHER_AUTHORITY, "weather/#", ALARMS_ID);
 	}
 
 	@Override
@@ -70,51 +71,40 @@ public class WeatherProvider extends ContentProvider {
 
 	@Override
 	public Uri insert(Uri uri, ContentValues initialValues) {
-		/*if (sURLMatcher.match(uri) != ALARMS) {
-			throw new IllegalArgumentException("Cannot insert into URL: " + uri);
-		}
-
-		ContentValues values;
-		if (initialValues != null) {
-			values = new ContentValues(initialValues);
-		} else {
-			values = new ContentValues();
-		}
-
-		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-		long rowId = db.insert(DBConstant.WeatherTable.TABLE_NAME, null, values);
-		if (rowId < 0) {
-			rowId = db.insert(DBConstant.WeatherTable.TABLE_NAME, null, values);
-			Log.e("DB","Failed to insert row into " + uri);
-		}
-		Uri newUrl = ContentUris.withAppendedId(DBConstant.WeatherTable.CONTENT_URI, rowId);
-		getContext().getContentResolver().notifyChange(newUrl, null);*/
+		/*
+		 * if (sURLMatcher.match(uri) != ALARMS) { throw new
+		 * IllegalArgumentException("Cannot insert into URL: " + uri); }
+		 * 
+		 * ContentValues values; if (initialValues != null) { values = new
+		 * ContentValues(initialValues); } else { values = new ContentValues();
+		 * }
+		 * 
+		 * SQLiteDatabase db = mOpenHelper.getWritableDatabase(); long rowId =
+		 * db.insert(DBConstant.WeatherTable.TABLE_NAME, null, values); if
+		 * (rowId < 0) { rowId = db.insert(DBConstant.WeatherTable.TABLE_NAME,
+		 * null, values); Log.e("DB","Failed to insert row into " + uri); } Uri
+		 * newUrl =
+		 * ContentUris.withAppendedId(DBConstant.WeatherTable.CONTENT_URI,
+		 * rowId); getContext().getContentResolver().notifyChange(newUrl, null);
+		 */
 		return null;
 	}
 
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
-		/*SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-		int count;
-		long rowId = 0;
-		switch (sURLMatcher.match(uri)) {
-		case ALARMS:
-			count = db.delete(DBConstant.WeatherTable.TABLE_NAME, selection, selectionArgs);
-			break;
-		case ALARMS_ID:
-			String segment = uri.getPathSegments().get(1);
-			rowId = Long.parseLong(segment);
-			if (TextUtils.isEmpty(selection)) {
-				selection = "_id=" + rowId;
-			} else {
-				selection = "_id=" + rowId + " AND (" + selection + ")";
-			}
-			count = db.delete(DBConstant.WeatherTable.TABLE_NAME, selection, selectionArgs);
-			break;
-		default:
-			throw new IllegalArgumentException("Cannot delete from URL: " + uri);
-		}
-		getContext().getContentResolver().notifyChange(uri, null);*/
+		/*
+		 * SQLiteDatabase db = mOpenHelper.getWritableDatabase(); int count;
+		 * long rowId = 0; switch (sURLMatcher.match(uri)) { case ALARMS: count
+		 * = db.delete(DBConstant.WeatherTable.TABLE_NAME, selection,
+		 * selectionArgs); break; case ALARMS_ID: String segment =
+		 * uri.getPathSegments().get(1); rowId = Long.parseLong(segment); if
+		 * (TextUtils.isEmpty(selection)) { selection = "_id=" + rowId; } else {
+		 * selection = "_id=" + rowId + " AND (" + selection + ")"; } count =
+		 * db.delete(DBConstant.WeatherTable.TABLE_NAME, selection,
+		 * selectionArgs); break; default: throw new
+		 * IllegalArgumentException("Cannot delete from URL: " + uri); }
+		 * getContext().getContentResolver().notifyChange(uri, null);
+		 */
 		return 0;
 
 	}
@@ -127,27 +117,38 @@ public class WeatherProvider extends ContentProvider {
 		int match = sURLMatcher.match(uri);
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		switch (match) {
-		
-			case ALARMS_ID: {
-				String segment = uri.getPathSegments().get(1);
-				rowId = Long.parseLong(segment);
-				count = db.update(DBConstant.WeatherTable.TABLE_NAME, values, "_id=" + rowId, null);
-				break;
+
+		case ALARMS_ID: {
+			String segment = uri.getPathSegments().get(1);
+			rowId = Long.parseLong(segment);
+			if (selection == null) {
+				count = db.update(DBConstant.WeatherTable.TABLE_NAME, values,
+						"_id=" + rowId, null);
+			} else {
+				count = db.update(DBConstant.WeatherTable.TABLE_NAME, values,
+						selection, selectionArgs);
 			}
-			
-			case ALARMS:
-				count = db.update(DBConstant.WeatherTable.TABLE_NAME, values, null, null);
-				break;
-				
-			default: {
-				Log.e("navi", "Cannot update URL: " + uri);
-				throw new UnsupportedOperationException("Cannot update URL: " + uri);
+			break;
+		}
+
+		case ALARMS:
+			if (selection == null) {
+				count = db.update(DBConstant.WeatherTable.TABLE_NAME, values,
+						null, null);
+			} else {
+				count = db.update(DBConstant.WeatherTable.TABLE_NAME, values,
+						selection, selectionArgs);
 			}
+			break;
+
+		default: {
+			Log.e("navi", "Cannot update URL: " + uri);
+			throw new UnsupportedOperationException("Cannot update URL: " + uri);
+		}
 		}
 		getContext().getContentResolver().notifyChange(uri, null);
 		return count;
 
 	}
-	
 
 }
