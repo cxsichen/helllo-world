@@ -96,6 +96,15 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 				}
 				break;
 			case OPENCAMERA:
+				new Thread(){  
+			        @Override  
+			        public void run() {   
+			            try {  
+								com.example.cjc7150.MainActivity.setmode((byte) 1);
+			            } catch (Exception e) {  
+			              Log.i("cxs","setmode fail"); 
+			            }  
+			        }}.start(); 
 				openCamera();
 				if (camera != null && mSurfaceTexture != null) {
 					Camera.Parameters mParams = camera.getParameters();
@@ -105,7 +114,9 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 					try {
 						camera.setPreviewTexture(mSurfaceTexture);
 					} catch (IOException t) {
+						Log.i("cxs","IOException fail"); 
 					}
+
 					// camera.startPreview();
 					camera.startPreview();
 					surface.setAlpha(1.0f);
@@ -216,8 +227,15 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (readChannelFile() != 1)
-			com.example.cjc7150.MainActivity.setmode((byte) 1);
+		new Thread(){  
+	        @Override  
+	        public void run() {  
+	            try {  
+					com.example.cjc7150.MainActivity.setmode((byte) 1);
+	            } catch (Exception e) {  
+	              Log.i("cxs","setmode fail"); 
+	            }  
+	        }}.start(); 
 		// …Ë÷√ΩÁ√Ê
 		dismissSysDialog();
 		chooseControlLayout();	

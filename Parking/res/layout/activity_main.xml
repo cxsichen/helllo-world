@@ -111,26 +111,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/g18" />
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/black" />
         </RelativeLayout>
     </LinearLayout>
-    
-    <include layout="@layout/nissan_layout"
+
+    <include
         android:id="@+id/nissan_layout"
+        layout="@layout/nissan_layout"
         android:visibility="gone" />
-    
-    <include layout="@layout/sstoyata_layout"
+
+    <include
         android:id="@+id/sstoyata_layout"
+        layout="@layout/sstoyata_layout"
         android:visibility="gone" />
-    
-    <include layout="@layout/sstrumpchigs5_layout"
+
+    <include
         android:id="@+id/sstrumpchigs5_layout"
+        layout="@layout/sstrumpchigs5_layout"
         android:visibility="gone" />
-    
-    <include layout="@layout/honda_15crv_layout"
+
+    <include
         android:id="@+id/honda_15crv_layout"
+        layout="@layout/honda_15crv_layout"
         android:visibility="gone" />
-    
-    <include layout="@layout/ssgolf_layout"
+
+    <include
         android:id="@+id/ssgolf_layout"
+        layout="@layout/ssgolf_layout"
         android:visibility="gone" />
+
 </RelativeLayout>
