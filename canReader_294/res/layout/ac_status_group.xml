@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="8dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="8dp">
+
+    <!--Windshield Defrost-->
+    <!--Set Alpha to 0.12 when disabled-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/stat_windshield_defrost"
+        android:alpha="0.12"/>
+
+    <!--Recirculation-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/stat_recirculation_outside" />
+
+    <!--Rear Window Defrost-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/stat_rear_window_defrost" />
+
+    <!--Auto-->
+    <TextView
+        style="@style/AcStatusText"
+        android:layout_centerVertical="true"
+        android:text="MAX\nAUTO"/>
+
+    <!--OutSide Temperature-->
+    <TextView
+        style="@style/AcStatusText"
+        android:layout_centerInParent="true"
+        android:text="31℃\nOUT" />
+
+    <!--Air Condition-->
+    <TextView
+        style="@style/AcStatusText"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="A/C"/>
+
+    <!--Left Seat Heating-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/stat_seat_heating_left_2"
+        android:scaleType="center"/>
+
+    <!--Air Outlet-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/stat_air_outlet_defrost" />
+
+    <!--Right Seat Heating-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/stat_seat_heating_right_3" />
+
+
+</RelativeLayout>

@@ -1,0 +1,23 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="LANGUAGE_CHANGE"
+        android:summaryOff="英文"
+        android:summaryOn="中文"
+        android:title="语音设置" />
+    
+    
+     <SwitchPreference
+        android:key="TEMP_UNIT"
+        android:summaryOff="华式"
+        android:summaryOn="摄氏"
+        android:title="温度单位" />
+     
+     
+     <SwitchPreference
+        android:key="CAMERA_MODE"
+        android:summaryOff="关闭"
+        android:summaryOn="打开"
+        android:title="摄像头延时" />
+
+</PreferenceScreen>

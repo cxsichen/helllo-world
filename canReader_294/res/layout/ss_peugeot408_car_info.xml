@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="20dp" >
+	
+    
+     <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3" >
+
+        <ImageView
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/peugeot_iv"
+            />
+        
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/peugeot_clean"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_weight="1" >
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:layout_gravity="center_horizontal"
+            android:text="瞬时油耗"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+             android:layout_gravity="center_horizontal"
+            android:text="续航里程"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+             android:layout_gravity="center_horizontal"
+            android:text="平均油耗"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+             android:layout_gravity="center_horizontal"
+            android:text="平均车速"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+             android:layout_gravity="center_horizontal"
+            android:text="累积里程"/>
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+         android:orientation="vertical"
+         android:layout_marginTop="50dp"
+        android:layout_weight="1" >
+         <TextView 
+             android:id="@+id/INSTANT_CONSUMPTION"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:layout_gravity="center_horizontal"
+            android:text="10"/>
+        <TextView 
+            android:id="@+id/RANGE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:layout_gravity="center_horizontal"
+            android:text="1000"/>
+        <TextView 
+            android:id="@+id/AVERAGE_CONSUMPTION"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:layout_gravity="center_horizontal"
+            android:text="10"/>
+        <TextView 
+            android:id="@+id/AVERAGE_SPEED"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:layout_gravity="center_horizontal"
+            android:text="10"/>
+        <TextView 
+            android:id="@+id/RANGE_ADD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:layout_gravity="center_horizontal"
+            android:text="1000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+         android:orientation="vertical"
+         android:layout_marginTop="50dp"
+        android:layout_weight="1" >
+         <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:text="L/100km"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:text="km"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:text="L/100km"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:text="km/h"/>
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox"
+            android:text="km"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2" >
+
+        <Button
+            android:layout_centerInParent="true"
+            android:id="@+id/ENGINE_START_STATUS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:background="@android:color/holo_green_light"
+            android:text="启停" />
+        
+    </RelativeLayout>
+
+</LinearLayout>

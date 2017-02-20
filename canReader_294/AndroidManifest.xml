@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.console.canreader"
+    android:versionCode="7"
+    android:versionName="5.04.294" >
+    <!--     android:sharedUserId="android.uid.system" -->
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+  <!--   <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"/> -->
+
+    <uses-sdk
+        android:minSdkVersion="22"
+        android:targetSdkVersion="22" />
+
+    <application
+        android:name="com.console.canreader.ConsoleApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:persistent="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".GuideActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.CarInfoWaringActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.CarInfoActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.fragment.SSToyota.MenuPaSelectActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+         <activity
+            android:name="com.console.canreader.fragment.SSJeepZNZ.MenuPaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+         <activity
+            android:name="com.console.canreader.fragment.SSJeepZNZ17.MenuPaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.fragment.SSJeepZNZ17.MenuPaSelectActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.CarSettingAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.MenuAcAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.MenuCdAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.MenuPaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.fragment.SSToyota.MenuPaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.fragment.SSJeepFreedom.MenuPaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.fragment.SSJeepFreedom.MenuPaSelectActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        <activity
+            android:name="com.console.canreader.activity.MenuPanoramaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.MenuAboutAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.MenuTpmsAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.VolkswagenGolf.DrivingDataActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.JingKooM20.DrivingDataActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.fragment.RZCJAC.TpmsActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.Toyota.SettingActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.Toyota.DrivingDataActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.Toyota.OilEleActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.Toyota.TripOilConActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.activity.Toyota.HistoryOilConActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 功放activity -->
+        <activity
+            android:name="com.console.canreader.fragment.SSHyundai.MenuPaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.fragment.SSHyundai.MenuPaSelectActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 功放activity -->
+        <!-- 功放activity -->
+        <activity
+            android:name="com.console.canreader.fragment.SSNissan.MenuPaAcitivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.console.canreader.fragment.SSNissan.MenuPaSelectActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 功放activity -->
+        <!-- 胎压activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSGE.TpmsActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 胎压activity -->
+          <!-- 胎压activity -->
+         <activity
+            android:name="com.console.canreader.fragment.RZCVolkswagenGolf.TpmsActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 胎压activity -->
+        <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSJeepZNZ17.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
+        <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.RZCFmilia17.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
+        <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSGE.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
+         <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSVolkswagenGolf.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
+         <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSMGGS.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
+          <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSChery.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
+        <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.RZCMGGS.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
+        <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.RZCVolkswagenGolf.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
+         <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSJeepFreedom.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
+	
+        <!-- 标致空调控制的activity -->
+        <activity
+            android:name="com.console.canreader.fragment.SSPeugeot.AirControlerSSPeugeot408"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 标致空调控制的activity -->
+        <!-- cd控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSJeepFreedom.CdContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- cd控制activity -->
+        <!-- cd控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.SSJeepZNZ17.CdContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- cd控制activity -->
+        <service
+            android:name="com.console.canreader.service.CanService"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter android:priority="1000" >
+                <action android:name="com.console.canreader.service.CanService" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name="com.console.canreader.receiver.BootBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

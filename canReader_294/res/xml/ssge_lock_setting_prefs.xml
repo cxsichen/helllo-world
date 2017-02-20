@@ -1,0 +1,34 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="LOCK_OPENDOOR_WITHOUTLOCK"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="防止开门自动自动落锁设定" />
+    <SwitchPreference
+        android:key="AUTO_LOCK_SETTING"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="自动落锁设定" />
+
+    <ListPreference
+        android:entries="@array/ssge_open_lock_z_entries"
+        android:entryValues="@array/ssge_open_lock_z_values"
+        android:key="AUTO_OPEN_LOCK_Z"
+        android:persistent="false"
+        android:title="自动解锁设定（自动档）" />
+
+    <SwitchPreference
+        android:key="LOCK_DELAY_LOCK"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="延迟落锁设定" />
+
+    <ListPreference
+        android:entries="@array/ssge_open_lock_s_entries"
+        android:entryValues="@array/ssge_open_lock_s_values"
+        android:key="AUTO_OPEN_LOCK_S"
+        android:persistent="false"
+        android:title="自动解锁设定（手动档）" />
+
+</PreferenceScreen>

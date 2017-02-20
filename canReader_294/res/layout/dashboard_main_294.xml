@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="40dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            
+            android:gravity="center" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <ImageView
+                    android:id="@+id/icObdWasherFluid"
+                    style="@style/DashboardStatusIcon_294"
+
+                    android:src="@drawable/ic_wash" />
+
+                <TextView
+                    android:id="@+id/clean"
+                    style="@style/DashboardStatusText_294"
+                    android:layout_toRightOf="@id/icObdWasherFluid"
+                    android:text="清洁液" />
+
+                <ImageView 
+                    
+                    style="@style/DashboardLine_294" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/icObdBattery"
+                    style="@style/DashboardStatusIcon_294"
+                    android:src="@drawable/ic_battery" />
+
+                <TextView
+                    android:id="@+id/battery"
+                    style="@style/DashboardStatusText_294"
+                    android:layout_toRightOf="@id/icObdBattery"
+                    android:text="电瓶信息" />
+
+                <ImageView style="@style/DashboardLine_294" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/icFuel"
+                    style="@style/DashboardStatusIcon_294"
+                    android:src="@drawable/ic_oil" />
+
+                <TextView
+                    android:id="@+id/oil"
+                    style="@style/DashboardStatusText_294"
+                    android:layout_toRightOf="@id/icFuel"
+                    android:text="燃油信息" />
+
+                <ImageView style="@style/DashboardLine_294" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2" >
+
+        <FrameLayout
+            android:id="@+id/speedMeter"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_centerInParent="true" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/support_speedmeter_294" />
+
+            <TextView
+                android:id="@+id/distance"
+                style="@style/SpeedmeterText"
+                android:textSize="12sp"
+                android:layout_width="80dp"
+                android:layout_height="56dp"
+                android:background="@drawable/text_bg_294_b"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="36dp"
+                android:text="0\nKM" />
+
+            <TextView
+                android:id="@+id/driving_speed"
+                style="@style/SpeedmeterText"
+                android:textSize="12sp"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:background="@drawable/text_bg_294_b_n"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="40dp"
+                android:text="0 KM/H" />
+
+            <ImageView
+                android:id="@+id/speed_hand1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                 android:layout_marginBottom="5dp"
+                android:src="@drawable/support_speedmeter_294_1" />
+
+            <ImageView
+                android:id="@+id/speed_hand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_gravity="center"
+                android:src="@drawable/hand_speedmeter_294" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/icObdSeatBelt"
+                    style="@style/DashboardStatusIcon_294"
+                    android:src="@drawable/ic_seatbelt" />
+
+                <TextView
+                    android:id="@+id/safety_salt"
+                    style="@style/DashboardStatusText_294"
+                    android:layout_toRightOf="@id/icObdSeatBelt"
+                    android:text="安全带" />
+
+                <ImageView style="@style/DashboardLine_294" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/icObdHandBrake"
+                    style="@style/DashboardStatusIcon_294"
+                    android:src="@drawable/ic_handbrake" />
+
+                <TextView
+                    android:id="@+id/handbrake"
+                    style="@style/DashboardStatusText_294"
+                    android:layout_toRightOf="@id/icObdHandBrake"
+                    android:text="驻车制动" />
+
+                <ImageView style="@style/DashboardLine_294" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/icWater"
+                    style="@style/DashboardStatusIcon_294"
+                    android:src="@drawable/ic_water_tmp" />
+
+                <TextView
+                    android:id="@+id/water"
+                    style="@style/DashboardStatusText_294"
+                    android:layout_toRightOf="@id/icWater"
+                    android:text="水温指示" />
+
+                <ImageView style="@style/DashboardLine_294" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

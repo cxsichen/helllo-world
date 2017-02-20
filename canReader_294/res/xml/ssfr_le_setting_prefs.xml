@@ -1,0 +1,91 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+     <PreferenceCategory 
+         android:key="ATMOSPHERE_ILL_VALUE_P"
+         android:title="前照灯敏感度" >
+        <com.console.canreader.view.StepPreference android:key="ATMOSPHERE_ILL_VALUE" />
+    </PreferenceCategory>
+    
+     <ListPreference
+        android:entries="@array/ssfr_4_entries"
+        android:entryValues="@array/ssfr_4_values"
+        android:key="ATMOSPHERE_ILL_STATUS"
+        android:persistent="false"
+        android:title="车内氛围灯" />
+     
+ 
+      
+      <SwitchPreference
+        android:key="CHANGE_ILL_STATUS"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="转角辅助灯" />
+      
+      <SwitchPreference
+        android:key="DAYTIME_LAMP_STATUS_ENABLE"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="解锁开启车灯" />
+      
+        <ListPreference
+        android:entries="@array/ssfr_6_entries"
+        android:entryValues="@array/ssfr_6_values"
+        android:key="GO_HOME_LAMP_STATUS_ENABLE"
+        android:persistent="false"
+        android:title="发动机关闭电源延迟" />
+        
+         <ListPreference
+        android:entries="@array/ssfr_7_entries"
+        android:entryValues="@array/ssfr_7_values"
+        android:key="WELCOME_PERSION_ILL_STATUS_ENABLE"
+        android:persistent="false"
+        android:title="靠近时大灯亮起" />
+         
+         <ListPreference
+        android:entries="@array/ssfr_7_entries"
+        android:entryValues="@array/ssfr_7_values"
+        android:key="ATMOSPHERE_ILL_STATUS_ENABLE"
+        android:persistent="false"
+        android:title="大灯关闭延迟" />
+         
+           <SwitchPreference
+        android:key="CHANGE_ILL_STATUS_ENABLE"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="锁车时转向灯闪烁" />
+           
+             <SwitchPreference
+        android:key="ESP_ENABLE"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="日间行驶灯" />
+             
+               <SwitchPreference
+        android:key="HOLOGRAM_ENABLE"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="自动防眩光灯" />
+               
+                 <SwitchPreference
+        android:key="CAT_SETTTING_ENABLE"
+        android:summaryOff="取消"
+        android:summaryOn="选择"
+        android:title="启动雨刷时自动启动大灯" />
+                 
+                 
+
+    <!-- <SwitchPreference
+        android:key="RADAR_PARK"
+        android:summaryOff="声音"
+        android:summaryOn="声音+显示"
+        android:title="雷达泊车" />
+
+    <ListPreference
+        android:entries="@array/ssfr_0_entries"
+        android:entryValues="@array/ssfr_0_values"
+        android:key="LANE_DEPARTURE"
+        android:persistent="false"
+        android:title="车道偏离校正力度" /> -->
+
+
+</PreferenceScreen>

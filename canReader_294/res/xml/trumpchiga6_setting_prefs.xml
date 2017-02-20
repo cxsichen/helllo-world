@@ -1,0 +1,146 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/car_info_setting_title2" >
+        <ListPreference
+            android:entries="@array/language_entries"
+            android:entryValues="@array/language_values"
+            android:key="car_info_LANGUAGE_CHANGE"
+            android:persistent="false"
+            android:title="@string/car_info_LANGUAGE_CHANGE" />
+
+        <SwitchPreference
+            android:key="car_info_AUTO_COMPRESSOR_STATUS"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_AUTO_COMPRESSOR_STATUS" />
+        <SwitchPreference
+            android:key="car_info_AUTO_CYCLE_STATUS"
+            android:summaryOff="手动"
+            android:summaryOn="自动"
+            android:title="@string/car_info_AUTO_CYCLE_STATUS" />
+
+        <ListPreference
+            android:entries="@array/car_info_AIR_COMFORTABLE_STATUS_entries"
+            android:entryValues="@array/car_info_AIR_COMFORTABLE_STATUS_values"
+            android:key="car_info_AIR_COMFORTABLE_STATUS"
+            android:persistent="false"
+            android:title="@string/car_info_AIR_COMFORTABLE_STATUS" />
+
+        <SwitchPreference
+            android:key="car_info_AIR_ANION_STATUS"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_AIR_ANION_STATUS" />
+        <SwitchPreference
+            android:key="car_info_DRIVING_POSITION_SETTING"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_DRIVING_POSITION_SETTING" />
+        <SwitchPreference
+            android:key="car_info_DEPUTY_DRIVING_POSITION_SETTING"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_DEPUTY_DRIVING_POSITION_SETTING" />
+        <SwitchPreference
+            android:key="car_info_POSITION_WELCOME_SETTING"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_POSITION_WELCOME_SETTING" />
+        <SwitchPreference
+            android:key="car_info_KEY_INTELLIGENCE"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_KEY_INTELLIGENCE" />
+        
+         <EditTextPreference
+            android:key="car_info_SPEED_OVER_SETTING"
+            android:summary="0"
+            android:title="@string/car_info_SPEED_OVER_SETTING" />
+        
+
+        <ListPreference
+            android:entries="@array/car_info_entries"
+            android:entryValues="@array/car_info_values"
+            android:key="car_info_WARNING_VOLUME"
+            android:persistent="false"
+            android:title="@string/car_info_WARNING_VOLUME" />
+         <EditTextPreference
+            android:key="car_info_REMOTE_POWER_TIME"
+            android:summary="0"
+            android:title="@string/car_info_REMOTE_POWER_TIME" />
+          <EditTextPreference
+            android:key="car_info_REMOTE_START_TIME"
+            android:summary="0"
+            android:title="@string/car_info_REMOTE_START_TIME" />
+        
+        <ListPreference
+            android:entries="@array/car_info_DRIVER_CHANGE_MODE_entries"
+            android:entryValues="@array/car_info_DRIVER_CHANGE_MODE_values"
+            android:key="car_info_DRIVER_CHANGE_MODE"
+            android:persistent="false"
+            android:title="@string/car_info_DRIVER_CHANGE_MODE" />
+        <ListPreference
+            android:entries="@array/car_info_REMOTE_UNLOCK_entries"
+            android:entryValues="@array/car_info_REMOTE_UNLOCK_values"
+            android:key="car_info_REMOTE_UNLOCK"
+            android:persistent="false"
+            android:title="@string/car_info_REMOTE_UNLOCK" />
+
+        <SwitchPreference
+            android:key="car_info_SPEED_LOCK"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_SPEED_LOCK" />
+        <SwitchPreference
+            android:key="car_info_AUTO_UNLOCK"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_AUTO_UNLOCK" />
+        <SwitchPreference
+            android:key="car_info_REMOTE_FRONT_LEFT"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_REMOTE_FRONT_LEFT" />
+        <SwitchPreference
+            android:key="car_info_FRONT_WIPER_CARE"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_FRONT_WIPER_CARE" />
+        <SwitchPreference
+            android:key="car_info_REAR_WIPER_STATUS"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_REAR_WIPER_STATUS" />
+        <SwitchPreference
+            android:key="car_info_OUTSIDE_MIRROR_STATUS"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_OUTSIDE_MIRROR_STATUS" />
+
+        <ListPreference
+            android:entries="@array/car_info_GO_HOME_LAMP_STATUS_entries"
+            android:entryValues="@array/car_info_GO_HOME_LAMP_STATUS_values"
+            android:key="car_info_GO_HOME_LAMP_STATUS"
+            android:persistent="false"
+            android:title="@string/car_info_GO_HOME_LAMP_STATUS" />
+
+        <SwitchPreference
+            android:key="car_info_FOG_LAMP_STATUS"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_FOG_LAMP_STATUS" />
+        <SwitchPreference
+            android:key="car_info_DAYTIME_LAMP_STATUS"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="@string/car_info_DAYTIME_LAMP_STATUS" />
+
+        <ListPreference
+            android:entries="@array/car_info_entries"
+            android:entryValues="@array/car_info_values"
+            android:key="car_info_AUTO_LAMP_STATUS"
+            android:persistent="false"
+            android:title="@string/car_info_AUTO_LAMP_STATUS" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

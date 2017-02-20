@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    tools:context="com.example.android.equalizer.MainActivity" >
+
+    <include layout="@layout/sound_balance" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <!-- TRE Slider -->
+
+    <LinearLayout style="@style/EqSliderLayout" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/tre_tv"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.equalizer.view.VerticalSeekBar
+            android:id="@+id/SeekBarTRE"
+            style="@style/EqSliderProgress" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="32Hz" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <LinearLayout style="@style/EqSliderLayout" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/tre_tv1"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.equalizer.view.VerticalSeekBar
+            android:id="@+id/SeekBarTRE1"
+            style="@style/EqSliderProgress" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="64Hz" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <LinearLayout style="@style/EqSliderLayout" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/tre_tv2"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.equalizer.view.VerticalSeekBar
+            android:id="@+id/SeekBarTRE2"
+            style="@style/EqSliderProgress" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="128Hz" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <!-- MID Slider -->
+
+    <LinearLayout style="@style/EqSliderLayout" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/mid_tv"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.equalizer.view.VerticalSeekBar
+            android:id="@+id/SeekBarMID"
+            style="@style/EqSliderProgress" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="256Hz" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <LinearLayout style="@style/EqSliderLayout" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/mid_tv1"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.equalizer.view.VerticalSeekBar
+            android:id="@+id/SeekBarMID1"
+            style="@style/EqSliderProgress" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="1KHz" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <LinearLayout style="@style/EqSliderLayout" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/mid_tv2"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.equalizer.view.VerticalSeekBar
+            android:id="@+id/SeekBarMID2"
+            style="@style/EqSliderProgress" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="2KHz" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <!-- BAS Slider -->
+
+    <LinearLayout style="@style/EqSliderLayout" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/bas_tv"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.equalizer.view.VerticalSeekBar
+            android:id="@+id/SeekBarBas"
+            style="@style/EqSliderProgress" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="4KHz" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <LinearLayout style="@style/EqSliderLayout" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/bas_tv1"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.equalizer.view.VerticalSeekBar
+            android:id="@+id/SeekBarBas1"
+            style="@style/EqSliderProgress" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="8KHz" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <LinearLayout style="@style/EqSliderLayout" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/bas_tv2"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.equalizer.view.VerticalSeekBar
+            android:id="@+id/SeekBarBas2"
+            style="@style/EqSliderProgress" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="16KHz" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <!-- Sound Styles & Reset Button -->
+
+    <LinearLayout
+        android:layout_width="112dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <!-- Sound Styles -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_space_bg"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/defaultEf_button"
+                style="@style/SoundStyleText"
+                android:background="@drawable/btn_bg_selected"
+                android:text="@string/defaultEF" />
+
+            <View style="@style/divide" />
+
+            <!-- Selected -->
+
+            <TextView
+                android:id="@+id/rockEf_button"
+                style="@style/SoundStyleText"
+                android:elevation="4dp"
+                android:text="@string/rock" />
+
+            <View style="@style/divide" />
+
+            <TextView
+                android:id="@+id/popularEf_button"
+                style="@style/SoundStyleText"
+                android:text="@string/popular" />
+
+            <View style="@style/divide" />
+
+            <TextView
+                android:id="@+id/jazzEf_button"
+                style="@style/SoundStyleText"
+                android:text="@string/jazz" />
+
+            <View style="@style/divide" />
+
+            <TextView
+                android:id="@+id/classicEf_button"
+                style="@style/SoundStyleText"
+                android:text="@string/classic" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_vertical_margin" />
+
+        <!-- Reset Button -->
+
+        <TextView
+            android:id="@+id/reset_button"
+            style="@style/SoundStyleText"
+            android:background="@drawable/btn_bg_selector"
+            android:text="@string/reset" />
+    </LinearLayout>
+
+</LinearLayout>

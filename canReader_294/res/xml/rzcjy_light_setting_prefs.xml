@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <ListPreference
+        android:entries="@array/ssjy_1_entries"
+        android:entryValues="@array/ssjy_1_values"
+        android:key="LIGHT_TOP_LIGHT"
+        android:persistent="false"
+        android:title="顶灯延时" />
+      <ListPreference
+        android:entries="@array/ssjy_2_entries"
+        android:entryValues="@array/ssjy_2_values"
+        android:key="AUTOMATIC_LAMP_CLOSE"
+        android:persistent="false"
+        android:title="节电时间" />
+
+</PreferenceScreen>

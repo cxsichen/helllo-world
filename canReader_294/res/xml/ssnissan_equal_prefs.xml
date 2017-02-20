@@ -1,0 +1,44 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="音量" >
+        <com.console.canreader.view.StepPreference android:key="EQL_VOLUME" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="左右平衡" >
+        <com.console.canreader.view.StepPreference android:key="LR_BALANCE" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="前后平衡" >
+        <com.console.canreader.view.StepPreference android:key="FB_BALANCE" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="低音" >
+        <com.console.canreader.view.StepPreference android:key="BAS_VOLUME" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="中音" >
+        <com.console.canreader.view.StepPreference android:key="MID_VOLUME" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="高音" >
+        <com.console.canreader.view.StepPreference android:key="TRE_VOLUME" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="车速联动音量" >
+        <com.console.canreader.view.StepPreference android:key="VOL_LINK_CARSPEED" />
+    </PreferenceCategory>
+    
+     <PreferenceCategory android:title="环绕音量" >
+        <com.console.canreader.view.StepPreference android:key="SURROND_VOLUME" />
+    </PreferenceCategory>
+    
+     <SwitchPreference
+            android:key="BOSE_CENTERPOINT"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="BOSE CenterPoint" />
+     
+     
+     <SwitchPreference
+            android:key="SEAT_SOUND"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="驾驶座音场" />
+    
+
+</PreferenceScreen>

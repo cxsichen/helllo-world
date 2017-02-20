@@ -1,0 +1,10 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+  <ListPreference
+        android:entries="@array/ssge_car_type_entries"
+        android:entryValues="@array/ssge_car_type_values"
+        android:key="CAR_TYPE"
+        android:persistent="false"
+        android:title="车型设置" />
+
+</PreferenceScreen>

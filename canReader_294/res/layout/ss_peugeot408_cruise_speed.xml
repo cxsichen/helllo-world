@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical" >
+
+        <CheckBox
+            android:id="@+id/CRUISE_SPEED_STATUS_ENABLE"
+            style="@style/sty_checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="巡航速度值使能" />
+
+        <CheckBox
+            android:id="@+id/CRUISE_SPEED_1_ENABLE"
+            style="@style/sty_checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使能速度1" />
+
+        <CheckBox
+            android:id="@+id/CRUISE_SPEED_2_ENABLE"
+            style="@style/sty_checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使能速度2" />
+
+        <CheckBox
+            android:id="@+id/CRUISE_SPEED_3_ENABLE"
+            style="@style/sty_checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使能速度3" />
+
+        <CheckBox
+            android:id="@+id/CRUISE_SPEED_4_ENABLE"
+            style="@style/sty_checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使能速度4" />
+
+        <CheckBox
+            android:id="@+id/CRUISE_SPEED_5_ENABLE"
+            style="@style/sty_checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使能速度5" />
+
+        <CheckBox
+            android:id="@+id/CRUISE_SPEED_6_ENABLE"
+            style="@style/sty_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使能速度6" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/CRUISE_SPEED_STATUS"
+                style="@style/sty_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="巡航速度值启用" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="6dp" >
+
+                <CheckBox
+                    android:id="@+id/CRUISE_SPEED_1"
+                    style="@style/sty_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="速度1:" />
+
+                <CheckBox
+                    android:id="@+id/CRUISE_SPEED_2"
+                    style="@style/sty_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="速度2:" />
+
+                <CheckBox
+                    android:id="@+id/CRUISE_SPEED_3"
+                    style="@style/sty_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="速度3:" />
+
+                <CheckBox
+                    android:id="@+id/CRUISE_SPEED_4"
+                    style="@style/sty_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="速度4:" />
+
+                <CheckBox
+                    android:id="@+id/CRUISE_SPEED_5"
+                    style="@style/sty_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="速度5:" />
+
+                <CheckBox
+                    android:id="@+id/CRUISE_SPEED_6"
+                    style="@style/sty_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="速度6:" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/CRUISE_SPEED_1_VALUE"
+                    style="@style/style_408_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="100" />
+
+                <TextView
+                    android:id="@+id/CRUISE_SPEED_2_VALUE"
+                    style="@style/style_408_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="100" />
+
+                <TextView
+                    android:id="@+id/CRUISE_SPEED_3_VALUE"
+                    style="@style/style_408_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="100" />
+
+                <TextView
+                    android:id="@+id/CRUISE_SPEED_4_VALUE"
+                    style="@style/style_408_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="100" />
+
+                <TextView
+                    android:id="@+id/CRUISE_SPEED_5_VALUE"
+                    style="@style/style_408_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="100" />
+
+                <TextView
+                    android:id="@+id/CRUISE_SPEED_6_VALUE"
+                    style="@style/style_408_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="100" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:paddingTop="4dp" >
+
+                <SeekBar
+                    android:id="@+id/CRUISE_SPEED_1_VALUE_S"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/CRUISE_SPEED_2_VALUE_S"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/CRUISE_SPEED_3_VALUE_S"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/CRUISE_SPEED_4_VALUE_S"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/CRUISE_SPEED_5_VALUE_S"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+
+                <SeekBar
+                    android:id="@+id/CRUISE_SPEED_6_VALUE_S"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="255" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

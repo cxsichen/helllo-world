@@ -1,0 +1,31 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="里程设定" >
+        <ListPreference
+            android:entries="@array/trip_setting_entries_1"
+            android:entryValues="@array/trip_setting_values_1"
+            android:key="SWITCH_TRIPB_SETTING"
+            android:persistent="false"
+            android:title="里程B重设条件的切换" />
+        <ListPreference
+            android:entries="@array/trip_setting_entries"
+            android:entryValues="@array/trip_setting_values"
+            android:key="SWITCH_TRIPA_SETTING"
+            android:persistent="false"
+            android:title="里程A重设条件的切换" />
+
+        <SwitchPreference
+            android:key="ENERGY_BACKGROUND_LIGHT"
+            android:summaryOff="关闭"
+            android:summaryOn="开启"
+            android:title="燃油消耗量显示时的背景照明" />
+
+        <ListPreference
+            android:entries="@array/outside_temp_entries_1"
+            android:entryValues="@array/outside_temp_values_1"
+            android:key="ADJUST_OUTSIDE_TEMP"
+            android:persistent="false"
+            android:title="调节外部气温显示(国产 -3~3   国外  -5~5)" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1E282D" >
+
+    <LinearLayout
+        android:id="@+id/mainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bg_main_menu"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RelativeLayout 
+            android:id="@+id/mCarInfoLayout"
+            style="@style/mainMenuRelativeLayout" 
+            >
+
+            <ImageView
+                android:id="@+id/icMenuCarInfo"
+                style="@style/mainMenuIcon"
+                android:src="@drawable/ic_menu_car_info" />
+
+            <TextView
+                style="@style/mainMenuLabel"
+                android:layout_below="@+id/icMenuCarInfo"
+                android:text="车辆信息" />
+        </RelativeLayout>
+
+        <View 
+            android:id="@+id/mCarInfoDivider"
+            style="@style/mainMenuDivider" />
+
+        <RelativeLayout 
+            android:id="@+id/mCarSettingsLayout"
+            style="@style/mainMenuRelativeLayout" >
+
+            <ImageView
+                android:id="@+id/icMenuCarSettings"
+                style="@style/mainMenuIcon"
+                android:src="@drawable/ic_menu_car_settings" />
+
+            <TextView
+                style="@style/mainMenuLabel"
+                android:layout_below="@+id/icMenuCarSettings"
+                android:text="车辆设置" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/mCarSettingsDivider" 
+            style="@style/mainMenuDivider" />
+
+        <RelativeLayout 
+            android:id="@+id/mMenuAcLayout"
+            style="@style/mainMenuRelativeLayout" >
+
+            <ImageView
+                android:id="@+id/icMenuAc"
+                style="@style/mainMenuIcon"
+                android:src="@drawable/ic_menu_ac" />
+
+            <TextView
+                style="@style/mainMenuLabel"
+                android:layout_below="@+id/icMenuAc"
+                android:text="空调控制" />
+        </RelativeLayout>
+
+        <View 
+            android:id="@+id/mMenuAcDivider" 
+            style="@style/mainMenuDivider" />
+
+        <RelativeLayout
+            android:id="@+id/mMenuCdLayout"
+            style="@style/mainMenuRelativeLayout" >
+
+            <ImageView
+                android:id="@+id/icMenuCd"
+                style="@style/mainMenuIcon"
+                android:src="@drawable/ic_menu_cd" />
+
+            <TextView
+                style="@style/mainMenuLabel"
+                android:layout_below="@+id/icMenuCd"
+                android:text="光盘控制" />
+        </RelativeLayout>
+
+        <View 
+             android:id="@+id/mMenuCdDivider" 
+            style="@style/mainMenuDivider" />
+
+        <RelativeLayout 
+            android:id="@+id/mMenuPaLayout"
+            style="@style/mainMenuRelativeLayout" >
+
+            <ImageView
+                android:id="@+id/icMenuPa"
+                style="@style/mainMenuIcon"
+                android:src="@drawable/ic_menu_pa" />
+
+            <TextView
+                style="@style/mainMenuLabel"
+                android:layout_below="@+id/icMenuPa"
+                android:text="原车功放" />
+        </RelativeLayout>
+
+        <View 
+            android:id="@+id/mMenuPaDivider" 
+            style="@style/mainMenuDivider" />
+
+        <RelativeLayout 
+            android:id="@+id/mMenuPanoramaLayout"
+            style="@style/mainMenuRelativeLayout" >
+
+            <ImageView
+                android:id="@+id/icMenuPanorama"
+                style="@style/mainMenuIcon"
+                android:src="@drawable/ic_menu_panorama" />
+
+            <TextView
+                style="@style/mainMenuLabel"
+                android:layout_below="@+id/icMenuPanorama"
+                android:text="全景" />
+        </RelativeLayout>
+
+        <View 
+            android:id="@+id/mMenuPanoramaDivider" 
+            style="@style/mainMenuDivider" />
+        
+        
+        <RelativeLayout 
+            android:id="@+id/mMenuTpmsLayout"
+            style="@style/mainMenuRelativeLayout" >
+
+            <ImageView
+                android:id="@+id/icMenuTpms"
+                style="@style/mainMenuIcon"
+                android:src="@drawable/ic_menu_tpms" />
+
+            <TextView
+                style="@style/mainMenuLabel"
+                android:layout_below="@+id/icMenuTpms"
+                android:text="胎压检测" />
+        </RelativeLayout>
+        
+        <View 
+            android:id="@+id/mMenuTpmsDivider" 
+            style="@style/mainMenuDivider" />
+
+        <RelativeLayout 
+            android:id="@+id/mMenuAboutLayout"
+            style="@style/mainMenuRelativeLayout" >
+
+            <ImageView
+                android:id="@+id/icMenuAbout"
+                style="@style/mainMenuIcon"
+                android:src="@drawable/ic_menu_about" />
+
+            <TextView
+                style="@style/mainMenuLabel"
+                android:layout_below="@+id/icMenuAbout"
+                android:text="关于" />
+        </RelativeLayout>
+        
+        <View 
+            android:id="@+id/mMenuAboutDivider" 
+            style="@style/mainMenuDivider" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">车辆信息</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="temp_unit">°</string>
+    <string name="aaaaa">aaaaa</string>
+    <string name="allOpen">后备箱,车门未关</string>
+    <string name="doorOpen">车门未关</string>
+    <string name="trunkOpen">后备箱未关</string>
+    <string name="driving_data_since_start">自启动起数据</string>
+    <string name="average_oil_consumption">平均油耗</string>
+    <string name="travelling_time">行驶时间</string>
+    <string name="time_17">17小时31分钟</string>
+    <string name="range">续航里程</string>
+    <string name="average_speed">平均车速</string>
+    <string name="driving_distance">行驶里程</string>
+    <string name="driving_data_since_oilchange">自加油起数据</string>
+    <string name="driving_datas_long_term">长时间数据</string>
+    <string name="Maintenance_information">保养信息</string>
+    <string name="vehicle_no">汽车编号</string>
+    <string name="inspection_days">车况检查天数</string>
+    <string name="inspection_distance">车况检查里程</string>
+    <string name="inspection_need_distance">离车况检查需要里程</string>
+    <string name="oil_change_service_days">更换机油保养天数</string>
+    <string name="oil_change_service_distance">更换机油保养里程</string>
+    <string name="handbrake_info">驻车制动\n</string>
+    <string name="battery_info">剩余电量\n</string>
+    <string name="safety_salt_info">安全带\n</string>
+    <string name="washer_info">清洁液\n</string>
+    <string name="hour">小时</string>
+    <string name="minute">分钟</string>
+    <string name="day">天</string>
+    <string name="inspection_need_days">离车况检查需要天数</string>
+    <string name="inspection_overdue_days">车况检查过期天数</string>
+    <string name="inspection_overdue_distance">车况检查过期里程</string>
+    <string name="oil_change_service_need_days">离更换机油保养需要天数</string>
+    <string name="oil_change_service_overdue_days">更换机油保养过期天数</string>
+    <string name="oil_change_service_need_distance">离更换机油保养需要里程</string>
+    <string name="oil_change_overdue_distance">更换机油保养过期里程</string>
+    <string name="normal">正 常</string>
+    <string name="untie">未 系</string>
+    <string name="not_put">未 放</string>
+    <string name="too_low">过 低</string>
+    <string name="activity_not_found">暂无此服务.</string>
+    <string name="not_more_offer">暂无额外信息</string>
+    <string name="software_version">软件版本：</string>
+    <string name="lock_setting_title">门锁设定选项标志</string>
+      <string name="control_setting_title">遥控设定</string>
+      <string name="compact_monitor_setting_title">冲撞/检测系统设定</string>
+      
+      <!-- add by xyw start -->
+      <string name="car_info_title">车身状态</string>
+      <string name="car_info_setting_title">车身信息</string>
+       <string name="car_info_setting_title2">车辆设置信息</string>
+      <string name="car_info_brake_pull">手刹拉起</string>
+      <string name="car_info_brake_down">手刹释放</string>
+      <string name="car_info_REV_yes">倒档状态</string>
+      <string name="car_info_REV_no">非倒档状态</string>
+      <string name="car_info_ILL_open">大灯开启</string>
+      <string name="car_info_ILL_close">大灯关闭</string>
+      <string name="car_info_safe_yes">已系安全带</string>
+      <string name="car_info_safe_no">未系安全带</string>
+      <string name="car_info_ESP">方向盘转角</string>
+      <string name="car_info_turn_left">左转</string>
+      <string name="car_info_turn_right">右转</string>
+      <string name="car_info_ESP_du">度</string>
+      <string name="str_minute">分钟</string>
+       <string name="str_kmh">Km/h</string>
+       <string name="position_heat_left">左座椅加热等级</string>
+       <string name="position_heat_right">右座椅加热等级</string>
+       <string name="communication_Link_SOS">Link/SOS通讯</string>
+        <string name="communication_Link_SOS_0">退出通讯</string>
+         <string name="communication_Link_SOS_1">进入Link通讯</string>
+          <string name="communication_Link_SOS_2">进入SOS通讯</string>
+       
+      
+      <string name="car_info_open">开</string>
+       <string name="car_info_close">关</string>
+        <string name="car_info_di">低</string>
+         <string name="car_info_zhong">中</string>
+          <string name="car_info_gao">高</string>
+          
+      <string name="car_info_LANGUAGE_CHANGE">语言设置</string>
+       <string name="car_info_LANGUAGE_CHANGE_1">中文</string>
+        <string name="car_info_LANGUAGE_CHANGE_2">英文</string>
+         <string name="car_info_AUTO_COMPRESSOR_STATUS">AUTO时压缩机状态</string>
+         <string name="car_info_AUTO_CYCLE_STATUS">AUTO时内外循环控制方式</string>
+         <string name="car_info_AUTO_CYCLE_STATUS_1">自动</string>
+         <string name="car_info_AUTO_CYCLE_STATUS_0">手动</string>
+          <string name="car_info_AIR_COMFORTABLE_STATUS">空调舒适曲线设置</string>
+          <string name="car_info_AIR_COMFORTABLE_STATUS_0">缓慢</string>
+          <string name="car_info_AIR_COMFORTABLE_STATUS_1">正常</string>
+          <string name="car_info_AIR_COMFORTABLE_STATUS_2">快速</string>
+           <string name="car_info_AIR_ANION_STATUS">负离子模式</string>
+            <string name="car_info_DRIVING_POSITION_SETTING">驾驶座椅自动加热设置</string>
+            <string name="car_info_DEPUTY_DRIVING_POSITION_SETTING">副驾驶座椅自动加热设置</string>
+            <string name="car_info_POSITION_WELCOME_SETTING">座椅迎宾功能设置</string>
+            
+            <string name="car_info_KEY_INTELLIGENCE">智能钥匙自动识别座椅</string>
+            <string name="car_info_WARNING_VOLUME">驾驶辅助组合仪表报警音量</string>
+            <string name="car_info_WARNING_VOLUME_0">低</string>
+            <string name="car_info_WARNING_VOLUME_1">中</string>
+            <string name="car_info_WARNING_VOLUME_2">高</string>
+            <string name="car_info_DRIVER_CHANGE_MODE">驾驶辅助转向模式</string>
+            <string name="car_info_DRIVER_CHANGE_MODE_0">运动</string>
+            <string name="car_info_DRIVER_CHANGE_MODE_1">标准</string>
+            <string name="car_info_DRIVER_CHANGE_MODE_2">舒适</string>
+            <string name="car_info_REMOTE_UNLOCK">遥控解锁</string>
+            <string name="car_info_REMOTE_UNLOCK_1">仅左前门 </string>
+            <string name="car_info_REMOTE_UNLOCK_0">所有车门</string>
+            
+            <string name="car_info_SPEED_LOCK">车速上锁</string>
+            <string name="car_info_AUTO_UNLOCK">自动解锁</string>
+            <string name="car_info_REMOTE_FRONT_LEFT">遥控左前窗和天窗</string>
+            <string name="car_info_FRONT_WIPER_CARE">前雨刮维护功能</string>
+            <string name="car_info_REAR_WIPER_STATUS">后雨刮倒挡自动刮刷功能</string>
+            <string name="car_info_OUTSIDE_MIRROR_STATUS">外后视镜自动折叠</string>
+            <string name="car_info_GO_HOME_LAMP_STATUS">伴我回家照明</string>
+             <string name="car_info_GO_HOME_LAMP_STATUS_0">关闭</string>
+              <string name="car_info_GO_HOME_LAMP_STATUS_1">仅近光灯</string>
+               <string name="car_info_GO_HOME_LAMP_STATUS_2">近光后雾</string>
+            
+             <string name="car_info_FOG_LAMP_STATUS">雾灯转向辅助</string>
+              <string name="car_info_DAYTIME_LAMP_STATUS">日间行车灯</string>
+              
+                <string name="car_info_AUTO_LAMP_STATUS">自动灯光灵敏度</string>
+                <string name="car_info_AUTO_LAMP_STATUS_0">低</string>
+                <string name="car_info_AUTO_LAMP_STATUS_1">中</string>
+                <string name="car_info_AUTO_LAMP_STATUS_2">高</string>
+                
+                 <string name="car_info_SPEED_OVER_SETTING">驾驶辅助超速报警 </string>
+                  <string name="car_info_REMOTE_POWER_TIME">驾驶辅助远程上电时间  </string>
+                   <string name="car_info_REMOTE_START_TIME">驾驶辅助远程启动时间 </string>
+            <!--  
+	public int SPEED_OVER_SETTING=0;							//驾驶辅助超速报警  速度=Data3*10km/h
+	
+	public int REMOTE_POWER_TIME=0;								//驾驶辅助远程上电时间    0-30分钟
+	public int REMOTE_START_TIME=0;								//驾驶辅助远程启动时间 0-30分钟
+	-->
+	<string name="car_info_panorama">全景影像设置</string>
+	<string name="car_info_setting">车辆设置信息</string>
+	<string name="car_info_panel">面板按键信息</string>
+	<string name="car_info_AIR">空调信息</string>
+	<string name="car_info_enable">有效</string>
+	<string name="car_info_unable">无效</string>
+	<string name="temp_open">打开胎压标定</string>
+	
+	<string name="warning_0001">引擎温度故障，请停车</string>
+	<string name="warning_0003">请加注冷却液</string>
+	<string name="warning_0004">请加注引擎机油</string>
+	<string name="warning_0005">引擎机油压力故障，请停车</string>
+	<string name="warning_0008">制动系统故障</string>
+	<string name="warning_000a">不可操作</string>
+	<string name="warning_000b">车门行李箱，发动机罩，后风窗和油箱未关</string>
+	<string name="warning_000d">多个轮胎爆裂</string>
+	<string name="warning_000f">微粒过滤器有堵塞风险：请 参考说明书</string>
+	<string name="warning_0011">悬架故障 限速90km/h</string>
+	<string name="warning_0012">悬架系统故障</string>
+	<string name="warning_0013">助力转向故障</string>
+	<string name="warning_0014">10km/h</string>
+	<string name="warning_0061">驻车制动启用</string>
+	<string name="warning_0062">驻车制动启用</string>
+	<string name="warning_0064">制动操作故障驻车制动自动激活</string>
+	<string name="warning_0067">制动片磨损</string>
+	<string name="warning_0068">驻车制动故障</string>
+	<string name="warning_0069">可变尾翼功能缺失限速，请参考说明书</string>
+	<string name="warning_006a">ABS系统故障</string>
+	<string name="warning_006b">ESP/ASR系统故障</string>
+	<string name="warning_006c">悬架系统故障</string>
+	<string name="warning_006d">助力转向故障</string>
+	<string name="warning_006e">变速箱故障：请维修车辆</string>
+	<string name="warning_006f">系航系统故障</string>
+	<string name="warning_0081">微粒过滤器添加剂不足：请维修车辆</string>
+	<string name="warning_0083">电子防盗系统故障</string>
+	<string name="warning_0088">驻车辅助系统故障</string>
+	<string name="warning_0089">车位测量系统故障</string>
+	<string name="warning_008a">蓄电池充电或供电系统故障</string>
+	<string name="warning_008d">轮胎气压不足</string>
+	<string name="warning_009a">近光灯泡坏</string>
+	<string name="warning_009b">远光灯泡坏</string>
+	<string name="warning_009c">制动灯泡坏</string>
+	<string name="warning_009d">雾灯灯泡坏</string>
+	<string name="warning_009e">转向灯坏</string>
+	<string name="warning_009f">倒车灯灯泡坏</string>
+	<string name="warning_00a0">位置灯灯泡坏</string>
+	<string name="warning_00d7">换挡杆换到P位</string>
+	<string name="warning_00d8">当心路面结冰</string>
+	<string name="warning_00d9">当心手刹</string>
+	<string name="warning_00de">车门、行李箱、发动罩、后风扇和油箱未关</string>
+	<string name="warning_00df">风窗洗涤液不足</string>
+	<string name="warning_00e0">燃油量不足</string>
+	<string name="warning_00e1">供油切断</string>
+	<string name="warning_00e3">遥控器电量不足</string>
+	<string name="warning_00e5">轮胎气压未监控</string>
+	<string name="warning_00e7">高速、检测胎压是否合适</string>
+	<string name="warning_00e8">轮胎气压不足</string>
+	<string name="warning_00f0">诊断中</string>
+	<string name="warning_00f1">诊断完成</string>
+	<string name="warning_00f7">左后安全带未系</string>
+	<string name="warning_00f8">后座中间安全带未系</string>
+	<string name="warning_00f9">右后安全带未系</string>
+	<string name="warning_012f">自动雨刮启用</string>
+	<string name="warning_0130">自动雨刮停用</string>
+	<string name="warning_0131">大灯自动点亮启用</string>
+	<string name="warning_0132">大灯自动点亮停用</string>
+	<string name="warning_0133">车门自锁启用</string>
+	<string name="warning_0134">车门自锁停用</string>
+	<string name="warning_01fa">无法开启硬顶：隔板未放</string>
+	<string name="warning_01fb">硬顶操作完成</string>
+	<string name="warning_01fc">立即借宿硬顶操作</string>
+	<string name="warning_01fd">操作失败：硬顶已锁</string>
+	<string name="warning_01fe">硬顶折叠机械故障</string>
+	<string name="warning_01ff">操作失败：后风窗未关</string>
+	<string name="warning_0200">活动顶蓬操作失败：蓬体未到位</string>
+	<string name="warning_0202">防倒滑系统故障</string>
+	<string name="warning_0203">驾驶模式：正常模式</string>
+	<string name="warning_0204">驾驶模式：泥地模式</string>
+	<string name="warning_0205">驾驶模式：雪地模式</string>
+	<string name="warning_0206">驾驶模式：沙地模式</string>
+	<string name="warning_0209">ESP系统停用</string>
+	<string name="warning_020a">行车间距不可测量：能见度过低</string>
+	<string name="warning_020b">行车间距不可测量：正在初始化</string>
+	
+	
+        <!-- add by xyw end -->
+</resources>

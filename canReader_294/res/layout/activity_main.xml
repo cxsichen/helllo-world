@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_main"
+    android:orientation="horizontal"
+    android:clipToPadding="false"
+    android:elevation="4dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    tools:context="com.example.android.obd.MainActivity">
+
+    <!--Left Fan-->
+    <RelativeLayout
+        android:id="@+id/left_fan"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
+        android:background="@drawable/outline_cooling">
+
+        <!--Divider-->
+        <View
+            android:id="@+id/divider_left"
+            style="@style/Divider" />
+
+        <!--Temperature-->
+        <TextView
+            android:id="@+id/temperature_left"
+            style="@style/TextTemp"
+            android:layout_above="@+id/divider_left"
+            android:text="26°" />
+
+        <!--Icon Fan-->
+        <ImageView
+            android:id="@+id/ic_fan_left"
+            style="@style/IconFan"
+            android:layout_below="@+id/divider_left" />
+
+        <!--Air Volume-->
+        <TextView
+            android:id="@+id/air_volume_left"
+            style="@style/TextFan"
+            android:layout_below="@+id/divider_left"
+            android:text="22" />
+
+    </RelativeLayout>
+
+    <!--Status Group-->
+    <include layout="@layout/status_group"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"/>
+
+    <!--Right Fan-->
+    <RelativeLayout
+        android:id="@+id/right_fan"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
+        android:background="@drawable/outline_heating">
+
+        <!--Divider-->
+        <View
+            android:id="@+id/divider_right"
+            style="@style/Divider" />
+
+        <!--Temperature-->
+        <TextView
+            android:id="@+id/temperature_right"
+            style="@style/TextTemp"
+            android:layout_above="@+id/divider_right"
+            android:text="30°" />
+
+        <!--Icon Fan-->
+        <ImageView
+            android:id="@+id/ic_fan_right"
+            style="@style/IconFan"
+            android:layout_below="@+id/divider_right" />
+
+        <!--Air Volume-->
+        <TextView
+            android:id="@+id/air_volume_right"
+            style="@style/TextFan"
+            android:layout_below="@+id/divider_right"
+            android:text="22" />
+
+    </RelativeLayout>
+
+</LinearLayout>

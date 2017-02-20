@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#009688"
+        android:text="音量" />
+
+       <SeekBar
+        android:id="@+id/seek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:paddingLeft="72dp"
+		android:paddingRight="16dp"
+		android:layout_marginRight="16dp"
+        android:max="48"
+        android:progress="24"
+        android:layout_marginBottom="16dp"
+        android:thumb="@drawable/ic_audio_vol" 
+        android:layout_centerVertical="true"/>
+       
+    <FrameLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </FrameLayout>
+
+</LinearLayout>

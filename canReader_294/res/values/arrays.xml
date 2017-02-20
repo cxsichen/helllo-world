@@ -1,0 +1,3798 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- main menu 对应 -->
+    <!-- 车辆信息      CarInfoActivity -->
+    <!-- 车辆设置      CarSettingAcitivity -->
+    <!-- 空调控制       MenuAcAcitivity -->
+    <!-- 光盘控制       MenuCdAcitivity -->
+    <!-- 原车功放       MenuPaAcitivity -->
+    <!-- 全景                 MenuPanoramaAcitivity -->
+    <!-- 胎压                 MenuTpmsAcitivity -->
+    <!-- 关于                MenuAboutAcitivity -->
+
+
+    <!-- 大众 -->
+    <!-- 睿志诚 大众 -->
+    <string-array name="RZCVolkswagen_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>0</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>0</item><!-- 关于 -->
+    </string-array>
+    <string-array name="RZCVolkswagen_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="RZCVolkswagen_fragment">
+        <item>com.console.canreader.fragment.RZCVolkswagen.CarInfoFragment</item>
+    </string-array>
+     <!-- 睿志诚 大众 -->
+     
+     <!-- 睿志诚 高尔夫7 -->
+    <string-array name="RZCVolkswagenGolf_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>1</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="RZCVolkswagenGolf_items">
+        <item>车辆信息</item>
+        <item>车辆提示信息</item>
+        <item>用户提示信息</item>
+        <item>舒适性用电器</item>
+        <item>自启动起信息</item>
+        <item>自加油起信息</item>
+        <item>长时间信息</item>
+        <item>保养信息</item>
+    </string-array>
+    <string-array name="RZCVolkswagenGolf_fragment">
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment6</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment7</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment5</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment1</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment2</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment3</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoFragment4</item>
+    </string-array>
+    
+      <string-array name="RZCVolkswagenGolf_setting_items">
+        <item>车身状态设定</item>
+        <item>驾驶员辅助系统</item>
+        <item>驻车和调车</item>
+        <item>车灯</item>
+        <item>后视镜和刮水器</item>
+        <item>打开和关闭</item>
+        <item>多功能显示</item>
+        <item>单位</item>
+        <item>恢复出厂设置</item>
+    </string-array>
+    <string-array name="RZCVolkswagenGolf_setting_fragment">
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.CarInfoSettingsFragment</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.DriveAssistFragment</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.ParkingFragment</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.LightFragment</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.MirrorWiperFragment</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.OpenCloseFragment</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.MFDFragment</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.UnitFragment</item>
+        <item>com.console.canreader.fragment.RZCVolkswagenGolf.ResetFragment</item>
+    </string-array>
+    <!-- 睿志诚 高尔夫7 -->
+    
+    <!-- 尚摄 大众 -->
+    <string-array name="SSVolkswagen_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSVolkswagen_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSVolkswagen_fragment">
+        <item>com.console.canreader.fragment.SSVolkswagen.CarInfoFragment</item>
+    </string-array>
+    
+    <string-array name="SSVolkswagen_setting_items">
+       <item>驾驶员辅助系统</item>
+    </string-array>
+    <string-array name="SSVolkswagen_setting_fragment">
+       <item>com.console.canreader.fragment.SSVolkswagen.AssitFragment</item>
+    </string-array>
+    <!--尚摄 大众 -->
+    
+     <!-- 尚摄 高尔夫7 -->
+    <string-array name="SSVolkswagenGolf_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSVolkswagenGolf_items">
+        <item>车辆信息</item>
+        <item>舒适性用电器及灯光信息</item>
+        <item>自启动起信息</item>
+        <item>自加油起信息</item>
+        <item>长时间信息</item>
+        <item>保养信息</item>
+    </string-array>
+    <string-array name="SSVolkswagenGolf_fragment">
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment5</item>
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment1</item>
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment2</item>
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment3</item>
+        <item>com.console.canreader.fragment.SSVolkswagenGolf.CarInfoFragment4</item>
+    </string-array>
+    
+    <string-array name="SSVolkswagenGolf_setting_items">
+       <item>车身状态设定</item>
+       <item>语言设定</item>
+       <item>行车模式设置</item>
+       <item>多功能显示</item>
+       <item>打开和关闭</item>
+       <item>后视镜和刮水器</item>
+       <item>车灯</item>
+       <item>驾驶员辅助系统</item>
+       <item>驻车和调车</item>
+       <item>Tyres设定信息</item>
+       <item>单位</item>
+       <item>恢复出厂设置</item>
+    </string-array>
+    <string-array name="SSVolkswagenGolf_setting_fragment">
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.SportFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.LanguageSettingsFragment</item> 
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.IndivdualFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.MFDFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.OpenCloseFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.MirrorWiperFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.LightFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.DriveAssistFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.ParkingFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.TyresSettingFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.UnitFragment</item>
+       <item>com.console.canreader.fragment.SSVolkswagenGolf.ResetFragment</item>
+    </string-array>
+    <!-- 尚摄 高尔夫7 -->
+    <!-- 大众 -->
+    
+    <!-- 吉普 -->
+    <!-- 尚摄 指南者 -->
+    <string-array name="SSJeepZNZ_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>0</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepZNZ_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepZNZ_fragment">
+        <item>com.console.canreader.fragment.SSJeepZNZ.CarInfoFragment</item>
+    </string-array>
+    <!-- 尚摄  指南者 -->
+    
+    <!-- 尚摄 17指南者-->
+    <string-array name="SSJeepZNZ17_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepZNZ17_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepZNZ17_fragment">
+        <item>com.console.canreader.fragment.SSJeepZNZ17.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepZNZ17_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯设置</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepZNZ17_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepZNZ17.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepZNZ17.LightEngineeFragment</item>  
+       <item>com.console.canreader.fragment.SSJeepZNZ17.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepZNZ17.UnitFragment</item>
+       <item>com.console.canreader.fragment.SSJeepZNZ17.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄  17指南者 -->
+    
+    <!-- 尚摄 自由光 -->
+    <string-array name="SSJeepFreedomG_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>1</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepFreedomG_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepFreedomG_fragment">
+        <item>com.console.canreader.fragment.SSJeepFreedom.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepFreedomG_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯和发动机</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepFreedomG_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepFreedom.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LightEngineeFragment</item>  
+       <item>com.console.canreader.fragment.SSJeepFreedom.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.UnitFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄  自由光 -->
+    
+    <!-- 尚摄 自由光低配 -->
+    <string-array name="SSJeepFreedomGL_main">
+        <item>0</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>1</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepFreedomGL_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGL_fragment">
+        <item>com.console.canreader.fragment.SSJeepFreedom.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepFreedomGL_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯和发动机</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGL_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepFreedom.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LightEngineeFragment1</item>  
+       <item>com.console.canreader.fragment.SSJeepFreedom.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.UnitFragment1</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄  自由光低配  -->
+    
+    
+    <!-- 尚摄 自由光中配 -->
+    <string-array name="SSJeepFreedomGM_main">
+        <item>0</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>1</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepFreedomGM_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGM_fragment">
+        <item>com.console.canreader.fragment.SSJeepFreedom.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepFreedomGM_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯和发动机</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGM_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepFreedom.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LightEngineeFragment1</item>  
+       <item>com.console.canreader.fragment.SSJeepFreedom.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.UnitFragment1</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄  自由光中配  -->
+    
+      <!-- 尚摄 自由光高配 -->
+    <string-array name="SSJeepFreedomGH_main">
+        <item>0</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>1</item><!-- 空调控制 -->
+        <item>1</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepFreedomGH_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGH_fragment">
+        <item>com.console.canreader.fragment.SSJeepFreedom.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepFreedomGH_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯和发动机</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepFreedomGH_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepFreedom.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LightEngineeFragment1</item>  
+       <item>com.console.canreader.fragment.SSJeepFreedom.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.UnitFragment1</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄  自由光高配  -->
+    
+    <!-- 尚摄 自由侠 -->
+    <string-array name="SSJeepFreedomX_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSJeepFreedomX_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSJeepFreedomX_fragment">
+        <item>com.console.canreader.fragment.SSJeepFreedom.CarInfoFragment</item>
+    </string-array>
+     <string-array name="SSJeepFreedomX_setting_items">
+       <item>安全和驾驶辅助</item>
+       <item>车灯和发动机</item>
+       <item>车门和锁</item>
+       <item>单位设置</item>
+       <item>语言设置</item>
+    </string-array>
+    <string-array name="SSJeepFreedomX_setting_fragment">
+       <item>com.console.canreader.fragment.SSJeepFreedom.SafeAssistFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LightEngineeFragment</item>  
+       <item>com.console.canreader.fragment.SSJeepFreedom.LockFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.UnitFragment</item>
+       <item>com.console.canreader.fragment.SSJeepFreedom.LanguageSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄   自由侠  -->
+    <!-- 吉普-->
+
+    <!-- 丰田 -->
+
+
+    <!-- 尚摄 丰田霸道 -->
+    <string-array name="SSToyotaBD_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>0</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>1</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSToyotaBD_items">
+        <item>车辆信息</item>
+        <item>历史油耗</item>
+        <item>油电混合信息</item>
+        <item>泊车辅助设定信息</item>
+    </string-array>
+    <string-array name="SSToyotaBD_fragment">
+        <item>com.console.canreader.fragment.SSToyota.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.HistoryOilConFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.RadarInfoFragment</item>
+    </string-array>
+    <!-- 尚摄 丰田霸道 -->
+
+
+    <!-- 尚摄 丰田锐志 -->
+    <string-array name="SSToyotaRZ_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSToyotaRZ_items">
+        <item>车辆信息</item>
+        <item>历史油耗</item>
+        <item>行程油耗</item>
+        <item>油电混合信息</item>
+    </string-array>
+    <string-array name="SSToyotaRZ_fragment">
+        <item>com.console.canreader.fragment.SSToyota.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.HistoryOilConFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.TrilOilConFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item>
+    </string-array>
+    <string-array name="SSToyotaRZ_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+    <string-array name="SSToyotaRZ_setting_fragment">
+        <item>com.console.canreader.fragment.SSToyota.RZCarSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄 丰田锐志 -->
+
+
+    <!-- 尚摄 RAV4 -->
+    <string-array name="SSToyotaRAV4_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSToyotaRAV4_items">
+        <item>车辆信息</item>
+        <item>历史油耗</item>
+        <item>行程油耗</item>
+        <item>油电混合信息</item>
+    </string-array>
+    <string-array name="SSToyotaRAV4_fragment">
+        <item>com.console.canreader.fragment.SSToyota.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.HistoryOilConFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.TrilOilConFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item>
+    </string-array>
+    <string-array name="SSToyotaRAV4_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+    <string-array name="SSToyotaRAV4_setting_fragment">
+        <item>com.console.canreader.fragment.SSToyota.RAV4CarSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄 RAV4 -->
+
+
+    <!-- 尚摄 凯美瑞 -->
+    <string-array name="SSToyotaKMR_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSToyotaKMR_items">
+        <item>车辆信息</item>
+        <item>历史油耗</item>
+        <item>行程油耗</item>
+        <item>油电混合信息</item>
+    </string-array>
+    <string-array name="SSToyotaKMR_fragment">
+        <item>com.console.canreader.fragment.SSToyota.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.HistoryOilConFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.TrilOilConFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item>
+    </string-array>
+    <string-array name="SSToyotaKMR_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+    <string-array name="SSToyotaKMR_setting_fragment">
+        <item>com.console.canreader.fragment.SSToyota.KMRCarSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄 凯美瑞 -->
+
+
+    <!-- 尚摄 卡罗拉 -->
+    <string-array name="SSToyotaKLL_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSToyotaKLL_items">
+        <item>车辆信息</item>
+        <item>油电混合信息</item>
+    </string-array>
+    <string-array name="SSToyotaKLL_fragment">
+        <item>com.console.canreader.fragment.SSToyota.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.SSToyota.OilEleFragment</item>
+    </string-array>
+    <string-array name="SSToyotaKLL_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+    <string-array name="SSToyotaKLL_setting_fragment">
+        <item>com.console.canreader.fragment.SSToyota.KLLCarSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄卡罗拉 -->
+
+
+    <!-- 丰田 -->
+
+
+    <!-- 本田 -->
+    <!-- 尚摄 本田通用 -->
+    <string-array name="SSHonda_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSHonda_items">
+        <item>本次驾驶状况</item>
+        <item>历史驾驶状况</item>
+    </string-array>
+    <string-array name="SSHonda_fragment">
+        <item>com.console.canreader.fragment.SSHonda.CurrentDriveFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.HistoryDriveFragment</item>
+    </string-array>
+    <string-array name="SSHonda_setting_items">
+        <item>原车屏设置</item>
+        <item>空调控制</item>
+        <item>车辆高级设定</item>
+        <item>显示屏状态设定</item>
+    </string-array>
+    <string-array name="SSHonda_setting_fragment">
+        <item>com.console.canreader.fragment.SSHonda.ScreenSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.AirConSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.SeniorSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.ScreenShowSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄 本田通用 -->
+    
+     <!-- 尚摄 本田雅阁9代 -->
+    <string-array name="SSHondaYG9_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSHondaYG9_items">
+        <item>本次驾驶状况</item>
+        <item>历史驾驶状况</item>
+    </string-array>
+    <string-array name="SSHondaYG9_fragment">
+        <item>com.console.canreader.fragment.SSHonda.CurrentDriveFragment</item>
+        <item>com.console.canreader.fragment.SSHondaYG9.HistoryDriveFragment</item>
+    </string-array>
+    <string-array name="SSHondaYG9_setting_items">
+        <item>车辆高级设定</item>
+        <item>显示屏状态设定</item>
+        <item>恢复原厂设置</item>
+        <item>原车屏设置</item>  
+        <item>胎压检测系统设定</item>           
+    </string-array>
+    <string-array name="SSHondaYG9_setting_fragment">
+        <item>com.console.canreader.fragment.SSHondaYG9.SeniorSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHondaYG9.ScreenShowSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHondaYG9.ResetSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHondaYG9.ScreenSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHondaYG9.TpmsSettingsFragment</item>           
+    </string-array>
+    <!-- 尚摄 本田雅阁9代-->
+    
+    <!-- 尚摄 本田凌派 -->
+    <string-array name="SSHondaLP_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSHondaLP_items">
+        <item>本次驾驶状况</item>
+        <item>历史驾驶状况</item>
+    </string-array>
+    <string-array name="SSHondaLP_fragment">
+        <item>com.console.canreader.fragment.SSHonda.CurrentDriveFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.HistoryDriveFragment</item>
+    </string-array>
+    <string-array name="SSHondaLP_setting_items">
+        <item>原车屏设置</item>
+        <item>空调控制</item>
+        <item>车辆高级设定</item>
+        <item>显示屏状态设定</item>
+    </string-array>
+    <string-array name="SSHondaLP_setting_fragment">
+        <item>com.console.canreader.fragment.SSHonda.ScreenSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.AirConSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.SeniorSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.ScreenShowSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄 本田凌派 -->
+    
+    <!-- 尚摄 16款思域 -->
+    <string-array name="SSHondaSY_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSHondaSY_items">
+        <item>本次驾驶状况</item>
+        <item>历史驾驶状况</item>
+    </string-array>
+    <string-array name="SSHondaSY_fragment">
+        <item>com.console.canreader.fragment.SSHonda.CurrentDriveFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.HistoryDriveFragment</item>
+    </string-array>
+    <string-array name="SSHondaSY_setting_items">
+        <item>原车屏设置</item>
+        <item>空调控制</item>
+        <item>车辆高级设定</item>
+        <item>显示屏状态设定</item>
+        <item>胎压监测系统设定</item>
+    </string-array>
+    <string-array name="SSHondaSY_setting_fragment">
+        <item>com.console.canreader.fragment.SSHonda.ScreenSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.AirConSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.SeniorSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.ScreenShowSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.TpmsSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄 16款思域 -->
+    
+     <!-- 尚摄 本田12CRV-->
+    <string-array name="SSHonda12CRV_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>0</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSHonda12CRV_items">
+        <item>多媒体信息</item>
+        <item>蓝牙源信息</item>
+    </string-array>
+    <string-array name="SSHonda12CRV_fragment">
+        <item>com.console.canreader.fragment.SSHonda12CRV.MediaFragment</item>
+        <item>com.console.canreader.fragment.SSHonda12CRV.BluetoothFragment</item>
+    </string-array>
+    <!-- 尚摄 本田12CRV -->
+    
+    
+    <!-- 尚摄 本田15CRV -->
+    <string-array name="SSHonda15CRV_main">
+        <item>1</item><!-- 车辆信息 -->
+        <item>1</item><!-- 车辆设置 -->
+        <item>0</item><!-- 空调控制 -->
+        <item>0</item><!-- 光盘控制 -->
+        <item>0</item><!-- 原车功放 -->
+        <item>0</item><!-- 全景 -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item><!-- 关于 -->
+    </string-array>
+    <string-array name="SSHonda15CRV_items">
+        <item>本次驾驶状况</item>
+        <item>历史驾驶状况</item>
+    </string-array>
+    <string-array name="SSHonda15CRV_fragment">
+        <item>com.console.canreader.fragment.SSHonda.CurrentDriveFragment</item>
+        <item>com.console.canreader.fragment.SSHonda.HistoryDriveFragment</item>
+    </string-array>
+    <string-array name="SSHonda15CRV_setting_items">
+        <item>原车屏设置</item>
+    </string-array>
+    <string-array name="SSHonda15CRV_setting_fragment">
+        <item>com.console.canreader.fragment.SSHonda.ScreenSettingsFragment</item>
+    </string-array>
+    <!-- 尚摄 本田15CRV -->    
+    <!-- 本田 -->
+    
+    <!-- 长城 -->
+    <!-- 长城 哈弗H1 -->
+    <string-array name="SSHavalH1_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <!-- 长城 哈弗H1 -->
+    <!-- 长城 -->
+    
+    <!-- 长安 -->
+    <!-- 长安 悦翔V7低配 -->
+    <string-array name="SSCHANGANYXL_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <!-- 长安  悦翔V7低配 -->
+    
+    <!-- 长安 悦翔V7中高配 -->
+    <string-array name="SSCHANGANYXH_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item> <!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <!-- 长安  悦翔V7中高配 -->
+    <!-- 长安  -->
+
+    <!-- 广汽传祺 -->
+    <!-- add by xyw start-->
+    <!-- 尚摄 广汽传祺GA6 -->
+    <string-array name="SSTrumpchiGA6_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+        <string-array name="SSTrumpchiGA6_items">
+        <item>车辆信息</item>
+        <item>车身信息使能标志</item>
+    </string-array>
+    <string-array name="SSTrumpchiGA6_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarInfoFragment</item>
+          <item>com.console.canreader.fragment.SSTrumpchi.GA6CarEnableInfoFragment</item> 
+    </string-array>
+    <string-array name="SSTrumpchiGA6_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSTrumpchiGA6_setting_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 广汽传祺GA6-->
+    
+    <!-- 尚摄 广汽传祺GS4高配 -->
+    <string-array name="SSTrumpchiGS4HIGH_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+        <string-array name="SSTrumpchiGS4HIGH_items">
+        <item>车辆信息</item>
+        <item>Link/SOS通讯</item>
+        <item>车身信息使能标志</item>
+    </string-array>
+    <string-array name="SSTrumpchiGS4HIGH_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarInfoFragment</item>
+           <item>com.console.canreader.fragment.SSTrumpchi.GS4HIGHLinkSOSFragment</item> 
+          <item>com.console.canreader.fragment.SSTrumpchi.GS4CarEnableInfoFragment</item> 
+    </string-array>
+    <string-array name="SSTrumpchiGS4HIGH_setting_items">
+        <item>车辆设定</item>
+         <item>空调控制</item>
+    </string-array>
+      <string-array name="SSTrumpchiGS4HIGH_setting_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarSettingsFragment</item> 
+         <item>com.console.canreader.fragment.SSTrumpchi.GS4HIGHCarAirSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 广汽传祺GS4高配-->
+    
+    <!-- 尚摄 广汽传祺GS4通用 -->
+    <string-array name="SSTrumpchiGS4_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+        <string-array name="SSTrumpchiGS4_items">
+        <item>车辆信息</item>
+        <item>车身信息使能标志</item>
+    </string-array>
+    <string-array name="SSTrumpchiGS4_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarInfoFragment</item>
+          <item>com.console.canreader.fragment.SSTrumpchi.GS4CarEnableInfoFragment</item> 
+    </string-array>
+    <string-array name="SSTrumpchiGS4_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSTrumpchiGS4_setting_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiCarSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 广汽传祺GS4高配-->
+    
+     <!-- 尚摄 广汽传祺GS5通用 -->
+    <string-array name="SSTrumpchiGS5_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+        <string-array name="SSTrumpchiGS5_items">
+        <item>车辆信息</item>
+        <item>车身信息使能标志</item>
+    </string-array>
+    <string-array name="SSTrumpchiGS5_fragment">
+        <item>com.console.canreader.fragment.SSTrumpchi.TrumpchiGS5CarInfoFragment</item>
+          <item>com.console.canreader.fragment.SSTrumpchi.GS5CarEnableInfoFragment</item> 
+    </string-array>
+    
+    <!-- 尚摄 广汽传祺GS5通用-->
+    
+    <!-- 尚摄 标致雪铁龙通用 -->
+    <string-array name="SSPeugeot_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeot_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致雪铁龙通用-->
+    
+    <!-- 尚摄 标致世嘉 -->
+    <string-array name="SSPeugeotSEGA_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotSEGA_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotSEGA_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotSEGA_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotSEGA_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致世嘉-->
+    
+    <!-- 尚摄 标致C4 -->
+    <string-array name="SSPeugeotC4_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotC4_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotC4_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotC4_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotC4_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致C4-->
+    
+     <!-- 尚摄 标致C5 -->
+    <string-array name="SSPeugeotC5_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotC5_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotC5_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotC5_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotC5_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致C5-->
+    
+    <!-- 尚摄 标致2013款C5 SSPeugeotC55-->
+    <string-array name="SSPeugeotC55_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotC55_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotC55_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotC55_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotC55_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致2013款C5 SSPeugeotC55-->
+    
+    <!-- 尚摄 标致307 -->
+    <string-array name="SSPeugeot307_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeot307_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot307_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot307_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot307_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致307-->
+    
+     <!-- 尚摄 标致308 -->
+    <string-array name="SSPeugeot308_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeot308_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot308_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot308_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot308_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致308-->
+    
+      <!-- 尚摄 标致408 -->
+    <string-array name="SSPeugeot408_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+        <string-array name="SSPeugeot408_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot408_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot408_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot408_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致408-->
+    
+     <!-- 尚摄 标致308S -->
+    <string-array name="SSPeugeot308S_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+        <string-array name="SSPeugeot308S_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot308S_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot308S_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot308S_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致308S-->
+    
+     <!-- 尚摄 标致508高配 -->
+    <string-array name="SSPeugeot508HIGH_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeot508HIGH_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot508HIGH_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot508HIGH_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot508HIGH_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致508高配-->
+    
+     <!-- 尚摄 标致508低配 -->
+    <string-array name="SSPeugeot508LOW_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeot508LOW_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot508LOW_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot508LOW_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot508LOW_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致508低配-->
+    
+     <!-- 尚摄 标致C4L-->
+    <string-array name="SSPeugeotC4L_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotC4L_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotC4L_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotC4L_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotC4L_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致C4L-->
+    
+    <!-- 尚摄 标致DS4HIGH-->
+    <string-array name="SSPeugeotDS4HIGH_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotDS4HIGH_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS4HIGH_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS4HIGH_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotDS4HIGH_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致DS4HIGH-->
+    
+    <!-- 尚摄 标致DS4LOW-->
+    <string-array name="SSPeugeotDS4LOW_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotDS4LOW_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS4LOW_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS4LOW_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotDS4LOW_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    <!-- 尚摄 标致DS4LOW-->
+    
+     <!-- 尚摄 标致DS5HIGH-->
+    <string-array name="SSPeugeotDS5HIGH_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotDS5HIGH_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5HIGH_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5HIGH_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5HIGH_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致DS5HIGH-->
+    
+    <!-- 尚摄 标致DS5LOW-->
+    <string-array name="SSPeugeotDS5LOW_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotDS5LOW_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5LOW_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5LOW_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5LOW_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致DS5LOW-->
+    
+     <!-- 尚摄 标致DS5LSHIGH-->
+    <string-array name="SSPeugeotDS5LSHIGH_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotDS5LSHIGH_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5LSHIGH_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5LSHIGH_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5LSHIGH_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致DS5LSHIGH-->
+    
+    <!-- 尚摄 标致DS5LSLOW-->
+    <string-array name="SSPeugeotDS5LSLOW_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotDS5LSLOW_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5LSLOW_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5LSLOW_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotDS5LSLOW_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致DS5LSLOW-->
+    
+    <!-- 尚摄 标致3008ALL  SSPeugeot3008ALL-->
+    <string-array name="SSPeugeot3008ALL_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeot3008ALL_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot3008ALL_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot3008ALL_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot3008ALL_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致3008ALL  SSPeugeot3008ALL-->
+    
+      <!-- 尚摄 标致2008  SSPeugeot2008-->
+    <string-array name="SSPeugeot2008_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeot2008_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot2008_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot2008_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot2008_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致2008  SSPeugeot2008-->
+    
+     <!-- 尚摄 标致3008留小屏  SSPeugeot3008LOW-->
+    <string-array name="SSPeugeot3008LOW_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeot3008LOW_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot3008LOW_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot3008LOW_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot3008LOW_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致3008留小屏  SSPeugeot3008LOW-->
+    
+      <!-- 尚摄 标致301  SSPeugeot301-->
+    <string-array name="SSPeugeot301_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeot301_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeot301_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeot301_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeot301_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致301  SSPeugeot301-->
+    
+      <!-- 尚摄 标致C3XR  SSPeugeotC3XR-->
+    <string-array name="SSPeugeotC3XR_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+   </string-array>
+        <string-array name="SSPeugeotC3XR_items">
+       <item>车辆信息</item>
+    </string-array>
+    <string-array name="SSPeugeotC3XR_setting_items">
+       		<item>车辆信息设定</item>
+       		<item>使能标志设定</item>
+       		<item>记忆速度设定</item>
+       		<item>巡航速度设定</item>
+       		<item>其他设置信息</item>
+    </string-array>
+    <string-array name="SSPeugeotC3XR_setting_fragment">
+        <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSettingFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarEnableFragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed1Fragment</item> 
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarSpeed2Fragment</item>
+         <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408SettingInfoFragment</item>
+    </string-array>
+    <string-array name="SSPeugeotC3XR_fragment">
+       <item>com.console.canreader.fragment.SSPeugeot.SSPeugeot408CarInfoFragment</item>
+    </string-array>
+    
+    <!-- 尚摄 标致C3XR  SSPeugeotC3XR-->
+    
+    <!-- add by xyw start end --> 
+    <!-- 广汽传祺 -->
+    <!-- 现代起亚 -->
+    <!-- 尚摄 现代起亚通用 -->
+    <string-array name="SSHyundai_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>1</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+     <string-array name="SSHyundai_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSHyundai_setting_fragment">
+        <item>com.console.canreader.fragment.SSHyundai.CarTypeSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 现代起亚通用 --> 
+    
+    <!-- 尚摄 现代起亚16名图 -->
+    <string-array name="SSHyundai16MT_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>1</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+         <string-array name="SSHyundai16MT_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSHyundai16MT_setting_fragment">
+        <item>com.console.canreader.fragment.SSHyundai.CarTypeSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 现代起亚16名图 -->    
+    <!-- 现代起亚 -->
+    
+    <!-- 日产 -->
+    <!-- 尚摄 日产带360全景-->
+    <string-array name="SSNissan_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>1</item> <!-- 原车功放  -->
+        <item>1</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <string-array name="SSNissan_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSNissan_setting_fragment">
+        <item>com.console.canreader.fragment.SSNissan.CarTypeSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 日产带360全景 -->   
+    
+    <!-- 尚摄 日产不带360全景-->
+    <string-array name="SSNissanWithout360_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>1</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <string-array name="SSNissanWithout360_setting_items">
+        <item>车辆设定</item>
+    </string-array>
+      <string-array name="SSNissanWithout360_setting_fragment">
+        <item>com.console.canreader.fragment.SSNissan.CarTypeSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 日产不带360全景 -->    
+     
+    <!-- 日产 -->
+    <!-- 通用 -->
+    <!-- 尚摄 通用-->
+    <string-array name="SSGE_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>1</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于 -->
+    </string-array>
+    <string-array name="SSGE_items">
+        <item>车辆信息</item>
+        <item>油耗、里程信息</item>
+    </string-array>
+    <string-array name="SSGE_fragment">
+        <item>com.console.canreader.fragment.SSGE.CarInfoFragment</item> 
+        <item>com.console.canreader.fragment.SSGE.ConDisInfoFragment</item> 
+    </string-array>
+    <string-array name="SSGE_setting_items">
+        <item>OnStar信息</item>
+        <item>蓝牙信息</item>
+        <item>车型面板设置</item>
+        <item>空调系统设定</item>
+        <item>冲撞/监测系统设定</item>
+        <item>舒适性/方便性设定</item>
+        <item>门锁设定</item>
+        <item>遥控设定</item>
+        <item>照明设定</item>
+        <item>仪表显示及运动模式设定</item>
+        <item>语言设定</item>      
+    </string-array>
+    <string-array name="SSGE_setting_fragment">
+        <item>com.console.canreader.fragment.SSGE.OnstarSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSGE.BluetoothSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSGE.CarTypeSettingsFragment</item>
+        <item>com.console.canreader.fragment.SSGE.AirConSettingsFragment</item>  
+        <item>com.console.canreader.fragment.SSGE.CrashSettingsFragment</item>  
+        <item>com.console.canreader.fragment.SSGE.ConvenienceSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSGE.LockSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSGE.RemoteControlSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSGE.LightSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSGE.DisplaySettingsFragment</item>
+        <item>com.console.canreader.fragment.SSGE.LanguageSettingsFragment</item> 
+    </string-array>
+
+     <!-- 尚摄 通用-->  
+    
+    <!-- 通用 -->
+    
+    <!-- 上汽  -->
+    <!-- 尚摄  荣威360  -->
+    <string-array name="SSRoewe360_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>1</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <!-- 尚摄  荣威360  --> 
+    
+    <!-- 睿志诚  荣威360  -->
+    <string-array name="RZCRoewe360_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <string-array name="RZCRoewe360_setting_items">
+        <item>背光颜色设置</item>     
+    </string-array>
+    <string-array name="RZCRoewe360_setting_fragment">
+        <item>com.console.canreader.fragment.RZCRoewe360.ColorFragment</item> 
+    </string-array>
+    <!-- 睿志诚   荣威360  -->   
+    <!-- 上汽  -->
+    
+     <!-- 福特  -->
+     
+     <!-- 尚摄  全系通用（16款撼路者、翼博、翼虎等）  -->
+    <string-array name="SSFord_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+     <string-array name="SSFord_items">
+        <item>车身信息</item>
+    </string-array>
+    <string-array name="SSFord_fragment">
+        <item>com.console.canreader.fragment.SSFord.CarTypeSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄  全系通用（16款撼路者、翼博、翼虎等）  -->   
+    
+      <!-- 尚摄  2015款锐界  -->
+    <string-array name="SSFordEDGE_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+     <string-array name="SSFordEDGE_items">
+        <item>车身信息</item>
+    </string-array>
+    <string-array name="SSFordEDGE_fragment">
+        <item>com.console.canreader.fragment.SSFord.CarTypeSettingsFragment</item> 
+    </string-array>
+      <string-array name="SSFordEDGE_setting_items">
+        <item>语言设定</item>
+    </string-array>
+      <string-array name="SSFordEDGE_setting_fragment">
+         <item>com.console.canreader.fragment.SSFord.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄  2015款锐界  --> 
+    
+     <!-- 尚摄  2015款福克斯  -->
+    <string-array name="SSFordFocus_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    
+     <string-array name="SSFordFocus_items">
+        <item>车身信息</item>
+        <item>油耗、里程信息</item>
+    </string-array>
+    <string-array name="SSFordFocus_fragment">
+        <item>com.console.canreader.fragment.SSFord.CarTypeSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSFord.OilDisFragment</item> 
+    </string-array>
+    <!-- 尚摄  2015款福克斯  -->       
+    <!-- 福特   -->
+    
+    <!-- 东风  -->
+    <!-- 睿志诚  东风系列  --> 
+    <string-array name="RZCFS_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <!-- 睿志诚  东风系列   --> 
+    
+    <!-- 尚摄  风光580  --> 
+    <string-array name="SSDFFG_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <!-- 尚摄  风光580  -->  
+    
+    <!-- 尚摄  风神AX7  --> 
+    <string-array name="SSFSAX7_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array> 
+     <string-array name="SSFSAX7_items">
+        <item>车身信息</item>
+    </string-array>
+    <string-array name="SSFSAX7_fragment">
+        <item>com.console.canreader.fragment.SSFS.CarTypeSettingsFragment</item> 
+    </string-array> 
+    <!-- 尚摄  风神AX7  -->  
+    
+    <!-- 尚摄 风神AX5  --> 
+    <string-array name="SSFSAX5_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSFSAX5_items">
+        <item>车身信息</item>
+    </string-array>
+    <string-array name="SSFSAX5_fragment">
+        <item>com.console.canreader.fragment.SSFS.CarTypeSettingsFragment</item> 
+    </string-array> 
+    <!-- 尚摄  风神AX5 -->  
+    
+    <!-- 睿志诚 景逸X5  --> 
+    <string-array name="RZCJY_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <string-array name="RZCJY_setting_items">
+        <item>门锁设置</item>
+        <item>车灯设置</item>
+    </string-array>
+    <string-array name="RZCJY_setting_fragment">
+        <item>com.console.canreader.fragment.RZCJY.LockSettingsFragment</item> 
+        <item>com.console.canreader.fragment.RZCJY.LightSettingsFragment</item> 
+    </string-array>
+    <!-- 睿志诚 景逸X5  -->   
+    
+    <!-- 尚摄 景逸X5  --> 
+    <string-array name="SSJY_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSJY_items">
+        <item>车身信息</item>
+    </string-array>
+    <string-array name="SSJY_fragment">
+        <item>com.console.canreader.fragment.SSJY.CarTypeSettingsFragment</item> 
+    </string-array> 
+    <string-array name="SSJY_setting_items">
+        <item>门锁设置</item>
+        <item>车灯设置</item>
+    </string-array>
+    <string-array name="SSJY_setting_fragment">
+        <item>com.console.canreader.fragment.SSJY.LockSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSJY.LightSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄  景逸X5 -->  
+    <!-- 东风  -->
+    
+    <!-- 奇瑞 --> 
+    <!-- 尚摄 奇瑞 艾瑞泽5 --> 
+    <string-array name="SSCheryAR5_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSCheryAR5_items">
+        
+    </string-array>
+    <string-array name="SSCheryAR5_fragment">
+      
+    </string-array> 
+    <string-array name="SSCheryAR5_setting_items">
+        <item>中控设置</item>
+        <item>语言设置</item>
+    </string-array>
+    <string-array name="SSCheryAR5_setting_fragment">
+        <item>com.console.canreader.fragment.SSChery.LockSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSChery.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 奇瑞 艾瑞泽5 --> 
+    
+    <!-- 尚摄 奇瑞 瑞虎5--> 
+    <string-array name="SSCheryR5_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <string-array name="SSCheryR5_setting_items">
+        <item>语言设置</item>
+    </string-array>
+    <string-array name="SSCheryR5_setting_fragment">
+        <item>com.console.canreader.fragment.SSChery.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 奇瑞 瑞虎5 --> 
+    
+    <!-- 尚摄 奇瑞瑞虎3--> 
+    <string-array name="SSCheryR3_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSCheryR3_items">
+        
+    </string-array>
+    <string-array name="SSCheryR3_fragment">
+      
+    </string-array> 
+    <string-array name="SSCheryR3_setting_items">
+        <item>语言设置</item>
+    </string-array>
+    <string-array name="SSCheryR3_setting_fragment">
+        <item>com.console.canreader.fragment.SSChery.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 奇瑞瑞虎3 --> 
+    
+     <!-- 尚摄 奇瑞瑞虎3X--> 
+    <string-array name="SSCheryR3X_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSCheryR3X_items">
+        
+    </string-array>
+    <string-array name="SSCheryR3X_fragment">
+      
+    </string-array> 
+    <string-array name="SSCheryR3X_setting_items">
+        <item>语言设置</item>
+    </string-array>
+    <string-array name="SSCheryR3X_setting_fragment">
+        <item>com.console.canreader.fragment.SSChery.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 奇瑞瑞虎3X -->
+    
+    
+    <!-- 尚摄 奇瑞 瑞虎7 --> 
+    <string-array name="SSCheryR7_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="SSCheryR7_items">
+        
+    </string-array>
+    <string-array name="SSCheryR7_fragment">
+      
+    </string-array> 
+    <string-array name="SSCheryR7_setting_items">
+        <item>中控设置</item>
+        <item>语言设置</item>
+    </string-array>
+    <string-array name="SSCheryR7_setting_fragment">
+        <item>com.console.canreader.fragment.SSChery.LockSettingsFragment</item> 
+        <item>com.console.canreader.fragment.SSChery.LanguageSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄 奇瑞 瑞虎7 -->  
+    
+    <!-- 奇瑞 --> 
+    
+    <!-- 上汽  --> 
+    <!-- 上汽 名爵锐腾  --> 
+    <!-- 尚摄  名爵锐腾  --> 
+    <string-array name="SSMGGS_main">
+        <item>1</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item> <!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <string-array name="SSMGGS_items">
+        <item>车身信息</item>
+        <item>门锁状态</item>
+        <item>油耗、里程信息</item>
+        <item>灯光信息</item>
+    </string-array>
+    <string-array name="SSMGGS_fragment">
+        <item>com.console.canreader.fragment.SSMGGS.CarInfoFragment</item>
+        <item>com.console.canreader.fragment.SSMGGS.DoorLockFragment</item>
+        <item>com.console.canreader.fragment.SSMGGS.OilDisFragment</item>
+        <item>com.console.canreader.fragment.SSMGGS.LightFragment</item>
+    </string-array>    
+    <string-array name="SSMGGS_setting_items">
+        <item>门锁设定</item>
+        <item>照明设定</item>
+    </string-array>
+      <string-array name="SSMGGS_setting_fragment">
+         <item>com.console.canreader.fragment.SSMGGS.LockSettingsFragment</item>
+         <item>com.console.canreader.fragment.SSMGGS.LightSettingsFragment</item> 
+    </string-array>
+    <!-- 尚摄  名爵锐腾  --> 
+    
+    <!-- 睿志诚  名爵锐腾  --> 
+    <string-array name="RZCMGGS_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item> <!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+     <string-array name="RZCMGGS_setting_items">
+        <item>车锁控制</item>
+        <item>照明设定</item>
+    </string-array>
+      <string-array name="RZCMGGS_setting_fragment">
+         <item>com.console.canreader.fragment.RZCMGGS.LockSettingsFragment</item>
+         <item>com.console.canreader.fragment.RZCMGGS.LightSettingsFragment</item> 
+    </string-array>
+    <!-- 睿志诚  名爵锐腾  --> 
+    
+    <!-- 上汽 名爵锐腾  -->      
+    
+         
+    <!-- 上汽   -->
+    
+    <!-- 上汽通用五菱  -->   
+    <!-- 睿志诚  宝骏730 560 -->
+    <string-array name="RZCBaoJun_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item> <!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+        
+    </string-array>
+    <!-- 睿志诚  宝骏730 560 -->
+    
+    <!-- 上汽通用五菱   -->
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+    <!-- 本田 -->
+    <string-array name="SSToyota_items">
+        <item>车辆信息</item>
+        <item>设定信息</item>
+        <item>历史油耗</item>
+        <item>行程油耗</item>
+        <item>油电混合信息</item>
+        <item>软件版本</item>
+    </string-array>
+    <string-array name="SSToyota_activity">
+        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+        <item>com.console.canreader.activity.Toyota.SettingActivity</item>
+        <item>com.console.canreader.activity.Toyota.HistoryOilConActivity</item>
+        <item>com.console.canreader.activity.Toyota.TripOilConActivity</item>
+        <item>com.console.canreader.activity.Toyota.OilEleActivity</item>
+        <item>com.console.canreader.activity.Toyota.DrivingDataActivity</item>
+    </string-array>
+    <!-- 本田 -->
+
+
+    <!-- 奔腾X80 -->
+    <string-array name="RZCBESTURNX80_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="RZCBESTURNX80_activity">
+        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+    </string-array>
+    <!-- 奔腾X80 -->
+
+
+    <!-- 海马M3 -->
+    <string-array name="RZCFHCM3_items">
+        <item>车辆信息</item>
+    </string-array>
+    <string-array name="RZCFHCM3_activity">
+        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
+    </string-array>
+    <!-- 海马M3 -->
+    
+    <!-- 海南马自达  -->
+    <!-- 睿志诚 17款福美来 -->
+    <string-array name="RZCFmilia17_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>   
+    <!-- 睿志诚 17款福美来 -->
+    <!-- 海南马自达  -->
+
+    
+    <!-- 北汽 -->
+    <!-- 睿志诚 威旺M20 -->
+    <string-array name="RZCJingKooM20_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <!-- 睿志诚 威旺M20 -->
+    
+    <!-- 睿志诚 绅宝 -->
+    <string-array name="RZCBAICSB_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item> <!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <!-- 睿志诚 绅宝 -->
+    <!-- 北汽 -->
+    
+    <!-- 江淮  -->
+    <!-- 睿志诚 瑞风S3 --> 
+    <string-array name="RZCJAC_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>1</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <!-- 睿志诚 瑞风S3 -->
+    <!-- 江淮  --> 
+
+    <string-array name="auto_lamp_sensitivity_entries">
+        <item>等级1</item>
+        <item>等级2</item>
+        <item>等级3</item>
+        <item>等级4</item>
+    </string-array>
+    <string-array name="auto_lamp_sensitivity_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="auto_lamp_close_entries">
+        <item>无效</item>
+        <item>7.5s</item>
+        <item>15s</item>
+        <item>30s</item>
+    </string-array>
+    <string-array name="auto_lamp_close_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="back_camera_mode_entries">
+        <item>广角视图</item>
+        <item>标准视图</item>
+        <item>俯视视图</item>
+    </string-array>
+    <string-array name="back_camera_mode_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="air_rate_entries">
+        <item>风量0</item>
+        <item>风量1</item>
+        <item>风量2</item>
+        <item>风量3</item>
+        <item>风量4</item>
+        <item>风量5</item>
+        <item>风量6</item>
+        <item>风量7</item>
+    </string-array>
+    <string-array name="air_rate_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="lamp_sensitivity_entries">
+        <item>最低</item>
+        <item>较低</item>
+        <item>中</item>
+        <item>较高</item>
+        <item>最高</item>
+    </string-array>
+    <string-array name="lamp_sensitivity_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="lamp_off_time_entries">
+        <item>0s</item>
+        <item>15s</item>
+        <item>30s</item>
+        <item>60s</item>
+    </string-array>
+    <string-array name="lamp_off_time_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    <string-array name="lamp_dark_time_entries">
+        <item>无效值</item>
+        <item>15s</item>
+        <item>30s</item>
+        <item>60s</item>
+    </string-array>
+    
+    <string-array name="lamp_dark_time_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+      <string-array name="auto_lock_time_entries">
+        <item>无效值</item>
+        <item>30s</item>
+        <item>60s</item>
+        <item>90s</item>
+    </string-array>
+    
+    <string-array name="auto_lock_time_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    
+    <string-array name="lane_dep_entries">
+        <item>无效</item>
+        <item>中</item>
+        <item>宽阔</item>
+        <item>仅警告</item>
+    </string-array>
+    
+    <string-array name="lane_dep_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    
+      <string-array name="danger_distance_entries">
+        <item>无效</item>
+        <item>远</item>
+        <item>中</item>
+        <item>近</item>
+    </string-array>
+    
+    <string-array name="danger_distance_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    
+     <string-array name="warning_volume_entries">
+        <item>无效</item>
+        <item>较高</item>
+        <item>中</item>
+        <item>较低</item>
+    </string-array>
+    
+    <string-array name="warning_volume_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    
+    <string-array name="trip_setting_entries">
+        <item>无效</item>
+        <item>与加油联动</item>
+        <item>关闭点火开关时联动</item>
+        <item>手动</item>
+    </string-array>
+    
+    <string-array name="trip_setting_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+     <string-array name="trip_setting_entries_1">
+        <item>与加油联动</item>
+        <item>关闭点火开关时联动</item>
+        <item>手动</item>
+    </string-array>
+    
+    <string-array name="trip_setting_values_1">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+     <string-array name="outside_temp_entries">
+        <item>无效</item>
+        <item>-3</item>
+        <item>-2</item>
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    <string-array name="outside_temp_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    
+   <string-array name="outside_temp_entries_1">
+        <item>-5</item>
+        <item>-4</item>
+        <item>-3</item>
+        <item>-2</item>
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    
+    <string-array name="outside_temp_values_1">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    
+    
+     <string-array name="outside_temp_entries_2">
+        <item>-5</item>
+        <item>-4</item>
+        <item>-3</item>
+        <item>-2</item>
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+    
+    <string-array name="outside_temp_values_2">
+        <item>-5</item>
+        <item>-4</item>
+        <item>-3</item>
+        <item>-2</item>
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+        <!-- add by xyw start -->
+        <string-array name="language_entries">
+        <item>中文</item>
+        <item>英文</item>
+    </string-array>  
+     <string-array name="language_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array> 
+     <string-array name="car_info_AIR_COMFORTABLE_STATUS_entries">
+        <item>缓慢</item>
+        <item>正常</item>
+          <item>快速</item>
+    </string-array>  
+     <string-array name="car_info_AIR_COMFORTABLE_STATUS_values">
+         <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     <string-array name="car_info_entries">
+        <item>低</item>
+        <item>中</item>
+          <item>高</item>
+    </string-array>  
+     <string-array name="car_info_values">
+         <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     <string-array name="car_info_DRIVER_CHANGE_MODE_entries">
+        <item>运动</item>
+        <item>标准</item>
+          <item>舒适</item>
+    </string-array>  
+     <string-array name="car_info_DRIVER_CHANGE_MODE_values">
+         <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+       <string-array name="car_info_REMOTE_UNLOCK_entries">
+        <item>所有车门</item>
+        <item>仅左前门</item>
+    </string-array>  
+     <string-array name="car_info_REMOTE_UNLOCK_values">
+         <item>0</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="car_info_GO_HOME_LAMP_STATUS_entries">
+        <item>关闭</item>
+        <item>仅近光灯</item>
+        <item>近光后雾</item>
+    </string-array>  
+     <string-array name="car_info_GO_HOME_LAMP_STATUS_values">
+         <item>0</item>
+        <item>1</item>
+         <item>2</item>
+    </string-array>
+    
+     <string-array name="car_info_position_heat_entries">
+        <item>不加热</item>
+        <item>1级</item>
+        <item>2级</item>
+        <item>3级</item>
+    </string-array>  
+     <string-array name="car_info_position_heat_values">
+         <item>0</item>
+        <item>1</item>
+         <item>2</item>
+          <item>3</item>
+    </string-array>
+     
+     <!-- add by xyw end -->
+     
+     <string-array name="sshyundai_car_type_entries">
+        <item>Ix35</item>
+        <item>Ix45</item>
+        <item>索纳塔8</item>
+        <item>索纳塔9</item>
+        <item>名图</item>
+        <item>途胜</item>
+        <item>领动</item>
+        <item>16K5</item>
+        <item>16KX5</item>
+    </string-array>  
+     <string-array name="sshyundai_car_type_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    
+    <string-array name="ssge_car_type_entries">
+        <item>爱唯欧、克鲁兹、英朗、迈锐宝、君威</item>
+        <item>君越、GL8</item>
+        <item>昂科拉</item>
+    </string-array>  
+     <string-array name="ssge_car_type_values">
+        <item>1</item>
+        <item>2</item>
+        <item>5</item>
+    </string-array>
+    
+      <string-array name="ssge_auto_wind_entries">
+        <item>低</item>
+        <item>中</item>
+        <item>高</item>
+    </string-array>  
+     <string-array name="ssge_auto_wind_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     <string-array name="ssge_aircon_mode_entries">
+        <item>关</item>
+        <item>开</item>
+        <item>上次设置</item>
+    </string-array>  
+     <string-array name="ssge_aircon_mode_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+      <string-array name="ssge_air_quality_entries">
+        <item>低敏感度</item>
+        <item>高敏感度</item>
+    </string-array>  
+     <string-array name="ssge_air_quality_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+    
+      <string-array name="ssge_air_autozone_entries">
+        <item>统一设置</item>
+        <item>分区设置</item>
+        <item>上次设置</item>
+    </string-array>  
+     <string-array name="ssge_air_autozone_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     
+      <string-array name="ssge_backarea_temp_entries">
+        <item>关</item>
+        <item>同前区一样</item>
+        <item>上次设定</item>
+    </string-array>  
+     <string-array name="ssge_backarea_temp_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     
+      <string-array name="ssge_remote_autoheat_entries">
+        <item>关</item>
+        <item>驾驶员和乘客</item>
+        <item>驾驶员</item>
+    </string-array>  
+     <string-array name="ssge_remote_autoheat_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+          <string-array name="ssge_park_assit_entries">
+        <item>关</item>
+        <item>开</item>
+        <item>拖车补偿</item>
+    </string-array>  
+     <string-array name="ssge_park_assit_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     
+        <string-array name="ssge_crash_ready_entries">
+        <item>关闭</item>
+        <item>报警</item>
+        <item>报警和制动</item>
+    </string-array>  
+     <string-array name="ssge_crash_ready_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+     
+          
+      <string-array name="ssge_convenience_ripe_entries">
+        <item>关</item>
+        <item>转向柱收缩</item>
+        <item>转向管柱提升</item>
+        <item>转向管柱收缩和提升</item>
+    </string-array>  
+     <string-array name="ssge_convenience_ripe_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+               
+    <string-array name="ssge_open_lock_s_entries">
+        <item>关</item>
+        <item>拔出点火开关钥匙仅驾驶员车门解锁</item>
+        <item>拔出点火开关钥匙所有车门解锁</item>
+    </string-array>  
+     <string-array name="ssge_open_lock_s_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+    <string-array name="ssge_open_lock_z_entries">
+        <item>关</item>
+        <item>切入驻车档仅驾驶员车门解锁</item>
+        <item>切入驻车档所有车门解锁</item>
+    </string-array>  
+    <string-array name="ssge_open_lock_z_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+    <string-array name="ssge_lock_feedback_entries">
+        <item>仅灯光</item>
+        <item>灯光与喇叭</item>
+        <item>仅喇叭</item>
+        <item>关</item>
+    </string-array>  
+    <string-array name="ssge_lock_feedback_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+      <string-array name="ssge_away_autolock_entries">
+        <item>关</item>
+        <item>开</item>
+        <item>喇叭鸣叫启用</item>
+    </string-array>  
+    <string-array name="ssge_away_autolock_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+      <string-array name="ssge_light_locklamp_entries">
+        <item>关</item>
+        <item>30s</item>
+        <item>60s</item>
+        <item>120s</item>
+    </string-array>  
+    <string-array name="ssge_light_locklamp_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+   <string-array name="spingarr">
+     <item>English</item>  
+     <item>Chinese</item>   
+     <item>German</item>  
+     <item>Iitalian</item>   
+     <item>French</item>  
+     <item>Swedish</item>  
+     <item>Spanish</item>  
+     <item>Dutch</item>
+     <item>Portug</item> 
+     <item>Turkish</item> 
+     <item>Japanese</item>  
+     <item>Norweg</item>  
+     <item>Finnish</item>  
+     <item>Danish</item>  
+     <item>Greek</item>  
+     <item>Arabic</item>    
+    </string-array>
+    
+    <string-array name="spingarr_1">
+     <item>English</item>  
+     <item>Chinese</item>   
+     <item>German</item>  
+     <item>Iitalian</item>   
+     <item>French</item>  
+     <item>Swedish</item>  
+     <item>Spanish</item>  
+     <item>Dutch</item>
+     <item>Japanese</item> 
+     <item>Norweg</item>
+     <item>Finnish</item> 
+     <item>Danish</item> 
+     <item>Greek</item>  
+     <item>Arabic</item>
+     <item>Turkish</item>         
+    </string-array>
+    
+   
+     <string-array name="car_info_lamp_time_entries">
+        <item>取消</item>
+        <item>大灯延时熄灭15秒</item>
+        <item>大灯延时熄灭30秒</item>
+        <item>大灯延时熄灭60秒</item>
+    </string-array>  
+    <string-array name="car_info_lamp_welcome_entries">
+        <item>取消</item>
+        <item>迎宾照明15秒</item>
+        <item>迎宾照明30秒</item>
+        <item>迎宾照明60秒</item>
+    </string-array> 
+    <string-array name="car_info_car_lock_entries">
+        <item>所有门</item>
+        <item>驾驶门</item>
+    </string-array> 
+    <string-array name="car_info_temp_unit_entries">
+        <item>℃</item>
+        <item>℉</item>
+    </string-array> 
+     <string-array name="car_info_obd_unit_entries">
+        <item>L/100km</item>
+        <item>km/L</item>
+        <item>mpg</item>
+    </string-array>
+    <string-array name="car_info_time_format_entries">
+        <item>12h</item>
+        <item>24h</item>
+    </string-array>
+    <string-array name="car_info_sos_status_entries">
+        <item>关闭</item>
+        <item>呼叫中</item>
+         <item>已经连接</item>
+    </string-array> 
+     
+    <string-array name="car_info_language_entries">
+        <item>English</item>
+        <item>Chinese</item>
+        <item>German</item>
+        <item>Italian</item>
+        <item>French</item>
+        
+        <item>Swedish</item>
+        <item>Spanish</item>
+        <item>Dutch</item>
+        <item>Portug</item>
+        <item>Japanese</item>
+        
+        <item>Norweg</item>
+        <item>Finnish</item>
+        <item>Danish</item>
+        <item>Greek</item>
+        <item>Arabic</item>
+        <item>Turkish</item>
+    </string-array>
+    
+     <string-array name="rzc_golf_language_entries">
+        <item>德语</item>
+        <item>英语(UK)</item>
+        <item>英语(US)</item>
+        <item>法语</item>
+        <item>意大利语</item>
+        <item>西班牙语</item>
+        <item>葡萄牙语</item>
+        <item>波兰语</item>
+        <item>捷克语</item>
+        <item>瑞典语</item>
+        <item>荷兰语</item>
+        <item>俄语</item>
+        <item>韩语</item>
+        <item>土耳其语</item>
+        <item>中文</item>
+        <item>挪威语</item>
+    </string-array>  
+    <string-array name="rzc_golf_language_values">
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>11</item>
+        <item>13</item>
+        <item>16</item>
+        <item>18</item>
+        <item>22</item>
+        <item>23</item>
+        <item>29</item>
+    </string-array>
+    
+    <string-array name="rzc_ecs_entries">
+        <item>OFF</item>
+        <item>ACTIVATIED</item>
+        <item>ESC运动</item>
+    </string-array>  
+    <string-array name="rzc_ecs_values">
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+    </string-array>
+    
+   
+    
+     <string-array name="rzc_acc_driver_entries">
+        <item>标准</item>
+        <item>运动</item>
+        <item>经济</item>
+    </string-array>  
+    <string-array name="rzc_acc_driver_values">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+    </string-array>
+    
+   <string-array name="rzc_acc_distance_entries">
+        <item>极小</item>
+        <item>小</item>
+        <item>中等</item>
+        <item>大</item>
+        <item>极大</item>
+    </string-array> 
+    
+     <string-array name="rzc_acc_distance_values">
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+    </string-array>
+    
+    <string-array name="ss_acc_driver_entries">
+        <item>经济</item>
+        <item>标准</item>
+        <item>运动</item>    
+    </string-array> 
+    
+   <string-array name="ss_acc_driver_values">
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+    </string-array>
+    
+   <string-array name="ss_acc_distance_entries">
+        <item>极小</item>
+        <item>小</item>
+        <item>中等</item>
+        <item>大</item>
+        <item>极大</item>
+    </string-array>  
+    
+    <string-array name="ss_acc_distance_values">
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+    </string-array>
+
+    
+    <string-array name="rzc_golf_volume_entries">
+        <item>音量1</item>
+        <item>音量2</item>
+        <item>音量3</item>
+        <item>音量4</item>
+        <item>音量5</item>
+        <item>音量6</item>
+        <item>音量7</item>
+        <item>音量8</item>
+        <item>音量9</item>
+    </string-array>
+    <string-array name="rzc_golf_frequency_entries">
+        <item>频率1</item>
+        <item>频率2</item>
+        <item>频率3</item>
+        <item>频率4</item>
+        <item>频率5</item>
+        <item>频率6</item>
+        <item>频率7</item>
+        <item>频率8</item>
+        <item>频率9</item>
+    </string-array>
+    <string-array name="rzc_golf_volume_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+    
+    <string-array name="rzc_golf_parking_mode_entries">
+        <item>垂直模式</item>
+        <item>侧边模式</item>
+        <item>俯视模式</item>
+        <item>窄向模式</item>
+    </string-array>
+    <string-array name="rzc_golf_parking_mode_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    <string-array name="ss_golf_parking_mode_entries">
+        <item>倒车入库和路边停车都不显示</item>
+        <item>倒车入库有效</item>
+        <item>路边停车有效</item>
+    </string-array>
+    <string-array name="ss_golf_parking_mode_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+      <string-array name="rzc_golf_switch_on_time_entries">
+        <item>提前</item>
+        <item>适时</item>
+        <item>延后</item>
+    </string-array>
+    <string-array name="rzc_golf_switch_on_time_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+     <string-array name="rzc_golf_switch_entries">
+        <item>"0%%"</item>
+        <item>"10%%"</item>
+        <item>"20%%"</item>
+        <item>"30%%"</item>
+        <item>"40%%"</item>
+        <item>"50%%"</item>
+        <item>"60%%"</item>
+        <item>"70%%"</item>
+        <item>"80%%"</item>
+        <item>"90%%"</item>
+        <item>"100%%"</item>      
+    </string-array>
+    <string-array name="rzc_golf_switch_values">
+        <item>0</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item> 
+    </string-array>
+    
+     <string-array name="rzc_golf_time_mode_entries">
+        <item>0s</item>
+        <item>5s</item>
+        <item>10s</item>
+        <item>15s</item>
+        <item>20s</item>
+        <item>25s</item>
+        <item>30s</item>    
+    </string-array>
+    <string-array name="rzc_golf_time_mode_values">
+        <item>0</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>  
+    </string-array>
+    
+    <string-array name="rzc_golf_color_entries">
+        <item>关闭</item>
+        <item>白色</item>
+        <item>橙色</item>
+        <item>蓝色</item>    
+    </string-array>
+    <string-array name="rzc_golf_color_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item> 
+    </string-array>
+    
+    
+   <string-array name="rzc_golf_conv_open_entries">
+        <item>关闭</item>
+        <item>驾驶员侧车窗</item>
+        <item>全部车窗</item>  
+    </string-array>
+    <string-array name="rzc_golf_conv_open_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="ss_golf_conv_open_entries">
+        <item>关闭</item>
+        <item>驾驶员侧车窗</item>
+        <item>全部车窗</item>  
+    </string-array>
+    <string-array name="ss_golf_conv_open_values">
+        <item>2</item>
+        <item>1</item>
+        <item>0</item> 
+    </string-array>
+     
+    <string-array name="rzc_golf_door_unlock_entries">
+        <item>车辆侧</item>
+        <item>单个车门</item>
+        <item>全部车门</item>   
+    </string-array>
+    <string-array name="rzc_golf_door_unlock_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="ss_golf_door_unlock_entries">
+        <item>车辆侧</item>
+        <item>单个车门</item>
+        <item>全部车门</item>   
+    </string-array>
+    <string-array name="ss_golf_door_unlock_values">
+        <item>2</item>
+        <item>1</item>
+        <item>0</item> 
+    </string-array>
+    
+    <string-array name="rzc_golf_volume_uint_entries">
+        <item>L</item>
+        <item>gal(UK)</item>
+        <item>gal(US)</item>   
+    </string-array>
+    <string-array name="rzc_golf_volume_uint_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+     <string-array name="ss_golf_volume_uint_entries">
+        <item>L</item>
+        <item>gal(US)</item>
+        <item>gal(UK)</item>   
+    </string-array>
+    <string-array name="ss_golf_volume_uint_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+     <string-array name="rzc_golf_consumption_uint_entries">
+        <item>mpg(UK)</item>
+        <item>L/100km</item>
+        <item>mpg(US)</item> 
+        <item>km/L</item>  
+    </string-array>
+    <string-array name="rzc_golf_consumption_uint_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    
+     <string-array name="ss_golf_consumption_uint_entries">
+        <item>L/100km</item>
+        <item>km/L</item>
+        <item>mpg(US)</item> 
+        <item>mpg(UK)</item>          
+    </string-array>
+    
+    <string-array name="ss_golf_consumption_uint_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    
+    <string-array name="rzc_golf_pressure_uint_entries">
+        <item>bar</item>
+        <item>psi</item>
+        <item>kPa</item> 
+    </string-array>
+    <string-array name="rzc_golf_pressure_uint_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+     <string-array name="ss_golf_pressure_uint_entries">
+        <item>kPa</item> 
+        <item>bar</item>
+        <item>psi</item>       
+    </string-array>
+    <string-array name="ss_golf_pressure_uint_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+     <string-array name="rzc_golf_profile_entries">
+        <item>普通模式</item>
+        <item>运动模式</item>
+        <item>ECO节能模式</item> 
+        <item>个性设置</item> 
+    </string-array>
+    <string-array name="rzc_golf_profile_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+      
+    <string-array name="rzc_golf_profile_1_entries">
+        <item>普通模式</item>
+        <item>运动模式</item>
+        <item>ECO节能模式</item> 
+    </string-array>
+    <string-array name="rzc_golf_profile_1_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>  
+    </string-array>
+    
+    <string-array name="rzc_golf_profile_2_entries">
+        <item>普通模式</item>
+        <item>ECO节能模式</item> 
+    </string-array>
+    <string-array name="rzc_golf_profile_2_values">
+        <item>0</item>
+        <item>2</item>  
+    </string-array>
+    
+     <string-array name="ssmggs_comming_home_entries">
+        <item>30秒</item>
+        <item>1分钟</item> 
+        <item>1分钟30秒</item> 
+        <item>2分钟</item> 
+        <item>2分钟30秒</item> 
+        <item>3分钟</item> 
+        <item>3分钟30秒</item> 
+        <item>4分钟</item> 
+        <item>4分钟30秒</item> 
+        <item>5分钟</item> 
+    </string-array>
+    <string-array name="ssmggs_comming_home_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+        <item>4</item> 
+        <item>5</item> 
+        <item>6</item> 
+        <item>7</item> 
+        <item>8</item> 
+        <item>9</item> 
+    </string-array>
+    
+       
+   <string-array name="ssjy_1_entries">
+        <item>无</item>
+        <item>10S</item>
+        <item>20S</item>
+        <item>30S</item>  
+    </string-array>
+    <string-array name="ssjy_1_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item>
+    </string-array>
+    
+       <string-array name="ssjy_2_entries">
+        <item>10Min</item>
+        <item>20Min</item>
+        <item>30Min</item>
+    </string-array>
+    <string-array name="ssjy_2_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="sscherry_0_entries">
+        <item>灯光</item>
+        <item>喇叭</item>
+        <item>灯光+喇叭</item>
+    </string-array>
+    <string-array name="sscherry_0_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="sscherry_1_entries">
+        <item>关闭</item>
+        <item>静态</item>
+        <item>静态+动态</item>
+    </string-array>
+    <string-array name="sscherry_1_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+     <string-array name="sscherry_2_entries">
+        <item>关闭</item>
+        <item>静态</item>
+        <item>静态+动态</item>
+    </string-array>
+    <string-array name="sscherry_2_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    
+    <string-array name="sscherry_3_entries">
+        <item>关闭</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>60</item>
+        <item>65</item>
+        <item>70</item>
+        <item>75</item>
+        <item>80</item>
+        <item>85</item>
+        <item>90</item>
+        <item>95</item>
+        <item>100</item>
+        <item>105</item>
+        <item>110</item>
+        <item>115</item>
+        <item>120</item>
+        <item>125</item>
+        <item>130</item>        
+    </string-array>
+    <string-array name="sscherry_3_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>   
+    </string-array>
+    
+    
+    <string-array name="sscherry_4_entries">
+        <item>1级</item>
+        <item>2级</item>
+        <item>3级</item>
+        <item>4级</item>
+        <item>5级</item>
+        <item>6级</item>
+        <item>7级</item>
+        <item>8级</item>
+        <item>9级</item>
+        <item>10级</item>       
+    </string-array>
+    <string-array name="sscherry_4_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    
+    
+    <string-array name="ssgolf_4_entries">
+        <item>30km/h</item>
+        <item>40km/h</item>
+        <item>50km/h</item>
+        <item>60km/h</item>
+        <item>70km/h</item>
+        <item>80km/h</item>
+        <item>90km/h</item>
+        <item>100km/h</item>
+        <item>110km/h</item>
+        <item>120km/h</item>
+        <item>130km/h</item>
+        <item>140km/h</item>
+        <item>150km/h</item>
+        <item>160km/h</item>
+        <item>170km/h</item>
+        <item>180km/h</item>
+        <item>190km/h</item>
+        <item>200km/h</item>
+        <item>210km/h</item>
+        <item>220km/h</item>
+        <item>230km/h</item>
+        <item>240km/h</item>       
+    </string-array>
+    <string-array name="ssgolf_4_values">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+    </string-array>
+    
+    <string-array name="ssgolf_1_entries">
+        <item>舒适</item>
+        <item>标准</item>
+        <item>运动</item>
+        <item>经济</item>
+        <item>个性化</item>       
+    </string-array>
+    <string-array name="ssgolf_1_values">
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+        <item>4</item> 
+        <item>5</item> 
+    </string-array>
+    
+     <string-array name="ssgolf_2_entries">
+        <item>Comfort</item>
+        <item>Normal</item>
+        <item>Sport</item>  
+    </string-array>
+    <string-array name="ssgolf_2_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+     <string-array name="ssgolf_3_entries">
+        <item>Normal</item>
+        <item>Sport</item>  
+        <item>Eco</item>
+    </string-array>
+    <string-array name="ssgolf_3_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="ssfr_0_entries">
+        <item>低</item>
+        <item>中</item>
+        <item>高</item>
+    </string-array>
+    <string-array name="ssfr_0_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="ssfr_1_entries">
+        <item>早</item>
+        <item>中</item>
+        <item>迟</item>
+    </string-array>
+    <string-array name="ssfr_1_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+        <string-array name="ssfr_2_entries">
+        <item>关闭</item>
+        <item>车灯</item>
+        <item>车灯+报警</item>
+    </string-array>
+    <string-array name="ssfr_2_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+      <string-array name="ssfr_3_entries">
+        <item>关闭</item>
+        <item>远程</item>
+        <item>全部</item>
+    </string-array>
+    <string-array name="ssfr_3_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    
+     <string-array name="ssfr_4_entries">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+        <item>4</item> 
+        <item>5</item> 
+        <item>6</item> 
+    </string-array>
+    <string-array name="ssfr_4_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+        <item>4</item> 
+        <item>5</item> 
+        <item>6</item> 
+    </string-array>
+    
+     <string-array name="ssfr_5_entries">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    <string-array name="ssfr_5_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    
+     <string-array name="ssfr_6_entries">
+        <item>0秒</item>
+        <item>45秒</item>
+        <item>5分</item> 
+        <item>10分</item> 
+    </string-array>
+    <string-array name="ssfr_6_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    
+     <string-array name="ssfr_7_entries">
+        <item>0秒</item>
+        <item>30秒</item>
+        <item>60秒</item> 
+        <item>90秒</item> 
+    </string-array>
+    <string-array name="ssfr_7_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    
+    
+     <string-array name="ssfr_8_entries">
+        <item>OFF</item>
+        <item>1st PRESS(ON)</item>
+        <item>2nd PRESS(ON)</item> 
+    </string-array>
+    <string-array name="ssfr_8_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="ssfr_9_entries">
+        <item>psi</item>
+        <item>kpa</item>
+        <item>bar</item> 
+    </string-array>
+    <string-array name="ssfr_9_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+    <string-array name="ssfr_10_entries">
+        <item>关</item>
+        <item>1等级</item>
+        <item>2等级</item> 
+        <item>3等级</item>
+    </string-array>
+    <string-array name="ssfr_10_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item>
+    </string-array>
+    
+    
+    <string-array name="ssznz17_0_entries">
+        <item>L/100km</item>
+        <item>km/l</item>
+        <item>mpg(UK)</item> 
+        <item>mpg(US)</item> 
+    </string-array>
+    <string-array name="ssznz17_0_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item> 
+        <item>4</item>
+    </string-array>
+    
+    <string-array name="ssznz17_1_entries">
+        <item>公制</item>
+        <item>美制</item>
+        <item>自定义</item> 
+    </string-array>
+    <string-array name="ssznz17_1_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item> 
+    </string-array>
+    
+    <string-array name="ssznz17_2_entries">
+        <item>0档</item>
+        <item>1档</item>
+        <item>2档</item> 
+        <item>3档</item> 
+        <item>4档</item> 
+        <item>5档</item> 
+        <item>6档</item> 
+    </string-array>
+    <string-array name="ssznz17_2_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+        <item>4</item> 
+        <item>5</item> 
+        <item>6</item> 
+    </string-array>
+    
+     <string-array name="ssznz17_3_entries">
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    <string-array name="ssznz17_3_values">
+        <item>1</item>
+        <item>2</item> 
+        <item>3</item> 
+    </string-array>
+    
+    <string-array name="ssznz17_4_entries">
+        <item>KM</item>
+        <item>Mile</item> 
+    </string-array>
+    <string-array name="ssznz17_4_values">
+        <item>1</item>
+        <item>2</item> 
+    </string-array>
+    
+</resources>

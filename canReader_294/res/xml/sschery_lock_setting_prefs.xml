@@ -1,0 +1,70 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="CRITICAL_PARK_STATUS"
+        android:summaryOff="关闭"
+        android:summaryOn="打开"
+        android:title="紧急制动报警开关" />
+
+    <ListPreference
+        android:entries="@array/sscherry_0_entries"
+        android:entryValues="@array/sscherry_0_values"
+        android:key="CRITICAL_PARK_MODE"
+        android:persistent="false"
+        android:title="紧急制动报警方式" />
+
+    <SwitchPreference
+        android:key="AUTO_LOCK_SETTING"
+        android:summaryOff="关闭"
+        android:summaryOn="打开"
+        android:title="自动落锁" />
+    
+    <SwitchPreference
+        android:key="FRONT_LAMP_DELAY_STATUS"
+        android:summaryOff="关闭"
+        android:summaryOn="打开"
+        android:title="前照灯延迟" />
+    
+    
+    <SwitchPreference
+        android:key="DAYTIME_LAMP_STATUS"
+        android:summaryOff="关闭"
+        android:summaryOn="打开"
+        android:title="日间行车灯" />
+    
+     <SwitchPreference
+        android:key="TURN_START_AVM_STATUS"
+        android:summaryOff="关闭"
+        android:summaryOn="打开"
+        android:title="转向启动AVM" />
+     
+      <SwitchPreference
+        android:key="TURN_START_ANIMATION_STATUS"
+        android:summaryOff="关闭"
+        android:summaryOn="打开"
+        android:title="转向启动动画" />
+      
+       <ListPreference
+        android:entries="@array/sscherry_1_entries"
+        android:entryValues="@array/sscherry_1_values"
+        android:key="SELECTOR_CAR_ASSIST_STATUS"
+        android:persistent="false"
+        android:title="选择车辆辅助线" />
+       
+       <ListPreference
+        android:entries="@array/sscherry_3_entries"
+        android:entryValues="@array/sscherry_3_values"
+        android:key="SPEED_OVER_SETTING"
+        android:persistent="false"
+        android:title="超速报警" />
+       
+       <ListPreference
+        android:entries="@array/sscherry_4_entries"
+        android:entryValues="@array/sscherry_4_values"
+        android:key="BACK_LIGHT_DATA"
+        android:persistent="false"
+        android:title="仪表背光" />
+    
+       
+
+</PreferenceScreen>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/speedMeter"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/bg_speedmeter" />
+
+    <TextView
+        android:id="@+id/distance"
+        style="@style/SpeedmeterText"
+        android:layout_width="96dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="72dp"
+        android:text="0\nKM" />
+
+    <TextView
+        android:id="@+id/driving_speed"
+        style="@style/SpeedmeterText"
+        android:layout_width="80dp"
+        android:layout_height="36dp"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="38dp"
+        android:text="0 KM/H" />
+
+    <ImageView
+        android:id="@+id/speed_hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/hand_speedmeter" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/support_speedmeter" />
+
+
+</FrameLayout>

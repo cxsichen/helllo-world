@@ -1,0 +1,62 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="车身状态" >
+                    
+        <SwitchPreference
+            android:key="RATATIONAL_RATE"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="转速提示" />
+        
+        <SwitchPreference
+            android:key="MSG_NOTIFICATION"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="新消息提醒" />
+        
+        <SwitchPreference
+            android:key="ENGINEE_AUTO_CONTROL"
+            android:summaryOff="关闭"
+            android:summaryOn="开启"
+            android:title="发动机节能自动启停提示" />
+        
+        <SwitchPreference
+            android:key="ENERGY_BACKGROUND_LIGHT"
+            android:summaryOff="关闭"
+            android:summaryOn="开启"
+            android:title="节能模式的背景照明" />
+              
+        <ListPreference
+                android:key="ADJUST_WARING_VOLUME"
+                android:title="调整报警音量"
+                android:persistent="false"
+                android:entries="@array/warning_volume_entries"
+                android:entryValues="@array/warning_volume_values" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="里程设定" >
+        
+         <ListPreference
+                android:key="SWITCH_TRIPB_SETTING"
+                android:title="里程B重设条件的切换"
+                android:persistent="false"
+                android:entries="@array/trip_setting_entries"
+                android:entryValues="@array/trip_setting_values" />
+         
+          <ListPreference
+                android:key="SWITCH_TRIPA_SETTING"
+                android:title="里程A重设条件的切换"
+                android:persistent="false"
+                android:entries="@array/trip_setting_entries"
+                android:entryValues="@array/trip_setting_values" />
+          
+           <ListPreference
+                android:key="ADJUST_OUTSIDE_TEMP"
+                android:title="调节外部气温显示"
+                android:persistent="false"
+                android:entries="@array/outside_temp_entries"
+                android:entryValues="@array/outside_temp_values" />
+    </PreferenceCategory>
+        
+   
+</PreferenceScreen>

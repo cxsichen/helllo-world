@@ -1,0 +1,21 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory 
+        android:key="SCREEN_SETTING"
+        android:title="原车屏状态" >
+               
+          <ListPreference
+                android:key="BACK_CAMERA_MODE"
+                android:title="后摄像头模式"
+                android:persistent="false"
+                android:entries="@array/back_camera_mode_entries"
+                android:entryValues="@array/back_camera_mode_values" />
+        
+<!--         <SwitchPreference
+            android:key="LEFT_CAMERA_SWITCH"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="右摄像头开关" /> -->
+    </PreferenceCategory>
+  
+</PreferenceScreen>

@@ -1,0 +1,30 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	
+    <SwitchPreference
+        android:key="DISPLAY_ECO_MIXPOWER"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="混合动力ECO指示设定" />
+    <SwitchPreference
+        android:key="DISPLAY_NAVI_MSG"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="仪表导航信息设定" />
+    <SwitchPreference
+        android:key="DISPLAY_SPEED_RANG"
+        android:summaryOff="全部"
+        android:summaryOn="局部"
+        android:title="速度范围提示模式设定" />
+    <SwitchPreference
+        android:key="SPORT_ENGINE_STATUS"
+        android:summaryOff="正常模式"
+        android:summaryOn="运动模式"
+        android:title="运动模式发动机状态设定" />
+    <SwitchPreference
+        android:key="SPORT_BACKLIGHT_MODE"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="运动模式背光模式设定" />
+
+</PreferenceScreen>

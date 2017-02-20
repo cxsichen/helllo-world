@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/car_info_setting_title" >
+        <Preference
+            android:key="ESP_enable"
+            android:title="@string/car_info_ESP" />
+        
+        <Preference
+            android:key="panel_enable"
+            android:title="@string/car_info_panel" />
+        <Preference
+            android:key="AIR_enable"
+            android:title="@string/car_info_AIR" />
+    </PreferenceCategory>
+</PreferenceScreen>

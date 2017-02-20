@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="舒适性用电器" />
+        
+        <ProgressBar 
+            android:id="@+id/ss_golf_seekbar"
+            android:layout_width="450dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            style="?android:attr/progressBarStyleHorizontal"  
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:id="@+id/ss_golf_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="gal/h" />
+        
+    </LinearLayout>
+    
+     <TextView
+            android:id="@+id/ss_golf_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="570dp"
+            android:text="" />
+     
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+           
+            android:textSize="25sp"
+            android:text="灯光信息" />
+        
+        <TextView
+            android:id="@+id/ssgolf_tv1"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+             android:layout_marginLeft="30dp"
+            android:text="右转向灯:" />
+        
+        
+        <TextView
+            android:id="@+id/ssgolf_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:layout_marginLeft="30dp"
+            android:text="左转向灯:" />
+      
+        
+    </LinearLayout>
+    
+
+</LinearLayout>

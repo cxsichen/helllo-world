@@ -1,0 +1,42 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="SCREEN_SHOW_SETTING"
+        android:title="原车屏亮度" >
+        
+         <com.console.canreader.view.SeekBarPreference 
+                android:key="CAR_SHWO_LIGHT" />
+        <ListPreference
+            android:entries="@array/outside_temp_entries_2"
+            android:entryValues="@array/outside_temp_values_2"
+            android:key="CAR_SHWO_CONTARST"
+            android:persistent="false"
+            android:title="原车屏对比度" />
+
+         <ListPreference
+            android:entries="@array/outside_temp_entries_2"
+            android:entryValues="@array/outside_temp_values_2"
+            android:key="CAR_SHWO_SATURATION"
+            android:persistent="false"
+            android:title="原车屏饱和度" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="SCREEN_SETTING"
+        android:title="原车屏状态" >
+        <ListPreference
+            android:entries="@array/back_camera_mode_entries"
+            android:entryValues="@array/back_camera_mode_values"
+            android:key="BACK_CAMERA_MODE"
+            android:persistent="false"
+            android:title="后摄像头模式" />
+
+        <SwitchPreference
+            android:key="LEFT_CAMERA_SWITCH"
+            android:summaryOff="关闭"
+            android:summaryOn="打开"
+            android:title="右摄像头开关" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

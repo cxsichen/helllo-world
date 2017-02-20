@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/pageViewTitle"
+        android:text="@string/driving_data_since_start" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="3"
+        android:orientation="vertical" >
+
+        <View style="@style/verDivide" />
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="@string/average_oil_consumption" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/consumption"
+                style="@style/PageViewTextView"
+                 />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="@string/travelling_time" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/travelling_time"
+                style="@style/PageViewTextView"
+                 />
+        </LinearLayout>
+
+        <View style="@style/verDivide" />
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="@string/range" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/range"
+                style="@style/PageViewTextView"
+               />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="@string/average_speed" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/speed"
+                style="@style/PageViewTextView"
+                />
+        </LinearLayout>
+
+        <View style="@style/verDivide" />
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="@string/driving_distance" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/distance"
+                style="@style/PageViewTextView"
+                />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="" />
+        </LinearLayout>
+
+        <View style="@style/verDivide" />
+    </LinearLayout>
+
+</LinearLayout>

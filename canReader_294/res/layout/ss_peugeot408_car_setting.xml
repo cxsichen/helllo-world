@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="horizontal" >
+    
+	
+	<LinearLayout 
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:layout_weight="1"
+	     android:orientation="vertical">
+	    
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="自动驻车"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="倒车雷达开关"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="倒车自动后雨刮"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="驻车辅助"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="车门自动锁定"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="车门上锁"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="日间行车灯"/>
+  <TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="气氛照明"/>
+  <TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="倒车是否发声"/>
+	</LinearLayout>
+	
+	<LinearLayout 
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:layout_weight="1"
+	     android:orientation="vertical">
+	    
+	<Switch
+	    android:id="@+id/AUTO_PARK_CAR_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	<Switch
+	    android:id="@+id/RADAR_ALARM_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	<Switch
+	    android:id="@+id/REAR_WIPER_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	<Switch
+	    android:id="@+id/PARKING_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	<Switch
+	    android:id="@+id/CAR_LOCK_AUTO_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	<Switch
+	    android:id="@+id/CAR_LOCK_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	<Switch
+	    android:id="@+id/DAYTIME_LAMP_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	  <Switch
+	    android:id="@+id/ATMOSPHERE_ILL_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	   <Switch
+	    android:id="@+id/BACK_CAR_VOICE_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	
+	</LinearLayout>
+	
+	<LinearLayout 
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:layout_weight="1"
+	    android:orientation="vertical">
+	
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="气氛照明值"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	     android:layout_marginTop="5dp"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="迎宾照明"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	     android:layout_marginTop="5dp"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="车门解锁"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	     android:layout_marginTop="5dp"
+	     android:layout_marginBottom="5dp"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="伴我回家照明"/>
+	
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="仅行李箱解锁设置"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="随动转向大灯设置"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="变道辅助"/>
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	     style="@style/sty_checkbox"
+	    android:text="迎宾功能"/>
+	</LinearLayout>
+	<LinearLayout
+	    android:layout_width="0dp"
+	    android:layout_height="match_parent"
+	    android:layout_weight="1"
+	    android:orientation="vertical">
+
+	<SeekBar
+	    android:id="@+id/ATMOSPHERE_ILL_VALUE"
+	    android:max="6"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+
+	<Spinner
+	    android:id="@+id/WELCOME_PERSION_ILL_STATUS"
+	    android:entries="@array/car_info_lamp_welcome_entries"
+	    android:layout_width="match_parent"
+	    android:layout_height="30dp" />
+	
+	<Spinner
+	    android:id="@+id/REMOTE_UNLOCK"
+	    android:entries="@array/car_info_car_lock_entries"
+	    android:layout_width="match_parent"
+	    android:layout_height="30dp" />
+	<Spinner
+	    android:id="@+id/GO_HOME_LAMP_STATUS"
+	    android:entries="@array/car_info_lamp_time_entries"
+	    android:layout_width="match_parent"
+	    android:layout_height="30dp" />
+	
+	<Switch
+	    android:id="@+id/TRUNK_UNLOCK_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	<Switch
+	    android:id="@+id/CHANGE_ILL_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	<Switch
+	    android:id="@+id/CHANGE_LINE_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	<Switch
+	    android:id="@+id/WELCOME_FUNTION_STATUS" 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    />
+	
+	</LinearLayout>
+	
+</LinearLayout>

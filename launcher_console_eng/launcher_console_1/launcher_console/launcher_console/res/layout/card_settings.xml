@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/setting_card_layout"
+    android:background="@drawable/bg_settings"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/wifi_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/ic_wifi" />
+            <TextView
+                style="@style/CardLabelSmall"
+                android:text="@string/label_setting_wlan"
+                android:layout_gravity="bottom"/>
+        </FrameLayout>
+
+        <View style="@style/VerticalDivider" />
+
+        <FrameLayout
+            android:id="@+id/effects_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/ic_equalizer" />
+            <TextView
+                style="@style/CardLabelSmall"
+                android:text="@string/label_setting_fm"
+                android:layout_gravity="bottom"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <View style="@style/HorizontalDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/wifi_hostpost_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/ic_wifi_tethering" />
+            <TextView
+                style="@style/CardLabelSmall"
+                android:text="@string/label_setting_wifi_tethering"
+                android:layout_gravity="bottom"/>
+        </FrameLayout>
+
+        <View style="@style/VerticalDivider" />
+
+        <FrameLayout
+            android:id="@+id/device_bind_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/ic_devices_bind" />
+            <TextView
+                style="@style/CardLabelSmall"
+                android:text="@string/label_setting_device_bind"
+                android:layout_gravity="bottom"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <View style="@style/HorizontalDivider" />
+
+    <ImageView
+        android:id="@+id/setting_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/shortcut_group_height"
+        android:background="?android:attr/selectableItemBackground"
+        android:scaleType="center"
+        android:src="@drawable/ic_settings" />
+
+</LinearLayout>

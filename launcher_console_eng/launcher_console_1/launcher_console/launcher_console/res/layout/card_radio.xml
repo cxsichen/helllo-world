@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fm_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_radio"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/radio_layout"
+        android:layout_width="match_parent"
+        android:background="@drawable/ripple_bg"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <!-- 专辑封面要被下面这个image盖住 -->
+
+        <ImageView
+            android:id="@+id/ev_radio_app"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/ripple_bg"
+            android:src="@drawable/oval_music"
+            android:visibility="invisible" />
+
+        <com.console.launcher_console.view.FMView
+            android:id="@+id/fMView"
+            android:layout_width="wrap_content"
+            android:layout_height="96dp"
+            android:layout_gravity="center_vertical" >
+        </com.console.launcher_console.view.FMView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:background="#F9CE1D" />
+
+        <TextView
+            android:id="@+id/channel_tx"
+            style="@style/CardLabel"
+            android:text="@string/label_card_radio"
+            android:layout_gravity="bottom" />
+    </FrameLayout>
+
+    <!-- 播放音乐时，该TextView显示歌曲名称 -->
+
+    <View style="@style/HorizontalDivider" />
+
+
+
+    <RelativeLayout style="@style/ShortCutGroup">
+
+        <com.console.launcher_console.view.SelectImageView
+            android:id="@+id/fm_pre"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_music_previous" />
+
+        <com.console.launcher_console.view.SelectImageView
+            android:id="@+id/fm_play"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_music_play" />
+
+        <com.console.launcher_console.view.SelectImageView
+            android:id="@+id/fm_next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_music_next" />
+
+    </RelativeLayout>
+
+</LinearLayout>

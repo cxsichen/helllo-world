@@ -1,0 +1,69 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:entries="@array/ssge_lock_feedback_entries"
+        android:entryValues="@array/ssge_lock_feedback_values"
+        android:key="REMOTECONTROL_LOCK_FEEDBACK"
+        android:persistent="false"
+        android:title="遥控落锁反馈设定" />
+
+    <SwitchPreference
+        android:key="REMOTECONTROL_UNLOCK_FEEDBACK"
+        android:summaryOff="关"
+        android:summaryOn="灯光闪烁"
+        android:title="遥控解锁反馈设定" />
+    <SwitchPreference
+        android:key="REMOTECONTROL_UNLOCK"
+        android:summaryOff="仅驾驶员门"
+        android:summaryOn="所有门"
+        android:title="遥控解锁设定" />
+    <SwitchPreference
+        android:key="REMOTECONTROL_UNLOCK_AUTORELOCK"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="遥控解锁车门自动重锁设定" />
+    <SwitchPreference
+        android:key="REMOTECONTROL_RELOCK_DOOR"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="重锁遥控打开的门的设定" />
+    <SwitchPreference
+        android:key="REMOTECONTROL_KEY_AUTORECOGNIZE"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="驾驶员钥匙自动识别设定" />
+    <SwitchPreference
+        android:key="REMOTECONTROL_START"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="远程启动设定" />
+    <SwitchPreference
+        android:key="REMOTECONTROL_NEAR_AUTOUNLOCK"
+        android:summaryOff="仅驾驶员门"
+        android:summaryOn="所有门"
+        android:title="智能近车解锁设定" />
+    <SwitchPreference
+        android:key="REMOTECONTROL_KEYLEF_ALARM"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="钥匙遗忘提醒设定" />
+
+    <ListPreference
+        android:entries="@array/ssge_away_autolock_entries"
+        android:entryValues="@array/ssge_away_autolock_values"
+        android:key="REMOTECONTROL_AWAY_AUTOLOCK"
+        android:persistent="false"
+        android:title="智能离车落锁设定" />
+
+    <SwitchPreference
+        android:key="REMOTECONTROL_MOVE_DOOR"
+        android:summaryOff="解锁所有门并打开滑移门"
+        android:summaryOn="解锁滑移门并打开滑移门"
+        android:title="遥控滑移门设置" />
+    <SwitchPreference
+        android:key="REMOTECONTROL_WINDOW_CONTROL"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="遥控车窗控制" />
+
+</PreferenceScreen>

@@ -1,0 +1,51 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:entries="@array/ssgolf_1_entries"
+        android:entryValues="@array/ssgolf_1_values"
+        android:key="DRIVING_MODE"
+        android:persistent="false"
+        android:title="行车模式" />
+    <ListPreference
+        android:entries="@array/ssgolf_2_entries"
+        android:entryValues="@array/ssgolf_2_values"
+        android:key="DRIVING_MODE_INDIVDUAL_DCC"
+        android:persistent="false"
+        android:title="DCC" />
+    <ListPreference
+        android:entries="@array/ssgolf_3_entries"
+        android:entryValues="@array/ssgolf_3_values"
+        android:key="DRIVING_MODE_INDIVDUAL_DBL"
+        android:persistent="false"
+        android:title="动态照明" />
+    <ListPreference
+        android:entries="@array/ssgolf_3_entries"
+        android:entryValues="@array/ssgolf_3_values"
+        android:key="DRIVING_MODE_INDIVDUAL_Engine"
+        android:persistent="false"
+        android:title="发动机" />
+     <ListPreference
+        android:entries="@array/ssgolf_3_entries"
+        android:entryValues="@array/ssgolf_3_values"
+        android:key="DRIVING_MODE_INDIVDUAL_ACC"
+        android:persistent="false"
+        android:title="ACC" />
+
+    <SwitchPreference
+        android:key="DRIVING_MODE_INDIVDUAL_AirCon"
+        android:summaryOff="Eco"
+        android:summaryOn="Normal"
+        android:title="空调  " />
+    <SwitchPreference
+        android:key="DRIVING_MODE_INDIVDUAL_Steering"
+        android:summaryOff="Sport"
+        android:summaryOn="Normal"
+        android:title="方向盘  " />
+    
+    <Preference
+        android:key="DRIVING_MODE_RESET"
+        android:title="行车模式重设" />
+
+
+
+</PreferenceScreen>

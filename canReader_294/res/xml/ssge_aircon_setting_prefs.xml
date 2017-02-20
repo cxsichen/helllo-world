@@ -1,0 +1,85 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:entries="@array/ssge_auto_wind_entries"
+        android:entryValues="@array/ssge_auto_wind_values"
+        android:key="AIRCON_AUTO_WIND"
+        android:persistent="false"
+        android:title="自动风量模式设定" />
+    <ListPreference
+        android:entries="@array/ssge_aircon_mode_entries"
+        android:entryValues="@array/ssge_aircon_mode_values"
+        android:key="AIRCON_MODE"
+        android:persistent="false"
+        android:title="空调模式设定" />
+    <ListPreference
+        android:entries="@array/ssge_air_quality_entries"
+        android:entryValues="@array/ssge_air_quality_values"
+        android:key="AIRCON_AIR_QUALITY"
+        android:persistent="false"
+        android:title="空气质量传感器设定" />
+    <ListPreference
+        android:entries="@array/ssge_air_autozone_entries"
+        android:entryValues="@array/ssge_air_autozone_values"
+        android:key="AIRCON_AUTOZONE_TEMP"
+        android:persistent="false"
+        android:title="自动区域温度" />
+
+    <SwitchPreference
+        android:key="AIRCON_SEAT_AUTOVENT"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="座椅自动通风" />
+    <SwitchPreference
+        android:key="AIRCON_SEAT_AUTOHEAT"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="座椅自动加热设定" />
+    <SwitchPreference
+        android:key="AIRCON_CONTORL_AUTOVENT"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="遥控启动座椅自动通风" />
+    <SwitchPreference
+        android:key="AIRCON_CONTORL_AUTOHEAT"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="遥控启动座椅自动加热" />
+
+    <ListPreference
+        android:entries="@array/ssge_backarea_temp_entries"
+        android:entryValues="@array/ssge_backarea_temp_values"
+        android:key="AIRCON_BACKAREA_TEMP"
+        android:persistent="false"
+        android:title="后座区域温度" />
+
+    <SwitchPreference
+        android:key="AIRCON_FRONT_DEMIST"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="前窗自动去雾" />
+    <SwitchPreference
+        android:key="AIRCON_BACK_DEMIST"
+        android:summaryOff="手动"
+        android:summaryOn="自动"
+        android:title="后窗自动去雾" />
+    <SwitchPreference
+        android:key="AIRCON_REMOTE_START"
+        android:summaryOff="手动"
+        android:summaryOn="自动"
+        android:title="遥控启动空调" />
+
+    <ListPreference
+        android:entries="@array/ssge_air_quality_entries"
+        android:entryValues="@array/ssge_air_quality_values"
+        android:key="AIRCON_AIR_QUALITY_1"
+        android:persistent="false"
+        android:title="空气质量传感器1设定" />
+    <ListPreference
+        android:entries="@array/ssge_remote_autoheat_entries"
+        android:entryValues="@array/ssge_remote_autoheat_values"
+        android:key="AIRCON_CONTORL_AUTOHEAT_1"
+        android:persistent="false"
+        android:title="遥控启动座椅自动加热1" />
+
+</PreferenceScreen>

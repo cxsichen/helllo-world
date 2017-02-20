@@ -1,0 +1,9 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="EQL_MUTE"
+        android:summaryOff="非静音"
+        android:summaryOn="静音"
+        android:title="功放静音" />
+
+</PreferenceScreen>

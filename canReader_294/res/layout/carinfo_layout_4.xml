@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/pageViewTitle"
+        android:text="@string/Maintenance_information" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="3"
+        android:orientation="vertical" >
+
+        <View style="@style/verDivide" />
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="@string/vehicle_no" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/vehicleNo"
+                style="@style/PageViewTextView"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+              />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/carCheckDaysTitle"
+                style="@style/PageViewTextView"
+                android:text="@string/inspection_days" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/carCheckDays"
+                style="@style/PageViewTextView"
+                />
+
+            <View style="@style/honDivide" />
+        </LinearLayout>
+
+        <View style="@style/verDivide" />
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/oilCheckDistanceTitle"
+                style="@style/PageViewTextView"
+                android:text="@string/inspection_distance" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/oilCheckDistance"
+                style="@style/PageViewTextView"
+                 />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/oilchangeDaysTitle"
+                style="@style/PageViewTextView"
+                android:text="@string/oil_change_service_days" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/oilchangeDays"
+                style="@style/PageViewTextView"
+               />
+
+            <View style="@style/honDivide" />
+        </LinearLayout>
+
+        <View style="@style/verDivide" />
+
+        <LinearLayout style="@style/PageViewLayout" >
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/oilchangeDistanceTitle"
+                style="@style/PageViewTextView"
+                android:text="@string/oil_change_service_distance" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                android:id="@+id/oilchangeDistance"
+                style="@style/PageViewTextView"
+                 />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="" />
+
+            <View style="@style/honDivide" />
+
+            <TextView
+                style="@style/PageViewTextView"
+                android:text="" />
+
+            <View style="@style/honDivide" />
+        </LinearLayout>
+
+        <View style="@style/verDivide" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+	
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        <ImageView
+	        android:id="@+id/ev_nav_compss"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="8dp"
+	        android:layout_marginRight="8dp"
+	        android:rotation="25"
+	        android:src="@drawable/oval_nav" />
+	
+	    <ImageView
+	        android:id="@+id/ev_nav_app"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_marginLeft="8dp"
+	        android:layout_marginRight="8dp"      
+	        android:src="@drawable/ic_nav" />
+        
+    </FrameLayout>
+	    
+
+    <TextView
+        style="@style/CardLabel"
+        android:layout_gravity="bottom"
+        android:text="@string/label_card_nav" />
+
+</LinearLayout>

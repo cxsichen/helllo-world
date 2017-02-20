@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
+
+    <include layout="@layout/ac_status_bar_peugeot_408" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
+        <!--Left Fan-->
+        <RelativeLayout
+            android:layout_width="192dp"
+            android:layout_height="192dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ac_outline_cooling">
+
+            <ImageView
+                android:id="@+id/left_temp_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_up" />
+
+            <!--Left Fan Temperature-->
+            <TextView
+                android:id="@+id/left_temp_value"
+                style="@style/TextTemp"
+                android:layout_centerVertical="true"
+                android:text="26°" />
+
+            <ImageView
+                android:id="@+id/left_temp_down"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_arrow_down" />
+
+        </RelativeLayout>
+
+        <!--Right Fan-->
+        <RelativeLayout
+            android:layout_width="192dp"
+            android:layout_height="192dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ac_outline_cooling">
+
+            <ImageView
+                android:id="@+id/right_temp_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_up" />
+
+            <!--Left Fan Temperature-->
+            <TextView
+                android:id="@+id/right_temp_value"
+                style="@style/TextTemp"
+                android:layout_centerVertical="true"
+                android:text="22°" />
+
+            <ImageView
+                android:id="@+id/right_temp_down"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_arrow_down" />
+
+        </RelativeLayout>
+
+        <!--Switchers Top-->
+        <LinearLayout
+            android:layout_width="456dp"
+            android:layout_height="104dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_ac_controler_switcher_top"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/UPWARD_AIR_INDICATOR"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/bg_button_oval"
+                android:scaleType="center"
+                android:src="@drawable/stat_air_outlet_defrost" />
+
+            <ImageView
+                android:id="@+id/PARALLEL_AIR_INDICATOR"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/bg_button_oval"
+                android:scaleType="center"
+                android:src="@drawable/stat_air_outlet_upper" />
+
+            <ImageView
+                android:id="@+id/DOWNWARD_AIR_INDICATOR"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/bg_button_oval"
+                android:scaleType="center"
+                android:src="@drawable/stat_air_outlet_lower" />
+
+        </LinearLayout>
+
+        <!--Switcher Bottom-->
+        <LinearLayout
+            android:layout_width="456dp"
+            android:layout_height="104dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_ac_controler_switcher_bottom"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/AUTO_STATUS"
+                style="@style/AcStatusText"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/bg_button_oval_on"
+                android:text="AUTO" />
+
+            <TextView
+                android:id="@+id/AC_INDICATOR_STATUS"
+                style="@style/AcStatusText"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:background="@drawable/bg_button_oval"
+                android:text="A/C" />
+
+            <TextView
+                android:id="@+id/AC_MAX_STATUS"
+                style="@style/AcStatusText"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/bg_button_oval"
+                android:text="A/C\nMAX" />
+
+        </LinearLayout>
+
+        <!--Air Volume-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/AIR_RATE_DOWN"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/bg_button_oval"
+                android:scaleType="center"
+                android:src="@drawable/ic_minus" />
+
+            <TextView
+                 android:id="@+id/AIR_RATE"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_air_volume"
+                android:gravity="center"
+                android:text="8"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
+
+            <ImageView
+                 android:id="@+id/AIR_RATE_UP"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="24dp"
+                android:background="@drawable/bg_button_oval"
+                android:scaleType="center"
+                android:src="@drawable/ic_plus" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,11 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+     
+     <ListPreference
+            android:entries="@array/rzc_ecs_entries"
+            android:entryValues="@array/rzc_ecs_values"
+            android:key="ESC_SYSTEM"
+            android:persistent="false"
+            android:title="ESC系统" />
+
+</PreferenceScreen>

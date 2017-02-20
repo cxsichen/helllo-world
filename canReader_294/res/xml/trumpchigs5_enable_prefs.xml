@@ -1,0 +1,9 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/car_info_setting_title" >
+        <Preference
+            android:key="panorama_enable"
+            android:title="@string/car_info_panorama" />
+        
+    </PreferenceCategory>
+</PreferenceScreen>

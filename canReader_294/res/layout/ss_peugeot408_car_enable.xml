@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="20dp" >
+
+    <!-- 左边布局 -->
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <CheckBox
+            android:id="@+id/AUTO_PARK_CAR_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/sty_checkbox2"
+            android:text="自动驻车" />
+
+        <CheckBox
+            android:id="@+id/RADAR_ALARM_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="倒车雷达开关" />
+
+        <CheckBox
+            android:id="@+id/WELCOME_PERSION_ILL_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="迎宾照明" />
+
+        <CheckBox
+            android:id="@+id/ATMOSPHERE_ILL_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="气氛照明" />
+
+        <CheckBox
+            android:id="@+id/REAR_WIPER_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="倒车自动后雨刮" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <CheckBox
+            android:id="@+id/PARKING_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="驻车辅助" />
+
+        <CheckBox
+            android:id="@+id/CAR_LOCK_AUTO_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="车门自动锁定" />
+
+        <CheckBox
+            android:id="@+id/CAR_LOCK_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="车门上锁" />
+
+        <CheckBox
+            android:id="@+id/CAR_UNLOCK_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="车门解锁" />
+
+        <CheckBox
+            android:id="@+id/DAYTIME_LAMP_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="日间行车灯" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <CheckBox
+            android:id="@+id/GO_HOME_LAMP_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="伴我回家照明" />
+         <CheckBox
+            android:id="@+id/TRUNK_UNLOCK_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="仅行李箱解锁设置" />
+          <CheckBox
+            android:id="@+id/CHANGE_ILL_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="随动转向大灯设置" />
+           <CheckBox
+            android:id="@+id/CHANGE_LINE_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="变道辅助" />
+            <CheckBox
+            android:id="@+id/WELCOME_FUNTION_STATUS_ENABLE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              style="@style/sty_checkbox2"
+            android:text="迎宾功能" />
+
+            <Button
+                android:id="@+id/temp_enable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                 style="@style/sty_checkbox"
+                android:text="胎压标定" />
+
+    </LinearLayout>
+
+</LinearLayout>

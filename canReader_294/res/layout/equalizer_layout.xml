@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    tools:context="com.example.android.equalizer.MainActivity" >
+
+    <com.console.canreader.view.SelectImageView
+        android:id="@+id/menu"
+        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_menu"
+        android:layout_weight="1" />
+    <!-- BAS Slider -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/vol_tv"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.canreader.view.VerticalSeekBar
+            android:id="@+id/SeekBarVol"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="10dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_drawable"
+            android:thumb="@drawable/ic_thumb"
+            android:thumbOffset="16dp" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="@string/volume" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <!-- TRE Slider -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/tre_tv"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.canreader.view.VerticalSeekBar
+            android:id="@+id/SeekBarTRE"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="10dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_drawable"
+            android:thumb="@drawable/ic_thumb"
+            android:thumbOffset="16dp" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="@string/tre" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <!-- MID Slider -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/mid_tv"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.canreader.view.VerticalSeekBar
+            android:id="@+id/SeekBarMID"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="10dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_drawable"
+            android:thumb="@drawable/ic_thumb"
+            android:thumbOffset="16dp" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="@string/mid" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+    <!-- BAS Slider -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <!-- Value -->
+
+        <TextView
+            android:id="@+id/bas_tv"
+            style="@style/EqSliderText"
+            android:text="0" />
+
+        <com.console.canreader.view.VerticalSeekBar
+            android:id="@+id/SeekBarBas"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="10dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_drawable"
+            android:thumb="@drawable/ic_thumb"
+            android:thumbOffset="16dp" />
+
+        <!-- Label -->
+
+        <TextView
+            style="@style/EqSliderText"
+            android:text="@string/bas" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <include layout="@layout/sound_balance" />
+
+</LinearLayout>

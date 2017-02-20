@@ -1,0 +1,39 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	
+      <ListPreference
+        android:entries="@array/ss_golf_conv_open_entries"
+        android:entryValues="@array/ss_golf_conv_open_values"
+        android:key="CONV_OPENING"
+        android:persistent="false"
+        android:title="车窗便捷开启" />
+    
+      
+        <ListPreference
+        android:entries="@array/ss_golf_door_unlock_entries"
+        android:entryValues="@array/ss_golf_door_unlock_values"
+        android:key="DOOR_UNLOCKING"
+        android:persistent="false"
+        android:title="中央门锁（车门解锁）" />
+      
+        
+    <SwitchPreference
+        android:key="AUTOMATIC_LOCKING"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="自动锁止  " />
+    
+     <SwitchPreference
+        android:key="SEAT_KEY_REMOTE_FIX"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="座椅遥控钥匙记忆匹配 " /> 
+        
+    <SwitchPreference
+        android:key="INDUCTON_REAR_DOOR_COVER"
+        android:summaryOff="OFF"
+        android:summaryOn="ON"
+        android:title="感应式后尾箱盖 " /> 
+
+
+</PreferenceScreen>

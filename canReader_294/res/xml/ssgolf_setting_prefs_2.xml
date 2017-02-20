@@ -1,0 +1,52 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="AUTO_PARK_CAR_STATUS"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="自动激活" />
+
+    <ListPreference
+        android:entries="@array/rzc_golf_volume_entries"
+        android:entryValues="@array/rzc_golf_volume_values"
+        android:key="FRONT_VOLUME"
+        android:persistent="false"
+        android:title="前部音量" />
+    
+    <ListPreference
+        android:entries="@array/rzc_golf_frequency_entries"
+        android:entryValues="@array/rzc_golf_volume_values"
+        android:key="FRONT_FREQUNENCY"
+        android:persistent="false"
+        android:title="前部音调" />
+    
+    
+    <ListPreference
+        android:entries="@array/rzc_golf_volume_entries"
+        android:entryValues="@array/rzc_golf_volume_values"
+        android:key="BACK_VOLUME"
+        android:persistent="false"
+        android:title="后部音量" />
+    
+    <ListPreference
+        android:entries="@array/rzc_golf_frequency_entries"
+        android:entryValues="@array/rzc_golf_volume_values"
+        android:key="BACK_FREQUNENCY"
+        android:persistent="false"
+        android:title="后部音调" />
+    
+    
+     <ListPreference
+        android:entries="@array/ss_golf_parking_mode_entries"
+        android:entryValues="@array/ss_golf_parking_mode_values"
+        android:key="PARKING_MODE"
+        android:persistent="false"
+        android:title="倒车模式" />
+     
+     <SwitchPreference
+        android:key="RADAR_WARING_VOLUME"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="倒车雷达声音" />
+
+</PreferenceScreen>

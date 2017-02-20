@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/divider" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/bg_car" />
+
+    <ImageView
+        android:id="@+id/ic_car"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_car" />
+
+    <LinearLayout
+        android:layout_width="@dimen/data_width"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_toLeftOf="@+id/ic_car"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/dataParentStyle">
+
+            <TextView
+                android:id="@+id/pressure_fl"
+                style="@style/dataTextStyle"
+                android:text="0Kpa" />
+
+            <TextView
+                android:id="@+id/temperature_fl"
+                style="@style/dataTextStyle"
+                android:layout_below="@+id/pressure_fl"
+                android:text="0℃" />
+
+            <ImageView
+                android:id="@+id/battery_fl"
+                android:layout_width="24dp"
+                android:layout_height="34dp"
+                android:layout_alignBottom="@+id/temperature_fl"
+                android:layout_toRightOf="@+id/temperature_fl"
+                android:visibility="invisible"
+                android:src="@drawable/ic_low_battery" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/dataParentStyle">
+
+            <TextView
+                android:id="@+id/pressure_bl"
+                style="@style/dataTextStyle"
+                android:layout_below="@+id/temperature_bl"
+                android:text="0Kpa" />
+
+            <TextView
+                android:id="@+id/temperature_bl"
+                style="@style/dataTextStyle"
+                android:text="0℃" />
+
+            <ImageView
+                android:id="@+id/battery_bl"
+                android:layout_width="24dp"
+                android:layout_height="34dp"
+                android:layout_alignBottom="@+id/temperature_bl"
+                android:layout_toRightOf="@+id/temperature_bl"
+                android:visibility="invisible"
+                android:src="@drawable/ic_low_battery" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/data_width"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_toRightOf="@+id/ic_car"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/dataParentStyle">
+
+            <TextView
+                android:id="@+id/pressure_fr"
+                style="@style/dataTextStyle"
+                android:layout_alignParentRight="true"
+                android:text="0Kpa" />
+
+            <TextView
+                android:id="@+id/temperature_fr"
+                style="@style/dataTextStyle"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/pressure_fr"
+                android:text="0℃" />
+
+            <ImageView
+                android:id="@+id/battery_fr"
+                android:layout_width="24dp"
+                android:layout_height="34dp"
+                android:layout_alignBottom="@+id/temperature_fr"
+                android:layout_toLeftOf="@+id/temperature_fr"
+                android:visibility="invisible"
+                android:src="@drawable/ic_low_battery" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/dataParentStyle">
+
+            <TextView
+                android:id="@+id/pressure_br"
+                style="@style/dataTextStyle"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/temperature_br"
+                android:text="0Kpa" />
+
+            <TextView
+                android:id="@+id/temperature_br"
+                style="@style/dataTextStyle"
+                android:layout_alignParentRight="true"
+                android:text="0℃" />
+
+            <ImageView
+                android:id="@+id/battery_br"
+                android:layout_width="24dp"
+                android:layout_height="34dp"
+                android:layout_alignBottom="@+id/temperature_br"
+                android:layout_toLeftOf="@+id/temperature_br"
+                android:visibility="invisible"
+                android:src="@drawable/ic_low_battery" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

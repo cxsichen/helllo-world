@@ -1,0 +1,52 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="PARKING_ASSIT_STATUS"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="泊车辅助系统设定" />
+    <SwitchPreference
+        android:key="CRASHPROOF_SIDE_BLIND_AREA"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="侧盲区报警系统" />
+    <SwitchPreference
+        android:key="CRASHPROOF_WARING"
+        android:summaryOff="钟鸣警告"
+        android:summaryOn="座椅"
+        android:title="防撞报警类型设定" />
+
+    <ListPreference
+        android:entries="@array/ssge_park_assit_entries"
+        android:entryValues="@array/ssge_park_assit_values"
+        android:key="CRASHPROOF_PART_ASSIT"
+        android:persistent="false"
+        android:title="泊车辅助系统设定（带拖车补偿）" />
+
+    <SwitchPreference
+        android:key="CRASHPROOF_24GHZ_RADAR"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="24GHZ雷达设定" />
+
+    <ListPreference
+        android:entries="@array/ssge_crash_ready_entries"
+        android:entryValues="@array/ssge_crash_ready_values"
+        android:key="CRASHPROOF_AUTO_READY"
+        android:persistent="false"
+        android:title="自动防撞准备" />
+    
+    <SwitchPreference
+        android:key="CRASHPROOF_CARSTATUS_NOTIFY"
+        android:summaryOff="关"
+        android:summaryOn="开"
+        android:title="汽车状态通知" />
+    
+    
+    <SwitchPreference
+        android:key="CRASHPROOF_RAMPWAY_ASSIT"
+        android:summaryOff="标准泊车"
+        android:summaryOn="增强泊车"
+        android:title="坡道辅助系统" />
+
+</PreferenceScreen>

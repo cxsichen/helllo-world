@@ -1,0 +1,332 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <style name="Theme.AppCompat.Light.NoActionBar" parent="android:Widget"></style>
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="@android:attr/actionBarSize">80px</item>
+    </style>
+
+    <!-- Status Group Text -->
+    <style name="StatusText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="MyDialog" parent="@android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/bg_empty</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/push_up_in</item>
+        <item name="android:windowExitAnimation">@anim/push_down_out</item>
+    </style>
+
+    <style name="DialogAnimation1">
+        <item name="android:windowEnterAnimation">@anim/large</item>
+        <item name="android:windowExitAnimation">@anim/small</item>
+    </style>
+
+    <style name="TextViewSy">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- Temperature -->
+    <style name="TextTemp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">60sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <!-- Divider -->
+    <style name="Divider">
+        <item name="android:layout_width">152dp</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:background">#57FFFFFF</item>
+    </style>
+
+    <!-- Fan Assets Styles -->
+    <!-- Fan icon -->
+    <style name="IconFan">
+        <item name="android:layout_height">@dimen/fan_assets_height</item>
+        <item name="android:layout_width">@dimen/fan_assets_width</item>
+        <item name="android:layout_marginLeft">@dimen/fan_assets_margin</item>
+        <item name="android:src">@drawable/ic_ac_fan</item>
+    </style>
+    <!-- Fan Text -->
+    <style name="TextFan">
+        <item name="android:layout_height">@dimen/fan_assets_height</item>
+        <item name="android:layout_width">@dimen/fan_assets_width</item>
+        <item name="android:layout_marginRight">@dimen/fan_assets_margin</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <!-- AC Status Group Text -->
+    <style name="AcStatusText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- Dashboard -->
+    <!-- Dashboard Status RelativeLayout -->
+    <style name="DashboardStatusRelativeLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+    <!-- Dashboard Status Icon -->
+    <style name="DashboardStatusIcon">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+    <!-- Dashboard Status Text -->
+    <style name="DashboardStatusText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <!-- Dashboard Speedmeter Text -->
+    <style name="SpeedmeterText">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#8AFFFFFF</item>
+        <item name="android:background">@drawable/bg_speedmeter_collapse</item>
+    </style>
+    <!-- Fuel and RPM Icons -->
+    <style name="FuelAndRpmIcons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">80dp</item>
+    </style>
+    <!-- Fuel and RPM Text -->
+    <style name="FuelAndRpmText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginLeft">16sp</item>
+    </style>
+
+    <!-- obd pageView textView -->
+    <style name="PageViewTextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- obd layout layout -->
+    <style name="PageViewLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- ver divide -->
+    <style name="verDivide">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@android:color/holo_blue_bright</item>
+    </style>
+
+    <!-- hon divide -->
+    <style name="honDivide">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@android:color/holo_blue_bright</item>
+    </style>
+    
+    <!-- oil change -->
+    <style name="oilChangeTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <!-- pageView title -->
+    <style name="pageViewTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+    
+        <!--Pressure and temperature data text style-->
+    <style name="dataTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!--Style of the parent of data text (RelativeLayout)-->
+    <style name="dataParentStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+ 
+     <!--Main Menu RelativeLayout-->
+    <style name="mainMenuRelativeLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:visibility">gone</item> 
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+    
+        <!--Main Menu Item Icon-->
+    <style name="mainMenuIcon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+    
+        <!--Main Menu Item Label-->
+    <style name="mainMenuLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+    
+        <!--Main Menu Divider-->
+    <style name="mainMenuDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">128dp</item>
+        <item name="android:background">#1FFFFFFF</item>
+        <item name="android:visibility">gone</item>
+    </style>
+    
+    
+        <!-- Button Styles -->
+    <style name="SoundStyleText">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#DFFFFFFF</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+        <!-- EQ Slider Text Style -->
+    <style name="EqSliderText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+           <style name="dial_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+    
+               <!-- PopupWindow左右弹出的效果 -->  
+    <style name="PopupWindowAnimation">  
+    <item name="android:windowEnterAnimation">@anim/left_in</item>  
+    <item name="android:windowExitAnimation">@anim/left_out</item>  
+</style>  
+    
+    <style name="sty_checkbox">
+        <item name="android:textSize">20sp</item> 
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+     <style name="sty_checkbox2">
+        <item name="android:textSize">20sp</item> 
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:clickable">false</item> 
+    </style>
+    <style name="style_408_tv" parent="@style/sty_checkbox">
+        <item name="android:layout_marginTop">6dp</item>
+    </style>
+    
+    
+
+    <!-- Dashboard Status Icon -->
+    <style name="DashboardStatusIcon_294">
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">0dp</item>
+    </style>
+    <!-- Dashboard Status Text -->
+    <style name="DashboardStatusText_294">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">96dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+                      
+     <style name="DashboardLine_294">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:src">@drawable/bottom_line</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+</resources>

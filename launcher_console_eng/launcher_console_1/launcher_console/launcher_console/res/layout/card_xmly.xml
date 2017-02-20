@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_xmly"
+    android:id="@+id/bg_card_xmly"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/xmly_img"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_xmly"
+        android:background="@drawable/ripple_bg"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"/>
+
+    <!--播放时，该TextView显示频道名称-->
+    <TextView
+        android:id="@+id/xmly_name"
+        style="@style/CardLabel"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:text="@string/label_card_xmly" />
+
+    <View style="@style/HorizontalDivider" />
+
+    <RelativeLayout style="@style/ShortCutGroup">
+
+        <com.console.launcher_console.view.SelectImageView
+            android:id="@+id/xmly_pre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_music_previous" />
+
+        <com.console.launcher_console.view.SelectImageView
+            android:id="@+id/xmly_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_music_play" />
+
+        <com.console.launcher_console.view.SelectImageView
+            android:id="@+id/xmly_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_music_next" />
+
+    </RelativeLayout>
+
+</LinearLayout>
