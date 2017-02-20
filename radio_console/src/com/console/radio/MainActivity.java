@@ -685,7 +685,7 @@ public class MainActivity extends Activity implements OnClickListener,
 			isFM = false;
 		}
 		if (mRadioData.curFreq != 65535)
-			showFrq(mRadioData.curFreq, isFM);
+			showFrq(mRadioData.curFreq, mRadioData.curFreq>8000);
 		updateAmFm(isFM);
 
 		band = mRadioData.curBand;
