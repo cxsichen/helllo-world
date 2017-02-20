@@ -1,8 +1,11 @@
 package com.console.auxapp;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -46,13 +49,29 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 1:
-				if (CHANGECHANNEL)
-					com.example.cjc7150.MainActivity.setmode((byte) 0);
+				new Thread(){  
+			        @Override  
+			        public void run() {  
+			            try {  
+			            	if (CHANGECHANNEL)
+								com.example.cjc7150.MainActivity.setmode((byte) 0);
+			            } catch (Exception e) {  
+			              Log.i("cxs","setmode fail"); 
+			            }  
+			        }}.start(); 	
 				break;
 			case OPENCAMERA:
+				new Thread(){  
+			        @Override  
+			        public void run() {  
+			            try {  
+			            	if (CHANGECHANNEL)
+								com.example.cjc7150.MainActivity.setmode((byte) 0);
+			            } catch (Exception e) {  
+			              Log.i("cxs","setmode fail"); 
+			            }  
+			        }}.start(); 	
 				openCamera();
-				if (CHANGECHANNEL)
-					com.example.cjc7150.MainActivity.setmode((byte) 0);
 				if (camera != null && mSurfaceTexture != null) {
 					Camera.Parameters mParams = camera.getParameters();
 
@@ -194,20 +213,7 @@ public class MainActivity extends Activity implements SurfaceTextureListener {
 			int height) {
 		// TODO Auto-generated method stub
 		mSurfaceTexture = surface;
-		openCamera();
-		if (camera != null) {
-			Camera.Parameters mParams = camera.getParameters();
-
-			mParams.setPreviewSize(720, 240);
-			camera.setParameters(mParams);
-			try {
-				camera.setPreviewTexture(surface);
-			} catch (IOException t) {
-			}
-			camera.startPreview();
-			this.surface.setAlpha(1.0f);
-			this.surface.setRotation(0f);
-		}
+		mHandler.sendEmptyMessageDelayed(OPENCAMERA, 0);
 	}
 
 	@Override
