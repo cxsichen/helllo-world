@@ -13,6 +13,11 @@ public class Contacts {
 	public static final int MSG_CHANGE_PAGE = 0x07;
 	public static final int MSG_PAGE_UNLOCK = 0x08;
 	public static final int MSG_SYNC_INDICATOR = 0x09;
+	public static final int MSG_CHANGE_SCORLLVIEW = 0x0A;
+	public static final int MSG_CHANGE_PAGE_ANYWAY = 0x0B;
+	public static final int MSG_SAVE_ITEM = 0x0C;
+	public static final int MSG_SAVE_ITEM_1 = 0x0D;
+	public static final int MSG_SEND_FREQ = 0x0E;
 
 	public static final String HEX_AUTO_SCAN = "F506000019";
 	public static final String HEX_START = "F000000001";

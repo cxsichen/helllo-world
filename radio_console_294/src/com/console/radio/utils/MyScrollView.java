@@ -19,19 +19,21 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MyScrollView extends HorizontalScrollView {
-
+	TextView saveTv;
 	TextView fmTv1;
 	TextView fmTv2;
 	TextView fmTv3;
 	TextView amTv1;
 	TextView amTv2;
 
+	ImageView saveId;
 	ImageView fmId1;
 	ImageView fmId2;
 	ImageView fmId3;
 	ImageView amId1;
 	ImageView amId2;
 	
+	RelativeLayout saveLy;
 	RelativeLayout fmLy1;
 	RelativeLayout fmLy2;
 	RelativeLayout fmLy3;
@@ -57,23 +59,27 @@ public class MyScrollView extends HorizontalScrollView {
 
 	private void init() {
 		// TODO Auto-generated method stub
+		saveTv = (TextView) findViewById(R.id.saveTv);
 		fmTv1 = (TextView) findViewById(R.id.fmTv1);
 		fmTv2 = (TextView) findViewById(R.id.fmTv2);
 		fmTv3 = (TextView) findViewById(R.id.fmTv3);
 		amTv1 = (TextView) findViewById(R.id.amTv1);
 		amTv2 = (TextView) findViewById(R.id.amTv2);
 
+		tvList.add(saveTv);
 		tvList.add(fmTv1);
 		tvList.add(fmTv2);
 		tvList.add(fmTv3);
 		tvList.add(amTv1);
 		tvList.add(amTv2);
 		
+		saveLy=(RelativeLayout) findViewById(R.id.saveLy);
 		fmLy1=(RelativeLayout) findViewById(R.id.fmLy1);
 		fmLy2=(RelativeLayout) findViewById(R.id.fmLy2);
 		fmLy3=(RelativeLayout) findViewById(R.id.fmLy3);
 		amLy1=(RelativeLayout) findViewById(R.id.amLy1);
 		amLy2=(RelativeLayout) findViewById(R.id.amLy2);
+		lyList.add(saveLy);
 		lyList.add(fmLy1);
 		lyList.add(fmLy2);
 		lyList.add(fmLy3);
@@ -92,12 +98,14 @@ public class MyScrollView extends HorizontalScrollView {
 			});
 		}
 
+		saveId = (ImageView) findViewById(R.id.saveId);
 		fmId1 = (ImageView) findViewById(R.id.fmId1);
 		fmId2 = (ImageView) findViewById(R.id.fmId2);
 		fmId3 = (ImageView) findViewById(R.id.fmId3);
 		amId1 = (ImageView) findViewById(R.id.amId1);
 		amId2 = (ImageView) findViewById(R.id.amId2);
 
+		ivList.add(saveId);
 		ivList.add(fmId1);
 		ivList.add(fmId2);
 		ivList.add(fmId3);
@@ -140,14 +148,14 @@ public class MyScrollView extends HorizontalScrollView {
 		this.onScrollChangedListener = onScrollChangedListener;
 	}
 
-	int[] distance = { 0, 0, 80, 160, 160 };
+	int[] distance = { 0, 0, 80, 160, 240 , 240};
 
 	public void syncSeletedPosition(int item) {
 		scrollTo(distance[item], 0);
 	}
 
 	public void setSelectedItem(int item) {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 6; i++) {
 			if (item == i) {
 				tvList.get(i).setTextColor(
 						context.getResources().getColor(R.color.text_selected));
@@ -157,6 +165,7 @@ public class MyScrollView extends HorizontalScrollView {
 				ivList.get(i).setVisibility(View.INVISIBLE);
 			}
 		}
+		syncSeletedPosition(item);
 	}
 
 }

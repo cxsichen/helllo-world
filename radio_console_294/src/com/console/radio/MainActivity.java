@@ -2,7 +2,9 @@ package com.console.radio;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import cn.colink.serialport.service.ISerialPortCallback;
 import cn.colink.serialport.service.ISerialPortService;
@@ -11,19 +13,26 @@ import com.console.radio.bean.RadioData;
 import com.console.radio.bean.RadioDataEvent;
 import com.console.radio.utils.BytesUtil;
 import com.console.radio.utils.Contacts;
+import com.console.radio.utils.DatabaseUtil;
 import com.console.radio.utils.DecoratorViewPager;
 import com.console.radio.utils.DensityUtils;
 import com.console.radio.utils.FMView;
 import com.console.radio.utils.MyScrollView;
 import com.console.radio.utils.MyScrollView.OnScrollChangedListener;
 import com.console.radio.utils.PreferenceUtil;
+import com.console.radio.utils.SaveVpAdapter;
 import com.console.radio.utils.ScrollAnimation;
 import com.console.radio.utils.Trace;
 import com.console.radio.utils.VerticalSeekBar;
 import com.console.radio.utils.VerticalSeekBar.OnProgressChangedListener;
 import com.console.radio.utils.ViewPagerAdapter;
 import com.console.radio.utils.VpAdapter;
+import com.console.radio.utils.VpAdapter.OnItemSelectedListener;
 
+
+
+
+import android.R.integer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -127,7 +136,11 @@ public class MainActivity extends Activity implements OnClickListener,
 	private int UNDEFAULT_VALUME = -100;
 	private MyScrollView myScrollView;
 	private List<Integer> allFqs = new ArrayList<Integer>();
-
+	private Set<Integer> saveFqs=new HashSet<Integer>();
+	private DatabaseUtil mDBUtil;
+	
+	
+	
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -141,15 +154,84 @@ public class MainActivity extends Activity implements OnClickListener,
 					freqVp.setCurrentItem(msg.arg1);
 				}
 				break;
+			case Contacts.MSG_CHANGE_PAGE_ANYWAY:
+				freqVp.setCurrentItem(msg.arg1);
+				break;
 			case Contacts.MSG_PAGE_UNLOCK:
 				PAGECHANGELOCK = false;
+				break;
+			case Contacts.MSG_CHANGE_SCORLLVIEW:
+				int position = msg.arg1;
+				myScrollView.setSelectedItem(position);
+				break;
+			case Contacts.MSG_SAVE_ITEM:
+				int band = msg.arg1;
+				int item = msg.arg2;
+				dealSaveFreq(band,item);
+				syncSaveFreq(saveFqs);
+				break;
+			case Contacts.MSG_SAVE_ITEM_1:
+				int freq = msg.arg1;
+				dealSaveFreq_1(freq);
+				syncSaveFreq(saveFqs);
+				break;
+			case Contacts.MSG_SEND_FREQ:
+				int sendFreq = msg.arg1;
+				sendMsg(getMsgString(sendFreq));
 				break;
 			default:
 				break;
 			}
 		}
-
 	};
+	
+	public String getMsgString(final int freq) {
+		byte[] packet = new byte[5];
+		packet[0] = Integer.valueOf("F1", 16).byteValue();
+		packet[1] = Integer.valueOf("01", 16).byteValue();
+		int data3 = freq / 256;
+		int data4 = freq - data3 * 256;
+		packet[2] = Integer.valueOf("00", 16).byteValue();
+		packet[3] = Integer.valueOf(Integer.toHexString(data3), 16).byteValue();
+		packet[4] = Integer.valueOf(Integer.toHexString(data4), 16).byteValue();
+		return BytesUtil.bytesToHexString(packet);
+	}
+	
+	private void dealSaveFreq_1(int freq) {
+		// TODO Auto-generated method stub
+		for(int i:saveFqs){
+			if(i==freq){
+				saveFqs.remove(i);
+				return;
+			}
+		}
+		saveFqs.add(freq);
+	}
+	
+	private void dealSaveFreq(int band, int item) {
+		// TODO Auto-generated method stub
+		if(allFqs==null||(6*band+item)>allFqs.size()){
+			return;
+		}
+		int saveFreq = allFqs.get(6*band+item);
+		for(int i:saveFqs){
+			if(i==saveFreq){
+				saveFqs.remove(i);
+				return;
+			}
+		}
+		saveFqs.add(saveFreq);
+	}
+	
+	private void syncSaveFreq(Set<Integer> saveFqs){
+		for (VpAdapter vpAdapter : vpAdapterlist) {
+			vpAdapter.setSaveFreq(saveFqs);
+			vpAdapter.notifyDataSetChanged();
+		}
+		saveVpAdapter.notifyDataSetChanged();
+	}
+	
+	
 
 	private ISerialPortCallback mICallback = new ISerialPortCallback.Stub() {
 
@@ -243,9 +325,9 @@ public class MainActivity extends Activity implements OnClickListener,
 			public void OnItemSelected(int index) {
 				// TODO Auto-generated method stub
 				Message msg = new Message();
-				msg.what = Contacts.MSG_CHANGE_PAGE;
+				msg.what = Contacts.MSG_CHANGE_PAGE_ANYWAY;
 				msg.arg1 = index;
-				mHandler.removeMessages(Contacts.MSG_CHANGE_PAGE);
+				mHandler.removeMessages(Contacts.MSG_CHANGE_PAGE_ANYWAY);
 				mHandler.sendMessage(msg);
 			}
 
@@ -284,12 +366,60 @@ public class MainActivity extends Activity implements OnClickListener,
 	/*-------频率的viewpage设置   start--------------*/
 	private void initFreqLayout() {
 		// TODO Auto-generated method stub
+		mDBUtil=new DatabaseUtil(this);
+		saveFqs=mDBUtil.queryAll();
+		
+		
 		freqVp = (DecoratorViewPager) findViewById(R.id.freq_vp);
+
+		View saveView = inflater.inflate(R.layout.freq_listview, null);
+		ListView saveListView = (ListView) saveView
+				.findViewById(R.id.freq_listView);
+		saveVpAdapter = new SaveVpAdapter(this, saveFqs);
+		saveVpAdapter.setOnItemSelectedListener(new SaveVpAdapter.OnItemSelectedListener() {
+			
+			@Override
+			public void OnItemSelected(int freq) {
+				// TODO Auto-generated method stub
+				Message msg = new Message();
+				msg.what = Contacts.MSG_SAVE_ITEM_1;
+				msg.arg1 = freq;
+				mHandler.sendMessage(msg);
+			}
+		});
+		saveListView.setAdapter(saveVpAdapter);
+		saveListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Message msg=new Message();
+				msg.what=Contacts.MSG_SEND_FREQ;
+				msg.arg1=(int) saveVpAdapter.getItem(position);
+				mHandler.sendMessage(msg);
+				//Log.i("cxs","====saveVpAdapter.getItem(position)========"+saveVpAdapter.getItem(position));
+			}
+		});
+		freqViewList.add(saveView);
+
 		for (int i = 0; i < 5; i++) {
 			View view = inflater.inflate(R.layout.freq_listview, null);
 			ListView listView = (ListView) view
 					.findViewById(R.id.freq_listView);
 			VpAdapter vpAdapter = new VpAdapter(this, allFqs, i);
+			vpAdapter.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void OnItemSelected(int band, int item) {
+					// TODO Auto-generated method stub
+					Message msg = new Message();
+					msg.what = Contacts.MSG_SAVE_ITEM;
+					msg.arg1 = band;
+					msg.arg2 = item;
+					mHandler.sendMessage(msg);
+				}
+			});
 			listView.setAdapter(vpAdapter);
 			listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -318,37 +448,47 @@ public class MainActivity extends Activity implements OnClickListener,
 		freqVp.setAdapter(freqVpAdapter);
 
 		freqVp.setOnPageChangeListener(mFreqOnPageChangeListener);
+		
+		syncSaveFreq(saveFqs);
 	}
+
+	int position = 0;
 
 	OnPageChangeListener mFreqOnPageChangeListener = new OnPageChangeListener() {
 
 		@Override
 		public void onPageSelected(int arg0) {
 			// TODO Auto-generated method stub
+			position = arg0;
 			if (!SEARCHLOCK) {
 				switch (arg0) {
-				case 0:
+				case 1:
 					sendMsg(Contacts.HEX_FM_BRAND_1);
 					break;
-				case 1:
+				case 2:
 					sendMsg(Contacts.HEX_FM_BRAND_2);
 					break;
-				case 2:
+				case 3:
 					sendMsg(Contacts.HEX_FM_BRAND_3);
 					break;
-				case 3:
+				case 4:
 					sendMsg(Contacts.HEX_AM_BRAND_1);
 					break;
-				case 4:
+				case 5:
 					sendMsg(Contacts.HEX_AM_BRAND_2);
 					break;
 				default:
 					break;
 				}
 			}
+
 			SEARCHLOCK = false;
 			updatePageView(allFqs, band, item);
-			myScrollView.syncSeletedPosition(arg0);
+
+			Message msg = new Message();
+			msg.what = Contacts.MSG_CHANGE_SCORLLVIEW;
+			msg.arg1 = arg0;
+			mHandler.sendMessage(msg);
 		}
 
 		@Override
@@ -361,6 +501,9 @@ public class MainActivity extends Activity implements OnClickListener,
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
 			// TODO Auto-generated method stub
+			if (position == 0) {
+				return;
+			}
 			if (arg0 == 0) {
 				mHandler.removeMessages(Contacts.MSG_PAGE_UNLOCK);
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_PAGE_UNLOCK, 1000);
@@ -418,7 +561,7 @@ public class MainActivity extends Activity implements OnClickListener,
 			break;
 		}
 	}
-	
+
 	public String getMsgString(final int freq, int type) {
 		byte[] packet = new byte[5];
 		packet[0] = Integer.valueOf("F1", 16).byteValue();
@@ -430,7 +573,6 @@ public class MainActivity extends Activity implements OnClickListener,
 		packet[4] = Integer.valueOf(Integer.toHexString(data4), 16).byteValue();
 		return BytesUtil.bytesToHexString(packet);
 	}
-
 
 	@Override
 	public boolean onLongClick(View v) {
@@ -529,8 +671,8 @@ public class MainActivity extends Activity implements OnClickListener,
 			isFM = false;
 		}
 		if (mRadioData.curFreq != 65535)
-			showFrq(mRadioData.curFreq, mRadioData.curFreq>8000);
-		updateAmFm(mRadioData.curFreq>8000);
+			showFrq(mRadioData.curFreq, mRadioData.curFreq > 8000);
+		updateAmFm(mRadioData.curFreq > 8000);
 
 		band = mRadioData.curBand;
 		item = mRadioData.curFavDown - 1;
@@ -544,13 +686,13 @@ public class MainActivity extends Activity implements OnClickListener,
 		}
 		updatePageItem(allFqs, band, item);
 		if (mRadioData.curFreq != 65535) {
-			if (mRadioData.curFreq >8000) {
+			if (mRadioData.curFreq > 8000) {
 				float fmvalue = checkFmValue(Float.parseFloat(df2
 						.format((float) mRadioData.curFreq / 100.0f)));
-				mFMView.setValue(fmvalue, mRadioData.curFreq >8000);
+				mFMView.setValue(fmvalue, mRadioData.curFreq > 8000);
 			} else {
 				float fmvalue = checkAmValue(mRadioData.curFreq);
-				mFMView.setValue(fmvalue, mRadioData.curFreq >8000);
+				mFMView.setValue(fmvalue, mRadioData.curFreq > 8000);
 			}
 		}
 	}
@@ -567,6 +709,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		Trace.i("FM MainActivity onPause");
 		super.onPause();
 		unBindSerialPortService();
+		saveFqDataWhenOnDestroy();
 	}
 
 	@Override
@@ -644,6 +787,8 @@ public class MainActivity extends Activity implements OnClickListener,
 		updateAmFm(isFM);
 		initFreqLayout();
 		updatePageView(allFqs, band, item);
+		
+
 	}
 
 	/**
@@ -656,17 +801,16 @@ public class MainActivity extends Activity implements OnClickListener,
 	private void updatePageView(List<Integer> allFqs, int band, int item) {
 		// TODO Auto-generated method stub
 
-	/*	for (VpAdapter vpAdapter : vpAdapterlist) {
+		for (VpAdapter vpAdapter : vpAdapterlist) {
 			vpAdapter.setSelectedItem(item, band);
 			vpAdapter.notifyDataSetChanged();
 		}
 
-		((ListView) freqViewList.get(band)).setSelection(item);*/
+		((ListView) freqViewList.get(band)).setSelection(item);
 
-		myScrollView.setSelectedItem(band);
 		Message msg = new Message();
 		msg.what = Contacts.MSG_CHANGE_PAGE;
-		msg.arg1 = band;
+		msg.arg1 = band + 1;
 		mHandler.removeMessages(Contacts.MSG_CHANGE_PAGE);
 		mHandler.sendMessage(msg);
 
@@ -679,27 +823,27 @@ public class MainActivity extends Activity implements OnClickListener,
 	 * @param band
 	 * @param item
 	 */
-	
-	int saveBand=-1;
-	int saveitem=-1;
+
+	int saveBand = -1;
+	int saveitem = -1;
+
 	private void updatePageItem(List<Integer> allFqs, int band, int item) {
 		// TODO Auto-generated method stub
 
 		vpAdapterlist.get(band).setSelectedItem(item, band);
 		vpAdapterlist.get(band).notifyDataSetChanged();
 
-		if((saveBand!=band)||(saveitem!=item)){
-			saveBand=band;
-			saveitem=item;
+		if ((saveBand != band) || (saveitem != item)) {
+			saveBand = band;
+			saveitem = item;
 			if (item >= 0 && item <= 5)
-				((ListView) freqViewList.get(band)).smoothScrollToPosition(item);
+				((ListView) freqViewList.get(band))
+						.smoothScrollToPosition(item);
 		}
-	
-		myScrollView.setSelectedItem(band);
 
 		Message msg = new Message();
 		msg.what = Contacts.MSG_CHANGE_PAGE;
-		msg.arg1 = band;
+		msg.arg1 = band + 1;
 		mHandler.sendMessage(msg);
 
 	}
@@ -741,9 +885,16 @@ public class MainActivity extends Activity implements OnClickListener,
 		PreferenceUtil.setBand(this, band);
 		PreferenceUtil.setFavoriteFq(this, item);
 		PreferenceUtil.setAllFq(this, allFqs);
+		
+		mDBUtil.revertSeq();
+		for(Integer i:saveFqs){
+			mDBUtil.Insert(i);
+		}
+		
 	}
 
 	private AudioManager mAudioManager;
+	private SaveVpAdapter saveVpAdapter;
 
 	private int requestAudioFocus() {
 		return getAudioManager().requestAudioFocus(

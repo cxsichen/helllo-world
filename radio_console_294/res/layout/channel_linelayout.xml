@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="600dp"
+    android:layout_width="720dp"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
+    
+    
+    <RelativeLayout 
+        android:id="@+id/saveLy"
+        style="@style/LinelayoutStyle" >
+
+        <TextView
+            android:id="@+id/saveTv"
+            style="@style/TvStyle"
+            android:text="收藏" />
+
+        <ImageView
+           android:id="@+id/saveId"
+           style="@style/ChoseStyle"
+            />
+    </RelativeLayout>
 
     <RelativeLayout 
         android:id="@+id/fmLy1"
