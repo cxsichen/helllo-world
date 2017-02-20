@@ -79,6 +79,9 @@ public class MenuTpmsAcitivity extends BaseActivity {
 		case Contacts.CANNAMEGROUP.RZCVolkswagenGolf:
 			startTpmsAcitivy("com.console.canreader.fragment.RZCVolkswagenGolf.TpmsActivity");
 			break;
+		case Contacts.CANNAMEGROUP.RZCJAC:
+			startTpmsAcitivy("com.console.canreader.fragment.RZCJAC.TpmsActivity");
+			break;
 		default:
 			break;
 		}

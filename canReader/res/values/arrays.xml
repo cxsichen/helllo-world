@@ -1814,7 +1814,26 @@
         <item>0</item><!-- 胎压 -->
         <item>1</item> <!-- 关于  -->
     </string-array>
-    <!-- 尚摄  荣威360  -->   
+    <!-- 尚摄  荣威360  --> 
+    
+    <!-- 睿志诚  荣威360  -->
+    <string-array name="RZCRoewe360_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>
+    <string-array name="RZCRoewe360_setting_items">
+        <item>背光颜色设置</item>     
+    </string-array>
+    <string-array name="RZCRoewe360_setting_fragment">
+        <item>com.console.canreader.fragment.RZCRoewe360.ColorFragment</item> 
+    </string-array>
+    <!-- 睿志诚   荣威360  -->   
     <!-- 上汽  -->
     
      <!-- 福特  -->
@@ -1952,6 +1971,27 @@
         <item>com.console.canreader.fragment.SSFS.CarTypeSettingsFragment</item> 
     </string-array> 
     <!-- 尚摄  风神AX5 -->  
+    
+    <!-- 睿志诚 景逸X5  --> 
+    <string-array name="RZCJY_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>1</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <string-array name="RZCJY_setting_items">
+        <item>门锁设置</item>
+        <item>车灯设置</item>
+    </string-array>
+    <string-array name="RZCJY_setting_fragment">
+        <item>com.console.canreader.fragment.RZCJY.LockSettingsFragment</item> 
+        <item>com.console.canreader.fragment.RZCJY.LightSettingsFragment</item> 
+    </string-array>
+    <!-- 睿志诚 景逸X5  -->   
     
     <!-- 尚摄 景逸X5  --> 
     <string-array name="SSJY_main">
@@ -2236,31 +2276,65 @@
         <item>com.console.canreader.activity.CarInfoWaringActivity</item>
     </string-array>
     <!-- 海马M3 -->
+    
+    <!-- 海南马自达  -->
+    <!-- 睿志诚 17款福美来 -->
+    <string-array name="RZCFmilia17_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>1</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>   
+    <!-- 睿志诚 17款福美来 -->
+    <!-- 海南马自达  -->
 
-
-    <!-- 北汽威旺M20 -->
-    <string-array name="RZCJingKooM20_items">
-        <item>车辆信息</item>
-    </string-array>
-    <string-array name="RZCJingKooM20_activity">
-        <item>com.console.canreader.activity.JingKooM20.DrivingDataActivity</item>
-    </string-array>
-    <!-- 北汽威旺M20 -->
-
-
-
-
-
-    <!-- 瑞风S3 -->
-    <string-array name="RZCJAC_items">
-        <item>车辆信息</item>
-        <item>胎压界面</item>
-    </string-array>
-    <string-array name="RZCJAC_activity">
-        <item>com.console.canreader.activity.CarInfoWaringActivity</item>
-        <item>com.console.canreader.activity.JAC.TpmsActivity</item>
-    </string-array>
-    <!-- 瑞风S3 -->
+    
+    <!-- 北汽 -->
+    <!-- 睿志诚 威旺M20 -->
+    <string-array name="RZCJingKooM20_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <!-- 睿志诚 威旺M20 -->
+    
+    <!-- 睿志诚 绅宝 -->
+    <string-array name="RZCBAICSB_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>0</item> <!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <!-- 睿志诚 绅宝 -->
+    <!-- 北汽 -->
+    
+    <!-- 江淮  -->
+    <!-- 睿志诚 瑞风S3 --> 
+    <string-array name="RZCJAC_main">
+        <item>0</item> <!-- 车辆信息  -->
+        <item>0</item> <!-- 车辆设置  -->
+        <item>0</item> <!-- 空调控制  -->
+        <item>0</item> <!-- 光盘控制  -->
+        <item>0</item> <!-- 原车功放  -->
+        <item>0</item> <!-- 全景  -->
+        <item>1</item><!-- 胎压 -->
+        <item>1</item> <!-- 关于  -->
+    </string-array>  
+    <!-- 睿志诚 瑞风S3 -->
+    <!-- 江淮  --> 
 
     <string-array name="auto_lamp_sensitivity_entries">
         <item>等级1</item>

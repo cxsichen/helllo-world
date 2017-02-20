@@ -9,29 +9,19 @@ import com.console.canreader.utils.Contacts;
 
 import android.util.Log;
 
-public class RZCJY extends AnalyzeUtils {
+public class RZCFmilia17 extends AnalyzeUtils {
 
 	// 数据类型
 	public static final int comID = 1;
 	// 方向盘按键
 	public static final int STEERING_BUTTON_DATA = 0x21;
-	// 方向盘按键
-	public static final int STEERING_BUTTON_DATA_1 = 0x22;
 	//空调信息
-	public static final int CAR_INFO_DATA_2 = 0x23;
-	// 基本信息
-    public static final int CAR_INFO_DATA_4 = 0x24;
-    //车门信息
+	public static final int CAR_INFO_DATA_2 = 0x24;
+	//车门信息
   	public static final int CAR_INFO_DATA = 0x28;
-    // 基本信息
- 	public static final int CAR_INFO_DATA_6 = 0x30;
-    // 基本信息
- 	public static final int CAR_INFO_DATA_5 = 0x36;
- 	//版本信息
- 	public static final int CAR_INFO_DATA_1 = 0x7f;
- // 基本信息
-  	public static final int CAR_INFO_DATA_7 = 0x40;
-
+    //版本信息
+   	public static final int CAR_INFO_DATA_1 = 0x7f;
+	
 	public CanInfo getCanInfo() {
 		return mCanInfo;
 	}
@@ -47,37 +37,17 @@ public class RZCJY extends AnalyzeUtils {
 				mCanInfo.CHANGE_STATUS = 2;
 				analyzeSteeringButtonData(msg);
 				break;
-			case STEERING_BUTTON_DATA_1:
-				mCanInfo.CHANGE_STATUS = 2;
-				analyzeSteeringButtonData_1(msg);
-				break;
 			case CAR_INFO_DATA_2:
 				mCanInfo.CHANGE_STATUS = 3;
 				analyzeCarInfoData_2(msg);
-				break;
-			case CAR_INFO_DATA_4:
-				mCanInfo.CHANGE_STATUS = 4;
-				analyzeCarInfoData_4(msg);
 				break;
 			case CAR_INFO_DATA:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData(msg);
 				break;
-			case CAR_INFO_DATA_6:
-				mCanInfo.CHANGE_STATUS = 8;
-				analyzeCarInfoData_6(msg);
-				break;
-			case CAR_INFO_DATA_5:
-				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData_5(msg);
-				break;	
 			case CAR_INFO_DATA_1:
 				mCanInfo.CHANGE_STATUS = 10;
 				analyzeCarInfoData_1(msg);
-				break;
-			case CAR_INFO_DATA_7:
-				mCanInfo.CHANGE_STATUS = 10;
-				analyzeCarInfoData_7(msg);
 				break;
 			default:
 				mCanInfo.CHANGE_STATUS = 8888;
@@ -209,7 +179,10 @@ public class RZCJY extends AnalyzeUtils {
 		case 0x04:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MENUDOWN;
 			break;
-		case 0x08:
+		case 0x06:
+			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.MUTE;
+			break;
+		case 0x07:
 			mCanInfo.STEERING_BUTTON_MODE = Contacts.KEYEVENT.SRC;
 			break;
 		case 0x09:
@@ -229,6 +202,7 @@ public class RZCJY extends AnalyzeUtils {
 		mCanInfo.RIGHT_BACKDOOR_STATUS = (int) ((msg[3] >> 5) & 0x01);
 		mCanInfo.LEFT_BACKDOOR_STATUS = (int) ((msg[3] >> 4) & 0x01);
 		mCanInfo.TRUNK_STATUS = (int) ((msg[3] >> 3) & 0x01);
+		mCanInfo.HOOD_STATUS = (int) ((msg[3] >> 2) & 0x01);
 	}
 
 	void analyzeCarInfoData_1(byte[] msg) {
@@ -251,25 +225,24 @@ public class RZCJY extends AnalyzeUtils {
 		mCanInfo.AIR_CONDITIONER_STATUS = (int) ((msg[3] >> 7) & 0x01);
 		mCanInfo.AC_INDICATOR_STATUS = (int) ((msg[3] >> 6) & 0x01);
 		mCanInfo.CYCLE_INDICATOR = (int) ((msg[3] >> 5) & 0x01);
-		mCanInfo.SMALL_LANTERN_INDICATOR = (int) ((msg[3] >> 3) & 0x01);
 		mCanInfo.REAR_LAMP_INDICATOR = (int) ((msg[3] >> 1) & 0x01);
 		mCanInfo.MAX_FRONT_LAMP_INDICATOR = (int) ((msg[3] >> 0) & 0x01);
 		
 		
 		int temp=(int) (msg[4] & 0xFF);
-		if((temp==0)||(temp==1)){
+		if((temp==1)||(temp==2)){
 			mCanInfo.PARALLEL_AIR_INDICATOR = 1;
 		}else{
 			mCanInfo.PARALLEL_AIR_INDICATOR = 0;
 		}
 		
-		if((temp==3)||(temp==4)){
+		if(temp==4){
 			mCanInfo.UPWARD_AIR_INDICATOR = 1;
 		}else{
 			mCanInfo.UPWARD_AIR_INDICATOR = 0;
 		}
 		
-		if((temp==1)||(temp==2)||(temp==3)){
+		if((temp==4)||(temp==2)||(temp==3)){
 			mCanInfo.DOWNWARD_AIR_INDICATOR = 1;
 		}else{
 			mCanInfo.DOWNWARD_AIR_INDICATOR = 0;
@@ -277,8 +250,8 @@ public class RZCJY extends AnalyzeUtils {
 
 		mCanInfo.AIR_RATE = (int) (msg[5] & 0x0f);
 
-		mCanInfo.DRIVING_POSITON_TEMP = ((int) (msg[6] & 0xff)==254)?-1:(int) (msg[6] & 0xff);
-		mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = ((int) (msg[7] & 0xff)==254)?-1:(int) (msg[7] & 0xff) ;
+		mCanInfo.DRIVING_POSITON_TEMP = 17+(int) (msg[6] & 0xff);
+		mCanInfo.DEPUTY_DRIVING_POSITON_TEMP = mCanInfo.DRIVING_POSITON_TEMP;
 	}
 
 	/**

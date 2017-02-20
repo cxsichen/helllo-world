@@ -107,9 +107,6 @@ public class RZCJAC extends AnalyzeUtils {
 		mCanInfo.LEFT_BACKDOOR_STATUS = (int) ((msg[3] >> 4) & 0x01);
 		mCanInfo.TRUNK_STATUS = (int) ((msg[3] >> 3) & 0x01);
 		mCanInfo.HOOD_STATUS = (int) ((msg[3] >> 2) & 0x01);
-
-		mCanInfo.SAFETY_BELT_STATUS = ((int) ((msg[4] >> 3) & 0x01)) == 0 ? 1
-				: 0;
 		mCanInfo.HANDBRAKE_STATUS = ((int) ((msg[4] >> 4) & 0x01));
 	}
 

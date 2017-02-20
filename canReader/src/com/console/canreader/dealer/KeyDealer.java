@@ -80,27 +80,27 @@ public class KeyDealer {
 
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
-			case Contacts.VOL_UP:
+			case Contacts.KEYEVENT.VOLUP:
 				Log.i("cxs", "-----1111--msg.VOL_UP-------");
 				handleVolUp();
 				break;
-			case Contacts.VOL_DOWN:
+			case Contacts.KEYEVENT.VOLDOW:
 				Log.i("cxs", "-------msg.VOL_DOWN-------");
 				handleVolDown();
 				break;
-			case Contacts.MENU_UP:
+			case Contacts.KEYEVENT.MENUUP:
 				Log.i("cxs", "-------msg.MENU_UP-------");
 				handleMenuUp();
 				break;
-			case Contacts.MENU_DOWN:
+			case Contacts.KEYEVENT.MENUDOWN:
 				Log.i("cxs", "-------msg.MENU_DOWN-------");
 				handleMenuDown();
 				break;
-			case Contacts.TEL:
+			case Contacts.KEYEVENT.PHONE:
 				Log.i("cxs", "-------msg.TEL-------");
 				handleTel();
 				break;
-			case Contacts.MUTE:
+			case Contacts.KEYEVENT.MUTE:
 				Log.i("cxs", "-------msg.MUTE-------");
 				handleMute();
 				break;
@@ -108,9 +108,9 @@ public class KeyDealer {
 				Log.i("cxs", "-------msg.POWER-------");
 				handlePower();
 				break;
-			case Contacts.SRC:
-			case Contacts.MIC:
-				Log.i("cxs", "-------msg.MIC-------");
+			case Contacts.KEYEVENT.SRC:
+			case Contacts.KEYEVENT.SPEECH:
+				Log.i("cxs", "-------msg.SPEECH-------");
 				ComponentName txz_name = new ComponentName(TXZ_PKG,
 						TXZ_SERVICE_CLASS);
 				Intent txz = new Intent();
@@ -118,11 +118,11 @@ public class KeyDealer {
 				txz.setAction(ACTION_START_TALK);
 				context.startService(txz);
 				break;
-			case Contacts.TEL_ANSWER:
+			case Contacts.KEYEVENT.ANSWER:
 				Log.i("cxs", "-------msg.TEL_ANSWER-------");
 				handleTelAnswer();
 				break;
-			case Contacts.TEL_HANDUP:
+			case Contacts.KEYEVENT.HANGUP:
 				Log.i("cxs", "-------msg.TEL_HANDUP-------");
 				handleTelHandUp();
 				break;
@@ -312,6 +312,10 @@ public class KeyDealer {
 			case Contacts.KEYEVENT.SETTING:
 				Log.i("cxs", "-------Contacts.KEYEVENT.SETTING-------");
 				handleSETTING();
+				break;
+			case Contacts.KEYEVENT.PHONE_WHIT_MUTE:
+				Log.i("cxs", "-------Contacts.KEYEVENT.PHONE_WHIT_MUTE-------");
+				handlePHONE_WHIT_MUTE();
 				break;
 			default:
 				break;
@@ -720,6 +724,14 @@ public class KeyDealer {
 			// TODO: handle exception
 		}
 	}
+	
+	private void handlePHONE_WHIT_MUTE() {
+         if(isPhoneCommig()){
+        	 handleTel();
+         }else{
+        	 handleMute();
+         }
+	}
 
 	private void handleSETTING() {
 		openApplication(context, "com.android.settings");
@@ -1034,55 +1046,59 @@ public class KeyDealer {
 		if (canInfo.STEERING_BUTTON_STATUS > 0 && PRESSFREE) {
 			PRESSFREE = false;
 			switch (canInfo.STEERING_BUTTON_MODE) {
-			case Contacts.VOL_UP:
-				mHandler.sendEmptyMessage(Contacts.VOL_UP);
+			case Contacts.KEYEVENT.VOLUP:
+				mHandler.sendEmptyMessage(Contacts.KEYEVENT.VOLUP);
 				/*
 				 * if (System.currentTimeMillis() - lastSendTime > 200) {
 				 * lastSendTime = System.currentTimeMillis();
 				 * mHandler.sendEmptyMessage(Contacts.VOL_UP); }
 				 */
 				break;
-			case Contacts.VOL_DOWN:
-				mHandler.sendEmptyMessage(Contacts.VOL_DOWN);
+			case Contacts.KEYEVENT.VOLDOW:
+				mHandler.sendEmptyMessage(Contacts.KEYEVENT.VOLDOW);
 				/*
 				 * if (System.currentTimeMillis() - lastSendTime > 200) {
 				 * lastSendTime = System.currentTimeMillis();
 				 * mHandler.sendEmptyMessage(Contacts.VOL_DOWN); }
 				 */
 				break;
-			case Contacts.MUTE:
+			case Contacts.KEYEVENT.MUTE:
 				if (System.currentTimeMillis() - lastSendTime > 200) {
 					lastSendTime = System.currentTimeMillis();
-					mHandler.sendEmptyMessage(Contacts.MUTE);
+					mHandler.sendEmptyMessage(Contacts.KEYEVENT.MUTE);
 				}
 				break;
-			case Contacts.MENU_UP:
-				mHandler.removeMessages(Contacts.MENU_UP);
-				mHandler.sendEmptyMessageDelayed(Contacts.MENU_UP, 100);
-				mHandler.sendEmptyMessageDelayed(Contacts.MENU_LONG_UP, 600);
+			case Contacts.KEYEVENT.MENUUP:
+				mHandler.removeMessages(Contacts.KEYEVENT.MENUUP);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.MENUUP, 100);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.MENU_LONG_UP, 600);
 
 				break;
-			case Contacts.MENU_DOWN:
-				mHandler.removeMessages(Contacts.MENU_DOWN);
-				mHandler.sendEmptyMessageDelayed(Contacts.MENU_DOWN, 100);
-				mHandler.sendEmptyMessageDelayed(Contacts.MENU_LONG_DOWN, 600);
+			case Contacts.KEYEVENT.MENUDOWN:
+				mHandler.removeMessages(Contacts.KEYEVENT.MENUDOWN);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.MENUDOWN, 100);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.MENU_LONG_DOWN, 600);
 				break;
-			case Contacts.TEL:
-				mHandler.removeMessages(Contacts.TEL);
-				mHandler.sendEmptyMessageDelayed(Contacts.TEL, 200);
+			case Contacts.KEYEVENT.PHONE:
+				mHandler.removeMessages(Contacts.KEYEVENT.PHONE);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.PHONE, 200);
 				break;
-			case Contacts.SRC:
-			case Contacts.MIC:
-				mHandler.removeMessages(Contacts.MIC);
-				mHandler.sendEmptyMessageDelayed(Contacts.MIC, 200);
+			case Contacts.KEYEVENT.SRC:
+			case Contacts.KEYEVENT.SPEECH:
+				mHandler.removeMessages(Contacts.KEYEVENT.SPEECH);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.SPEECH, 200);
 				break;
-			case Contacts.TEL_ANSWER:
-				mHandler.removeMessages(Contacts.TEL_ANSWER);
-				mHandler.sendEmptyMessageDelayed(Contacts.TEL_ANSWER, 200);
+			case Contacts.KEYEVENT.PHONE_WHIT_MUTE:
+				mHandler.removeMessages(Contacts.KEYEVENT.PHONE_WHIT_MUTE);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.PHONE_WHIT_MUTE, 200);
 				break;
-			case Contacts.TEL_HANDUP:
-				mHandler.removeMessages(Contacts.TEL_HANDUP);
-				mHandler.sendEmptyMessageDelayed(Contacts.TEL_HANDUP, 200);
+			case Contacts.KEYEVENT.ANSWER:
+				mHandler.removeMessages(Contacts.KEYEVENT.ANSWER);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.ANSWER, 200);
+				break;
+			case Contacts.KEYEVENT.HANGUP:
+				mHandler.removeMessages(Contacts.KEYEVENT.HANGUP);
+				mHandler.sendEmptyMessageDelayed(Contacts.KEYEVENT.HANGUP, 200);
 				break;
 			case Contacts.KEYEVENT.CANINFOPAGE:
 				mHandler.removeMessages(Contacts.KEYEVENT.CANINFOPAGE);

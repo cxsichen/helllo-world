@@ -59,6 +59,7 @@ public class Contacts {
 		public static final int SETTING = 48; // 打开系统设置界面
 		public static final int AUXCHANGE = 49; // 打开关闭AUX二合一
 		public static final int BROSWE =50; // 打开浏览器
+		public static final int PHONE_WHIT_MUTE =51; // 接听挂断和静音二合一
 		/*-----------无按键状态--------*/
 		public static final int KNOBVOLUME = 101; // 音量旋钮 无按键状态       带值记忆
 		public static final int KNOBSELECTOR = 102; // 选择旋钮 无按键状态    带值记忆              
@@ -100,14 +101,21 @@ public class Contacts {
 		public static final String RZCEDGE = "RZCEDGE"; // 福特锐界
 		public static final String RZCRoewe360 = "RZCRoewe360"; // 荣威360
 		public static final String RZCMGGS = "RZCMGGS"; // MG GS MG锐腾
-		public static final String RZCFHCm3 = "RZCFHCm3"; // 海马M3
+		
 		public static final String RZCBESTURNx80 = "RZCBESTURNx80"; // 奔腾X80
 		public static final String RZCPeugeot = "RZCPeugeot"; // 标致
 		public static final String RZCJAC = "RZCJAC"; // 瑞风S3
-		public static final String RZCBaoJun = "RZCBaoJun"; // 宝骏730 560
-		public static final String RZCJingKooM20 = "RZCJingKooM20"; // 北汽威旺M20
+		public static final String RZCBaoJun = "RZCBaoJun"; // 宝骏730 560	
 		//东风
 		public static final String RZCFS = "RZCFS"; // 风神系列
+		public static final String RZCJY = "RZCJY"; // 景逸 X5 
+		//海南马自达
+		public static final String RZCFHCm3 = "RZCFHCm3"; // 海马M3
+		public static final String RZCFmilia17 = "RZCFmilia17"; //17款福美来
+		//北汽
+		public static final String RZCJingKooM20 = "RZCJingKooM20"; // 北汽威旺M20
+		public static final String RZCBAICSB = "RZCBAICSB"; // 北汽绅宝
+		
 		/*--------------睿志诚-----------*/
 
 		/*--------------尚摄-----------*/

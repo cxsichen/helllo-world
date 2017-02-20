@@ -4,6 +4,7 @@ import com.console.canreader.bean.AnalyzeUtils.AnalyzeUtilsCallback;
 import com.console.canreader.service.CanInfo;
 import com.console.canreader.utils.Contacts;
 
+
 import android.util.Log;
 
 public class RZCFord extends AnalyzeUtils {

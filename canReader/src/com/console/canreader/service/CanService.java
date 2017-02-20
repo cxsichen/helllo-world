@@ -291,8 +291,8 @@ public class CanService extends Service {
 		case Contacts.CANFISRTNAMEGROUP.RAISE: // 睿志诚
 			switch (canName) {
 			case Contacts.CANNAMEGROUP.RZCPeugeot: // 标致
-			case Contacts.CANNAMEGROUP.RZCBESTURNx80:// 奔腾X80 海马M3
-			case Contacts.CANNAMEGROUP.RZCFHCm3:
+			//case Contacts.CANNAMEGROUP.RZCBESTURNx80:// 奔腾X80 
+			case Contacts.CANNAMEGROUP.RZCFHCm3:  //海马M3
 				initSerialPort(SERIAL_PORT_BT_19200);
 				break;
 			default:
@@ -1060,6 +1060,30 @@ public class CanService extends Service {
 				+ BytesUtil.changIntHex(hour) + BytesUtil.changIntHex(minute)
 				+ "0100" + "000000"));
 	}
+	
+	private void rzcSyncTimeWithMsgRZCJAC() {
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		int mouth = c.get(Calendar.MONTH);
+		int date = c.get(Calendar.DATE);
+
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int minute = c.get(Calendar.MINUTE);
+		int second = c.get(Calendar.SECOND);
+		String tmp=Integer.toHexString(year).toUpperCase();
+		String tmp1="";
+		String tmp2="";
+		if (tmp.length() > 2) {
+			tmp1 = tmp.substring(tmp.length() - 2, tmp.length());
+			tmp2 = Integer.toHexString(mouth+1).toUpperCase()+tmp.substring(0,1);
+		}
+		writeCanPort(BytesUtil.addRZCCheckBit("2E8206"
+				+ tmp1
+				+ tmp2
+				+ BytesUtil.changIntHex(date) + BytesUtil.changIntHex(hour)
+				+ BytesUtil.changIntHex(minute)
+				+ "00"));
+	}
 
 	private void rzcSyncTimeWithMsg(String str) {
 		Calendar c = Calendar.getInstance();
@@ -1132,7 +1156,14 @@ public class CanService extends Service {
 		switch (canFirtName) {
 		case Contacts.CANFISRTNAMEGROUP.RAISE: // 睿志诚
 			switch (canName) {
+			case Contacts.CANNAMEGROUP.RZCJAC:
+				rzcSyncTimeWithMsgRZCJAC();
+				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
+						1000 * 60);
+				break;
 			case Contacts.CANNAMEGROUP.RZCVolkswagenGolf:
+			case Contacts.CANNAMEGROUP.RZCRoewe360:
 				rzcSyncTimeWithMsg("2EA607");
 				mHandler.removeMessages(Contacts.MSG_MSG_CYCLE);
 				mHandler.sendEmptyMessageDelayed(Contacts.MSG_MSG_CYCLE,
@@ -1361,7 +1392,6 @@ public class CanService extends Service {
 			case Contacts.CANNAMEGROUP.SSPeugeot2008:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240E00"));
 				break;
-
 			case Contacts.CANNAMEGROUP.SSPeugeotDS4HIGH:
 			case Contacts.CANNAMEGROUP.SSPeugeotDS4LOW:
 				writeCanPort(BytesUtil.addSSCheckBit("5AA502240F00"));

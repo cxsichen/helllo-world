@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.console.canreader"
-    android:sharedUserId="android.uid.system"
     android:versionCode="7"
     android:versionName="5.04" >
     <!--     android:sharedUserId="android.uid.system" -->
@@ -12,7 +11,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"/>
+  <!--   <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"/> -->
 
     <uses-sdk
         android:minSdkVersion="22"
@@ -127,7 +126,7 @@
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name="com.console.canreader.activity.JAC.TpmsActivity"
+            android:name="com.console.canreader.fragment.RZCJAC.TpmsActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>
@@ -197,6 +196,13 @@
         <!-- 空调控制activity -->
          <activity
             android:name="com.console.canreader.fragment.SSJeepZNZ17.AirContorlActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- 空调控制activity -->
+        <!-- 空调控制activity -->
+         <activity
+            android:name="com.console.canreader.fragment.RZCFmilia17.AirContorlActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
         </activity>

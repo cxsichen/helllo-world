@@ -39,7 +39,6 @@ public class MenuAcAcitivity extends BaseActivity {
 			startActivity(intent);
 		} catch (Exception e) {
 			// TODO: handle exception
-			Log.i("cxs", "====e=====" + e);
 		}
 	}
 
@@ -120,6 +119,7 @@ public class MenuAcAcitivity extends BaseActivity {
 			startAcAcitivy("com.console.canreader.fragment.RZCVolkswagenGolf.AirContorlActivity");
 			break;
 		default:
+			startAcAcitivy("com.console.canreader.fragment."+canName+".AirContorlActivity");
 			break;
 		}
 	}
