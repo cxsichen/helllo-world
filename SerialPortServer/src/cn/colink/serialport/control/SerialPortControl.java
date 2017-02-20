@@ -200,8 +200,8 @@ public class SerialPortControl {
 				}
 				break;
 			/**
-			 * 处理app切换模式命令 0 收音机 1 音乐 2 视频 3 蓝牙 4 aux 5 音效 6 导航 7
-			 * 行车记录仪8数字电视100喜马拉雅
+			 * 处理app切换模式命令  0 收音机    1 音乐    2 视频   3 蓝牙  4 aux  5 音效  6 导航 7
+			 * 行车记录仪 8数字电视 100喜马拉雅
 			 */
 			case Contacts.MSG_APP_CHANGE:
 				mHandler.removeMessages(Contacts.MSG_CHECK_MODE);
@@ -375,15 +375,15 @@ public class SerialPortControl {
 				/*
 				 * acc on 后自动返回之前开启的模式对应的app
 				 */
-				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_1, 2000);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_1, 0);
 
 				break;
 			case Contacts.MSG_ACCON_MSG_1:
 				int mode = PreferenceUtil.getMode(mSerialPortService);
 				Trace.m("--------MSG_ACCON_MSG_1------mode-------" + mode);
 				sendMsg("F5020000" + BytesUtil.intToHexString(mode));
-				startModeActivty(mode);
-				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_2, 6000);
+				DELAY isDelay=startModeActivty(mode);
+				mHandler.sendEmptyMessageDelayed(Contacts.MSG_ACCON_MSG_2, isDelay==DELAY.DELAY3000?3000:isDelay==DELAY.DELAY1000?1000:0);
 				break;
 			case Contacts.MSG_ACCON_MSG_2:
 				int parkingState = android.provider.Settings.System.getInt(
@@ -433,10 +433,14 @@ public class SerialPortControl {
 		packet[4] = Integer.valueOf(Integer.toHexString(data4), 16).byteValue();
 		return BytesUtil.bytesToHexString(packet);
 	}
+	enum DELAY{
+		NODELAY,DELAY1000,DELAY3000,
+	}
 
-	private void startModeActivty(int mode) {
+	private DELAY startModeActivty(int mode) {
 		// TODO Auto-generated method stub
 		// if when acc off ,the naving is process
+		DELAY delay=DELAY.DELAY1000;
 		if (isNaving) {
 			mode = 6;
 		}
@@ -444,6 +448,7 @@ public class SerialPortControl {
 		case 1: // 音乐
 			try {
 				if (appNameSave.equals("cn.kuwo.kwmusiccar")) {
+					delay=DELAY.DELAY3000;
 					startMusic();
 				}
 			} catch (Exception e2) {
@@ -510,6 +515,8 @@ public class SerialPortControl {
 			openApplication(mSerialPortService, modeApplist[mode]);
 			break;
 		}
+		
+		return delay;
 
 	}
 
