@@ -4,7 +4,7 @@
     <string name="app_name">音效控制</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="defaultEF">默认</string>
+    <string name="defaultEF">用户</string>
     <string name="rock">摇滚</string>
     <string name="popular">流行</string>
     <string name="jazz">爵士</string>

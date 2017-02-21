@@ -133,12 +133,12 @@ public class MainActivity extends Activity implements OnClickListener {
 			msg.what = Contacts.MSG_SEND_MSG;
 			mHandler.sendMessage(msg);
 		}
-
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
 			mISpService = null;
 		}
 	};
+	
 
 	private void bindSpService() {
 		try {
@@ -219,7 +219,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (mode == R.id.reset_button) {
 			mode = R.id.defaultEf_button;
 		}
-		setChangeable();
+		//setChangeable();
 		if (findViewById(mode) != null) {
 			clearButtonBg();
 			try {
@@ -295,6 +295,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
+						setDefaultButton();
 						valueGroup[0] = progress / SEEKBARDURATION;
 						mHandler.sendEmptyMessage(Contacts.MSG_SEND_MSG);
 					}
@@ -317,6 +318,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
+						setDefaultButton();
 						valueGroup[1] = progress / SEEKBARDURATION;
 						mHandler.sendEmptyMessage(Contacts.MSG_SEND_MSG);
 					}
@@ -339,6 +341,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
+						setDefaultButton();
 						valueGroup[2] = progress / SEEKBARDURATION;
 						mHandler.sendEmptyMessage(Contacts.MSG_SEND_MSG);
 					}
@@ -362,6 +365,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
+						setDefaultButton();
 						valueGroup[3] = progress / SEEKBARDURATION;
 						mHandler.sendEmptyMessage(Contacts.MSG_SEND_MSG);
 					}
@@ -385,6 +389,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
+						setDefaultButton();
 						valueGroup[4] = progress / SEEKBARDURATION;
 						mHandler.sendEmptyMessage(Contacts.MSG_SEND_MSG);
 					}
@@ -408,6 +413,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
+						setDefaultButton();
 						valueGroup[5] = progress / SEEKBARDURATION;
 						mHandler.sendEmptyMessage(Contacts.MSG_SEND_MSG);
 					}
@@ -431,6 +437,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
+						setDefaultButton();
 						valueGroup[6] = progress / SEEKBARDURATION;
 						mHandler.sendEmptyMessage(Contacts.MSG_SEND_MSG);
 					}
@@ -453,6 +460,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
+						setDefaultButton();
 						valueGroup[7] = progress / SEEKBARDURATION;
 						mHandler.sendEmptyMessage(Contacts.MSG_SEND_MSG);
 					}
@@ -476,6 +484,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					@Override
 					public void OnStop(int progress) {
 						// TODO Auto-generated method stub
+						setDefaultButton();
 						valueGroup[8] = progress / SEEKBARDURATION;
 						mHandler.sendEmptyMessage(Contacts.MSG_SEND_MSG);
 					}
@@ -496,6 +505,12 @@ public class MainActivity extends Activity implements OnClickListener {
 					}
 				});
 
+	}
+	
+	void setDefaultButton(){
+		valueGroup[11]=R.id.defaultEf_button;
+		clearButtonBg();
+		defaultEfButton.setBackgroundResource(R.drawable.btn_bg_selected);
 	}
 	
 	OnClickListener mOnClickListener=new OnClickListener() {
@@ -550,17 +565,17 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		if (mode == R.id.defaultEf_button) {
+	/*	if (mode == R.id.defaultEf_button) {
 			PreferenceUtil.setUserMode(MainActivity.this, valueGroup);
-		}
+		}*/
 		mode = v.getId();
 		valueGroup[11]=mode;
-		setChangeable();
+	//	setChangeable();
 		switch (v.getId()) {
 		case R.id.defaultEf_button:
 			clearButtonBg();
-			int[] values = PreferenceUtil.getUserMode(MainActivity.this);
-			setVolumeData(values);
+			/*int[] values = PreferenceUtil.getUserMode(MainActivity.this);*/
+			/*setVolumeData(values);*/
 			defaultEfButton.setBackgroundResource(R.drawable.btn_bg_selected);
 			break;
 		case R.id.rockEf_button:

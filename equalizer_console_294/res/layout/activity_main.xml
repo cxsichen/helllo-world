@@ -9,7 +9,7 @@
     tools:context="com.example.android.equalizer.MainActivity" >
 
     <include layout="@layout/sound_balance" />
-
+  
     <View
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -17,7 +17,8 @@
 
     <!-- TRE Slider -->
 
-    <LinearLayout style="@style/EqSliderLayout" >
+    <LinearLayout style="@style/EqSliderLayout"
+        >
 
         <!-- Value -->
 
