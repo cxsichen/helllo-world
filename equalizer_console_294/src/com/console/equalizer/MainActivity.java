@@ -511,6 +511,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		valueGroup[11]=R.id.defaultEf_button;
 		clearButtonBg();
 		defaultEfButton.setBackgroundResource(R.drawable.btn_bg_selected);
+		mode = R.id.defaultEf_button;
+		PreferenceUtil.setUserMode(MainActivity.this, valueGroup);
+		
 	}
 	
 	OnClickListener mOnClickListener=new OnClickListener() {
@@ -538,15 +541,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	};
 
 	private void syncText(float mColumnIndex, float mRowIndex) {
-		// TODO Auto-generated method stub
-		lfTv.setText("左前\n" + checkValue(mColumnIndex - 50, mRowIndex - 50)
-				+ "%");
-		rfTv.setText("右前\n" + checkValue(50 - mColumnIndex, mRowIndex - 50)
-				+ "%");
-		lrTv.setText("左后\n" + checkValue(mColumnIndex - 50, 50 - mRowIndex)
-				+ "%");
-		rrTv.setText("右前\n" + checkValue(50 - mColumnIndex, 50 - mRowIndex)
-				+ "%");
+		// TODO Auto-generated method stub	
+		lfTv.setText(String.format(getResources().getString(R.string.lf_tx), checkValue(mColumnIndex - 50, mRowIndex - 50)));
+		rfTv.setText(String.format(getResources().getString(R.string.rf_tx), checkValue(50 - mColumnIndex, mRowIndex - 50)));
+		lrTv.setText(String.format(getResources().getString(R.string.lr_tx), checkValue(mColumnIndex - 50, 50 - mRowIndex)));
+		rrTv.setText(String.format(getResources().getString(R.string.rr_tx), checkValue(50 - mColumnIndex, 50 - mRowIndex)));
 	}
 
 	int checkValue(float mColumnIndex, float mRowIndex) {
@@ -565,17 +564,17 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-	/*	if (mode == R.id.defaultEf_button) {
+		if (mode == R.id.defaultEf_button) {
 			PreferenceUtil.setUserMode(MainActivity.this, valueGroup);
-		}*/
+		}
 		mode = v.getId();
 		valueGroup[11]=mode;
 	//	setChangeable();
 		switch (v.getId()) {
 		case R.id.defaultEf_button:
 			clearButtonBg();
-			/*int[] values = PreferenceUtil.getUserMode(MainActivity.this);*/
-			/*setVolumeData(values);*/
+			int[] values = PreferenceUtil.getUserMode(MainActivity.this);
+			setVolumeData(values);
 			defaultEfButton.setBackgroundResource(R.drawable.btn_bg_selected);
 			break;
 		case R.id.rockEf_button:

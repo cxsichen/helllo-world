@@ -13,5 +13,9 @@
     <string name="tre">TRE</string>
     <string name="mid">MID</string>
     <string name="bas">BAS</string>
+    <string name="lf_tx">左前\n%1$s%%</string>
+    <string name="rf_tx">右前\n%1$d%%</string> 
+    <string name="lr_tx">左后\n%1$d%%</string> 
+    <string name="rr_tx">右后\n%1$d%%</string>  
 
 </resources>
