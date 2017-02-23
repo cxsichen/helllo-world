@@ -7,7 +7,6 @@
     <color name="colorPrimary">#37474F</color>
     <color name="colorPrimaryDark">#263238</color>
     <color name="colorAccent">#009688</color>
-    <color name="colorProgressBar">#333333</color>
-
+    <color name="colorProgressBar">#222222</color>
 
 </resources>

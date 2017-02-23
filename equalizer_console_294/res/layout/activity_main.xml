@@ -28,7 +28,8 @@
 
         <com.console.equalizer.view.VerticalSeekBar
             android:id="@+id/SeekBarTRE"
-            style="@style/EqSliderProgress" />
+            style="@style/EqSliderProgress"
+            />
 
         <!-- Label -->
 
